@@ -1,12 +1,19 @@
+mapper.stocks = new Backbone.Collection();
+mapper.groups = new Backbone.Collection();
+
+// Init views on document ready
+$(function() {
+  mapper.map = new mapper.Map($('.map'), mapper.stocks);
+});
+
+// Socket
 var socket = io.connect('http://localhost');
+socket.on('update', function(data) {
+  mapper.stocks.get(data[0]).update(data);
+});
+
+// Stocks JSON
 $.getJSON('/data/stocks.json', function(response) {
-  mapper.stocks = new Backbone.Collection();
-  
-  // Init views on document ready
-  $(function() {
-    mapper.map = new mapper.Map($('.map'), mapper.stocks);
-  });
-  
   var field, i,
       headers = response.headers,
       hash;
@@ -20,8 +27,26 @@ $.getJSON('/data/stocks.json', function(response) {
     socket.emit('subscribe', stock.get('sym'));
     mapper.stocks.add(stock);
   });
+  tryPopulateGroups();
 });
 
-socket.on('update', function(data) {
-  mapper.stocks.get(data[0]).update(data);
+// Groups JSON
+$.getJSON('/data/groups.json', function(response) {
+  _.each(response, function(groupJson) {
+    groupJson.members = new Backbone.Collection();
+    mapper.groups.add( new Backbone.Model(groupJson) );
+  });
+  tryPopulateGroups();
 });
+
+function tryPopulateGroups(groups) {
+  if(mapper.stocks.length && mapper.groups.length) {
+    mapper.groups.forEach(function(group) {
+      var members = group.get('members');
+      _.each(group.get('ids'), function(id) {
+        members.add(mapper.stocks.get(id));
+      });
+      console.log(group.get('members').length);
+    });
+  }
+}

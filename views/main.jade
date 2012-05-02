@@ -48,15 +48,15 @@ html
                   isSandP = vals[4] == 'YES',
                   isDow = vals[5] == 'YES';
                   
-              getOrCreateGroup('industry', industry).members.push(sym);
-              getOrCreateGroup('country', country).members.push(sym);
-              getOrCreateGroup('region', region).members.push(sym);
+              getOrCreateGroup('industry', industry).ids.push(sym);
+              getOrCreateGroup('country', country).ids.push(sym);
+              getOrCreateGroup('region', region).ids.push(sym);
               
               if(isSandP) {
-                getOrCreateGroup('index', 'S&P 500').members.push(sym);
+                getOrCreateGroup('index', 'S&P 500').ids.push(sym);
               }
               if(isDow) {
-                getOrCreateGroup('index', 'Dow Jones').members.push(sym);
+                getOrCreateGroup('index', 'Dow Jones').ids.push(sym);
               }
             }
           
@@ -71,7 +71,7 @@ html
             group = groupsTable[groupId] = {
               name: name,
               type: type,
-              members: []
+              ids: []
             };
             
             groups.push(group);
