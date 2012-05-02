@@ -1,0 +1,66 @@
+.map {
+  position:relative;
+}
+
+.map div.shadows {
+  position:absolute;
+  left:0;
+  right:0;
+  z-index:1;
+}
+
+.map li {
+  display:inline-block;
+  width:27px;
+  height:12px;
+  margin-right:1px;
+  margin-bottom:1px;
+  padding-left:2px;
+  white-space:nowrap;
+  font:11px/12px "Helvetica Narrow","Arial Narrow",sans-serif;
+  font-weight:bold;
+  letter-spacing:-1px;
+}
+
+.map > li {
+  background-color:#ccc;
+}
+
+.map .shadows li {
+  font-size:20px;
+}
+
+.map .shadows li.active {
+  position:relative;
+}
+.map .shadows li.active:after {
+  position:absolute;
+  content:'';
+  left:1px;
+  top:1px;
+  width:31px;
+  height:14px;
+  background-color:rgba(0,0,0,.6);
+}
+
+
+.map li span {
+  font-size:9px;
+  padding-left:1px;
+}
+
+.map > li.active {
+/*  font-weight:bold;*/
+  z-index:2;
+  position:relative;
+}
+
+.map > li.active:after {
+  width:27px;
+  height:10px;
+  border:1px solid #fff;
+  position:absolute;
+  left:0;
+  top:0;
+  content:'';
+}

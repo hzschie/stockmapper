@@ -1,0 +1,104 @@
+!!!
+html
+  head
+    title= 'StockMapper'
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0")
+    
+    link(rel='stylesheet', href='/stylesheets/boilerplate.css')
+    link(rel='stylesheet', href='/stylesheets/main.css')
+    link(rel='stylesheet', href='/stylesheets/map.css')
+    
+    script(type='text/javascript', src='/javascripts/lib/zepto.min.js')
+    script(type='text/javascript', src='/javascripts/lib/underscore-min.js')
+    script(type='text/javascript', src='/javascripts/lib/backbone.js')
+    script(type='text/javascript', src='/socket.io/socket.io.js')
+    script(type='text/javascript')
+      mapper = {};
+    script(type='text/javascript', src='/javascripts/stocks.js')
+    script(type='text/javascript', src='/javascripts/map.js')
+    script(type='text/javascript')
+      var socket = io.connect('http://localhost');
+      $.getJSON('/data/stocks.json', function(response) {
+        mapper.stocks = new Backbone.Collection();
+        mapper.map = new mapper.Map($('.map'), mapper.stocks);
+        var field, i,
+            headers = response.headers,
+            hash;
+        _.each(response.data, function(values) {
+          hash = {};
+          for(field = headers[0], i = 0; i < headers.length; field = headers[++i]) {
+            hash[field] = values[i];
+          }
+          
+          var stock = new mapper.Stock(hash);
+          socket.emit('subscribe', stock.get('sym'));
+          mapper.stocks.add(stock);
+        });
+      });
+      
+      socket.on('update', function(data) {
+        mapper.stocks.get(data[0]).update(data);
+      });
+    script(type='text/javascript')
+      (function() {
+        return;
+        // Open the original CSV file and extract stuff from it
+        
+        var stocks = {
+              headers: ['id','name'],
+              data: []
+            },
+            groups = [],
+            groupsTable = {};
+        
+        $.ajax({
+          url:'/data/stocks.csv',
+          success: function(data) {
+            var newline = data.charAt(58),
+                rows = data.split(newline);
+              
+            for(var i = 1; i < rows.length; i++) {
+              var vals = rows[i].split(','),
+                  sym = vals[1];
+              stocks.data.push([sym, vals[0]]);
+              
+              var industry = vals[2],
+                  country = vals[6],
+                  region = vals[7],
+                  isSandP = vals[4] == 'YES',
+                  isDow = vals[5] == 'YES';
+                  
+              getOrCreateGroup('industry', industry).members.push(sym);
+              getOrCreateGroup('country', country).members.push(sym);
+              getOrCreateGroup('region', region).members.push(sym);
+              
+              if(isSandP) {
+                getOrCreateGroup('index', 'S&P 500').members.push(sym);
+              }
+              if(isDow) {
+                getOrCreateGroup('index', 'Dow Jones').members.push(sym);
+              }
+            }
+          
+            console.log(JSON.stringify(groups));
+          }
+        });
+        
+        function getOrCreateGroup(type, name) {
+          var groupId = type + '_' + name;
+              group = groupsTable[groupId];
+          if(!group) {
+            group = groupsTable[groupId] = {
+              name: name,
+              type: type,
+              members: []
+            };
+            
+            groups.push(group);
+          }
+          
+          return group;
+        }
+      })();
+  body
+    ul.map
