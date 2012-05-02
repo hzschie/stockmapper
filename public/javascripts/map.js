@@ -20,7 +20,7 @@
       
       model.set({
         $tag: $(document.createElement('li')).html(html).appendTo($map),
-        $shadow: $(document.createElement('li')).appendTo($shadows)
+        $shadow: $(document.createElement('div')).appendTo($shadows)
       }, { silent:true });
       model.on('change', updateModel);
     }
