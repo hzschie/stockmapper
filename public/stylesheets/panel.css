@@ -1,0 +1,20 @@
+.panel .group {
+  display:inline-block;
+  width:84px;
+  height:20px;
+  padding-top:2px;
+  padding-left:3px;
+  margin-right:3px;
+  margin-bottom:3px;
+  background-color:#ccc;
+  font:12px/13px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
+}
+
+.panel .group label {
+  font-weight:bold;
+}
+
+.panel .group .type {
+  font-size:9px;
+  line-height:9px;
+}

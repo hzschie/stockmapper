@@ -6,6 +6,7 @@ html
     
     link(rel='stylesheet', href='/stylesheets/boilerplate.css')
     link(rel='stylesheet', href='/stylesheets/main.css')
+    link(rel='stylesheet', href='/stylesheets/panel.css')
     link(rel='stylesheet', href='/stylesheets/map.css')
     
     script(type='text/javascript', src='/javascripts/lib/zepto.min.js')
@@ -15,6 +16,7 @@ html
     script(type='text/javascript')
       mapper = {};
     script(type='text/javascript', src='/javascripts/stocks.js')
+    script(type='text/javascript', src='/javascripts/panel.js')
     script(type='text/javascript', src='/javascripts/map.js')
     script(type='text/javascript', src='/javascripts/main.js')
     script(type='text/javascript')
@@ -23,7 +25,6 @@ html
       (function() {
         return;
         // Open the original CSV file and extract stuff from it
-        
         var stocks = {
               headers: ['id','name'],
               data: []
@@ -42,13 +43,13 @@ html
                   sym = vals[1];
               stocks.data.push([sym, vals[0]]);
               
-              var industry = vals[2],
+              var sector = vals[2],
                   country = vals[6],
                   region = vals[7],
                   isSandP = vals[4] == 'YES',
                   isDow = vals[5] == 'YES';
                   
-              getOrCreateGroup('industry', industry).ids.push(sym);
+              getOrCreateGroup('sector', sector).ids.push(sym);
               getOrCreateGroup('country', country).ids.push(sym);
               getOrCreateGroup('region', region).ids.push(sym);
               
@@ -68,8 +69,43 @@ html
           var groupId = type + '_' + name;
               group = groupsTable[groupId];
           if(!group) {
+            var nickname;
+            switch(name) {
+              case 'Basic Materials': {
+                nickname = 'Materials';
+                break;
+              }
+              case 'Consumer Services': {
+                nickname = 'Services';
+                break;
+              }
+              case 'Oil and Gas': {
+                nickname = 'Oil & Gas';
+                break;
+              }
+              case 'Consumer Goods': {
+                nickname = 'Goods';
+                break;
+              }
+              case 'Telecommunications': {
+                nickname = 'Telecom';
+                break;
+              }
+              case 'Asia-Pacific': {
+                nickname = 'Asia/Pacific';
+                break;
+              }
+              case 'MidEast-Africa': {
+                nickname = 'MidEast/Africa';
+                break;
+              }
+              default: {
+                nickname = name;
+              }
+            }
             group = groupsTable[groupId] = {
               name: name,
+              nickname: nickname,
               type: type,
               ids: []
             };
@@ -81,4 +117,5 @@ html
         }
       })();
   body
+    .panel
     ul.map

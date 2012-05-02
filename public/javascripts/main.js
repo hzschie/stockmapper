@@ -3,6 +3,7 @@ mapper.groups = new Backbone.Collection();
 
 // Init views on document ready
 $(function() {
+  mapper.panel = new mapper.Panel($('.panel'), mapper.groups);
   mapper.map = new mapper.Map($('.map'), mapper.stocks);
 });
 
@@ -13,6 +14,7 @@ socket.on('update', function(data) {
 });
 
 // Stocks JSON
+setTimeout(function() {// TEMP
 $.getJSON('/data/stocks.json', function(response) {
   var field, i,
       headers = response.headers,
@@ -29,6 +31,7 @@ $.getJSON('/data/stocks.json', function(response) {
   });
   tryPopulateGroups();
 });
+},1000);// TEMP
 
 // Groups JSON
 $.getJSON('/data/groups.json', function(response) {
@@ -46,7 +49,6 @@ function tryPopulateGroups(groups) {
       _.each(group.get('ids'), function(id) {
         members.add(mapper.stocks.get(id));
       });
-      console.log(group.get('members').length);
     });
   }
 }

@@ -1,0 +1,73 @@
+(function() {
+  function Panel($panel, groups) {
+    var order = _.map([
+      'sector:Materials',
+      'sector:Goods',
+      'sector:Services',
+      'sector:Financials',
+      'sector:Health Care',
+      'sector:Industrials',
+      'sector:Oil & Gas',
+      'sector:Technology',
+      'sector:Telecom',
+      'sector:Utilities',
+      'index:Dow Jones',
+      'index:S&P 500',
+      'region:United States',
+      'region:Asia/Pacific',
+      'region:Canada',
+      'region:Europe',
+      'region:Latin America',
+      'region:MidEast/Africa'
+    ], function(reference) { 
+      return { reference:reference, isFilled:false };
+    });
+    
+    // If groups is already populated (may be partially), we handle those groups now
+    groups.forEach(function(group) {
+      addGroup(group);
+      updateGroup(group, true);
+    });
+    // Subscribe to subsequent adding of groups
+    groups.bind('add', addGroup);
+
+    function addGroup(group) {
+      var type = group.get('type'),
+          nickname = group.get('nickname'),
+          reference = type + ':' + nickname,
+          record = _.find(order, function(entry) {
+            return entry.reference == reference;
+          }),
+          index = _.indexOf(order, record);
+      
+      if(!record) { return; }
+
+      var actualIndex = 0;
+      for(var i = 0; i < index; i++) {
+        if(order[i].isFilled) actualIndex++;
+      }
+      
+      var $tag = $(document.createElement('div')).addClass('group').html([
+        '<div class="type">', type.toUpperCase(), '</div>', 
+        '<label>', nickname, '</label>'
+      ].join(''));
+      if(actualIndex == 0) $panel.prepend($tag);
+      else $panel.children().eq(actualIndex - 1).after($tag);
+      
+      record.isFilled = true;
+      
+      group.set({
+        $tag: $tag
+      }, { silent:true });
+      group.on('change', updateGroup);
+      
+      record.$tag = $tag;
+    }
+    
+    function updateGroup(group, force) {
+      console.log("ya");
+    }
+  }
+  
+  mapper.Panel = Panel;
+})();
