@@ -31,12 +31,8 @@
       var $tag = model.get('$tag'),
           $shadow = model.get('$shadow');
       if(model.hasChanged('change') || force) {
-        var pct = model.get('changePct'),
-            whiteness = Math.round(0xff * ( 1 - Math.abs( Math.min(5, Math.max(-5, pct)) / 5) )),
-            rgb = [pct < 0 ? 0xff : whiteness, pct > 0 ? 0xff : whiteness, whiteness];
-          
         $tag.css({
-          backgroundColor: 'rgb(' + rgb + ')'
+          backgroundColor: 'rgb(' + mapper.fractionChangeToHex(Math.min(5, Math.max(-5, model.get('changePct'))) / 5) + ')'
         });
       }
       if(model.hasChanged('isVeryActive') || force) {

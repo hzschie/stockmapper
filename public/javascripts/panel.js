@@ -48,6 +48,7 @@
       }
       
       var $tag = $(document.createElement('div')).addClass('group').html([
+        '<div class="counts"></div>',
         '<div class="type">', type.toUpperCase(), '</div>', 
         '<label>', nickname, '</label>'
       ].join(''));
@@ -57,7 +58,8 @@
       record.isFilled = true;
       
       group.set({
-        $tag: $tag
+        $tag: $tag,
+        $counts: $tag.find('.counts')
       }, { silent:true });
       group.on('change', updateGroup);
       
@@ -65,7 +67,11 @@
     }
     
     function updateGroup(group, force) {
-      console.log("ya");
+      var counts = group.get('upsAndDowns');
+      group.get('$counts').text('+' + counts[0] + '-' + counts[1]);
+      group.get('$tag').css({ 
+        backgroundColor: 'rgb(' + mapper.fractionChangeToHex(counts[0]/counts[1] - 1) + ')'
+      });
     }
   }
   

@@ -8,13 +8,13 @@ $(function() {
 });
 
 // Socket
-var socket = io.connect('http://localhost');
+var socket = io.connect('http://amitair.local:3000');
 socket.on('update', function(data) {
   mapper.stocks.get(data[0]).update(data);
 });
 
 // Stocks JSON
-setTimeout(function() {// TEMP
+// setTimeout(function() {// TEMP
 $.getJSON('/data/stocks.json', function(response) {
   var field, i,
       headers = response.headers,
@@ -31,13 +31,12 @@ $.getJSON('/data/stocks.json', function(response) {
   });
   tryPopulateGroups();
 });
-},1000);// TEMP
+// },1000);// TEMP
 
 // Groups JSON
 $.getJSON('/data/groups.json', function(response) {
   _.each(response, function(groupJson) {
-    groupJson.members = new Backbone.Collection();
-    mapper.groups.add( new Backbone.Model(groupJson) );
+    mapper.groups.add( new mapper.StockGroup(groupJson) );
   });
   tryPopulateGroups();
 });

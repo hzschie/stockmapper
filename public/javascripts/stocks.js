@@ -12,6 +12,7 @@ var Stock = mapper.Stock = Backbone.Model.extend(
       _.forEach(Stock.fields, function(field, i) {
         if(!field) return;
         hash[field.name] = field.isNum ? Number(array[i]) : array[i];
+        hash['changeDir'] = hash['change'] == 0 ? 0 : (hash['change'] / Math.abs(hash['change']));
         hash['changePct'] = parseFloat(hash.changePctString);
         hash['isVeryActive'] = hash.volume / hash.avgVolume >= 2;
       });
@@ -35,5 +36,33 @@ var Stock = mapper.Stock = Backbone.Model.extend(
       { name:'marketCap', isNum:false },
       { name:'avgVolume', isNum:true }
     ]
+  }
+);
+
+var StockGroup = mapper.StockGroup = Backbone.Model.extend(
+  {
+    initialize: function(hash) {
+      hash.members = new Backbone.Collection();
+      hash.upsAndDowns = [0,0];
+      this.set(hash);
+      hash.members.on('add', function(stock) {
+        // console.log(stock.get('change'));
+      });
+
+      var _this = this;
+      hash.members.on('change:changeDir', function(model) {
+        var prevDir = model.previous('changeDir'),
+            newDir = model.get('changeDir'),
+            currentUpsAndDowns = _this.get('upsAndDowns');
+
+        if(prevDir > 0) currentUpsAndDowns[0] -= 1;
+        else if(prevDir < 0) currentUpsAndDowns[1] -= 1;
+
+        if(newDir > 0) currentUpsAndDowns[0] += 1;
+        else if(newDir < 0) currentUpsAndDowns[1] += 1;
+
+        _this.set({ 'upsAndDowns': currentUpsAndDowns.concat() });
+      });
+    }
   }
 );
