@@ -3,8 +3,12 @@ mapper.groups = new Backbone.Collection();
 
 // Init views on document ready
 $(function() {
-  mapper.panel = new mapper.Panel($('.panel'), mapper.groups);
-  mapper.map = new mapper.Map($('.map'), mapper.stocks);
+  var panel = new mapper.Panel($('.panel'), mapper.groups),
+      map = new mapper.Map($('.map'), mapper.stocks);
+  
+  panel.on('select_group', function(group) {
+    map.setModels(group.get('members'));
+  });
 });
 
 // Socket

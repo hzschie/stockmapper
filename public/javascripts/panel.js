@@ -23,6 +23,9 @@
       return { reference:reference, isFilled:false };
     });
     
+    _.extend(this, Backbone.Events);
+    var _this = this;
+    
     // If groups is already populated (may be partially), we handle those groups now
     groups.forEach(function(group) {
       addGroup(group);
@@ -52,8 +55,14 @@
         '<div class="type">', type.toUpperCase(), '</div>', 
         '<label>', nickname, '</label>'
       ].join(''));
+      
+      // Add panel in the right place
       if(actualIndex == 0) $panel.prepend($tag);
       else $panel.children().eq(actualIndex - 1).after($tag);
+      
+      $tag.bind('click', function() {
+        _this.trigger('select_group', group);
+      });
       
       record.isFilled = true;
       
@@ -62,8 +71,6 @@
         $counts: $tag.find('.counts')
       }, { silent:true });
       group.on('change', updateGroup);
-      
-      record.$tag = $tag;
     }
     
     function updateGroup(group, force) {
