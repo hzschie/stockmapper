@@ -1,29 +1,22 @@
 var express = require('express'),
-    io = require('socket.io');
+    http = require('http');
+    
+var app = express(),
+    server = http.createServer(app),
+    io = require('socket.io').listen(server);
 
-app = express.createServer();
-io = io.listen(app);
+server.listen(process.env.PORT || 3000);
+
 // Configuration
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   
-  this.use(require("stylus").middleware({
-    src: __dirname + "/public",
-    compress: true
-  }));
-  
-  app.use(express.methodOverride());
-  app.use(express.bodyParser());
-  app.use(express.cookieParser());
-  app.use(express.session({ secret:'mappermapper' }));
+  app.use(express['static'](__dirname + '/public'));
   app.use(app.router);
-  app.use(express.static(__dirname + '/public'));
 });
 
-app.listen(process.env.PORT || 3000);
-
-app.get('/main', function(req, res) {
+app.get('/', function(req, res) {
   res.render('main', {
     layout: false
   });
@@ -37,7 +30,7 @@ io.sockets.on('connection', function (socket) {
       socket.join(id);
       var current = dataSource.get(id);
       if(current) {
-        socket.emit("update", current)
+        socket.emit("update", current);
       }
     });
   });
