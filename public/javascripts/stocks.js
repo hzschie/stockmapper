@@ -44,6 +44,7 @@ var StockGroup = mapper.StockGroup = Backbone.Model.extend(
     initialize: function(hash) {
       hash.members = new Backbone.Collection();
       hash.upsAndDowns = [0,0];
+      hash.urlName = hash.nickname.toLowerCase().replace(/\s|\/|\&/g, '+').replace(/\++/, '+');
       this.set(hash);
       hash.members.on('add', function(stock) {
         // console.log(stock.get('change'));
@@ -53,7 +54,7 @@ var StockGroup = mapper.StockGroup = Backbone.Model.extend(
       hash.members.on('change:changeDir', function(model) {
         var prevDir = model.previous('changeDir'),
             newDir = model.get('changeDir'),
-            currentUpsAndDowns = _this.get('upsAndDowns');
+            currentUpsAndDowns = _this.get('upsAndDowns').concat();
 
         if(prevDir > 0) currentUpsAndDowns[0] -= 1;
         else if(prevDir < 0) currentUpsAndDowns[1] -= 1;
@@ -61,7 +62,7 @@ var StockGroup = mapper.StockGroup = Backbone.Model.extend(
         if(newDir > 0) currentUpsAndDowns[0] += 1;
         else if(newDir < 0) currentUpsAndDowns[1] += 1;
 
-        _this.set({ 'upsAndDowns': currentUpsAndDowns.concat() });
+        _this.set({ 'upsAndDowns': currentUpsAndDowns });
       });
     }
   }

@@ -16,7 +16,7 @@ app.configure(function(){
   app.use(app.router);
 });
 
-app.get('/', function(req, res) {
+app.get('/*', function(req, res) {
   res.render('main', {
     layout: false
   });

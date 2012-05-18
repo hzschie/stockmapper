@@ -1,16 +1,6 @@
 mapper.stocks = new Backbone.Collection();
 mapper.groups = new Backbone.Collection();
 
-// Init views on document ready
-$(function() {
-  var panel = new mapper.Panel($('.panel'), mapper.groups),
-      map = new mapper.Map($('.map'), mapper.stocks);
-  
-  panel.on('select_group', function(group) {
-    map.setModels(group.get('members'));
-  });
-});
-
 // Socket
 var socket = io.connect('http://amitair.local:3000');
 socket.on('update', function(data) {
@@ -18,7 +8,6 @@ socket.on('update', function(data) {
 });
 
 // Stocks JSON
-// setTimeout(function() {// TEMP
 $.getJSON('/data/stocks.json', function(response) {
   var field, i,
       headers = response.headers,
@@ -35,7 +24,6 @@ $.getJSON('/data/stocks.json', function(response) {
   });
   tryPopulateGroups();
 });
-// },1000);// TEMP
 
 // Groups JSON
 $.getJSON('/data/groups.json', function(response) {
@@ -45,6 +33,7 @@ $.getJSON('/data/groups.json', function(response) {
   tryPopulateGroups();
 });
 
+// Put stocks into groups
 function tryPopulateGroups(groups) {
   if(mapper.stocks.length && mapper.groups.length) {
     mapper.groups.forEach(function(group) {
@@ -53,5 +42,49 @@ function tryPopulateGroups(groups) {
         members.add(mapper.stocks.get(id));
       });
     });
+    
+    buildView();
   }
+}
+
+// Initialize view and Historty
+function buildView() {
+  // Init views on document ready
+  $(function() {
+    var panel = new mapper.Panel($('.panel'), mapper.groups),
+        map = new mapper.Map($('.map'), mapper.stocks),
+        viewState = new mapper.ViewState();
+        
+    viewState.on('change', function(viewState) {
+      if(viewState.hasChanged('filter')) {
+        var name = viewState.get('filter'),
+            group = mapper.groups.find(function(group) {
+              return group.get('urlName') == name;
+            });
+        
+        if(group)
+          map.setModels(group.get('members'));
+        else if(!name)
+          map.setModels(mapper.stocks);
+        else
+          throw new Error('Unknown group, ' + name);
+      }
+    });
+
+    (function(window, undefined){
+        var History = window.History;
+        if ( !History.enabled ) return;
+
+        History.Adapter.bind(window, 'statechange', function(){
+          var state = History.getState();
+          viewState.fromUrl(state.url);
+        });
+        viewState.fromUrl(History.getState().url);
+    })(window);
+
+    panel.on('select_group', function(group) {
+      viewState.set({ filter: group.get('urlName') }, { silent: true });
+      History.pushState(null, null, viewState.toUrl());
+    });
+  });
 }

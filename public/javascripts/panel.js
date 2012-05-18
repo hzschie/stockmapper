@@ -1,6 +1,9 @@
 (function() {
   function Panel($panel, groups) {
-    var order = _.map([
+    _.extend(this, Backbone.Events);
+    var _this = this;
+
+    var tagsOrder = _.map([
       'sector:Materials',
       'sector:Goods',
       'sector:Services',
@@ -23,31 +26,35 @@
       return { reference:reference, isFilled:false };
     });
     
-    _.extend(this, Backbone.Events);
-    var _this = this;
+    var buttonsOrder = [
+      { id:'sym', label:'Ticker Symbol' },
+      { id:'chg', label:'Percent Chng' },
+      { id:'vol', label:'Volume' },
+      { id:'cap', label:'Market Cap' }
+    ];
+    
+    buttonsOrder.forEach(function(btnObj) {
+    });
     
     // If groups is already populated (may be partially), we handle those groups now
-    groups.forEach(function(group) {
-      addGroup(group);
-      updateGroup(group, true);
-    });
+    groups.forEach(addGroup);
     // Subscribe to subsequent adding of groups
-    groups.bind('add', addGroup);
+    groups.on('add', addGroup);
 
     function addGroup(group) {
       var type = group.get('type'),
           nickname = group.get('nickname'),
+          urlName = group.get('urlName'),
           reference = type + ':' + nickname,
-          record = _.find(order, function(entry) {
+          record = _.find(tagsOrder, function(entry) {
             return entry.reference == reference;
           }),
-          index = _.indexOf(order, record);
+          index = _.indexOf(tagsOrder, record);
       
-      if(!record) { return; }
+      if(!record) return;
 
-      var actualIndex = 0;
-      for(var i = 0; i < index; i++) {
-        if(order[i].isFilled) actualIndex++;
+      for(var i = 0, actualIndex = 0; i < index; i++) { 
+        if(tagsOrder[i].isFilled) actualIndex++;
       }
       
       var $tag = $(document.createElement('div')).addClass('group').html([
@@ -63,21 +70,23 @@
       $tag.bind('click', function() {
         _this.trigger('select_group', group);
       });
-      
+            
       record.isFilled = true;
-      
       group.set({
         $tag: $tag,
         $counts: $tag.find('.counts')
       }, { silent:true });
       group.on('change', updateGroup);
+      
+      updateGroup(group, true);
     }
     
     function updateGroup(group, force) {
       var counts = group.get('upsAndDowns');
       group.get('$counts').text('+' + counts[0] + '-' + counts[1]);
       group.get('$tag').css({ 
-        backgroundColor: 'rgb(' + mapper.fractionChangeToHex(counts[0]/counts[1] - 1) + ')'
+        backgroundColor: 'rgb(' + mapper.fractionChangeToHex((counts[0]/counts[1] - 1) || 1) + ')'
+        // || 1 above is in case counts[1] (ie "downs") is zero, which produces NaN
       });
     }
   }
