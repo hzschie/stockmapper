@@ -12,10 +12,11 @@ var Stock = mapper.Stock = Backbone.Model.extend(
       _.forEach(Stock.fields, function(field, i) {
         if(!field) return;
         hash[field.name] = field.isNum ? Number(array[i]) : array[i];
-        hash['changeDir'] = hash['change'] == 0 ? 0 : (hash['change'] / Math.abs(hash['change']));
-        hash['changePct'] = parseFloat(hash.changePctString);
-        hash['isVeryActive'] = hash.volume / hash.avgVolume >= 2;
       });
+      hash['changeDir'] = hash['change'] == 0 ? 0 : (hash['change'] / Math.abs(hash['change']));
+      hash['changePct'] = parseFloat(hash.changePctString);
+      hash['marketCap'] = Stock.parseMarketCapString(hash.marketCapString);
+      hash['isVeryActive'] = hash.volume / (hash.avgVolume || hash.volume) >= 1.96;
       this.set(hash);
     }
   },
@@ -33,22 +34,33 @@ var Stock = mapper.Stock = Backbone.Model.extend(
       { name:'low', isNum:true },
       { name:'volume', isNum:true },
       { name:'changePctString', isNum:false },
-      { name:'marketCap', isNum:false },
+      { name:'marketCapString', isNum:false },
       { name:'avgVolume', isNum:true }
-    ]
+    ],
+    
+    parseMarketCapString: function(capString) {
+      var fraction = parseFloat(capString),
+          multKey = (capString.match(/[MB]$/) || [])[0];
+      switch(multKey) {
+        case 'B':
+          return Math.round(fraction * 1000000000);
+        case 'M':
+          return Math.round(fraction * 1000000);
+        default:
+          return fraction;
+      }
+    }
   }
 );
 
 var StockGroup = mapper.StockGroup = Backbone.Model.extend(
   {
     initialize: function(hash) {
-      hash.members = new Backbone.Collection();
+      hash.members = new Backbone.Collection(hash.members);
       hash.upsAndDowns = [0,0];
+      hash.label = hash.label || hash.nickname;
       hash.urlName = hash.nickname.toLowerCase().replace(/\s|\/|\&/g, '+').replace(/\++/, '+');
       this.set(hash);
-      hash.members.on('add', function(stock) {
-        // console.log(stock.get('change'));
-      });
 
       var _this = this;
       hash.members.on('change:changeDir', function(model) {
@@ -67,3 +79,21 @@ var StockGroup = mapper.StockGroup = Backbone.Model.extend(
     }
   }
 );
+
+mapper.sortBy = function(attribute) {
+  return function(a, b) {
+    var val1 = a.get(attribute),
+        val2 = b.get(attribute);
+    return ((val1 < val2) - (val2 < val1)) || 
+      (isNaN(val1) - isNaN(val2)) || 
+      mapper.sortFunctions.sym(a, b);
+  };
+};
+mapper.sortFunctions = {
+  sym: function(a, b) {
+    return a.get('sym') > b.get('sym') ? 1 : -1;
+  },
+  chg: mapper.sortBy('changePct'),
+  vol: mapper.sortBy('volume'),
+  cap: mapper.sortBy('marketCap')
+};

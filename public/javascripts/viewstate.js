@@ -1,9 +1,5 @@
 var ViewState = mapper.ViewState = Backbone.Model.extend(
   {
-    defaults: {
-      filter: null
-    },
-    
     toUrl: function() {
       return '?' + this.toParamsString();
     },
@@ -13,7 +9,8 @@ var ViewState = mapper.ViewState = Backbone.Model.extend(
       var paramsString = RegExp.$1 || null,
           params = paramsString && paramsString.split('&'),
           attribs = {
-            filter: null
+            filter: null,
+            sort: null
           };
           
       _.forEach(params, function(param) {
@@ -25,16 +22,17 @@ var ViewState = mapper.ViewState = Backbone.Model.extend(
     },
     
     toParamsString: function() {
-      var val, output = '';
-      for(var param in this.attributes) {
-        switch (typeof(val = this.attributes[param])) {
-          case 'function': continue;
-          default: {
-            output += (output.length ? '&' : '') + param + '=' + val;
-          }
-        }
-      }
+      var val, 
+          output = '',
+          _this = this;
+      ViewState.urlParams.forEach(function(param) {
+        val = _this.attributes[param];
+        if(val) output += (output.length ? '&' : '') + param + '=' + val;
+      });
       return output;
     }
+  },
+  {
+    urlParams: ['filter', 'sort']
   }
 );

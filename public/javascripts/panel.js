@@ -4,6 +4,7 @@
     var _this = this;
 
     var tagsOrder = _.map([
+      'index:NYA',
       'sector:Materials',
       'sector:Goods',
       'sector:Services',
@@ -34,6 +35,12 @@
     ];
     
     buttonsOrder.forEach(function(btnObj) {
+      var $btn = $(document.createElement('div')).addClass('sort').addClass('button').html([
+        '<div class="type">SORT BY:</div>', 
+        '<label>', btnObj.label, '</label>'
+      ].join('')).appendTo($panel).click(function() {
+        _this.trigger('select_sort', btnObj.id);
+      });
     });
     
     // If groups is already populated (may be partially), we handle those groups now
@@ -44,6 +51,7 @@
     function addGroup(group) {
       var type = group.get('type'),
           nickname = group.get('nickname'),
+          label = group.get('label'),
           urlName = group.get('urlName'),
           reference = type + ':' + nickname,
           record = _.find(tagsOrder, function(entry) {
@@ -57,10 +65,10 @@
         if(tagsOrder[i].isFilled) actualIndex++;
       }
       
-      var $tag = $(document.createElement('div')).addClass('group').html([
+      var $tag = $(document.createElement('div')).addClass('group').addClass('button').html([
         '<div class="counts"></div>',
         '<div class="type">', type.toUpperCase(), '</div>', 
-        '<label>', nickname, '</label>'
+        '<label>', label, '</label>'
       ].join(''));
       
       // Add panel in the right place

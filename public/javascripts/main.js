@@ -43,6 +43,16 @@ function tryPopulateGroups(groups) {
       });
     });
     
+    // Create the "All" group
+    mapper.allGroup = new mapper.StockGroup({
+      members: mapper.stocks.models,
+      name: 'NYE Composit Index',
+      label: 'NYA (show all)',
+      nickname: 'NYA',
+      type: 'index'
+    });
+    mapper.groups.add(mapper.allGroup);
+    
     buildView();
   }
 }
@@ -52,22 +62,36 @@ function buildView() {
   // Init views on document ready
   $(function() {
     var panel = new mapper.Panel($('.panel'), mapper.groups),
-        map = new mapper.Map($('.map'), mapper.stocks),
-        viewState = new mapper.ViewState();
+        map = new mapper.Map($('.map')),
+        viewState = new mapper.ViewState(),
+        currentGroup = null,
+        currentSort = mapper.sortFunctions['sym'];
         
     viewState.on('change', function(viewState) {
       if(viewState.hasChanged('filter')) {
-        var name = viewState.get('filter'),
-            group = mapper.groups.find(function(group) {
-              return group.get('urlName') == name;
-            });
+        var name = viewState.get('filter');
+        currentGroup = !name ? mapper.allGroup : mapper.groups.where({urlName:name})[0];
         
-        if(group)
-          map.setModels(group.get('members'));
-        else if(!name)
-          map.setModels(mapper.stocks);
+        if(currentGroup) {
+          if(currentGroup.get('members').comparator != currentSort) {
+            currentGroup.get('members').comparator = currentSort;
+            currentGroup.get('members').sort();
+          }
+
+          map.setModels(currentGroup.get('members'));
+        }
         else
           throw new Error('Unknown group, ' + name);
+      }
+      
+      if(viewState.hasChanged('sort')) {
+        currentSort = mapper.sortFunctions[viewState.get('sort') || 'sym'];
+        
+        // TODO: move currentSort logic into StockGroup, so that it can re-sort when members' data changes... I think.
+        if(currentGroup.get('members').comparator != currentSort) {
+          currentGroup.get('members').comparator = currentSort;
+          currentGroup.get('members').sort();
+        }
       }
     });
 
@@ -86,5 +110,11 @@ function buildView() {
       viewState.set({ filter: group.get('urlName') }, { silent: true });
       History.pushState(null, null, viewState.toUrl());
     });
+    
+    panel.on('select_sort', function(sortVal) {
+      viewState.set({ sort: sortVal }, { silent: true });
+      History.pushState(null, null, viewState.toUrl());
+    });
+
   });
 }

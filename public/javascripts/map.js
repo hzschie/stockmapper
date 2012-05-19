@@ -3,25 +3,23 @@
     var models,
         $shadows;
 
-    (this.setModels = function(_models) {
+    this.setModels = function(_models) {
       if(models) {
         models.off('add', addModel);
         models.off('change', updateModel);
-        $map.empty();
+        models.off('reset', rebuild);
       }
       
-      $shadows = $(document.createElement('div')).addClass('shadows').appendTo($map);
       models = _models;
+      rebuild();
 
-      // If models is already populated (may be partially), we handle those models now
-      models.forEach(function(model) {
-        addModel(model);
-        updateModel(model, true);
-      });
       // Subscribe to subsequent adding of models
       models.on('add', addModel);
       models.on('change', updateModel);
-    })(_models);
+      models.on('reset', rebuild);
+    };
+    
+    if(_models) this.setModels(_models);
     
     function addModel(model) {
       var sym = model.get('sym'),
@@ -37,7 +35,6 @@
         $tag: $(document.createElement('li')).html(html).appendTo($map),
         $shadow: $(document.createElement('div')).appendTo($shadows)
       }, { silent:true });
-      // model.on('change', updateModel);
     }
     
     function updateModel(model, force) {
@@ -58,6 +55,16 @@
           $shadow.removeClass('active');
         }
       }
+    }
+    
+    function rebuild() {
+      $map.empty();
+      $shadows = $(document.createElement('div')).addClass('shadows').appendTo($map);
+      
+      models.forEach(function(model) {
+        addModel(model);
+        updateModel(model, true);
+      });
     }
   };
   
