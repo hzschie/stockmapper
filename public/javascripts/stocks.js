@@ -39,15 +39,13 @@ var Stock = mapper.Stock = Backbone.Model.extend(
     ],
     
     parseMarketCapString: function(capString) {
-      var fraction = parseFloat(capString),
-          multKey = (capString.match(/[MB]$/) || [])[0];
+      var f = parseFloat(capString),
+          multKey = (capString.match(/[MBT]$/) || [])[0];
       switch(multKey) {
-        case 'B':
-          return Math.round(fraction * 1000000000);
-        case 'M':
-          return Math.round(fraction * 1000000);
-        default:
-          return fraction;
+        case 'T': return Math.round(f * 1e+12);
+        case 'B': return Math.round(f * 1e+9);
+        case 'M': return Math.round(f * 1e+6);
+        default: return f;
       }
     }
   }
