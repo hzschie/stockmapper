@@ -71,6 +71,10 @@ function buildView() {
         
     viewState.on('change', function(viewState) {
       if(viewState.hasChanged('filter')) {
+        if(currentGroup) {
+          currentGroup.get('members').off('change', reSort);
+        }
+        
         var name = viewState.get('filter');
         currentGroup = !name ? mapper.allGroup : mapper.groups.where({urlName:name})[0];
         
@@ -78,6 +82,8 @@ function buildView() {
           if(currentGroup.get('members').comparator != currentSort) {
             currentGroup.get('members').comparator = currentSort;
             currentGroup.get('members').sort();
+            
+            currentGroup.get('members').on('change', reSort);
           }
           map.setModels(currentGroup.get('members'));
           panel.setSelectedGroup(currentGroup);
@@ -120,5 +126,16 @@ function buildView() {
       History.pushState(null, null, viewState.toUrl());
     });
 
+    var resortTimeoutId = null;
+    function reSort() {
+      if(resortTimeoutId != null) {
+        clearTimeout(resortTimeoutId);
+      }
+      resortTimeoutId = setTimeout(function() {
+        console.log('resort now');
+        currentGroup.get('members').sort();
+        resortTimeoutId = null;
+      }, 100);
+    }
   });
 }
