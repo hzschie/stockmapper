@@ -2,7 +2,7 @@ mapper.stocks = new Backbone.Collection();
 mapper.groups = new Backbone.Collection();
 
 // Socket
-var socket = io.connect('http://amitair.local:3000');
+var socket = io.connect();//'http://amitair.local:3000');
 var b = '';
 socket.on('update', function(data) {
   b += data;
@@ -65,6 +65,7 @@ function buildView() {
   $(function() {
     var panel = new mapper.Panel($('.panel'), mapper.groups),
         map = new mapper.Map($('.map')),
+        // chart = new mapper.Chart($('.chart')),
         viewState = new mapper.ViewState(),
         currentGroup = null,
         currentSort = mapper.sortFunctions['sym'];
@@ -86,6 +87,7 @@ function buildView() {
             currentGroup.get('members').on('change', reSort);
           }
           map.setModels(currentGroup.get('members'));
+          // chart.setModels(currentGroup.get('members'));
           panel.setSelectedGroup(currentGroup);
         }
         else
