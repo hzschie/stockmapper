@@ -11,7 +11,7 @@
       }
       
       models = _models;
-      rebuild();
+      rebuild(null, null, true);
 
       // Subscribe to subsequent adding of models
       models.on('add', addModel);
@@ -22,6 +22,12 @@
     if(_models) this.setModels(_models);
     
     function addModel(model) {
+      if(model.get('$tag')) {
+        model.get('$tag').appendTo($map);
+        model.get('$shadow').appendTo($shadows);
+        return;
+      }
+
       var sym = model.get('sym'),
           html;
       if(sym.indexOf('-') > -1) {
@@ -57,14 +63,18 @@
       }
     }
     
-    function rebuild() {
+    function rebuild(collection, options, isNewCollection) {
+      var tt = Date.now();
       $map.empty();
       $shadows = $(document.createElement('div')).addClass('shadows').appendTo($map);
       
       models.forEach(function(model) {
         addModel(model);
-        updateModel(model, true);
+        if(isNewCollection && model.get('hasData')) {
+          updateModel(model, true);
+        }
       });
+      console.log("Rebuild time:" + (Date.now() - tt));
     }
   };
   

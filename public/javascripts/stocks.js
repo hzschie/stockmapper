@@ -1,5 +1,9 @@
 var Stock = mapper.Stock = Backbone.Model.extend(
   {
+    defaults: {
+      hasData: false
+    },
+    
     initialize: function(hash) {
       this.set({
         sym:hash.id,
@@ -17,6 +21,7 @@ var Stock = mapper.Stock = Backbone.Model.extend(
       hash['changePct'] = parseFloat(hash.changePctString);
       hash['marketCap'] = Stock.parseMarketCapString(hash.marketCapString);
       hash['isVeryActive'] = hash.volume / (hash.avgVolume || hash.volume) >= 1.96;
+      hash['hasData'] = true;
       this.set(hash);
     }
   },

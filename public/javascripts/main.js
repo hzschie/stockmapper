@@ -3,7 +3,9 @@ mapper.groups = new Backbone.Collection();
 
 // Socket
 var socket = io.connect('http://amitair.local:3000');
+var b = '';
 socket.on('update', function(data) {
+  b += data;
   mapper.stocks.get(data[0]).update(data);
 });
 
@@ -77,7 +79,6 @@ function buildView() {
             currentGroup.get('members').comparator = currentSort;
             currentGroup.get('members').sort();
           }
-
           map.setModels(currentGroup.get('members'));
         }
         else
