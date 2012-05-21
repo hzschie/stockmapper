@@ -1,7 +1,9 @@
 (function() {
   function Panel($panel, groups) {
     _.extend(this, Backbone.Events);
-    var _this = this;
+    var _this = this,
+        selectedGroup = null,
+        $selectedSort = null;
 
     var tagsOrder = _.map([
       'index:NYA',
@@ -35,7 +37,7 @@
     ];
     
     buttonsOrder.forEach(function(btnObj) {
-      var $btn = $(document.createElement('div')).addClass('sort').addClass('button').html([
+      btnObj.$btn = $(document.createElement('div')).addClass('sort').addClass('button').html([
         '<div class="type">SORT BY:</div>', 
         '<label>', btnObj.label, '</label>'
       ].join('')).appendTo($panel).click(function() {
@@ -47,6 +49,27 @@
     groups.forEach(addGroup);
     // Subscribe to subsequent adding of groups
     groups.on('add', addGroup);
+    
+    this.setSelectedGroup = function(group) {
+      if(selectedGroup) {
+        selectedGroup.get('$tag').removeClass('selected');
+      }
+      selectedGroup = group;
+      if(selectedGroup) {
+        selectedGroup.get('$tag').addClass('selected');
+      }
+    };
+    
+    this.setSelectedSort = function(sort) {
+      if($selectedSort) {
+        $selectedSort.removeClass('selected');
+      }
+      var sortObj = _.find(buttonsOrder, function(obj) { return obj.id == sort; });
+      $selectedSort = sortObj && sortObj.$btn;
+      if($selectedSort) {
+        $selectedSort.addClass('selected');
+      }
+    };
 
     function addGroup(group) {
       var type = group.get('type'),

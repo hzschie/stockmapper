@@ -26,6 +26,24 @@
   line-height:9px;
 }
 
+.panel .button.selected {
+  position:relative
+}
+
+.panel .button.selected:after {
+  width:85px;
+  height:20px;
+/*  border:1px solid #fffcce;
+  left:0;
+  top:0;*/
+  border:2px solid #fffcce;
+  left:-1px;
+  top:-1px;
+  position:absolute;
+  content:'';
+  background:transparent url('/images/inner_dropshadow.png') no-repeat top left;
+}
+
 .panel .group {
   background-color:#ccc;
 }

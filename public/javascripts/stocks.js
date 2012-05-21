@@ -62,7 +62,7 @@ var StockGroup = mapper.StockGroup = Backbone.Model.extend(
       hash.members = new Backbone.Collection(hash.members);
       hash.upsAndDowns = [0,0];
       hash.label = hash.label || hash.nickname;
-      hash.urlName = hash.nickname.toLowerCase().replace(/\s|\/|\&/g, '+').replace(/\++/, '+');
+      hash.urlName = hash.type + ':' + hash.nickname.toLowerCase().replace(/\s|\/|\&/g, '+').replace(/\++/, '+');
       this.set(hash);
 
       var _this = this;

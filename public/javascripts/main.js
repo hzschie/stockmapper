@@ -80,19 +80,22 @@ function buildView() {
             currentGroup.get('members').sort();
           }
           map.setModels(currentGroup.get('members'));
+          panel.setSelectedGroup(currentGroup);
         }
         else
           throw new Error('Unknown group, ' + name);
       }
       
       if(viewState.hasChanged('sort')) {
-        currentSort = mapper.sortFunctions[viewState.get('sort') || 'sym'];
+        var sortId = viewState.get('sort') || 'sym';
+        currentSort = mapper.sortFunctions[sortId];
         
         // TODO: move currentSort logic into StockGroup, so that it can re-sort when members' data changes... I think.
         if(currentGroup.get('members').comparator != currentSort) {
           currentGroup.get('members').comparator = currentSort;
           currentGroup.get('members').sort();
         }
+        panel.setSelectedSort(sortId);
       }
     });
 
