@@ -2,11 +2,11 @@ mapper.stocks = new Backbone.Collection();
 mapper.groups = new Backbone.Collection();
 
 // Socket
-var socket = io.connect();//'http://amitair.local:3000');
-var b = '';
-socket.on('update', function(data) {
-  b += data;
-  mapper.stocks.get(data[0]).update(data);
+var socket = io.connect();
+socket.on('update', function(multiStockData) {
+  _.forEach(multiStockData, function(data) {
+    mapper.stocks.get(data[0]).update(data);
+  });
 });
 
 // Stocks JSON
@@ -21,9 +21,10 @@ $.getJSON('/data/stocks.json', function(response) {
     }
     
     var stock = new mapper.Stock(hash);
-    socket.emit('subscribe', stock.get('sym'));
+    // socket.emit('subscribe', [stock.get('sym')]);// This would be individual stock subscription
     mapper.stocks.add(stock);
   });
+  socket.emit('subscribe', mapper.stocks.pluck('sym'));
   tryPopulateGroups();
 });
 

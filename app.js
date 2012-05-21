@@ -3,7 +3,11 @@ var express = require('express'),
     
 var app = express(),
     server = http.createServer(app),
-    io = require('socket.io').listen(server);
+    io = require('socket.io').listen(server, {
+      // 'log level': 0,
+      'transports': ['xhr-polling'],
+      'polling duration': 10
+    });
 
 server.listen(process.env.PORT || 3000);
 
@@ -26,16 +30,20 @@ io.sockets.on('connection', function (socket) {
   socket.on('subscribe', function (ids) {
     if(typeof(ids) == 'string') ids = [ids];
     
+    var reply = [];
     ids.forEach(function(id) {
       socket.join(id);
       var current = dataSource.get(id);
       if(current) {
-        socket.emit("update", current);
+        reply.push(current);
       }
     });
+    if(reply.length) {
+      socket.emit("update", reply);
+    }
   });
 });
 var YahooDataSource = require('./yahoo_data_source.js').YahooDataSource;
 var dataSource = new YahooDataSource(function(data) {
-  io.sockets.emit("update", data);
+  io.sockets.emit("update", [data]);
 });
