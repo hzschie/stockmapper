@@ -5,11 +5,18 @@
         ticks = svg.append('g'),
         bars = svg.append('g'),
         mostActive = svg.append('g').attr('class', 'most_active').attr('fill', '#76f9fb'),
-        $mostActive = $container.find('.most_active');
+        $mostActive = $container.find('.most_active'),
+        upsAndDowns = svg.append('g').attr('class', 'ups_and_downs'),
+        $upsAndDowns = $container.find('.ups_and_downs');
         
     mostActive.append('text').text('VOLUME').attr('dy', 4);
     mostActive.append('text').attr('class', 'sym').attr('dy', 17);
     mostActive.append('path').attr('stroke', '#76f9fb').attr('stroke-width', 2);
+    
+    upsAndDowns.append('text').attr('class', 'up_count').attr('fill', '#76f9fb').attr('dy', -3).attr('text-anchor', 'middle');
+    upsAndDowns.append('text').attr('class', 'dn_count').attr('fill', '#76f9fb').attr('dy', -3).attr('text-anchor', 'middle');
+    upsAndDowns.append('path').attr('class', 'up_arrow').attr('stroke', '#76f9fb').attr('stroke-width', 2);
+    upsAndDowns.append('path').attr('class', 'dn_arrow').attr('stroke', '#76f9fb').attr('stroke-width', 2);
 
     this.setModels = function(_models) {
       if(models) {
@@ -175,9 +182,61 @@
       else {
         $mostActive.hide();
       }
+      
+      if(models.comparator == mapper.sortFunctions['chg'] && !isNaN(models.at(0).get('changePct'))) {
+        var firstNotUp = models.find(function(model, i) { return model.get('changePct') <= 0; }),
+            firstDn = models.find(function(model, i) { return model.get('changePct') < 0; }),
+            firstNA = models.find(function(model, i) { return isNaN(model.get('changePct')); }),
+            
+            lastUpIndex = _.indexOf(models.models, firstNotUp),
+            firstDnIndex = _.indexOf(models.models, firstDn),
+            lastDnIndex = firstNA ? _.indexOf(models.models, firstNA) : models.length,
+            
+            firstUpX = barX(null, 0),
+            lastUpX  = barX(null, lastUpIndex),
+            firstDnX = barX(null, firstDnIndex),
+            lastDnX  = barX(null, lastDnIndex),
+            
+            upSpan = lastUpX - firstUpX,
+            dnSpan = lastDnX - firstDnX;
+
+        $upsAndDowns.show();
+        $upsAndDowns.find('.up_arrow').attr('d',
+          getArrowPath( firstUpX, paddingTop + 55, Math.floor(upSpan/2),  1 ) + 
+          getArrowPath( lastUpX,  paddingTop + 55, Math.ceil( upSpan/2), -1 )
+        );
+        $upsAndDowns.find('.dn_arrow').attr('d',
+          getArrowPath( firstDnX, paddingTop + 55, Math.floor(dnSpan/2),  1 ) + 
+          getArrowPath( lastDnX,  paddingTop + 55, Math.ceil( dnSpan/2), -1 )
+        );
+        $upsAndDowns.find('.up_count').attr({
+          x: firstUpX + upSpan / 2,
+          y: paddingTop + 55
+        }).text(lastUpIndex + ' Stocks UP');
+        $upsAndDowns.find('.dn_count').attr({
+          x: firstDnX + dnSpan / 2,
+          y: paddingTop + 55
+        }).text((lastDnIndex - firstDnIndex) + ' Stocks DOWN');
+      }
+      else {
+        console.log('no');
+        $upsAndDowns.hide();
+      }
 
       console.log(Date.now() - tt + ' ms, CHART redraw');
     };
+    
+    function getArrowPath(arrowX, arrowY, length, mult) {
+      console.log(arrowX, arrowY);
+      return [
+        'M' + arrowX + ',' + arrowY,
+        'l' + length*mult + ',0',
+        'M' + arrowX + ',' + arrowY,
+        'l' + 7*mult + ',-5',
+        'M' + arrowX + ',' + arrowY,
+        'l' + 7*mult + ',5'
+      ].join(' ');
+    }
   }
   mapper.Chart = Chart;
 })();
