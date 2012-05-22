@@ -96,7 +96,10 @@
         .remove();
         
         // Render Volume ticks
-        var tickValues = volumeY.ticks(5).slice(1),
+        var tickValues = volumeY.ticks(4).slice(1),
+            tickValues = d3.scale.sqrt()
+              .domain([0, tickValues[0]])
+              .range([0, volumeY(tickValues[0])]).ticks(4).slice(1).concat(tickValues),
             volumeTickY = function(val) { return paddingTop + chgMaxH + Math.round(volumeY(val)) + .5; },
             changeTicks = svg.selectAll('line.vol').data(tickValues),
             changeTicksText = svg.selectAll('text.vol').data(tickValues);
