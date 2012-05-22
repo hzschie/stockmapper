@@ -2,6 +2,8 @@
   function Chart($container) {
     var models = null,
         svg = d3.select($container[0]).append('svg'),
+        ticks = svg.append('g'),
+        bars = svg.append('g'),
         mostActive = svg.append('g').attr('class', 'most_active').attr('fill', '#76f9fb'),
         $mostActive = $container.find('.most_active');
         
@@ -29,8 +31,8 @@
           chgMaxH = 180,
           volMaxH = 300,
           barFractionalW = (w - 40) / models.length,
-          changeBars = svg.selectAll('rect.chg').data(models.models, Stock.sym),
-          volumeBars = svg.selectAll('rect.vol').data(models.models, Stock.sym),
+          changeBars = bars.selectAll('rect.chg').data(models.models, Stock.sym),
+          volumeBars = bars.selectAll('rect.vol').data(models.models, Stock.sym),
 
           barX = function(model, i) { return Math.round(i * barFractionalW); },
           barW = function(model, i) { return Math.max( barX(null, i+1) - barX(null, i) - 1, 1 ); },
@@ -72,8 +74,8 @@
       // Render Change ticks
       var tickValues = chgPctY.ticks(3).slice(1),
           changeTickY = function(val) { return paddingTop + Math.round(chgMaxH - chgPctY(val)) + .5; },
-          changeTicks = svg.selectAll('line.chg').data(tickValues),
-          changeTicksText = svg.selectAll('text.chg').data(tickValues);
+          changeTicks = ticks.selectAll('line.chg').data(tickValues),
+          changeTicksText = ticks.selectAll('text.chg').data(tickValues);
       changeTicks.enter().append('line')
         .attr('class', 'chg')
         .attr('stroke-dasharray', '2 2');
@@ -107,8 +109,8 @@
             .domain([0, tickValues[0]])
             .range([0, volumeY(tickValues[0])]).ticks(4).slice(1).concat(tickValues),
           volumeTickY = function(val) { return paddingTop + chgMaxH + Math.round(volumeY(val)) + .5; },
-          changeTicks = svg.selectAll('line.vol').data(tickValues),
-          changeTicksText = svg.selectAll('text.vol').data(tickValues);
+          changeTicks = ticks.selectAll('line.vol').data(tickValues),
+          changeTicksText = ticks.selectAll('text.vol').data(tickValues);
       changeTicks.enter().append('line')
         .attr('class', 'vol')
         .attr('stroke-dasharray', '2 2');
@@ -152,7 +154,7 @@
         var arrowIndex = _.indexOf(models.models, mostActiveStock),
             mult = arrowIndex > models.models.length / 2 ? -1 : 1,
             arrowX = barX(null, arrowIndex + (mult == -1 ? 0 : 1)) - (mult == -1 ? 1 : 0),
-            arrowY = volumeTickY(mostActiveStock.get('volume')) - 44;
+            arrowY = volumeTickY(mostActiveStock.get('volume')) - 17;
         $mostActive.show().find('path').attr('d', [
           'M' + arrowX + ',' + arrowY,
           'l' + 20*mult + ',0',
