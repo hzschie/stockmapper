@@ -52,7 +52,14 @@ var Stock = mapper.Stock = Backbone.Model.extend(
         case 'M': return Math.round(f * 1e+6);
         default: return f;
       }
-    }
+    },
+    
+    // Convenience getters, for d3 neatness
+    sym: function(stock) { return stock.attributes['sym']; },
+    changePct: function(stock) { return stock.attributes['changePct'] || 0; },
+    changePctAbs: function(stock) { return Math.abs(Stock.changePct(stock)); },
+    changePctToHex: function(stock) { return mapper.changePctToHex(Stock.changePct(stock)); },
+    volume: function(stock) { return stock.attributes['volume'] || 0; }
   }
 );
 

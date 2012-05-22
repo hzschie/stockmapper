@@ -48,7 +48,8 @@
           $shadow = model.get('$shadow');
       if(model.hasChanged('change') || force) {
         $tag.css({
-          backgroundColor: 'rgb(' + mapper.fractionChangeToHex(Math.min(5, Math.max(-5, model.get('changePct'))) / 5) + ')'
+          // backgroundColor: 'rgb(' + mapper.fractionChangeToHex(Math.min(5, Math.max(-5, model.get('changePct'))) / 5) + ')'
+          backgroundColor: mapper.changePctToHex( model.get('changePct') )
         });
       }
       if(model.hasChanged('isVeryActive') || force) {
@@ -74,7 +75,7 @@
           updateModel(model, true);
         }
       });
-      console.log("Rebuild time:" + (Date.now() - tt));
+      console.log(Date.now() - tt + ' ms, MAP redraw');
     }
   };
   

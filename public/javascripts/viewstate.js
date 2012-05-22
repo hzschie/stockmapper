@@ -1,7 +1,7 @@
 var ViewState = mapper.ViewState = Backbone.Model.extend(
   {
     toUrl: function() {
-      return '?' + this.toParamsString();
+      return '/?' + this.toParamsString();
     },
     
     fromUrl: function(url) {
