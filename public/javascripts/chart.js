@@ -63,6 +63,7 @@
       volumeBars.exit()
         .remove();
         
+      // Render Change ticks
       var tickValues = chgPctY.ticks(3).slice(1),
           changeTickY = function(val) { return paddingTop + Math.round(chgMaxH - chgPctY(val)) + .5; },
           changeTicks = svg.selectAll('line.chg').data(tickValues),
@@ -75,16 +76,15 @@
         .attr('x1', 0)
         .attr('x2', w)
         .attr('y1', changeTickY)
-        .attr('y2', changeTickY)
-        .text(String);
+        .attr('y2', changeTickY);
       changeTicks.exit()
         .remove();
         
+      // Render Change ticks' text
       changeTicksText.enter().append('text')
         .attr('class', 'chg')
         .attr('text-anchor', 'end')
         .attr('fill', '#bbb')
-        // .attr('opacity', .9)
         .attr('dy', -2)
         .attr('x', w)
         .attr('y', changeTickY);
@@ -95,7 +95,50 @@
       changeTicksText.exit()
         .remove();
         
-      console.log(Date.now() - tt + ' ms, CHART redraw');
+        // Render Volume ticks
+        var tickValues = volumeY.ticks(5).slice(1),
+            volumeTickY = function(val) { return paddingTop + chgMaxH + Math.round(volumeY(val)) + .5; },
+            changeTicks = svg.selectAll('line.vol').data(tickValues),
+            changeTicksText = svg.selectAll('text.vol').data(tickValues);
+        changeTicks.enter().append('line')
+          .attr('class', 'vol')
+          .attr('stroke-dasharray', '2 2');
+        changeTicks
+          .attr('stroke', '#555555')
+          .attr('x1', 0)
+          .attr('x2', w)
+          .attr('y1', volumeTickY)
+          .attr('y2', volumeTickY);
+        changeTicks.exit()
+          .remove();
+
+        // Render Volume ticks' text
+        changeTicksText.enter().append('text')
+          .attr('class', 'vol')
+          .attr('text-anchor', 'end')
+          .attr('fill', '#bbb')
+          .attr('dy', -2)
+          .attr('x', w)
+          .attr('y', volumeTickY);
+        changeTicksText
+          .attr('x', w)
+          .attr('y', volumeTickY)
+          .text(function(val) {
+            if(val >= 1e+12)
+              return val / 1e+12 + 'T';
+            else if(val >= 1e+9)
+              return val / 1e+9 + 'B';
+            else if(val >= 1e+6)
+              return val / 1e+6 + 'M';
+            else if(val >= 1e+3)
+              return val / 1e+3 + 'K';
+            else
+              return String(val);
+          });
+        changeTicksText.exit()
+          .remove();
+          
+        console.log(Date.now() - tt + ' ms, CHART redraw');
     };
   }
   mapper.Chart = Chart;
