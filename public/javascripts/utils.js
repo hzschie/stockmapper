@@ -14,7 +14,8 @@
     var magnitude = Math.abs(fraction),
         whiteness;
     if(magnitude <= .4) {
-      whiteness = Math.round(0xff - 21.25 * Math.ceil(20 * magnitude));
+      // whiteness = Math.round(0xff - 21.25 * Math.ceil(20 * magnitude));
+      whiteness = Math.round(0xff - 21.25 * Math.ceil(20 * Math.sqrt(magnitude / .4) * .4));
     }
     else {
       whiteness = Math.round(21.25 * Math.ceil(5 * (1 - magnitude)));
