@@ -151,7 +151,7 @@
       if(mostActiveStock) {
         var arrowIndex = _.indexOf(models.models, mostActiveStock),
             mult = arrowIndex > models.models.length / 2 ? -1 : 1,
-            arrowX = barX(null, arrowIndex + 1*mult),
+            arrowX = barX(null, arrowIndex + (mult == -1 ? 0 : 1)) - (mult == -1 ? 1 : 0),
             arrowY = volumeTickY(mostActiveStock.get('volume')) - 44;
         $mostActive.show().find('path').attr('d', [
           'M' + arrowX + ',' + arrowY,
