@@ -201,9 +201,9 @@
             lastDnIndex = firstNA ? _.indexOf(models.models, firstNA) : models.length,
             
             firstUpX = barX(null, 0),
-            lastUpX  = barX(null, lastUpIndex),
+            lastUpX  = barX(null, lastUpIndex) - 1,
             firstDnX = barX(null, firstDnIndex),
-            lastDnX  = barX(null, lastDnIndex),
+            lastDnX  = barX(null, lastDnIndex) - 1,
             
             upSpan = lastUpX - firstUpX,
             dnSpan = lastDnX - firstDnX;
