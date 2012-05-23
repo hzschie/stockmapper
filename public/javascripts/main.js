@@ -84,6 +84,7 @@ function buildView() {
     var panel = new mapper.Panel($('.panel'), mapper.groups),
         map = new mapper.Map($('.map')),
         chart = new mapper.Chart($('.chart')),
+        inspector = new mapper.Inspector($('.inspector')),
         viewState = new mapper.ViewState(),
         currentGroup = null,
         currentSort = mapper.sortFunctions['sym'];
@@ -144,6 +145,10 @@ function buildView() {
     panel.on('select_sort', function(sortVal) {
       viewState.set({ sort: sortVal }, { silent: true });
       History.pushState(null, null, viewState.toUrl());
+    });
+    
+    map.on('inspect_tag', function(model) {
+      inspector.inspect(model);
     });
 
     var resortTimeoutId = null;

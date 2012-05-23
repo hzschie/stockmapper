@@ -1,7 +1,9 @@
 (function() {
   function Map($map, _models) {
+    _.extend(this, Backbone.Events);
     var models,
-        $shadows;
+        $shadows,
+        _this = this;
 
     this.setModels = function(_models) {
       if(models) {
@@ -22,8 +24,9 @@
     if(_models) this.setModels(_models);
     
     function addModel(model) {
-      if(model.get('$tag')) {
-        model.get('$tag').appendTo($map);
+      var $tag = model.get('$tag');
+      if($tag) {
+        $tag.appendTo($map);
         model.get('$shadow').appendTo($shadows);
         return;
       }
@@ -37,10 +40,16 @@
         html = sym;
       }
       
+      
       model.set({
-        $tag: $(document.createElement('li')).html(html).appendTo($map),
+        $tag: $tag = $(document.createElement('li')).html(html).appendTo($map),
         $shadow: $(document.createElement('div')).appendTo($shadows)
       }, { silent:true });
+      
+      $tag.mouseover(function() {
+        _this.trigger('inspect_tag', model);
+      });
+
     }
     
     function updateModel(model, force) {

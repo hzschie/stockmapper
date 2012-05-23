@@ -8,6 +8,7 @@ html
     link(rel='stylesheet', href='/stylesheets/main.css')
     link(rel='stylesheet', href='/stylesheets/panel.css')
     link(rel='stylesheet', href='/stylesheets/map.css')
+    link(rel='stylesheet', href='/stylesheets/inspector.css')
     
     script(type='text/javascript', src='/javascripts/lib/zepto.min.js')
     script(type='text/javascript', src='/javascripts/lib/zepto.history.js')
@@ -23,6 +24,7 @@ html
     script(type='text/javascript', src='/javascripts/panel.js')
     script(type='text/javascript', src='/javascripts/map.js')
     script(type='text/javascript', src='/javascripts/chart.js')
+    script(type='text/javascript', src='/javascripts/inspector.js')
     script(type='text/javascript', src='/javascripts/main.js')
     script(type='text/javascript')
       // hello world
@@ -125,3 +127,28 @@ html
     .panel
     ul.map
     .chart(style='margin-top:20px; font:12px/13px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;')
+    .inspector
+      .header
+        h3.name Amit was here
+        .sym SYM
+        .last_trade 123.45
+        .change
+          span.amount +12.34
+          &nbsp;\(
+          span.percent 1.23%
+          \)
+      dl
+        .left
+          dt Avg. Vol.:
+          dd.avg_volume 123,456
+          dt Vol.:
+          dd.volume 123,456
+          dt Cap.:
+          dd.market_cap 1.234B
+        .right
+          dt Open:
+          dd.open 12.34
+          dt High:
+          dd.high 12.34
+          dt Low:
+          dd.low 12.34
