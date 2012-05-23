@@ -5,7 +5,24 @@ mapper.groups = new Backbone.Collection();
 var socket = io.connect();
 socket.on('update', function(multiStockData) {
   _.forEach(multiStockData, function(data) {
-    mapper.stocks.get(data[0]).update(data);
+    var stock = mapper.stocks.get(data[0]);
+    if(!stock) return;
+    
+    stock.update(data);
+    
+    // Remove stocks with no data
+    if(!stock.get('lastTrade')) {
+      var stockId = stock.get('id');
+      _.forEach(
+        mapper.groups.filter(function(group) { 
+          return group.get('members').get(stockId);
+        }),
+        function(group) {
+          group.get('members').remove(stock);
+        }
+      );
+      mapper.stocks.remove(stock);
+    }
   });
 });
 
@@ -131,11 +148,9 @@ function buildView() {
 
     var resortTimeoutId = null;
     function reSortIfNeeded(changedModel) {
-/*
-      if(!changedModel.hasChanged(currentSort.prop)) {
+/*    if(!changedModel.hasChanged(currentSort.prop)) {
         return;
-      }
-*/
+      }*/
 
       if(resortTimeoutId != null) {
         clearTimeout(resortTimeoutId);
