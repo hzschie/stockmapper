@@ -24,14 +24,15 @@
       }
 
       models = _models;
-      redraw();
+      redraw(null);
       
       if(models) {
         models.on('reset', redraw);
       }
     };
     
-    function redraw() {
+    function redraw(collection) {
+      if(!models.at(0).get('hasData')) return;
       var tt = Date.now();
       var w = $container.width() - 3,
           paddingTop = 20,
@@ -53,9 +54,13 @@
       // Render Change bars
       changeBars.enter().append('rect')
         .attr('class', 'chg')
+        .attr('fill', Stock.changePctToHex)
         .attr('x', barX)
-        .attr('width', barW);
+        .attr('y', function(model, i) { return paddingTop + chgMaxH - chgPctY( Stock.changePctAbs(model) ); })
+        .attr('width', barW)
+        .attr('height', function(model, i) { return chgPctY( Stock.changePctAbs(model) ); });
       changeBars
+        .transition().duration(collection ? 1000 : 0)
         .attr('fill', Stock.changePctToHex)
         .attr('x', barX)
         .attr('y', function(model, i) { return paddingTop + chgMaxH - chgPctY( Stock.changePctAbs(model) ); })
@@ -69,8 +74,11 @@
         .attr('class', 'vol')
         .attr('fill', '#999')
         .attr('x', barX)
-        .attr('width', barW);
+        .attr('y', paddingTop + chgMaxH + 1)
+        .attr('width', barW)
+        .attr('height', function(model, i) { return volumeY( Stock.volume(model) ); });
       volumeBars
+        .transition().duration(collection ? 1000 : 0)
         .attr('x', barX)
         .attr('y', paddingTop + chgMaxH + 1)
         .attr('width', barW)
@@ -219,7 +227,6 @@
         }).text((lastDnIndex - firstDnIndex) + ' Stocks DOWN');
       }
       else {
-        console.log('no');
         $upsAndDowns.hide();
       }
 
@@ -227,7 +234,6 @@
     };
     
     function getArrowPath(arrowX, arrowY, length, mult) {
-      console.log(arrowX, arrowY);
       return [
         'M' + arrowX + ',' + arrowY,
         'l' + length*mult + ',0',

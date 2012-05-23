@@ -91,13 +91,15 @@ var StockGroup = mapper.StockGroup = Backbone.Model.extend(
 );
 
 mapper.sortBy = function(attribute) {
-  return function(a, b) {
+  var sortFunction = function(a, b) {
     var val1 = a.get(attribute),
         val2 = b.get(attribute);
     return ((val1 < val2) - (val2 < val1)) || 
       (isNaN(val1) - isNaN(val2)) || 
       mapper.sortFunctions.sym(a, b);
   };
+  sortFunction.prop = attribute;// If prop changes, we need to resort
+  return sortFunction;
 };
 mapper.sortFunctions = {
   sym: function(a, b) {

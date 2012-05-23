@@ -4,7 +4,7 @@ var express = require('express'),
 var app = express(),
     server = http.createServer(app),
     io = require('socket.io').listen(server, {
-      // 'log level': 0,
+      'log level': 0,
       'transports': ['xhr-polling'],
       'polling duration': 10
     });

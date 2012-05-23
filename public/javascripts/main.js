@@ -74,7 +74,7 @@ function buildView() {
     viewState.on('change', function(viewState) {
       if(viewState.hasChanged('filter')) {
         if(currentGroup) {
-          currentGroup.get('members').off('change', reSort);
+          currentGroup.get('members').off('change', reSortIfNeeded);
         }
         
         var name = viewState.get('filter');
@@ -85,7 +85,7 @@ function buildView() {
             currentGroup.get('members').comparator = currentSort;
             currentGroup.get('members').sort();
             
-            currentGroup.get('members').on('change', reSort);
+            currentGroup.get('members').on('change', reSortIfNeeded);
           }
           map.setModels(currentGroup.get('members'));
           chart.setModels(currentGroup.get('members'));
@@ -130,7 +130,13 @@ function buildView() {
     });
 
     var resortTimeoutId = null;
-    function reSort() {
+    function reSortIfNeeded(changedModel) {
+/*
+      if(!changedModel.hasChanged(currentSort.prop)) {
+        return;
+      }
+*/
+
       if(resortTimeoutId != null) {
         clearTimeout(resortTimeoutId);
       }
@@ -138,7 +144,7 @@ function buildView() {
         console.log('resort now');
         currentGroup.get('members').sort();
         resortTimeoutId = null;
-      }, 100);
+      }, 200);
     }
   });
 }

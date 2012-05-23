@@ -2,7 +2,10 @@ var http = require('http'),
     csv = require('ya-csv');
 
 function YahooDataSource(callback) {
-  var table = {},
+  var NEED_TO_REQUEST = 1,
+      PENDING = 0,
+      
+      table = {},
       queue = {};
       
   this.get = function(id, socket) {
@@ -11,7 +14,7 @@ function YahooDataSource(callback) {
       return current;
     }
     else if(!queue[id]) {
-      queue[id] = 1;
+      queue[id] = NEED_TO_REQUEST;
     }
   };
   
@@ -23,15 +26,18 @@ function YahooDataSource(callback) {
   });
   reader.addListener('data', function(data) {
     table[ data[0] ] = data;
+    delete queue[ data[0] ];
     callback(data);
   });
+  
+  // Process the queue
   setInterval(function() {
     var count = 0,
         ids = [];
     for(var id in queue) {
-      if(queue[id] == 0) continue;
+      if(queue[id] == PENDING) continue;
       ids.push(id);
-      queue[id] = 0;
+      queue[id] = PENDING;
       if(++count >= 99) break;
     }
     if(ids.length > 0) {
@@ -57,5 +63,15 @@ function YahooDataSource(callback) {
       });
     }
   }, 200);
+  
+  // Refresh the data
+  setInterval(function() {
+    console.log('refresh now');
+    Object.keys(table).forEach(function(id) {
+      if(queue[id] != PENDING) {
+        queue[id] = NEED_TO_REQUEST;
+      }
+    });
+  }, 30000);
 }
 exports.YahooDataSource = YahooDataSource;
