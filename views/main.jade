@@ -26,110 +26,109 @@ html
     script(type='text/javascript', src='/javascripts/chart.js')
     script(type='text/javascript', src='/javascripts/inspector.js')
     script(type='text/javascript', src='/javascripts/main.js')
-    script(type='text/javascript')
-      // hello world
-    script(type='text/javascript')
-      (function() {
-        return;
-        // Open the original CSV file and extract stuff from it
-        var stocks = {
-              headers: ['id','name'],
-              data: []
-            },
-            groups = [],
-            groupsTable = {};
+    //-
+      script(type='text/javascript')
+        (function() {
+          return;
+          // Open the original CSV file and extract stuff from it
+          var stocks = {
+                headers: ['id','name'],
+                data: []
+              },
+              groups = [],
+              groupsTable = {};
         
-        $.ajax({
-          url:'/data/stocks.csv',
-          success: function(data) {
-            var newline = data.charAt(58),
-                rows = data.split(newline);
+          $.ajax({
+            url:'/data/stocks.csv',
+            success: function(data) {
+              var newline = data.charAt(58),
+                  rows = data.split(newline);
               
-            for(var i = 1; i < rows.length; i++) {
-              var vals = rows[i].split(','),
-                  sym = vals[1];
-              stocks.data.push([sym, vals[0]]);
+              for(var i = 1; i < rows.length; i++) {
+                var vals = rows[i].split(','),
+                    sym = vals[1];
+                stocks.data.push([sym, vals[0]]);
               
-              var sector = vals[2],
-                  country = vals[6],
-                  region = vals[7],
-                  isSandP = vals[4] == 'YES',
-                  isDow = vals[5] == 'YES';
+                var sector = vals[2],
+                    country = vals[6],
+                    region = vals[7],
+                    isSandP = vals[4] == 'YES',
+                    isDow = vals[5] == 'YES';
                   
-              getOrCreateGroup('sector', sector).ids.push(sym);
-              getOrCreateGroup('country', country).ids.push(sym);
-              getOrCreateGroup('region', region).ids.push(sym);
+                getOrCreateGroup('sector', sector).ids.push(sym);
+                getOrCreateGroup('country', country).ids.push(sym);
+                getOrCreateGroup('region', region).ids.push(sym);
               
-              if(isSandP) {
-                getOrCreateGroup('index', 'S&P 500').ids.push(sym);
+                if(isSandP) {
+                  getOrCreateGroup('index', 'S&P 500').ids.push(sym);
+                }
+                if(isDow) {
+                  getOrCreateGroup('index', 'Dow Jones').ids.push(sym);
+                }
               }
-              if(isDow) {
-                getOrCreateGroup('index', 'Dow Jones').ids.push(sym);
-              }
-            }
           
-            console.log(JSON.stringify(groups));
-          }
-        });
+              console.log(JSON.stringify(groups));
+            }
+          });
         
-        function getOrCreateGroup(type, name) {
-          var groupId = type + '_' + name;
-              group = groupsTable[groupId];
-          if(!group) {
-            var nickname;
-            switch(name) {
-              case 'Basic Materials': {
-                nickname = 'Materials';
-                break;
+          function getOrCreateGroup(type, name) {
+            var groupId = type + '_' + name;
+                group = groupsTable[groupId];
+            if(!group) {
+              var nickname;
+              switch(name) {
+                case 'Basic Materials': {
+                  nickname = 'Materials';
+                  break;
+                }
+                case 'Consumer Services': {
+                  nickname = 'Services';
+                  break;
+                }
+                case 'Oil and Gas': {
+                  nickname = 'Oil & Gas';
+                  break;
+                }
+                case 'Consumer Goods': {
+                  nickname = 'Goods';
+                  break;
+                }
+                case 'Telecommunications': {
+                  nickname = 'Telecom';
+                  break;
+                }
+                case 'Asia-Pacific': {
+                  nickname = 'Asia/Pacific';
+                  break;
+                }
+                case 'MidEast-Africa': {
+                  nickname = 'MidEast/Africa';
+                  break;
+                }
+                default: {
+                  nickname = name;
+                }
               }
-              case 'Consumer Services': {
-                nickname = 'Services';
-                break;
-              }
-              case 'Oil and Gas': {
-                nickname = 'Oil & Gas';
-                break;
-              }
-              case 'Consumer Goods': {
-                nickname = 'Goods';
-                break;
-              }
-              case 'Telecommunications': {
-                nickname = 'Telecom';
-                break;
-              }
-              case 'Asia-Pacific': {
-                nickname = 'Asia/Pacific';
-                break;
-              }
-              case 'MidEast-Africa': {
-                nickname = 'MidEast/Africa';
-                break;
-              }
-              default: {
-                nickname = name;
-              }
-            }
-            group = groupsTable[groupId] = {
-              name: name,
-              nickname: nickname,
-              type: type,
-              ids: []
-            };
+              group = groupsTable[groupId] = {
+                name: name,
+                nickname: nickname,
+                type: type,
+                ids: []
+              };
             
-            groups.push(group);
-          }
+              groups.push(group);
+            }
           
-          return group;
-        }
-      })();
+            return group;
+          }
+        })();
   body(style='margin:10px;')
     .panel
     ul.map
-    .chart(style='margin-top:20px; font:12px/13px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;')
+    .chart
     .inspector
       svg
-        path(d="M0,0 l100,100", stroke="#ccc", fill="#fffdee")
+        path(stroke="#ccc", fill="#fffdee")
       .body
         .header
           h3.name Amit was here

@@ -60,7 +60,7 @@
       $container.css(pos);
     };
     
-    setInterval(updateTip, 18);
+    d3.timer(updateTip);
     
     function updateTip() {
       var currP = $container.offset();

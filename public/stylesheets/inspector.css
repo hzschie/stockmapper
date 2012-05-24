@@ -5,6 +5,8 @@
   pointer-events:none;
   
   -webkit-transition: left .3s, top .3s;
+  -ms-transition: left .3s, top .3s;
+  -moz-transition: left .6s, top .6s;
 }
 
 .inspector .body {
