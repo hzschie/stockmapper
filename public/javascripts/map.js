@@ -47,7 +47,7 @@
       }, { silent:true });
       
       $tag.mouseover(function() {
-        _this.trigger('inspect_tag', model);
+        _this.trigger('inspect_tag', model, $tag);
       });
 
     }

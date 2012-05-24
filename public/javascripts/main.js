@@ -147,8 +147,8 @@ function buildView() {
       History.pushState(null, null, viewState.toUrl());
     });
     
-    map.on('inspect_tag', function(model) {
-      inspector.inspect(model);
+    map.on('inspect_tag', function(model, $tag) {
+      inspector.inspectTag(model, $tag);
     });
 
     var resortTimeoutId = null;
