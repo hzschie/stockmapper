@@ -65,6 +65,7 @@ function YahooDataSource(callback) {
   }, 200);
   
   // Refresh the data
+/*
   setInterval(function() {
     console.log('refresh now');
     Object.keys(table).forEach(function(id) {
@@ -73,5 +74,6 @@ function YahooDataSource(callback) {
       }
     });
   }, 30000);
+*/
 }
 exports.YahooDataSource = YahooDataSource;
