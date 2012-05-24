@@ -30,10 +30,17 @@
         $tip = $container.find('svg'),
         pointLeft = false,
         bubbW = null,
-        targP = {},
+        targP = null,
         lastPos = {};
     
     this.inspectTag = function(model, $tag) {
+      if(!model) {
+        $container.addClass('hidden');
+        return;
+      }
+      
+      $container.removeClass('hidden');
+      
       _.forEach(bindings, function(binding) {
         var $field = $container.find(binding.$),
             val = (binding.formatter || String)( model.get(binding.field), $field );
@@ -64,7 +71,7 @@
     
     function updateTip() {
       var currP = $container.offset();
-      if(currP.left == lastPos.left && currP.top == lastPos.top) return;
+      if(!targP || (currP.left == lastPos.left && currP.top == lastPos.top)) return;
       
       var pad = 20,
           ins = 10,// inset / how far is the pivot point from the corner

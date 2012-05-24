@@ -5,6 +5,11 @@
         $shadows,
         _this = this;
 
+    $map.mouseout(function(event) { 
+      if(event.toElement != $map[0] && !$(event.toElement).is('li')) 
+        _this.trigger('inspect_tag', null);
+    });
+
     this.setModels = function(_models) {
       if(models) {
         models.off('add', addModel);
@@ -49,7 +54,6 @@
       $tag.mouseover(function() {
         _this.trigger('inspect_tag', model, $tag);
       });
-
     }
     
     function updateModel(model, force) {
