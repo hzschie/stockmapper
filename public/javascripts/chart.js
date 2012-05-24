@@ -3,6 +3,14 @@
     var models = null,
         svg = d3.select($container[0]).append('svg'),
         ticks = svg.append('g'),
+        changeLabel = ticks.append('text').text('Percent Change')
+          .attr('class', 'axis_label')
+          .attr('text-anchor', 'end')
+          .attr('fill', '#fff'),
+        volumeLabel = ticks.append('text').text('Volume')
+          .attr('class', 'axis_label')
+          .attr('text-anchor', 'end')
+          .attr('fill', '#fff'),
         bars = svg.append('g'),
         mostActive = svg.append('g').attr('class', 'most_active').attr('fill', '#76f9fb'),
         $mostActive = $container.find('.most_active'),
@@ -35,7 +43,8 @@
       if(!models.at(0).get('hasData')) return;
       var tt = Date.now();
       var w = $container.width() - 3,
-          paddingTop = 20,
+          paddingTop = 30,
+          paddingBottom = 30,
           chgMaxH = 180,
           volMaxH = 300,
           barFractionalW = (w - 40) / models.length,
@@ -85,7 +94,11 @@
         .attr('height', function(model, i) { return volumeY( Stock.volume(model) ); });
       volumeBars.exit()
         .remove();
-        
+      
+      // Position axis labels
+      changeLabel.attr('x', w).attr('y', 15);
+      volumeLabel.attr('x', w).attr('y', paddingTop + chgMaxH + volMaxH + 15);
+      
       // Render Change ticks
       var tickValues = chgPctY.ticks(3).slice(1),
           changeTickY = function(val) { return paddingTop + Math.round(chgMaxH - chgPctY(val)) + .5; },
@@ -170,21 +183,15 @@
             mult = arrowIndex > models.models.length / 2 ? -1 : 1,
             arrowX = barX(null, arrowIndex + (mult == -1 ? 0 : 1)) - (mult == -1 ? 1 : 0),
             arrowY = volumeTickY(mostActiveStock.get('volume')) - 21;
-        $mostActive.show().find('path').attr('d', [
-          'M' + arrowX + ',' + arrowY,
-          'l' + 20*mult + ',0',
-          'M' + arrowX + ',' + arrowY,
-          'l' + 7*mult + ',-5',
-          'M' + arrowX + ',' + arrowY,
-          'l' + 7*mult + ',5'
-        ].join(' '));
         
         $mostActive.find('text').attr({ 
-          x: arrowX,
           y: arrowY,
           dx: 25 * mult,
           'text-anchor': mult == 1 ? 'start' : 'end'
         });
+        mostActive.selectAll('text').transition().duration(collection ? 1000 : 0).attr('x', arrowX);
+        mostActive.selectAll('path').transition().duration(collection ? 1000 : 0).attr('d', getArrowPath( arrowX, arrowY, 20, mult ));
+        
         $mostActive.find('text.sym').text('Most Active Stock: ' + mostActiveStock.get('sym'));
       }
       else {
