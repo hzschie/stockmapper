@@ -49,6 +49,22 @@
   content:'';
 }
 
+.map > li:hover {
+  position:relative;
+  z-index:3;
+}
+.map > li:hover:after {
+  width:27px;
+  height:10px;
+  border:2px solid #fffcce;
+  left:-1px;
+  top:-1px;
+  position:absolute;
+  content:'';
+  background:transparent url('/images/inner_dropshadow.png') no-repeat left top;
+}
+
+
 .map .shadows div.active {
   position:relative;
 }
