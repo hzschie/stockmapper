@@ -1,7 +1,8 @@
 (function() {
   var Inspector = mapper.Inspector = function($container) {
-    var priceFormat = d3.format('.2f'),
+    var priceFormat = d3.format(',.2f'),
         commaFormat = d3.format(','),
+        changeFormat = d3.format('+.2f'),
         makeRedOrGreen = function(val, $field) {
           $field.removeClass('red green');
           if(val) $field.addClass(val == 1 ? 'green' : 'red');
@@ -14,8 +15,8 @@
           { $:'.last_trade', field:'lastTrade', formatter:priceFormat },
 
           { $:'.change', field:'changeDir', formatter:makeRedOrGreen },
-          { $:'.change .amount', field:'change', formatter:d3.format('+.2f') },
-          { $:'.change .percent', field:'changePct', formatter:function(val) { return val + '%'; } },
+          { $:'.change .amount', field:'change', formatter:changeFormat },
+          { $:'.change .percent', field:'changePct', formatter:function(val) { return changeFormat(val) + '%'; } },
 
           { $:'.avg_volume', field:'avgVolume', formatter:commaFormat },
           { $:'.volume', field:'volume', formatter:commaFormat },
@@ -59,82 +60,53 @@
       $container.css(pos);
     };
     
-    setInterval(function() {
-      var currP = $container.offset(),
-          pad = 20,
-          ins = 10;// inset / how far is the pivot point from the corner
+    setInterval(updateTip, 18);
+    
+    function updateTip() {
+      var currP = $container.offset();
       if(currP.left == lastPos.left && currP.top == lastPos.top) return;
       
-      if(pointLeft) {
-        $tip.attr({
-          width: Math.abs(currP.left - targP.left) + 2*pad,
-          height: Math.abs(currP.top - targP.top) + 2*pad
-        });
-        $tip.css({
-          left: Math.min(0, targP.left - currP.left) - pad,
-          top: Math.min(0, targP.top - currP.top) - pad
-        });
-        
-        var vect = {
-              x: currP.left - targP.left + ins, 
-              y: currP.top - targP.top + ins
-            },
-            normal = {
-              x: -vect.y,
-              y: vect.x
-            },
-            mag = Math.sqrt( Math.pow(normal.x, 2) + Math.pow(normal.y, 2) ),
-            thickness = ins;
-        
-        normal.x *= thickness / mag;
-        normal.y *= thickness / mag;
-        
-        $tip.find('path').attr({
-          d: [
-            'M', (Math.max(0, targP.left - currP.left) + pad), (Math.max(0, targP.top - currP.top) + pad),// Start at target (i.e. tip
-            'l', vect.x + normal.x, vect.y + normal.y,
-            'l', -2 * normal.x, -2 * normal.y,
-            'z'
-          ].join(' ')
-        });
-      }
-      else {
-        $tip.attr({
-          width: Math.abs(currP.left + bubbW - targP.left) + 2*pad,
-          height: Math.abs(currP.top - targP.top) + 2*pad
-        });
-        $tip.css({
-          left: Math.min(bubbW, targP.left - currP.left) - pad,
-          top: Math.min(0, targP.top - currP.top) - pad
-        });
-        
-        var vect = {
-              x: currP.left - targP.left + bubbW - ins - 2, 
-              y: currP.top - targP.top + ins
-            },
-            normal = {
-              x: -vect.y,
-              y: vect.x
-            },
-            mag = Math.sqrt( Math.pow(normal.x, 2) + Math.pow(normal.y, 2) ),
-            thickness = ins;
-        
-        normal.x *= thickness / mag;
-        normal.y *= thickness / mag;
-        
-        $tip.find('path').attr({
-          d: [
-            'M', (Math.max(0, targP.left - currP.left - bubbW) + pad), (Math.max(0, targP.top - currP.top) + pad),// Start at target (i.e. tip
-            // 'l', (currP.left - targP.left + bubbW - ins), (currP.top - targP.top + ins)
-            'l', vect.x + normal.x, vect.y + normal.y,
-            'l', -2 * normal.x, -2 * normal.y,
-            'z'
-          ].join(' ')
-        });
-
-      }
+      var pad = 20,
+          ins = 10,// inset / how far is the pivot point from the corner
+          diff = {
+            x: currP.left - targP.left,
+            y: currP.top - targP.top
+          },
+          datum = {
+            x: pointLeft ? 0 : bubbW,
+            y: 0// not used yet
+          };
+      
+      $tip.attr({
+        width: Math.abs(diff.x + datum.x) + 2*pad,
+        height: Math.abs(diff.y) + 2*pad
+      });
+      $tip.css({
+        left: Math.min(datum.x, -diff.x) - pad,
+        top: Math.min(0, -diff.y) - pad
+      });
+      
+      var vect = {
+            x: diff.x + datum.x + (pointLeft ? ins : -ins - 2), 
+            y: diff.y + ins
+          },
+          mag = Math.sqrt( Math.pow(vect.x, 2) + Math.pow(vect.y, 2) ),
+          norm = {
+            x: -vect.y * ins / mag,
+            y: vect.x * ins / mag
+          };
+      
+      $tip.find('path').attr({
+        d: [
+          'M', Math.max(0, -diff.x - datum.x) + pad, Math.max(0, -diff.y) + pad,// Start at target (i.e. tip)
+          'l', vect.x + norm.x, vect.y + norm.y,
+          'l', -2 * norm.x, -2 * norm.y,
+          'z'
+        ].join(' ')
+      });
+      
       lastPos.left = currP.left;
       lastPos.top  = currP.top;
-    }, 30);
+    }
   };
 })();
