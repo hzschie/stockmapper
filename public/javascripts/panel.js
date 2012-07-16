@@ -113,11 +113,11 @@
     }
     
     function updateGroup(group, force) {
-      var counts = group.get('upsAndDowns');
+      var counts = group.get('upsAndDowns'),
+          fraction = !counts[1] ? (counts[0] && 1) : (counts[0]/counts[1] - 1);
       group.get('$counts').text('+' + counts[0] + '-' + counts[1]);
       group.get('$tag').css({ 
-        backgroundColor: 'rgb(' + mapper.fractionToGreenRedHex((counts[0]/counts[1] - 1) || (counts[0] ? 1 : 0)) + ')'
-        // || (counts[0] ? 1 : 0) above is in case counts[1] (ie "downs") is zero, which produces NaN, except counts[0] is also zero
+        backgroundColor: 'rgb(' + mapper.fractionToGreenRedHex(fraction) + ')'
       });
     }
   }
