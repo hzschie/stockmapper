@@ -7,7 +7,8 @@ var app = express(),
     io = require('socket.io').listen(server, {
       'log level': 0,
       'transports': ['xhr-polling'],
-      'polling duration': 10
+      'polling duration': 10,
+      'browser client minification': true
     });
 
 server.listen(process.env.PORT || 3000);
@@ -20,6 +21,16 @@ app.configure(function(){
   app.use(express['static'](__dirname + '/public'));
   app.use(app.router);
 });
+
+var BundleUp = require('bundle-up');
+BundleUp(app, __dirname + '/lib/assets', {
+  staticRoot: __dirname + '/public/',
+  staticUrlRoot:'/',
+  bundle: false,
+  minifyCss: true,
+  minifyJs: true
+});
+
 
 var dataDomain = (process.env.DATA_DOMAIN || 'nyse').toLowerCase(),
     dataSourceClass;

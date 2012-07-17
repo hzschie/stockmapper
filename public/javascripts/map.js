@@ -32,6 +32,9 @@
       var $tag = model.get('$tag');
       if($tag) {
         $tag.appendTo($map);
+        $tag.mouseover(function() {
+          _this.trigger('inspect_tag', model, $tag);
+        });
         model.get('$shadow').appendTo($shadows);
         return;
       }

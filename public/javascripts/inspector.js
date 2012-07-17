@@ -60,10 +60,14 @@
             top: tagPos.top + offset.y
           };
       
+      // TODO: Don't hardcode these
+      tagPos.width = 29;
+      tagPos.height = 12;
+      
       targP = {
         left: tagPos.left + (pointLeft ? tagPos.width : 0),
-        top: tagPos.top + tagPos.height 
-      };    
+        top: tagPos.top + tagPos.height
+      };
       $container.css(pos);
     };
     
