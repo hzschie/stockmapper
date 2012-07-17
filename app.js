@@ -20,6 +20,21 @@ app.configure(function(){
   app.use(app.router);
 });
 
+var dataDomain = (process.env.DATA_DOMAIN || '').toLowerCase(),
+    dataSourceClass;
+switch(dataDomain) {
+  case 'bluefin':
+    dataSourceClass = require('./bluefin_data_source.js').BluefinDataSource;
+    break;
+  default:
+    dataSourceClass = require('./yahoo_data_source.js').YahooDataSource;
+}
+var dataSource = new dataSourceClass(function(data) {
+  io.sockets.emit("update", [data]);
+});
+
+
+
 app.get('/*', function(req, res) {
   res.render('main', {
     layout: false
@@ -42,8 +57,4 @@ io.sockets.on('connection', function (socket) {
       socket.emit("update", reply);
     }
   });
-});
-var YahooDataSource = require('./yahoo_data_source.js').YahooDataSource;
-var dataSource = new YahooDataSource(function(data) {
-  io.sockets.emit("update", [data]);
 });
