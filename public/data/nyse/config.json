@@ -1,0 +1,4 @@
+{
+  groupsUrl: '/data/nyse/groups.json',
+  stocksUrl: '/data/nyse/stocks.json'
+}

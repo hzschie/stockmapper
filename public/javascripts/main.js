@@ -27,7 +27,7 @@ socket.on('update', function(multiStockData) {
 });
 
 // Stocks JSON
-$.getJSON('/data/stocks.json', function(response) {
+$.getJSON('/data/nyse/stocks.json', function(response) {
   var field, i,
       headers = response.headers,
       hash;
@@ -46,7 +46,7 @@ $.getJSON('/data/stocks.json', function(response) {
 });
 
 // Groups JSON
-$.getJSON('/data/groups.json', function(response) {
+$.getJSON('/data/nyse/groups.json', function(response) {
   _.each(response, function(groupJson) {
     mapper.groups.add( new mapper.StockGroup(groupJson) );
   });
