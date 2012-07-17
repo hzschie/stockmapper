@@ -8,7 +8,7 @@ var urlBase = 'http://46.137.212.140:8080/Service/equities.svc/',
     actions = [],
     groups = {},
     stocks = {};
-request(urlBase + 'GetEntireIndexList', function(error, response, body) {
+request(urlBase + 'GetBlufinIndexList', function(error, response, body) {
   var indexesRaw = JSON.parse(body);
   cursor
     .hex('#00ff00')
@@ -71,3 +71,20 @@ function writeDefinitions() {
     .write('DONE\n')
     .reset();
 }
+
+/*
+Yields:
+2644 stocks
+
+ScripId Lengths:
+2 characters: 1
+3 characters: 114
+4 characters: 146
+5 characters: 224
+6 characters: 316
+7 characters: 554
+8 characters: 702
+9 characters: 412
+10 characters: 145
+11 characters: 29
+12 characters: 1

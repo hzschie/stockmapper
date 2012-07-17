@@ -1,0 +1,84 @@
+var fs = require('fs'),
+    csv = require('ya-csv'),
+    ansi = require('ansi'),
+    cursor = ansi(process.stdout);
+
+var stocks = {
+      headers: ['id', 'name'],
+      data: []
+    },
+    groups = [],
+    groupsTable = {},
+    reader = csv.createCsvFileReader(__dirname + '/public/data/stocks.csv', { columnsFromHeader: true });
+    
+reader.on('data', function(stockRaw) {
+  var sym = stockRaw.Symbol;
+  stocks.data.push([sym, stockRaw.Name]);
+  
+  getOrCreateGroup('sector', stockRaw.Industry).ids.push(sym);
+  getOrCreateGroup('country', stockRaw.Country).ids.push(sym);
+  getOrCreateGroup('region', stockRaw.Region).ids.push(sym);
+  
+  if(stockRaw.SandP == 'YES') {
+    getOrCreateGroup('index', 'S&P 500').ids.push(sym);
+  }
+  if(stockRaw.Dow == 'YES') {
+    getOrCreateGroup('index', 'Dow Jones').ids.push(sym);
+  }
+});
+
+reader.on('end', function() {
+  fs.writeFileSync(__dirname + '/public/data/groups.json', JSON.stringify(groups));
+  fs.writeFileSync(__dirname + '/public/data/stocks.json', JSON.stringify(stocks));
+});
+
+function getOrCreateGroup(type, name) {
+  var groupId = type + '_' + name;
+      group = groupsTable[groupId];
+  if(!group) {
+    var nickname;
+    switch(name) {
+      case 'Basic Materials': {
+        nickname = 'Materials';
+        break;
+      }
+      case 'Consumer Services': {
+        nickname = 'Services';
+        break;
+      }
+      case 'Oil and Gas': {
+        nickname = 'Oil & Gas';
+        break;
+      }
+      case 'Consumer Goods': {
+        nickname = 'Goods';
+        break;
+      }
+      case 'Telecommunications': {
+        nickname = 'Telecom';
+        break;
+      }
+      case 'Asia-Pacific': {
+        nickname = 'Asia/Pacific';
+        break;
+      }
+      case 'MidEast-Africa': {
+        nickname = 'MidEast/Africa';
+        break;
+      }
+      default: {
+        nickname = name;
+      }
+    }
+    group = groupsTable[groupId] = {
+      name: name,
+      nickname: nickname,
+      type: type,
+      ids: []
+    };
+  
+    groups.push(group);
+  }
+
+  return group;
+}
