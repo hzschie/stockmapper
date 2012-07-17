@@ -23,8 +23,8 @@ app.configure(function(){
 var dataDomain = (process.env.DATA_DOMAIN || '').toLowerCase(),
     dataSourceClass;
 switch(dataDomain) {
-  case 'bluefin':
-    dataSourceClass = require('./bluefin_data_source.js').BluefinDataSource;
+  case 'blufin':
+    dataSourceClass = require('./blufin_data_source.js').BlufinDataSource;
     break;
   default:
     dataSourceClass = require('./yahoo_data_source.js').YahooDataSource;

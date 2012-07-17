@@ -60,10 +60,10 @@ function writeDefinitions() {
     headers: ['id', 'name', 'scripId'],
     data: Object.keys(stocks).sort().map(function(key) { return stocks[key]; })
   };
-  fs.writeFileSync(__dirname + '/public/data/bluefin/stocks.json', JSON.stringify(stocksJSON));
+  fs.writeFileSync(__dirname + '/public/data/blufin/stocks.json', JSON.stringify(stocksJSON));
   
   var groupsJSON = Object.keys(groups).map(function(key) { return groups[key]; });
-  fs.writeFileSync(__dirname + '/public/data/bluefin/groups.json', JSON.stringify(groupsJSON));
+  fs.writeFileSync(__dirname + '/public/data/blufin/groups.json', JSON.stringify(groupsJSON));
     
   cursor
     .hex('#00ff00')
@@ -88,3 +88,4 @@ ScripId Lengths:
 10 characters: 145
 11 characters: 29
 12 characters: 1
+*/
