@@ -10,14 +10,15 @@ html
     link(rel='stylesheet', href='/stylesheets/map.css')
     link(rel='stylesheet', href='/stylesheets/inspector.css')
     
+    script(type='text/javascript')
+      mapper = {};
+      mapper.config = !{dataConfig};
     script(type='text/javascript', src='/javascripts/lib/zepto.min.js')
     script(type='text/javascript', src='/javascripts/lib/zepto.history.js')
     script(type='text/javascript', src='/javascripts/lib/underscore-min.js')
     script(type='text/javascript', src='/javascripts/lib/backbone-min.js')
     script(type='text/javascript', src='/javascripts/lib/d3.v2.min.js')
     script(type='text/javascript', src='/socket.io/socket.io.js')
-    script(type='text/javascript')
-      mapper = {};
     script(type='text/javascript', src='/javascripts/utils.js')
     script(type='text/javascript', src='/javascripts/stocks.js')
     script(type='text/javascript', src='/javascripts/viewstate.js')
@@ -26,102 +27,6 @@ html
     script(type='text/javascript', src='/javascripts/chart.js')
     script(type='text/javascript', src='/javascripts/inspector.js')
     script(type='text/javascript', src='/javascripts/main.js')
-    //-
-      script(type='text/javascript')
-        (function() {
-          return;
-          // Open the original CSV file and extract stuff from it
-          var stocks = {
-                headers: ['id','name'],
-                data: []
-              },
-              groups = [],
-              groupsTable = {};
-        
-          $.ajax({
-            url:'/data/stocks.csv',
-            success: function(data) {
-              var newline = data.charAt(58),
-                  rows = data.split(newline);
-              
-              for(var i = 1; i < rows.length; i++) {
-                var vals = rows[i].split(','),
-                    sym = vals[1];
-                stocks.data.push([sym, vals[0]]);
-              
-                var sector = vals[2],
-                    country = vals[6],
-                    region = vals[7],
-                    isSandP = vals[4] == 'YES',
-                    isDow = vals[5] == 'YES';
-                  
-                getOrCreateGroup('sector', sector).ids.push(sym);
-                getOrCreateGroup('country', country).ids.push(sym);
-                getOrCreateGroup('region', region).ids.push(sym);
-              
-                if(isSandP) {
-                  getOrCreateGroup('index', 'S&P 500').ids.push(sym);
-                }
-                if(isDow) {
-                  getOrCreateGroup('index', 'Dow Jones').ids.push(sym);
-                }
-              }
-          
-              console.log(JSON.stringify(groups));
-            }
-          });
-        
-          function getOrCreateGroup(type, name) {
-            var groupId = type + '_' + name;
-                group = groupsTable[groupId];
-            if(!group) {
-              var nickname;
-              switch(name) {
-                case 'Basic Materials': {
-                  nickname = 'Materials';
-                  break;
-                }
-                case 'Consumer Services': {
-                  nickname = 'Services';
-                  break;
-                }
-                case 'Oil and Gas': {
-                  nickname = 'Oil & Gas';
-                  break;
-                }
-                case 'Consumer Goods': {
-                  nickname = 'Goods';
-                  break;
-                }
-                case 'Telecommunications': {
-                  nickname = 'Telecom';
-                  break;
-                }
-                case 'Asia-Pacific': {
-                  nickname = 'Asia/Pacific';
-                  break;
-                }
-                case 'MidEast-Africa': {
-                  nickname = 'MidEast/Africa';
-                  break;
-                }
-                default: {
-                  nickname = name;
-                }
-              }
-              group = groupsTable[groupId] = {
-                name: name,
-                nickname: nickname,
-                type: type,
-                ids: []
-              };
-            
-              groups.push(group);
-            }
-          
-            return group;
-          }
-        })();
   body(style='margin:10px;')
     .panel
     ul.map

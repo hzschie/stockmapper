@@ -1,5 +1,6 @@
 var express = require('express'),
-    http = require('http');
+    http = require('http'),
+    fs = require('fs');
     
 var app = express(),
     server = http.createServer(app),
@@ -20,24 +21,28 @@ app.configure(function(){
   app.use(app.router);
 });
 
-var dataDomain = (process.env.DATA_DOMAIN || '').toLowerCase(),
+var dataDomain = (process.env.DATA_DOMAIN || 'nyse').toLowerCase(),
     dataSourceClass;
 switch(dataDomain) {
   case 'blufin':
-    dataSourceClass = require('./blufin_data_source.js').BlufinDataSource;
+    dataSourceClass = require(__dirname + '/blufin_data_source.js').BlufinDataSource;
     break;
-  default:
-    dataSourceClass = require('./yahoo_data_source.js').YahooDataSource;
+  case 'nyse':
+    dataSourceClass = require(__dirname + '/yahoo_data_source.js').YahooDataSource;
+    break;
 }
 var dataSource = new dataSourceClass(function(data) {
   io.sockets.emit("update", [data]);
 });
-
+// Parse and Stringify the data to strip whitespace
+var dataConfig = JSON.stringify(JSON.parse(
+  fs.readFileSync(__dirname + '/public/data/' + dataDomain + '/config.json', 'utf8')
+));
 
 
 app.get('/*', function(req, res) {
   res.render('main', {
-    layout: false
+    dataConfig: dataConfig
   });
 });
 
