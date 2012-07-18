@@ -1,1 +1,1 @@
-web: DATA_DOMAIN=blufin node app.js
+web: BUNDLE=true DATA_DOMAIN=blufin node app.js

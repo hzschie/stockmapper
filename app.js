@@ -27,7 +27,7 @@ var BundleUp = require('bundle-up');
 BundleUp(app, __dirname + '/lib/assets', {
   staticRoot: __dirname + '/public/',
   staticUrlRoot:'/',
-  bundle: false,
+  bundle: (process.env.BUNDLE && process.env.BUNDLE.toLowerCase() == 'true'),
   minifyCss: true,
   minifyJs: true
 });
