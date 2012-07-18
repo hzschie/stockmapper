@@ -43,7 +43,7 @@ switch(dataDomain) {
     break;
 }
 var dataSource = new dataSourceClass(function(data) {
-  io.sockets.emit("update", Array.isArray(data) ? data : [data]);
+  io.sockets.emit("update", Array.isArray(data[0]) ? data : [data]);
 });
 
 // Parse and Stringify the data to strip whitespace
