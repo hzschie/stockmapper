@@ -1,6 +1,14 @@
 {
   "groupsUrl": "/data/nyse/groups.json",
   "stocksUrl": "/data/nyse/stocks.json",
+  
+  "allGroup": {
+    "name": "NYSE Composit Index",
+    "label": "NYA (show all)",
+    "nickname": "NYA",
+    "type": "index"
+  },
+  
   "groupsTagOrder": [
     "index:NYA",
     "sector:Materials",

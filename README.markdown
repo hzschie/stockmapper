@@ -13,3 +13,15 @@
 *   Currently width and height of $tags are hardcoded in inspector.js
 
 *   Currently maps $tag is subscribed to mouseover events multiple times
+
+*   If no tagsOrder is defined, panel does a bunch of work for what amounts to sequentially adding elements
+
+*   Not using Date and Time, but when we do, Timezones will come into play.
+
+
+## Questions
+*   What to do with timezones?
+
+*   What unit is Market Cap in?
+
+*   Can we get Average Volume and what's the difference between Volume and TotalVolume

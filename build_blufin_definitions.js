@@ -19,6 +19,7 @@ request(urlBase + 'GetBlufinIndexList', function(error, response, body) {
   indexesRaw.forEach(function(index, i) {
     var indexId = index.IndexId;
     groups[indexId] = {
+      indexId: indexId,
       name: index.IndexName,
       nickname: index.IndexName,
       type: index.Category,

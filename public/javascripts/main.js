@@ -41,7 +41,7 @@ $.getJSON(mapper.config.stocksUrl, function(response) {
     // socket.emit('subscribe', [stock.get('sym')]);// This would be individual stock subscription
     mapper.stocks.add(stock);
   });
-  socket.emit('subscribe', mapper.stocks.pluck('sym'));
+  socket.emit('subscribe', mapper.stocks.pluck('id'));
   tryPopulateGroups();
 });
 
@@ -62,16 +62,16 @@ function tryPopulateGroups(groups) {
         members.add(mapper.stocks.get(id));
       });
     });
-    
-    // Create the "All" group
-    mapper.allGroup = new mapper.StockGroup({
-      members: mapper.stocks.models,
-      name: 'NYE Composit Index',
-      label: 'NYA (show all)',
-      nickname: 'NYA',
-      type: 'index'
-    });
-    mapper.groups.add(mapper.allGroup);
+
+    // Create the "All" group, if defined
+    if(mapper.config.allGroup) {
+      mapper.allGroup = new mapper.StockGroup(
+        $.extend({
+          members: mapper.stocks.models
+        }, mapper.config.allGroup)
+      );
+      mapper.groups.add(mapper.allGroup);
+    }
     
     buildView();
   }

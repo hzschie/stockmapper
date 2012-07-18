@@ -43,8 +43,9 @@ switch(dataDomain) {
     break;
 }
 var dataSource = new dataSourceClass(function(data) {
-  io.sockets.emit("update", [data]);
+  io.sockets.emit("update", Array.isArray(data) ? data : [data]);
 });
+
 // Parse and Stringify the data to strip whitespace
 var dataConfig = JSON.stringify(JSON.parse(
   fs.readFileSync(__dirname + '/public/data/' + dataDomain + '/config.json', 'utf8')

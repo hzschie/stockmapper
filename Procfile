@@ -1,1 +1,1 @@
-web: node app.js
+web: DATA_DOMAIN=blufin node app.js
