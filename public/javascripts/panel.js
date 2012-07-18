@@ -5,29 +5,16 @@
         selectedGroup = null,
         $selectedSort = null;
 
-    var tagsOrder = _.map([
-      'index:NYA',
-      'sector:Materials',
-      'sector:Goods',
-      'sector:Services',
-      'sector:Financials',
-      'sector:Health Care',
-      'sector:Industrials',
-      'sector:Oil & Gas',
-      'sector:Technology',
-      'sector:Telecom',
-      'sector:Utilities',
-      'index:Dow Jones',
-      'index:S&P 500',
-      'region:United States',
-      'region:Asia/Pacific',
-      'region:Canada',
-      'region:Europe',
-      'region:Latin America',
-      'region:MidEast/Africa'
-    ], function(reference) { 
-      return { reference:reference, isFilled:false };
-    });
+    // If tags order is explicitly defined in config, use it. Otherwise, assume all groups 
+    // should be added, and create tagsOrder based on that.
+    var tagsOrder = _.map(
+      mapper.config.groupsTagOrder || groups.models,
+      function(refOrGroup) {
+        var reference = typeof(refOrGroup) == 'string' ? 
+          refOrGroup : (refOrGroup.get('type') + ':' + refOrGroup.get('nickname'));
+        return { reference:reference, isFilled:false };
+      }
+    );
     
     var buttonsOrder = [
       { id:'sym', label:'Ticker Symbol' },

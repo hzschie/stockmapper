@@ -1,4 +1,25 @@
 {
   "groupsUrl": "/data/nyse/groups.json",
-  "stocksUrl": "/data/nyse/stocks.json"
+  "stocksUrl": "/data/nyse/stocks.json",
+  "groupsTagOrder": [
+    "index:NYA",
+    "sector:Materials",
+    "sector:Goods",
+    "sector:Services",
+    "sector:Financials",
+    "sector:Health Care",
+    "sector:Industrials",
+    "sector:Oil & Gas",
+    "sector:Technology",
+    "sector:Telecom",
+    "sector:Utilities",
+    "index:Dow Jones",
+    "index:S&P 500",
+    "region:United States",
+    "region:Asia/Pacific",
+    "region:Canada",
+    "region:Europe",
+    "region:Latin America",
+    "region:MidEast/Africa"
+  ]
 }
