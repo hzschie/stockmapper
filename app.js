@@ -13,6 +13,7 @@ var app = express(),
 
 server.listen(process.env.PORT || 3000);
 
+console.log("process.env = ", process.env);
 // Configuration
 app.configure(function(){
   app.set('views', __dirname + '/views');
