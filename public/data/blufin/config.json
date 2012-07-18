@@ -1,4 +1,5 @@
 {
   "groupsUrl": "/data/blufin/groups.json",
-  "stocksUrl": "/data/blufin/stocks.json"
+  "stocksUrl": "/data/blufin/stocks.json",
+  "allGroup": "Blufin Broad Market Index"
 }

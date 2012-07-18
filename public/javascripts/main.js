@@ -64,11 +64,12 @@ function tryPopulateGroups(groups) {
     });
 
     // Create the "All" group, if defined
-    if(mapper.config.allGroup) {
+    if(typeof(mapper.config.allGroup) == 'string') {
+      mapper.allGroup = mapper.groups.where({ name:mapper.config.allGroup })[0];
+    }
+    else {
       mapper.allGroup = new mapper.StockGroup(
-        $.extend({
-          members: mapper.stocks.models
-        }, mapper.config.allGroup)
+        $.extend({ members: mapper.stocks.models }, mapper.config.allGroup)
       );
       mapper.groups.add(mapper.allGroup);
     }
