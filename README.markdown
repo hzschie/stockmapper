@@ -20,8 +20,8 @@
 
 
 ## Questions
-*   What to do with timezones?
+*   What to do with timezones? (IST for everyone)
 
-*   What unit is Market Cap in?
+*   What unit is Market Cap in? (Append Cr)
 
-*   Can we get Average Volume and what's the difference between Volume and TotalVolume
+*   Can we get Average Volume and what's the difference between Volume and TotalVolume (Pending)

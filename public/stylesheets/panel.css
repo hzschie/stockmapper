@@ -4,6 +4,7 @@
 
 .panel .button {
   display:inline-block;
+  vertical-align:top;
   width:84px;
   height:20px;
   padding-top:2px;

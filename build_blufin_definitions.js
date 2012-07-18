@@ -21,7 +21,7 @@ request(urlBase + 'GetBlufinIndexList', function(error, response, body) {
     groups[indexId] = {
       indexId: indexId,
       name: index.IndexName,
-      nickname: index.IndexName,
+      nickname: index.IndexName.replace(/^blufin /i, ''),
       type: index.Category,
       ids: []
     };
@@ -38,7 +38,7 @@ function getIndexConstituents(indexId, callback) {
   var group = groups[indexId];
   request(urlBase + 'GetLatestIndexConstituentsDataByIndexID?IndexID=' + indexId, function(error, response, body) {
     if(error || response.statusCode >= 400) {
-      cursor.hex('#cc0000').write('Data not available for IndexId ' + indexId + ' (' + group.name + ')\n');
+      cursor.hex('#cc0000').write('Data not available for IndexId ' + indexId + ' (' + group.name + '). Status code was ' + response.statusCode + '\n');
       return callback();
     }
     
@@ -49,7 +49,7 @@ function getIndexConstituents(indexId, callback) {
       group.ids.push(id);
     });
     cursor
-      .hex('#6666ff').write(group.name)
+      .hex('#6666ff').write('IndexId ' + indexId + ' (' + group.name + ')')
       .hex('#3333aa').write(' ids: ' + group.ids.join(',') + '\n');
     
     callback();
