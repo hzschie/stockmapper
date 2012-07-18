@@ -18,6 +18,8 @@
 
 *   Not using Date and Time, but when we do, Timezones will come into play.
 
+*   Expect issues in IE7 for css :after selector.
+
 
 ## Questions
 *   What to do with timezones? (IST for everyone)
