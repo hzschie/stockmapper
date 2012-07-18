@@ -36,10 +36,10 @@ var dataDomain = (process.env.DATA_DOMAIN || 'nyse').toLowerCase(),
     dataSourceClass;
 switch(dataDomain) {
   case 'blufin':
-    dataSourceClass = require(__dirname + '/blufin_data_source.js').BlufinDataSource;
+    dataSourceClass = require(__dirname + '/lib/blufin_data_source.js').BlufinDataSource;
     break;
   case 'nyse':
-    dataSourceClass = require(__dirname + '/yahoo_data_source.js').YahooDataSource;
+    dataSourceClass = require(__dirname + '/lib/yahoo_data_source.js').YahooDataSource;
     break;
 }
 var dataSource = new dataSourceClass(function(data) {

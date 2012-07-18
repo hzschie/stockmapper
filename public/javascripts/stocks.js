@@ -6,7 +6,7 @@ var Stock = mapper.Stock = Backbone.Model.extend(
     
     initialize: function(hash) {
       this.set({
-        sym:hash.id,
+        sym:hash.sym || hash.id,
         'isVeryActive': false
       });
     },

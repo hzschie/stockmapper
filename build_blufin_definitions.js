@@ -57,7 +57,7 @@ function getIndexConstituents(indexId, callback) {
 
 function writeDefinitions() {
   var stocksJSON = {
-    headers: ['id', 'name', 'scripId'],
+    headers: ['id', 'name', 'sym'],
     data: Object.keys(stocks).sort().map(function(key) { return stocks[key]; })
   };
   fs.writeFileSync(__dirname + '/public/data/blufin/stocks.json', JSON.stringify(stocksJSON));

@@ -11,3 +11,5 @@
 *   If groups were to be populated with stocks that already have changePct data, they wouldn't get added to the upsAndDowns counts.
 
 *   Currently width and height of $tags are hardcoded in inspector.js
+
+*   Currently maps $tag is subscribed to mouseover events multiple times
