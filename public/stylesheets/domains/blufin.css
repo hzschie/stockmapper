@@ -1,3 +1,7 @@
+/* MAP */
+.map {
+  line-height:10px;
+}
 .map > li, .map .shadows div {
   font-family: 'Open Sans Condensed', sans-serif;
   width:58px;/*52px;*/
@@ -5,15 +9,14 @@
   font-size:10px;
   letter-spacing:0;
 }
-
 .map > li.active:after {
   width:58px;/*52px;*/
 }
-
 .map > li:hover:after {
   width:58px;/*52px;*/
 }
 
+/* PANEL */
 .panel .button {
 /*  font-family: 'Open Sans Condensed', sans-serif;*/
   width:116px;/*104px;*/
@@ -24,7 +27,6 @@
   font-size: 11px;
   line-height: 10px;
 }
-
 .panel .button.selected:after {
   width:117px;/*105px;*/
 }
