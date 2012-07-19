@@ -1,9 +1,5 @@
-/*@import url(http://fonts.googleapis.com/css?family=Homenaje);*/
-@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700);
-
 .map > li, .map .shadows div {
   font-family: 'Open Sans Condensed', sans-serif;
-/*  font-family: 'Homenaje', sans-serif;*/
   width:58px;/*52px;*/
   font-weight:normal;
   font-size:10px;
