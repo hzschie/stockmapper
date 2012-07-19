@@ -21,7 +21,7 @@ request(urlBase + 'GetBlufinIndexList', function(error, response, body) {
     groups[indexId] = {
       indexId: indexId,
       name: index.IndexName,
-      nickname: index.IndexName.replace(/^blufin /i, ''),
+      nickname: index.IndexName.replace(/^blufin /i, '').replace(/ index$/i, '').replace(/ and /, ' & '),
       type: index.Category,
       ids: []
     };

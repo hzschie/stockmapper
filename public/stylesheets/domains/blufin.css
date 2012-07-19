@@ -1,5 +1,34 @@
+/*@import url(http://fonts.googleapis.com/css?family=Homenaje);*/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700);
+
 .map > li, .map .shadows div {
-  width:60px;
-/*  font-weight:normal;*/
-/*  font-size:10px;*/
+  font-family: 'Open Sans Condensed', sans-serif;
+/*  font-family: 'Homenaje', sans-serif;*/
+  width:58px;/*52px;*/
+  font-weight:normal;
+  font-size:10px;
+  letter-spacing:0;
+}
+
+.map > li.active:after {
+  width:58px;/*52px;*/
+}
+
+.map > li:hover:after {
+  width:58px;/*52px;*/
+}
+
+.panel .button {
+/*  font-family: 'Open Sans Condensed', sans-serif;*/
+  width:116px;/*104px;*/
+}
+.panel .button label {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: bold;
+  font-size: 11px;
+  line-height: 10px;
+}
+
+.panel .button.selected:after {
+  width:117px;/*105px;*/
 }
