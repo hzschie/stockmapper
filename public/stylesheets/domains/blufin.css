@@ -9,6 +9,9 @@
   font-size:10px;
   letter-spacing:0;
 }
+.map > li .tight {
+  letter-spacing:-1px;
+}
 .map > li.active:after {
   width:58px;/*52px;*/
 }
@@ -38,7 +41,7 @@
   font-family: 'Open Sans Condensed', sans-serif;
   width:95px;
 }
-.inspector .sym.tight {
+.inspector .sym .tight {
   letter-spacing:-1px;
 }
 .inspector .left {

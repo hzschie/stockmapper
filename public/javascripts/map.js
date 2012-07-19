@@ -3,7 +3,9 @@
     _.extend(this, Backbone.Events);
     var models,
         $shadows,
-        _this = this;
+        _this = this,
+        getTagHtml = mapper.config.getTagHtml || function(model) { return model.get('sym'); };
+        
 
     $map.mouseout(function(event) { 
       if(event.toElement != $map[0] && !$(event.toElement).is('li')) 
@@ -38,19 +40,9 @@
         model.get('$shadow').appendTo($shadows);
         return;
       }
-
-      var sym = model.get('sym'),
-          html;
-      if(sym.indexOf('-') > -1) {
-        var splt = sym.split('-');
-        html = splt[0] + '<span>' + splt[1] + '</span>';
-      } else {
-        html = sym;
-      }
-      
       
       model.set({
-        $tag: $tag = $(document.createElement('li')).html(html).appendTo($map),
+        $tag: $tag = $(document.createElement('li')).html( getTagHtml(model) ).appendTo($map),
         $shadow: $(document.createElement('div')).appendTo($shadows)
       }, { silent:true });
       

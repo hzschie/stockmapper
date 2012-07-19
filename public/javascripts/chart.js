@@ -40,7 +40,7 @@
     };
     
     function redraw(collection) {
-      if(!models.at(0).get('hasData')) return;
+      if(!models.at(0) || !models.at(0).get('hasData')) return;
       var tt = Date.now();
       var w = $container.width() - 3,
           paddingTop = 30,

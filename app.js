@@ -1,3 +1,5 @@
+process.env.DATA_DOMAIN = process.env.DATA_DOMAIN || 'nyse';
+
 var express = require('express'),
     http = require('http'),
     fs = require('fs');
@@ -32,8 +34,7 @@ BundleUp(app, __dirname + '/lib/assets', {
   minifyJs: true
 });
 
-
-var dataDomain = (process.env.DATA_DOMAIN || 'nyse').toLowerCase(),
+var dataDomain = process.env.DATA_DOMAIN,
     dataSourceClass;
 switch(dataDomain) {
   case 'blufin':

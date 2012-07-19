@@ -48,7 +48,7 @@
       _.forEach(bindings, function(binding) {
         var $field = $container.find(binding.$),
             val = (binding.formatter || String)( model.get(binding.field), $field );
-        if(val) $field.text(val);
+        if(val) $field.html(val);
       });
       
       var tagPos = $tag.offset(),
