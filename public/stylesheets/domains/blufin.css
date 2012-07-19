@@ -18,7 +18,6 @@
 
 /* PANEL */
 .panel .button {
-/*  font-family: 'Open Sans Condensed', sans-serif;*/
   width:116px;/*104px;*/
 }
 .panel .button label {
@@ -29,4 +28,20 @@
 }
 .panel .button.selected:after {
   width:117px;/*105px;*/
+}
+
+/* INSPECTOR */
+.inspector .sym {
+  font-family: 'Open Sans Condensed', sans-serif;
+  width:95px;
+  letter-spacing:-1px;
+}
+.inspector .left {
+  width:121px;
+}
+.inspector .right {
+  width: 148px;
+}
+.inspector .right dt {
+  padding-left: 35px;
 }

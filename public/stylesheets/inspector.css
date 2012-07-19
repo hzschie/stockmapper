@@ -49,6 +49,7 @@
 .inspector .sym, .inspector .last_trade {
   font-weight:bold;
   overflow:hidden;
+  white-space:nowrap;
 }
 
 .inspector .header > div {
