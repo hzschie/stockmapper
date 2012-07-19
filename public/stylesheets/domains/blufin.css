@@ -26,6 +26,9 @@
   font-size: 11px;
   line-height: 10px;
 }
+.panel .button .type {
+  line-height:8px;
+}
 .panel .button.selected:after {
   width:117px;/*105px;*/
 }
@@ -34,6 +37,8 @@
 .inspector .sym {
   font-family: 'Open Sans Condensed', sans-serif;
   width:95px;
+}
+.inspector .sym.tight {
   letter-spacing:-1px;
 }
 .inspector .left {

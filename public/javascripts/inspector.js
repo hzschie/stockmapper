@@ -32,6 +32,10 @@
         bubbW = null,
         targP = null,
         lastPos = {};
+        
+    if(mapper.config.processInspectorBindings) {
+      mapper.config.processInspectorBindings(bindings);
+    }
     
     this.inspectTag = function(model, $tag) {
       if(!model) {
