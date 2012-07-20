@@ -44,9 +44,25 @@ function getIndexConstituents(indexId, callback) {
     
     var stocksRaw = JSON.parse(body);
     stocksRaw.forEach(function(stock) {
-      var id = stock.ScripCode;
-      stocks[id] = stocks[id] || [id, stock.ScripName, stock.ScripId];
-      group.ids.push(id);
+      var sym = stock.ScripId;
+      stocks[sym] = stocks[sym] || [stock.ScripCode, stock.ScripName, sym];
+      group.ids.push(stock.ScripCode);
+      
+      var crosstab = [
+        'Blufin ',
+        stock.Capitalization.match(/Blufin (.*) Cap Index/)[1],
+        ' ',
+        stock.Style.match(/Blufin (.*) Index/)[1],
+        ' Index'
+      ].join('');
+      for(var indexId in groups) {
+        var crosstabGroup = groups[indexId];
+        if(crosstabGroup.name == crosstab) {
+          crosstabGroup.ids.push(stock.ScripCode);
+          break;
+        }
+      }
+      
     });
     cursor
       .hex('#6666ff').write('IndexId ' + indexId + ' (' + group.name + ')')
