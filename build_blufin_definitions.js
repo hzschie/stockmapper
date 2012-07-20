@@ -8,65 +8,74 @@ var urlBase = 'http://46.137.212.140:8080/Service/equities.svc/',
     actions = [],
     groups = {},
     stocks = {};
-request(urlBase + 'GetBlufinIndexList', function(error, response, body) {
-  var indexesRaw = JSON.parse(body);
-  cursor
-    .hex('#00ff00')
-    .bold()
-    .write(indexesRaw.length + ' indexes\n')
-    .reset();
-  
-  indexesRaw.forEach(function(index, i) {
-    var indexId = index.IndexId;
-    groups[indexId] = {
-      indexId: indexId,
-      name: index.IndexName,
-      nickname: index.IndexName.replace(/^blufin /i, '').replace(/ index$/i, '').replace(/ and /, ' & '),
-      type: index.Category,
-      ids: []
-    };
     
-    actions.push(function(callback) {
-      getIndexConstituents(indexId, callback);
-    });
-  });
+flow.series([createGroups, createStocks, writeDefinitions]);
+    
+function createGroups(callback) {
+  request(urlBase + 'GetBlufinIndexList', function(error, response, body) {
+    var indexesRaw = JSON.parse(body);
+    cursor
+      .hex('#00ff00')
+      .bold()
+      .write(indexesRaw.length + ' indexes\n')
+      .reset();
   
-  flow.parallel(actions, writeDefinitions);
-});
+    indexesRaw.forEach(function(index, i) {
+      var indexId = index.IndexId;
+      groups[indexId] = {
+        indexId: indexId,
+        name: index.IndexName,
+        nickname: index.IndexName.replace(/^blufin /i, '').replace(/ index$/i, '').replace(/ and /, ' & '),
+        type: index.Category,
+        ids: []
+      };
+    });
+    
+    callback();
+  });
+}
 
-function getIndexConstituents(indexId, callback) {
-  var group = groups[indexId];
-  request(urlBase + 'GetLatestIndexConstituentsDataByIndexID?IndexID=' + indexId, function(error, response, body) {
+function createStocks(callback) {
+  request(urlBase + 'GetLatestIndexConstituentsDataByIndexID?IndexID=1000', function(error, response, body) {
     if(error || response.statusCode >= 400) {
-      cursor.hex('#cc0000').write('Data not available for IndexId ' + indexId + ' (' + group.name + '). Status code was ' + response.statusCode + '\n');
+      cursor.hex('#cc0000').write('Data not available for IndexId=1000. Status code was ' + response.statusCode + '\n');
       return callback();
     }
     
-    var stocksRaw = JSON.parse(body);
+    var stocksRaw = JSON.parse(body),
+        broadGroup = groups['1000'];
     stocksRaw.forEach(function(stock) {
       var sym = stock.ScripId;
       stocks[sym] = stocks[sym] || [stock.ScripCode, stock.ScripName, sym];
-      group.ids.push(stock.ScripCode);
       
-      var crosstab = [
-        'Blufin ',
-        stock.Capitalization.match(/Blufin (.*) Cap Index/)[1],
-        ' ',
-        stock.Style.match(/Blufin (.*) Index/)[1],
-        ' Index'
-      ].join('');
+      var sector = stock.Sector,
+          capitalization = stock.Capitalization,
+          style = stock.Style,
+          crosstab = (capitalization + style).replace(/Index/, '');
+
+      cursor
+        .hex('#6666ff').write('\n' + stock.ScripId)
+        .hex('#3333aa').write(' (' + stock.ScripName + '):\n');
+
       for(var indexId in groups) {
-        var crosstabGroup = groups[indexId];
-        if(crosstabGroup.name == crosstab) {
-          crosstabGroup.ids.push(stock.ScripCode);
-          break;
+        var group = groups[indexId];
+        if(group.name == sector || group.name == capitalization || group.name == style || group.name == crosstab || group == broadGroup) {
+          group.ids.push(stock.ScripCode);
+          
+          cursor
+            .hex('#3333aa').write('Add ')
+            .hex('#6666ff').write(stock.ScripId)
+            .hex('#3333aa').write(' to ')
+            .hex('#6666ff').write(group.name + '\n');
         }
       }
       
     });
+/*
     cursor
       .hex('#6666ff').write('IndexId ' + indexId + ' (' + group.name + ')')
       .hex('#3333aa').write(' ids: ' + group.ids.join(',') + '\n');
+*/
     
     callback();
   });
