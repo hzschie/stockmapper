@@ -37,6 +37,10 @@
     // Subscribe to subsequent adding of groups
     groups.on('add', addGroup);
     
+    this.height = function() {
+      return $panel.outerHeight();
+    };
+    
     this.setSelectedGroup = function(group) {
       if(selectedGroup) {
         selectedGroup.get('$tag').removeClass('selected');

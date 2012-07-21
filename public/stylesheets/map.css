@@ -1,6 +1,7 @@
 .map {
   position:relative;
   line-height:13px;
+  z-index:0;
 }
 
 .map div.shadows {

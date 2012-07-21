@@ -90,6 +90,8 @@ function buildView() {
         currentGroup = null,
         currentSort = mapper.sortFunctions['sym'];
         
+    $('.map').css({ 'padding-top': panel.height() });
+        
     viewState.on('change', function(viewState) {
       if(viewState.hasChanged('filter')) {
         if(currentGroup) {
