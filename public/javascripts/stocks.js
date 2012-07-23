@@ -86,6 +86,8 @@ var StockGroup = mapper.StockGroup = Backbone.Model.extend(
 
         _this.set({ 'upsAndDowns': currentUpsAndDowns });
       });
+      
+      hash.members.modelId = function(model) { return model.id; };
     }
   }
 );

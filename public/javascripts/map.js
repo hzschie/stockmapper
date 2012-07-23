@@ -2,7 +2,8 @@
   function Map($map, _models) {
     _.extend(this, Backbone.Events);
     var models,
-        $shadows,
+        $shadows = $(document.createElement('div')).addClass('shadows').appendTo($map),
+        grid = null,
         _this = this,
         getTagHtml = mapper.config.getTagHtml || function(model) { return model.get('sym'); };
         
@@ -14,7 +15,7 @@
 
     this.setModels = function(_models) {
       if(models) {
-        models.off('add', addModel);
+        // models.off('add', addModel);
         models.off('change', updateModel);
         models.off('reset', rebuild);
       }
@@ -23,37 +24,91 @@
       rebuild(null, null, true);
 
       // Subscribe to subsequent adding of models
-      models.on('add', addModel);
+      // models.on('add', addModel);
       models.on('change', updateModel);
       models.on('reset', rebuild);
     };
     
     if(_models) this.setModels(_models);
     
-    function addModel(model) {
-      var $tag = model.get('$tag');
-      if($tag) {
-        $tag.appendTo($map);
-        $tag.mouseover(function() {
-          _this.trigger('inspect_tag', model, $tag);
-        });
-        model.get('$shadow').appendTo($shadows);
-        return;
+    function addModel(model, i, animate) {
+      var $tag = $(this);
+      model.$tag = $tag;
+      $tag.html(getTagHtml(model));
+      
+      var $shadow = $(document.createElement('div')).appendTo($shadows);
+      model.$shadow = $shadow;
+      
+      if(!grid) {
+        grid = gg = new mapper.Grid(models.length, $map.width(), $tag.outerWidth() + 1, $tag.outerHeight() + 1);
+        updateBounds();
       }
       
-      model.set({
-        $tag: $tag = $(document.createElement('li')).html( getTagHtml(model) ).appendTo($map),
-        $shadow: $(document.createElement('div')).appendTo($shadows)
-      }, { silent:true });
+      var pos = {
+        left: grid.xi(i),
+        top: grid.yi(i),
+        display:'none'
+      };
+      $tag.css(pos);
+      $shadow.css(pos);
+      
+      setTimeout(function() {
+        $tag.css({ display:'' });
+        $shadow.css({ display:'' });
+      }, getDelay(model, i));
+      
+      $tag.mouseover(function() {
+        _this.trigger('inspect_tag', model, $tag);
+      });
+
+
+      return;
+      
+      i = i == null ? n : i;
+      var $tag = model.get('$tag'),
+          $shadow = model.get('$shadow');
+      if($tag) {
+        $tag.prependTo($map);
+        $shadow.appendTo($shadows);
+      }
+      else {
+        model.set({
+          $tag: $tag = $(document.createElement('li')).html( getTagHtml(model) ).appendTo($map),
+          $shadow: $shadow = $(document.createElement('div')).appendTo($shadows)
+        }, { silent:true });
+        
+        if(!grid) {
+          grid = gg = new mapper.Grid(models.length, $map.width(), $tag.outerWidth() + 1, $tag.outerHeight() + 1);
+          updateBounds();
+        }
+      }
+      
+      var pos = {
+        left: grid.xi(i),
+        top: grid.yi(i)
+      };
+      if(animate) {
+        setTimeout(function() {
+          $tag.css(pos);
+          $shadow.css(pos);
+        }, 200+2*i);//1500 * i / models.length);
+      }
+      else {
+        $tag.css(pos);
+        $shadow.css(pos);
+      }
       
       $tag.mouseover(function() {
         _this.trigger('inspect_tag', model, $tag);
       });
     }
     
-    function updateModel(model, force) {
-      var $tag = model.get('$tag'),
-          $shadow = model.get('$shadow');
+    function updateModel(model, i) {
+      var force = !isNaN(i);// isNewCollection && model.get('hasData')
+      if(force) model.index = i;
+      
+      var $tag = model.$tag,
+          $shadow = model.$shadow;
       if(model.hasChanged('change') || force) {
         $tag.css({
           // backgroundColor: 'rgb(' + mapper.fractionChangeToHex(Math.min(5, Math.max(-5, model.get('changePct'))) / 5) + ')'
@@ -70,20 +125,79 @@
           $shadow.removeClass('active');
         }
       }
+      
+      if(!force) return;
+      var pos = { 
+        left: grid.xi(i),
+        top: grid.yi(i)
+      };
+      setTimeout(function() {
+        $tag.css(pos);
+        $shadow.css(pos);
+        // console.log($shadow);
+      }, getDelay(model, i));
     }
     
+    var getDelay,
+        iDelay = function(model, i) { return (grid.c(i) + grid.r(i) / grid.rows) * 20; },
+        xtraDelay = function(extra) { return function(model, i) { return extra + iDelay(model, i); }; };// slow device, make delay 1 sec longer
     function rebuild(collection, options, isNewCollection) {
+      var tt = Date.now();
+      
+      var oldGrid, oldRows;
+      if(grid) {
+        oldCells = grid.cellsClone();
+        oldRows = grid.rows;
+        updateBounds();
+      }
+      var tags = d3.select($map[0]).selectAll('li'),
+          oldLength = tags[0].length;
+      tags = tags.data(models.models, models.modelId);
+      
+      var exiting = 0; tags.exit().each(function() { exiting++; });
+      if(exiting == oldLength) {
+        getDelay = xtraDelay( 200 + (oldLength - exiting) * 2);
+      }
+      else {
+        getDelay = xtraDelay( 1000 + (oldLength - exiting) * 2);
+      }
+      tags.enter()
+        .append('li')
+        .each(addModel);
+        
+      getDelay = xtraDelay( 200);
+      tags
+        .each(updateModel);
+      
+      tags.exit()
+        .each(function(model, i) {
+          setTimeout(function() {
+            model.$tag.remove();
+            model.$shadow.remove();
+          }, (oldCells[model.index][0] + oldCells[model.index][1] / oldRows) * 20);
+        });
+        
+      console.log(Date.now() - tt + ' ms, MAP redraw');
+      return;
+      
       var tt = Date.now();
       $map.empty();
       $shadows = $(document.createElement('div')).addClass('shadows').appendTo($map);
       
-      models.forEach(function(model) {
-        addModel(model);
+      if(grid) updateBounds();
+      models.forEach(function(model, i) {
+        addModel(model, i, !isNewCollection);
         if(isNewCollection && model.get('hasData')) {
           updateModel(model, true);
         }
       });
       console.log(Date.now() - tt + ' ms, MAP redraw');
+    }
+    
+    function updateBounds() {
+      grid.n(models.length);
+      var bounds = grid.bounds();
+      $map.css({ width: bounds.w, height: bounds.h });
     }
   };
   

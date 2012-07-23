@@ -23,8 +23,34 @@
   font:11px/12px "Helvetica Narrow","Arial Narrow",sans-serif;
   font-weight:bold;
   letter-spacing:-1px;
+  position:absolute;
+  -webkit-transition:left .6s, top .6s;
+  -moz-transition:left .6s, top .6s;
+  -ms-transition:left .6s, top .6s;
+  transition:left .6s, top .6s;
 }
 
+.map .shadows div {
+  display:none;
+  background-color:rgba(0,0,0,.6);
+  margin-left:1px;
+  margin-top:1px;
+  width:29px;
+  height:14px;
+}
+.map .shadows div.active {
+  display:block;
+}
+/*.map .shadows div.active:after {
+  position:absolute;
+  content:'';
+  left:1px;
+  top:1px;
+  width:31px;
+  height:14px;
+  background-color:rgba(0,0,0,.6);
+}
+*/
 .map > li {
   background-color:#ccc;
   cursor: crosshair;
@@ -33,7 +59,6 @@
 .map > li.active {
 /*  font-weight:bold;*/
   z-index:2;
-  position:relative;
 }
 
 .map > li.active:after {
@@ -59,18 +84,4 @@
   position:absolute;
   content:'';
   background:transparent url('/images/inner_dropshadow.png') no-repeat left top;
-}
-
-
-.map .shadows div.active {
-  position:relative;
-}
-.map .shadows div.active:after {
-  position:absolute;
-  content:'';
-  left:1px;
-  top:1px;
-  width:31px;
-  height:14px;
-  background-color:rgba(0,0,0,.6);
 }

@@ -10,6 +10,7 @@ socket.on('update', function(multiStockData) {
     
     stock.update(data);
     
+/*
     // Remove stocks with no data
     if(!stock.get('lastTrade')) {
       var stockId = stock.get('id');
@@ -23,6 +24,7 @@ socket.on('update', function(multiStockData) {
       );
       mapper.stocks.remove(stock);
     }
+*/
   });
 });
 
@@ -90,7 +92,7 @@ function buildView() {
         currentGroup = null,
         currentSort = mapper.sortFunctions['sym'];
         
-    $('.map').css({ 'padding-top': panel.height() });
+    $('.map').css({ 'margin-top': panel.height() });
         
     viewState.on('change', function(viewState) {
       if(viewState.hasChanged('filter')) {

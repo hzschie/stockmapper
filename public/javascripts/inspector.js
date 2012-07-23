@@ -47,7 +47,11 @@
       
       _.forEach(bindings, function(binding) {
         var $field = $container.find(binding.$),
-            val = (binding.formatter || String)( model.get(binding.field), $field );
+            val = model.get(binding.field);
+        if(isNaN(val) && typeof(val) == 'number') val = 'N/A';
+        if(val != 'N/A') {
+          val = (binding.formatter || String)( val, $field );
+        }
         if(val) $field.html(val);
       });
       
