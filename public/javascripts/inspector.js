@@ -55,29 +55,46 @@
         if(val) $field.html(val);
       });
       
+      inspectElement($tag, { x:57, y:20 });
+    };
+    
+    this.inspectGroup = function(group, $tag) {
+      if(!group) {
+        $container.addClass('hidden');
+        return;
+      }
+      
+      $container.removeClass('hidden');
+      
+      // DO THE CONTENT ...
+      
+      inspectElement($tag, { x:20, y:20 });
+    };
+    
+    function inspectElement($tag, spacing) {
       var tagPos = $tag.offset(),
+          tagSz = { w:$tag.outerWidth(), h:$tag.outerHeight() },
           bodyWidth = $('body').width(),
           _bubbW = bubbW = $container.width(),
           _pointLeft = pointLeft = tagPos.left <= bodyWidth / 2,
           offset = {
-            x: pointLeft ? 86 : -bubbW - 56,
-            y: 32
+            x: pointLeft ? tagSz.w + spacing.x : -bubbW + 1 - spacing.x,// 57
+            y: tagSz.h + spacing.y// 20
           },
           pos = {
             left: tagPos.left + offset.x,
             top: tagPos.top + offset.y
           };
       
-      // TODO: Don't hardcode these
-      tagPos.width = 29;
-      tagPos.height = 12;
+      tagPos.width = tagSz.w;
+      tagPos.height = tagSz.h;
       
       targP = {
         left: tagPos.left + (pointLeft ? tagPos.width : 0),
         top: tagPos.top + tagPos.height
       };
       $container.css(pos);
-    };
+    }
     
     d3.timer(updateTip);
     

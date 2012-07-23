@@ -140,6 +140,11 @@ function buildView() {
           map.setModels(currentGroup.get('members'));
           chart.setModels(currentGroup.get('members'));
           panel.setSelectedGroup(currentGroup);
+          
+          $('.inspector').addClass('suspended');
+          setTimeout(function() {
+            $('.inspector').removeClass('suspended');
+          }, 1000);
         }
         else
           throw new Error('Unknown group, ' + name);
@@ -182,6 +187,10 @@ function buildView() {
     panel.on('select_sort', function(sortVal) {
       viewState.set({ sort: sortVal }, { silent: true });
       History.pushState(null, null, viewState.toUrl());
+    });
+    
+    panel.on('inspect_group', function(group, $tag) {
+      inspector.inspectGroup(group, $tag);
     });
     
     map.on('inspect_tag', function(model, $tag) {

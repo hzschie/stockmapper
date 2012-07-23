@@ -38,12 +38,9 @@
   line-height:9px;
 }
 
-.panel .button.selected:after {
+.panel .button:hover:after, .panel .button.selected:after {
   width:85px;
   height:20px;
-/*  border:1px solid #fffcce;
-  left:0;
-  top:0;*/
   border:2px solid #fffcce;
   left:-1px;
   top:-1px;
@@ -52,6 +49,21 @@
   background:transparent url('/images/inner_dropshadow.png') no-repeat top left;
 }
 
+.panel .button:hover:after {
+  opacity:.5;
+}
+
+/*.panel .button.selected:after {
+  width:87px;
+  height:22px;
+  border:3px solid #fffcce;
+  left:-3px;
+  top:-3px;
+  position:absolute;
+  content:'';
+  background:transparent url('/images/inner_dropshadow.png') no-repeat left top;
+}
+*/
 .panel .group {
   background-color:#ccc;
 }

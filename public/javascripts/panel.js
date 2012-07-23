@@ -13,7 +13,7 @@
         margin;
         
     while(padding.length < 4) { padding.push(padding[0]); }
-
+    
     // If tags order is explicitly defined in config, use it. Otherwise, assume all groups 
     // should be added, and create tagsOrder based on that.
     var tagsOrder = _.map(
@@ -128,6 +128,14 @@
       $tag.bind('click', function() {
         _this.trigger('select_group', group);
       });
+      $tag.hover(
+        function() {
+          _this.trigger('inspect_group', group, $tag);
+        },
+        function() {
+          _this.trigger('inspect_group', null, null);
+        }
+      );
             
       record.isFilled = true;
       group.set({

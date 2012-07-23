@@ -13,6 +13,10 @@
   opacity:0;
 }
 
+.inspector.suspended {
+  opacity:0 !important;
+}
+
 .inspector .body {
   position:relative;
   padding:2px;
