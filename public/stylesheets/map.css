@@ -72,7 +72,6 @@
 }
 
 .map > li:hover {
-  position:relative;
   z-index:3;
 }
 .map > li:hover:after {

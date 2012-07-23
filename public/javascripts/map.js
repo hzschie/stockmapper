@@ -15,7 +15,6 @@
 
     this.setModels = function(_models) {
       if(models) {
-        // models.off('add', addModel);
         models.off('change', updateModel);
         models.off('reset', rebuild);
       }
@@ -24,7 +23,6 @@
       rebuild(null, null, true);
 
       // Subscribe to subsequent adding of models
-      // models.on('add', addModel);
       models.on('change', updateModel);
       models.on('reset', rebuild);
     };
@@ -56,47 +54,6 @@
         $tag.css({ display:'' });
         $shadow.css({ display:'' });
       }, getDelay(model, i));
-      
-      $tag.mouseover(function() {
-        _this.trigger('inspect_tag', model, $tag);
-      });
-
-
-      return;
-      
-      i = i == null ? n : i;
-      var $tag = model.get('$tag'),
-          $shadow = model.get('$shadow');
-      if($tag) {
-        $tag.prependTo($map);
-        $shadow.appendTo($shadows);
-      }
-      else {
-        model.set({
-          $tag: $tag = $(document.createElement('li')).html( getTagHtml(model) ).appendTo($map),
-          $shadow: $shadow = $(document.createElement('div')).appendTo($shadows)
-        }, { silent:true });
-        
-        if(!grid) {
-          grid = gg = new mapper.Grid(models.length, $map.width(), $tag.outerWidth() + 1, $tag.outerHeight() + 1);
-          updateBounds();
-        }
-      }
-      
-      var pos = {
-        left: grid.xi(i),
-        top: grid.yi(i)
-      };
-      if(animate) {
-        setTimeout(function() {
-          $tag.css(pos);
-          $shadow.css(pos);
-        }, 200+2*i);//1500 * i / models.length);
-      }
-      else {
-        $tag.css(pos);
-        $shadow.css(pos);
-      }
       
       $tag.mouseover(function() {
         _this.trigger('inspect_tag', model, $tag);
@@ -134,7 +91,6 @@
       setTimeout(function() {
         $tag.css(pos);
         $shadow.css(pos);
-        // console.log($shadow);
       }, getDelay(model, i));
     }
     
@@ -177,20 +133,6 @@
           }, (oldCells[model.index][0] + oldCells[model.index][1] / oldRows) * 20);
         });
         
-      console.log(Date.now() - tt + ' ms, MAP redraw');
-      return;
-      
-      var tt = Date.now();
-      $map.empty();
-      $shadows = $(document.createElement('div')).addClass('shadows').appendTo($map);
-      
-      if(grid) updateBounds();
-      models.forEach(function(model, i) {
-        addModel(model, i, !isNewCollection);
-        if(isNewCollection && model.get('hasData')) {
-          updateModel(model, true);
-        }
-      });
       console.log(Date.now() - tt + ' ms, MAP redraw');
     }
     

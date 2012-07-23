@@ -92,7 +92,7 @@ function buildView() {
         currentGroup = null,
         currentSort = mapper.sortFunctions['sym'];
         
-    $('.map').css({ 'margin-top': panel.height() });
+    $('.map').css({ 'margin-top': panel.height() + 10 });
         
     viewState.on('change', function(viewState) {
       if(viewState.hasChanged('filter')) {
