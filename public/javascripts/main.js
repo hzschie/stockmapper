@@ -82,6 +82,22 @@ function tryPopulateGroups(groups) {
 
 // Initialize view and Historty
 function buildView() {
+  function scrollTo(y) {
+    var $dummy = $('<div></div>'),
+        $document = $(document);
+    $dummy.css({ left:$document.scrollTop() });
+    $dummy.animate(
+      { left:y },
+      {
+        step: function() {
+          $document.scrollTop(parseInt($(this).css('left'), 10));
+        },
+        complete: function() {
+          $document.scrollTop(y);
+        }
+      }
+    );
+  }
   // Init views on document ready
   $(function() {
     var panel = new mapper.Panel($('.panel'), mapper.groups),
@@ -92,9 +108,20 @@ function buildView() {
         currentGroup = null,
         currentSort = mapper.sortFunctions['sym'];
         
-    $('.map').css({ 'margin-top': panel.height() + 10 });
+    $('.map').css({ 'margin-top': panel.height() + 14 });
         
     viewState.on('change', function(viewState) {
+      if(viewState.hasChanged('view')) {
+        switch(viewState.get('view')) {
+          case 'chart':
+            scrollTo($('.chart').offset().top - $('.map').offset().top);
+            break;
+          case 'map':
+          default:
+            scrollTo(0);
+            break;
+        }
+      }
       if(viewState.hasChanged('filter')) {
         if(currentGroup) {
           currentGroup.get('members').off('change', reSortIfNeeded);
@@ -144,6 +171,11 @@ function buildView() {
 
     panel.on('select_group', function(group) {
       viewState.set({ filter: group.get('urlName') }, { silent: true });
+      History.pushState(null, null, viewState.toUrl());
+    });
+    
+    panel.on('select_view', function(viewName) {
+      viewState.set({ view: viewName }, { silent: true });
       History.pushState(null, null, viewState.toUrl());
     });
     

@@ -12,11 +12,37 @@ html
     script(type='text/javascript')
       mapper = {};
       mapper.config = !{dataConfig};
+      //TEMP
+      mapper.config.XgroupsTagOrder = [
+        "index:NYA",
+        "index:Dow Jones",
+        "index:S&P 500",
+        "sector:Materials",
+        "sector:Goods",
+        "sector:Services",
+        "sector:Financials",
+        "sector:Health Care",
+        "sector:Industrials",
+        "sector:Oil & Gas",
+        "sector:Technology",
+        "sector:Telecom",
+        "sector:Utilities",
+        "region:United States",
+        "region:Asia/Pacific",
+        "region:Canada",
+        "region:Europe",
+        "region:Latin America",
+        "region:MidEast/Africa"
+      ];
     script(type='text/javascript', src='/socket.io/socket.io.js')
     != renderJs()
     
   body(style='margin:0 10px;')
     .panel
+      .sorts
+      .views
+        div MAP
+        div CHART
     ul.map
     .chart
     .inspector.hidden

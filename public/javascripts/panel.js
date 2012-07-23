@@ -1,9 +1,17 @@
 (function() {
+  var T = 0, R = 1, B = 2, L = 3;
   function Panel($panel, groups) {
     _.extend(this, Backbone.Events);
     var _this = this,
+        grid = null,
         selectedGroup = null,
-        $selectedSort = null;
+        $selectedSort = null,
+        $sorts = $panel.find('.sorts'),
+        $views = $panel.find('.views'),
+        padding = _.map($panel.css('padding').split(' '), function(p) { return parseInt(p, 10); }),
+        margin;
+        
+    while(padding.length < 4) { padding.push(padding[0]); }
 
     // If tags order is explicitly defined in config, use it. Otherwise, assume all groups 
     // should be added, and create tagsOrder based on that.
@@ -27,7 +35,7 @@
       btnObj.$btn = $(document.createElement('div')).addClass('sort').addClass('button').html([
         '<div class="type">SORT BY:</div>', 
         '<label>', btnObj.label, '</label>'
-      ].join('')).appendTo($panel).click(function() {
+      ].join('')).appendTo($sorts).click(function() {
         _this.trigger('select_sort', btnObj.id);
       });
     });
@@ -37,7 +45,15 @@
     // Subscribe to subsequent adding of groups
     groups.on('add', addGroup);
     
+    $views.children().each(function(i, el) {
+      $(el).on('click', function() {
+        _this.trigger('select_view', $(el).text().toLowerCase());
+      });
+    });
+    
     this.height = function() {
+      var h = grid.bounds().h + 23;
+      $panel.css({ height: h });
       return $panel.outerHeight();
     };
     
@@ -89,6 +105,23 @@
       if(actualIndex == 0) $panel.prepend($tag);
       else $panel.children().eq(actualIndex - 1).after($tag);
       
+      if(!grid) {
+        margin = _.map($tag.css('margin').split(' '), function(m) { return parseInt(m, 10); });
+        grid = new mapper.Grid(
+          tagsOrder.length, $panel.width(), 
+          $tag.outerWidth() + margin[L] + margin[R], 
+          $tag.outerHeight() + margin[T] + margin[B],
+          makeCells);
+        $sorts.css({
+          // left: grid.x(grid.cols - buttonsOrder.length) + padding[L]
+          right: $panel.width() - grid.x(grid.cols) + padding[R] - margin[L]
+        });
+      }
+      $tag.css({
+        left: padding[L] + grid.xi(index),
+        top: padding[T] + grid.yi(index)
+      });
+      
       $tag.bind('click', function() {
         _this.trigger('select_group', group);
       });
@@ -110,6 +143,69 @@
       group.get('$tag').css({ 
         backgroundColor: 'rgb(' + mapper.fractionToGreenRedHex(fraction) + ')'
       });
+    }
+    
+    function makeCells(n, c, r) {
+      var centered = false,
+          rotated = true,
+          cells = [],
+          d = c * r - n,
+          _c = 0, _r = 0;
+      var adj = Math.min(1, centered ? Math.floor(d/2) : 0);
+      for(var i = 0; i < n; i++) {
+        cells[i] = [_c, _r];
+        if(rotated) {
+          _r++;
+          if(_r >= r - adj) {
+            _r = 0;
+            _c++;
+            if(centered) {
+              adj = _c < d/2 || _c >= c - d/2 ? 1 : 0;
+            }
+            else {
+              adj = _c >= c - d ? 1 : 0;
+            }
+          }
+        }
+        else {
+          _c++;
+          if(_c == c) {
+            _c = 0;
+            _r++;
+          }
+        }
+      }
+      return cells;
+    }    
+    function XmakeCells(n, c, r) {
+      var cells = [],
+          _c = 0, _r = 0;
+      for(var i = 0; i < n; i++) {
+        cells[i] = [_c, _r, tagsOrder[i].reference.match(/^.*\:/)[0]];
+        _r++;
+        if(_r >= r || 
+          ((i < n - 1) && cells[i][2] != tagsOrder[i+1].reference.match(/^.*\:/)[0])) {
+          _r = 0;
+          _c++;
+        }
+      }
+      return cells;
+    }
+    
+    function XXmakeCells(n, c, r) {
+      var cells = [],
+          _c = 0, _r = 0,
+          dir = 1;
+      for(var i = 0; i < n; i++) {
+        cells[i] = [_c, _r];
+        _r += dir;
+        if(_r >= r || _r < 0) {
+          dir *= -1;
+          _r += dir;
+          _c++;
+        }
+      }
+      return cells;
     }
   }
   

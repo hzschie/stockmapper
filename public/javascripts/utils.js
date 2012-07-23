@@ -28,7 +28,7 @@
       return '#' + (0x1000000 + (whiteness << 16) + 0xff00 + whiteness).toString(16).substring(1);
   };
   
-  mapper.Grid = function(_n, bw, _w, _h) {
+  mapper.Grid = function(_n, bw, _w, _h, makeCells) {
     var c, r, w, h, n, d,
         _this = this,
         cells,
@@ -36,36 +36,17 @@
         
     this.cellsClone = function() { return cells.concat(); };
     this.redefine = function(_n, _c, _r, _w, _h) {
-      var dOld = d, nOld = n;
+      var nOld = n;
       n = _n || n;
       c = this.cols = _c || c;
       r = this.rows = _r || r;
       w = _w || w;
       h = _h || h;
-      d = c * r - n;
-      if(d != dOld || n != nOld) {
-        cells = [];
-        _c = 0; _r = 0;
-        var adj = Math.min(1, Math.floor(d/2));
-        for(var i = 0; i < n; i++) {
-          cells[i] = [_c, _r];
-          if(rotated) {
-            _r++;
-            if(_r >= r - adj) {
-              _r = 0;
-              _c++;
-              adj = _c < d/2 || _c >= c - d/2 ? 1 : 0;
-            }
-          }
-          else {
-            _c++;
-            if(_c == c) {
-              _c = 0;
-              _r++;
-            }
-          }
-        }
+
+      if(n != nOld) {
+        cells = makeCells(n, c, r);
       }
+      // console.log('n='+n, 'c='+c, 'r='+r, 'w='+w, 'h='+h);
     };
     
     this.n = function(_n) {
@@ -78,14 +59,6 @@
       _this.redefine(_n, _c, _r, _w, _h);
     })(_n, bw, _w, _h);
     
-    // if(rotated) {
-    //   this.c = function(i) { return Math.floor(i / r); };
-    //   this.r = function(i) { return i % r; };
-    // }
-    // else {
-    //   this.c = function(i) { return i % c; };
-    //   this.r = function(i) { return Math.floor(i / c); };
-    // }
     this.c = function(i) { return cells[i][0]; };
     this.r = function(i) { return cells[i][1]; };
 

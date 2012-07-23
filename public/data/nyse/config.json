@@ -11,6 +11,8 @@
   
   "groupsTagOrder": [
     "index:NYA",
+    "index:Dow Jones",
+    "index:S&P 500",
     "sector:Materials",
     "sector:Goods",
     "sector:Services",
@@ -21,8 +23,6 @@
     "sector:Technology",
     "sector:Telecom",
     "sector:Utilities",
-    "index:Dow Jones",
-    "index:S&P 500",
     "region:United States",
     "region:Asia/Pacific",
     "region:Canada",

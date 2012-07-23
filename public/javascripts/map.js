@@ -38,7 +38,7 @@
       model.$shadow = $shadow;
       
       if(!grid) {
-        grid = gg = new mapper.Grid(models.length, $map.width(), $tag.outerWidth() + 1, $tag.outerHeight() + 1);
+        grid = new mapper.Grid(models.length, $map.width(), $tag.outerWidth() + 1, $tag.outerHeight() + 1, makeCells);
         updateBounds();
       }
       
@@ -140,6 +140,39 @@
       grid.n(models.length);
       var bounds = grid.bounds();
       $map.css({ width: bounds.w, height: bounds.h });
+    }
+    
+    function makeCells(n, c, r) {
+      var centered = true,
+          rotated = true,
+          cells = [],
+          d = c * r - n,
+          _c = 0, _r = 0;
+      var adj = Math.min(1, centered ? Math.floor(d/2) : 0);
+      for(var i = 0; i < n; i++) {
+        cells[i] = [_c, _r];
+        if(rotated) {
+          _r++;
+          if(_r >= r - adj) {
+            _r = 0;
+            _c++;
+            if(centered) {
+              adj = _c < d/2 || _c >= c - d/2 ? 1 : 0;
+            }
+            else {
+              adj = 0;//_c >= c - d ? 1 : 0;
+            }
+          }
+        }
+        else {
+          _c++;
+          if(_c == c) {
+            _c = 0;
+            _r++;
+          }
+        }
+      }
+      return cells;
     }
   };
   

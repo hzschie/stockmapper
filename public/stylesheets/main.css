@@ -8,6 +8,7 @@ body {
   height:530px;
   margin-top:20px; 
   font:12px/13px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
+  margin-bottom:400px;
 }
 
 .chart svg {
