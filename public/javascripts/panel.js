@@ -8,7 +8,8 @@
         $selectedSort = null,
         $sorts = $panel.find('.sorts'),
         $views = $panel.find('.views'),
-        padding = _.map($panel.css('padding').split(' '), function(p) { return parseInt(p, 10); }),
+        //padding = _.map($panel.css('padding').split(' '), function(p) { return parseInt(p, 10); }),
+        padding = [10, 9, 12, 9],
         margin;
         
     while(padding.length < 4) { padding.push(padding[0]); }
@@ -106,7 +107,9 @@
       else $panel.children().eq(actualIndex - 1).after($tag);
       
       if(!grid) {
-        margin = _.map($tag.css('margin').split(' '), function(m) { return parseInt(m, 10); });
+        //margin = _.map($tag.css('margin').split(' '), function(m) { return parseInt(m, 10); });
+        margin = [1,2,2,1];
+
         grid = new mapper.Grid(
           tagsOrder.length, $panel.width(), 
           $tag.outerWidth() + margin[L] + margin[R], 
