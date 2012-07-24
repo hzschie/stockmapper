@@ -73,4 +73,36 @@
     this.yi = function(i) { return _this.y( _this.r(i) ); };
     this.bounds = function() { return { w: c * w, h: r * h }; };
   };
+  
+  mapper.Template = Template;
+  Template.priceFormat = d3.format(',.2f');
+  Template.commaFormat = d3.format(',');
+  Template.changeFormat = d3.format('+.2f');
+  Template.makeRedOrGreen = function(val, $field) {
+    $field.removeClass('red green');
+    if(val) $field.addClass(val == 1 ? 'green' : 'red');
+    return null;
+  };
+  function Template(bindings) {
+    this.bindings = bindings;
+    
+    this.getBindings = function(key) {
+      return this.bindings[key];
+    };
+    
+    this.applyBindings = function(bindings, $container, model) {
+      if(typeof(bindings) == 'string') bindings = this.getBindings(bindings);
+      
+      _.forEach(bindings, function(binding) {
+        var $field = $container.find(binding.$),
+            val = model.get(binding.field);
+        if(isNaN(val) && typeof(val) == 'number') val = 'N/A';
+        if(val != 'N/A') {
+          val = (binding.formatter || String)( val, $field );
+        }
+        if(val) $field.html(val);
+      });
+    };
+    
+  }
 })();

@@ -1,40 +1,35 @@
 (function() {
   mapper.Inspector = Inspector;
-  Inspector.priceFormat = d3.format(',.2f');
-  Inspector.commaFormat = d3.format(',');
-  Inspector.changeFormat = d3.format('+.2f');
-  Inspector.makeRedOrGreen = function(val, $field) {
-    $field.removeClass('red green');
-    if(val) $field.addClass(val == 1 ? 'green' : 'red');
-    return null;
-  };
-  Inspector.bindings = {
+  var Template = mapper.Template;
+  Inspector.defaultBindings = {
     stock: [
       { $:'.name', field:'name' },
       { $:'.sym', field:'sym' },
-      { $:'.last_trade', field:'lastTrade', formatter:Inspector.priceFormat },
+      { $:'.last_trade', field:'lastTrade', formatter:Template.priceFormat },
 
-      { $:'.change', field:'changeDir', formatter:Inspector.makeRedOrGreen },
-      { $:'.change .amount', field:'change', formatter:Inspector.changeFormat },
-      { $:'.change .percent', field:'changePct', formatter:function(val) { return Inspector.changeFormat(val) + '%'; } },
+      { $:'.change', field:'changeDir', formatter:Template.makeRedOrGreen },
+      { $:'.change .amount', field:'change', formatter:Template.changeFormat },
+      { $:'.change .percent', field:'changePct', formatter:function(val) { return Template.changeFormat(val) + '%'; } },
 
-      { $:'.avg_volume', field:'avgVolume', formatter:Inspector.commaFormat },
-      { $:'.volume', field:'volume', formatter:Inspector.commaFormat },
+      { $:'.avg_volume', field:'avgVolume', formatter:Template.commaFormat },
+      { $:'.volume', field:'volume', formatter:Template.commaFormat },
       { $:'.market_cap', field:'marketCapString' },
 
-      { $:'.open', field:'open', formatter:Inspector.priceFormat },
-      { $:'.high', field:'high', formatter:Inspector.priceFormat },
-      { $:'.low', field:'low', formatter:Inspector.priceFormat }
+      { $:'.open', field:'open', formatter:Template.priceFormat },
+      { $:'.high', field:'high', formatter:Template.priceFormat },
+      { $:'.low', field:'low', formatter:Template.priceFormat }
     ]
   };
-  Inspector.bindings = $.extend(Inspector.bindings, mapper.config.getInspectorBindings(Inspector.bindings));
 
   function Inspector($container) {
     var $tip = $container.find('svg'),
         pointLeft = false,
         bubbW = null,
         targP = null,
-        lastPos = {};
+        lastPos = {},
+        template = new mapper.Template(
+          $.extend(Inspector.defaultBindings, mapper.config.getInspectorBindings(Inspector.defaultBindings))
+        );
         
     this.inspectTag = function(model, $tag) {
       if(!model) {
@@ -44,7 +39,7 @@
       
       $container.removeClass('hidden');
       
-      applyBindings(Inspector.bindings.stock, model);
+      template.applyBindings('stock', $container, model);
       inspectElement($tag, '.stock', { x:57, y:20 });
     };
     
@@ -57,21 +52,9 @@
       $container.removeClass('hidden');
       
       var type = (mapper.config.getGroupType && mapper.config.getGroupType(group.get('type'), group)) || group.get('type');
-      applyBindings(Inspector.bindings[type], group);
+      template.applyBindings(type, $container, group);
       inspectElement($tag, '.' + type, { x:20, y:20 });
     };
-    
-    function applyBindings(bindings, model) {
-      _.forEach(bindings, function(binding) {
-        var $field = $container.find(binding.$),
-            val = model.get(binding.field);
-        if(isNaN(val) && typeof(val) == 'number') val = 'N/A';
-        if(val != 'N/A') {
-          val = (binding.formatter || String)( val, $field );
-        }
-        if(val) $field.html(val);
-      });
-    }
     
     function inspectElement($tag, contentSelector, spacing) {
       $container.find('.content').removeClass('current');

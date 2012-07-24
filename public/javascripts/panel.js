@@ -144,10 +144,10 @@
       }, { silent:true });
       group.on('change', updateGroup);
       
-      updateGroup(group, true);
+      updateGroup(group);
     }
     
-    function updateGroup(group, force) {
+    function updateGroup(group) {
       var counts = group.get('upsAndDowns'),
           fraction = !counts[1] ? (counts[0] && 1) : (counts[0]/counts[1] - 1);
       group.get('$counts').text('+' + counts[0] + '-' + counts[1]);

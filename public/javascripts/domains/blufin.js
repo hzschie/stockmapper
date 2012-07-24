@@ -21,13 +21,13 @@ mapper.config.getInspectorBindings = function(bindings) {
     blufin_index: [
       { $:'.type', field:'type', formatter:function(val) { return 'Stocks by ' + mapper.capitalize(val); } },
       { $:'.label', field:'name' },
-      { $:'.last_trade', field:'value', formatter:mapper.Inspector.commaFormat },
-      { $:'.change', field:'changeDir', formatter:mapper.Inspector.makeRedOrGreen },
-      { $:'.change .amount', field:'change', formatter:mapper.Inspector.changeFormat },
-      { $:'.change .percent', field:'changePct', formatter:function(val) { return mapper.Inspector.changeFormat(val) + '%'; } },
-      { $:'.previous', field:'previous', formatter:mapper.Inspector.commaFormat },
-      { $:'.volume', field:'volume', formatter:mapper.Inspector.commaFormat },
-      { $:'.market_cap', field:'marketCap', formatter:mapper.Inspector.commaFormat }
+      { $:'.last_trade', field:'value', formatter:mapper.Template.commaFormat },
+      { $:'.change', field:'changeDir', formatter:mapper.Template.makeRedOrGreen },
+      { $:'.change .amount', field:'change', formatter:mapper.Template.changeFormat },
+      { $:'.change .percent', field:'changePct', formatter:function(val) { return mapper.Template.changeFormat(val) + '%'; } },
+      { $:'.previous', field:'previous', formatter:mapper.Template.commaFormat },
+      { $:'.volume', field:'volume', formatter:mapper.Template.commaFormat },
+      { $:'.market_cap', field:'marketCap', formatter:mapper.Template.commaFormat }
     ]
   };
 };
