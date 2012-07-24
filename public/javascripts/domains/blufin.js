@@ -1,19 +1,3 @@
-mapper.config.getTagHtml = function(model) {
-  var sym = model.get('sym');
-  if(sym.length >= 11 &&
-    (sym == "WINDSOR MACH" || sym == "VARDHMNPOLY" || sym == "MUNJALSHOWA" || sym == "INDORAMASYN")) {
-      return '<span class="tight">' + sym + '</span>';
-  }
-  return sym;
-};
-mapper.config.getGroupHtml = function(group, $container) {
-  return [
-    '<div class="val_right change"></div>',
-    '<div class="type">', group.get('type').toUpperCase(), '</div>', 
-    '<label>', group.get('label'), '</label>'
-  ].join('');
-};
-
 mapper.config.getGroupType = function() { return 'blufin_index'; };
 
 mapper.config.getInspectorBindings = function(bindings) {
@@ -36,6 +20,22 @@ mapper.config.getInspectorBindings = function(bindings) {
   };
 };
 
+mapper.config.getMapTagHtml = function(model) {
+  var sym = model.get('sym');
+  if(sym.length >= 11 &&
+    (sym == "WINDSOR MACH" || sym == "VARDHMNPOLY" || sym == "MUNJALSHOWA" || sym == "INDORAMASYN")) {
+      return '<span class="tight">' + sym + '</span>';
+  }
+  return sym;
+};
+
+mapper.config.getPanelGroupHtml = function(group, $container) {
+  return [
+    '<div class="val_right change"></div>',
+    '<div class="type">', group.get('type').toUpperCase(), '</div>', 
+    '<label>', group.get('label'), '</label>'
+  ].join('');
+};
 mapper.config.getPanelBindings = function(bindings) {
   return {
     blufin_index: [

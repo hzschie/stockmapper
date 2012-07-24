@@ -23,7 +23,7 @@
         //padding = _.map($panel.css('padding').split(' '), function(p) { return parseInt(p, 10); }),
         padding = [10, 9, 12, 9],
         margin,
-        getGroupHtml = mapper.config.getGroupHtml || function(group) {
+        getGroupHtml = mapper.config.getPanelGroupHtml || function(group) {
           return [
             '<div class="type">', group.get('type').toUpperCase(), '</div>', 
             '<label>', group.get('label'), '</label>'

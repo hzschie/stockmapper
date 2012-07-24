@@ -94,7 +94,7 @@
     };
     
     this.applyBindings = function(bindings, $container, model) {
-      // console.log("apply", bindings);// TEMP
+      console.log("apply", bindings);// TEMP
       
       if(typeof(bindings) == 'string') bindings = this.getBindings(bindings);
       _.forEach(bindings, function(binding) {

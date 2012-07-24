@@ -5,7 +5,7 @@
         $shadows = $(document.createElement('div')).addClass('shadows').appendTo($map),
         grid = null,
         _this = this,
-        getTagHtml = mapper.config.getTagHtml || function(model) { return model.get('sym'); };
+        getTagHtml = mapper.config.getMapTagHtml || function(model) { return model.get('sym'); };
         
 
     $map.mouseout(function(event) { 
