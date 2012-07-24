@@ -1,5 +1,17 @@
 (function() {
   var T = 0, R = 1, B = 2, L = 3;
+  Panel.defaultBindings = {
+    group: [
+      { $:'.counts', field:'upsAndDowns', formatter:function(counts) { return '+' + counts[0] + '-' + counts[1]; } },
+      { $:null, field:'upsAndDowns', formatter:function(counts, $container) {
+        var fraction = !counts[1] ? (counts[0] && 1) : (counts[0]/counts[1] - 1);
+        $container.css({ 
+          backgroundColor: 'rgb(' + mapper.fractionToGreenRedHex(fraction) + ')'
+        });
+        return null;
+      }}
+    ]
+  };
   function Panel($panel, groups) {
     _.extend(this, Backbone.Events);
     var _this = this,
@@ -10,8 +22,16 @@
         $views = $panel.find('.views'),
         //padding = _.map($panel.css('padding').split(' '), function(p) { return parseInt(p, 10); }),
         padding = [10, 9, 12, 9],
-        margin;
-        
+        margin,
+        getGroupHtml = mapper.config.getGroupHtml || function(group) {
+          return [
+            '<div class="type">', group.get('type').toUpperCase(), '</div>', 
+            '<label>', group.get('label'), '</label>'
+          ].join('');
+        },
+        template = new mapper.Template(
+          $.extend(Panel.defaultBindings, mapper.config.getPanelBindings && mapper.config.getPanelBindings(Panel.defaultBindings))
+        );
     while(padding.length < 4) { padding.push(padding[0]); }
     
     // If tags order is explicitly defined in config, use it. Otherwise, assume all groups 
@@ -96,11 +116,8 @@
         if(tagsOrder[i].isFilled) actualIndex++;
       }
       
-      var $tag = $(document.createElement('div')).addClass('group').addClass('button').html([
-        '<div class="counts"></div>',
-        '<div class="type">', type.toUpperCase(), '</div>', 
-        '<label>', label, '</label>'
-      ].join(''));
+      var $tag = $(document.createElement('div')).addClass('group').addClass('button');
+      $tag.html(getGroupHtml(group, $tag));
       
       // Add panel in the right place
       if(actualIndex == 0) $panel.prepend($tag);
@@ -139,8 +156,7 @@
             
       record.isFilled = true;
       group.set({
-        $tag: $tag,
-        $counts: $tag.find('.counts')
+        $tag: $tag
       }, { silent:true });
       group.on('change', updateGroup);
       
@@ -148,12 +164,8 @@
     }
     
     function updateGroup(group) {
-      var counts = group.get('upsAndDowns'),
-          fraction = !counts[1] ? (counts[0] && 1) : (counts[0]/counts[1] - 1);
-      group.get('$counts').text('+' + counts[0] + '-' + counts[1]);
-      group.get('$tag').css({ 
-        backgroundColor: 'rgb(' + mapper.fractionToGreenRedHex(fraction) + ')'
-      });
+      var type = (mapper.config.getGroupType && mapper.config.getGroupType(group.get('type'), group)) || group.get('type');
+      template.applyBindings(type, group.get('$tag'), group);
     }
     
     function makeCells(n, c, r) {

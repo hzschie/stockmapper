@@ -6,8 +6,9 @@
     return [fraction < 0 ? 0xff : whiteness, fraction > 0 ? 0xff : whiteness, whiteness];
   };
   
-  mapper.changePctToHex = function(changePct) {
-    return mapper.fractionChangeToHex(Math.min(5, Math.max(-5, changePct)) / 5);
+  mapper.changePctToHex = function(changePct, bound) {
+    bound = bound || 5;
+    return mapper.fractionChangeToHex(Math.min(bound, Math.max(-bound, changePct)) / bound);
   };
 
   mapper.fractionChangeToHex = function(fraction) {
@@ -78,6 +79,7 @@
   Template.priceFormat = d3.format(',.2f');
   Template.commaFormat = d3.format(',');
   Template.changeFormat = d3.format('+.2f');
+  Template.blankIfNull = function(fn) { return function(val, model) { return val == null ? '' : fn(val, model); }; };
   Template.makeRedOrGreen = function(val, $field) {
     $field.removeClass('red green');
     if(val) $field.addClass(val == 1 ? 'green' : 'red');
@@ -91,10 +93,11 @@
     };
     
     this.applyBindings = function(bindings, $container, model) {
-      if(typeof(bindings) == 'string') bindings = this.getBindings(bindings);
+      // console.log("apply", bindings);// TEMP
       
+      if(typeof(bindings) == 'string') bindings = this.getBindings(bindings);
       _.forEach(bindings, function(binding) {
-        var $field = $container.find(binding.$),
+        var $field = binding.$ ? $container.find(binding.$) : $container,
             val = model.get(binding.field);
         if(isNaN(val) && typeof(val) == 'number') val = 'N/A';
         if(val != 'N/A') {

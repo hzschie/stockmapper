@@ -3,6 +3,13 @@ mapper.config.getTagHtml = function(model) {
   sym.match(/^(\w*)\-?(\w*)$/);
   return RegExp.$1 + (RegExp.$2 ? '<span>' + RegExp.$2 + '</span>' : '');
 };
+mapper.config.getGroupHtml = function(group, $container) {
+  return [
+    '<div class="val_right counts"></div>',
+    '<div class="type">', group.get('type').toUpperCase(), '</div>', 
+    '<label>', group.get('label'), '</label>'
+  ].join('');
+};
 
 mapper.config.getGroupType = function(type, group) {
   if(type == 'index') { return type; };

@@ -23,3 +23,6 @@ Transition between tags, and switch to absoluting them
 Transition graph scale
 Collapse view section
 Search box that filters the view
+
+## Data Issues
+Jocil Ltd has a blank symbol

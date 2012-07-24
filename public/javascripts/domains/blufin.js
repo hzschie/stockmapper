@@ -1,6 +1,3 @@
-mapper.config.processInspectorBindings = function(bindings) {
-};
-
 mapper.config.getTagHtml = function(model) {
   var sym = model.get('sym');
   if(sym.length >= 11 &&
@@ -8,6 +5,13 @@ mapper.config.getTagHtml = function(model) {
       return '<span class="tight">' + sym + '</span>';
   }
   return sym;
+};
+mapper.config.getGroupHtml = function(group, $container) {
+  return [
+    '<div class="val_right change"></div>',
+    '<div class="type">', group.get('type').toUpperCase(), '</div>', 
+    '<label>', group.get('label'), '</label>'
+  ].join('');
 };
 
 mapper.config.getGroupType = function() { return 'blufin_index'; };
@@ -28,6 +32,21 @@ mapper.config.getInspectorBindings = function(bindings) {
       { $:'.previous', field:'previous', formatter:mapper.Template.commaFormat },
       { $:'.volume', field:'volume', formatter:mapper.Template.commaFormat },
       { $:'.market_cap', field:'marketCap', formatter:mapper.Template.commaFormat }
+    ]
+  };
+};
+
+mapper.config.getPanelBindings = function(bindings) {
+  return {
+    blufin_index: [
+      { $:'.change', field:'change', formatter:mapper.Template.blankIfNull(mapper.Template.changeFormat) },
+      { $:null, field:'changePct', formatter:function(changePct, $container) {
+        if(changePct == null) return;
+        $container.css({ 
+          backgroundColor: mapper.changePctToHex(changePct, 2)
+        });
+        return null;
+      }}
     ]
   };
 };
