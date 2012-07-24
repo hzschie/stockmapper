@@ -35,8 +35,15 @@
 .panel .button .type {
   line-height:8px;
 }
+.panel .button .value {
+  font-weight: bold;
+  line-height: 13px;
+}
 .panel .button:hover:after, .panel .button.selected:after {
-  width:117px;/*105px;*/
+  left:-2px;
+  top:-2px;
+  border-width:3px;
+  width:116px;/*105px;*/
 }
 
 /* INSPECTOR */

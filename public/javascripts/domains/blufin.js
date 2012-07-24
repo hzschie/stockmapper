@@ -31,7 +31,12 @@ mapper.config.getMapTagHtml = function(model) {
 
 mapper.config.getPanelGroupHtml = function(group, $container) {
   return [
-    '<div class="val_right change"></div>',
+    // '<div class="val_right change"></div>',
+    // '<div class="val_right value"></div>',
+    '<div class="val_right">',
+      '<div class="change"></div>',
+      '<div class="value"></div>',
+    '</div>',
     '<div class="type">', group.get('type').toUpperCase(), '</div>', 
     '<label>', group.get('label'), '</label>'
   ].join('');
@@ -40,6 +45,7 @@ mapper.config.getPanelBindings = function(bindings) {
   return {
     blufin_index: [
       { $:'.change', field:'change', formatter:mapper.Template.blankIfNull(mapper.Template.changeFormat) },
+      { $:'.value', field:'value', formatter:mapper.Template.blankIfNull(mapper.Template.commaFormat) },
       { $:null, field:'changePct', formatter:function(changePct, $container) {
         if(changePct == null) return;
         $container.css({ 

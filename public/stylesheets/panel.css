@@ -38,7 +38,9 @@
   font-size:9px;
   line-height:9px;
 }
-
+.button.selected {
+  z-index:1;
+}
 .panel .button:hover:after, .panel .button.selected:after {
   width:85px;
   height:20px;
@@ -48,6 +50,9 @@
   position:absolute;
   content:'';
   background:transparent url('/images/inner_dropshadow.png') no-repeat top left;
+  -moz-box-shadow: 4px 4px 8px rgba(0,0,0,.75);
+  -webkit-box-shadow: 4px 4px 8px rgba(0,0,0,.75);
+  box-shadow: 4px 4px 8px rgba(0,0,0,.75);
 }
 
 .panel .button:hover:after {
@@ -73,7 +78,9 @@
   font-size:9px;
   line-height:9px;
   float:right;
+  text-align:right;
   margin-right:2px;
+  height:0;
 }
 
 .panel .sorts {
