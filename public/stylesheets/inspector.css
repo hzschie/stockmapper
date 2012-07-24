@@ -113,7 +113,10 @@
   float:left;
   font-weight:bold;
 }
-
+.inspector dt .unit {
+  display:inline;
+  font-weight:normal;
+}
 .inspector dd {
   margin-top:1px;
   text-align:right;

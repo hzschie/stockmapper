@@ -9,7 +9,7 @@
 
       { $:'.change', field:'changeDir', formatter:Template.makeRedOrGreen },
       { $:'.change .amount', field:'change', formatter:Template.changeFormat },
-      { $:'.change .percent', field:'changePct', formatter:function(val) { return Template.changeFormat(val) + '%'; } },
+      { $:'.change .percent', field:'changePct', formatter:Template.postfix(Template.changeFormat, '%') },
 
       { $:'.avg_volume', field:'avgVolume', formatter:Template.commaFormat },
       { $:'.volume', field:'volume', formatter:Template.commaFormat },

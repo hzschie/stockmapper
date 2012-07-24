@@ -80,6 +80,7 @@
   Template.commaFormat = d3.format(',');
   Template.changeFormat = d3.format('+.2f');
   Template.blankIfNull = function(fn) { return function(val, model) { return val == null ? '' : fn(val, model); }; };
+  Template.postfix = function(fn, postFix) { return function(val, model) { return fn(val, model) + postFix; }; };
   Template.makeRedOrGreen = function(val, $field) {
     $field.removeClass('red green');
     if(val) $field.addClass(val == 1 ? 'green' : 'red');

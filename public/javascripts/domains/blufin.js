@@ -28,7 +28,7 @@ mapper.config.getInspectorBindings = function(bindings) {
       { $:'.last_trade', field:'value', formatter:mapper.Template.commaFormat },
       { $:'.change', field:'changeDir', formatter:mapper.Template.makeRedOrGreen },
       { $:'.change .amount', field:'change', formatter:mapper.Template.changeFormat },
-      { $:'.change .percent', field:'changePct', formatter:function(val) { return mapper.Template.changeFormat(val) + '%'; } },
+      { $:'.change .percent', field:'changePct', formatter:mapper.Template.postfix(mapper.Template.changeFormat, '%') },
       { $:'.previous', field:'previous', formatter:mapper.Template.commaFormat },
       { $:'.volume', field:'volume', formatter:mapper.Template.commaFormat },
       { $:'.market_cap', field:'marketCap', formatter:mapper.Template.commaFormat }
