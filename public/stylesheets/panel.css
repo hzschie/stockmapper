@@ -50,7 +50,8 @@
 }
 
 .panel .button:hover:after {
-  opacity:.5;
+  opacity:.6;
+  background:none;
 }
 
 /*.panel .button.selected:after {

@@ -28,6 +28,11 @@
       return '#' + (0x1000000 + (whiteness << 16) + 0xff00 + whiteness).toString(16).substring(1);
   };
   
+  mapper.capitalize = function(str) {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  };
+
+  
   mapper.Grid = function(_n, bw, _w, _h, makeCells) {
     var c, r, w, h, n, d,
         _this = this,

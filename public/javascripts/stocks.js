@@ -68,6 +68,9 @@ var StockGroup = mapper.StockGroup = Backbone.Model.extend(
     initialize: function(hash) {
       hash.members = new Backbone.Collection(hash.members);
       hash.upsAndDowns = [0,0];
+      hash.volumeUp = 0;
+      hash.volumeDown = 0;
+      hash.volumeTotal = 0;
       hash.label = hash.label || hash.nickname;
       hash.urlName = hash.type + ':' + hash.nickname.toLowerCase().replace(/\s|\/|\&/g, '+').replace(/\++/, '+');
       this.set(hash);
@@ -76,15 +79,29 @@ var StockGroup = mapper.StockGroup = Backbone.Model.extend(
       hash.members.on('change:changeDir', function(model) {
         var prevDir = model.previous('changeDir'),
             newDir = model.get('changeDir'),
+            setter = {},
             currentUpsAndDowns = _this.get('upsAndDowns').concat();
 
-        if(prevDir > 0) currentUpsAndDowns[0] -= 1;
-        else if(prevDir < 0) currentUpsAndDowns[1] -= 1;
+        setter.volumeUp = _this.get('volumeUp');
+        setter.volumeDown = _this.get('volumeDown');
+        setter.volumeTotal = _this.get('volumeTotal');
 
-        if(newDir > 0) currentUpsAndDowns[0] += 1;
-        else if(newDir < 0) currentUpsAndDowns[1] += 1;
+        if(prevDir > 0) {
+          currentUpsAndDowns[0] -= 1;
+        }
+        else if(prevDir < 0) {
+          currentUpsAndDowns[1] -= 1;
+        }
 
-        _this.set({ 'upsAndDowns': currentUpsAndDowns });
+        if(newDir > 0) {
+          currentUpsAndDowns[0] += 1;
+        }
+        else if(newDir < 0) {
+          currentUpsAndDowns[1] += 1;
+        }
+
+        setter.upsAndDowns = currentUpsAndDowns;
+        _this.set(setter);
       });
       
       hash.members.modelId = function(model) { return model.id; };

@@ -9,7 +9,7 @@
           return null;
         },
     
-        bindings = [
+        stockBindings = [
           { $:'.name', field:'name' },
           { $:'.sym', field:'sym' },
           { $:'.last_trade', field:'lastTrade', formatter:priceFormat },
@@ -26,6 +26,14 @@
           { $:'.high', field:'high', formatter:priceFormat },
           { $:'.low', field:'low', formatter:priceFormat }
         ],
+        groupBindings = [
+          { $:'.type', field:'type', formatter:function(val) { return 'Stocks by ' + mapper.capitalize(val); } },
+          { $:'.label', field:'name' }
+        ],
+        indexBindings = [
+          { $:'.name', field:'name' },
+          { $:'.sym', field:'sym' }
+        ],
         
         $tip = $container.find('svg'),
         pointLeft = false,
@@ -34,7 +42,7 @@
         lastPos = {};
         
     if(mapper.config.processInspectorBindings) {
-      mapper.config.processInspectorBindings(bindings);
+      mapper.config.processInspectorBindings(stockBindings);
     }
     
     this.inspectTag = function(model, $tag) {
@@ -45,17 +53,8 @@
       
       $container.removeClass('hidden');
       
-      _.forEach(bindings, function(binding) {
-        var $field = $container.find(binding.$),
-            val = model.get(binding.field);
-        if(isNaN(val) && typeof(val) == 'number') val = 'N/A';
-        if(val != 'N/A') {
-          val = (binding.formatter || String)( val, $field );
-        }
-        if(val) $field.html(val);
-      });
-      
-      inspectElement($tag, { x:57, y:20 });
+      applyBindings(stockBindings, model);
+      inspectElement($tag, '.stock', { x:57, y:20 });
     };
     
     this.inspectGroup = function(group, $tag) {
@@ -66,12 +65,28 @@
       
       $container.removeClass('hidden');
       
-      // DO THE CONTENT ...
-      
-      inspectElement($tag, { x:20, y:20 });
+      var bindings = group.get('type') == 'index' ? indexBindings : groupBindings,
+          selector = group.get('type') == 'index' ? '.index' : '.group';
+      applyBindings(bindings, group);
+      inspectElement($tag, selector, { x:20, y:20 });
     };
     
-    function inspectElement($tag, spacing) {
+    function applyBindings(bindings, model) {
+      _.forEach(bindings, function(binding) {
+        var $field = $container.find(binding.$),
+            val = model.get(binding.field);
+        if(isNaN(val) && typeof(val) == 'number') val = 'N/A';
+        if(val != 'N/A') {
+          val = (binding.formatter || String)( val, $field );
+        }
+        if(val) $field.html(val);
+      });
+    }
+    
+    function inspectElement($tag, contentSelector, spacing) {
+      $container.find('.content').removeClass('current');
+      $container.find(contentSelector).addClass('current');
+      
       var tagPos = $tag.offset(),
           tagSz = { w:$tag.outerWidth(), h:$tag.outerHeight() },
           bodyWidth = $('body').width(),
@@ -102,7 +117,7 @@
       var currP = $container.offset();
       if(!targP || (currP.left == lastPos.left && currP.top == lastPos.top)) return;
       
-      var pad = 20,
+      var pad = 16,//20,
           ins = 10,// inset / how far is the pivot point from the corner
           diff = {
             x: currP.left - targP.left,
@@ -135,9 +150,10 @@
       $tip.find('path').attr({
         d: [
           'M', Math.max(0, -diff.x - datum.x) + pad, Math.max(0, -diff.y) + pad,// Start at target (i.e. tip)
-          'l', vect.x + norm.x, vect.y + norm.y,
-          'l', -2 * norm.x, -2 * norm.y,
-          'z'
+          'm', vect.x + norm.x, vect.y + norm.y,
+          'm', -2 * norm.x, -2 * norm.y,
+          'L', Math.max(0, -diff.x - datum.x) + pad, Math.max(0, -diff.y) + pad,// Start at target (i.e. tip)
+          'l', vect.x + norm.x, vect.y + norm.y
         ].join(' ')
       });
       

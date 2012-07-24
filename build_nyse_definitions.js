@@ -9,7 +9,7 @@ var stocks = {
     },
     groups = [],
     groupsTable = {},
-    reader = csv.createCsvFileReader(__dirname + '/public/data/stocks.csv', { columnsFromHeader: true });
+    reader = csv.createCsvFileReader(__dirname + '/public/data/nyse/stocks.csv', { columnsFromHeader: true });
     
 reader.on('data', function(stockRaw) {
   var sym = stockRaw.Symbol;
@@ -28,8 +28,8 @@ reader.on('data', function(stockRaw) {
 });
 
 reader.on('end', function() {
-  fs.writeFileSync(__dirname + '/public/data/groups.json', JSON.stringify(groups));
-  fs.writeFileSync(__dirname + '/public/data/stocks.json', JSON.stringify(stocks));
+  fs.writeFileSync(__dirname + '/public/data/nyse/groups.json', JSON.stringify(groups));
+  fs.writeFileSync(__dirname + '/public/data/nyse/stocks.json', JSON.stringify(stocks));
 });
 
 function getOrCreateGroup(type, name) {
@@ -76,6 +76,16 @@ function getOrCreateGroup(type, name) {
       type: type,
       ids: []
     };
+    if(type == 'index') {
+      switch(name) {
+        case 'S&P 500':
+          group.sym = 'SPX';
+          break;
+        case 'Dow Jones':
+          group.sym = 'DJI';
+          break;
+      }
+    }
   
     groups.push(group);
   }

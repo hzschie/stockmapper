@@ -27,6 +27,7 @@ html
       svg
         path(stroke="#ccc", fill="#fffdee")
       .body
+      .content.stock
         .header
           h3.name Amit was here
           .sym SYM
@@ -51,3 +52,30 @@ html
             dd.high 12.34
             dt Low:
             dd.low 12.34
+      .content.group
+        .header
+          h3.type Amit was here
+          .label SYM
+        dl
+          .wide
+            dt Volume Up:
+            dd.volume_up 123,456
+            dt Volume Down:
+            dd.volume_down 123,456
+            dt Volume Total:
+            dd.volume_total 123,456
+      .content.index
+        .header
+          h3.name Amit was here
+          .sym SYM
+        dl
+          .left
+            dt Avg. Vol.:
+            dd.avg_volume 123,456
+            dt Vol.:
+            dd.volume 123,456
+          .right
+            dt Open:
+            dd.open 12.34
+            dt High:
+            dd.high 12.34
