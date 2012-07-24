@@ -23,7 +23,7 @@ function createGroups(callback) {
     indexesRaw.forEach(function(index, i) {
       var indexId = index.IndexId;
       groups[indexId] = {
-        indexId: indexId,
+        id: indexId,
         name: index.IndexName,
         nickname: index.IndexName.replace(/^blufin /i, '').replace(/ index$/i, '').replace(/ and /, ' & '),
         type: index.Category,

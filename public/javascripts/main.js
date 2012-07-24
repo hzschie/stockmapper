@@ -5,10 +5,14 @@ mapper.groups = new Backbone.Collection();
 var socket = io.connect();
 socket.on('update', function(multiStockData) {
   _.forEach(multiStockData, function(data) {
-    var stock = mapper.stocks.get(data[0]);
-    if(!stock) return;
-    
-    stock.update(data);
+    try {
+      /* data[0] is type (ie. 'group' or 'stock'). data[1] is id */
+      mapper[ data[0] + 's' ].get(data[1]).update(data);
+    }
+    catch(e) {
+      console.log("couldn't update:", data);
+      console.error(e.message);
+    }
     
 /*
     // Remove stocks with no data
@@ -52,6 +56,7 @@ $.getJSON(mapper.config.groupsUrl, function(response) {
   _.each(response, function(groupJson) {
     mapper.groups.add( new mapper.StockGroup(groupJson) );
   });
+  socket.emit('subscribe', mapper.groups.pluck('id'));
   tryPopulateGroups();
 });
 

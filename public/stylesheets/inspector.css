@@ -40,7 +40,7 @@
 .inspector .content {
   z-index: 2;
   position: relative;
-  padding: 3px;
+  padding: 4px;
   display: none;
 }
 
@@ -80,7 +80,7 @@
 }
 
 .inspector .last_trade {
-  width: 61px;
+  width:61px;
   text-align:right;
 }
 
@@ -103,7 +103,8 @@
 }
 
 .inspector .wide {
-  width:240px;
+/*  width:240px;*/
+  width:100%;
   display:inline-block;
 }
 

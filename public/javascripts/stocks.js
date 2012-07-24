@@ -29,6 +29,7 @@ var Stock = mapper.Stock = Backbone.Model.extend(
   {
     //sl1d1t1c1ohgvp2j1a2
     fields: [
+      null,
       null, 
       { name:'lastTrade', isNum:true },
       { name:'lastTradeDate', isNum:false },
@@ -73,6 +74,7 @@ var StockGroup = mapper.StockGroup = Backbone.Model.extend(
       hash.volumeTotal = 0;
       hash.label = hash.label || hash.nickname;
       hash.urlName = hash.type + ':' + hash.nickname.toLowerCase().replace(/\s|\/|\&/g, '+').replace(/\++/, '+');
+      hash.id = this.id || hash.urlName;
       this.set(hash);
 
       var _this = this;
@@ -105,7 +107,32 @@ var StockGroup = mapper.StockGroup = Backbone.Model.extend(
       });
       
       hash.members.modelId = function(model) { return model.id; };
+    },
+    
+    update: function(array) {
+      var hash = {};
+      _.forEach(StockGroup.fields, function(field, i) {
+        if(!field) return;
+        hash[field.name] = field.isNum ? Number(array[i]) : array[i];
+      });
+      hash['changeDir'] = hash['change'] == 0 ? 0 : (hash['change'] / Math.abs(hash['change']));
+      hash['changePct'] = parseFloat(hash.changePctString);
+      hash['hasData'] = true;
+      this.set(hash);
     }
+  },
+  
+  {
+    fields: [
+      null,
+      null, 
+      { name:'value', isNum:true },
+      { name:'previous', isNum:true },
+      { name:'change', isNum:true },
+      { name:'volume', isNum:true },
+      { name:'changePctString', isNum:false },
+      { name:'marketCap', isNum:true }
+    ]
   }
 );
 

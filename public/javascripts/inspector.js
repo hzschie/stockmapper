@@ -1,50 +1,41 @@
 (function() {
-  var Inspector = mapper.Inspector = function($container) {
-    var priceFormat = d3.format(',.2f'),
-        commaFormat = d3.format(','),
-        changeFormat = d3.format('+.2f'),
-        makeRedOrGreen = function(val, $field) {
-          $field.removeClass('red green');
-          if(val) $field.addClass(val == 1 ? 'green' : 'red');
-          return null;
-        },
-    
-        stockBindings = [
-          { $:'.name', field:'name' },
-          { $:'.sym', field:'sym' },
-          { $:'.last_trade', field:'lastTrade', formatter:priceFormat },
+  mapper.Inspector = Inspector;
+  Inspector.priceFormat = d3.format(',.2f');
+  Inspector.commaFormat = d3.format(',');
+  Inspector.changeFormat = d3.format('+.2f');
+  Inspector.makeRedOrGreen = function(val, $field) {
+    $field.removeClass('red green');
+    if(val) $field.addClass(val == 1 ? 'green' : 'red');
+    return null;
+  };
+  Inspector.bindings = {
+    stock: [
+      { $:'.name', field:'name' },
+      { $:'.sym', field:'sym' },
+      { $:'.last_trade', field:'lastTrade', formatter:Inspector.priceFormat },
 
-          { $:'.change', field:'changeDir', formatter:makeRedOrGreen },
-          { $:'.change .amount', field:'change', formatter:changeFormat },
-          { $:'.change .percent', field:'changePct', formatter:function(val) { return changeFormat(val) + '%'; } },
+      { $:'.change', field:'changeDir', formatter:Inspector.makeRedOrGreen },
+      { $:'.change .amount', field:'change', formatter:Inspector.changeFormat },
+      { $:'.change .percent', field:'changePct', formatter:function(val) { return Inspector.changeFormat(val) + '%'; } },
 
-          { $:'.avg_volume', field:'avgVolume', formatter:commaFormat },
-          { $:'.volume', field:'volume', formatter:commaFormat },
-          { $:'.market_cap', field:'marketCapString' },
+      { $:'.avg_volume', field:'avgVolume', formatter:Inspector.commaFormat },
+      { $:'.volume', field:'volume', formatter:Inspector.commaFormat },
+      { $:'.market_cap', field:'marketCapString' },
 
-          { $:'.open', field:'open', formatter:priceFormat },
-          { $:'.high', field:'high', formatter:priceFormat },
-          { $:'.low', field:'low', formatter:priceFormat }
-        ],
-        groupBindings = [
-          { $:'.type', field:'type', formatter:function(val) { return 'Stocks by ' + mapper.capitalize(val); } },
-          { $:'.label', field:'name' }
-        ],
-        indexBindings = [
-          { $:'.name', field:'name' },
-          { $:'.sym', field:'sym' }
-        ],
-        
-        $tip = $container.find('svg'),
+      { $:'.open', field:'open', formatter:Inspector.priceFormat },
+      { $:'.high', field:'high', formatter:Inspector.priceFormat },
+      { $:'.low', field:'low', formatter:Inspector.priceFormat }
+    ]
+  };
+  Inspector.bindings = $.extend(Inspector.bindings, mapper.config.getInspectorBindings(Inspector.bindings));
+
+  function Inspector($container) {
+    var $tip = $container.find('svg'),
         pointLeft = false,
         bubbW = null,
         targP = null,
         lastPos = {};
         
-    if(mapper.config.processInspectorBindings) {
-      mapper.config.processInspectorBindings(stockBindings);
-    }
-    
     this.inspectTag = function(model, $tag) {
       if(!model) {
         $container.addClass('hidden');
@@ -53,7 +44,7 @@
       
       $container.removeClass('hidden');
       
-      applyBindings(stockBindings, model);
+      applyBindings(Inspector.bindings.stock, model);
       inspectElement($tag, '.stock', { x:57, y:20 });
     };
     
@@ -65,10 +56,9 @@
       
       $container.removeClass('hidden');
       
-      var bindings = group.get('type') == 'index' ? indexBindings : groupBindings,
-          selector = group.get('type') == 'index' ? '.index' : '.group';
-      applyBindings(bindings, group);
-      inspectElement($tag, selector, { x:20, y:20 });
+      var type = (mapper.config.getGroupType && mapper.config.getGroupType(group.get('type'), group)) || group.get('type');
+      applyBindings(Inspector.bindings[type], group);
+      inspectElement($tag, '.' + type, { x:20, y:20 });
     };
     
     function applyBindings(bindings, model) {

@@ -32,7 +32,7 @@
 .panel .button .type {
   line-height:8px;
 }
-.panel .button.selected:after {
+.panel .button:hover:after, .panel .button.selected:after {
   width:117px;/*105px;*/
 }
 
@@ -52,4 +52,16 @@
 }
 .inspector .right dt {
   padding-left: 35px;
+}
+.inspector .blufin_index .label {
+  font-weight:bold;
+}
+.inspector .blufin_index .last_trade {
+  width:auto;
+  margin-left:18px;
+  margin-right:12px;
+}
+
+.inspector .blufin_index .change {
+  width:auto;
 }

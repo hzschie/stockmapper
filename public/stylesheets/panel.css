@@ -31,6 +31,7 @@
 
 .panel .button label {
   font-weight:bold;
+  white-space: nowrap;
 }
 
 .panel .button .type {

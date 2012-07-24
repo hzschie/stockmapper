@@ -76,7 +76,9 @@ function getOrCreateGroup(type, name) {
       type: type,
       ids: []
     };
+    
     if(type == 'index') {
+      group.inspector_type = 'index';
       switch(name) {
         case 'S&P 500':
           group.sym = 'SPX';
@@ -85,6 +87,9 @@ function getOrCreateGroup(type, name) {
           group.sym = 'DJI';
           break;
       }
+    }
+    else {
+      group.inspector_type = 'group';
     }
   
     groups.push(group);
