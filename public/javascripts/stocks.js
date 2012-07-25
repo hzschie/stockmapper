@@ -78,32 +78,35 @@ var StockGroup = mapper.StockGroup = Backbone.Model.extend(
       this.set(hash);
 
       var _this = this,
-          upsAndDowns = [0,0],
-          timeoutId = null;
-      hash.members.on('change:changeDir', function(model) {
-        var prevDir = model.previous('changeDir'),
-            newDir = model.get('changeDir'),
-            setter = {};
-
-        if(prevDir > 0) {
-          upsAndDowns[0] -= 1;
-        }
-        else if(prevDir < 0) {
-          upsAndDowns[1] -= 1;
-        }
-
-        if(newDir > 0) {
-          upsAndDowns[0] += 1;
-        }
-        else if(newDir < 0) {
-          upsAndDowns[1] += 1;
-        }
-
+          timeoutId = null,
+          members = this.get('members');
+      var lbl='Technology';// TEMP
+      members.on('change:changeDir change:volume', function(model) {
         if(timeoutId == null) {
           timeoutId = setTimeout(function() {
-            timeoutId = null;
+            var upsAndDowns = [0,0],
+                volumeUp = 0,
+                volumeDown = 0,
+                volumeTotal = 0,
+                vol, dir;
+            members.each(function(model) {
+              vol = model.attributes.volume || 0;
+              dir = model.attributes.changeDir;
+              if(dir == 1) {
+                upsAndDowns[0] += 1;
+                volumeUp += vol;
+              }
+              else if(dir == -1) {
+                upsAndDowns[1] += 1;
+                volumeDown += vol;
+              }
+              volumeTotal += vol;
+            });
             _this.set({
-              upsAndDowns: upsAndDowns.concat()
+              upsAndDowns: upsAndDowns,
+              volumeUp: volumeUp,
+              volumeDown: volumeDown,
+              volumeTotal: volumeTotal
             });
           },0);
         }

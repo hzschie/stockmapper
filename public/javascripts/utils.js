@@ -76,16 +76,18 @@
   };
   
   mapper.Template = Template;
-  Template.priceFormat = d3.format(',.2f');
-  Template.commaFormat = d3.format(',');
-  Template.changeFormat = d3.format('+.2f');
   Template.blankIfNull = function(fn) { return function(val, model) { return val == null ? '' : fn(val, model); }; };
+  Template.NaIfNaN = function(fn) { return function(val, model) { return isNaN(val) ? 'N/A' : fn(val, model); }; };
   Template.postfix = function(fn, postFix) { return function(val, model) { return fn(val, model) + postFix; }; };
   Template.makeRedOrGreen = function(val, $field) {
     $field.removeClass('red green');
     if(val) $field.addClass(val == 1 ? 'green' : 'red');
     return null;
   };
+  Template.priceFormat = Template.NaIfNaN( d3.format(',.2f') );
+  Template.commaFormat = Template.NaIfNaN( d3.format(',') );
+  Template.changeFormat = Template.NaIfNaN( d3.format('+.2f') );
+
   function Template(bindings) {
     this.bindings = bindings;
     
@@ -94,17 +96,15 @@
     };
     
     this.applyBindings = function(bindings, $container, model) {
-      console.log("apply", bindings);// TEMP
-      
       if(typeof(bindings) == 'string') bindings = this.getBindings(bindings);
       _.forEach(bindings, function(binding) {
         var $field = binding.$ ? $container.find(binding.$) : $container,
             val = model.get(binding.field);
-        if(isNaN(val) && typeof(val) == 'number') val = 'N/A';
-        if(val != 'N/A') {
-          val = (binding.formatter || String)( val, $field );
-        }
-        if(val) $field.html(val);
+        // if(isNaN(val) && typeof(val) == 'number') val = 'N/A';
+        // if(val != 'N/A') {
+        val = (binding.formatter || String)( val, $field );
+        // }
+        if(val != null) $field.html(val);
       });
     };
     

@@ -2,3 +2,7 @@
   font-size:9px;
   padding-left:1px;
 }
+
+.inspector .content.group {
+  width: 200px;
+}
