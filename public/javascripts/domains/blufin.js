@@ -31,8 +31,6 @@ mapper.config.getMapTagHtml = function(model) {
 
 mapper.config.getPanelGroupHtml = function(group, $container) {
   return [
-    // '<div class="val_right change"></div>',
-    // '<div class="val_right value"></div>',
     '<div class="val_right">',
       '<div class="change"></div>',
       '<div class="value"></div>',

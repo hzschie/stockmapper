@@ -49,6 +49,7 @@
 /* INSPECTOR */
 .inspector .sym {
   font-family: 'Open Sans Condensed', sans-serif;
+  padding-bottom:2px;
   width:95px;
 }
 .inspector .sym .tight {
