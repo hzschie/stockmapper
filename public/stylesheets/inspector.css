@@ -94,8 +94,8 @@
   text-align:right;
 }
 
-.inspector .change.green { color:#060; }
-.inspector .change.red   { color:#600; }
+.inspector .green { color:#060; }
+.inspector .red   { color:#600; }
 
 .inspector .left {
   width:111px;
