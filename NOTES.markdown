@@ -27,4 +27,6 @@ Search box that filters the view
 Jocil Ltd has a blank symbol
 
 ## To do
+Relayout on window resize
+Bubble positioning optimization to remain above screen
 Touch device events

@@ -1,10 +1,18 @@
 mapper.config.getGroupType = function() { return 'blufin_index'; };
 
 mapper.config.getInspectorBindings = function(bindings) {
-  _.find(bindings.stock, function(binding) { return binding.$ == '.sym'; }).formatter = function(val, $field) {
-    if(val.length >= 10) return '<span class="tight">' + val + '</span>';
-    return val;
-  };
+  _.each(bindings.stock, function(binding) {
+    if(binding.$ == '.market_cap') {
+      binding.field = 'marketCap';
+      binding.formatter = mapper.Template.commaFormat;
+    }
+    if(binding.$ == '.sym') {
+      binding.formatter = function(val, $field) {
+        if(val.length >= 10) return '<span class="tight">' + val + '</span>';
+        return val;
+      };
+    }
+  });
   return {
     blufin_index: [
       { $:'.type', field:'type', formatter:function(val) { return 'Stocks by ' + mapper.capitalize(val); } },
@@ -47,7 +55,7 @@ mapper.config.getPanelBindings = function(bindings) {
       { $:null, field:'changePct', formatter:function(changePct, $container) {
         if(changePct == null) return;
         $container.css({ 
-          backgroundColor: mapper.changePctToHex(changePct, 2)
+          backgroundColor: mapper.changePctToHex(changePct, 5)
         });
         return null;
       }}
