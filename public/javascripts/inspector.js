@@ -23,8 +23,11 @@
 
   function Inspector($container) {
     var $tip = $container.find('svg'),
+        $window = $(window),
         pointLeft = false,
+        pointUp = false,
         bubbW = null,
+        bubbH = null,
         targP = null,
         lastPos = {},
         template = new mapper.Template(
@@ -59,15 +62,16 @@
     function inspectElement($tag, contentSelector, spacing) {
       $container.find('.content').removeClass('current');
       $container.find(contentSelector).addClass('current');
-      
       var tagPos = $tag.offset(),
           tagSz = { w:$tag.outerWidth(), h:$tag.outerHeight() },
           bodyWidth = $('body').width(),
           _bubbW = bubbW = $container.width(),
+          _bubbH = bubbH = $container.height(),
           _pointLeft = pointLeft = tagPos.left <= bodyWidth / 2,
+          _pointUp = pointUp = (tagPos.top + bubbH + tagSz.h + spacing.y) <= ($window.scrollTop() + $window.height()),
           offset = {
             x: pointLeft ? tagSz.w + spacing.x : -bubbW + 1 - spacing.x,// 57
-            y: tagSz.h + spacing.y// 20
+            y: pointUp ? tagSz.h + spacing.y : -_bubbH - spacing.y
           },
           pos = {
             left: tagPos.left + offset.x,
@@ -79,7 +83,7 @@
       
       targP = {
         left: tagPos.left + (pointLeft ? tagPos.width : 0),
-        top: tagPos.top + tagPos.height
+        top: tagPos.top + (pointUp ? tagPos.height : 0)
       };
       $container.css(pos);
     }
@@ -98,21 +102,21 @@
           },
           datum = {
             x: pointLeft ? 0 : bubbW,
-            y: 0// not used yet
+            y: pointUp ? 0 : bubbH
           };
       
       $tip.attr({
         width: Math.abs(diff.x + datum.x) + 2*pad,
-        height: Math.abs(diff.y) + 2*pad
+        height: Math.abs(diff.y + datum.y) + 2*pad
       });
       $tip.css({
         left: Math.min(datum.x, -diff.x) - pad,
-        top: Math.min(0, -diff.y) - pad
+        top: Math.min(datum.y, -diff.y) - pad
       });
       
       var vect = {
             x: diff.x + datum.x + (pointLeft ? ins : -ins - 2), 
-            y: diff.y + ins
+            y: diff.y + datum.y + (pointUp ? ins : -ins - 2)
           },
           mag = Math.sqrt( Math.pow(vect.x, 2) + Math.pow(vect.y, 2) ),
           norm = {
@@ -122,10 +126,10 @@
       
       $tip.find('path').attr({
         d: [
-          'M', Math.max(0, -diff.x - datum.x) + pad, Math.max(0, -diff.y) + pad,// Start at target (i.e. tip)
+          'M', Math.max(0, -diff.x - datum.x) + pad, Math.max(0, -diff.y - datum.y) + pad,// Start at target (i.e. tip)
           'm', vect.x + norm.x, vect.y + norm.y,
           'm', -2 * norm.x, -2 * norm.y,
-          'L', Math.max(0, -diff.x - datum.x) + pad, Math.max(0, -diff.y) + pad,// Start at target (i.e. tip)
+          'L', Math.max(0, -diff.x - datum.x) + pad, Math.max(0, -diff.y - datum.y) + pad,// Start at target (i.e. tip)
           'l', vect.x + norm.x, vect.y + norm.y
         ].join(' ')
       });
