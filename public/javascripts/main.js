@@ -54,7 +54,8 @@ $.getJSON(mapper.config.stocksUrl, function(response) {
 // Groups JSON
 $.getJSON(mapper.config.groupsUrl, function(response) {
   _.each(response, function(groupJson) {
-    mapper.groups.add( new mapper.StockGroup(groupJson) );
+    var group = new mapper.StockGroup(groupJson);
+    if(group.get('ids').length > 0) mapper.groups.add(group);
   });
   socket.emit('subscribe', mapper.groups.pluck('id'));
   tryPopulateGroups();

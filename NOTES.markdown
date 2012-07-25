@@ -26,3 +26,6 @@ Search box that filters the view
 
 ## Data Issues
 Jocil Ltd has a blank symbol
+
+## To do
+Touch device events
