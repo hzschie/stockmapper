@@ -13,11 +13,11 @@ socket.on('update', function(multiStockData) {
       console.log("couldn't update:", data);
       console.error(e.message);
     }
-    
-/*
     // Remove stocks with no data
-    if(!stock.get('lastTrade')) {
+/*  var stock = mapper[ data[0] + 's' ].get(data[1]);
+    if(stock && (stock.get('lastTrade') == null || isNaN(stock.get('lastTrade')))) {
       var stockId = stock.get('id');
+      console.log('elim', stock.get('sym'));
       _.forEach(
         mapper.groups.filter(function(group) { 
           return group.get('members').get(stockId);
@@ -27,8 +27,7 @@ socket.on('update', function(multiStockData) {
         }
       );
       mapper.stocks.remove(stock);
-    }
-*/
+    }*/
   });
 });
 
@@ -55,9 +54,10 @@ $.getJSON(mapper.config.stocksUrl, function(response) {
 $.getJSON(mapper.config.groupsUrl, function(response) {
   _.each(response, function(groupJson) {
     var group = new mapper.StockGroup(groupJson);
-    if(group.get('ids').length > 0) mapper.groups.add(group);
+    if(group.get('ids').length) mapper.groups.add(group);
   });
-  socket.emit('subscribe', mapper.groups.pluck('id'));
+  var groupIds = _.reject(mapper.groups.pluck('id'), function(id) { return id == null; });
+  groupIds.length && socket.emit('subscribe', groupIds);
   tryPopulateGroups();
 });
 
