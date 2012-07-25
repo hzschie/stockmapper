@@ -77,33 +77,36 @@ var StockGroup = mapper.StockGroup = Backbone.Model.extend(
       hash.id = this.id || hash.urlName;
       this.set(hash);
 
-      var _this = this;
+      var _this = this,
+          upsAndDowns = [0,0],
+          timeoutId = null;
       hash.members.on('change:changeDir', function(model) {
         var prevDir = model.previous('changeDir'),
             newDir = model.get('changeDir'),
-            setter = {},
-            currentUpsAndDowns = _this.get('upsAndDowns').concat();
-
-        setter.volumeUp = _this.get('volumeUp');
-        setter.volumeDown = _this.get('volumeDown');
-        setter.volumeTotal = _this.get('volumeTotal');
+            setter = {};
 
         if(prevDir > 0) {
-          currentUpsAndDowns[0] -= 1;
+          upsAndDowns[0] -= 1;
         }
         else if(prevDir < 0) {
-          currentUpsAndDowns[1] -= 1;
+          upsAndDowns[1] -= 1;
         }
 
         if(newDir > 0) {
-          currentUpsAndDowns[0] += 1;
+          upsAndDowns[0] += 1;
         }
         else if(newDir < 0) {
-          currentUpsAndDowns[1] += 1;
+          upsAndDowns[1] += 1;
         }
 
-        setter.upsAndDowns = currentUpsAndDowns;
-        _this.set(setter);
+        if(timeoutId == null) {
+          timeoutId = setTimeout(function() {
+            timeoutId = null;
+            _this.set({
+              upsAndDowns: upsAndDowns.concat()
+            });
+          },0);
+        }
       });
       
       hash.members.modelId = function(model) { return model.id; };
