@@ -27,6 +27,10 @@
   right:0;
   bottom:0;
   
+  -moz-box-shadow: 4px 4px 8px rgba(0,0,0,.75);
+  -webkit-box-shadow: 4px 4px 8px rgba(0,0,0,.75);
+  box-shadow: 4px 4px 8px rgba(0,0,0,.75);
+  
   background: #fffdee; /* Old browsers */
   background: -moz-linear-gradient(left,  #fffdee 0%, #fffcde 100%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, right top, color-stop(0%,#fffdee), color-stop(100%,#fffcde)); /* Chrome,Safari4+ */
