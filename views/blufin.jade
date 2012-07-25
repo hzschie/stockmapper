@@ -1,0 +1,41 @@
+extends main
+
+block header
+  | <div id="logo-container">
+  |   <div id="logo"><a href="../bci.html"><img src="images/blufin_logo.png" border="0"></a></div>
+  |   <div id="logo-name">Business Cycle Indicator</div>
+  |   <div id="panel">
+  |     <div id="indices-info" onclick="window.open('http://www.blufin.in/allabout-bci-pdf/BCI-Factsheet.pdf')"></div>
+  |     <div id="refresh-bar" onclick="javascript:overview();clearPlot2(1)"></div>
+  |     <div id="social-icons">
+  |       <ul>
+  |         <li><a href="https://twitter.com/#!/BluFinIndia" title="twitter" class="twit" target="_blank"></a></li>
+  |         <li><a href="https://www.facebook.com/pages/BluFinIndia/111282055662574" title="facebook" class="fb" target="_blank"></a></li>
+  |         <li><a href="http://www.linkedin.com/company/blufin-india" title="linkedin" class="in" target="_blank"></a></li>
+  |         <li><a href="http://www.youtube.com/user/BluFinIndia" title="youtube" class="ya" target="_blank"></a></li>
+  |       </ul>
+  |     </div>
+  |   </div>
+  | </div>
+
+block append inspector_content
+  .content.blufin_index
+    .header
+      h3.type Amit was here
+      .label Label
+      .last_trade 123.45
+      .change
+        span.amount +12.34
+    dl
+      .wide
+        dt Percent Change:
+        dd.change
+          span.percent 1.23%
+        dt Previous Close:
+        dd.previous 12.34
+        dt Volume:
+        dd.volume 123,456
+        dt Market Cap 
+          .unit (Cr.)
+          | :
+        dd.market_cap 123,456

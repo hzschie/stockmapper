@@ -55,7 +55,7 @@ var dataConfig = JSON.stringify(JSON.parse(
 
 
 app.get('/*', function(req, res) {
-  res.render('main', {
+  res.render(dataDomain, {
     dataDomain: dataDomain,
     dataConfig: dataConfig
   });

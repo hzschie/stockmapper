@@ -27,79 +27,45 @@ html
       svg
         path(stroke="#ccc", fill="#fffdee")
       .body
-      .content.stock
-        .header
-          h3.name Amit was here
-          .sym SYM
-          .last_trade 123.45
-          .change
-            span.amount +12.34
-            | &nbsp;(
-            span.percent 1.23%
-            | )
-        dl
-          .left
-            dt Avg. Vol.:
-            dd.avg_volume 123,456
-            dt Vol.:
-            dd.volume 123,456
-            dt Cap.:
-            dd.market_cap 1.234B
-          .right
-            dt Open:
-            dd.open 12.34
-            dt High:
-            dd.high 12.34
-            dt Low:
-            dd.low 12.34
-      .content.blufin_index
-        .header
-          h3.type Amit was here
-          .label Label
-          .last_trade 123.45
-          .change
-            span.amount +12.34
-        dl
-          .wide
-            dt Percent Change:
-            dd.change
+      block inspector_content
+        .content.stock
+          .header
+            h3.name Amit was here
+            .sym SYM
+            .last_trade 123.45
+            .change
+              span.amount +12.34
+              | &nbsp;(
               span.percent 1.23%
-            dt Previous Close:
-            dd.previous 12.34
-            dt Volume:
-            dd.volume 123,456
-            dt Market Cap 
-              .unit (Cr.)
-              | :
-            dd.market_cap 123,456
-      .content.group
-        .header
-          h3.type Amit was here
-          .label SYM
-        dl
-          .wide
-            dt Num of Stocks Up:
-            dd.num_up 123
-            dt Num of Stocks Down:
-            dd.num_down 123
-            dt Volume Up:
-            dd.volume_up 123,456
-            dt Volume Down:
-            dd.volume_down 123,456
-            dt Volume Total:
-            dd.volume_total 123,456
-      .content.index
-        .header
-          h3.name Amit was here
-          .sym SYM
-        dl
-          .left
-            dt Avg. Vol.:
-            dd.avg_volume 123,456
-            dt Vol.:
-            dd.volume 123,456
-          .right
-            dt Open:
-            dd.open 12.34
-            dt High:
-            dd.high 12.34
+              | )
+          dl
+            .left
+              dt Avg. Vol.:
+              dd.avg_volume 123,456
+              dt Vol.:
+              dd.volume 123,456
+              dt Cap.:
+              dd.market_cap 1.234B
+            .right
+              dt Open:
+              dd.open 12.34
+              dt High:
+              dd.high 12.34
+              dt Low:
+              dd.low 12.34
+        .content.group
+          .header
+            h3.type Amit was here
+            .label SYM
+          dl
+            .wide
+              dt Num of Stocks Up:
+              dd.num_up.up 123
+              dt Num of Stocks Down:
+              dd.num_down.down 123
+              dt Volume Up:
+              dd.volume_up 123,456
+              dt Volume Down:
+              dd.volume_down 123,456
+              dt Volume Total:
+              dd.volume_total 123,456

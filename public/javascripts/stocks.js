@@ -82,8 +82,12 @@ var StockGroup = mapper.StockGroup = Backbone.Model.extend(
           members = this.get('members');
       var lbl='Technology';// TEMP
       members.on('change:changeDir change:volume', function(model) {
+        // Recalculate ups and downs figures
+        // Collapse recalculations via setTimeout, to avoid doing it many ties
+        // during a large update
         if(timeoutId == null) {
           timeoutId = setTimeout(function() {
+            timeoutId = null;
             var upsAndDowns = [0,0],
                 volumeUp = 0,
                 volumeDown = 0,
@@ -108,7 +112,7 @@ var StockGroup = mapper.StockGroup = Backbone.Model.extend(
               volumeDown: volumeDown,
               volumeTotal: volumeTotal
             });
-          },0);
+          }, 0);
         }
       });
       

@@ -150,7 +150,7 @@ function buildView() {
           $('.inspector').addClass('suspended');
           setTimeout(function() {
             $('.inspector').removeClass('suspended');
-          }, 1000);
+          }, 2000);
         }
         else
           throw new Error('Unknown group, ' + name);
