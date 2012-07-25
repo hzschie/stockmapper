@@ -100,10 +100,8 @@
       _.forEach(bindings, function(binding) {
         var $field = binding.$ ? $container.find(binding.$) : $container,
             val = model.get(binding.field);
-        // if(isNaN(val) && typeof(val) == 'number') val = 'N/A';
-        // if(val != 'N/A') {
+
         val = (binding.formatter || String)( val, $field );
-        // }
         if(val != null) $field.html(val);
       });
     };
