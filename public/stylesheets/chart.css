@@ -1,0 +1,95 @@
+.chart {
+  position:relative;
+  padding:0;
+  height:530px;
+  margin-top:20px;
+  font:12px/13px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
+}
+
+/* HTML CHART */
+.chart .bar {
+  position:absolute;
+  top:0;
+}
+.chart .bar div {
+  position:absolute;
+  width:100%;
+}
+.chart .tick {
+  position:absolute;
+  width:100%;
+  border-top:1px dashed #555555;
+  color:#bbb;
+}
+.chart .tick div {
+  margin-top:-6px;
+}
+.chart .tick .left {
+  float:left;
+}
+.chart .tick .right {
+  float:right;
+}
+.chart .bars {
+  margin:0 40px;
+  position:relative;
+}
+.chart.animated .bar {
+  -webkit-transition:left .6s, width .6s;
+  -moz-transition:left .6s, width .6s;
+  -ms-transition:left .6s, width .6s;
+  transition:left .6s, width .6s;
+}
+.chart.animated .bar div {
+  -webkit-transition:height .6s, top .6s;
+  -moz-transition:height .6s, top .6s;
+  -ms-transition:height .6s, top .6s;
+  transition:height .6s, top .6s;
+}
+.chart.animated .tick {
+  -webkit-transition:top .6s, opacity .6s;
+  -moz-transition:top .6s, opacity .6s;
+  -ms-transition:top .6s, opacity .6s;
+  transition:top .6s, opacity .6s;
+}
+.chart.animated .most_active {
+  -webkit-transition:left .6s, width .6s;
+  -moz-transition:left .6s, width .6s;
+  -ms-transition:left .6s, width .6s;
+  transition:left .6s, width .6s;
+}
+
+.chart .arrow {
+  height:14px;
+  background: transparent url('/images/arrow.png') no-repeat scroll -2px -2px;
+}
+.chart .right .arrow {
+  background-position: right -2px;
+}
+
+.chart .most_active {
+  white-space:nowrap;
+  color: #76f9fb;
+  position:absolute;
+  top:460px;
+  display:none;
+}
+.chart .most_active .arrow {
+/*  display:inline-block;
+  vertical-align:top;*/
+  float:left;
+  width:21px;
+}
+.chart .most_active .note {
+/*  display:inline-block;
+  vertical-align:top;*/
+  float:left;
+  padding-top:2px;
+  margin:0 3px;
+}
+.chart .most_active.right {
+  text-align:right;
+}
+.chart .most_active.right > * {
+  float:right;
+}

@@ -4,6 +4,7 @@
     var models,
         $bars = $('.bars', $chart),
         $ticks = $('.ticks', $chart),
+        $mostActive = $('.most_active', $chart),
         _this = this;
         
     // $chart.mouseout(function(event) { 
@@ -63,7 +64,6 @@
           $chgBar = model.$chgBar,
           $volBar = model.$volBar;
       var force = !isNaN(i);
-      if(force) model.index = i;
       
       if(model.hasChanged('change') || force) {
         $chgBar.css({
@@ -81,24 +81,51 @@
       if(!force) return;
       
       setTimeout(function() {
+        model.index = i;
         $bar.css({
           left:xi(i),
           width: wi(i)
         });
+        
+        if(model.get('volume') == volMax) {
+          $('.sym', $mostActive).text(model.get('sym'));
+          var left = xi(i + 1);
+          if(left + 240 > barsX + barsWidth) {
+            left = xi(i);
+            $mostActive
+              .addClass('right')
+              .css({
+                display:'block',
+                left: xi(i) - $mostActive.width()
+              });
+          }
+          else {
+            $mostActive
+              .removeClass('right')
+              .css({
+                display:'block',
+                left:left
+              });
+          }
+        }
       }, getDelay(model, i));
     }
     
-    var getDelay,
+    var oldLength,
+        getDelay,
         iDelay = function(model, i) { return 400 * i / models.length; },
-        xtraDelay = function(extra) { return function(model, i) { return extra + iDelay(model, i); }; };// slow device, make delay 1 sec longer
+        oldDelay = function(model, i) { return 400 * model.index / oldLength; },
+        xtraDelay = function(extra, fn) { 
+          return function(model, i) { return extra + (fn ? fn(model, i) : iDelay(model, i)); };
+        };// slow device, make delay 1 sec longer
     function rebuild(collection, options, isNewCollection) {
       updateHelpers();
       updateBounds();
       
       /* ------ UPDATE BARS ------ */
       var tt = Date.now();
-      var bars = d3.select($bars[0]).selectAll('.bar'),
-          oldLength = bars[0].length;
+      var bars = d3.select($bars[0]).selectAll('.bar');
+      oldLength = bars[0].length;
       bars = bars.data(models.models, models.modelId);
 
       var exiting = 0; bars.exit().each(function() { exiting++; });
@@ -170,6 +197,8 @@
     
     var chgMaxH = 180,
         volMaxH = 300,
+        barsX,
+        barsWidth,
         fBarWidth,
         xi = function(i) { return Math.round(i * fBarWidth); },
         wi = function(i) { return Math.max(1, xi(i+1) - xi(i) - 1); },
@@ -184,7 +213,9 @@
         volTicks;
     function updateHelpers() {
       var stocks = models.models;
-      fBarWidth = Math.min(60, $bars.width() / stocks.length);
+      barsX = $bars.offset().left - $chart.offset().left;
+      barsWidth = $bars.width();
+      fBarWidth = Math.min(60, barsWidth / stocks.length);
       chgMax = 0;
       chgMax = $.map(stocks, function(m, i) {
         chgMax = Math.max(chgMax, Math.abs(m.attributes['changePct'] || 0));
