@@ -6,7 +6,11 @@
   font:12px/13px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
 }
 
-/* HTML CHART */
+.chart .bars {
+  margin:0 40px;
+  position:relative;
+}
+
 .chart .bar {
   position:absolute;
   top:0;
@@ -29,10 +33,6 @@
 }
 .chart .tick .right {
   float:right;
-}
-.chart .bars {
-  margin:0 40px;
-  position:relative;
 }
 .chart.animated .bar {
   -webkit-transition:left .6s, width .6s;
@@ -62,9 +62,12 @@
 .chart .arrow {
   height:14px;
   background: transparent url('/images/arrow.png') no-repeat scroll -2px -2px;
+  float:left;
+  width:50%;
 }
-.chart .right .arrow {
+.chart .right.arrow, .chart .right .arrow {
   background-position: right -2px;
+  float:right;
 }
 
 .chart .most_active {
@@ -75,14 +78,9 @@
   display:none;
 }
 .chart .most_active .arrow {
-/*  display:inline-block;
-  vertical-align:top;*/
-  float:left;
   width:21px;
 }
 .chart .most_active .note {
-/*  display:inline-block;
-  vertical-align:top;*/
   float:left;
   padding-top:2px;
   margin:0 3px;
@@ -90,6 +88,24 @@
 .chart .most_active.right {
   text-align:right;
 }
-.chart .most_active.right > * {
+.chart .most_active.right .note {
   float:right;
+}
+
+.chart .advances, .chart .declines {
+  top:60px;
+  color: #76f9fb;
+  position:absolute;
+  -webkit-transition:left .6s, width .6s;
+  -moz-transition:left .6s, width .6s;
+  -ms-transition:left .6s, width .6s;
+  transition:left .6s, width .6s;
+}
+.chart .advances .note, .chart .declines .note {
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:7px;
+  text-align:center;
+  padding:0 20px;
 }

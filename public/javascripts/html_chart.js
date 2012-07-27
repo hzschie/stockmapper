@@ -5,6 +5,8 @@
         $bars = $('.bars', $chart),
         $ticks = $('.ticks', $chart),
         $mostActive = $('.most_active', $chart),
+        $advances = $('.advances', $chart),
+        $declines = $('.declines', $chart),
         _this = this;
         
     // $chart.mouseout(function(event) { 
@@ -89,14 +91,13 @@
         
         if(model.get('volume') == volMax) {
           $('.sym', $mostActive).text(model.get('sym'));
-          var left = xi(i + 1);
+          var left = barsX + xi(i + 1);
           if(left + 240 > barsX + barsWidth) {
-            left = xi(i);
             $mostActive
               .addClass('right')
               .css({
                 display:'block',
-                left: xi(i) - $mostActive.width()
+                left: xi(i) + barsX - $mostActive.width()
               });
           }
           else {
@@ -121,6 +122,15 @@
     function rebuild(collection, options, isNewCollection) {
       updateHelpers();
       updateBounds();
+      
+      if(models.comparator == mapper.sortFunctions['chg'] && models.at(0).get('hasData')) {
+        showUpsAndDowns();
+      }
+      else {
+        $advances.hide();
+        $declines.hide();
+      }
+        
       
       /* ------ UPDATE BARS ------ */
       var tt = Date.now();
@@ -195,22 +205,46 @@
     function updateBounds() {
     }
     
+    function showUpsAndDowns() {
+      var firstNotUp = models.find(function(model, i) { return model.get('changePct') <= 0; }),
+          firstDn = models.find(function(model, i) { return model.get('changePct') < 0; }),
+          firstNA = models.find(function(model, i) { return isNaN(model.get('changePct')); }),
+          
+          lastUpIndex = _.indexOf(models.models, firstNotUp),
+          firstDnIndex = _.indexOf(models.models, firstDn),
+          lastDnIndex = firstNA ? _.indexOf(models.models, firstNA) : models.length,
+          
+          firstUpX = xi(0),
+          lastUpX  = xi(lastUpIndex) - 1,
+          firstDnX = xi(firstDnIndex),
+          lastDnX  = xi(lastDnIndex) - 1,
+          
+          upSpan = lastUpX - firstUpX,
+          dnSpan = lastDnX - firstDnX;
+
+      $advances.show().css({
+        left: barsX + firstUpX,
+        width: lastUpX - firstUpX
+      });
+      $declines.show().css({
+        left: barsX + firstDnX,
+        width: lastDnX - firstDnX
+      });
+      
+      $('.count', $advances).text(upSpan);
+      $('.count', $declines).text(dnSpan);
+    }
+    
     var chgMaxH = 180,
         volMaxH = 300,
-        barsX,
-        barsWidth,
-        fBarWidth,
+        barsX, barsWidth, fBarWidth, chgMax, volMax, chgTicks, volTicks,
         xi = function(i) { return Math.round(i * fBarWidth); },
         wi = function(i) { return Math.max(1, xi(i+1) - xi(i) - 1); },
-        chgMax,
-        volMax,
         chgScl = d3.scale.linear().range([0, chgMaxH]),
         volScl = d3.scale.sqrt().range([0, volMaxH]),
         volSubScl = d3.scale.sqrt(),
         chgY = function(chg, i) { return Math.round( Math.abs(chgScl(chg)) ); },
-        volY = function(vol, i) { return Math.round( volScl(vol) ); },
-        chgTicks,
-        volTicks;
+        volY = function(vol, i) { return Math.round( volScl(vol) ); };
     function updateHelpers() {
       var stocks = models.models;
       barsX = $bars.offset().left - $chart.offset().left;
@@ -231,11 +265,6 @@
       volScl.domain([0, volMax]);
       chgTicks = chgScl.ticks(3);
       volTicks = volScl.ticks(12).slice(1);
-      
-      return;
-      volTicks = volScl.ticks(4).slice(1);
-      volTicks = _.unique(volSubScl.domain([0, volTicks[0]])
-        .range([0, volScl(volTicks[0])]).ticks(4).slice(1).concat(volTicks));
     }
   };
   

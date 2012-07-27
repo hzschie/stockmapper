@@ -24,10 +24,23 @@ html
     .chart
       .ticks
       .bars
-        .most_active
-          .arrow
-          .note VOLUME<br>Most Active Stock: 
-            span.sym BIRLACOT
+      .most_active
+        .arrow
+        .note VOLUME<br>Most Active Stock: 
+          span.sym BIRLACOT
+      .advances
+        .arrow
+        .note 
+          span.count 203
+          |  Stocks UP
+        .arrow.right
+      .declines
+        .arrow
+        .note 
+          span.count 203
+          |  Stocks DOWN
+        .arrow.right
+
     ul.map
     .inspector.hidden
       svg
