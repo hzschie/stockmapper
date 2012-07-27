@@ -1,11 +1,16 @@
 extends main
 
+block links
+  link(href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700', rel='stylesheet', type='text/css')
+  link(href='http://fonts.googleapis.com/css?family=EB+Garamond', rel='stylesheet', type='text/css')
+  
 block header
+  | <header>
   | <div id="logo-container">
-  |   <div id="logo"><a href="../bci.html"><img src="images/blufin_logo.png" border="0"></a></div>
-  |   <div id="logo-name">Business Cycle Indicator</div>
+  |   <div id="logo"><a href="http://www.blufin.in/"><img src="http://www.blufin.in/BCI/images/blufin_logo.png" border="0"></a></div>
+  |   <div id="logo-name">StockMapper</div>
   |   <div id="panel">
-  |     <div id="indices-info" onclick="window.open('http://www.blufin.in/allabout-bci-pdf/BCI-Factsheet.pdf')"></div>
+  |     <div style="opacity:0;" id="indices-info" onclick="window.open('http://www.blufin.in/allabout-bci-pdf/BCI-Factsheet.pdf')"></div>
   |     <div id="refresh-bar" onclick="javascript:overview();clearPlot2(1)"></div>
   |     <div id="social-icons">
   |       <ul>
@@ -17,6 +22,7 @@ block header
   |     </div>
   |   </div>
   | </div>
+  | </header>
 
 block append inspector_content
   .content.blufin_index

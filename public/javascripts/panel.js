@@ -18,6 +18,7 @@
         grid = null,
         selectedGroup = null,
         $selectedSort = null,
+        $groups = $panel.find('.groups'),
         $sorts = $panel.find('.sorts'),
         $views = $panel.find('.views'),
         //padding = _.map($panel.css('padding').split(' '), function(p) { return parseInt(p, 10); }),
@@ -73,8 +74,8 @@
     });
     
     this.height = function() {
-      var h = grid.bounds().h + 23;
-      $panel.css({ height: h });
+      // var h = grid.bounds().h + 23;
+      // $panel.css({ height: h });
       return $panel.outerHeight();
     };
     
@@ -120,8 +121,8 @@
       $tag.html(getGroupHtml(group, $tag));
       
       // Add panel in the right place
-      if(actualIndex == 0) $panel.prepend($tag);
-      else $panel.children().eq(actualIndex - 1).after($tag);
+      if(actualIndex == 0) $groups.prepend($tag);
+      else $groups.children().eq(actualIndex - 1).after($tag);
       
       if(!grid) {
         //margin = _.map($tag.css('margin').split(' '), function(m) { return parseInt(m, 10); });
@@ -132,14 +133,18 @@
           $tag.outerWidth() + margin[L] + margin[R], 
           $tag.outerHeight() + margin[T] + margin[B],
           makeCells);
+        $groups.css({
+          width: grid.bounds().w,
+          height: grid.bounds().h
+        });
         $sorts.css({
           // left: grid.x(grid.cols - buttonsOrder.length) + padding[L]
           right: $panel.width() - grid.x(grid.cols) + padding[R] - margin[L]
         });
       }
       $tag.css({
-        left: padding[L] + grid.xi(index),
-        top: padding[T] + grid.yi(index)
+        left: grid.xi(index),
+        top: grid.yi(index)
       });
       
       $tag.bind('click', function() {

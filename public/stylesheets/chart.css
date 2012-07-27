@@ -1,7 +1,8 @@
 .chart {
   position:relative;
   padding:0;
-  height:530px;
+  height:490px;
+  margin-bottom:60px;
   margin-top:20px;
   font:12px/13px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
 }
@@ -74,6 +75,7 @@
 }
 
 .chart .most_active {
+  pointer-events:none;
   white-space:nowrap;
   color: #76f9fb;
   position:absolute;
@@ -96,6 +98,7 @@
 }
 
 .chart .advances, .chart .declines {
+  pointer-events:none;
   top:65px;
   color: #76f9fb;
   position:absolute;

@@ -111,10 +111,9 @@ function buildView() {
         chart = new mapper.HtmlChart($('.chart')),
         inspector = new mapper.Inspector($('.inspector')),
         viewState = new mapper.ViewState(),
+        layout = new mapper.Layout(panel, map, chart),
         currentGroup = null,
         currentSort = mapper.sortFunctions['sym'];
-        
-    $('.chart').css({ 'margin-top': panel.height() + 14 });
         
     viewState.on('change', function(viewState) {
       if(viewState.hasChanged('view')) {

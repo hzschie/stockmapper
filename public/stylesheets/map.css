@@ -2,6 +2,7 @@
   position:relative;
   line-height:13px;
   z-index:0;
+  margin:0 auto;
 }
 
 .map div.shadows {

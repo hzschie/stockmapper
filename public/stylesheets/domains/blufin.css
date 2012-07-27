@@ -3,7 +3,7 @@
   line-height:10px;
 }
 .map > li, .map .shadows div {
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: 'Open Sans Condensed', 'Helvetica Narrow', 'Arial Narrow', sans-serif;
   width:58px;/*52px;*/
   font-weight:normal;
   font-size:10px;
@@ -75,4 +75,93 @@
 
 .inspector .blufin_index .change {
   width:auto;
+}
+
+
+
+/* --------------------------------- HEADER BANNER --------------------------------- */
+header {
+  color:white;
+  height: 40px;
+  margin-bottom: 10px;
+  padding:0 10px;
+}
+#header-hr {
+  margin-left: 24px;
+  margin-top: 15px;
+  width: 966px;
+}
+#panel {
+  border: 0px solid #FF0000;
+  height: 33px;
+  width: 473px;
+  float: right;
+  margin-right: 10px;
+}
+#indices-info {
+  background: url(http://www.blufin.in/BCI/images/info-bar.png) no-repeat;
+  width: 169px;
+  height:30px;
+  float:left;
+  margin-top:4px;
+  margin-right: 6px;
+  margin-left: 70px;
+  cursor: pointer;
+}
+#refresh-bar {
+  background: url(http://www.blufin.in/BCI/images/refresh.png) no-repeat;
+  width:105px;
+  height:30px;
+  width: 105px;
+  margin-top:4px;
+  cursor: pointer;
+  float: left;
+}
+#social-icons {
+  float: right;
+  height: 41px;
+  margin-top: -35px;
+}
+header #logo {
+  color: #FFFFFF;
+  float: left;
+  font-family: 'EB Garamond', serif;
+  font-weight: normal;
+  margin-top: 0px; /*only valid once every element has been layed out in the page*/
+  height:33px;
+  width: 129px;
+}
+#logo-name {
+  float:left;
+  margin-left:19px;
+  font-family: 'EB Garamond', serif;
+  font-size:29px;  
+}
+#social-icons ul {
+  width:130px;
+  border:0px solid #00ff00;
+  margin:16px 0;
+}
+#social-icons ul li {
+  display: inline-block;
+}
+a.twit {
+  background: url("http://www.blufin.in/BCI/images/social-nw-links.png") no-repeat scroll left top transparent;
+}
+a.fb {
+  background: url("http://www.blufin.in/BCI/images/social-nw-links.png") no-repeat scroll left -48px transparent;
+}
+a.ya {
+  background: url("http://www.blufin.in/BCI/images/social-nw-links.png") no-repeat scroll left -139px transparent;
+}
+a.in {
+  background: url("http://www.blufin.in/BCI/images/social-nw-links.png") no-repeat scroll left -99px transparent;
+}
+a.twit, a.fb, a.ya, a.in {
+  display: block;
+  height: 30px;
+  left: 5px;
+  position: relative;
+  top: -10px;
+  width: 29px;
 }
