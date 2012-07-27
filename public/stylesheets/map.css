@@ -4,6 +4,10 @@
   z-index:0;
   margin:0 auto;
   margin-bottom:40px;
+  -webkit-transition:height .6s;
+  -moz-transition:height .6s;
+  -ms-transition:height .6s;
+  transition:height .6s;
 }
 
 .map div.shadows {
