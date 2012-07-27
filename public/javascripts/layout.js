@@ -11,10 +11,40 @@
       'padding-bottom': 20
     });
     
-    $window.scroll(scroll);
+    $window.scroll(onScroll);
     
-    function scroll() {
+    this.frameView = function(viewName) {
+      switch(viewName) {
+        case 'chart':
+          scrollTo($('.chart').offset().top - $('.map').offset().top);
+          break;
+        case 'map':
+        default:
+          scrollTo(0);
+          break;
+      }
+    };
+    
+    function onScroll() {
       // console.log($window.scrollTop());
+    }
+    
+    function scrollTo(y) {
+      var $dummy = $('<div></div>'),
+          $document = $(document);
+      $dummy.css({ left:$document.scrollTop() });
+      $dummy.animate(
+        { left:y },
+        {
+          step: function() {
+            $document.scrollTop(parseInt($(this).css('left'), 10));
+          },
+          complete: function() {
+            $document.scrollTop(y);
+          },
+          easing:'swing'
+        }
+      );
     }
   }
 })();
