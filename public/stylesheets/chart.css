@@ -61,7 +61,7 @@
 
 .chart .arrow {
   height:14px;
-  background: transparent url('/images/arrow.png?123') no-repeat scroll -2px -2px;
+  background: transparent url('/images/arrow.png') no-repeat scroll -2px -2px;
   float:left;
   width:50%;
 }

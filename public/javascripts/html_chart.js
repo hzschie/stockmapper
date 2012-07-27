@@ -32,7 +32,9 @@
       var $bar = model.$bar = $(this)
             .addClass('bar')
             .css({
-              width: wi(i)
+              left:xi(i),
+              width: wi(i),
+              display:'none'
             }),
           $chgBar = model.$chgBar = $('<div></div>')
             .addClass('chg')
@@ -50,15 +52,8 @@
               'height': volY(model.get('volume'))
             })
             .appendTo($bar);
-            
       
-      $bar.css({
-        left:xi(i),
-        display:'none'
-      });
-      setTimeout(function() {
-        $bar.css({ display:'' });
-      }, getDelay(model, i));
+      setTimeout(function() { $bar.css({ display:'' }); }, getDelay(model, i));
     }
     
     function updateModel(model, i) {
@@ -92,22 +87,20 @@
         if(model.get('volume') == volMax) {
           $('.sym', $mostActive).text(model.get('sym'));
           var left = barsX + xi(i + 1);
-          if(left + 240 > barsX + barsWidth) {
+          if(left + 240 > barsX + barsWidth)
             $mostActive
               .addClass('right')
               .css({
                 display:'block',
                 left: xi(i) + barsX - $mostActive.width()
               });
-          }
-          else {
+          else
             $mostActive
               .removeClass('right')
               .css({
                 display:'block',
                 left:left
               });
-          }
         }
       }, getDelay(model, i));
     }
@@ -131,7 +124,6 @@
         $declines.hide();
       }
         
-      
       /* ------ UPDATE BARS ------ */
       var tt = Date.now();
       var bars = d3.select($bars[0]).selectAll('.bar');
@@ -160,16 +152,7 @@
           .append('div')
           .each(function(val) {
             if(type) {
-              if(val >= 1e+12)
-                val = val / 1e+12 + 'T';
-              else if(val >= 1e+9)
-                val = val / 1e+9 + 'B';
-              else if(val >= 1e+6)
-                val = val / 1e+6 + 'M';
-              else if(val >= 1e+3)
-                val = val / 1e+3 + 'K';
-              else
-                val = String(val);
+              val = mapper.Template.metricFormat(val);
             }
             else if(val) {
               val = mapper.Template.pctFormat(val);
@@ -215,20 +198,23 @@
           lastDnIndex = firstNA ? _.indexOf(models.models, firstNA) : models.length,
           
           firstUpX = xi(0),
-          lastUpX  = xi(lastUpIndex) - 1,
-          firstDnX = xi(firstDnIndex),
-          lastDnX  = xi(lastDnIndex) - 1,
+          lastUpX  = xi(lastUpIndex == -1 ? models.length : lastUpIndex) - 1,
+          firstDnX = xi(firstDnIndex == -1 ? models.length : firstDnIndex),
+          lastDnX  = xi(lastDnIndex == -1 ? models.length : lastDnIndex) - 1,
           
           upSpan = lastUpX - firstUpX,
           dnSpan = lastDnX - firstDnX;
 
+console.log('ll',lastUpX);
       $advances.show().css({
         left: barsX + firstUpX,
-        width: lastUpX - firstUpX
+        width: lastUpX - firstUpX,
+        display: lastUpX > firstUpX ? 'block' : 'none'
       });
       $declines.show().css({
         left: barsX + firstDnX,
-        width: lastDnX - firstDnX
+        width: lastDnX - firstDnX,
+        display: lastDnX > firstDnX ? 'block' : 'none'
       });
       
       $('.count', $advances).text(upSpan);

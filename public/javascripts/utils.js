@@ -88,6 +88,18 @@
   Template.commaFormat = Template.NaIfNaN( d3.format(',') );
   Template.changeFormat = Template.NaIfNaN( d3.format('+.2f') );
   Template.pctFormat = Template.NaIfNaN( Template.postfix(d3.format('.1f'), '%') );
+  Template.metricFormat = function(val) {
+    if(val >= 1e+12)
+      return val / 1e+12 + 'T';
+    else if(val >= 1e+9)
+      return val / 1e+9 + 'B';
+    else if(val >= 1e+6)
+      return val / 1e+6 + 'M';
+    else if(val >= 1e+3)
+      return val / 1e+3 + 'K';
+    else
+      return String(val);
+  };
 
   function Template(bindings) {
     this.bindings = bindings;
