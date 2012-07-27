@@ -218,8 +218,8 @@
         display: lastDnX > firstDnX ? 'block' : 'none'
       });
       
-      $('.count', $advances).text(upSpan);
-      $('.count', $declines).text(dnSpan);
+      $('.count', $advances).text(lastUpIndex);
+      $('.count', $declines).text(lastDnIndex - firstDnIndex);
     }
     
     var chgMaxH = 180,
