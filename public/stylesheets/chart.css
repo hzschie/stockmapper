@@ -19,6 +19,15 @@
   position:absolute;
   width:100%;
 }
+.chart .bar:hover {
+  z-index:1;
+}
+.chart .bar:hover div {
+  margin:-1px 0 0 0px;
+  -moz-box-shadow: 2px 2px 2px rgba(0, 0, 0, .5);
+  -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, .5);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, .5);
+}
 .chart .tick {
   position:absolute;
   width:100%;
