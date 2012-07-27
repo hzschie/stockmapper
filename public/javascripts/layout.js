@@ -5,8 +5,8 @@
         $panel = $('.panel'),
         $map = $('.map');
         $chart = $('.chart');
-    $chart.css({ 'margin-top': panel.height() + 14 });
-    $map.css({ 
+    $map.css({ 'margin-top': panel.height() + 14 });
+    $chart.css({ 
       'min-height': $window.height() - panel.height() - 14 - 20,
       'padding-bottom': 20
     });
