@@ -137,10 +137,10 @@
           width: grid.bounds().w,
           height: grid.bounds().h
         });
-        $sorts.css({
-          // left: grid.x(grid.cols - buttonsOrder.length) + padding[L]
-          right: $panel.width() - grid.x(grid.cols) + padding[R] - margin[L]
-        });
+        // $sorts.css({
+        //   // left: grid.x(grid.cols - buttonsOrder.length) + padding[L]
+        //   right: $panel.width() - grid.x(grid.cols) + padding[R] - margin[L]
+        // });
       }
       $tag.css({
         left: grid.xi(index),

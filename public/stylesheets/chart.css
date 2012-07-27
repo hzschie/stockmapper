@@ -28,7 +28,7 @@
 }
 .chart .tick div {
   margin-top:-6px;
-  background-color:#333;
+/*  background-color:#333;*/
 }
 .chart .tick .left {
   float:left;

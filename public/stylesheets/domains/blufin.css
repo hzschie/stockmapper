@@ -39,7 +39,7 @@
   font-weight: bold;
   line-height: 13px;
 }
-.panel .button:hover:after, .panel .button.selected:after {
+.panel .groups .button:hover:after, .panel .groups .button.selected:after {
   left:-2px;
   top:-2px;
   border-width:3px;

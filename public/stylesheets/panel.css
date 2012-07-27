@@ -41,7 +41,7 @@
 .button.selected {
   z-index:1;
 }
-.panel .button:hover:after, .panel .button.selected:after {
+.panel .groups .button:hover:after, .panel .groups .button.selected:after {
   width:85px;
   height:20px;
   border:2px solid #fffcce;
@@ -90,12 +90,21 @@
 }
 .panel .sorts {
   position:absolute;
-  bottom:2px;
+  bottom:-1px;
+  right:20px;
 }
-.panel .sort {
+.panel .sorts .button {
   display:inline-block;
   position:relative;
+  color:#fff;
+}
+
+.panel .sorts .button:hover {
+  background-color:#444;
+}
+.panel .sorts .button.selected {
   background-color:#fff;
+  color:#000;
 }
 
 .panel .views {
