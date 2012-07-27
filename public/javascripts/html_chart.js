@@ -9,10 +9,10 @@
         $declines = $('.declines', $chart),
         _this = this;
         
-    // $chart.mouseout(function(event) { 
-    //   if(event.toElement != $map[0] && !$(event.toElement).is('li')) 
-    //     _this.trigger('inspect_tag', null);
-    // });
+    $chart.mouseout(function(event) { 
+      if(event.toElement != $chart[0] && !$(event.toElement).is('li')) 
+        _this.trigger('inspect_bar', null);
+    });
 
     this.setModels = function(_models) {
       if(models) {
@@ -34,24 +34,25 @@
             .css({
               left:xi(i),
               width: wi(i),
-              display:'none'
+              display:'none',
+              height: chgMaxH + 1 + volMaxH
             }),
           $chgBar = model.$chgBar = $('<div></div>')
             .addClass('chg')
-            .css({
-              'background-color': mapper.changePctToHex( model.get('changePct') ),
-              'top': chgMaxH - chgY(model.get('changePct')),
-              'height': chgY(model.get('changePct'))
-            })            
             .appendTo($bar),
           $volBar = model.$volBar = $('<div></div>')
             .addClass('vol')
             .css({
               'top': chgMaxH + 1,
-              'background-color': '#999',
-              'height': volY(model.get('volume'))
+              'background-color': '#999'
             })
             .appendTo($bar);
+            
+      $bar.mouseover(function(e) {
+        var barTop = $bar.offset().top,
+            isVol = e.pageY - barTop > chgMaxH;
+        _this.trigger('inspect_bar', model, isVol ? $volBar : $chgBar, isVol, barTop + (isVol ? chgMaxH + 1 + volMaxH - 80 : -40) );
+      });
       
       setTimeout(function() { $bar.css({ display:'' }); }, getDelay(model, i));
     }
@@ -63,10 +64,11 @@
       var force = !isNaN(i);
       
       if(model.hasChanged('change') || force) {
+        var chgPct = model.get('changePct') || 0;
         $chgBar.css({
-          'background-color': mapper.changePctToHex( model.get('changePct') ),
-          'top': chgMaxH - chgY(model.get('changePct')),
-          'height': chgY(model.get('changePct'))
+          'background-color': mapper.changePctToHex(chgPct),
+          'top': chgMaxH - chgY(chgPct),
+          'height': chgY(chgPct)
         });
       }
       if(model.hasChanged('volume') || force) {
@@ -150,7 +152,7 @@
         var ticks = d3.select($ticks[0]).selectAll(!type ? '.chg_tick' : '.vol_tick').data(!type ? chgTicks : volTicks, Number);
         ticks.enter()
           .append('div')
-          .each(function(val) {
+          .each(function(val, i) {
             if(type) {
               val = mapper.Template.metricFormat(val);
             }
@@ -167,11 +169,11 @@
             }, 600);
           });
         ticks
-          .each(function(val) {
+          .each(function(val, i) {
             var $this = $(this);
             $this.css({
               top: !type ? chgMaxH - chgY(val) : chgMaxH + volY(val)
-            });
+            }).children().css({ 'display': !type || (i % 2) ? 'block' : 'none' });
           });
         ticks.exit().remove();
       }
@@ -205,7 +207,6 @@
           upSpan = lastUpX - firstUpX,
           dnSpan = lastDnX - firstDnX;
 
-console.log('ll',lastUpX);
       $advances.show().css({
         left: barsX + firstUpX,
         width: lastUpX - firstUpX,

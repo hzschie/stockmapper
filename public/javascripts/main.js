@@ -108,7 +108,6 @@ function buildView() {
   $(function() {
     var panel = new mapper.Panel($('.panel'), mapper.groups),
         map = new mapper.Map($('.map')),
-        // chart = new mapper.Chart($('.chart')),
         chart = new mapper.HtmlChart($('.chart')),
         inspector = new mapper.Inspector($('.inspector')),
         viewState = new mapper.ViewState(),
@@ -202,6 +201,10 @@ function buildView() {
     
     map.on('inspect_tag', function(model, $tag) {
       inspector.inspectTag(model, $tag);
+    });
+    
+    chart.on('inspect_bar', function(model, $subBar, isVol, yFixed) {
+      inspector.inspectBar(model, $subBar, isVol, yFixed);
     });
 
     var resortTimeoutId = null;

@@ -39,11 +39,21 @@
         $container.addClass('hidden');
         return;
       }
-      
       $container.removeClass('hidden');
       
       template.applyBindings('stock', $container, model);
       inspectElement($tag, '.stock', { x:57, y:20 });
+    };
+    
+    this.inspectBar = function(model, $subBar, isVol, yFixed) {
+      if(!model) {
+        $container.addClass('hidden');
+        return;
+      }
+      $container.removeClass('hidden');
+      
+      template.applyBindings('stock', $container, model);
+      inspectElement($subBar, '.stock', { x:57, y:20, yFixed:yFixed }, isVol);
     };
     
     this.inspectGroup = function(group, $tag) {
@@ -59,7 +69,7 @@
       inspectElement($tag, '.' + type, { x:20, y:20 });
     };
     
-    function inspectElement($tag, contentSelector, spacing) {
+    function inspectElement($tag, contentSelector, spacing, forcePoint) {
       $container.find('.content').removeClass('current');
       $container.find(contentSelector).addClass('current');
       var tagPos = $tag.offset(),
@@ -68,14 +78,14 @@
           _bubbW = bubbW = $container.width(),
           _bubbH = bubbH = $container.height(),
           _pointLeft = pointLeft = tagPos.left <= bodyWidth / 2,
-          _pointUp = pointUp = (tagPos.top + bubbH + tagSz.h + spacing.y) <= ($window.scrollTop() + $window.height()),
+          _pointUp = pointUp = forcePoint == null ? ((tagPos.top + bubbH + tagSz.h + spacing.y) <= ($window.scrollTop() + $window.height())) : forcePoint,
           offset = {
             x: pointLeft ? tagSz.w + spacing.x : -bubbW + 1 - spacing.x,// 57
             y: pointUp ? tagSz.h + spacing.y : -_bubbH - spacing.y
           },
           pos = {
             left: tagPos.left + offset.x,
-            top: tagPos.top + offset.y
+            top: spacing.yFixed == null ? tagPos.top + offset.y : spacing.yFixed
           };
       
       tagPos.width = tagSz.w;
