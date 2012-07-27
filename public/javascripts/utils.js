@@ -87,6 +87,7 @@
   Template.priceFormat = Template.NaIfNaN( d3.format(',.2f') );
   Template.commaFormat = Template.NaIfNaN( d3.format(',') );
   Template.changeFormat = Template.NaIfNaN( d3.format('+.2f') );
+  Template.pctFormat = Template.NaIfNaN( Template.postfix(d3.format('.1f'), '%') );
 
   function Template(bindings) {
     this.bindings = bindings;

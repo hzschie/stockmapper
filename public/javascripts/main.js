@@ -108,13 +108,14 @@ function buildView() {
   $(function() {
     var panel = new mapper.Panel($('.panel'), mapper.groups),
         map = new mapper.Map($('.map')),
-        chart = new mapper.Chart($('.chart')),
+        // chart = new mapper.Chart($('.chart')),
+        chart = new mapper.HtmlChart($('.chart')),
         inspector = new mapper.Inspector($('.inspector')),
         viewState = new mapper.ViewState(),
         currentGroup = null,
         currentSort = mapper.sortFunctions['sym'];
         
-    $('.map').css({ 'margin-top': panel.height() + 14 });
+    $('.chart').css({ 'margin-top': panel.height() + 14 });
         
     viewState.on('change', function(viewState) {
       if(viewState.hasChanged('view')) {
