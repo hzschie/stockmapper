@@ -20,15 +20,26 @@ MidEast-Africa => MidEast/Africa
 ## Thoughts & Ideas
 Titles for the various section
 A list view
-Transition graph scale
-Collapse view section
+-X- Transition graph scale
+-"X"- Collapse view section
 Search box that filters the view
 
 ## Data Issues
 Jocil Ltd has a blank symbol
 
 ## To do
-Relayout on window resize
-Bubble positioning optimization to remain above screen
-Chart rollover
-Touch device events
+H Relayout on window resize
+H Bubble positioning optimization to remain above screen
+H Touch device events
+H Redesign sort buttons
+M Redesign indexes
+H Intraday graphs
+M Inspect more attributes (52 week, etc)
+M Grouped sorting on map (i.e by industry)
+L Logos and Flags
+L re-heat map
+L re-heat map
+L Map subnav to rearange re-heat
+L Reimport nya stocks
+H Interval service
+L Search box that filters the view

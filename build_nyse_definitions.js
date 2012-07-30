@@ -3,6 +3,19 @@ var fs = require('fs'),
     ansi = require('ansi'),
     cursor = ansi(process.stdout);
 
+/*    
+// "NAME","TICKER","COUNTRY","ICB","INDUS","SUP SEC","SEC","SUB SEC"
+var reader = csv.createCsvFileReader(__dirname + '/public/data/nyse/nya.csv', { columnsFromHeader: true }),
+    countries = {};
+reader.on('data', function(stockRaw) {
+  countries[stockRaw.COUNTRY] = ++countries[stockRaw.COUNTRY] || 1;
+});
+reader.on('end', function(stockRaw) {
+  console.log(Object.keys(countries).length,'countries');
+  console.log(Object.keys(countries).map(function(c) { return c + ': ' + countries[c]; }).join(', '));
+});
+*/
+
 var stocks = {
       headers: ['id', 'name'],
       data: []
