@@ -82,37 +82,36 @@ var StockGroup = mapper.StockGroup = Backbone.Model.extend(
       var lbl='Technology';// TEMP
       members.on('change:changeDir change:volume', function(model) {
         // Recalculate ups and downs figures
-        // Collapse recalculations via setTimeout, to avoid doing it many ties
-        // during a large update
-        if(timeoutId == null) {
-          timeoutId = setTimeout(function() {
-            timeoutId = null;
-            var upsAndDowns = [0,0],
-                volumeUp = 0,
-                volumeDown = 0,
-                volumeTotal = 0,
-                vol, dir;
-            members.each(function(model) {
-              vol = model.attributes.volume || 0;
-              dir = model.attributes.changeDir;
-              if(dir == 1) {
-                upsAndDowns[0] += 1;
-                volumeUp += vol;
-              }
-              else if(dir == -1) {
-                upsAndDowns[1] += 1;
-                volumeDown += vol;
-              }
-              volumeTotal += vol;
-            });
-            _this.set({
-              upsAndDowns: upsAndDowns,
-              volumeUp: volumeUp,
-              volumeDown: volumeDown,
-              volumeTotal: volumeTotal
-            });
-          }, 0);
-        }
+        // Use Interval to collapse recalculations, to avoid doing it
+        // needlessly many times during a large update
+        Interval.callOnce({ fn:function() {
+          console.log('Update upanddown.');
+          var upsAndDowns = [0,0],
+              volumeUp = 0,
+              volumeDown = 0,
+              volumeTotal = 0,
+              vol, dir;
+          members.each(function(model) {
+            vol = model.attributes.volume || 0;
+            dir = model.attributes.changeDir;
+            if(dir == 1) {
+              upsAndDowns[0] += 1;
+              volumeUp += vol;
+            }
+            else if(dir == -1) {
+              upsAndDowns[1] += 1;
+              volumeDown += vol;
+            }
+            volumeTotal += vol;
+          });
+          _this.set({
+            upsAndDowns: upsAndDowns,
+            volumeUp: volumeUp,
+            volumeDown: volumeDown,
+            volumeTotal: volumeTotal
+          });
+        }, key:_this.get('urlName') }, Interval.LOW);
+        
       });
       
       hash.members.modelId = function(model) { return model.id; };

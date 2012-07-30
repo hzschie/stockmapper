@@ -43,36 +43,36 @@
         
         _this = this;
     
-    // handler can be a function or an object like so { fn:handler threadId:'optional' }.
+    // handler can be a function or an object like so { fn:handler key:'optional' }.
     // Normally, if add() is called multiple times with the same handler function, the function
     // only gets added once. This makes sense in many cases (like UI refresh callbacks). Internally,
-    // to achieve this, Interval assigns a threadId to each callback in its system.
+    // to achieve this, Interval assigns a key to each callback in its system.
     // However, annonymous functions, which are declared (and re-declared) on the fly, can't retain 
-    // threadIds; so there's no way for Interval to tell if an annonymous function is being
+    // keys; so there's no way for Interval to tell if an annonymous function is being
     // added multiple times. So, if you do need Interval to ensure that multiple add()'s of 
-    // the same annonymous function don't get subscribed more than once, pass a consistent threadId
+    // the same annonymous function don't get subscribed more than once, pass a consistent key
     // in here (or don't use an annoymous function. Sometimes though, such functions make it easy
     // to retain scope).
     this.add = function (handler, priority, params) {
       if(typeof(handler) != 'function') {
         var fn = handler.fn;
-        fn.threadId = handler.threadId;
+        fn.key = handler.key;
         handler = fn;
       }
       
-      if(handler.threadId != null && subscribersTable[ handler.threadId ] != null) {
+      if(handler.key != null && subscribersTable[ handler.key ] != null) {
         return false;
       }
       
-      if(handler.threadId == null) {
-        handler.threadId = uniqueId++;
+      if(handler.key == null) {
+        handler.key = uniqueId++;
       }
       
       priority = priority == null ? PRIORITY_MID : priority;
       
       subscribersArray[priority].push(handler);
-      subscribersTable[handler.threadId] = priority;
-      subscribersParamsTable[handler.threadId] = params;
+      subscribersTable[handler.key] = priority;
+      subscribersParamsTable[handler.key] = params;
             
       totalSubscribers++;
       
@@ -86,30 +86,30 @@
     this.callOnce = function (handler, priority, params) {
       if(typeof(handler) != 'function') {
         var fn = handler.fn;
-        fn.threadId = handler.threadId;
+        fn.key = handler.key;
         handler = fn;
       }
 
       var wrapper = function() {
-        _this.remove(arguments.callee);// remove before calling handler, so that it can be resubscribed to during the call
+        _this.remove(this);// remove before calling handler, so that it can be resubscribed to during the call
         handler.apply(handler, arguments);
       };
-      if(this.add({ fn:wrapper, threadId:handler.threadId }, priority, params)) {
-        // store threadId that's assigned to wrapper so that we can track whether
+      if(this.add({ fn:wrapper, key:handler.key }, priority, params)) {
+        // store key that's assigned to wrapper so that we can track whether
         // callOnce() is being called again with same handler (which is not allowed).
-        handler.threadId = wrapper.threadId;
+        handler.key = wrapper.key;
         return true;
       }
       return false;
     };
 
     this.remove = function (handler) {
-      if(subscribersTable[handler.threadId] == null) { return; }
-      var destinationArray = subscribersArray[ subscribersTable[handler.threadId] ];
+      if(subscribersTable[handler.key] == null) { return; }
+      var destinationArray = subscribersArray[ subscribersTable[handler.key] ];
       destinationArray.splice( $.inArray(handler, destinationArray), 1 );
       totalSubscribers--;
       
-      subscribersTable[handler.threadId] = null;
+      subscribersTable[handler.key] = null;
       
       if(totalSubscribers == 0) {
         stopService();
@@ -200,7 +200,7 @@
         return;
       }
       handler.success = false;
-      handler.apply(handler, [getRemainingFrameTime() / executionsRemaining].concat( subscribersParamsTable[handler.threadId] ) );
+      handler.apply(handler, [getRemainingFrameTime() / executionsRemaining].concat( subscribersParamsTable[handler.key] ) );
       handler.success = true;
     }
     
