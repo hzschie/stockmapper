@@ -29,18 +29,19 @@
     };
     
     function addModel(model, i, animate) {
-      var $bar = model.$bar = $(this)
-            .addClass('bar')
+      model._chart = {};
+      var $bar = model._chart.$bar = $(this)
+            .addClass('bar ok')
             .css({
               left:xi(i),
               width: wi(i),
-              display:'none',
+              visibility:'hidden',
               height: chgMaxH + 1 + volMaxH
             }),
-          $chgBar = model.$chgBar = $('<div></div>')
+          $chgBar = model._chart.$chgBar = $('<div></div>')
             .addClass('chg')
             .appendTo($bar),
-          $volBar = model.$volBar = $('<div></div>')
+          $volBar = model._chart.$volBar = $('<div></div>')
             .addClass('vol')
             .css({
               'top': chgMaxH + 1,
@@ -48,8 +49,8 @@
             })
             .appendTo($bar);
             
-      setTimeout(function() { 
-        $bar.css({ display:'' });
+      setTimeout(function() {
+        $bar.css({ visibility:'visible' });
         $bar.mouseover(function(e) {
           var barTop = $bar.offset().top,
               isVol = e.pageY - barTop > chgMaxH;
@@ -59,10 +60,11 @@
     }
     
     function updateModel(model, i) {
-      var $bar = model.$bar,
-          $chgBar = model.$chgBar,
-          $volBar = model.$volBar;
-      var force = !isNaN(i);
+      if(!model._chart) return;
+      var force = !isNaN(i),
+          $bar = model._chart.$bar,
+          $chgBar = model._chart.$chgBar,
+          $volBar = model._chart.$volBar;
       
       if(model.hasChanged('change') || force) {
         var chgPct = model.get('changePct') || 0;
@@ -80,8 +82,11 @@
       
       if(!force) return;
       
-      setTimeout(function() {
-        model.index = i;
+      var _chart = model._chart;
+      if(_chart.updateTimeout) clearTimeout(_chart.updateTimeout);
+      _chart.updateTimeout = setTimeout(function() {
+        _chart.updateTimeout = null;
+        _chart.index = i;
         $bar.css({
           left:xi(i),
           width: wi(i)
@@ -110,8 +115,7 @@
     
     var oldLength,
         getDelay,
-        iDelay = function(model, i) { return 400 * i / models.length; },
-        oldDelay = function(model, i) { return 400 * model.index / oldLength; },
+        iDelay = function(model, i) { return mapper.chartDelayMult * i / models.length; },
         xtraDelay = function(extra, fn) { 
           return function(model, i) { return extra + (fn ? fn(model, i) : iDelay(model, i)); };
         };// slow device, make delay 1 sec longer
@@ -129,28 +133,34 @@
         
       /* ------ UPDATE BARS ------ */
       var tt = Date.now();
-      var bars = d3.select($bars[0]).selectAll('.bar');
+      var bars = d3.select($bars[0]).selectAll('.bar.ok');
       oldLength = bars[0].length;
       bars = bars.data(models.models, models.modelId);
 
       var exiting = 0; bars.exit().each(function() { exiting++; });
       
+      Interval.remove({ key:'chart_add' });
       Interval.callOnce({ fn:function() {
         if(exiting == oldLength) getDelay = xtraDelay(200);//getDelay = xtraDelay( 200 + (oldLength - exiting) * 2);
         else getDelay = xtraDelay(1000);//xtraDelay( 1000 + (oldLength - exiting) * 2);
         bars.enter().append('div').each(addModel);
-      }, key:'chart_add' });
         
-      Interval.callOnce({ fn:function() {
-        getDelay = xtraDelay(200);
-        bars.each(updateModel);
-      }, key:'chart_update' });
+        Interval.remove({ key:'chart_update' });
+        Interval.callOnce({ fn:function() {
+          getDelay = xtraDelay(200);
+          bars.each(updateModel);
+        }, key:'chart_update' });
+      }, key:'chart_add' });
       
       bars.exit()
         .each(function(model, i) {
+          var _chart = model._chart,
+              $bar = _chart.$bar;
+          $bar.removeClass('ok');
           setTimeout(function() {
-            model.$bar.remove();
-          }, 400 * model.index / oldLength);
+            $bar.remove();
+          }, 400 * model._chart.index / oldLength);
+          delete model._chart;
         });
         
       /* ------ UPDATE TICKS ------ */

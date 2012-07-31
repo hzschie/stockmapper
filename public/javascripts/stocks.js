@@ -85,7 +85,6 @@ var StockGroup = mapper.StockGroup = Backbone.Model.extend(
         // Use Interval to collapse recalculations, to avoid doing it
         // needlessly many times during a large update
         Interval.callOnce({ fn:function() {
-          console.log('Update upanddown.');
           var upsAndDowns = [0,0],
               volumeUp = 0,
               volumeDown = 0,

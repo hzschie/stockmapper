@@ -5,6 +5,7 @@ mapper.groups = new Backbone.Collection();
 var socket = io.connect();
 socket.on('update', function(multiStockData) {
   _.forEach(multiStockData, function(data) {
+    if(!data) return;
     try {
       /* data[0] is type (ie. 'group' or 'stock'). data[1] is id */
       mapper[ data[0] + 's' ].get(data[1]).update(data);

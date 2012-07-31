@@ -30,12 +30,13 @@
     if(_models) this.setModels(_models);
     
     function addModel(model, i, animate) {
-      var $tag = $(this);
-      model.$tag = $tag;
+      var $tag = $(this).addClass('tag');
+      model._map = {};
+      model._map.$tag = $tag;
       $tag.html(getTagHtml(model));
       
       var $shadow = $(document.createElement('div')).appendTo($shadows);
-      model.$shadow = $shadow;
+      model._map.$shadow = $shadow;
       
       if(!grid) {
         grid = new mapper.Grid(models.length, $map.width(), $tag.outerWidth() + 1, $tag.outerHeight() + 1, makeCells);
@@ -45,14 +46,18 @@
       var pos = {
         left: grid.xi(i),
         top: grid.yi(i),
-        display:'none'
+        visibility: 'hidden'
+        // display:'none'
       };
       $tag.css(pos);
       $shadow.css(pos);
       
       setTimeout(function() {
-        $tag.css({ display:'' });
-        $shadow.css({ display:'' });
+        $tag.css({ visibility: 'visible' });
+        $shadow.css({ visibility: 'visible' });
+        
+        // $tag.css({ display:'' });
+        // $shadow.css({ display:'' });
         $tag.mouseover(function() {
           _this.trigger('inspect_tag', model, $tag);
         });
@@ -60,11 +65,10 @@
     }
     
     function updateModel(model, i) {
-      var force = !isNaN(i);// isNewCollection && model.get('hasData')
-      if(force) model.index = i;
-      
-      var $tag = model.$tag,
-          $shadow = model.$shadow;
+      if(!model._map) return;
+      var force = !isNaN(i),
+          $tag = model._map.$tag,
+          $shadow = model._map.$shadow;
       if(model.hasChanged('change') || force) {
         $tag.css({
           // backgroundColor: 'rgb(' + mapper.fractionChangeToHex(Math.min(5, Math.max(-5, model.get('changePct'))) / 5) + ')'
@@ -83,18 +87,24 @@
       }
       
       if(!force) return;
-      var pos = { 
-        left: grid.xi(i),
-        top: grid.yi(i)
-      };
-      setTimeout(function() {
+      var pos = {
+            left: grid.xi(i),
+            top: grid.yi(i)
+          },
+          _map = model._map;
+      
+      if(_map.updateTimeout) clearTimeout(_map.updateTimeout);
+      _map.updateTimeout = setTimeout(function() {
+        _map.updateTimeout = null;
         $tag.css(pos);
         $shadow.css(pos);
       }, getDelay(model, i));
+      _map.index = i;
     }
     
-    var getDelay,
-        iDelay = function(model, i) { return (grid.c(i) + grid.r(i) / grid.rows) * 20; },
+    var delayMult = mapper.mapDelayMult,
+        getDelay,
+        iDelay = function(model, i) { return (grid.c(i) + grid.r(i) / grid.rows) * mapper.mapDelayMult; },
         xtraDelay = function(extra) { return function(model, i) { return extra + iDelay(model, i); }; };// slow device, make delay 1 sec longer
     function rebuild(collection, options, isNewCollection) {
       var tt = dd1 = dd2 = Date.now();
@@ -106,12 +116,13 @@
         updateBounds();
       }
 
-      var tags = d3.select($map[0]).selectAll('li'),
+      var tags = d3.select($map[0]).selectAll('li.tag'),
           oldLength = tags[0].length;
       tags = tags.data(models.models, models.modelId);
       
       var exiting = 0; tags.exit().each(function() { exiting++; });
       
+      Interval.remove({ key:'map_add' });
       Interval.callOnce({ fn:function() {
         if(exiting == oldLength) {
           getDelay = xtraDelay( 200 + (oldLength - exiting) * 2);
@@ -122,20 +133,30 @@
         tags.enter()
           .append('li')
           .each(addModel);
+          
+        Interval.remove({ key:'map_update' });
+        Interval.callOnce({ fn:function() {
+          getDelay = xtraDelay( 200);
+          tags
+            .each(updateModel);
+        }, key:'map_update' });
       }, key:'map_add' });
-
-      Interval.callOnce({ fn:function() {
-        getDelay = xtraDelay( 200);
-        tags
-          .each(updateModel);
-      }, key:'map_update' });
       
       tags.exit()
         .each(function(model, i) {
+          var _map = model._map,
+              $tag = model._map.$tag,
+              $shadow = model._map.$shadow,
+              index = model._map.index,
+              oldCell = oldCells[index],
+              delay = oldCell ? (oldCells[index][0] + oldCells[index][1] / oldRows) * 20 : 0;
+          
+          $tag.removeClass('tag');
           setTimeout(function() {
-            model.$tag.remove();
-            model.$shadow.remove();
-          }, (oldCells[model.index][0] + oldCells[model.index][1] / oldRows) * 20);
+            $tag.remove();
+            $shadow.remove();
+          }, delay);
+          delete model._map;
         });
         
       console.log(Date.now() - tt + ' ms, MAP redraw', '\t\t\t');
@@ -144,7 +165,9 @@
     function updateBounds() {
       grid.n(models.length);
       var bounds = grid.bounds();
-      $map.css({ width: bounds.w, height: bounds.h });
+      setTimeout(function() {
+        $map.css({ width: bounds.w, height: bounds.h });
+      }, bounds.h >= $map.height() ? 0 : getDelay(null, models.length - 1));
     }
     
     function makeCells(n, c, r) {

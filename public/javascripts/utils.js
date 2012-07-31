@@ -1,3 +1,23 @@
+$.browser.iPhone = navigator.userAgent.match(/iPhone/i) !== null;
+$.browser.iPad = navigator.userAgent.match(/iPad/i) !== null;
+$.browser.iOS = $.browser.iPhone || $.browser.iPad;
+$.browser.android = navigator.userAgent.match(/android/i) !== null;
+$.browser.touchDevice = $.browser.android || $.browser.iOS;
+$.browser.firefox = navigator.userAgent.match(/firefox/i) !== null;
+
+if($.browser.touchDevice) {
+  mapper.mapDelayMult = 80;
+  mapper.chartDelayMult = 1500;
+}
+else if($.browser.firefox) {
+  mapper.mapDelayMult = 60;
+  mapper.chartDelayMult = 1000;
+}
+else {
+  mapper.mapDelayMult = 20;
+  mapper.chartDelayMult = 400;
+}
+
 (function() {
   // Converts a value between -1 and 1 to a hex of red or green with corresponding intensity
   mapper.fractionToGreenRedHex = function(fraction, progressive) {
