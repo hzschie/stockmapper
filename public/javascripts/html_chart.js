@@ -48,13 +48,14 @@
             })
             .appendTo($bar);
             
-      $bar.mouseover(function(e) {
-        var barTop = $bar.offset().top,
-            isVol = e.pageY - barTop > chgMaxH;
-        _this.trigger('inspect_bar', model, isVol ? $volBar : $chgBar, isVol, barTop + (isVol ? chgMaxH + 1 + volMaxH - 80 : -40) );
-      });
-      
-      setTimeout(function() { $bar.css({ display:'' }); }, getDelay(model, i));
+      setTimeout(function() { 
+        $bar.css({ display:'' });
+        $bar.mouseover(function(e) {
+          var barTop = $bar.offset().top,
+              isVol = e.pageY - barTop > chgMaxH;
+          _this.trigger('inspect_bar', model, isVol ? $volBar : $chgBar, isVol, barTop + (isVol ? chgMaxH + 1 + volMaxH - 80 : -40) );
+        });
+      }, getDelay(model, i));
     }
     
     function updateModel(model, i) {
@@ -133,12 +134,17 @@
       bars = bars.data(models.models, models.modelId);
 
       var exiting = 0; bars.exit().each(function() { exiting++; });
-      if(exiting == oldLength) getDelay = xtraDelay(200);//getDelay = xtraDelay( 200 + (oldLength - exiting) * 2);
-      else getDelay = xtraDelay(1000);//xtraDelay( 1000 + (oldLength - exiting) * 2);
-      bars.enter().append('div').each(addModel);
+      
+      Interval.callOnce({ fn:function() {
+        if(exiting == oldLength) getDelay = xtraDelay(200);//getDelay = xtraDelay( 200 + (oldLength - exiting) * 2);
+        else getDelay = xtraDelay(1000);//xtraDelay( 1000 + (oldLength - exiting) * 2);
+        bars.enter().append('div').each(addModel);
+      }, key:'chart_add' });
         
-      getDelay = xtraDelay(200);
-      bars.each(updateModel);
+      Interval.callOnce({ fn:function() {
+        getDelay = xtraDelay(200);
+        bars.each(updateModel);
+      }, key:'chart_update' });
       
       bars.exit()
         .each(function(model, i) {

@@ -53,11 +53,10 @@
       setTimeout(function() {
         $tag.css({ display:'' });
         $shadow.css({ display:'' });
+        $tag.mouseover(function() {
+          _this.trigger('inspect_tag', model, $tag);
+        });
       }, getDelay(model, i));
-      
-      $tag.mouseover(function() {
-        _this.trigger('inspect_tag', model, $tag);
-      });
     }
     
     function updateModel(model, i) {
@@ -98,7 +97,7 @@
         iDelay = function(model, i) { return (grid.c(i) + grid.r(i) / grid.rows) * 20; },
         xtraDelay = function(extra) { return function(model, i) { return extra + iDelay(model, i); }; };// slow device, make delay 1 sec longer
     function rebuild(collection, options, isNewCollection) {
-      var tt = Date.now();
+      var tt = dd1 = dd2 = Date.now();
       
       var oldGrid, oldRows;
       if(grid) {
@@ -106,24 +105,30 @@
         oldRows = grid.rows;
         updateBounds();
       }
+
       var tags = d3.select($map[0]).selectAll('li'),
           oldLength = tags[0].length;
       tags = tags.data(models.models, models.modelId);
       
       var exiting = 0; tags.exit().each(function() { exiting++; });
-      if(exiting == oldLength) {
-        getDelay = xtraDelay( 200 + (oldLength - exiting) * 2);
-      }
-      else {
-        getDelay = xtraDelay( 1000 + (oldLength - exiting) * 2);
-      }
-      tags.enter()
-        .append('li')
-        .each(addModel);
-        
-      getDelay = xtraDelay( 200);
-      tags
-        .each(updateModel);
+      
+      Interval.callOnce({ fn:function() {
+        if(exiting == oldLength) {
+          getDelay = xtraDelay( 200 + (oldLength - exiting) * 2);
+        }
+        else {
+          getDelay = xtraDelay( 1000 + (oldLength - exiting) * 2);
+        }
+        tags.enter()
+          .append('li')
+          .each(addModel);
+      }, key:'map_add' });
+
+      Interval.callOnce({ fn:function() {
+        getDelay = xtraDelay( 200);
+        tags
+          .each(updateModel);
+      }, key:'map_update' });
       
       tags.exit()
         .each(function(model, i) {
@@ -133,7 +138,7 @@
           }, (oldCells[model.index][0] + oldCells[model.index][1] / oldRows) * 20);
         });
         
-      console.log(Date.now() - tt + ' ms, MAP redraw');
+      console.log(Date.now() - tt + ' ms, MAP redraw', '\t\t\t');
     }
     
     function updateBounds() {
