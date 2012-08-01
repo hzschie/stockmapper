@@ -47,7 +47,6 @@
         left: grid.xi(i),
         top: grid.yi(i),
         visibility: 'hidden'
-        // display:'none'
       };
       $tag.css(pos);
       $shadow.css(pos);
@@ -55,9 +54,6 @@
       setTimeout(function() {
         $tag.css({ visibility: 'visible' });
         $shadow.css({ visibility: 'visible' });
-        
-        // $tag.css({ display:'' });
-        // $shadow.css({ display:'' });
         $tag.mouseover(function() {
           _this.trigger('inspect_tag', model, $tag);
         });
