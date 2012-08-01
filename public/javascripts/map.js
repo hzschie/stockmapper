@@ -141,7 +141,8 @@
           
         Interval.remove({ key:'map_update' });
         Interval.callOnce({ fn:function() {
-          getDelay = xtraDelay( 200);
+          sizeMult *= .75;
+          getDelay = xtraDelay(200);
           tags
             .each(updateModel);
             

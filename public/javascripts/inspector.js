@@ -74,7 +74,7 @@
       status.on('transition_done', function() {
         setTimeout(function() {
           $container.removeClass('suspended');
-        }, 400);
+        }, 600);
       });
     };
     

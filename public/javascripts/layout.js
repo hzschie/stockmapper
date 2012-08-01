@@ -17,11 +17,11 @@
     this.frameView = function(viewName) {
       switch(viewName) {
         case 'chart':
-          scrollTo($('.chart').offset().top);
+          scrollTo($chart.offset().top - $layout.offset().top);
           break;
         case 'map':
         default:
-          scrollTo(0);
+          scrollTo($map.offset().top - $layout.offset().top);
           break;
       }
     };
