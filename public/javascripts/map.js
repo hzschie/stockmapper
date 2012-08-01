@@ -57,6 +57,9 @@
         $tag.mouseover(function() {
           _this.trigger('inspect_tag', model, $tag);
         });
+        $tag.click(function() {
+          _this.trigger('select_tag', model, $tag);
+        });
       }, getDelay(model, i));
     }
     
@@ -94,6 +97,10 @@
         _map.updateTimeout = null;
         $tag.css(pos);
         $shadow.css(pos);
+        
+        if(i == models.length - 1) {
+          _this.trigger('transition_done');
+        }
       }, getDelay(model, i));
       _map.index = i;
     }

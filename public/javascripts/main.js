@@ -21,11 +21,7 @@ mapper.dataReady = function() {
           map.setModels(currentGroup.get('members'));
           chart.setModels(currentGroup.get('members'));
           panel.setSelectedGroup(currentGroup);
-          
-          $('.inspector').addClass('suspended');
-          setTimeout(function() {
-            $('.inspector').removeClass('suspended');
-          }, 2000);
+          inspector.suspendTillDone(map);
         }
         else
           throw new Error('Unknown group, ' + name);
@@ -57,6 +53,11 @@ mapper.dataReady = function() {
     
     panel.on('select_sort', function(sortVal) {
       viewState.set({ sort: sortVal }, { silent: true });
+      History.pushState(null, null, viewState.toUrl());
+    });
+    
+    map.on('select_tag', function(model, $tag) {
+      viewState.set({ q: model.id }, { silent: true });
       History.pushState(null, null, viewState.toUrl());
     });
     

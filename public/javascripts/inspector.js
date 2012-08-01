@@ -69,6 +69,15 @@
       inspectElement($tag, '.' + type, { x:20, y:20 });
     };
     
+    this.suspendTillDone = function(status) {
+      $container.addClass('suspended');
+      status.on('transition_done', function() {
+        setTimeout(function() {
+          $container.removeClass('suspended');
+        }, 400);
+      });
+    };
+    
     function inspectElement($tag, contentSelector, spacing, forcePoint) {
       $container.find('.content').removeClass('current');
       $container.find(contentSelector).addClass('current');
