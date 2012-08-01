@@ -23,26 +23,32 @@ html
       .views
         a MAP
         a CHART
-    ul.map
-    .chart
-      .ticks
-      .bars
-      .most_active
-        .arrow
-        .note VOLUME<br>Most Active Stock: 
-          span.sym BIRLACOT
-      .advances
-        .arrow
-        .note 
-          span.count 203
-          |  Stocks UP
-        .arrow.right
-      .declines
-        .arrow
-        .note 
-          span.count 203
-          |  Stocks DOWN
-        .arrow.right
+    
+    .layout
+      .details
+        .sym SYM
+        h3.name Amit was here
+      ul.map
+      .chart
+        .ticks
+        .bars
+        .most_active
+          .arrow
+          .note VOLUME<br>Most Active Stock: 
+            span.sym BIRLACOT
+        .advances
+          .arrow
+          .note 
+            span.count 203
+            |  Stocks UP
+          .arrow.right
+        .declines
+          .arrow
+          .note 
+            span.count 203
+            |  Stocks DOWN
+          .arrow.right
+          
     .inspector.hidden
       svg
         path(stroke="#ccc", fill="#fffdee")

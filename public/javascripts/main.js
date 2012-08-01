@@ -6,6 +6,7 @@ mapper.dataReady = function() {
         map = new mapper.Map($('.map')),
         chart = new mapper.HtmlChart($('.chart')),
         inspector = new mapper.Inspector($('.inspector')),
+        details = new mapper.Details($('.details')),
         viewState = new mapper.ViewState(),
         layout = new mapper.Layout(panel, map, chart),
         currentGroup = null,
@@ -32,6 +33,12 @@ mapper.dataReady = function() {
         currentSort = mapper.sortFunctions[sortId];
         currentGroup.set({ comparator: currentSort });
         panel.setSelectedSort(sortId);
+      }
+      
+      if(viewState.hasChanged('q')) {
+        var id = viewState.get('q'),
+            stock = mapper.stocks.get(id);
+        details.query(stock);
       }
     });
 

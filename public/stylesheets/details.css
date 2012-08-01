@@ -1,0 +1,9 @@
+.details {
+  color:#fff;
+  padding-bottom:20px;
+  font:16px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
+}
+.details > * {
+  display:inline-block;
+  margin-right:10px;
+}

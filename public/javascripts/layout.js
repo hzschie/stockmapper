@@ -2,10 +2,11 @@
   mapper.Layout = Layout;
   function Layout(panel, map, chart) {
     var $window = $(window),
+        $layout = $('.layout'),
         $panel = $('.panel'),
         $map = $('.map');
         $chart = $('.chart');
-    $map.css({ 'margin-top': panel.height() + 14 });
+    $layout.css({ 'margin-top': panel.height() + 14 });
     $chart.css({ 
       'min-height': $window.height() - panel.height() - 14 - 20,
       'padding-bottom': 20
@@ -16,7 +17,7 @@
     this.frameView = function(viewName) {
       switch(viewName) {
         case 'chart':
-          scrollTo($('.chart').offset().top - $('.map').offset().top);
+          scrollTo($('.chart').offset().top);
           break;
         case 'map':
         default:
