@@ -114,14 +114,14 @@
         updateBounds();
       }
 
-      var tags = d3.select($map[0]).selectAll('li.tag'),
-          oldLength = tags[0].length;
-      tags = tags.data(models.models, models.modelId);
-      
-      var exiting = 0; tags.exit().each(function() { exiting++; });
-      
       Interval.remove({ key:'map_add' });
       Interval.callOnce({ fn:function() {
+        var tags = d3.select($map[0]).selectAll('li.tag'),
+            oldLength = tags[0].length;
+        tags = tags.data(models.models, models.modelId);
+
+        var exiting = 0; tags.exit().each(function() { exiting++; });
+        
         if(exiting == oldLength) {
           getDelay = xtraDelay( 200 + (oldLength - exiting) * 2);
         }
@@ -144,26 +144,25 @@
             }, 0);
           }
         }, key:'map_update' });
-      }, key:'map_add' });
-      
-      tags.exit()
-        .each(function(model, i) {
-          var _map = model._map,
-              $tag = model._map.$tag,
-              $shadow = model._map.$shadow,
-              index = model._map.index,
-              oldCell = oldCells[index],
-              delay = oldCell ? (oldCells[index][0] + oldCells[index][1] / oldRows) * .5 * mapper.perf.mapDelayMult : 0;
-          
-          $tag.removeClass('tag');
-          setTimeout(function() {
-            $tag.remove();
-            $shadow.remove();
-          }, delay);
-          delete model._map;
-        });
         
-      console.log(Date.now() - tt + ' ms, MAP redraw', '\t\t\t');
+        tags.exit()
+          .each(function(model, i) {
+            var _map = model._map,
+                $tag = model._map.$tag,
+                $shadow = model._map.$shadow,
+                index = model._map.index,
+                oldCell = oldCells[index],
+                delay = oldCell ? (oldCells[index][0] + oldCells[index][1] / oldRows) * .5 * mapper.perf.mapDelayMult : 0;
+
+            $tag.removeClass('tag');
+            setTimeout(function() {
+              $tag.remove();
+              $shadow.remove();
+            }, delay);
+            delete model._map;
+          });
+      }, key:'map_add' });
+      // console.log(Date.now() - tt + ' ms, MAP redraw', '\t\t\t');
     }
     
     function updateBounds() {

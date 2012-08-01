@@ -1,94 +1,5 @@
-mapper.stocks = new Backbone.Collection();
-mapper.groups = new Backbone.Collection();
-
-// Socket
-var socket = io.connect();
-socket.on('update', function(multiStockData) {
-  _.forEach(multiStockData, function(data) {
-    if(!data) return;
-    try {
-      /* data[0] is type (ie. 'group' or 'stock'). data[1] is id */
-      mapper[ data[0] + 's' ].get(data[1]).update(data);
-    }
-    catch(e) {
-      console.log("couldn't update:", data);
-      console.error(e.message);
-    }
-    // Remove stocks with no data
-/*  var stock = mapper[ data[0] + 's' ].get(data[1]);
-    if(stock && (stock.get('lastTrade') == null || isNaN(stock.get('lastTrade')))) {
-      var stockId = stock.get('id');
-      console.log('elim', stock.get('sym'));
-      _.forEach(
-        mapper.groups.filter(function(group) { 
-          return group.get('members').get(stockId);
-        }),
-        function(group) {
-          group.get('members').remove(stock);
-        }
-      );
-      mapper.stocks.remove(stock);
-    }*/
-  });
-});
-
-// Stocks JSON
-$.getJSON(mapper.config.stocksUrl, function(response) {
-  var field, i,
-      headers = response.headers,
-      hash;
-  _.each(response.data, function(values) {
-    hash = {};
-    for(field = headers[0], i = 0; i < headers.length; field = headers[++i]) {
-      hash[field] = values[i];
-    }
-    
-    var stock = new mapper.Stock(hash);
-    // socket.emit('subscribe', [stock.get('sym')]);// This would be individual stock subscription
-    mapper.stocks.add(stock);
-  });
-  socket.emit('subscribe', mapper.stocks.pluck('id'));
-  tryPopulateGroups();
-});
-
-// Groups JSON
-$.getJSON(mapper.config.groupsUrl, function(response) {
-  _.each(response, function(groupJson) {
-    var group = new mapper.StockGroup(groupJson);
-    if(group.get('ids').length) mapper.groups.add(group);
-  });
-  var groupIds = _.reject(mapper.groups.pluck('id'), function(id) { return id == null; });
-  groupIds.length && socket.emit('subscribe', groupIds);
-  tryPopulateGroups();
-});
-
-// Put stocks into groups
-function tryPopulateGroups(groups) {
-  if(mapper.stocks.length && mapper.groups.length) {
-    mapper.groups.forEach(function(group) {
-      var members = group.get('members');
-      _.each(group.get('ids'), function(id) {
-        members.add(mapper.stocks.get(id));
-      });
-    });
-
-    // Create the "All" group, if defined
-    if(typeof(mapper.config.allGroup) == 'string') {
-      mapper.allGroup = mapper.groups.where({ name:mapper.config.allGroup })[0];
-    }
-    else {
-      mapper.allGroup = new mapper.StockGroup(
-        $.extend({ members: mapper.stocks.models }, mapper.config.allGroup)
-      );
-      mapper.groups.add(mapper.allGroup);
-    }
-    
-    buildView();
-  }
-}
-
 // Initialize view and Historty
-function buildView() {
+mapper.dataReady = function() {
   // Init views on document ready
   $(function() {
     var panel = new mapper.Panel($('.panel'), mapper.groups),
@@ -102,20 +13,11 @@ function buildView() {
         
     viewState.on('change', function(viewState) {
       if(viewState.hasChanged('filter')) {
-        if(currentGroup) {
-          currentGroup.get('members').off('change', reSortIfNeeded);
-        }
-        
         var name = viewState.get('filter');
         currentGroup = !name ? mapper.allGroup : mapper.groups.where({urlName:name})[0];
         
         if(currentGroup) {
-          if(currentGroup.get('members').comparator != currentSort) {
-            currentGroup.get('members').comparator = currentSort;
-            currentGroup.get('members').sort();
-            
-            currentGroup.get('members').on('change', reSortIfNeeded);
-          }
+          currentGroup.set({ comparator: currentSort });
           map.setModels(currentGroup.get('members'));
           chart.setModels(currentGroup.get('members'));
           panel.setSelectedGroup(currentGroup);
@@ -132,12 +34,7 @@ function buildView() {
       if(viewState.hasChanged('sort')) {
         var sortId = viewState.get('sort') || 'sym';
         currentSort = mapper.sortFunctions[sortId];
-        
-        // TODO: move currentSort logic into StockGroup, so that it can re-sort when members' data changes... I think.
-        if(currentGroup.get('members').comparator != currentSort) {
-          currentGroup.get('members').comparator = currentSort;
-          currentGroup.get('members').sort();
-        }
+        currentGroup.set({ comparator: currentSort });
         panel.setSelectedSort(sortId);
       }
     });
@@ -164,8 +61,6 @@ function buildView() {
     });
     
     panel.on('select_view', function(viewName) {
-      // viewState.set({ view: viewName }, { silent: true });
-      // History.pushState(null, null, viewState.toUrl());
       layout.frameView(viewName);
     });
     
@@ -180,21 +75,5 @@ function buildView() {
     chart.on('inspect_bar', function(model, $subBar, isVol, yFixed) {
       inspector.inspectBar(model, $subBar, isVol, yFixed);
     });
-
-    var resortTimeoutId = null;
-    function reSortIfNeeded(changedModel) {
-/*    if(!changedModel.hasChanged(currentSort.prop)) {
-        return;
-      }*/
-
-      if(resortTimeoutId != null) {
-        clearTimeout(resortTimeoutId);
-      }
-      resortTimeoutId = setTimeout(function() {
-        console.log('resort now');
-        currentGroup.get('members').sort();
-        resortTimeoutId = null;
-      }, 200);
-    }
   });
-}
+};

@@ -20,6 +20,9 @@
   Interval.LOW = PRIORITY_LOW;
   Interval.FREETIME = PRIORITY_FREETIME;
   
+  Interval.MAX = MAX_FRAMETIME;
+  Interval.AVG = AVG_FRAMETIME;
+  
   function IntervalService() {
     var subscribersArray = [ [], [], [], [] ], // sub-arrays correspond to priorities
         subscribersTable = {},

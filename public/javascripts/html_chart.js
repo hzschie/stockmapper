@@ -141,14 +141,14 @@
         
       /* ------ UPDATE BARS ------ */
       var tt = Date.now();
-      var bars = d3.select($bars[0]).selectAll('.bar.ok');
-      oldLength = bars[0].length;
-      bars = bars.data(models.models, models.modelId);
-
-      var exiting = 0; bars.exit().each(function() { exiting++; });
       
       Interval.remove({ key:'chart_add' });
       Interval.callOnce({ fn:function() {
+        var bars = d3.select($bars[0]).selectAll('.bar.ok');
+        oldLength = bars[0].length;
+        bars = bars.data(models.models, models.modelId);
+
+        var exiting = 0; bars.exit().each(function() { exiting++; });
         if(exiting == oldLength) getDelay = xtraDelay(200);//getDelay = xtraDelay( 200 + (oldLength - exiting) * 2);
         else getDelay = xtraDelay(1000);//xtraDelay( 1000 + (oldLength - exiting) * 2);
         bars.enter().append('div').each(addModel);
@@ -164,18 +164,18 @@
             }, 0);
           }
         }, key:'chart_update' });
+        
+        bars.exit()
+          .each(function(model, i) {
+            var _chart = model._chart,
+                $bar = _chart.$bar;
+            $bar.removeClass('ok');
+            setTimeout(function() {
+              $bar.remove();
+            }, .5 * mapper.perf.chartDelayMult * model._chart.index / oldLength);
+            delete model._chart;
+          });
       }, key:'chart_add' });
-      
-      bars.exit()
-        .each(function(model, i) {
-          var _chart = model._chart,
-              $bar = _chart.$bar;
-          $bar.removeClass('ok');
-          setTimeout(function() {
-            $bar.remove();
-          }, .5 * mapper.perf.chartDelayMult * model._chart.index / oldLength);
-          delete model._chart;
-        });
         
       /* ------ UPDATE TICKS ------ */
       for(var type = 0; type < 2; type++) {
@@ -207,8 +207,7 @@
           });
         ticks.exit().remove();
       }
-      
-      console.log(Date.now() - tt + ' ms, HTML CHART redraw');
+      // console.log(Date.now() - tt + ' ms, HTML CHART redraw');
     }
     
     function updateBounds() {

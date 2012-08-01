@@ -77,43 +77,81 @@ var StockGroup = mapper.StockGroup = Backbone.Model.extend(
       this.set(hash);
 
       var _this = this,
-          timeoutId = null,
           members = this.get('members');
-      var lbl='Technology';// TEMP
+      members.on('add', function(model) {
+        if( model.get('hasData') ) _this.updateCounts();
+      });
       members.on('change:changeDir change:volume', function(model) {
-        // Recalculate ups and downs figures
-        // Use Interval to collapse recalculations, to avoid doing it
-        // needlessly many times during a large update
-        Interval.callOnce({ fn:function() {
-          var upsAndDowns = [0,0],
-              volumeUp = 0,
-              volumeDown = 0,
-              volumeTotal = 0,
-              vol, dir;
-          members.each(function(model) {
-            vol = model.attributes.volume || 0;
-            dir = model.attributes.changeDir;
-            if(dir == 1) {
-              upsAndDowns[0] += 1;
-              volumeUp += vol;
-            }
-            else if(dir == -1) {
-              upsAndDowns[1] += 1;
-              volumeDown += vol;
-            }
-            volumeTotal += vol;
-          });
-          _this.set({
-            upsAndDowns: upsAndDowns,
-            volumeUp: volumeUp,
-            volumeDown: volumeDown,
-            volumeTotal: volumeTotal
-          });
-        }, key:_this.get('urlName') }, Interval.LOW);
-        
+        _this.updateCounts();
+        _this.resortMembers(false);
+      });
+      
+      this.on('change:comparator', function(_this) {
+        _this.get('members').comparator = _this.get('comparator');
+        _this.resortMembers(true);
       });
       
       hash.members.modelId = function(model) { return model.id; };
+    },
+    
+    resortMembers: function(expedite) {
+      if(expedite) {
+        this._resortMembers();
+        return;
+      }
+      var _this = this;
+      if(!this.resortPending) {
+        this.resortPending = true;
+        Interval.callOnce({ fn:function() {
+          _this.resortPending = false;
+          _this._resortMembers();
+        }, key:'resort_' + _this.get('urlName') }, Interval.LOW);
+      }
+    },
+    _resortMembers: function() {
+      if( !this.get('comparator') ) return;
+      this.get('members').sort();
+    },
+
+    // Use Interval to collapse recalculations, to avoid doing it
+    // needlessly many times during a large update
+    updateCounts: function() {
+      var _this = this;
+      if(!this.updatePending) {
+        this.updatePending = true;
+        Interval.callOnce({ fn:function() {
+          _this.updatePending = false;
+          _this._updateCounts();
+        }, key:'update_' + _this.get('urlName') }, Interval.LOW);
+      }
+    },
+    // Recalculate ups and downs figures
+    _updateCounts: function() {
+      var members = this.get('members'),
+          upsAndDowns = [0,0],
+          volumeUp = 0,
+          volumeDown = 0,
+          volumeTotal = 0,
+          vol, dir;
+      members.each(function(model) {
+        vol = model.attributes.volume || 0;
+        dir = model.attributes.changeDir;
+        if(dir == 1) {
+          upsAndDowns[0] += 1;
+          volumeUp += vol;
+        }
+        else if(dir == -1) {
+          upsAndDowns[1] += 1;
+          volumeDown += vol;
+        }
+        volumeTotal += vol;
+      });
+      this.set({
+        upsAndDowns: upsAndDowns,
+        volumeUp: volumeUp,
+        volumeDown: volumeDown,
+        volumeTotal: volumeTotal
+      });
     },
     
     update: function(array) {
