@@ -7,8 +7,8 @@ $.browser.firefox = navigator.userAgent.match(/firefox/i) !== null;
 
 mapper.perf = {};
 if($.browser.touchDevice) {
-  mapper.perf.mapDelayMult = 150;//0;//80;
-  mapper.perf.chartDelayMult = 2500;//0;//1500;
+  mapper.perf.mapDelayMult = 0;//150;//0;//80;
+  mapper.perf.chartDelayMult = 0;//2500;//0;//1500;
   mapper.perf.animate = false;
 }
 else if($.browser.firefox) {
