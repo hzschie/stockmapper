@@ -98,9 +98,9 @@
       _map.index = i;
     }
     
-    var delayMult = mapper.mapDelayMult,
+    var delayMult = mapper.perf.mapDelayMult,
         getDelay,
-        iDelay = function(model, i) { return (grid.c(i) + grid.r(i) / grid.rows) * mapper.mapDelayMult; },
+        iDelay = function(model, i) { return (grid.c(i) + grid.r(i) / grid.rows) * delayMult; },
         xtraDelay = function(extra) { return function(model, i) { return extra + iDelay(model, i); }; };// slow device, make delay 1 sec longer
     function rebuild(collection, options, isNewCollection) {
       var tt = dd1 = dd2 = Date.now();
@@ -135,6 +135,12 @@
           getDelay = xtraDelay( 200);
           tags
             .each(updateModel);
+            
+          if(mapper.perf.animate != false && models.at(0).get('hasData') && !$map.hasClass('animated')) {
+            setTimeout(function() {
+              $map.addClass('animated');
+            }, 0);
+          }
         }, key:'map_update' });
       }, key:'map_add' });
       
@@ -145,7 +151,7 @@
               $shadow = model._map.$shadow,
               index = model._map.index,
               oldCell = oldCells[index],
-              delay = oldCell ? (oldCells[index][0] + oldCells[index][1] / oldRows) * 20 : 0;
+              delay = oldCell ? (oldCells[index][0] + oldCells[index][1] / oldRows) * .5 * mapper.perf.mapDelayMult : 0;
           
           $tag.removeClass('tag');
           setTimeout(function() {

@@ -5,17 +5,19 @@ $.browser.android = navigator.userAgent.match(/android/i) !== null;
 $.browser.touchDevice = $.browser.android || $.browser.iOS;
 $.browser.firefox = navigator.userAgent.match(/firefox/i) !== null;
 
+mapper.perf = {};
 if($.browser.touchDevice) {
-  mapper.mapDelayMult = 80;
-  mapper.chartDelayMult = 1500;
+  mapper.perf.mapDelayMult = 150;//0;//80;
+  mapper.perf.chartDelayMult = 2500;//0;//1500;
+  mapper.perf.animate = false;
 }
 else if($.browser.firefox) {
-  mapper.mapDelayMult = 60;
-  mapper.chartDelayMult = 1000;
+  mapper.perf.mapDelayMult = 60;
+  mapper.perf.chartDelayMult = 1000;
 }
 else {
-  mapper.mapDelayMult = 20;
-  mapper.chartDelayMult = 400;
+  mapper.perf.mapDelayMult = 20;
+  mapper.perf.chartDelayMult = 400;
 }
 
 (function() {

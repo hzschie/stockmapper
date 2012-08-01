@@ -4,10 +4,6 @@
   z-index:0;
   margin:0 auto;
   margin-bottom:40px;
-  -webkit-transition:height .6s;
-  -moz-transition:height .6s;
-  -ms-transition:height .6s;
-  transition:height .6s;
 }
 
 .map div.shadows {
@@ -30,10 +26,6 @@
   font-weight:bold;
   letter-spacing:-1px;
   position:absolute;
-  -webkit-transition:left .6s, top .6s;
-  -moz-transition:left .6s, top .6s;
-  -ms-transition:left .6s, top .6s;
-  transition:left .6s, top .6s;
 }
 
 .map .shadows div {
@@ -89,4 +81,17 @@
   position:absolute;
   content:'';
   background:transparent url('/images/inner_dropshadow.png') no-repeat left top;
+}
+
+.map.animated {
+  -webkit-transition:height .6s;
+  -moz-transition:height .6s;
+  -ms-transition:height .6s;
+  transition:height .6s;
+}
+.map.animated > li, .map.animated .shadows div {
+  -webkit-transition:left .6s, top .6s;
+  -moz-transition:left .6s, top .6s;
+  -ms-transition:left .6s, top .6s;
+  transition:left .6s, top .6s;
 }

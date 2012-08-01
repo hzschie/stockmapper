@@ -38,14 +38,20 @@
               visibility:'hidden',
               height: chgMaxH + 1 + volMaxH
             }),
+          chgPct = model.get('changePct') || 0,
           $chgBar = model._chart.$chgBar = $('<div></div>')
             .addClass('chg')
+            .css({
+              'top': chgMaxH - chgY(chgPct),
+              'height': chgY(chgPct)
+            })            
             .appendTo($bar),
           $volBar = model._chart.$volBar = $('<div></div>')
             .addClass('vol')
             .css({
               'top': chgMaxH + 1,
-              'background-color': '#999'
+              'background-color': '#999',
+              'height': volY(model.get('volume'))
             })
             .appendTo($bar);
             
@@ -115,7 +121,7 @@
     
     var oldLength,
         getDelay,
-        iDelay = function(model, i) { return mapper.chartDelayMult * i / models.length; },
+        iDelay = function(model, i) { return mapper.perf.chartDelayMult * i / models.length; },
         xtraDelay = function(extra, fn) { 
           return function(model, i) { return extra + (fn ? fn(model, i) : iDelay(model, i)); };
         };// slow device, make delay 1 sec longer
@@ -149,6 +155,12 @@
         Interval.callOnce({ fn:function() {
           getDelay = xtraDelay(200);
           bars.each(updateModel);
+          
+          if(mapper.perf.animate != false && models.at(0).get('hasData') && !$chart.hasClass('animated')) {
+            setTimeout(function() {
+              $chart.addClass('animated');
+            }, 0);
+          }
         }, key:'chart_update' });
       }, key:'chart_add' });
       
@@ -159,7 +171,7 @@
           $bar.removeClass('ok');
           setTimeout(function() {
             $bar.remove();
-          }, 400 * model._chart.index / oldLength);
+          }, .5 * mapper.perf.chartDelayMult * model._chart.index / oldLength);
           delete model._chart;
         });
         
@@ -192,12 +204,6 @@
             }).children().css({ 'display': !type || (i % 2) ? 'block' : 'none' });
           });
         ticks.exit().remove();
-      }
-      
-      if(models.at(0).get('hasData') && !$chart.hasClass('animated')) {
-        setTimeout(function() {
-          $chart.addClass('animated');
-        }, 0);
       }
       
       console.log(Date.now() - tt + ' ms, HTML CHART redraw');
