@@ -121,11 +121,13 @@
     
     var oldLength,
         getDelay,
-        iDelay = function(model, i) { return mapper.perf.chartDelayMult * i / models.length; },
+        sizeMult = 1,
+        iDelay = function(model, i) { return mapper.perf.chartDelayMult * sizeMult * i / models.length; },
         xtraDelay = function(extra, fn) { 
           return function(model, i) { return extra + (fn ? fn(model, i) : iDelay(model, i)); };
         };// slow device, make delay 1 sec longer
     function rebuild(collection, options, isNewCollection) {
+      sizeMult = models.length > 1000 ? 3 : 1;
       updateHelpers();
       updateBounds();
       
