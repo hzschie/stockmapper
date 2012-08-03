@@ -16,7 +16,6 @@
       template.applyBindings('stock', $details, model);
       model.getTimeSeries();
       model.on('change:price_series', function(model) {
-        console.log(model.get('price_series'));
         graph.render(model.get('price_series'));
       });
     };

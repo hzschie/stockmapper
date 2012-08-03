@@ -12,8 +12,6 @@
   display:block;
 }
 .graph svg {
-  width:600px;
-  height:250px;
 }
 
 .graph .axis path {

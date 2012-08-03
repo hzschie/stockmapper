@@ -1,4 +1,9 @@
 {
+  "marketHours": {
+    "t0": 560,
+    "t1": 960
+  },
+  
   "groupsUrl": "/data/blufin/groups.json",
   "stocksUrl": "/data/blufin/stocks.json",
   "allGroup": "Broad Market India Index",
