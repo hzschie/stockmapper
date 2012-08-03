@@ -7,3 +7,29 @@
   display:inline-block;
   margin-right:10px;
 }
+
+.graph {
+  display:block;
+}
+.graph svg {
+  width:600px;
+  height:250px;
+}
+
+.graph .axis path {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1px;
+}
+
+.graph .axis .tick {
+  fill: none;
+  stroke: #fff;
+}
+.graph .y.axis .tick {
+  stroke: #ccc;
+  stroke-width: .5px;
+}
+.graph .axis text {
+  fill: #fff;
+}

@@ -23,6 +23,22 @@ var Stock = mapper.Stock = Backbone.Model.extend(
       hash['isVeryActive'] = hash.volume / (hash.avgVolume || hash.volume) >= 1.96;
       hash['hasData'] = true;
       this.set(hash);
+    },
+    
+    getTimeSeries: function() {
+      var setter = {},
+          _this = this;
+      $.getJSON(
+        '/intraday/' + this.id,
+        function(data) {
+          for(var prop in data) {
+            if(data[prop].length) {
+              setter[prop + '_series'] = new mapper.TimeSeries(data, prop);
+            }
+          }
+          _this.set(setter);
+        }
+      );
     }
   },
   // STATIC methods
@@ -199,4 +215,4 @@ mapper.sortFunctions = {
   chg: mapper.sortBy('changePct'),
   vol: mapper.sortBy('volume'),
   cap: mapper.sortBy('marketCap')
-};
+};  
