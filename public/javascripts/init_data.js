@@ -1,10 +1,4 @@
 (function() {
-  var hours = mapper.config.marketHours,
-      now = Date.now(),
-      today = now - (now % 8.64e7);
-  hours.date0 = new Date(today + hours.t0 * 60000);
-  hours.date1 = new Date(today + hours.t1 * 60000);
-  
   mapper.stocks = new Backbone.Collection();
   mapper.groups = new Backbone.Collection();
 

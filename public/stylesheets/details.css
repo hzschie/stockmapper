@@ -10,23 +10,40 @@
 
 .graph {
   display:block;
+  font-size:12px;
 }
 .graph svg {
 }
 
+.graph .graph_path {
+  stroke:#fff;
+  fill:none;
+  shape-rendering: geometricPrecision;
+}
+.graph .graph_area {
+  stroke:none;
+  fill:rgba(255,255,255,.1);
+  shape-rendering: geometricPrecision;
+}
+.graph .reference {
+  stroke:#f66;
+}
+
+.graph .axis {
+  shape-rendering: crispEdges;
+}
 .graph .axis path {
   fill: none;
   stroke: #fff;
   stroke-width: 1px;
 }
-
 .graph .axis .tick {
   fill: none;
   stroke: #fff;
+  stroke-width: 1px;
 }
 .graph .y.axis .tick {
-  stroke: #ccc;
-  stroke-width: .5px;
+  stroke: rgba(255,255,255,.35);
 }
 .graph .axis text {
   fill: #fff;

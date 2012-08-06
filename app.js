@@ -53,8 +53,14 @@ var dataConfig = JSON.stringify(JSON.parse(
   fs.readFileSync(__dirname + '/public/data/' + dataDomain + '/config.json', 'utf8')
 ));
 
-app.get('/intraday/:id', function(req, res) {
+app.get('/series/intraday/:id', function(req, res) {
   dataSource.getIntraday(
+    req.params.id,
+    function(data) { res.json(data); }
+  );
+});
+app.get('/series/daily/:id', function(req, res) {
+  dataSource.getDaily(
     req.params.id,
     function(data) { res.json(data); }
   );

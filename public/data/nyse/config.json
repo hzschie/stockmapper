@@ -1,4 +1,8 @@
 {
+  "marketHours": {
+    "t0": 570,
+    "t1": 960
+  },
   "groupsUrl": "/data/nyse/groups.json",
   "stocksUrl": "/data/nyse/stocks.json",
   

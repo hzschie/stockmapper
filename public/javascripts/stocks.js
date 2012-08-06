@@ -33,7 +33,12 @@ var Stock = mapper.Stock = Backbone.Model.extend(
         function(data) {
           for(var prop in data) {
             if(data[prop].length) {
-              setter[prop + '_series'] = new mapper.TimeSeries(data, prop);
+              var ts = new mapper.TimeSeries(data, prop);
+              setter[prop + '_series'] = ts;
+              
+              if(prop == 'price') {
+                ts.ref = _this.get('previous');
+              }
             }
           }
           _this.set(setter);
@@ -51,6 +56,7 @@ var Stock = mapper.Stock = Backbone.Model.extend(
       { name:'lastTradeDate', isNum:false },
       { name:'lastTradeTime', isNum:false },
       { name:'change', isNum:true },
+      { name:'previous', isNum:true },
       { name:'open', isNum:true },
       { name:'high', isNum:true },
       { name:'low', isNum:true },
