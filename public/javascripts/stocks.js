@@ -29,7 +29,7 @@ var Stock = mapper.Stock = Backbone.Model.extend(
       var setter = {},
           _this = this;
       $.getJSON(
-        '/intraday/' + this.id,
+        '/series/intraday/' + this.id,
         function(data) {
           for(var prop in data) {
             if(data[prop].length) {

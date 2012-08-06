@@ -21,12 +21,12 @@ function createGroups(callback) {
       .reset();
   
     indexesRaw.forEach(function(index, i) {
-      var indexId = index.IndexId;
+      var indexId = index.id;// IndexId
       groups[indexId] = {
         id: indexId,
-        name: index.IndexName,
-        nickname: index.IndexName.replace(/^blufin /i, '').replace(/ index$/i, '').replace(/ and /, ' & '),
-        type: index.Category,
+        name: index.n,// IndexName
+        nickname: index.n.replace(/^blufin /i, '').replace(/ index$/i, '').replace(/ and /, ' & '),
+        type: index.c,// Category
         ids: []
       };
     });
@@ -45,26 +45,26 @@ function createStocks(callback) {
     var stocksRaw = JSON.parse(body),
         broadGroup = groups['1000'];
     stocksRaw.forEach(function(stock) {
-      var sym = stock.ScripId;
-      stocks[sym] = stocks[sym] || [stock.ScripCode, stock.ScripName, sym];
+      var sym = stock.id;// ScripId
+      stocks[sym] = stocks[sym] || [stock.sc, stock.n, sym];//[ScripCode, ScripName, sym]
       
-      var sector = stock.Sector,
-          capitalization = stock.Capitalization,
-          style = stock.Style,
+      var sector = stock.sec,// Sector
+          capitalization = stock.c,// Capitalization
+          style = stock.st,// Style
           crosstab = (capitalization + style).replace(/Index/, '');
 
       cursor
-        .hex('#6666ff').write('\n' + stock.ScripId)
-        .hex('#3333aa').write(' (' + stock.ScripName + '):\n');
+        .hex('#6666ff').write('\n' + stock.id)
+        .hex('#3333aa').write(' (' + stock.n + '):\n');
 
       for(var indexId in groups) {
         var group = groups[indexId];
         if(group.name == sector || group.name == capitalization || group.name == style || group.name == crosstab || group == broadGroup) {
-          group.ids.push(stock.ScripCode);
+          group.ids.push(stock.sc);// ScripCode
           
           cursor
             .hex('#3333aa').write('Add ')
-            .hex('#6666ff').write(stock.ScripId)
+            .hex('#6666ff').write(stock.id)
             .hex('#3333aa').write(' to ')
             .hex('#6666ff').write(group.name + '\n');
         }

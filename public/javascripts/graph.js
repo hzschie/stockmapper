@@ -38,7 +38,6 @@
           .ticks(4).orient("right")
           .tickPadding(-3);
     this.render = function(series) {
-      series.ref = series.max + .29;// TEMP!!
       var hours = mapper.config.marketHours,
           dayOf = series.t0 - (series.t0 % 8.64e7),
           date0 = new Date(dayOf + hours.t0 * 60000),
@@ -48,7 +47,7 @@
       interval = series.interval;
       var min = Math.min(series.ref, series.min),
           max = Math.max(series.ref, series.max),
-          dPad = (max - min) * .1;console.log(min,max);
+          dPad = (max - min) * .1;
       x.domain([date0, date1]);
       y.domain([min - dPad, max + dPad]);
       xax.call(xAxis);
