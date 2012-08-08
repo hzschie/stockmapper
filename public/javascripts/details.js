@@ -15,7 +15,7 @@
     
     this.query = function(model) {
       if(!model) {
-        $details.show().css({ opacity:0, height: 0 });
+        $details.css({ opacity:0, height: 0 });
         return;
       }
       

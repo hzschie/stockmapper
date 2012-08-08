@@ -50,7 +50,7 @@ mapper.config.getPanelGroupHtml = function(group, $container) {
 mapper.config.getPanelBindings = function(bindings) {
   return {
     blufin_index: [
-      { $:'.change', field:'change', formatter:mapper.Template.blankIfNull(mapper.Template.changeFormat) },
+      { $:'.change', field:'changePct', formatter:mapper.Template.blankIfNull(mapper.Template.postfix(mapper.Template.changeFormat, '%')) },
       { $:'.value', field:'value', formatter:mapper.Template.blankIfNull(mapper.Template.commaFormat) },
       { $:null, field:'changePct', formatter:function(changePct, $container) {
         if(changePct == null) return;
