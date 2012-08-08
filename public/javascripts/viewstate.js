@@ -10,7 +10,8 @@ var ViewState = mapper.ViewState = Backbone.Model.extend(
           params = paramsString && paramsString.split('&'),
           attribs = {
             filter: null,
-            sort: null
+            sort: null,
+            q: null
           };
           
       _.forEach(params, function(param) {

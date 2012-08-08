@@ -7,7 +7,7 @@ mapper.dataReady = function() {
         chart = new mapper.HtmlChart($('.chart')),
         inspector = new mapper.Inspector($('.inspector')),
         details = new mapper.Details($('.details')),
-        viewState = new mapper.ViewState(),
+        viewState = vvv = new mapper.ViewState(),
         layout = new mapper.Layout(panel, map, chart),
         currentGroup = null,
         currentSort = mapper.sortFunctions['sym'];

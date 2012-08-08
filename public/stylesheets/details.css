@@ -2,13 +2,14 @@
   color:#fff;
   padding-bottom:20px;
   font:16px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
-  position:absolute;
-  z-index:1;
-  left:0;
-  right:0;
   padding:10px;
-
-  background: #000;
+  height:0;
+  opacity:0;
+  
+  -webkit-transition:height .6s, opacity .6s;
+  -moz-transition:height .6s, opacity .6s;
+  -ms-transition:height .6s, opacity .6s;
+  transition:height .6s, opacity .6s;
 }
 .details > * {
   display:inline-block;

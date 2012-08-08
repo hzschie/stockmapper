@@ -58,7 +58,6 @@
         d++;
         t += 8.64e7;
       }
-      console.log(domain,range);
       x.domain(domain);
       x.range(range);
       // x.domain([date0, date1]);
