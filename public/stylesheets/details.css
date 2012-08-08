@@ -33,6 +33,10 @@
   fill:rgba(255,255,255,.1);
   shape-rendering: geometricPrecision;
 }
+.graph .volume_chart {
+  stroke:#fff;
+  shape-rendering: crispEdges;/*geometricPrecision*/
+}
 .graph .reference {
   stroke:#f66;
 }

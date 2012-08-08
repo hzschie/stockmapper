@@ -2,59 +2,79 @@
   mapper.Graph = Graph;
   var T=0,R=1,B=2,L=3;
   function Graph($graph) {
-    var w = 600,
-        h = 200,
+    var marketHours = mapper.config.marketHours,
+        w = 600,
+        priceH = 200,
+        gap = 20,
+        volH = 80,
+        h = priceH + volH + gap,
         pad = [0, 20, 20, 0],
-        svg = d3.select($graph[0]).append('svg').attr('width', w + 'px').attr('height', h + 'px'),
+        svg = d3.select($graph[0]).append('svg').attr('width', (w+pad[L]+pad[R]) + 'px').attr('height', (h+pad[T]+pad[B]) + 'px'),
         xax = svg.append("svg:g")
           .attr("class", "x axis")
-          .attr("transform", "translate(0," + (h-pad[B]) + ")"),
-        yax = svg.append("svg:g")
+          .attr("transform", "translate(0," + (priceH+pad[T]) + ")"),
+        priceAx = svg.append("svg:g")
           .attr("class", "y axis")
-          .attr("transform", "translate(" + (w-pad[R]) + ",0)"),
-        area = svg.append('path')
+          .attr("transform", "translate(" + (w+pad[L]) + ",0)"),
+        volAx = svg.append("svg:g")
+          .attr("class", "y axis")
+          .attr("transform", "translate(" + (w+pad[L]) + "," + (priceH + pad[T] + gap) + ")"),
+        priceArea = svg.append('path')
           .attr('class', 'graph_area'),
-        path = svg.append('path')
+        pricePath = svg.append('path')
           .attr('class', 'graph_path')
           .attr('stroke-width', 1.5),
+        volChart = svg.append('g')
+          .attr('class', 'volume_chart')
+          .attr('stroke-width', 1)
+          .attr("transform", "translate(0," + (priceH + pad[T] + gap) + ")"),
         reference = svg.append('line')
           .attr('class', 'reference')
           .attr('stroke-dasharray', '4 2')
           .attr('x1', pad[L])
-          .attr('x2', w-pad[R]),
-        offset = 0,
-        x = d3.time.scale.utc().range([pad[L], w-pad[R]]),
+          .attr('x2', w+pad[L]),
+
+        x = d3.time.scale.utc().range([0, w]),
         xt = function(slice,i) { return x(slice.t); },
-        y = d3.scale.linear().range([h-pad[B], pad[T]]),
-        yPrice = function(slice, i) { return y(slice.price); },
-        dLine = d3.svg.line().x(xt).y(yPrice),
-        dArea = d3.svg.area().x(xt).y1(yPrice).y0(h-pad[B]),
+        isWithinMarketHours = function(slice) { var t = (slice.t % 8.64e7) / 60000; return t >= marketHours.t0 && t <= marketHours.t1; },
+        
+        yp = d3.scale.linear().range([priceH, 0]),
+        yPrice = function(slice, i) { return yp(slice.price); },
+
+        yv = d3.scale.linear().range([volH, 0]),
+        yVol = function(slice, i) { var yvv = yv(slice.volume); return yvv == volH ? volH : Math.min(volH-1, yvv); },
+        
+        dLine = d3.svg.line().defined(isWithinMarketHours).x(xt).y(yPrice),
+        dArea = d3.svg.area().defined(isWithinMarketHours).x(xt).y1(yPrice).y0(priceH+pad[T]),
         xAxis = d3.svg.axis().scale(x)
           .ticks(d3.time.hours, 1)
-          .tickSize(4, 0, 0)//-(h - pad[T] - pad[B]), 0, 0)
+          .tickSize(4, 0, 0)//-(priceH - pad[T] - pad[B]), 0, 0)
           .tickPadding(4),
-        yAxis = d3.svg.axis().scale(y)
-          .tickSize(-(w-pad[L]-pad[R]))//, -w, 0)
+        priceAxis = d3.svg.axis().scale(yp)
+          .tickSize(-w)//, -w, 0)
           .ticks(4).orient("right")
+          .tickPadding(-3);
+        volAxis = d3.svg.axis().scale(yv)
+          .tickSize(-w)//, -w, 0)
+          .ticks(2).orient("right")
           .tickPadding(-3);
           
     this.render = function(series) {
       console.log(series);
-      var hours = mapper.config.marketHours,
-          dayOf0 = series.t_min - (series.t_min % 8.64e7),
-          date0 = new Date(dayOf0 + hours.t0 * 60000),
+      var dayOf0 = series.t_min - (series.t_min % 8.64e7),
+          date0 = new Date(dayOf0 + marketHours.t0 * 60000),
           dayOf1 = series.t_max - (series.t_max % 8.64e7),
-          date1 = new Date(dayOf1 + hours.t1 * 60000);
+          date1 = new Date(dayOf1 + marketHours.t1 * 60000);
           
       var t = dayOf0,
           d = 0,
           domain = [],
           range = [];
       while(t <= dayOf1) {
-        domain.push(t + hours.t0 * 60000);
-        domain.push(t + hours.t1 * 60000);
-        range.push(d * w + pad[L]);
-        range.push((d + 1) * w - pad[R]);
+        domain.push(t + marketHours.t0 * 60000);
+        domain.push(t + marketHours.t1 * 60000);
+        range.push(d * w);
+        range.push((d + 1) * w);
         d++;
         t += 8.64e7;
       }
@@ -62,26 +82,39 @@
       x.range(range);
       // x.domain([date0, date1]);
       // x.domain([series.t_min, series.t_max]);
+      xax.call(xAxis);
       
-      offset = series.t_min;
       var min = Math.min(series.price_ref, series.price_min),
           max = Math.max(series.price_ref, series.price_max),
           dPad = (max - min) * .1;
-          
-      y.domain([min - dPad, max + dPad]);
-      xax.call(xAxis);
-      yax.call(yAxis);
+      yp.domain([min - dPad, max + dPad]);
+      priceAx.call(priceAxis);
 
-      yax.selectAll('text')
+      yv.domain([0, series.volume_max * 1.2]);
+      volAx.call(volAxis);
+      
+      svg.selectAll('.y.axis text')
         .attr('text-anchor', 'end')
         .attr('dy', '-4');
 
-      area.attr('d', dArea(series.data));
-      path.attr('d', dLine(series.data));
+      priceArea.attr('d', dArea(series.data));
+      pricePath.attr('d', dLine(series.data));
+      
+      var bars = volChart.selectAll('.bar').data(series.data);
+      bars.enter()
+        .append('line')
+        .attr('class', 'bar');
+      bars
+        .attr('x1', xt)
+        .attr('x2', xt)
+        .attr('y1', volH)
+        .attr('y2', yVol)
+        .style('display', function(slice) { return isWithinMarketHours(slice) ? '' : 'none'; });
+      bars.exit().remove();
         
       reference
-        .attr('y1', y(series.price_ref))
-        .attr('y2', y(series.price_ref));
+        .attr('y1', yp(series.price_ref))
+        .attr('y2', yp(series.price_ref));
     };
   }
 })();

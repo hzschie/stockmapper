@@ -19,7 +19,7 @@
         return;
       }
       
-      $details.show().css({ opacity:0, height: 240 });
+      $details.show().css({ opacity:0, height: 440 });
       
       template.applyBindings('stock', $details, model);
       
