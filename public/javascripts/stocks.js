@@ -25,12 +25,19 @@ var Stock = mapper.Stock = Backbone.Model.extend(
       this.set(hash);
     },
     
-    getTimeSeries: function() {
+    acquireTimeSeries: function(type) {
       var setter = {},
           _this = this;
       $.getJSON(
-        '/series/intraday/' + this.id,
+        '/series/' + type + '/' + this.id,
         function(data) {
+          var ts = new mapper.TimeSeries(data, type);
+          setter[type] = ts;
+        
+          if(type == 'intraday') {
+            ts.price_ref = _this.get('previous');
+          }
+/*
           for(var prop in data) {
             if(data[prop].length) {
               var ts = new mapper.TimeSeries(data, prop);
@@ -41,6 +48,7 @@ var Stock = mapper.Stock = Backbone.Model.extend(
               }
             }
           }
+*/
           _this.set(setter);
         }
       );

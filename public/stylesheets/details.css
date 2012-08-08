@@ -2,6 +2,13 @@
   color:#fff;
   padding-bottom:20px;
   font:16px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
+  position:absolute;
+  z-index:1;
+  left:0;
+  right:0;
+  padding:10px;
+
+  background: #000;
 }
 .details > * {
   display:inline-block;

@@ -1,26 +1,22 @@
 (function() {
   mapper.TimeSeries = TimeSeries;
-  function TimeSeries(def, prop) {
-    var data = this.data = def[prop],
-        len = data.length,
-        cur, min, max;
-    for(var i = 0; i < len; i++) {
-      cur = data[i];
-      if(cur == null) {
-        cur = data[i] = data[i-1];
-      }
-      if(i == 0) {
-        min = cur;
-        max = cur;
-      }
-      else if(cur != null) {
-        min = Math.min(min, cur);
-        max = Math.max(max, cur);
-      }
-    }
-    this.min = min;
-    this.max = max;
-    this.prop = prop;
+  function TimeSeries(def, type) {
     $.extend(this, def);
+    
+    var output,
+        headers = def.headers,
+        len = headers.length;
+    this.data = $.map(this.data, function(row) {
+      output = {};
+      for(var i=0; i < len; i++) {
+        output[ headers[i] ] = row[i];
+      }
+      return output;
+    });
+    this.type = type;
+    
+    
+    // this.data = $.map(this.data, function(slice) { var s2=$.extend({},slice); s2.t-=864e5; return s2; }).concat(this.data);//TEMP
+    // this.t_min -= 864e5;//TEMP
   }
 })();

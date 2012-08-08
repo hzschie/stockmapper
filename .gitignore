@@ -1,6 +1,7 @@
 public/images/psd
 public/generated
 node_modules
+temp
 
 # OS generated files #
 ######################

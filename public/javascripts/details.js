@@ -10,13 +10,14 @@
   
   function Details($details) {
     var template = new mapper.Template(Details.defaultBindings),
+        series_type = 'intraday',// 'daily',// 
         graph = new mapper.Graph($('.graph', $details));
     
     this.query = function(model) {
       template.applyBindings('stock', $details, model);
-      model.getTimeSeries();
-      model.on('change:price_series', function(model) {
-        graph.render(model.get('price_series'));
+      model.acquireTimeSeries(series_type);
+      model.on('change:' + series_type, function(model) {
+        graph.render( model.get(series_type) );
       });
     };
   }

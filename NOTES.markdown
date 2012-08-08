@@ -2,7 +2,7 @@
 TODO: use CSS box-shadow for label drop-shadows. Yay.
 
 ## Links
-Yahoo finance API reference: http://www.gummy-stuff.org/Yahoo-data.htm
+Yahoo finance API reference: http://code.google.com/p/yahoo-finance-managed/wiki/csvHistQuotesDownload
 YA csv module: https://github.com/koles/ya-csv/blob/master/lib/ya-csv.js
 NYSE stocks CSV: http://www.nyse.com/indexes/nyaindex.csv
 
@@ -28,6 +28,8 @@ Search box that filters the view
 Jocil Ltd has a blank symbol
 
 ## To do
+Touch device layout (no fixed positioning on panel)
+Use (optionally) ajax instead of socket.io
 H Relayout on window resize
 H Bubble positioning optimization to remain above screen
 H Touch device events
