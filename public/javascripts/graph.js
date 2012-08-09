@@ -8,17 +8,23 @@
         gap = 20,
         volH = 80,
         h = priceH + volH + gap,
-        pad = [0, 20, 20, 0],
-        svg = d3.select($graph[0]).append('svg').attr('width', (w+pad[L]+pad[R]) + 'px').attr('height', (h+pad[T]+pad[B]) + 'px'),
-        xax = svg.append("svg:g")
-          .attr("class", "x axis")
-          .attr("transform", "translate(0," + (priceH+pad[T]) + ")"),
-        priceAx = svg.append("svg:g")
-          .attr("class", "y axis")
-          .attr("transform", "translate(" + (w+pad[L]) + ",0)"),
-        volAx = svg.append("svg:g")
-          .attr("class", "y axis")
-          .attr("transform", "translate(" + (w+pad[L]) + "," + (priceH + pad[T] + gap) + ")"),
+        pad = [20, 50, 20, 0],
+        svg = d3.select($graph[0]).select('svg').attr('width', (w+pad[L]+pad[R]) + 'px').attr('height', (h+pad[T]+pad[B]) + 'px'),
+        xax = svg.append('svg:g')
+          .attr('class', 'x axis')
+          .attr('transform', 'translate(0,' + (priceH+pad[T]) + ')'),
+        priceAx = svg.append('svg:g')
+          .attr('class', 'y axis')
+          .attr('transform', 'translate(' + (w+pad[L]) + ',0)'),
+        volAx = svg.append('svg:g')
+          .attr('class', 'y axis')
+          .attr('transform', 'translate(' + (w+pad[L]) + ',' + (priceH + pad[T] + gap) + ')'),
+        divider1 = svg.append('line').attr('class', 'divider')
+          .attr('x1', pad[L]).attr('x2', w+pad[L])
+          .attr('y1', pad[T] + priceH + gap).attr('y2', pad[T] + priceH + gap),
+        divider2 = svg.append('line').attr('class', 'divider')
+          .attr('x1', pad[L]).attr('x2', w+pad[L])
+          .attr('y1', pad[T] + h).attr('y2', pad[T] + h),
         priceArea = svg.append('path')
           .attr('class', 'graph_area'),
         pricePath = svg.append('path')
@@ -27,7 +33,7 @@
         volChart = svg.append('g')
           .attr('class', 'volume_chart')
           .attr('stroke-width', 1)
-          .attr("transform", "translate(0," + (priceH + pad[T] + gap) + ")"),
+          .attr('transform', 'translate(0,' + (priceH + pad[T] + gap) + ')'),
         reference = svg.append('line')
           .attr('class', 'reference')
           .attr('stroke-dasharray', '4 2')
@@ -46,21 +52,23 @@
         
         dLine = d3.svg.line().defined(isWithinMarketHours).x(xt).y(yPrice),
         dArea = d3.svg.area().defined(isWithinMarketHours).x(xt).y1(yPrice).y0(priceH+pad[T]),
+        
         xAxis = d3.svg.axis().scale(x)
           .ticks(d3.time.hours, 1)
-          .tickSize(4, 0, 0)//-(priceH - pad[T] - pad[B]), 0, 0)
-          .tickPadding(4),
+          .tickSize(-(priceH + pad[T]), 0, 0)
+          .tickPadding(7)
+          .tickFormat(d3.time.format.utc('%H:%M')),
         priceAxis = d3.svg.axis().scale(yp)
           .tickSize(-w)//, -w, 0)
-          .ticks(4).orient("right")
-          .tickPadding(-3);
+          .ticks(4)
+          .tickPadding(4)
+          .orient('right'),
         volAxis = d3.svg.axis().scale(yv)
-          .tickSize(-w)//, -w, 0)
-          .ticks(2).orient("right")
-          .tickPadding(-3);
-          
+          .tickSize(-w)
+          .ticks(2)
+          .tickPadding(4)
+          .orient('right');
     this.render = function(series) {
-      console.log(series);
       var dayOf0 = series.t_min - (series.t_min % 8.64e7),
           date0 = new Date(dayOf0 + marketHours.t0 * 60000),
           dayOf1 = series.t_max - (series.t_max % 8.64e7),
@@ -93,9 +101,15 @@
       yv.domain([0, series.volume_max * 1.2]);
       volAx.call(volAxis);
       
-      svg.selectAll('.y.axis text')
-        .attr('text-anchor', 'end')
-        .attr('dy', '-4');
+      svg.selectAll('.x.axis g')
+        .append('line')
+        .attr('class', 'tick')
+        .attr('x2', 0)
+        .attr('y1', gap)
+        .attr('y2', volH + gap);
+      // svg.selectAll('.y.axis text')
+      //   .attr('text-anchor', 'end')
+      //   .attr('dy', '-4');
 
       priceArea.attr('d', dArea(series.data));
       pricePath.attr('d', dLine(series.data));
