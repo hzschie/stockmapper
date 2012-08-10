@@ -92,8 +92,8 @@
       // x.domain([series.t_min, series.t_max]);
       xax.call(xAxis);
       
-      var min = Math.min(series.price_ref, series.price_min),
-          max = Math.max(series.price_ref, series.price_max),
+      var min = Math.min(series.price_ref || series.price_min, series.price_min),
+          max = Math.max(series.price_ref || series.price_max, series.price_max),
           dPad = (max - min) * .1;
       yp.domain([min - dPad, max + dPad]);
       priceAx.call(priceAxis);
@@ -127,8 +127,9 @@
       bars.exit().remove();
         
       reference
-        .attr('y1', yp(series.price_ref))
-        .attr('y2', yp(series.price_ref));
+        .style('display', series.price_ref != null)
+        .attr('y1', yp(series.price_ref || 0))
+        .attr('y2', yp(series.price_ref || 0));
     };
   }
 })();
