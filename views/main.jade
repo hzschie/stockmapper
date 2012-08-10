@@ -24,16 +24,17 @@ html
         a MAP
         a CHART
     
+    .details(style="display:none;")
+      .sym SYM
+      h3.name Amit was here
+      .graph
+        svg
+          defs
+            linearGradient#fade(gradientTransform="rotate(90)", gradientUnits="userSpaceOnUse", spreadMethod="reflect")
+              stop(offset="26%", stop-color="#FFF", stop-opacity=".07")
+              stop(offset="28%", stop-color="#FFF", stop-opacity="0")
+
     .layout
-      .details(style="display:none;")
-        .sym SYM
-        h3.name Amit was here
-        .graph
-          svg
-            defs
-              linearGradient#fade(gradientTransform="rotate(90)", gradientUnits="userSpaceOnUse", spreadMethod="reflect")
-                stop(offset="31%", stop-color="#FFF", stop-opacity=".07")
-                stop(offset="34%", stop-color="#FFF", stop-opacity="0")
       ul.map
       .chart
         .ticks

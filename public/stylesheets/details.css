@@ -1,10 +1,17 @@
 .details {
   color:#fff;
   font:16px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
-  padding:0 10px 20px 10px;
-  height:0;
+  padding:0 10px 0 10px;
+/*  height:0;*/
   opacity:0;
   display:none;
+  background-color:#333;
+  
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:1;
   
   -webkit-transition:height .6s, opacity .6s;
   -moz-transition:height .6s, opacity .6s;

@@ -15,11 +15,17 @@
     
     this.query = function(model) {
       if(!model) {
-        $details.css({ opacity:0, height: 0 });
+        $details.css({ 
+          // height: 0,
+          opacity:0 
+        });
         return;
       }
       
-      $details.show().css({ opacity:0, height: 440 });
+      $details.show().css({
+        // height: 440,
+        opacity:0
+      });
       
       template.applyBindings('stock', $details, model);
       

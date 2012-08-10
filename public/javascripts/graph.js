@@ -4,11 +4,11 @@
   function Graph($graph) {
     var marketHours = mapper.config.marketHours,
         w = 600,
-        priceH = 200,
+        priceH = 160,
         gap = 20,
         volH = 80,
         h = priceH + volH + gap,
-        pad = [20, 50, 20, 0],
+        pad = [20, 50, 10, 0],
         svg = d3.select($graph[0]).select('svg').attr('width', (w+pad[L]+pad[R]) + 'px').attr('height', (h+pad[T]+pad[B]) + 'px'),
         xax = svg.append('svg:g')
           .attr('class', 'x axis')
