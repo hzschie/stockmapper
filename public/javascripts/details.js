@@ -10,7 +10,7 @@
   
   function Details($details) {
     var template = new mapper.Template(Details.defaultBindings),
-        series_type = 'intraday',// 'daily',// 
+        series_type = 'daily',// 'intraday',// 'daily',// 
         graph = new mapper.Graph($('.graph', $details));
     
     this.query = function(model) {

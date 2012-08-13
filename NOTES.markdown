@@ -6,6 +6,8 @@ Yahoo finance API reference: http://code.google.com/p/yahoo-finance-managed/wiki
 YA csv module: https://github.com/koles/ya-csv/blob/master/lib/ya-csv.js
 NYSE stocks CSV: http://www.nyse.com/indexes/nyaindex.csv
 
+Blufin stocks and indices historical can be accessed from: http://46.137.212.140/BMI/data/[SCRIPID/INDEXID]_bse_his.csv
+Blufin last 4 days of data can be accessed from: http://46.137.212.140/BMI/data/[SCRIPID/INDEXID]_bse_4d.csv
 
 ## Synonyms
 Basic Materials => Materials
