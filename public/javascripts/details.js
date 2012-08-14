@@ -4,7 +4,26 @@
   Details.defaultBindings = {
     stock: [
       { $:'.sym', field:'sym' },
-      { $:'.name', field:'name' }
+      { $:'.name', field:'name' },
+      { $:'.last_trade', field:'lastTrade', formatter:Template.priceFormat },
+
+      { $:'.change', field:'changeDir', formatter:Template.makeRedOrGreen },
+      { $:'.change .amount', field:'change', formatter:Template.changeFormat },
+      { $:'.change .percent', field:'changePct', formatter:Template.postfix(Template.changeFormat, '%') },
+
+      { $:'.open', field:'open', formatter:Template.priceFormat },
+      { $:'.high', field:'high', formatter:Template.priceFormat },
+      { $:'.low', field:'low', formatter:Template.priceFormat },
+      
+      { $:'.avg_volume', field:'avgVolume', formatter:Template.commaFormat },
+      { $:'.volume', field:'volume', formatter:Template.commaFormat },
+      { $:'.market_cap', field:'marketCapString' },
+
+      { $:'.pe', field:'pe', formatter:Template.priceFormat },
+      { $:'.pb', field:'pb', formatter:Template.priceFormat },
+      { $:'.ps', field:'ps', formatter:Template.priceFormat },
+      { $:'.div_yield', field:'divYield', formatter:Template.priceFormat },
+      { $:'.roe', field:'roe', formatter:Template.priceFormat }
     ]
   };
   

@@ -37,18 +37,6 @@ var Stock = mapper.Stock = Backbone.Model.extend(
           if(type == 'intraday') {
             ts.price_ref = _this.get('previous');
           }
-/*
-          for(var prop in data) {
-            if(data[prop].length) {
-              var ts = new mapper.TimeSeries(data, prop);
-              setter[prop + '_series'] = ts;
-              
-              if(prop == 'price') {
-                ts.ref = _this.get('previous');
-              }
-            }
-          }
-*/
           _this.set(setter);
         }
       );
@@ -71,7 +59,13 @@ var Stock = mapper.Stock = Backbone.Model.extend(
       { name:'volume', isNum:true },
       { name:'changePctString', isNum:false },
       { name:'marketCapString', isNum:false },
-      { name:'avgVolume', isNum:true }
+      { name:'avgVolume', isNum:true },
+      
+      { name:'pe', isNum:true },
+      { name:'pb', isNum:true },
+      { name:'ps', isNum:true },
+      { name:'divYield', isNum:true },
+      { name:'roe', isNum:true }
     ],
     
     parseMarketCapString: function(capString) {

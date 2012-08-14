@@ -6,6 +6,8 @@
   opacity:0;
   display:none;
   background-color:#333;
+  padding-top:10px;
+  border-top:1px solid #aaa;
   
   position:fixed;
   left:0;
@@ -17,60 +19,65 @@
   -moz-transition:height .6s, opacity .6s;
   -ms-transition:height .6s, opacity .6s;
   transition:height .6s, opacity .6s;
+  
+  background: -moz-linear-gradient(top,  rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.95) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.88)), color-stop(100%,rgba(0,0,0,0.95))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.95) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.95) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.95) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.95) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0000000', endColorstr='#f2000000',GradientType=0 ); /* IE6-9 */
 }
-.details > * {
+/*.details > * {
   display:inline-block;
   margin-right:10px;
 }
+*/
+.details h3 {
+  font-size:16px;
+  line-height:24px;
+}
 
-.graph {
-  display:block;
+.details .sym, .details .last_trade, .details .change {
+  font-size:24px;
+  display:inline-block;
+}
+.details .sym {
+  font-weight:bold;
+  width: 185px;
+}
+.details .last_trade {
+  font-weight:bold;
+  width: 175px;
+}
+.details .red {
+  color:#f33;
+}
+.details .green {
+  color:#3f3;
+}
+.details .left, .details .right {
+  display:inline-block;
+  width:50%;
+  vertical-align:top;
+}
+.details .values {
   font-size:12px;
+  line-height:16px;
 }
-.graph svg {
+.details .values .col {
+  width:20%;
+  display:inline-block;
+  margin-right:24px;
+  vertical-align:top;
 }
-
-.graph .graph_path {
-  stroke:#ddf;
-/*  stroke: url(#fade);*/
-  fill:none;
-  shape-rendering: geometricPrecision;
+.details .values dt {
+  float:left;
 }
-.graph .graph_area {
-  stroke:none;
-  fill:rgba(220,220,255,.15);
-/*  fill: url(#fade);*/
-  shape-rendering: geometricPrecision;
+.details .values dd {
+  text-align:right;
+  border-bottom:1px dotted #888;
 }
-.graph .volume_chart {
-  stroke:#ddf;
-  shape-rendering: crispEdges;
-}
-.graph .reference {
-  stroke:#f66;
-}
-
-.graph .axis {
-  shape-rendering: crispEdges;
-  fill: none;
-}
-.graph .x.axis .domain {
-  stroke: #fff;
-  stroke-width: 1px;
-}
-.graph .axis .tick {
-  fill: none;
-  stroke: url(#fade);
-/*  stroke: #fff;*/
-  stroke-width: 1px;
-}
-.graph .divider {
-  shape-rendering: crispEdges;
-  stroke: #fff;
-}
-.graph .y.axis .tick {
-  stroke: rgba(255,255,255,.3);
-}
-.graph .axis text {
-  fill: #fff;
+.details .values dd:last-child {
+  border-bottom:none;
 }

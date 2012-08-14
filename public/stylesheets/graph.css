@@ -1,0 +1,53 @@
+.graph {
+  display:block;
+  font-size:12px;
+  
+  margin-left:-20px;
+}
+.graph svg {
+}
+
+.graph .graph_path {
+  stroke:#ddf;
+/*  stroke: url(#fade);*/
+  fill:none;
+  shape-rendering: geometricPrecision;
+}
+.graph .graph_area {
+  stroke:none;
+  fill:rgba(220,220,255,.15);
+/*  fill: url(#fade);*/
+  shape-rendering: geometricPrecision;
+}
+.graph .volume_chart {
+  stroke:#ddf;
+  shape-rendering: crispEdges;
+}
+.graph .reference {
+  stroke:#f66;
+}
+
+.graph .axis {
+  shape-rendering: crispEdges;
+  fill: none;
+}
+.graph .x.axis .domain {
+  stroke: #fff;
+  stroke-width: 1px;
+}
+.graph .axis .tick {
+  fill: none;
+  stroke: url(#fade);
+/*  stroke: #fff;*/
+  stroke-width: 1px;
+}
+.graph .divider {
+  shape-rendering: crispEdges;
+  stroke: #fff;
+}
+.graph .y.axis .tick {
+  stroke: rgba(255,255,255,.3);
+}
+.graph .axis text {
+  fill: #fff;
+}

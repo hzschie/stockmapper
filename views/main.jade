@@ -25,14 +25,50 @@ html
         a CHART
     
     .details(style="display:none;")
-      .sym SYM
-      h3.name Amit was here
-      .graph
-        svg
-          defs
-            linearGradient#fade(gradientTransform="rotate(90)", gradientUnits="userSpaceOnUse", spreadMethod="reflect")
-              stop(offset="26%", stop-color="#FFF", stop-opacity=".07")
-              stop(offset="28%", stop-color="#FFF", stop-opacity="0")
+      .left
+        h3.name Amit was here
+        .sym SYM
+        .last_trade 123.45
+        .change
+          span.amount +12.34
+          | &nbsp;(
+          span.percent 1.23%
+          | )
+        .graph
+          svg
+            defs
+              linearGradient#fade(gradientTransform="rotate(90)", gradientUnits="userSpaceOnUse", spreadMethod="reflect")
+                stop(offset="26%", stop-color="#FFF", stop-opacity=".07")
+                stop(offset="28%", stop-color="#FFF", stop-opacity="0")
+      .right
+        .values
+          dl
+            .col
+              dt Open:
+              dd.open 12.34
+              dt High:
+              dd.high 12.34
+              dt Low:
+              dd.low 12.34
+            .col
+              dt Avg. Volume:
+              dd.avg_volume 123,456
+              dt Volume:
+              dd.volume 123,456
+              dt Market Cap:
+              dd.market_cap 1.234B
+            .col
+              dt Div/Yield:
+              dd.div_yield
+              dt ROE:
+              dd.roe
+            .col
+              dt P/E:
+              dd.pe
+              dt P/B:
+              dd.pb
+              dt P/S:
+              dd.ps
 
     .layout
       ul.map
