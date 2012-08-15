@@ -40,6 +40,17 @@ var Stock = mapper.Stock = Backbone.Model.extend(
           _this.set(setter);
         }
       );
+    },
+    
+    acquireNews: function() {
+      var _this = this;
+      $.getJSON(
+        '/news/' + this.get('sym'),
+        function(data) {
+          data.sort(function(a,b) { return (a.t < b.t) - (a.t > b.t); });
+          _this.set({ news:data });
+        }
+      );
     }
   },
   // STATIC methods

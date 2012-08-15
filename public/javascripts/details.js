@@ -30,7 +30,8 @@
   function Details($details) {
     var template = new mapper.Template(Details.defaultBindings),
         series_type = 'daily',// 'intraday',// 'daily',// 
-        graph = new mapper.Graph($('.graph', $details));
+        graph = new mapper.Graph($('.graph', $details)),
+        news = new mapper.News($('.news', $details));
     
     this.query = function(model) {
       if(!model) {
@@ -48,6 +49,7 @@
       
       template.applyBindings('stock', $details, model);
       
+      // Price+Volume graph
       if(model.get(series_type)) {
         $details.css({ opacity:1 });
         graph.render( model.get(series_type) );
@@ -57,6 +59,16 @@
         $details.css({ opacity:1 });
         graph.render( model.get(series_type) );
       });
+      
+      // News feed
+      if(model.get('news')) {
+        news.render( model.get('news') );
+      }
+      model.acquireNews();
+      model.on('change:news', function(model) {
+        news.render( model.get('news') );
+      });
+      
     };
   }
 })();

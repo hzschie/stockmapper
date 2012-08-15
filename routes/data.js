@@ -28,6 +28,13 @@ exports.getDaily = function(req, res) {
   );
 };
 
+exports.getNews = function(req, res) {
+  dataSource.getNews(
+    req.params.id,
+    function(data) { res.json(data); }
+  );
+};
+
 exports.setIO = function(_io) {
   io = _io;
   io.sockets.on('connection', function (socket) {

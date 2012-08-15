@@ -134,7 +134,7 @@ else {
       if(typeof(bindings) == 'string') bindings = this.getBindings(bindings);
       _.forEach(bindings, function(binding) {
         var $field = binding.$ ? $container.find(binding.$) : $container,
-            val = model.get(binding.field);
+            val = (model.get && model.get(binding.field)) || (!model.get && model[binding.field]);
 
         val = (binding.formatter || String)( val, $field );
         if(val != null) $field.html(val);

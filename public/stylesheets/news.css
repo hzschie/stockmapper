@@ -1,0 +1,19 @@
+.news {
+  font-weight:normal;
+  font-size:10px;
+  color:#ddf;
+  overflow:hidden;/*auto*/
+  height:280px;
+  margin-top:11px;
+}
+
+.news .article {
+  padding: 5px 0;
+  line-height:12px;
+}
+
+.news .title {
+  color:#fff;
+  font-weight:bold;
+  font-size:15px;
+}

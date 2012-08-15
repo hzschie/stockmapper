@@ -36,6 +36,7 @@
 .details h3 {
   font-size:16px;
   line-height:24px;
+  color:#ddf;
 }
 
 .details .sym, .details .last_trade, .details .change {
@@ -57,6 +58,7 @@
   color:#3f3;
 }
 .details .left, .details .right {
+  position:relative;
   display:inline-block;
   width:50%;
   vertical-align:top;
@@ -73,8 +75,10 @@
 }
 .details .values dt {
   float:left;
+  color:#ddf;
 }
 .details .values dd {
+  font-weight:bold;
   text-align:right;
   border-bottom:1px dotted #888;
 }
