@@ -1,19 +1,28 @@
 .news {
   font-weight:normal;
-  font-size:10px;
+  font-size:11px;
+  line-height:12px;
   color:#ddf;
   overflow:hidden;/*auto*/
   height:280px;
-  margin-top:11px;
+  margin-top:10px;
+  margin-left:-6px;
 }
 
 .news .article {
-  padding: 5px 0;
-  line-height:12px;
+  padding: 5px 6px;
+}
+
+.news .article:hover {
+  background-color:rgba(220,220,255,.15);
+  border-radius:5px;
 }
 
 .news .title {
+  display:block;
   color:#fff;
   font-weight:bold;
   font-size:15px;
+  line-height:16px;
+  text-decoration:none;
 }

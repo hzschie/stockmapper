@@ -3,6 +3,7 @@
   var Template = mapper.Template;
   News.bindings = [
     { $:'.title', field:'title' },
+    { $:'.title', field:'href', formatter: function(val, $field) { $field.prop('href', val); return null; } },
     { $:'.source', field:'source' },
     { $:'.date', field:'t', formatter:distanceOfTimeInWords }
   ];
@@ -12,7 +13,6 @@
         articleHtml = $('.article', $news).remove().wrap('<p>').parent().html();
 
     this.render = function(news) {
-      console.log('render',news);
       $news.empty();
       $.each(news, function(i, article) {
         var $article = $(articleHtml).appendTo($news);
@@ -22,7 +22,6 @@
     
     var velocity = 0;
     function mousemove(e) {
-      // console.log(Object.keys(e));
       var h = $news.height(),
           y = e.pageY - $news.offset().top,
           f = (y/h - .5) * 2;
