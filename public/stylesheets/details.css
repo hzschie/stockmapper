@@ -28,11 +28,19 @@
   background: linear-gradient(to bottom,  rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.95) 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0000000', endColorstr='#f2000000',GradientType=0 ); /* IE6-9 */
 }
-/*.details > * {
-  display:inline-block;
-  margin-right:10px;
+.details .x {
+  width:18px;
+  height:18px;
+  background:transparent url('/images/sprites.png') no-repeat scroll -2px -2px;
+  position:absolute;
+  right:0;
+  top:0;
+  cursor:pointer;
 }
-*/
+.details .x:hover {
+  opacity:.8;
+}
+
 .details h3 {
   font-size:16px;
   line-height:24px;

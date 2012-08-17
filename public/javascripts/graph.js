@@ -1,9 +1,9 @@
 (function() {
   mapper.Graph = Graph;
   var T=0,R=1,B=2,L=3;
-  function Graph($graph) {
+  function Graph($graph, _w) {
     var marketHours = mapper.config.marketHours,
-        w = 600,
+        w = _w - 50,//600,
         priceH = 160,
         gap = 20,
         volH = 80,
@@ -92,7 +92,7 @@
       var min = Math.min(series.price_ref || series.price_min, series.price_min),
           max = Math.max(series.price_ref || series.price_max, series.price_max),
           dPad = (max - min) * .1;
-      yp.domain([min - dPad, max + dPad]);
+      yp.domain([Math.max(0, min - dPad), max + dPad]);
       priceAx.call(priceAxis);
 
       yv.domain([0, series.volume_max * 1.2]);

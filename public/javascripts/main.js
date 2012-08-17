@@ -7,7 +7,7 @@ mapper.dataReady = function() {
         chart = new mapper.HtmlChart($('.chart')),
         inspector = new mapper.Inspector($('.inspector')),
         details = new mapper.Details($('.details')),
-        viewState = vvv = new mapper.ViewState(),
+        viewState = new mapper.ViewState(),
         layout = new mapper.Layout(panel, map, chart),
         currentGroup = null,
         currentSort = mapper.sortFunctions['sym'];
@@ -82,6 +82,11 @@ mapper.dataReady = function() {
     
     chart.on('inspect_bar', function(model, $subBar, isVol, yFixed) {
       inspector.inspectBar(model, $subBar, isVol, yFixed);
+    });
+    
+    details.on('click_x', function() {
+      viewState.set({ q: null }, { silent: true });
+      History.pushState(null, null, viewState.toUrl());
     });
   });
 };

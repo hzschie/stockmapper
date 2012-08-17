@@ -28,10 +28,14 @@
   };
   
   function Details($details) {
+    _.extend(this, Backbone.Events);
     var template = new mapper.Template(Details.defaultBindings),
         series_type = 'daily',// 'intraday',// 'daily',// 
-        graph = new mapper.Graph($('.graph', $details)),
-        news = new mapper.News($('.news', $details));
+        graph = new mapper.Graph($('.graph', $details), $details.width() / 2),
+        news = new mapper.News($('.news', $details)),
+        _this = this;
+        
+    $('.x', $details).click(function() { _this.trigger('click_x'); });
     
     this.query = function(model) {
       if(!model) {
