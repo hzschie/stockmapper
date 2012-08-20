@@ -25,7 +25,8 @@ var Stock = mapper.Stock = Backbone.Model.extend(
       this.set(hash);
     },
     
-    acquireTimeSeries: function(type) {
+    acquireTimeSeries: function(type, callback) {
+      if(this.get(type)) return callback(this.get(type));
       var setter = {},
           _this = this;
       $.getJSON(
@@ -38,17 +39,20 @@ var Stock = mapper.Stock = Backbone.Model.extend(
             ts.price_ref = _this.get('previous');
           }
           _this.set(setter);
+          callback(ts);
         }
       );
     },
     
-    acquireNews: function() {
+    acquireNews: function(callback) {
+      if(this.get('news')) return callback(this.get('news'));
       var _this = this;
       $.getJSON(
         '/news/' + this.get('sym'),
         function(data) {
           data.sort(function(a,b) { return (a.t < b.t) - (a.t > b.t); });
           _this.set({ news:data });
+          callback(data);
         }
       );
     }

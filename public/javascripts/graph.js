@@ -8,7 +8,7 @@
         gap = 20,
         volH = 80,
         h = priceH + volH + gap,
-        pad = [20, 50, 10, 20],
+        pad = [10, 50, 10, 20],
         svg = d3.select($graph[0]).select('svg').attr('width', (w+pad[L]+pad[R]) + 'px').attr('height', (h+pad[T]+pad[B]) + 'px'),
         xax = svg.append('svg:g')
           .attr('class', 'x axis')
@@ -131,6 +131,9 @@
         xAxis.ticks(d3.time.months, 3).tickFormat(d3.time.format.utc('%b %Y'));
       else
         xAxis.ticks(d3.time.months, 1).tickFormat(d3.time.format.utc('%b %Y'));
+        
+      dLine.defined(function() { return true; });
+      dArea.defined(function() { return true; });
     };
     
     function renderIntraday(series) {

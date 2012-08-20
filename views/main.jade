@@ -26,7 +26,6 @@ html
     
     .details(style="display:none;")
       .left
-        h3.name Amit was here
         .sym SYM
         .last_trade 123.45
         .change
@@ -34,14 +33,23 @@ html
           | &nbsp;(
           span.percent 1.23%
           | )
+        h3.name Amit was here
         .graph
+          .ui
+            .ranges
+              | Range:&nbsp;&nbsp;
+              #rMax.range Max
+              #r1y.range 1y
+              #r3m.range 3m
+              #r5d.range 5d
+              #r1d.range.selected 1d
           svg
             defs
               linearGradient#fade(gradientTransform="rotate(90)", gradientUnits="userSpaceOnUse", spreadMethod="reflect")
                 stop(offset="26%", stop-color="#FFF", stop-opacity=".07")
                 stop(offset="28%", stop-color="#FFF", stop-opacity="0")
       .right
-        .x
+        .close
         .values
           dl
             .col

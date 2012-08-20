@@ -28,7 +28,7 @@
   background: linear-gradient(to bottom,  rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.95) 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0000000', endColorstr='#f2000000',GradientType=0 ); /* IE6-9 */
 }
-.details .x {
+.details .close {
   width:18px;
   height:18px;
   background:transparent url('/images/sprites.png') no-repeat scroll -2px -2px;
@@ -37,19 +37,20 @@
   top:0;
   cursor:pointer;
 }
-.details .x:hover {
+.details .close:hover {
   opacity:.8;
 }
 
 .details h3 {
   font-size:16px;
-  line-height:24px;
+  line-height:16px;
   color:#ddf;
 }
 
 .details .sym, .details .last_trade, .details .change {
   font-size:24px;
   display:inline-block;
+  padding-top:2px;
 }
 .details .sym {
   font-weight:bold;

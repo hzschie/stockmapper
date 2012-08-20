@@ -34,6 +34,6 @@ var ViewState = mapper.ViewState = Backbone.Model.extend(
     }
   },
   {
-    urlParams: ['filter', 'sort', 'q']
+    urlParams: ['filter', 'sort', 'q', 'range']
   }
 );

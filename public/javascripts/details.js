@@ -29,50 +29,49 @@
   
   function Details($details) {
     _.extend(this, Backbone.Events);
-    var template = new mapper.Template(Details.defaultBindings),
-        series_type = 'daily',// 'intraday',// 'daily',// 
-        graph = new mapper.Graph($('.graph', $details), $details.width() / 2),
-        news = new mapper.News($('.news', $details)),
-        _this = this;
-        
-    $('.x', $details).click(function() { _this.trigger('click_x'); });
+    var _this = this,
     
-    this.query = function(model) {
+        model = null,
+        series_type = 'intraday',// 'daily',//
+    
+        template = new mapper.Template(Details.defaultBindings),
+        graph = new mapper.Graph($('.graph', $details), $details.width() / 2),
+        graphRange = new mapper.GraphRange($('.graph .ui .ranges'), function(id) { _this.trigger('select_range', id); }),
+        news = new mapper.News($('.news', $details));
+        
+    $('.close', $details).click(function() { _this.trigger('click_close'); });
+    
+    this.query = function(_model) {
+      model = _model;
       if(!model) {
-        $details.css({ 
-          // height: 0,
-          opacity:0 
-        });
+        $details.css({ opacity:0 });
         return;
       }
-      
-      $details.show().css({
-        // height: 440,
-        opacity:0
-      });
+      $details.show().css({ opacity:1 });
       
       template.applyBindings('stock', $details, model);
       
-      // Price+Volume graph
-      if(model.get(series_type)) {
-        $details.css({ opacity:1 });
-        graph.render( model.get(series_type) );
-      }
-      model.acquireTimeSeries(series_type);
-      model.on('change:' + series_type, function(model) {
-        $details.css({ opacity:1 });
-        graph.render( model.get(series_type) );
-      });
+      model.acquireNews(function(data) { news.render(data); });// News feed
+      this.updateGraph();
+    };
+    
+    this.setRange = function(range) {
+      graphRange.setRange(range);
+
+      if(range == 'r1d') series_type = 'intraday';
+      else if(range == 'r5d') series_type = 'minutes';
+      else series_type = 'daily';
       
-      // News feed
-      if(model.get('news')) {
-        news.render( model.get('news') );
-      }
-      model.acquireNews();
-      model.on('change:news', function(model) {
-        news.render( model.get('news') );
+      this.updateGraph();
+    };
+    
+    this.updateGraph = function() {
+      Interval.callOnce({ 
+        fn:function() {
+          model.acquireTimeSeries(series_type, function(series) { graph.render(series); });// Price+Volume graph          
+        },
+        key:'update_graph'
       });
-      
     };
   }
 })();

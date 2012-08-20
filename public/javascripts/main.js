@@ -40,6 +40,10 @@ mapper.dataReady = function() {
             stock = mapper.stocks.get(id);
         details.query(stock);
       }
+      
+      if(viewState.hasChanged('range')) {
+        details.setRange(viewState.get('range'));
+      }
     });
 
     (function(window, undefined){
@@ -84,8 +88,13 @@ mapper.dataReady = function() {
       inspector.inspectBar(model, $subBar, isVol, yFixed);
     });
     
-    details.on('click_x', function() {
+    details.on('click_close', function() {
       viewState.set({ q: null }, { silent: true });
+      History.pushState(null, null, viewState.toUrl());
+    });
+    
+    details.on('select_range', function(range) {
+      viewState.set({ range: range }, { silent: true });
       History.pushState(null, null, viewState.toUrl());
     });
   });

@@ -1,10 +1,39 @@
 .graph {
+  position:relative;
   display:block;
   font-size:12px;
-  
-  margin-left:-20px;
 }
+
+.graph .ui {
+  position:relative;
+  z-index:1;
+}
+.graph .ui .ranges {
+  color:#ddf;
+  text-align:right;
+  margin-right:40px;
+  margin-bottom:-10px;
+}
+.graph .ui .range {
+  color:#fff;
+  display:inline-block;
+  width:28px;
+  text-align:center;
+  cursor:pointer;
+}
+.graph .ui .range:hover {
+  font-weight:bold;
+}
+.graph .ui .range.selected {
+  background-color:#fff;
+  color:#000;
+  line-height:18px;
+  padding-top:1px;
+  font-weight:bold;
+}
+
 .graph svg {
+  margin-left:-20px;
 }
 
 .graph .graph_path {
