@@ -69,9 +69,9 @@
           .tickPadding(4)
           .orient('right');
     this.render = function(series) {
-      console.log(series);
       switch(series.type) {
         case 'intraday':
+        case '5day':
           renderIntraday(series);
           break;
         case 'daily':
@@ -79,7 +79,6 @@
           break;
       }
       
-      xax.call(xAxis);
       var gs = svg.selectAll('.x.axis g');
       gs.selectAll('.tick.bottom').remove();
       gs
@@ -98,8 +97,16 @@
       yv.domain([0, series.volume_max * 1.2]);
       volAx.call(volAxis);
       
-      priceArea.attr('d', dArea(series.data));
-      pricePath.attr('d', dLine(series.data));
+      var area = dArea(series.data),
+          line = dLine(series.data);
+      if(area && line) {
+        priceArea.style('display', 'block').attr('d', area);
+        pricePath.style('display', 'block').attr('d', line);
+      }
+      else {
+        priceArea.style('display', 'none');
+        pricePath.style('display', 'none');
+      }
       
       var bars = volChart.selectAll('.bar').data(series.data);
       bars.enter()
@@ -124,6 +131,7 @@
         .domain([series.t_min, series.t_max])
         .range([0, w]);
       
+      xAxis.tickValues(null);
       var range = series.t_max - series.t_min;
       if(range > 922752e5)// 3 years
         xAxis.ticks(d3.time.years, 1).tickFormat(d3.time.format.utc('%Y'));
@@ -134,6 +142,8 @@
         
       dLine.defined(function() { return true; });
       dArea.defined(function() { return true; });
+      
+      xax.call(xAxis);
     };
     
     function renderIntraday(series) {
@@ -141,26 +151,38 @@
           date0 = new Date(dayOf0 + marketHours.t0 * 60000),
           dayOf1 = series.t_max - (series.t_max % 8.64e7),
           date1 = new Date(dayOf1 + marketHours.t1 * 60000);
-          
+      // series.data.forEach(function(a) { console.log(new Date(a.t).toUTCString()); });
       var t = dayOf0,
           d = 0,
+          _w = series.type == '5day' ? w / 5 : w,
           domain = [],
-          range = [];
+          range = [],
+          values = [];
       while(t <= dayOf1) {
-        domain.push(t + marketHours.t0 * 60000);
-        domain.push(t + marketHours.t1 * 60000);
-        range.push(d * w);
-        range.push((d + 1) * w);
-        d++;
+        var dayOfWeek = new Date(t).getUTCDay();
+        if(dayOfWeek != 0 && dayOfWeek != 6) {
+          domain.push(t + marketHours.t0 * 60000);
+          domain.push(t + marketHours.t1 * 60000);
+          range.push(d * _w);
+          range.push((d + 1) * _w);
+          values.push( new Date(t + marketHours.t0 * 60000) );
+          d++;
+        }
         t += 8.64e7;
       }
+
       x.domain(domain);
       x.range(range);
       
-      xAxis.ticks(d3.time.hours, 1).tickFormat(d3.time.format.utc('%H:%M'));
+      if(series.type == '5day') xAxis.tickValues(values).tickFormat(d3.time.format.utc('%a %b %e'));
+      else xAxis.tickValues(null).ticks(d3.time.hours, 1).tickFormat(d3.time.format.utc('%H:%M'));
       
-      dLine.defined(isWithinMarketHours);
-      dArea.defined(isWithinMarketHours);
+      xax.call(xAxis);
+      
+      if(series.type == '5day') xax.selectAll('text').attr('dx', _w/2);
+        
+        dLine.defined(isWithinMarketHours);
+        dArea.defined(isWithinMarketHours);
     };
   }
 })();

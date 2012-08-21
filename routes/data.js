@@ -20,7 +20,12 @@ exports.getIntraday = function(req, res) {
     function(data) { res.json(data); }
   );
 };
-
+exports.get5day = function(req, res) {
+  dataSource.get5day(
+    req.params.id,
+    function(data) { res.json(data); }
+  );
+};
 exports.getDaily = function(req, res) {
   dataSource.getDaily(
     req.params.id,

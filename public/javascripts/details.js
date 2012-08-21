@@ -59,7 +59,7 @@
       graphRange.setRange(range);
 
       if(range == 'r1d') series_type = 'intraday';
-      else if(range == 'r5d') series_type = 'minutes';
+      else if(range == 'r5d') series_type = '5day';
       else series_type = 'daily';
       
       this.updateGraph();

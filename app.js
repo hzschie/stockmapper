@@ -43,6 +43,7 @@ var dataConfig = JSON.stringify(JSON.parse(
 ));
 
 app.get('/series/intraday/:id', dataRoutes.getIntraday);
+app.get('/series/5day/:id', dataRoutes.get5day);
 app.get('/series/daily/:id', dataRoutes.getDaily);
 app.get('/news/:id', dataRoutes.getNews);
 
