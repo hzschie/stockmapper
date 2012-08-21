@@ -57,6 +57,7 @@
     
     this.setRange = function(range) {
       graphRange.setRange(range);
+      graph.setRange(range);
 
       if(range == 'r1d') series_type = 'intraday';
       else if(range == 'r5d') series_type = '5day';

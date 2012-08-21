@@ -68,6 +68,12 @@
           .ticks(2)
           .tickPadding(4)
           .orient('right');
+    
+    var rangeId;
+    this.setRange = function(_rangeId) {
+      rangeId = _rangeId;
+    };
+    
     this.render = function(series) {
       switch(series.type) {
         case 'intraday':
@@ -127,21 +133,26 @@
     };
     
     function renderDaily(series) {
+      var tMin;
+      if(rangeId == 'rMax') tMin = series.t_min;
+      else if(rangeId == 'r1y') tMin = series.t_max - 314496e5;
+      else if(rangeId == 'r3m') tMin = series.t_max - 78624e5;
       x
-        .domain([series.t_min, series.t_max])
+        .domain([tMin, series.t_max])
         .range([0, w]);
       
       xAxis.tickValues(null);
-      var range = series.t_max - series.t_min;
-      if(range > 922752e5)// 3 years
+      
+      var span = x.domain()[1] - x.domain()[0];
+      if(span > 922752e5)// 3 years
         xAxis.ticks(d3.time.years, 1).tickFormat(d3.time.format.utc('%Y'));
-      else if(range >= 307584e5)// 1 year
+      else if(span >= 307584e5)// 1 year
         xAxis.ticks(d3.time.months, 3).tickFormat(d3.time.format.utc('%b %Y'));
       else
         xAxis.ticks(d3.time.months, 1).tickFormat(d3.time.format.utc('%b %Y'));
         
-      dLine.defined(function() { return true; });
-      dArea.defined(function() { return true; });
+      dLine.defined(function(slice) { return slice.t >= tMin; });
+      dArea.defined(function(slice) { return slice.t >= tMin; });
       
       xax.call(xAxis);
     };
