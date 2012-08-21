@@ -2,8 +2,6 @@
   color:#fff;
   font:16px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
   padding:0 10px 0 10px;
-/*  height:0;*/
-  opacity:0;
   display:none;
   background-color:#333;
   padding-top:10px;
@@ -14,11 +12,6 @@
   right:0;
   bottom:0;
   z-index:1;
-  
-  -webkit-transition:height .6s, opacity .6s;
-  -moz-transition:height .6s, opacity .6s;
-  -ms-transition:height .6s, opacity .6s;
-  transition:height .6s, opacity .6s;
   
   background: -moz-linear-gradient(top,  rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.95) 100%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.88)), color-stop(100%,rgba(0,0,0,0.95))); /* Chrome,Safari4+ */

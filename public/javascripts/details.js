@@ -44,10 +44,10 @@
     this.query = function(_model) {
       model = _model;
       if(!model) {
-        $details.css({ opacity:0 });
+        $details.fadeOut();
         return;
       }
-      $details.show().css({ opacity:1 });
+      $details.fadeIn();
       
       template.applyBindings('stock', $details, model);
       
@@ -68,7 +68,7 @@
     this.updateGraph = function() {
       Interval.callOnce({ 
         fn:function() {
-          model.acquireTimeSeries(series_type, function(series) { graph.render(series); });// Price+Volume graph          
+          model && model.acquireTimeSeries(series_type, function(series) { graph.render(series); });// Price+Volume graph          
         },
         key:'update_graph'
       });
