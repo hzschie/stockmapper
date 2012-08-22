@@ -1,3 +1,9 @@
+Mobile startegy,
+Git hub deploy
+Using d3 csv on historical chart
+Change to counts for "type":"LIST"
+
+
 ##
 TODO: use CSS box-shadow for label drop-shadows. Yay.
 
