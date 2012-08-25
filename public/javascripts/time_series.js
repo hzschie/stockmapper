@@ -14,7 +14,8 @@
       return output;
     });
     this.type = type;
-    
+
+    this.data.sort(function(a,b) { return (a.t < b.t) - (a.t > b.t); });
     
     // this.data = $.map(this.data, function(slice) { var s2=$.extend({},slice); s2.t-=864e5; return s2; }).concat(this.data);//TEMP
     // this.t_min -= 864e5;//TEMP
