@@ -41,7 +41,7 @@ mapper.dataReady = function() {
     viewState.on('change', function() { updateView(false); });
 
     panel.on('select_group', function(group) {
-      viewState.set({ filter: group.get('urlName') }, { silent: true });
+      viewState.set({ filter: group.get('urlName'), q: null }, { silent: true });
       History.pushState(null, null, viewState.toUrl());
     });
     
