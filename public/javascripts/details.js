@@ -58,6 +58,7 @@
     };
     
     this.setRange = function(range) {
+      range = range || 'r1d';
       graphRange.setRange(range);
       graph.setRange(range);
 

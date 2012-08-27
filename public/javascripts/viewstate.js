@@ -14,11 +14,6 @@ var ViewState = mapper.ViewState = Backbone.Model.extend(
             this.set({
               currentGroup: currentGroup
             });
-            
-            // map.setModels(currentGroup.get('members'));
-            // chart.setModels(currentGroup.get('members'));
-            // panel.setSelectedGroup(currentGroup);
-            // inspector.suspendTillDone(map);
           }
           else
             throw new Error('Unknown group, ' + name);
@@ -29,19 +24,15 @@ var ViewState = mapper.ViewState = Backbone.Model.extend(
               currentSort = mapper.sortFunctions[sortId];
           this.get('currentGroup').set({ comparator: currentSort });
           this.set({ currentSort: currentSort });
-          
-          // panel.setSelectedSort(sortId);
         }
 
         if(this.hasChanged('q')) {
           var currentStock = mapper.stocks.get( this.get('q') );
           this.set({ currentStock: currentStock });
-          // details.query(stock);
         }
 
-        if(this.hasChanged('range')) {
-          // details.setRange(this.get('range'));
-        }
+        // if(this.hasChanged('range')) {
+        // }
       });
       
       var _this = this;
