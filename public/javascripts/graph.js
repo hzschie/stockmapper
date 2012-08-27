@@ -123,7 +123,7 @@
         .attr('x2', xt)
         .attr('y1', volH)
         .attr('y2', yVol)
-        .style('display', function(slice) { return isWithinMarketHours(slice) ? '' : 'none'; });
+        .style('display', function(slice) { return series.type == 'daily' ? true : isWithinMarketHours(slice) ? '' : 'none'; });
       bars.exit().remove();
       
       reference
