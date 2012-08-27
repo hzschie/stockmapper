@@ -1,4 +1,4 @@
-mapper.config.getGroupType = function() { return 'blufin_index'; };
+mapper.config.getGroupType = function() { return 'group'; /*return 'blufin_index';*/ };
 
 mapper.config.getInspectorBindings = function(bindings) {
   _.each(bindings.stock, function(binding) {
@@ -39,6 +39,14 @@ mapper.config.getMapTagHtml = function(model) {
 
 mapper.config.getPanelGroupHtml = function(group, $container) {
   return [
+    '<div class="val_right counts"></div>',
+    '<div class="type">', group.get('type').toUpperCase(), '</div>', 
+    '<label>', group.get('label'), '</label>'
+  ].join('');
+};
+/*
+mapper.config.getPanelGroupHtml = function(group, $container) {
+  return [
     '<div class="val_right">',
       '<div class="change"></div>',
       '<div class="value"></div>',
@@ -62,3 +70,4 @@ mapper.config.getGroupBindings = function(bindings) {
     ]
   };
 };
+*/

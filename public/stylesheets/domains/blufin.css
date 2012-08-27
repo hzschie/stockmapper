@@ -47,6 +47,9 @@
 }
 
 /* INSPECTOR */
+.inspector .content.group {
+  width: 200px;
+}
 .inspector .sym {
   font-family: 'Open Sans Condensed', sans-serif;
   padding-bottom:2px;
