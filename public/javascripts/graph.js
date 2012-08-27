@@ -74,7 +74,13 @@
       rangeId = _rangeId;
     };
     
+    this.setPending = function(isPending) {
+      if(isPending) $graph.addClass('pending');
+      else $graph.removeClass('pending');
+    };
+    
     this.render = function(series) {
+      this.setPending(false);
       switch(series.type) {
         case 'intraday':
         case '5day':

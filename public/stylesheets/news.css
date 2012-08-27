@@ -8,6 +8,9 @@
   margin-top:10px;
   margin-left:-6px;
 }
+.news.pending {
+  background:transparent url('/images/busy.gif?123456') no-repeat scroll center center;
+}
 
 .news .article {
   padding: 5px 6px;

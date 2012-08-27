@@ -51,7 +51,9 @@
       
       template.applyBindings('stock', $details, model);
       
+      news.setPending(true);
       model.acquireNews(function(data) { news.render(data); });// News feed
+      
       this.updateGraph();
     };
     
@@ -67,6 +69,7 @@
     };
     
     this.updateGraph = function() {
+      graph.setPending(true);
       Interval.callOnce({ 
         fn:function() {
           model && model.acquireTimeSeries(series_type, function(series) { graph.render(series); });// Price+Volume graph          

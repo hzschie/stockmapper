@@ -3,6 +3,9 @@
   display:block;
   font-size:12px;
 }
+.graph.pending {
+  background:transparent url('/images/busy.gif?123456') no-repeat scroll center center;
+}
 
 .graph .ui {
   position:relative;
@@ -34,6 +37,10 @@
 
 .graph svg {
   margin-left:-20px;
+  visibility:visible;
+}
+.graph.pending svg {
+  visibility:hidden;
 }
 
 .graph .graph_path {

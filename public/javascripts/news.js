@@ -12,7 +12,16 @@
     var template = new mapper.Template(),
         articleHtml = $('.article', $news).remove().wrap('<p>').parent().html();
 
+    this.setPending = function(isPending) {
+      if(isPending) {
+        $news.empty();
+        $news.addClass('pending');
+      }
+      else $news.removeClass('pending');
+    };
+
     this.render = function(news) {
+      this.setPending(false);
       $news.empty();
       $.each(news, function(i, article) {
         var $article = $(articleHtml).appendTo($news);
