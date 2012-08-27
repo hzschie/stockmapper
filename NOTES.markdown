@@ -2,6 +2,10 @@ Mobile startegy,
 Git hub deploy
 Using d3 csv on historical chart
 Change to counts for "type":"LIST"
+market hours 9 to 4
+week hi/lo, 
+
+320x480 @ 40 = 8x12 = 96
 
 
 ##

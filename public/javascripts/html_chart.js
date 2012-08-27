@@ -141,7 +141,6 @@
         
       /* ------ UPDATE BARS ------ */
       var tt = Date.now();
-      
       Interval.remove({ key:'chart_add' });
       Interval.callOnce({ fn:function() {
         var bars = d3.select($bars[0]).selectAll('.bar.ok');

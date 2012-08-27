@@ -2,60 +2,42 @@
 mapper.dataReady = function() {
   // Init views on document ready
   $(function() {
+    if(mapper.isMobile) {
+      return;
+    }
+    
     var panel = new mapper.Panel($('.panel'), mapper.groups),
         map = new mapper.Map($('.map')),
         chart = new mapper.HtmlChart($('.chart')),
         inspector = new mapper.Inspector($('.inspector')),
         details = new mapper.Details($('.details')),
         viewState = new mapper.ViewState(),
-        layout = new mapper.Layout(panel, map, chart),
-        currentGroup = null,
-        currentSort = mapper.sortFunctions['sym'];
-        
-    viewState.on('change', function(viewState) {
-      if(viewState.hasChanged('filter')) {
-        var name = viewState.get('filter');
-        currentGroup = !name ? mapper.allGroup : mapper.groups.where({urlName:name})[0];
-        
-        if(currentGroup) {
-          currentGroup.set({ comparator: currentSort });
-          map.setModels(currentGroup.get('members'));
-          chart.setModels(currentGroup.get('members'));
-          panel.setSelectedGroup(currentGroup);
-          inspector.suspendTillDone(map);
-        }
-        else
-          throw new Error('Unknown group, ' + name);
+        layout = new mapper.Layout(panel, map, chart);
+    
+    function updateView(force) {
+      if(viewState.hasChanged('currentGroup') || force) {
+        var currentGroup = viewState.get('currentGroup');
+        map.setModels(currentGroup.get('members'));
+        chart.setModels(currentGroup.get('members'));
+        panel.setSelectedGroup(currentGroup);
+        inspector.suspendTillDone(map);
       }
       
-      if(viewState.hasChanged('sort')) {
-        var sortId = viewState.get('sort') || 'sym';
-        currentSort = mapper.sortFunctions[sortId];
-        currentGroup.set({ comparator: currentSort });
-        panel.setSelectedSort(sortId);
+      if(viewState.hasChanged('currentSort') || force) {
+        panel.setSelectedSort(viewState.get('currentSort').id);
       }
       
-      if(viewState.hasChanged('q')) {
-        var id = viewState.get('q'),
-            stock = mapper.stocks.get(id);
-        details.query(stock);
+      if(viewState.hasChanged('currentStock') || force) {
+        details.query(viewState.get('currentStock'));
       }
       
-      if(viewState.hasChanged('range')) {
+      if(viewState.hasChanged('range') || force) {
         details.setRange(viewState.get('range'));
       }
-    });
-
-    (function(window, undefined){
-        var History = window.History;
-        if ( !History.enabled ) return;
-
-        History.Adapter.bind(window, 'statechange', function(){
-          var state = History.getState();
-          viewState.fromUrl(state.url);
-        });
-        viewState.fromUrl(History.getState().url);
-    })(window);
+    }
+    
+    updateView(true);
+    viewState.on('change', function() { updateView(false); });
 
     panel.on('select_group', function(group) {
       viewState.set({ filter: group.get('urlName') }, { silent: true });

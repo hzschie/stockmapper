@@ -238,4 +238,7 @@ mapper.sortFunctions = {
   chg: mapper.sortBy('changePct'),
   vol: mapper.sortBy('volume'),
   cap: mapper.sortBy('marketCap')
-};  
+};
+for(var key in mapper.sortFunctions) {
+  mapper.sortFunctions[key].id = key;
+}

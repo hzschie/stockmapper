@@ -108,8 +108,15 @@
 
     this.remove = function (handler) {
       if(subscribersTable[handler.key] == null) { return; }
-      var destinationArray = subscribersArray[ subscribersTable[handler.key] ];
-      destinationArray.splice( $.inArray(handler, destinationArray), 1 );
+      var destinationArray = subscribersArray[ subscribersTable[handler.key] ],
+          len = destinationArray.length;
+
+      for(var i = 0; i < len; i++) {
+        if(destinationArray[i].key == handler.key) {
+          destinationArray.splice( i, 1 );
+          break;
+        }
+      }
       totalSubscribers--;
       
       subscribersTable[handler.key] = null;
@@ -117,6 +124,12 @@
       if(totalSubscribers == 0) {
         stopService();
       }
+    };
+    
+    this.trace = function() {
+      console.log("HGH:", subscribersArray[PRIORITY_HIGH].map(function(fn) { return fn.key; }));
+      console.log("MID:", subscribersArray[PRIORITY_MID].map(function(fn) { return fn.key; }));
+      console.log("LOW:", subscribersArray[PRIORITY_LOW].map(function(fn) { return fn.key; }));
     };
 
     function startService() {

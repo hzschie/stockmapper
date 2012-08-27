@@ -48,8 +48,12 @@ app.get('/series/daily/:id', dataRoutes.getDaily);
 app.get('/news/:id', dataRoutes.getNews);
 
 app.get('/*', function(req, res) {
+  var ua = req.headers['user-agent'],
+      isMobile = /mobile/i.test(ua) || req.query.mobile || false;
+      
   res.render(dataDomain, {
     dataDomain: dataDomain,
-    dataConfig: dataConfig
+    dataConfig: dataConfig,
+    isMobile: isMobile
   });
 });
