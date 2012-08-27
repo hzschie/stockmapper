@@ -47,7 +47,7 @@ mapper.config.getPanelGroupHtml = function(group, $container) {
     '<label>', group.get('label'), '</label>'
   ].join('');
 };
-mapper.config.getPanelBindings = function(bindings) {
+mapper.config.getGroupBindings = function(bindings) {
   return {
     blufin_index: [
       { $:'.change', field:'changePct', formatter:mapper.Template.blankIfNull(mapper.Template.postfix(mapper.Template.changeFormat, '%')) },

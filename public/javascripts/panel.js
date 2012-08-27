@@ -31,7 +31,7 @@
           ].join('');
         },
         template = new mapper.Template(
-          $.extend(Panel.defaultBindings, mapper.config.getPanelBindings && mapper.config.getPanelBindings(Panel.defaultBindings))
+          $.extend(Panel.defaultBindings, mapper.config.getGroupBindings && mapper.config.getGroupBindings(Panel.defaultBindings))
         );
     while(padding.length < 4) { padding.push(padding[0]); }
     

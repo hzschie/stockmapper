@@ -3,6 +3,7 @@ mapper.dataReady = function() {
   // Init views on document ready
   $(function() {
     if(mapper.isMobile) {
+      var groupsView = new mapper.GroupsView($('.groups'), mapper.groups);
       return;
     }
     
