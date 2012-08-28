@@ -49,7 +49,7 @@ app.get('/news/:id', dataRoutes.getNews);
 
 app.get('/*', function(req, res) {
   var ua = req.headers['user-agent'],
-      isMobile = false;// /mobile/i.test(ua) || req.query.mobile || false;
+      isMobile = /mobile/i.test(ua) || req.query.mobile || false;
       
   res.render(dataDomain, {
     dataDomain: dataDomain,

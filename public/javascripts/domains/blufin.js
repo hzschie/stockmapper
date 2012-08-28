@@ -37,7 +37,7 @@ mapper.config.getMapTagHtml = function(model) {
   return sym;
 };
 
-mapper.config.getPanelGroupHtml = function(group, $container) {
+mapper.config.getPanelGroupHtml = function(group, $container, withoutType) {
   return [
     '<div class="val_right counts"></div>',
     '<div class="type">', group.get('type').toUpperCase(), '</div>', 
@@ -45,7 +45,7 @@ mapper.config.getPanelGroupHtml = function(group, $container) {
   ].join('');
 };
 /*
-mapper.config.getPanelGroupHtml = function(group, $container) {
+mapper.config.getPanelGroupHtml = function(group, $container, withoutType) {
   return [
     '<div class="val_right">',
       '<div class="change"></div>',

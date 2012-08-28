@@ -1,12 +1,7 @@
 // Initialize view and Historty
 mapper.dataReady = function() {
   // Init views on document ready
-  $(function() {
-    if(mapper.isMobile) {
-      var groupsView = new mapper.GroupsView($('.groups'), mapper.groups);
-      return;
-    }
-    
+  $(mapper.isMobile ? mapper.Mobile.ready : function() {
     var panel = new mapper.Panel($('.panel'), mapper.groups),
         map = new mapper.Map($('.map')),
         chart = new mapper.HtmlChart($('.chart')),
