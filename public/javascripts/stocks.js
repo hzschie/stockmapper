@@ -20,7 +20,7 @@ var Stock = mapper.Stock = Backbone.Model.extend(
       hash['changeDir'] = hash['change'] == 0 ? 0 : (hash['change'] / Math.abs(hash['change']));
       hash['changePct'] = parseFloat(hash.changePctString);
       hash['marketCap'] = Stock.parseMarketCapString(hash.marketCapString);
-      hash['isVeryActive'] = hash.volume / (hash.avgVolume || hash.volume) >= 1.96;
+      // hash['isVeryActive'] = hash.volume / (hash.avgVolume || hash.volume) >= 1.96;
       hash['hasData'] = true;
       this.set(hash);
     },

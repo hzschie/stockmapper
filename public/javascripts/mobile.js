@@ -7,18 +7,34 @@ mapper.Mobile.ready = function() {
         trackedParams: ['filter', 'sort', 'q', 'range', 'mobile']
       }),
       groupsView = new mapper.GroupsView($('.groups_view'), mapper.groups),
+      details = new mapper.Details($('.details')),
       map = new mapper.Map($('.map'));
       
   function updateView(force) {
     if(viewState.hasChanged('currentGroup') || force) {
       var currentGroup = viewState.get('currentGroup');
       if(currentGroup) {
-        layout.setPage(1);
+        layout.setPage(viewState.get('currentStock') ? 2 : 1);
         map.setModels(currentGroup.get('members'));
       }
       else {
-        layout.setPage(0);
+        layout.setPage(viewState.get('currentStock') ? 2 : 0);
       }
+    }
+    
+    if(viewState.hasChanged('currentStock') || force) {
+      var stock = viewState.get('currentStock');
+      if(stock) {
+        details.query(stock);
+        layout.setPage(2);
+      }
+      else {
+        layout.setPage(viewState.get('currentGroup') ? 1 : 0);
+      }
+    }
+    
+    if(viewState.hasChanged('range') || force) {
+      details.setRange(viewState.get('range'));
     }
   }
   
@@ -27,6 +43,16 @@ mapper.Mobile.ready = function() {
   
   groupsView.on('select_group', function(group) {
     viewState.set({ filter: group.get('urlName') }, { silent: true });
+    History.pushState(null, null, viewState.toUrl());
+  });
+  
+  map.on('select_tag', function(model, $tag) {
+    viewState.set({ q: model.id }, { silent: true });
+    History.pushState(null, null, viewState.toUrl());
+  });
+  
+  details.on('select_range', function(range) {
+    viewState.set({ range: range }, { silent: true });
     History.pushState(null, null, viewState.toUrl());
   });
   

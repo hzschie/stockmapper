@@ -5,3 +5,34 @@ body {
   overflow:scroll;
   min-height:100%;
 }
+
+
+.mobile .details .left, .mobile .details .right {
+  width:100%;
+  white-space:nowrap;
+}
+.mobile .details .last_trade {
+  width:50%;
+}
+.mobile .details .values .col {
+  width:44%;
+}
+.mobile .details .last_trade, .mobile .details .change {
+  font-size:20px;
+}
+.mobile .details .sym {
+  font-size:14px;
+}
+.mobile .details h3 {
+  font-size:24px;
+  margin-bottom:8px;
+}
+.mobile .details .values {
+  margin-top:12px;
+  margin-bottom:12px;
+}
+
+
+.mobile .graph .axis .tick {
+  display:none;
+}

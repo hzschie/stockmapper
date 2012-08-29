@@ -35,10 +35,9 @@
         series_type = 'intraday',// 'daily',//
     
         template = new mapper.Template(Details.defaultBindings),
-        graph = new mapper.Graph($('.graph', $details), $details.width() / 2),
+        graph = new mapper.Graph($('.graph', $details), $('.left', $details).width()),
         graphRange = new mapper.GraphRange($('.graph .ui .ranges'), function(id) { _this.trigger('select_range', id); }),
         news = new mapper.News($('.news', $details));
-        
     $('.close', $details).click(function() { _this.trigger('click_close'); });
     
     this.query = function(_model) {
@@ -47,7 +46,7 @@
         $details.fadeOut();
         return;
       }
-      $details.fadeIn();
+      $details.css({ visibility:'visible' }).fadeIn();
       
       template.applyBindings('stock', $details, model);
       

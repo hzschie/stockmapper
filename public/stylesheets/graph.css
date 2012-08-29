@@ -45,14 +45,12 @@
 
 .graph .graph_path {
   stroke:#ddf;
-/*  stroke: url(#fade);*/
   fill:none;
   shape-rendering: geometricPrecision;
 }
 .graph .graph_area {
   stroke:none;
   fill:rgba(220,220,255,.15);
-/*  fill: url(#fade);*/
   shape-rendering: geometricPrecision;
 }
 .graph .volume_chart {

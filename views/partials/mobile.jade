@@ -1,6 +1,68 @@
-body
+body.mobile
   .layout
     .index
       .groups_view
     .contents
       .map
+    .details(style="visibility:hidden;")
+      .left
+        .sym SYM
+        h3.name Amit was here
+        .last_trade 123.45
+        .change
+          span.amount +12.34
+          | &nbsp;(
+          span.percent 1.23%
+          | )
+        .values
+          dl
+            .col
+              dt Open:
+              dd.open 12.34
+              dt High:
+              dd.high 12.34
+              dt Low:
+              dd.low 12.34
+              dd &nbsp;
+              dt
+              dt P/E:
+              dd.pe
+              dt P/B:
+              dd.pb
+              dt P/S:
+              dd.ps
+            .col
+              dt Avg. Vol.:
+              dd.avg_volume 123,456
+              dt Volume:
+              dd.volume 123,456
+              dt Market Cap:
+              dd.market_cap 1.234B
+              dd &nbsp;
+              dt
+              dt Div/Yield:
+              dd.div_yield
+              dt ROE:
+              dd.roe
+        .graph
+          .ui
+            .ranges
+              | Range:&nbsp;&nbsp;
+              #rMax.range Max
+              #r1y.range 1y
+              #r3m.range 3m
+              #r5d.range 5d
+              #r1d.range.selected 1d
+          svg
+            defs
+              linearGradient#fade(gradientTransform="rotate(90)", gradientUnits="userSpaceOnUse", spreadMethod="reflect")
+                stop(offset="26%", stop-color="#FFF", stop-opacity=".09")
+                stop(offset="28%", stop-color="#FFF", stop-opacity="0")
+      .right
+        .news
+          .article
+            a.title(target="stockmapper_news")
+            span.source
+            |  – 
+            span.date
+
