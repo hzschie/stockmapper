@@ -7,7 +7,11 @@ mapper.dataReady = function() {
         chart = new mapper.HtmlChart($('.chart')),
         inspector = new mapper.Inspector($('.inspector')),
         details = new mapper.Details($('.details')),
-        viewState = new mapper.ViewState(),
+        viewState = new mapper.ViewState({
+          defaultGroup: mapper.allGroup,
+          defaultSort: mapper.sortFunctions.sym,
+          trackedParams: ['filter', 'sort', 'q', 'range']
+        }),
         layout = new mapper.Layout(panel, map, chart);
     
     function updateView(force) {

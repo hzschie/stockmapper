@@ -7,22 +7,18 @@ var ViewState = mapper.ViewState = Backbone.Model.extend(
       this.on('change', function() {
         if(this.hasChanged('filter')) {
           var name = this.get('filter'),
-              currentGroup = !name ? mapper.allGroup : mapper.groups.where({ urlName:name })[0];
+              currentGroup = name && mapper.groups.where({ urlName:name })[0] || this.get('defaultGroup');
 
-          if(currentGroup) {
-            currentGroup.set({ comparator: this.get('currentSort') });
-            this.set({
-              currentGroup: currentGroup
-            });
-          }
-          else
-            throw new Error('Unknown group, ' + name);
+          currentGroup && currentGroup.set({ comparator: this.get('currentSort') });
+          this.set({
+            currentGroup: currentGroup
+          });
         }
 
         if(this.hasChanged('sort')) {
-          var sortId = this.get('sort') || 'sym',
-              currentSort = mapper.sortFunctions[sortId];
-          this.get('currentGroup').set({ comparator: currentSort });
+          var sortId = this.get('sort'),
+              currentSort = sortId && mapper.sortFunctions[sortId] || this.get('defaultSort');
+          this.get('currentGroup') && this.get('currentGroup').set({ comparator: currentSort });
           this.set({ currentSort: currentSort });
         }
 
@@ -73,14 +69,11 @@ var ViewState = mapper.ViewState = Backbone.Model.extend(
       var val, 
           output = '',
           _this = this;
-      ViewState.urlParams.forEach(function(param) {
+      _.forEach(this.get('trackedParams'), function(param) {
         val = _this.attributes[param];
         if(val) output += (output.length ? '&' : '') + param + '=' + val;
       });
       return output;
     }
-  },
-  {
-    urlParams: ['filter', 'sort', 'q', 'range']
   }
 );
