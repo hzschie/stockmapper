@@ -40,18 +40,15 @@ mapper.dataReady = function() {
     viewState.on('change', function() { updateView(false); });
 
     panel.on('select_group', function(group) {
-      viewState.set({ filter: group.get('urlName'), q: null }, { silent: true });
-      History.pushState(null, null, viewState.toUrl());
+      viewState.setState({ filter: group.get('urlName'), q: null });
     });
     
     panel.on('select_sort', function(sortVal) {
-      viewState.set({ sort: sortVal }, { silent: true });
-      History.pushState(null, null, viewState.toUrl());
+      viewState.setState({ sort: sortVal });
     });
     
     map.on('select_tag', function(model, $tag) {
-      viewState.set({ q: model.id }, { silent: true });
-      History.pushState(null, null, viewState.toUrl());
+      viewState.setState({ q: model.id });
     });
     
     panel.on('select_view', function(viewName) {
@@ -71,13 +68,11 @@ mapper.dataReady = function() {
     });
     
     details.on('click_close', function() {
-      viewState.set({ q: null }, { silent: true });
-      History.pushState(null, null, viewState.toUrl());
+      viewState.setState({ q: null });
     });
     
     details.on('select_range', function(range) {
-      viewState.set({ range: range }, { silent: true });
-      History.pushState(null, null, viewState.toUrl());
+      viewState.setState({ range: range });
     });
   });
 };

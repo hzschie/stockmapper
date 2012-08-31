@@ -4,33 +4,6 @@ var ViewState = mapper.ViewState = Backbone.Model.extend(
       currentSort: mapper.sortFunctions['sym']// is this needed???
     },
     initialize: function() {
-      this.on('change', function() {
-        if(this.hasChanged('filter')) {
-          var name = this.get('filter'),
-              currentGroup = name && mapper.groups.where({ urlName:name })[0] || this.get('defaultGroup');
-
-          currentGroup && currentGroup.set({ comparator: this.get('currentSort') });
-          this.set({
-            currentGroup: currentGroup
-          });
-        }
-
-        if(this.hasChanged('sort')) {
-          var sortId = this.get('sort'),
-              currentSort = sortId && mapper.sortFunctions[sortId] || this.get('defaultSort');
-          this.get('currentGroup') && this.get('currentGroup').set({ comparator: currentSort });
-          this.set({ currentSort: currentSort });
-        }
-
-        if(this.hasChanged('q')) {
-          var currentStock = mapper.stocks.get( this.get('q') );
-          this.set({ currentStock: currentStock });
-        }
-
-        // if(this.hasChanged('range')) {
-        // }
-      });
-      
       var _this = this;
       (function(window, undefined){
           var History = window.History;
@@ -40,37 +13,65 @@ var ViewState = mapper.ViewState = Backbone.Model.extend(
             var state = History.getState();
             _this.fromUrl(state.url);
           });
-          _this.fromUrl(History.getState().url);
+          _this.fromUrl(History.getState().url, true);
       })(window);
     },
     
-    toUrl: function() {
-      return '/?' + this.toParamsString();
+    setState: function(hash) {
+      History.pushState(null, null, '/?' + this.toParamsString(hash));
     },
     
-    fromUrl: function(url) {
-      url.match(/\?(.*)$/);
-      var paramsString = RegExp.$1 || null,
+    fromUrl: function(url, force) {
+      var matches = url.match(/\?(.*)$/),
+          paramsString = matches && matches[1] || null,
           params = paramsString && paramsString.split('&'),
-          attribs = {
+          oldAttribs = this.attributes,
+          newAttribs = {
             filter: null,
             sort: null,
-            q: null
-          };
+            q: null,
+            range: null,
+            mobile: null
+          },
+          _this = this;
           
       _.forEach(params, function(param) {
         param.match(/(.*)\=(.*)/);
-        attribs[RegExp.$1] = RegExp.$2;
+        var key = RegExp.$1,
+            val = RegExp.$2;
+        newAttribs[key] = val;
       });
-      this.set(attribs);
+      
+      for(var key in newAttribs) {
+        var val = newAttribs[key];
+        if((oldAttribs[key] != val) || force) {
+          if(key == 'filter') {
+            var currentGroup = val && mapper.groups.where({ urlName:val })[0] || _this.get('defaultGroup');
+            currentGroup && currentGroup.set({ comparator: _this.get('currentSort') });
+            newAttribs.currentGroup = currentGroup;
+          }
+
+          if(key == 'sort') {
+            var currentSort = val && mapper.sortFunctions[val] || _this.get('defaultSort');
+            _this.get('currentGroup') && _this.get('currentGroup').set({ comparator: currentSort });
+            newAttribs.currentSort = currentSort;
+          }
+
+          if(key == 'q') {
+            var currentStock = mapper.stocks.get(val);
+            newAttribs.currentStock = currentStock;
+          }
+        }
+      }
+      this.set(newAttribs);
     },
     
-    toParamsString: function() {
+    toParamsString: function(hash) {
       var val, 
           output = '',
           _this = this;
       _.forEach(this.get('trackedParams'), function(param) {
-        val = _this.attributes[param];
+        val = hash[param] === undefined ? _this.attributes[param] : hash[param];
         if(val) output += (output.length ? '&' : '') + param + '=' + val;
       });
       return output;

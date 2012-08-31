@@ -7,15 +7,17 @@ mapper.Mobile.ready = function() {
         trackedParams: ['filter', 'sort', 'q', 'range', 'mobile']
       }),
       groupsView = new mapper.GroupsView($('.groups_view'), mapper.groups),
-      details = new mapper.Details($('.details')),
-      map = new mapper.Map($('.map'));
+      groupInfo = new mapper.GroupInfo($('.group_info')),
+      map = new mapper.Map($('.map')),
+      details = new mapper.Details($('.details'));
       
   function updateView(force) {
     if(viewState.hasChanged('currentGroup') || force) {
       var currentGroup = viewState.get('currentGroup');
       if(currentGroup) {
-        layout.setPage(viewState.get('currentStock') ? 2 : 1);
+        groupInfo.setGroup(currentGroup);
         map.setModels(currentGroup.get('members'));
+        layout.setPage(viewState.get('currentStock') ? 2 : 1);
       }
       else {
         layout.setPage(viewState.get('currentStock') ? 2 : 0);
@@ -42,18 +44,15 @@ mapper.Mobile.ready = function() {
   viewState.on('change', function() { updateView(false); });
   
   groupsView.on('select_group', function(group) {
-    viewState.set({ filter: group.get('urlName') }, { silent: true });
-    History.pushState(null, null, viewState.toUrl());
+    viewState.setState({ filter: group.get('urlName') });
   });
   
   map.on('select_tag', function(model, $tag) {
-    viewState.set({ q: model.id }, { silent: true });
-    History.pushState(null, null, viewState.toUrl());
+    viewState.setState({ q: model.id });
   });
   
   details.on('select_range', function(range) {
-    viewState.set({ range: range }, { silent: true });
-    History.pushState(null, null, viewState.toUrl());
+    viewState.setState({ range: range });
   });
   
   function CardLayout($container, num) {
