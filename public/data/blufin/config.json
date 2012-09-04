@@ -1,7 +1,7 @@
 {
   "marketHours": {
-    "t0": 570,
-    "t1": 930
+    "t0": 540,
+    "t1": 960
   },
   
   "groupsUrl": "/data/blufin/groups.json",

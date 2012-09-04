@@ -197,9 +197,10 @@
       xax.call(xAxis);
       
       if(series.type == '5day') xax.selectAll('text').attr('dx', _w/2);
+      else xax.selectAll('text').attr('dx', 0);
         
-        dLine.defined(isWithinMarketHours);
-        dArea.defined(isWithinMarketHours);
+      dLine.defined(isWithinMarketHours);
+      dArea.defined(isWithinMarketHours);
     };
   }
 })();
