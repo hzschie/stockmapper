@@ -46,14 +46,16 @@ var ViewState = mapper.ViewState = Backbone.Model.extend(
         var val = newAttribs[key];
         if((oldAttribs[key] != val) || force) {
           if(key == 'filter') {
-            var currentGroup = val && mapper.groups.where({ urlName:val })[0] || _this.get('defaultGroup');
-            currentGroup && currentGroup.set({ comparator: _this.get('currentSort') });
+            var currentGroup = val && mapper.groups.where({ urlName:val })[0] || _this.get('defaultGroup'),
+                currentSort = newAttribs.currentSort !== undefined ? newAttribs.currentSort : _this.get('currentSort');
+            currentGroup && currentGroup.set({ comparator: currentSort });
             newAttribs.currentGroup = currentGroup;
           }
 
           if(key == 'sort') {
-            var currentSort = val && mapper.sortFunctions[val] || _this.get('defaultSort');
-            _this.get('currentGroup') && _this.get('currentGroup').set({ comparator: currentSort });
+            var currentSort = val && mapper.sortFunctions[val] || _this.get('defaultSort'),
+                currentGroup = newAttribs.currentGroup !== undefined ? newAttribs.currentGroup : _this.get('currentGroup');
+            currentGroup && currentGroup.set({ comparator: currentSort });
             newAttribs.currentSort = currentSort;
           }
 

@@ -1,13 +1,14 @@
 mapper.Mobile = function() {};
 
 mapper.Mobile.ready = function() {
-  var layout = lll = new CardLayout($('.layout')),
+  var layout = new CardLayout($('.layout')),
       viewState = new mapper.ViewState({
         defaultSort: mapper.sortFunctions.sym,
         trackedParams: ['filter', 'sort', 'q', 'range', 'mobile']
       }),
       groupsView = new mapper.GroupsView($('.groups_view'), mapper.groups),
       groupInfo = new mapper.GroupInfo($('.group_info')),
+      sorts = new mapper.SortButtons($('.sorts'), function(id) { viewState.setState({ sort:id }); }),
       map = new mapper.Map($('.map')),
       details = new mapper.Details($('.details'));
       
@@ -22,6 +23,10 @@ mapper.Mobile.ready = function() {
       else {
         layout.setPage(viewState.get('currentStock') ? 2 : 0);
       }
+    }
+    
+    if(viewState.hasChanged('currentSort') || force) {
+      sorts.setCurrent(viewState.get('currentSort').id);
     }
     
     if(viewState.hasChanged('currentStock') || force) {
