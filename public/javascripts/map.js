@@ -27,6 +27,23 @@
       models.on('reset', rebuild);
     };
     
+    this.search = function(model) {
+      $('.search_result', $map).removeClass('search_result');
+      if(!model) {
+        $map.removeClass('dimmed');
+      }
+      else {
+        $map.addClass('dimmed');
+        var $tag = model._map && model._map.$tag;
+        if($tag) {
+          model._map.$tag.addClass('search_result');
+          _this.trigger('inspect_tag', model, $tag);
+          return;
+        }
+      }
+      _this.trigger('inspect_tag', null);
+    };
+    
     if(_models) this.setModels(_models);
     
     function addModel(model, i, animate) {

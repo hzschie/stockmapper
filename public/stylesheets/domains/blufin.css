@@ -168,3 +168,8 @@ a.twit, a.fb, a.ya, a.in {
   top: -10px;
   width: 29px;
 }
+
+/* SEARCH */
+.search .dropdown .sym {
+  font-family: 'Open Sans Condensed', 'Helvetica Narrow', 'Arial Narrow', sans-serif;
+}

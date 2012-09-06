@@ -89,6 +89,19 @@
       }
     };
     
+    this.search = function(stock) {
+      $('.search_result', $groups).removeClass('search_result');
+      if(!stock) {
+        $groups.removeClass('dimmed');
+      }
+      else {
+        $groups.addClass('dimmed');
+        _.forEach(stock.get('groups'), function(group) {
+          group.get('$tag').addClass('search_result');
+        });
+      }
+    };
+    
     this.setSelectedSort = function(sort) {
       if($selectedSort) {
         $selectedSort.removeClass('selected');

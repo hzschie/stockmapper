@@ -28,6 +28,17 @@
   letter-spacing:-1px;
   position:absolute;
 }
+.map.dimmed > li {
+  opacity:.2;
+}
+.map.dimmed > li.search_result {
+  opacity:1;
+  margin-left:-1px;
+  margin-top:-1px;
+  padding-right:2px;
+  padding-top:1px;
+  padding-bottom:1px;
+}
 
 .map .shadows div {
   display:none;

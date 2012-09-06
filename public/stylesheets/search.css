@@ -1,0 +1,40 @@
+.search {
+  font:14px/20px "Myriad Pro","Myriad", "Helvetica", "Arial", sans-serif;
+}
+
+.search .dropdown {
+  padding:2px;
+  display:none;
+}
+
+.search .dropdown > div {
+  cursor:pointer;
+  padding:0 2px;
+}
+.search .dropdown > div:not(.selected):hover {
+  background:#eee;
+}
+.search .dropdown .selected {
+  color:#fff;
+  background:#333;
+}
+
+.search .dropdown .sym b {
+  text-decoration:underline;
+}
+
+.search .dropdown .sym {
+  display:inline-block;
+  min-width:70px;
+  white-space:nowrap;
+  font-size:12px;
+  padding-right:8px;
+}
+
+.search .dropdown .name {
+  display:inline-block;
+  max-width:200px;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  overflow:hidden;
+}

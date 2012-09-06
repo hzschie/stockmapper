@@ -75,6 +75,15 @@
 .panel .group {
   background-color:#ccc;
 }
+.panel .groups.dimmed .group {
+  opacity:.2;
+  -webkit-transition: opacity .2s;
+  -ms-transition: opacity .2s;
+  -moz-transition: opacity .2s;
+}
+.panel .groups.dimmed .group.search_result {
+  opacity:1;
+}
 .panel .group .val_right {
   font-size:9px;
   line-height:9px;

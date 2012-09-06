@@ -79,7 +79,9 @@
       mapper.groups.forEach(function(group) {
         var members = group.get('members');
         _.each(group.get('ids'), function(id) {
-          members.add(mapper.stocks.get(id));
+          var stock = mapper.stocks.get(id);
+          members.add(stock);
+          stock.get('groups').push(group);
         });
       });
 

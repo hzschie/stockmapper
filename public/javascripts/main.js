@@ -7,6 +7,7 @@ mapper.dataReady = function() {
         chart = new mapper.HtmlChart($('.chart')),
         inspector = new mapper.Inspector($('.inspector')),
         details = new mapper.Details($('.details')),
+        search = new mapper.Search($('.search')),
         viewState = new mapper.ViewState({
           defaultGroup: mapper.allGroup,
           defaultSort: mapper.sortFunctions.sym,
@@ -34,6 +35,16 @@ mapper.dataReady = function() {
       if(viewState.hasChanged('range') || force) {
         details.setRange(viewState.get('range'));
       }
+      
+      if(viewState.hasChanged('searchStock') || force) {
+        var searchStock = viewState.get('searchStock');
+        map.search(searchStock);
+        panel.search(searchStock);
+        
+        if(searchStock) {
+          details.query(null);
+        }
+      }
     }
     
     updateView(true);
@@ -42,23 +53,26 @@ mapper.dataReady = function() {
     panel.on('select_group', function(group) {
       viewState.setState({ filter: group.get('urlName'), q: null });
     });
-    
     panel.on('select_sort', function(sortVal) {
       viewState.setState({ sort: sortVal });
+    });
+    panel.on('select_view', function(viewName) {
+      layout.frameView(viewName);
+    });
+    panel.on('inspect_group', function(group, $tag) {
+      inspector.inspectGroup(group, $tag);
+    });
+    
+    search.on('select_option', function(model) {
+      viewState.set({ searchStock: model });
+    });
+    search.on('commit_option', function(model) {
+      viewState.setState({ q: (model && model.id) || null });
     });
     
     map.on('select_tag', function(model, $tag) {
       viewState.setState({ q: model.id });
     });
-    
-    panel.on('select_view', function(viewName) {
-      layout.frameView(viewName);
-    });
-    
-    panel.on('inspect_group', function(group, $tag) {
-      inspector.inspectGroup(group, $tag);
-    });
-    
     map.on('inspect_tag', function(model, $tag) {
       inspector.inspectTag(model, $tag);
     });
@@ -70,7 +84,6 @@ mapper.dataReady = function() {
     details.on('click_close', function() {
       viewState.setState({ q: null });
     });
-    
     details.on('select_range', function(range) {
       viewState.setState({ range: range });
     });
