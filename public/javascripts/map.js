@@ -27,7 +27,9 @@
       models.on('reset', rebuild);
     };
     
-    this.search = function(model) {
+    var searched;
+    this.search = function(model, andInspect) {
+      searched = model;
       $('.search_result', $map).removeClass('search_result');
       if(!model) {
         $map.removeClass('dimmed');
@@ -37,7 +39,9 @@
         var $tag = model._map && model._map.$tag;
         if($tag) {
           model._map.$tag.addClass('search_result');
-          _this.trigger('inspect_tag', model, $tag);
+          if(andInspect != false) {
+            _this.trigger('inspect_tag', model, $tag);
+          }
           return;
         }
       }
@@ -158,6 +162,8 @@
           
         Interval.remove({ key:'map_update' });
         Interval.callOnce({ fn:function() {
+          _this.search(searched, false);
+          
           sizeMult *= .75;
           getDelay = xtraDelay(200);
           tags

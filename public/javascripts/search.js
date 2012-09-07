@@ -83,6 +83,7 @@
       if(newTerm.length <= 1) {
         matches = [];
         render();
+        _this.trigger('select_option', null);
         return;
       }
       
