@@ -103,7 +103,6 @@
             j = 0,
             match = null,
             bestMatch;
-        // while(regexp[j] && (bestMatch = (sym.match(regexp[j]) || name.match(regexp[j])))) {
         while(regexp[j] && (regexp[j].test(sym) || regexp[j].test(name))) {
           bestMatch = sym.match(regexp[j]) || name.match(regexp[j]);
         
