@@ -1,1 +1,1 @@
-web: NODE_ENV=production BUNDLE=true DATA_DOMAIN=blufin node app.js
+web: CANNED=true NODE_ENV=production BUNDLE=true DATA_DOMAIN=blufin node app.js
