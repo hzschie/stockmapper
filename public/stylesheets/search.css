@@ -1,22 +1,43 @@
 .search {
   font:14px/20px "Myriad Pro","Myriad", "Helvetica", "Arial", sans-serif;
+  display:inline-block;
+  margin-bottom:4px;
+  vertical-align:middle;
+  margin-left:20px;
 }
 
+.search .field {
+  position:relative;
+}
+.search input {
+  width:160px;
+  padding:5px 10px 0;
+  background:#fff;
+  border-radius:18px;
+  border:1px solid #555;
+  -webkit-box-shadow: inset 2px 2px 6px 0px #000000;
+  -moz-box-shadow: inset 2px 2px 6px 0px #000000;
+  box-shadow: inset 2px 2px 6px 0px #000000;
+  border:none;
+}
+.search .x {
+  width:20px;
+  height:20px;
+  background:transparent url('/images/sprites.png?09102012') no-repeat scroll -2px -22px;
+  position:absolute;
+  right:0px;
+  top:6px;
+  cursor:pointer;
+}
 .search .dropdown {
+  position:absolute;
+  background:rgba(0,0,0,.8);
+  border:2px solid #000;
+  z-index:20;
   padding:2px;
   display:none;
-}
-
-.search .dropdown > div {
-  cursor:pointer;
-  padding:0 2px;
-}
-.search .dropdown > div:not(.selected):hover {
-  background:#eee;
-}
-.search .dropdown .selected {
-  color:#fff;
-  background:#333;
+  color:#bbb;
+  margin-top:8px;
 }
 
 .search .dropdown .sym b {
@@ -34,7 +55,21 @@
 .search .dropdown .name {
   display:inline-block;
   max-width:200px;
+  font-size:13px;
   text-overflow:ellipsis;
   white-space:nowrap;
   overflow:hidden;
+}
+.search .dropdown > div {
+  cursor:pointer;
+  padding:0 2px;
+  background-color:rgba(128,128,128,0);
+}
+.search .dropdown > div:not(.selected):hover {
+  background:rgba(128,128,128,.2);
+}
+.search .dropdown .selected {
+  color:#fff;
+  background-color:rgba(128,128,128,.4);
+  -webkit-transition:background-color .25s;
 }

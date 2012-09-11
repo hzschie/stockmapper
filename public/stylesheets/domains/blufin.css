@@ -26,7 +26,7 @@
 .panel .button {
   width:116px;/*104px;*/
 }
-.panel .button label {
+.panel .groups .button label {
   font-family: 'Open Sans Condensed', sans-serif;
   font-weight: bold;
   font-size: 11px;

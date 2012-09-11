@@ -42,7 +42,7 @@ mapper.dataReady = function() {
         panel.search(searchStock);
         
         if(searchStock) {
-          details.query(null);
+          details.close();
         }
       }
     }
@@ -58,6 +58,10 @@ mapper.dataReady = function() {
     });
     panel.on('inspect_group', function(group, $tag) {
       inspector.inspectGroup(group, $tag);
+    });
+    
+    layout.on('select_view', function(viewName) {
+      viewState.setState({ q: null });
     });
     
     search.on('select_option', function(model) {

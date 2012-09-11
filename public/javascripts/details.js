@@ -40,10 +40,14 @@
         news = new mapper.News($('.news', $details));
     $('.close', $details).click(function() { _this.trigger('click_close'); });
     
+    this.close = function() {
+      $details.fadeOut();
+    };
+    
     this.query = function(_model) {
       model = _model;
       if(!model) {
-        $details.fadeOut();
+        this.close();
         return;
       }
       $details.css({ visibility:'visible' }).fadeIn();

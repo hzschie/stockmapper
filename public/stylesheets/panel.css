@@ -118,6 +118,8 @@
 }
 
 .panel .views {
+  display:inline-block;
+  vertical-align:middle;
   margin-left:4px;
 }
 
@@ -128,7 +130,6 @@
   font:16px/22px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
   padding: 2px 8px 0;
   line-height:16px;
-  margin-bottom:4px;
 }
 .panel .views a:hover {
   color:#fff;

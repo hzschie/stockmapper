@@ -1,14 +1,17 @@
 body(style='padding:0 10px;')
   .panel
     block header
-    .search
-      input
-      .dropdown(style="position:absolute; background:#fff; z-index:20;")
     .groups
     .sorts
     .views
       a MAP
       a CHART
+    .search
+      .field
+        input(placeholder="Search")
+        .x
+      .dropdown
+      
   
   .details(style="visibility:hidden;")
     .left

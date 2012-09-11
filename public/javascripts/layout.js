@@ -23,7 +23,9 @@
 
     $views.children().each(function(i, el) {
       $(el).on('click', function() {
-        _this.frameView($(el).text().toLowerCase());
+        var view = $(el).text().toLowerCase();
+        _this.frameView(view);
+        _this.trigger('select_view', view);
       });
     });
     
