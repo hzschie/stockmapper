@@ -4,6 +4,7 @@
     _.extend(this, Backbone.Events);
     var searchPending = false,
         $input = $('input', $search).on('keydown', keydown).on('focus', focus).on('blur', blur),
+        $x = $('.x', $search).on('click', clear),
         $dropdown = $('.dropdown', $search),
         selection = -1,
         term, inputTerm,
@@ -14,6 +15,12 @@
       if(searchPending) return;
       searchPending = true;
       _search();
+    }
+    
+    function clear() {
+      $input.val('');
+      _this.trigger('commit_option', null);
+      search();
     }
     
     function keydown(e) {
@@ -135,7 +142,13 @@
     }
     
     function render() {
-      $dropdown.fadeIn();
+      if(matches.length > 0) {
+        $dropdown.fadeIn();
+      }
+      else {
+        $dropdown.fadeOut();
+        return;
+      }
       var html = $.map(matches, function(match) {
         return [
           '<div>',
