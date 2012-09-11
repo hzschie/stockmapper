@@ -20,7 +20,6 @@
         $selectedSort = null,
         $groups = $panel.find('.groups'),
         $sorts = $panel.find('.sorts'),
-        $views = $panel.find('.views'),
         //padding = _.map($panel.css('padding').split(' '), function(p) { return parseInt(p, 10); }),
         padding = [10, 9, 12, 9],
         margin,
@@ -66,12 +65,6 @@
     groups.forEach(addGroup);
     // Subscribe to subsequent adding of groups
     groups.on('add', addGroup);
-    
-    $views.children().each(function(i, el) {
-      $(el).on('click', function() {
-        _this.trigger('select_view', $(el).text().toLowerCase());
-      });
-    });
     
     this.height = function() {
       // var h = grid.bounds().h + 23;

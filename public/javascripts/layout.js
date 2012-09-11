@@ -1,18 +1,31 @@
 (function() {
   mapper.Layout = Layout;
   function Layout(panel, map, chart) {
+    _.extend(this, Backbone.Events);
     var $window = $(window),
         $layout = $('.layout'),
         $panel = $('.panel'),
-        $map = $('.map');
-        $chart = $('.chart');
-    $layout.css({ 'margin-top': panel.height() + 14 });
+        $map = $('.map'),
+        $chart = $('.chart'),
+        $views = $panel.find('.views'),
+        _this = this;
+        
+    $layout.css({ 'margin-top': topLine() });
     $chart.css({ 
       'min-height': $window.height() - panel.height() - 14 - 20,
       'padding-bottom': 20
     });
     
     $window.scroll(onScroll);
+    map.on('transition_done', function() {
+      onScroll();
+    });
+
+    $views.children().each(function(i, el) {
+      $(el).on('click', function() {
+        _this.frameView($(el).text().toLowerCase());
+      });
+    });
     
     this.frameView = function(viewName) {
       switch(viewName) {
@@ -26,8 +39,26 @@
       }
     };
     
+    var $currentView = null;
     function onScroll() {
-      // console.log($window.scrollTop());
+      var y = $window.scrollTop() + topLine(),
+          _$currentView,
+          view;
+      if(y >= $chart.offset().top) {
+        _$currentView = $chart;
+        view = 'CHART';
+      }
+      else if(y >= $map.offset().top) {
+        _$currentView = $map;
+        view = 'MAP';
+      }
+      
+      if(_$currentView && $currentView != _$currentView) {
+        $currentView = _$currentView;
+        $views.children().removeClass('current');
+        $views.find(':contains(' + view + ')').addClass('current');
+      }
+      
     }
     
     function scrollTo(y) {
@@ -46,6 +77,10 @@
           easing:'swing'
         }
       );
+    }
+    
+    function topLine() {
+      return panel.height() + 14;
     }
   }
 })();

@@ -56,9 +56,6 @@ mapper.dataReady = function() {
     panel.on('select_sort', function(sortVal) {
       viewState.setState({ sort: sortVal });
     });
-    panel.on('select_view', function(viewName) {
-      layout.frameView(viewName);
-    });
     panel.on('inspect_group', function(group, $tag) {
       inspector.inspectGroup(group, $tag);
     });

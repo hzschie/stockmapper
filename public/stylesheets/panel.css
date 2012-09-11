@@ -96,7 +96,7 @@
 .panel .groups {
   position:relative;
   margin:0 auto;
-  padding-bottom:16px;
+  padding-bottom:6px;
 }
 .panel .sorts {
   position:absolute;
@@ -118,16 +118,23 @@
 }
 
 .panel .views {
-  margin-left:12px;
+  margin-left:4px;
 }
 
 .panel .views a {
   cursor:pointer;
   display:inline-block;
-  margin-right:10px;
   color:#ccc;
   font:16px/22px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
+  padding: 2px 8px 0;
+  line-height:16px;
+  margin-bottom:4px;
 }
 .panel .views a:hover {
   color:#fff;
+}
+.panel .views a.current {
+  color:#000;
+  background:#fff;
+  border-radius:12px;
 }
