@@ -45,6 +45,7 @@
     };
     
     this.query = function(_model) {
+      if(model) model.off('change', updateQuote);
       model = _model;
       if(!model) {
         this.close();
@@ -52,7 +53,8 @@
       }
       $details.css({ visibility:'visible' }).fadeIn();
       
-      template.applyBindings('stock', $details, model);
+      if(model) model.off('change', updateQuote);
+      updateQuote();
       
       news.setPending(true);
       model.acquireNews(function(data) { news.render(data); });// News feed
@@ -81,5 +83,9 @@
         key:'update_graph'
       });
     };
+    
+    function updateQuote() {
+      template.applyBindings('stock', $details, model);
+    }
   }
 })();
