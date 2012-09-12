@@ -12,3 +12,16 @@ body {
 .layout {
   position:relative;
 }
+
+.credit {
+  color:#ddd;
+  font:12px/13px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
+  text-align:right;
+}
+
+.credit a {
+  font-weight:bold;
+  color:#fff;
+  text-decoration:none;
+}
+  

@@ -20,6 +20,7 @@
         $selectedSort = null,
         $groups = $panel.find('.groups'),
         $sorts = $panel.find('.sorts'),
+        $title = $panel.find('.title'),
         //padding = _.map($panel.css('padding').split(' '), function(p) { return parseInt(p, 10); }),
         padding = [10, 9, 12, 9],
         margin,
@@ -79,6 +80,7 @@
       selectedGroup = group;
       if(selectedGroup) {
         selectedGroup.get('$tag').addClass('selected');
+        $title.text(group.get('name'));
       }
     };
     

@@ -12,7 +12,7 @@
         
     $layout.css({ 'margin-top': topLine() });
     $chart.css({ 
-      'min-height': $window.height() - panel.height() - 14 - 20,
+      'min-height': $window.height() - panel.height() - 42 - 20,
       'padding-bottom': 20
     });
     
@@ -32,7 +32,7 @@
     this.frameView = function(viewName) {
       switch(viewName) {
         case 'chart':
-          scrollTo($chart.offset().top - $layout.offset().top);
+          scrollTo($chart.offset().top - $layout.offset().top - 5);
           break;
         case 'map':
         default:
@@ -46,7 +46,7 @@
       var y = $window.scrollTop() + topLine(),
           _$currentView,
           view;
-      if(y >= $chart.offset().top) {
+      if(y >= $chart.offset().top - 20) {
         _$currentView = $chart;
         view = 'CHART';
       }
@@ -82,7 +82,7 @@
     }
     
     function topLine() {
-      return panel.height() + 14;
+      return panel.height() + 42;
     }
   }
 })();

@@ -139,3 +139,15 @@
   background:#fff;
   border-radius:12px;
 }
+
+.panel .title {
+  position: absolute;
+  bottom: -40px;
+  font-size: 24px;
+  font-family: "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.85);
+  left: 7px;
+  background-color: rgba(74, 74, 74, .25);
+  padding: 0px 6px;
+}
