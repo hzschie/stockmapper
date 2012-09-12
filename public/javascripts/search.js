@@ -86,14 +86,31 @@
       
       term = inputTerm = newTerm;
       selection = -1;
+      matches = [];
       
-      if(newTerm.length <= 1) {
-        matches = [];
+      var isInputNumeric = (/^\d*$/).test(newTerm);
+      if(newTerm.length <= (isInputNumeric ? 2 : 1)) {
         render();
         _this.trigger('select_option', null);
         return;
       }
       
+      if(isInputNumeric) {
+        // doScripCodeSearch();
+        var regexp = new RegExp('^' + term),
+            models = mapper.stocks.models;
+        
+        mapper.stocks.each(function(model) {
+          if(regexp.test(model.id)) {
+            matches.push({ model:model, isNumeric:true, best:model.id.match(regexp)[0] });
+          }
+        });
+        matches = matches.slice(0,10);
+        
+        render();
+        return;
+      }
+
       var regexp = [
             // term.split('').join('.*'),
             new RegExp(term.split('').join('.?.?')),
@@ -101,18 +118,18 @@
             new RegExp(term)
           ],
           models = mapper.stocks.models;
-          
-      matches = [];
-          
+        
+        
       for(var i = 0; i < models.length; i++) {
         var sym = models[i].get('sym').toLowerCase(),
             name = models[i].get('name').toLowerCase(),
             j = 0,
             match = null,
             bestMatch;
+      
         while(regexp[j] && (regexp[j].test(sym) || regexp[j].test(name))) {
           bestMatch = sym.match(regexp[j]) || name.match(regexp[j]);
-        
+      
           if(match) {
             match.level++;
             match.best = bestMatch[0];
@@ -121,7 +138,7 @@
             match = { model:models[i], level:0, best:bestMatch[0] };
             matches.push(match);
           }
-          
+        
           // if(sym.charAt(0) == term.charAt(0) || name.charAt(0) == term.charAt(0)) {
           if(sym.match('^' + regexp[j].source)) {
             match.level++;
@@ -153,6 +170,7 @@
         return [
           '<div>',
             '<span class="sym">', format(match.model.get('sym'), match.best), '</span>',
+            match.isNumeric ? '<span class="code">' + format(match.model.get('id'), match.best) + '</span>' : '',
             '<span class="name">', format(match.model.get('name'), match.best), '</span>',
           '</div>'
         ].join('');

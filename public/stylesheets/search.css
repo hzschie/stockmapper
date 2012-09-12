@@ -52,6 +52,12 @@
   padding-right:8px;
 }
 
+.search .dropdown .code {
+  display:inline-block;
+  width:60px;
+  font-size:13px;
+}
+
 .search .dropdown .name {
   display:inline-block;
   max-width:200px;
