@@ -65,7 +65,7 @@
   $.getJSON(mapper.config.groupsUrl, function(response) {
     _.each(response, function(groupJson) {
       var group = new mapper.StockGroup(groupJson);
-      if(group.get('ids').length) mapper.groups.add(group);
+      if(true || group.get('ids').length) mapper.groups.add(group);
     });
     var groupIds = _.reject(mapper.groups.pluck('id'), function(id) { return id == null; });
     groupIds.length && socket.emit('subscribe', groupIds);

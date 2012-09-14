@@ -169,7 +169,7 @@
           tags
             .each(updateModel);
             
-          if(mapper.perf.animate != false && models.at(0).get('hasData') && !$map.hasClass('animated')) {
+          if(mapper.perf.animate != false && models.length && models.at(0).get('hasData') && !$map.hasClass('animated')) {
             setTimeout(function() {
               $map.addClass('animated');
             }, 0);

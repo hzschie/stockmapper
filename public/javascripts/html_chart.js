@@ -157,7 +157,7 @@
           getDelay = xtraDelay(200);
           bars.each(updateModel);
           
-          if(mapper.perf.animate != false && models.at(0).get('hasData') && !$chart.hasClass('animated')) {
+          if(mapper.perf.animate != false && models.length && models.at(0).get('hasData') && !$chart.hasClass('animated')) {
             setTimeout(function() {
               $chart.addClass('animated');
             }, 0);
