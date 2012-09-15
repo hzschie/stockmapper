@@ -2,8 +2,7 @@ body(style='padding:0 10px;')
   .panel
     block header
     .groups
-    .sorts
-    .views
+    .views.selector
       a MAP
       a CHART
     .search
@@ -11,6 +10,12 @@ body(style='padding:0 10px;')
         input(placeholder="Search")
         .x
       .dropdown
+    .sorts.selector
+      label Sort By:
+      a#sym Ticker Symbol
+      a#chg Percent Change
+      a#vol Volume
+      a#cap Market Cap
     .title
       
   

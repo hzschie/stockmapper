@@ -98,43 +98,34 @@
   margin:0 auto;
   padding-bottom:6px;
 }
+
 .panel .sorts {
-  position:absolute;
-  bottom:-2px;
-  right:20px;
+  float:right;
 }
-.panel .sorts .button {
-  display:inline-block;
-  position:relative;
-  color:#fff;
+.panel .sorts label {
+  line-height:30px;
+  margin-right:6px;
+  color:#ddf;
 }
 
-.panel .sorts .button:hover {
-  background-color:#444;
-}
-.panel .sorts .button.selected {
-  background-color:#fff;
-  color:#000;
-}
-
-.panel .views {
+.panel .selector {
+  font:16px/22px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
   display:inline-block;
   vertical-align:middle;
   margin-left:4px;
 }
 
-.panel .views a {
+.panel .selector a {
   cursor:pointer;
   display:inline-block;
   color:#ccc;
-  font:16px/22px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
   padding: 2px 8px 0;
   line-height:16px;
 }
-.panel .views a:hover {
+.panel .selector a:hover {
   color:#fff;
 }
-.panel .views a.current {
+.panel .selector a.current {
   color:#000;
   background:#fff;
   border-radius:12px;

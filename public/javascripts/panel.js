@@ -17,9 +17,7 @@
     var _this = this,
         grid = null,
         selectedGroup = null,
-        $selectedSort = null,
         $groups = $panel.find('.groups'),
-        $sorts = $panel.find('.sorts'),
         $title = $panel.find('.title'),
         //padding = _.map($panel.css('padding').split(' '), function(p) { return parseInt(p, 10); }),
         padding = [10, 9, 12, 9],
@@ -45,22 +43,6 @@
         return { reference:reference, isFilled:false };
       }
     );
-    
-    var buttonsOrder = [
-      { id:'sym', label:'Ticker Symbol' },
-      { id:'chg', label:'Percent Chng' },
-      { id:'vol', label:'Volume' },
-      { id:'cap', label:'Market Cap' }
-    ];
-    
-    buttonsOrder.forEach(function(btnObj) {
-      btnObj.$btn = $(document.createElement('div')).addClass('sort').addClass('button').html([
-        '<div class="type">SORT BY:</div>', 
-        '<label>', btnObj.label, '</label>'
-      ].join('')).appendTo($sorts).click(function() {
-        _this.trigger('select_sort', btnObj.id);
-      });
-    });
     
     // If groups is already populated (may be partially), we handle those groups now
     groups.forEach(addGroup);
@@ -97,17 +79,6 @@
       }
     };
     
-    this.setSelectedSort = function(sort) {
-      if($selectedSort) {
-        $selectedSort.removeClass('selected');
-      }
-      var sortObj = _.find(buttonsOrder, function(obj) { return obj.id == sort; });
-      $selectedSort = sortObj && sortObj.$btn;
-      if($selectedSort) {
-        $selectedSort.addClass('selected');
-      }
-    };
-
     function addGroup(group) {
       var type = group.get('type'),
           nickname = group.get('nickname'),
@@ -145,10 +116,6 @@
           width: grid.bounds().w,
           height: grid.bounds().h
         });
-        // $sorts.css({
-        //   // left: grid.x(grid.cols - buttonsOrder.length) + padding[L]
-        //   right: $panel.width() - grid.x(grid.cols) + padding[R] - margin[L]
-        // });
       }
       $tag.css({
         left: grid.xi(index),

@@ -3,6 +3,7 @@ mapper.dataReady = function() {
   // Init views on document ready
   $(mapper.isMobile ? mapper.Mobile.ready : function() {
     var panel = new mapper.Panel($('.panel'), mapper.groups),
+        sorts = new mapper.SortButtons($('.panel .sorts'), function(id) { viewState.setState({ sort:id }); }),
         map = new mapper.Map($('.map')),
         chart = new mapper.HtmlChart($('.chart')),
         inspector = new mapper.Inspector($('.inspector')),
@@ -25,7 +26,7 @@ mapper.dataReady = function() {
       }
       
       if(viewState.hasChanged('currentSort') || force) {
-        panel.setSelectedSort(viewState.get('currentSort').id);
+        sorts.setCurrent(viewState.get('currentSort').id);
       }
       
       if(viewState.hasChanged('currentStock') || force) {
