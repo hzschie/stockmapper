@@ -79,6 +79,9 @@ mapper.dataReady = function() {
       inspector.inspectTag(model, $tag);
     });
     
+    chart.on('select_bar', function(model, $bar) {
+      viewState.setState({ q: model.id });
+    });
     chart.on('inspect_bar', function(model, $subBar, isVol, yFixed) {
       inspector.inspectBar(model, $subBar, isVol, yFixed);
     });

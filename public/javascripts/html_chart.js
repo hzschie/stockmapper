@@ -62,6 +62,9 @@
               isVol = e.pageY - barTop > chgMaxH;
           _this.trigger('inspect_bar', model, isVol ? $volBar : $chgBar, isVol, barTop + (isVol ? chgMaxH + 1 + volMaxH - 80 : -40) );
         });
+        $bar.click(function() {
+          _this.trigger('select_bar', model, $bar);
+        });
       }, getDelay(model, i));
     }
     
