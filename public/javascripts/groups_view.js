@@ -1,3 +1,11 @@
+/* Algo TODO:
+  Calculate numCols
+  (Build scheme, wrapping a column if group.length + currRow > maxRows
+  Calculate height for each scheme, where maxRows is 2->n.
+  If cols(n) is > numCols, reject
+  Else, accept scheme
+*/
+
 (function() {
   GroupsView.defaultBindings = {
     group: [

@@ -42,10 +42,13 @@
     
     this.close = function() {
       $details.fadeOut();
+      this.trigger('close');
     };
     
     this.query = function(_model) {
       if(model) model.off('change', updateQuote);
+      else if(_model) this.trigger('open');
+      
       model = _model;
       if(!model) {
         this.close();

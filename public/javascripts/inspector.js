@@ -38,10 +38,15 @@
         bubbW = null,
         bubbH = null,
         targP = null,
+        bottomConstraint = $window.height(),
         lastPos = {},
         template = new mapper.Template(
           $.extend(Inspector.defaultBindings, mapper.config.getInspectorBindings(Inspector.defaultBindings))
         );
+        
+    this.setBottomConstraint = function(c) {
+      bottomConstraint = c;
+    };
         
     this.inspectTag = function(model, $tag) {
       if(!model) {
@@ -96,7 +101,7 @@
           _bubbW = bubbW = $container.width(),
           _bubbH = bubbH = $container.height(),
           _pointLeft = pointLeft = tagPos.left <= bodyWidth / 2,
-          _pointUp = pointUp = forcePoint == null ? ((tagPos.top + bubbH + tagSz.h + spacing.y) <= ($window.scrollTop() + $window.height())) : forcePoint,
+          _pointUp = pointUp = forcePoint == null ? ((tagPos.top + bubbH + tagSz.h + spacing.y) <= ($window.scrollTop() + bottomConstraint)) : forcePoint,
           offset = {
             x: pointLeft ? tagSz.w + spacing.x : -bubbW + 1 - spacing.x,// 57
             y: pointUp ? tagSz.h + spacing.y : -_bubbH - spacing.y

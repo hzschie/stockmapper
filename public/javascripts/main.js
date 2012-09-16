@@ -14,7 +14,7 @@ mapper.dataReady = function() {
           defaultSort: mapper.sortFunctions.sym,
           trackedParams: ['filter', 'sort', 'q', 'range']
         }),
-        layout = new mapper.Layout(panel, map, chart);
+        layout = new mapper.Layout(panel, map, chart, inspector, details);
     
     function updateView(force) {
       if(viewState.hasChanged('currentGroup') || force) {

@@ -1,12 +1,13 @@
 (function() {
   mapper.Layout = Layout;
-  function Layout(panel, map, chart) {
+  function Layout(panel, map, chart, inspector, details) {
     _.extend(this, Backbone.Events);
     var $window = $(window),
         $layout = $('.layout'),
         $panel = $('.panel'),
         $map = $('.map'),
         $chart = $('.chart'),
+        $details = $('.details'),
         $views = $panel.find('.views'),
         _this = this;
         
@@ -20,6 +21,10 @@
     map.on('transition_done', function() {
       onScroll();
     });
+    
+    details.on('open', function() { inspector.setBottomConstraint($window.height() - $details.outerHeight()); });
+    details.on('close', function() { inspector.setBottomConstraint($window.height()); });
+    
 
     $views.children().each(function(i, el) {
       $(el).on('click', function() {
