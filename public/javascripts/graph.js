@@ -90,6 +90,15 @@
           renderDaily(series);
           break;
       }
+
+      // Update the price and volume yscale's domains
+      var xd = x.domain(),
+          tRange = [ xd[0], xd[xd.length - 1] ],
+          pMin = series.getMin('price', tRange),
+          pMax = series.getMax('price', tRange),
+          dPad = (pMax - pMin) * .1;
+      yp.domain([Math.max(0, pMin - dPad), pMax + dPad]);
+      yv.domain([0, series.getMax('volume', tRange) * 1.2]);
       
       var gs = svg.selectAll('.x.axis g');
       gs.selectAll('.tick.bottom').remove();
@@ -102,7 +111,6 @@
       
       priceAx.call(priceAxis);
 
-      yv.domain([0, series.getMax('volume') * 1.2]);
       volAx.call(volAxis);
       
       var area = dArea(series.data),
@@ -157,12 +165,6 @@
       dArea.defined(function(slice) { return slice.t >= tMin; });
       
       xax.call(xAxis);
-      
-      // Update the price yscale domain
-      var min = series.getMin('price', x.domain()),
-          max = series.getMax('price', x.domain()),
-          dPad = (max - min) * .1;
-      yp.domain([Math.max(0, min - dPad), max + dPad]);
     };
     
     function renderIntraday(series) {
@@ -203,12 +205,6 @@
         
       dLine.defined(isWithinMarketHours);
       dArea.defined(isWithinMarketHours);
-      
-      // Update the price yscale domain
-      var min = series.getMin('price'),
-          max = series.getMax('price'),
-          dPad = (max - min) * .1;
-      yp.domain([Math.max(0, min - dPad), max + dPad]);
     };
   }
 })();
