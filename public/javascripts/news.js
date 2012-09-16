@@ -2,8 +2,8 @@
   mapper.News = News;
   var Template = mapper.Template;
   News.bindings = [
+    { $:null, field:'href', formatter: function(val, $field) { $field.prop('href', val); return null; } },
     { $:'.title', field:'title' },
-    { $:'.title', field:'href', formatter: function(val, $field) { $field.prop('href', val); return null; } },
     { $:'.source', field:'source' },
     { $:'.date', field:'t', formatter:distanceOfTimeInWords }
   ];

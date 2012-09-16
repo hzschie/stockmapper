@@ -2,7 +2,6 @@
   font-weight:normal;
   font-size:11px;
   line-height:12px;
-  color:#ddf;
   overflow:hidden;/*auto*/
   height:280px;
   margin-top:10px;
@@ -13,7 +12,10 @@
 }
 
 .news .article {
+  color:#ddf;
+  display:block;
   padding: 5px 6px;
+  text-decoration:none;
 }
 
 .news .article:hover {
@@ -27,7 +29,6 @@
   font-weight:bold;
   font-size:15px;
   line-height:16px;
-  text-decoration:none;
 }
 
 .news .none {
@@ -35,4 +36,5 @@
   line-height:30px;
   font-size:20px;
   margin-top:20px;
+  color:#aac;
 }
