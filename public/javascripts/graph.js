@@ -100,13 +100,9 @@
         .attr('y1', gap)
         .attr('y2', volH + gap);
       
-      var min = Math.min(series.price_ref || series.price_min, series.price_min),
-          max = Math.max(series.price_ref || series.price_max, series.price_max),
-          dPad = (max - min) * .1;
-      yp.domain([Math.max(0, min - dPad), max + dPad]);
       priceAx.call(priceAxis);
 
-      yv.domain([0, series.volume_max * 1.2]);
+      yv.domain([0, series.getMax('volume') * 1.2]);
       volAx.call(volAxis);
       
       var area = dArea(series.data),
@@ -140,11 +136,11 @@
     
     function renderDaily(series) {
       var tMin;
-      if(rangeId == 'rMax') tMin = series.t_min;
-      else if(rangeId == 'r1y') tMin = series.t_max - 314496e5;
-      else if(rangeId == 'r3m') tMin = series.t_max - 78624e5;
+      if(rangeId == 'rMax') tMin = series.getMin('t');
+      else if(rangeId == 'r1y') tMin = series.getMax('t') - 314496e5;
+      else if(rangeId == 'r3m') tMin = series.getMax('t') - 78624e5;
       x
-        .domain([tMin, series.t_max])
+        .domain([tMin, series.getMax('t')])
         .range([0, w]);
       
       xAxis.tickValues(null);
@@ -161,14 +157,20 @@
       dArea.defined(function(slice) { return slice.t >= tMin; });
       
       xax.call(xAxis);
+      
+      // Update the price yscale domain
+      var min = series.getMin('price', x.domain()),
+          max = series.getMax('price', x.domain()),
+          dPad = (max - min) * .1;
+      yp.domain([Math.max(0, min - dPad), max + dPad]);
     };
     
     function renderIntraday(series) {
-      var dayOf0 = series.t_min - (series.t_min % 8.64e7),
+      var dayOf0 = series.getMin('t') - (series.getMin('t') % 8.64e7),
           date0 = new Date(dayOf0 + marketHours.t0 * 60000),
-          dayOf1 = series.t_max - (series.t_max % 8.64e7),
+          dayOf1 = series.getMax('t') - (series.getMax('t') % 8.64e7),
           date1 = new Date(dayOf1 + marketHours.t1 * 60000);
-      // series.data.forEach(function(a) { console.log(new Date(a.t).toUTCString()); });
+
       var t = dayOf0,
           d = 0,
           _w = series.type == '5day' ? w / 5 : w,
@@ -201,6 +203,12 @@
         
       dLine.defined(isWithinMarketHours);
       dArea.defined(isWithinMarketHours);
+      
+      // Update the price yscale domain
+      var min = series.getMin('price'),
+          max = series.getMax('price'),
+          dPad = (max - min) * .1;
+      yp.domain([Math.max(0, min - dPad), max + dPad]);
     };
   }
 })();
