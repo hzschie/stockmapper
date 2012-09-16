@@ -108,7 +108,7 @@
           },
           pos = {
             left: tagPos.left + offset.x,
-            top: spacing.yFixed == null ? tagPos.top + offset.y : spacing.yFixed
+            top: spacing.yFixed == null ? tagPos.top + offset.y : Math.min(spacing.yFixed, ($window.scrollTop() + bottomConstraint) - bubbH - 5 )
           };
       
       tagPos.width = tagSz.w;
