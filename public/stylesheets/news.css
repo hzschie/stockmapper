@@ -29,3 +29,10 @@
   line-height:16px;
   text-decoration:none;
 }
+
+.news .none {
+  text-align:center;
+  line-height:30px;
+  font-size:20px;
+  margin-top:20px;
+}

@@ -22,7 +22,12 @@
 
     this.render = function(news) {
       this.setPending(false);
-      $news.empty();
+      
+      if(!news.length) {
+        $news.html('<div class="none">No news available</div>');
+        return;
+      }
+      
       $.each(news, function(i, article) {
         var $article = $(articleHtml).appendTo($news);
         template.applyBindings(News.bindings, $article, article);
