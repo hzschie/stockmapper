@@ -2,26 +2,10 @@
 mapper.dataReady = function() {
   // Init views on document ready
   $(mapper.isMobile ? mapper.Mobile.ready : function() {
-    var highlights = new mapper.SelectorButtons($('.map .highlights'), function(id) { highlights.setCurrent(id); }, true),
-        slider = new mapper.SliderAndInput(
-          new mapper.Slider(
-            $('.map .highlights .slider'), 
-            mapper.config.minVeryActiveRatio, mapper.config.maxVeryActiveRatio, mapper.config.veryActiveRatio
-          ),
-          $('.map .highlights input')
-        );
-        slider.on('change_val', function(val) {
-          mapper.stocks.each(function(s) {
-            s.set({
-              veryActiveRatio: val,
-              isVeryActive: s.get('volume') / (s.get('avgVolume') || s.get('volume')) >= val
-            });
-          });
-        });
-        
     var panel = new mapper.Panel($('.panel'), mapper.groups),
         sorts = new mapper.SelectorButtons($('.panel .sorts'), function(id) { viewState.setState({ sort:id }); }),
         map = new mapper.Map($('.map ul')),
+        highlights = new mapper.MapHighlights($('.map .map_ui')),
         chart = new mapper.HtmlChart($('.chart')),
         inspector = new mapper.Inspector($('.inspector')),
         details = new mapper.Details($('.details')),
@@ -70,9 +54,6 @@ mapper.dataReady = function() {
 
     panel.on('select_group', function(group) {
       viewState.setState({ filter: group.get('urlName'), q: null });
-    });
-    panel.on('select_sort', function(sortVal) {
-      viewState.setState({ sort: sortVal });
     });
     panel.on('inspect_group', function(group, $tag) {
       inspector.inspectGroup(group, $tag);

@@ -1,0 +1,76 @@
+.map .map_ui {
+  margin-top:-34px;
+  margin-bottom:4px;
+  text-align:right;
+  z-index:4;
+}
+.map_ui .highlights {
+  position:relative;
+  font-size:12px;
+  display:inline-block;
+}
+.map_ui .highlights a {
+  line-height:12px;
+}
+.map_ui .highlights .plus {
+  display:inline-block;
+  width:14px;
+  height:14px;
+  background:transparent url('/images/sprites.png?09162012') no-repeat -2px -63px;
+  vertical-align: middle;
+  margin-right: 4px;
+  margin-top: -2px;
+  cursor:pointer;
+  font-size:13px;
+  -webkit-transition:background-position .3s;
+  -moz-transition:background-position .3s;
+  -ms-transition:background-position .3s;
+  transition:background-position .3s;
+}
+.map_ui .highlights .minus {
+  background-position:-2px -43px;
+}
+.map_ui .highlights .plus:hover {
+  opacity:.8;
+}
+.map_ui .highlights .panel {
+  position:absolute;
+  top:26px;
+  color:#eee;
+  text-align:left;
+  line-height:20px;
+  padding:8px;
+  left:-8px;
+  right:-8px;
+  border-radius:8px;
+
+  background: -moz-linear-gradient(top,  rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.73) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.85)), color-stop(100%,rgba(0,0,0,0.73))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.73) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.73) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.73) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.73) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0000000', endColorstr='#f2000000',GradientType=0 ); /* IE6-9 */
+}
+.map_ui .highlights .panel.disabled {
+  visibility:hidden;
+}
+.map_ui .highlights .info {
+  margin-bottom:4px;
+  font-size:13px;
+}
+.map_ui .highlights a.disabled {
+  opacity:.3;
+}
+.map_ui .highlights input {
+  width:24px;
+  display:inline-block;
+  vertical-align: middle;
+  font-size:14px;
+}
+.map_ui .highlights .slider {
+  display:inline-block;
+  width:200px;
+  vertical-align: middle;
+  margin-left: 12px;
+}
