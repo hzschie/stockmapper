@@ -163,6 +163,10 @@
 }
 .map .highlights .info {
   margin-bottom:4px;
+  font-size:13px;
+}
+.map .highlights a.disabled {
+  opacity:.3;
 }
 .map .highlights input {
   width:24px;

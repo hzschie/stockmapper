@@ -2,7 +2,7 @@
 mapper.dataReady = function() {
   // Init views on document ready
   $(mapper.isMobile ? mapper.Mobile.ready : function() {
-    var highlights = new mapper.SelectorButtons($('.map .highlights'), function(id) { highlights.setCurrent(id); }),
+    var highlights = new mapper.SelectorButtons($('.map .highlights'), function(id) { highlights.setCurrent(id); }, true),
         slider = new mapper.SliderAndInput(
           new mapper.Slider(
             $('.map .highlights .slider'), 
