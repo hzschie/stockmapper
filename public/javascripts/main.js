@@ -2,7 +2,7 @@
 mapper.dataReady = function() {
   // Init views on document ready
   $(mapper.isMobile ? mapper.Mobile.ready : function() {
-    var highlights = new mapper.SortButtons($('.map .highlights'), function(id) { highlights.setCurrent(id); }),
+    var highlights = new mapper.SelectorButtons($('.map .highlights'), function(id) { highlights.setCurrent(id); }),
         slider = new mapper.SliderAndInput(
           new mapper.Slider(
             $('.map .highlights .slider'), 
@@ -20,7 +20,7 @@ mapper.dataReady = function() {
         });
         
     var panel = new mapper.Panel($('.panel'), mapper.groups),
-        sorts = new mapper.SortButtons($('.panel .sorts'), function(id) { viewState.setState({ sort:id }); }),
+        sorts = new mapper.SelectorButtons($('.panel .sorts'), function(id) { viewState.setState({ sort:id }); }),
         map = new mapper.Map($('.map ul')),
         chart = new mapper.HtmlChart($('.chart')),
         inspector = new mapper.Inspector($('.inspector')),
