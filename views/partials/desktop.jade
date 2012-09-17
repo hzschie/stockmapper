@@ -81,7 +81,20 @@ body(style='padding:0 10px;')
           span.date
 
   .layout
-    ul.map
+    .map
+      .map_ui
+        .highlights.selector
+          label
+            .plus
+            | Highlight:
+          a#active Very Active
+          a#best 52wk Best
+          a#worst 52wk Worst
+          .panel
+            .info Ratio of volume to average volume greater than:
+            input
+            .slider
+      ul
     .chart
       .ticks
       .bars

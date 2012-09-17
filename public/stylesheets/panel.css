@@ -102,34 +102,6 @@
 .panel .sorts {
   float:right;
 }
-.panel .sorts label {
-  line-height:30px;
-  margin-right:6px;
-  color:#ddf;
-}
-
-.panel .selector {
-  font:16px/22px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
-  display:inline-block;
-  vertical-align:middle;
-  margin-left:4px;
-}
-
-.panel .selector a {
-  cursor:pointer;
-  display:inline-block;
-  color:#ccc;
-  padding: 2px 8px 0;
-  line-height:16px;
-}
-.panel .selector a:hover {
-  color:#fff;
-}
-.panel .selector a.current {
-  color:#000;
-  background:#fff;
-  border-radius:12px;
-}
 
 .panel .title {
   position: absolute;

@@ -2,7 +2,7 @@
   mapper.SortButtons = SortButtons;
   function SortButtons($sorts, callback) {
     var $current;
-    $sorts.children().each(function() {
+    $('a', $sorts).each(function() {
       $(this).on('click', function() {
         callback( $(this).attr('id') );
       });

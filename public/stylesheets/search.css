@@ -11,19 +11,11 @@
 }
 .search input {
   width:160px;
-  padding:5px 10px 0;
-  background:#fff;
-  border-radius:18px;
-  border:1px solid #555;
-  -webkit-box-shadow: inset 2px 2px 6px 0px #000000;
-  -moz-box-shadow: inset 2px 2px 6px 0px #000000;
-  box-shadow: inset 2px 2px 6px 0px #000000;
-  border:none;
 }
 .search .x {
   width:20px;
   height:20px;
-  background:transparent url('/images/sprites.png?09102012') no-repeat scroll -2px -22px;
+  background:transparent url('/images/sprites.png?09162012') no-repeat scroll -2px -22px;
   position:absolute;
   right:0px;
   top:6px;

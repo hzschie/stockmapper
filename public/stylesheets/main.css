@@ -9,19 +9,58 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endColorstr='#333333',GradientType=0 ); /* IE6-9 */
 }
 
+input {
+  padding:5px 10px 0;
+  background:#fff;
+  border-radius:18px;
+  border:1px solid #555;
+  -webkit-box-shadow: inset 2px 2px 6px 0px #000000;
+  -moz-box-shadow: inset 2px 2px 6px 0px #000000;
+  box-shadow: inset 2px 2px 6px 0px #000000;
+  border:none;
+}
+
 .layout {
   position:relative;
 }
+
 
 .credit {
   color:#ddd;
   font:12px/13px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
   text-align:right;
 }
-
 .credit a {
   font-weight:bold;
   color:#fff;
   text-decoration:none;
 }
-  
+
+
+.selector label {
+  line-height:30px;
+  margin-right:6px;
+  color:#ddf;
+}
+.selector {
+  font:16px/22px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
+  display:inline-block;
+  vertical-align:middle;
+  margin-left:4px;
+}
+.selector a {
+  cursor:pointer;
+  display:inline-block;
+  color:#ccc;
+  padding: 2px 8px 0;
+  line-height:16px;
+  position:relative;
+}
+.selector a:hover {
+  color:#fff;
+}
+.selector a.current {
+  color:#000;
+  background:#fff;
+  border-radius:12px;
+}

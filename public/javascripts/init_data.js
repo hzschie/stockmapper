@@ -23,8 +23,10 @@
           mapper[ data[0] + 's' ].get(data[1]).update(data);
         }
         catch(e) {
-          console.log("couldn't update:", data);
-          console.error(e.message);
+          if(e.type != 'non_object_property_call') {
+            console.log("couldn't update:", data.join(', '));
+            console.error(e.message, e.name, e.type);
+          }
         }
         finally {
           i++;

@@ -3,6 +3,12 @@
     "t0": 570,
     "t1": 960
   },
+  
+  "veryActiveRatio": 1.96,
+  "minVeryActiveRatio": 1,
+  "maxVeryActiveRatio": 4,
+
+  
   "groupsUrl": "/data/nyse/groups.json",
   "stocksUrl": "/data/nyse/stocks.json",
   

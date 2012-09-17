@@ -4,6 +4,10 @@
     "t1": 960
   },
   
+  "minVeryActiveRatio": 1,
+  "maxVeryActiveRatio": 8,
+  "veryActiveRatio": 4,
+  
   "groupsUrl": "/data/blufin/groups.json",
   "stocksUrl": "/data/blufin/stocks.json",
   "allGroup": "Broad Market India Index",

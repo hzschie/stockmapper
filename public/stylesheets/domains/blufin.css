@@ -2,7 +2,7 @@
 .map {
   line-height:10px;
 }
-.map > li, .map .shadows div {
+.map li, .map .shadows div {
   font-family: 'Open Sans Condensed', 'Helvetica Narrow', 'Arial Narrow', sans-serif;
   width:58px;/*52px;*/
   font-weight:normal;
@@ -12,13 +12,13 @@
 .map .shadows div {
   width: 60px;
 }
-.map > li .tight {
+.map li .tight {
   letter-spacing:-1px;
 }
-.map > li.active:after {
+.map li.active:after {
   width:58px;/*52px;*/
 }
-.map > li:hover:after {
+.map li:hover:after {
   width:58px;/*52px;*/
 }
 
