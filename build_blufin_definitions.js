@@ -45,8 +45,8 @@ function createStocks(callback) {
     var stocksRaw = JSON.parse(body),
         broadGroup = groups['1000'];
     stocksRaw.forEach(function(stock) {
-      var sym = stock.id;// ScripId
-      stocks[sym] = stocks[sym] || [stock.sc, stock.n, sym];//[ScripCode, ScripName, sym]
+      var sym = stock.s;// ScripId
+      stocks[sym] = stocks[sym] || [stock.cid, stock.n, sym];//[ScripCode, ScripName, sym]
       
       var sector = stock.sec,// Sector
           capitalization = stock.c,// Capitalization
@@ -54,17 +54,17 @@ function createStocks(callback) {
           crosstab = (capitalization + style).replace(/Index/, '');
 
       cursor
-        .hex('#6666ff').write('\n' + stock.id)
+        .hex('#6666ff').write('\n' + stock.s)
         .hex('#3333aa').write(' (' + stock.n + '):\n');
 
       for(var indexId in groups) {
         var group = groups[indexId];
         if(group.name == sector || group.name == capitalization || group.name == style || group.name == crosstab || group == broadGroup) {
-          group.ids.push(stock.sc);// ScripCode
+          group.ids.push(stock.cid);// ScripCode
           
           cursor
             .hex('#3333aa').write('Add ')
-            .hex('#6666ff').write(stock.id)
+            .hex('#6666ff').write(stock.s)
             .hex('#3333aa').write(' to ')
             .hex('#6666ff').write(group.name + '\n');
         }
