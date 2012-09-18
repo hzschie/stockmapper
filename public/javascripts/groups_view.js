@@ -34,13 +34,13 @@
           $.extend(GroupsView.defaultBindings, mapper.config.getGroupBindings && mapper.config.getGroupBindings(Panel.defaultBindings))
         );
         
+    $groups.show().css({ height:300 });//TEMP
     var w = $groups.width(),
         gap = 6,
         pad = 3,
         numCols,
         tagW,
         tagH;
-    $groups.css({ height:300 });//TEMP
     function addLabel(label, c, r) {
       var $tag = $(document.createElement('div'))
         .addClass('label')
