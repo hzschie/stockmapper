@@ -13,14 +13,13 @@ flow.series([createGroups, createStocks, writeDefinitions]);
     
 function createGroups(callback) {
   request(urlBase + 'GetBlufinIndexList', function(error, response, body) {
-    var indexesRaw = JSON.parse(body);
-    cursor
-      .hex('#00ff00')
-      .bold()
-      .write(indexesRaw.length + ' indexes\n')
-      .reset();
-  
-    indexesRaw.forEach(function(index, i) {
+    var groupsJson = JSON.parse(body);
+    
+    // Log
+    cursor.hex('#00ff00').bold().write(groupsJson.length + ' groups\n').reset();
+    
+    // Gather required properties for each group and index it by index id
+    groupsJson.forEach(function(index, i) {
       var indexId = index.id;// IndexId
       groups[indexId] = {
         id: indexId,
@@ -30,6 +29,22 @@ function createGroups(callback) {
         ids: []
       };
     });
+    
+    // Hardcodes creation of NIFTY and SENSEX groups
+    groups['nifty'] = {
+      id: 'nifty',
+      name: 'NIFTY',
+      nickname: 'NIFTY',
+      type: 'Broad',
+      ids: []
+    };
+    groups['sensex'] = {
+      id: 'sensex',
+      name: 'SENSEX',
+      nickname: 'SENSEX',
+      type: 'Broad',
+      ids: []
+    };
     
     callback();
   });
@@ -43,7 +58,9 @@ function createStocks(callback) {
     }
     
     var stocksRaw = JSON.parse(body),
-        broadGroup = groups['1000'];
+        broadGroup = groups['1000'],
+        niftyGroup = groups['nifty'],
+        sensexGroup = groups['sensex'];
     stocksRaw.forEach(function(stock) {
       var sym = stock.s;// ScripId
       stocks[sym] = stocks[sym] || [stock.cid, stock.n, sym];//[ScripCode, ScripName, sym]
@@ -51,7 +68,9 @@ function createStocks(callback) {
       var sector = stock.sec,// Sector
           capitalization = stock.c,// Capitalization
           style = stock.st,// Style
-          crosstab = (capitalization + style).replace(/Index/, '');
+          crosstab = (capitalization + style).replace(/Index/, ''),
+          isNifty = stock.nifty == 1,
+          isSensex = stock.sensex == 1;
 
       cursor
         .hex('#6666ff').write('\n' + stock.s)
@@ -59,7 +78,8 @@ function createStocks(callback) {
 
       for(var indexId in groups) {
         var group = groups[indexId];
-        if(group.name == sector || group.name == capitalization || group.name == style || group.name == crosstab || group == broadGroup) {
+        if(group.name == sector || group.name == capitalization || group.name == style || group.name == crosstab || 
+            group == broadGroup || (isNifty && group == niftyGroup) || (isSensex && group == sensexGroup)) {
           group.ids.push(stock.cid);// ScripCode
           
           cursor

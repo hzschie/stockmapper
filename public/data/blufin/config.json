@@ -14,6 +14,8 @@
   
   "groupsTagOrder": [
     "Broad:Broad Market India",
+    "Broad:SENSEX",
+    "Broad:NIFTY",
     "Capitisation:Mega Cap",
     "Capitisation:Large Cap",
     "Capitisation:Mid Cap",
