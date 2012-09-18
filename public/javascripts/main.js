@@ -2,6 +2,7 @@
 mapper.dataReady = function() {
   // Init views on document ready
   $(mapper.isMobile ? mapper.Mobile.ready : function() {
+    // var groups = new mapper.SmartGroupsView($('.groups_grid'), mapper.groups);// TEMP
     var panel = new mapper.Panel($('.panel'), mapper.groups),
         sorts = new mapper.SelectorButtons($('.panel .sorts'), function(id) { viewState.setState({ sort:id }); }),
         map = new mapper.Map($('.map ul')),
