@@ -119,14 +119,14 @@
         col = 0,
         row = 0,
         table = [],
-        placeCluster = function(cluster) {
+        placeCluster = function(cluster, dryRun) {
           var len = cluster.groups.length;
           
-          table[row][col] = cluster.type;
+          if(!dryRun) table[row][col] = cluster.type;
           row++;
           
           _.each(cluster.groups, function(group, i) {
-            table[row][col] = group;
+            if(!dryRun) table[row][col] = group;
             row++;
             if(row > numRows - 1) {
               row = (i == len - 1) ? 0 : 1;
@@ -176,6 +176,62 @@
     }
     console.log(output);
     // console.log("ends at col", col, "row", row);
+    mapper.clusters = clusters;// TEMP!!!!!
+  }
+  
+  mapper.Scheme = Scheme;
+  function Scheme(clusters, numRows) {
+    this.numRows = numRows;
+    this.table = null;
+    
+    var col, row,
+        _this = this;
+    run(true);
+    
+    this.getTable = function() {
+      if(this.table) return this.table;
+      this.table = [];
+      for(var r = 0; r < this.numRows; r++) { this.table.push([]); }
+      run();
+      return this.table
+    }
+    
+    function run(dryRun) {
+      col = 0;
+      row = 0;
+      _.each(clusters, function(cluster) {
+        if(row == 0) {
+          placeCluster(cluster, dryRun);
+        }
+        else {
+          if(row + 1 + cluster.groups.length <= _this.numRows) {
+            placeCluster(cluster, dryRun);
+          }
+          else {
+            row = 0;
+            col++;
+            placeCluster(cluster, dryRun);
+          }
+        }
+      });
+      _this.numCols = col + (row == 0 ? 0 : 1);;
+    }
+    
+    function placeCluster(cluster, dryRun) {
+      var len = cluster.groups.length;
+      
+      if(!dryRun) _this.table[row][col] = cluster.type;
+      row++;
+      
+      _.each(cluster.groups, function(group, i) {
+        if(!dryRun) _this.table[row][col] = group;
+        row++;
+        if(row > _this.numRows - 1) {
+          row = (i == len - 1) ? 0 : 1;
+          col++;
+        }
+      });
+    };
   }
   
   /* --------------------------------------------------------------------------------- */
