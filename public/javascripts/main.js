@@ -2,8 +2,7 @@
 mapper.dataReady = function() {
   // Init views on document ready
   $(mapper.isMobile ? mapper.Mobile.ready : function() {
-    // var groups = new mapper.SmartGroupsView($('.groups_grid'), mapper.groups);// TEMP
-    var panel = new mapper.Panel($('.panel'), mapper.groups),
+    var groups = new mapper.SmartGroupsView(mapper.groups, $('.panel .groups'), $('.panel .title')),
         sorts = new mapper.SelectorButtons($('.panel .sorts'), function(id) { viewState.setState({ sort:id }); }),
         map = new mapper.Map($('.map ul')),
         highlights = new mapper.MapHighlights($('.map .map_ui')),
@@ -16,14 +15,14 @@ mapper.dataReady = function() {
           defaultSort: mapper.sortFunctions.sym,
           trackedParams: ['filter', 'sort', 'q', 'range']
         }),
-        layout = new mapper.Layout(panel, map, chart, inspector, details);
+        layout = new mapper.Layout(map, chart, inspector, details);
     
     function updateView(force) {
       if(viewState.hasChanged('currentGroup') || force) {
         var currentGroup = viewState.get('currentGroup');
         map.setModels(currentGroup.get('members'));
         chart.setModels(currentGroup.get('members'));
-        panel.setSelectedGroup(currentGroup);
+        groups.setSelected(currentGroup);
         inspector.suspendTillDone(map);
       }
       
@@ -42,7 +41,7 @@ mapper.dataReady = function() {
       if(viewState.hasChanged('searchStock') || force) {
         var searchStock = viewState.get('searchStock');
         map.search(searchStock);
-        panel.search(searchStock);
+        groups.search(searchStock);
         
         if(searchStock) {
           details.close();
@@ -53,10 +52,10 @@ mapper.dataReady = function() {
     updateView(true);
     viewState.on('change', function() { updateView(false); });
 
-    panel.on('select_group', function(group) {
+    groups.on('select_group', function(group) {
       viewState.setState({ filter: group.get('urlName'), q: null });
     });
-    panel.on('inspect_group', function(group, $tag) {
+    groups.on('inspect_group', function(group, $tag) {
       inspector.inspectGroup(group, $tag);
     });
     

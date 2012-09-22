@@ -1,11 +1,3 @@
-/* Algo TODO:
-  Calculate numCols
-  (Build scheme, wrapping a column if group.length + currRow > maxRows
-  Calculate height for each scheme, where maxRows is 2->n.
-  If cols(n) is > numCols, reject
-  Else, accept scheme
-*/
-
 (function() {
   GroupsView.defaultBindings = {
     group: [
@@ -21,79 +13,17 @@
   };
   
   mapper.SmartGroupsView = SmartGroupsView;
-  function SmartGroupsView($groups, groups) {
+  function SmartGroupsView(groups, $groups, $title) {
     _.extend(this, Backbone.Events);
     var _this = this,
         getGroupHtml = mapper.config.getPanelGroupHtml || function(group) {
-          return [
-            '<div class="type">', group.get('type').toUpperCase(), '</div>', 
-            '<label>', group.get('label'), '</label>'
-          ].join('');
+          return '<div class="type">' + group.get('type').toUpperCase() + '</div>';
         },
         template = new mapper.Template(
           $.extend(GroupsView.defaultBindings, mapper.config.getGroupBindings && mapper.config.getGroupBindings(Panel.defaultBindings))
-        );
+        ),
+        selected = null;
         
-    $groups.show().css({ height:300 });//TEMP
-    var w = $groups.width(),
-        gap = 6,
-        pad = 3,
-        numCols,
-        tagW,
-        tagH;
-    function addLabel(label, c, r) {
-      var $tag = $(document.createElement('div'))
-        .addClass('label')
-        .html(label)//.toUpperCase())
-        .css({
-          width: tagW + (typeof(table[r][c+1]) == 'string' || (table[r][c+1] && table[r][c+1].get('type') != label) ? 0 : gap/2 - 1),
-          height: tagH + (r == 0 ? gap/2 : 0) + gap/2 - 1,
-          left: c * (tagW + gap) + gap/2,
-          top: r * (tagH + gap) + (r == 0 ? 0 : gap/2)
-        })
-        .appendTo($groups);
-    }
-    function addGroup(group, c, r) {
-      var $tag = $(document.createElement('div'))
-        .addClass('group')
-        .html(getGroupHtml(group, $tag))
-        .css({
-          width: tagW + (shouldExtend(group, c+1, r) ? gap/2 - 1 : 0) + (shouldExtend(group, c-1, r) ? gap/2 : 0) - pad*2,
-          height: tagH + (shouldExtend(group, c, r+1) ? gap/2 - 1 : 0) + (shouldExtend(group, c, r-1) ? gap/2 : 0) - pad*2,
-          left: c * (tagW + gap) + (shouldExtend(group, c-1, r) ? 0 : gap/2),
-          top: r * (tagH + gap) + (shouldExtend(group, c, r-1) ? 0 : gap/2),
-          padding: pad
-        })
-        .appendTo($groups)
-        .click(function() {
-          _this.trigger('select_group', group);
-        });
-
-      group.set({ $tag2: $tag }, { silent:true });
-      group.on('change', updateGroup);
-      updateGroup(group);
-    }
-    function shouldExtend(group, toCol, toRow, iteration) {
-      iteration = iteration || 0;
-      if(iteration > 20) throw Error('too much');
-      var target = table[toRow] && table[toRow][toCol];
-      if(target) {
-        if(typeof(target) == 'string') return target == group.get('type');
-        else if(target.get('type') == group.get('type')) return true;
-        return false;
-      }
-      else {
-        if(toCol < 0 || toCol >= numCols ) return false;
-        else if(!table[toRow]) return true;
-        return shouldExtend(group, toCol, toRow - 1, iteration+1);
-      }
-    }
-    function updateGroup(group) {
-      var type = (mapper.config.getGroupType && mapper.config.getGroupType(group.get('type'), group)) || group.get('type');
-      template.applyBindings(type, group.get('$tag2'), group);
-    }
-    
-    // ---------------------------------
     var clusters = [],
         currCluster, currType;
     _.each(
@@ -115,71 +45,120 @@
       }
     );
     
-    var numRows = 6,//8,//6,
-        col = 0,
-        row = 0,
-        table = [],
-        placeCluster = function(cluster, dryRun) {
-          var len = cluster.groups.length;
-          
-          if(!dryRun) table[row][col] = cluster.type;
-          row++;
-          
-          _.each(cluster.groups, function(group, i) {
-            if(!dryRun) table[row][col] = group;
-            row++;
-            if(row > numRows - 1) {
-              row = (i == len - 1) ? 0 : 1;
-              col++;
-            }
-          });
-        };
+    $groups.show();
+    var width = $groups.width(),
+        gap = 5,
+        pad = 3,
+        line = 1,
+        tagH = 16,
+        tagW = null,
+        schemes = [],
+        scheme = pickScheme();
         
-    for(var r=0; r<numRows; r++) { table.push([]); }
+    tagW = Math.floor((width - gap * scheme.numCols) / scheme.numCols);
+    $groups.css({ height:(tagH + 2 * pad) * scheme.numRows - 2 * pad + gap });
     
-    _.each(clusters, function(cluster) {
-      if(row == 0) {
-        placeCluster(cluster);
-      }
-      else {
-        if(row + 1 + cluster.groups.length <= numRows) {
-          placeCluster(cluster);
-        }
-        else {
-          row = 0;
-          col++;
-          placeCluster(cluster);
-        }
-      }
-    });
-    
-    numCols = col + (row == 0 ? 0 : 1);
-    tagW = Math.floor((w - gap * numCols) / numCols);
-    tagH = 14;
-    
-    var output = '',
-        strPad = '           ';//'                    ';
-    for(var r = 0; r < table.length; r++) {
-      for(var c = 0; c < table[r].length; c++) {
+    var table = scheme.getTable();
+    for(var r = 0; r < scheme.numRows; r++) {
+      for(var c = 0; c < scheme.numCols; c++) {
         var obj = table[r][c];
         
         if(obj && typeof(obj) == 'string') addLabel(obj, c, r);
         else obj && addGroup(obj, c, r);
-        
-        if(obj) {
-          output += (obj = (typeof(obj) == 'string' ? ":: " + obj + " ::" : obj.get('nickname')).substr(0, strPad.length-1));
-          output += strPad.substring(0, strPad.length - obj.length);
-        }
-        else output += strPad;
       }
-      output += '\n';
     }
-    console.log(output);
-    // console.log("ends at col", col, "row", row);
-    mapper.clusters = clusters;// TEMP!!!!!
+    
+    this.setSelected = function(group) {
+      if(selected) {
+        selected.get('$tag').removeClass('selected');
+      }
+      selected = group;
+      if(selected) {
+        selected.get('$tag').addClass('selected');
+        $title.text(group.get('name'));
+      }
+    };
+    
+    this.search = function(stock) {
+      $('.search_result', $groups).removeClass('search_result');
+      if(!stock) {
+        $groups.removeClass('dimmed');
+      }
+      else {
+        $groups.addClass('dimmed');
+        _.forEach(stock.get('groups'), function(group) {
+          group.get('$tag').addClass('search_result');
+        });
+      }
+    };
+    
+    // -------------
+    
+    function addLabel(label, c, r) {
+      var $tag = $(document.createElement('div'))
+        .addClass('label')
+        .html(label)//.toUpperCase())
+        .css({
+          width: tagW + (typeof(table[r][c+1]) == 'string' || (table[r][c+1] && table[r][c+1].get('type') != label) ? 0 : gap/2 - line),
+          height: tagH + (r == 0 ? gap/2 : 0) + gap/2 - line,
+          left: c * (tagW + gap) + gap/2,
+          top: r * (tagH + gap)
+        })
+        .appendTo($groups);
+    }
+    
+    function addGroup(group, c, r) {
+      var $tag = $(document.createElement('div'))
+        .addClass('group')
+        .html(getGroupHtml(group, $tag))
+        .css({
+          width: tagW + (scheme.shouldExtend(group, c+1, r) ? gap/2 - line : 0) + (scheme.shouldExtend(group, c-1, r) ? gap/2 : 0) - pad*2,
+          height: tagH + (scheme.shouldExtend(group, c, r+1) ? gap/2 - line : 0) + (scheme.shouldExtend(group, c, r-1) ? gap/2 : 0) - pad*2,
+          left: c * (tagW + gap) + (scheme.shouldExtend(group, c-1, r) ? 0 : gap/2),
+          top: r * (tagH + gap) + (scheme.shouldExtend(group, c, r-1) ? 0 : gap/2),
+          padding: pad
+        })
+        .appendTo($groups)
+        .click(function() {
+          _this.trigger('select_group', group);
+        });
+
+      group.set({ $tag: $tag }, { silent:true });
+      group.on('change', updateGroup);
+      updateGroup(group);
+      
+      $tag.bind('click', function() {
+        _this.trigger('select_group', group);
+      });
+      
+      $tag.hover(
+        function() {
+          _this.trigger('inspect_group', group, $tag);
+        },
+        function() {
+          _this.trigger('inspect_group', null, null);
+        }
+      );
+    }
+    
+    function updateGroup(group) {
+      var type = (mapper.config.getGroupType && mapper.config.getGroupType(group.get('type'), group)) || group.get('type');
+      template.applyBindings(type, group.get('$tag'), group);
+    }
+    
+    function pickScheme() {
+      if(!width) return;
+      var i = 0,
+          _scheme;
+      while(true) {
+        _scheme = schemes[i] || new Scheme(clusters, i+2);
+        if(width / _scheme.numCols >= 140 || i > 20) break;
+        i++;
+      }
+      return _scheme;
+    }
   }
   
-  mapper.Scheme = Scheme;
   function Scheme(clusters, numRows) {
     this.numRows = numRows;
     this.table = null;
@@ -193,8 +172,22 @@
       this.table = [];
       for(var r = 0; r < this.numRows; r++) { this.table.push([]); }
       run();
-      return this.table
-    }
+      return this.table;
+    };
+    
+    this.shouldExtend = function(group, toCol, toRow) {
+      var target = this.table[toRow] && this.table[toRow][toCol];
+      if(target) {
+        if(typeof(target) == 'string') return target == group.get('type');
+        else if(target.get('type') == group.get('type')) return true;
+        return false;
+      }
+      else {
+        if(toCol < 0 || toCol >= this.numCols ) return false;
+        else if(!this.table[toRow]) return true;
+        return this.shouldExtend(group, toCol, toRow - 1);
+      }
+    };
     
     function run(dryRun) {
       col = 0;

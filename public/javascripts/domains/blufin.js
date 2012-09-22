@@ -40,7 +40,6 @@ mapper.config.getMapTagHtml = function(model) {
 mapper.config.getPanelGroupHtml = function(group, $container, withoutType) {
   return [
     '<div class="val_right counts"></div>',
-    '<div class="type">', group.get('type').toUpperCase(), '</div>', 
     '<label>', group.get('label'), '</label>'
   ].join('');
 };

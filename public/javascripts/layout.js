@@ -1,6 +1,6 @@
 (function() {
   mapper.Layout = Layout;
-  function Layout(panel, map, chart, inspector, details) {
+  function Layout(map, chart, inspector, details) {
     _.extend(this, Backbone.Events);
     var $window = $(window),
         $layout = $('.layout'),
@@ -13,11 +13,14 @@
         
     $layout.css({ 'margin-top': topLine() });
     $chart.css({ 
-      'min-height': $window.height() - panel.height() - 42 - 20,
+      'min-height': $window.height() - $panel.outerHeight() - 42 - 20,
       'padding-bottom': 20
     });
     
     $window.scroll(onScroll);
+    
+    detectResize($window, function() { });
+    
     map.on('transition_done', function() {
       onScroll();
     });
@@ -87,7 +90,21 @@
     }
     
     function topLine() {
-      return panel.height() + 42;
+      return $panel.outerHeight() + 42;
+    }
+    
+    
+    // ------ RESIZE DETECTION ------
+    
+    var timeoutId = null;
+    function detectResize($window, handler) {
+      $window.resize(function() {
+        if(timeoutId != null) clearTimeout(timeoutId);
+        timeoutId = setTimeout(function() {
+          timeoutId = null;
+          handler();
+        }, 200);
+      });
     }
   }
 })();
