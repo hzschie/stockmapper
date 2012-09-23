@@ -154,8 +154,9 @@
   display:none;
   font-size:16px;
 }
-.groups_view .counts {
+.groups_view .val_right {
   position:absolute;
+  text-align:right;
   right:5px;
   bottom:0;
   line-height:18px;
