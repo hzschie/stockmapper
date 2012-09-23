@@ -60,7 +60,7 @@
       model._map.$shadow = $shadow;
       
       if(!grid) {
-        grid = new mapper.Grid(models.length, $map.width(), $tag.outerWidth() + 1, $tag.outerHeight() + 1, makeCells);
+        grid = new mapper.Grid(models.length, $map.width(), $tag.outerWidth() - 1, $tag.outerHeight() - 1, makeCells);
         updateBounds();
       }
       

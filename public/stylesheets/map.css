@@ -22,8 +22,6 @@
   display:inline-block;
   width:27px;
   height:12px;
-  margin-right:1px;
-  margin-bottom:1px;
   padding-left:2px;
   white-space:nowrap;
   font:11px/12px "Helvetica Narrow","Arial Narrow",sans-serif;
@@ -48,42 +46,41 @@
 
 .map .shadows div {
   display:none;
-  background-color:rgba(0,0,0,.6);
-  margin-left:1px;
+  background-color:rgba(0,0,0,.7);
+/*  margin-left:1px;
   margin-top:1px;
+*/
+  margin-left:2px;
+  margin-top:2px;
+  
   width:29px;
   height:14px;
 }
 .map .shadows div.active {
   display:block;
 }
-/*.map .shadows div.active:after {
-  position:absolute;
-  content:'';
-  left:1px;
-  top:1px;
-  width:31px;
-  height:14px;
-  background-color:rgba(0,0,0,.6);
-}
-*/
 .map li {
+  border:1px solid rgba(0,0,0,.2);
   background-color:#ccc;
   cursor: crosshair;
 }
 
 .map li.active {
-/*  font-weight:bold;*/
+/*  -moz-box-shadow: 2px 2px 8px rgba(0,0,0,.75);
+  -webkit-box-shadow: 2px 2px 8px rgba(0,0,0,.75);
+  box-shadow: 2px 2px 8px rgba(0,0,0,.75);*/
   z-index:2;
+/*  margin:-1px 0 0 -1px;*/
 }
 
 .map li.active:after {
   width:27px;
   height:10px;
-  border:1px solid #fff;
+  border:1px solid #000;
   position:absolute;
-  left:0;
-  top:0;
+  left:-1px;
+  top:-1px;
+  padding:1px;
   content:'';
 }
 

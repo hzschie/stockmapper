@@ -4,6 +4,7 @@
       { $:'.counts', field:'upsAndDowns', formatter:function(counts) { return '+' + counts[0] + '-' + counts[1]; } },
       { $:null, field:'upsAndDowns', formatter:function(counts, $container) {
         var fraction = !counts[1] ? (counts[0] && 1) : (counts[0]/counts[1] - 1);
+        // var fraction = 2*counts[0]/(counts[0]+counts[1])-1;
         $container.css({ 
           backgroundColor: 'rgb(' + mapper.fractionToGreenRedHex(fraction) + ')'
         });
