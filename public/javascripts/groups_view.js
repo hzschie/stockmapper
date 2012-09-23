@@ -17,11 +17,11 @@
   function SmartGroupsView(groups, $groups, $title) {
     _.extend(this, Backbone.Events);
     var _this = this,
-        getGroupHtml = mapper.config.getPanelGroupHtml || function(group) {
+        getGroupHtml = mapper.config.getGroupTagHtml || function(group) {
           return '<div class="type">' + group.get('type').toUpperCase() + '</div>';
         },
         template = new mapper.Template(
-          $.extend(GroupsView.defaultBindings, mapper.config.getGroupBindings && mapper.config.getGroupBindings(Panel.defaultBindings))
+          $.extend(GroupsView.defaultBindings, mapper.config.getGroupBindings && mapper.config.getGroupBindings(GroupsView.defaultBindings))
         ),
         selected = null;
         
@@ -36,6 +36,8 @@
           group = groups.where({ type:splt[0], nickname:splt[1] })[0];
         }
         else group = refOrGroup;
+        
+        if(!group) return;
         
         if((type = group.get('type')) != currType) {
           currType = type;
@@ -234,14 +236,14 @@
   function GroupsView($groups, groups) {
     _.extend(this, Backbone.Events);
     var _this = this,
-        getGroupHtml = mapper.config.getPanelGroupHtml || function(group) {
+        getGroupHtml = mapper.config.getGroupTagHtml || function(group) {
           return [
             '<div class="type">', group.get('type').toUpperCase(), '</div>', 
             '<label>', group.get('label'), '</label>'
           ].join('');
         },
         template = new mapper.Template(
-          $.extend(GroupsView.defaultBindings, mapper.config.getGroupBindings && mapper.config.getGroupBindings(Panel.defaultBindings))
+          $.extend(GroupsView.defaultBindings, mapper.config.getGroupBindings && mapper.config.getGroupBindings(GroupsView.defaultBindings))
         );
 
     // If tags order is explicitly defined in config, use it. Otherwise, assume all groups 

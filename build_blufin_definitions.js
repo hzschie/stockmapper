@@ -32,17 +32,17 @@ function createGroups(callback) {
     
     // Hardcodes creation of NIFTY and SENSEX groups
     groups['nifty'] = {
-      id: 'nifty',
+      id: 229,
       name: 'NIFTY',
       nickname: 'NIFTY',
-      type: 'Broad',
+      type: 'Index',
       ids: []
     };
     groups['sensex'] = {
-      id: 'sensex',
+      id: 201,
       name: 'SENSEX',
       nickname: 'SENSEX',
-      type: 'Broad',
+      type: 'Index',
       ids: []
     };
     

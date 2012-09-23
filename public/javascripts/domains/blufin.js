@@ -1,4 +1,4 @@
-mapper.config.getGroupType = function() { return 'group'; /*return 'blufin_index';*/ };
+mapper.config.getGroupType = function(type, group) { return type == 'Index' ? 'blufin_index' : 'group'; };
 
 mapper.config.getInspectorBindings = function(bindings) {
   _.each(bindings.stock, function(binding) {
@@ -37,28 +37,25 @@ mapper.config.getMapTagHtml = function(model) {
   return sym;
 };
 
-mapper.config.getPanelGroupHtml = function(group, $container, withoutType) {
-  return [
-    '<div class="val_right counts"></div>',
-    '<label>', group.get('label'), '</label>'
-  ].join('');
-};
-/*
-mapper.config.getPanelGroupHtml = function(group, $container, withoutType) {
-  return [
-    '<div class="val_right">',
-      '<div class="change"></div>',
-      '<div class="value"></div>',
-    '</div>',
-    '<div class="type">', group.get('type').toUpperCase(), '</div>', 
-    '<label>', group.get('label'), '</label>'
-  ].join('');
+mapper.config.getGroupTagHtml = function(group, $container) {
+  if(group.get('type') == 'Index') return [
+      '<div class="val_right">',
+        '<div class="value"></div>',
+        '<div class="change"></div>',
+      '</div>',
+      '<label>', group.get('label'), '</label>'
+    ].join('');
+  else return [
+      '<div class="val_right counts"></div>',
+      '<label>', group.get('label'), '</label>'
+    ].join('');
 };
 mapper.config.getGroupBindings = function(bindings) {
   return {
     blufin_index: [
-      { $:'.change', field:'changePct', formatter:mapper.Template.blankIfNull(mapper.Template.postfix(mapper.Template.changeFormat, '%')) },
       { $:'.value', field:'value', formatter:mapper.Template.blankIfNull(mapper.Template.commaFormat) },
+      // { $:'.change', field:'changePct', formatter:mapper.Template.blankIfNull(mapper.Template.postfix(mapper.Template.changeFormat, '%')) },
+      { $:'.change', field:'change', formatter:mapper.Template.blankIfNull(mapper.Template.changeFormat) },
       { $:null, field:'changePct', formatter:function(changePct, $container) {
         if(changePct == null) return;
         $container.css({ 
@@ -69,4 +66,3 @@ mapper.config.getGroupBindings = function(bindings) {
     ]
   };
 };
-*/

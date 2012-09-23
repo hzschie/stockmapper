@@ -22,28 +22,10 @@
   width:58px;/*52px;*/
 }
 
-/* PANEL */
-.panel .button {
-  width:116px;/*104px;*/
-}
-.panel .groups .button label {
-  font-family: 'Open Sans Condensed', sans-serif;
-  font-weight: bold;
-  font-size: 11px;
-  line-height: 10px;
-}
-.panel .button .type {
-  line-height:8px;
-}
-.panel .button .value {
-  font-weight: bold;
-  line-height: 13px;
-}
-.panel .groups .button:hover:after, .panel .groups .button.selected:after {
-  left:-2px;
-  top:-2px;
-  border-width:3px;
-  width:116px;/*105px;*/
+/* GROUPS */
+.groups .group .val_right > * {
+  display:inline-block;
+  margin-left:5px;
 }
 
 /* INSPECTOR */
