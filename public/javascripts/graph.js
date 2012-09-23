@@ -180,13 +180,15 @@
           range = [],
           values = [];
       while(t <= dayOf1) {
-        var dayOfWeek = new Date(t).getUTCDay();
-        if(dayOfWeek != 0 && dayOfWeek != 6) {
-          domain.push(t + marketHours.t0 * 60000);
-          domain.push(t + marketHours.t1 * 60000);
+        var dayOfWeek = new Date(t).getUTCDay(),
+            tOpen = t + marketHours.t0 * 60000,
+            tClose = t + marketHours.t1 * 60000;
+        if(dayOfWeek != 0 && dayOfWeek != 6 && series.hasData(tOpen, tClose)) {
+          domain.push(tOpen);
+          domain.push(tClose);
           range.push(d * _w);
           range.push((d + 1) * _w);
-          values.push( new Date(t + marketHours.t0 * 60000) );
+          values.push( new Date(tOpen) );
           d++;
         }
         t += 8.64e7;

@@ -25,6 +25,13 @@
     
     this.getMin = function(field, range) { return getMinOrMax('min', field, range); };
     this.getMax = function(field, range) { return getMinOrMax('max', field, range); };
+    
+    this.hasData = function(t0, t1) {
+      for(var i = 0, len = this.data.length; i < len; i++) {
+        if(this.data[i].t >= t0 && this.data[i].t <= t1) return true;
+      }
+      return false;
+    };
 
     function getMinOrMax(minOrMax, field, range) {
       if(range && (Number(range[0]) != _this.t_min || Number(range[1]) != _this.t_max)) {
