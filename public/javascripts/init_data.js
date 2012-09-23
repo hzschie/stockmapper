@@ -1,4 +1,4 @@
-(function() {
+$(function() {
   mapper.stocks = new Backbone.Collection();
   mapper.groups = new Backbone.Collection();
 
@@ -46,34 +46,28 @@
   });
 
   // Stocks JSON
-  $.getJSON(mapper.config.stocksUrl, function(response) {
-    var field, i,
-        headers = response.headers,
-        hash;
-    _.each(response.data, function(values) {
-      hash = {};
-      for(field = headers[0], i = 0; i < headers.length; field = headers[++i]) {
-        hash[field] = values[i];
-      }
-    
-      var stock = new mapper.Stock(hash);
-      mapper.stocks.add(stock);
-    });
-    socket.emit('subscribe', mapper.stocks.pluck('id'));
-    tryPopulateGroups();
-  });
-
-  // Groups JSON
-  $.getJSON(mapper.config.groupsUrl, function(response) {
-    _.each(response, function(groupJson) {
-      var group = new mapper.StockGroup(groupJson);
-      if(true || group.get('ids').length) mapper.groups.add(group);
-    });
-    var groupIds = _.reject(mapper.groups.pluck('id'), function(id) { return id == null; });
-    groupIds.length && socket.emit('subscribe', groupIds);
+  var field, i,
+      headers = mapper.stocksJson.headers,
+      hash;
+  _.each(mapper.stocksJson.data, function(values) {
+    hash = {};
+    for(field = headers[0], i = 0; i < headers.length; field = headers[++i]) {
+      hash[field] = values[i];
+    }
   
-    tryPopulateGroups();
+    var stock = new mapper.Stock(hash);
+    mapper.stocks.add(stock);
   });
+  socket.emit('subscribe', mapper.stocks.pluck('id'));
+
+  _.each(mapper.groupsJson, function(groupJson) {
+    var group = new mapper.StockGroup(groupJson);
+    if(true || group.get('ids').length) mapper.groups.add(group);
+  });
+  var groupIds = _.reject(mapper.groups.pluck('id'), function(id) { return id == null; });
+  groupIds.length && socket.emit('subscribe', groupIds);
+  
+  tryPopulateGroups();
 
   // Put stocks into groups
   function tryPopulateGroups(groups) {
@@ -101,4 +95,4 @@
       mapper.dataReady();
     }
   }
-})();
+});

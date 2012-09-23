@@ -5,7 +5,8 @@ var express = require('express'),
     fs = require('fs'),
     
     dataRoutes = require('./routes/data.js');
-    
+
+// NODE APP CONFIGURATION    
 var app = express(),
     server = http.createServer(app),
     io = require('socket.io').listen(server, {
@@ -18,8 +19,6 @@ var app = express(),
 server.listen(process.env.PORT || 3000);
 dataRoutes.setIO(io);
 
-console.log("process.env = ", process.env);
-// Configuration
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
@@ -28,6 +27,8 @@ app.configure(function(){
   app.use(app.router);
 });
 
+
+// ASSET PACKAGER CONFIGURATION
 var BundleUp = require('bundle-up');
 BundleUp(app, __dirname + '/lib/assets', {
   staticRoot: __dirname + '/public/',
@@ -36,12 +37,22 @@ BundleUp(app, __dirname + '/lib/assets', {
   minifyCss: true,
   minifyJs: true
 });
+console.log("process.env = ", process.env);
 
-// Parse and Stringify the data to strip whitespace
-var dataConfig = JSON.stringify(JSON.parse(
+
+// STOCK AND GROUP DEFINITION JSON
+var groups = JSON.stringify(JSON.parse(// Parse and Stringify the data to strip whitespace
+  fs.readFileSync(__dirname + '/public/data/' + dataDomain + '/groups.json', 'utf8')
+));
+var stocks = JSON.stringify(JSON.parse(// Parse and Stringify the data to strip whitespace
+  fs.readFileSync(__dirname + '/public/data/' + dataDomain + '/stocks.json', 'utf8')
+));
+// DOMAIN SPECIFIC CONFIGURATION
+var dataConfig = JSON.stringify(JSON.parse(// Parse and Stringify the data to strip whitespace
   fs.readFileSync(__dirname + '/public/data/' + dataDomain + '/config.json', 'utf8')
 ));
 
+// ROUTES
 app.get('/series/intraday/:id', dataRoutes.getIntraday);
 app.get('/series/5day/:id', dataRoutes.get5day);
 app.get('/series/daily/:id', dataRoutes.getDaily);
@@ -54,6 +65,8 @@ app.get('/*', function(req, res) {
   res.render(dataDomain, {
     dataDomain: dataDomain,
     dataConfig: dataConfig,
+    groups: groups,
+    stocks: stocks,
     isMobile: isMobile
   });
 });
