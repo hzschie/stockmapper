@@ -23,7 +23,7 @@ else {
 (function() {
   // Converts a value between -1 and 1 to a hex of red or green with corresponding intensity
   mapper.fractionToGreenRedHex = function(fraction, progressive) {
-    if(progressive) return mapper.fractionChangeToHexProgressive(fraction);
+    if(progressive) return mapper.fractionChangeToHex(fraction);
     var whiteness = Math.round(0xff * ( 1 - Math.abs(fraction) ));
     return [fraction < 0 ? 0xff : whiteness, fraction > 0 ? 0xff : whiteness, whiteness];
   };
@@ -121,6 +121,11 @@ else {
       return val / 1e+3 + 'K';
     else
       return String(val);
+  };
+  var timestampFormat = d3.time.format.utc('%b %e, %I:%M%p');
+  Template.timestamp = function(val) {
+    if(typeof(val) == 'number') val = new Date(val);
+    return timestampFormat(val);
   };
 
   function Template(bindings) {

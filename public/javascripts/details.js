@@ -6,6 +6,7 @@
       { $:'.sym', field:'sym' },
       { $:'.name', field:'name' },
       { $:'.last_trade', field:'lastTrade', formatter:Template.priceFormat },
+      { $:'.timestamp', field:'timestamp', formatter:Template.postfix(Template.timestamp, ' ' + mapper.config.marketHours.timezone) },
 
       { $:'.change', field:'changeDir', formatter:Template.makeRedOrGreen },
       { $:'.change .amount', field:'change', formatter:Template.changeFormat },

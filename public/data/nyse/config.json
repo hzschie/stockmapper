@@ -1,7 +1,8 @@
 {
   "marketHours": {
     "t0": 570,
-    "t1": 960
+    "t1": 960,
+    "timezone": "EST"
   },
   
   "veryActiveRatio": 1.96,
