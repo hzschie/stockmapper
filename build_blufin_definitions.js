@@ -40,6 +40,12 @@ else {
     
 function createGroups(callback) {
   request(urlBase + 'GetBlufinIndexList', function(error, response, body) {
+    if(error || response.statusCode >= 400) {
+      cursor.hex('#cc0000').write(
+        'Data not available for GetBlufinIndexList. Status code was ' + response.statusCode + '\n'
+      );
+      return callback();
+    }
     var groupsJson = JSON.parse(body);
     
     // Log
@@ -80,7 +86,9 @@ function createGroups(callback) {
 function createStocks(callback) {
   request(urlBase + 'GetLatestIndexConstituentsDataByIndexID?IndexID=1000', function(error, response, body) {
     if(error || response.statusCode >= 400) {
-      cursor.hex('#cc0000').write('Data not available for IndexId=1000. Status code was ' + response.statusCode + '\n');
+      cursor.hex('#cc0000').write(
+        'Data not available for GetLatestIndexConstituentsDataByIndexID?IndexId=1000. Status code was ' + response.statusCode + '\n'
+      );
       return callback();
     }
     
