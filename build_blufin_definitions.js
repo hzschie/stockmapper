@@ -1,15 +1,42 @@
 var fs = require('fs'),
     request = require('request'),
     flow = require('nimble'),
-    ansi = require('ansi'),
-    cursor = ansi(process.stdout);
+    ansi = require('ansi');
 
 var urlBase = 'http://46.137.212.140:8080/Service/equities.svc/',
     actions = [],
     groups = {},
-    stocks = {};
-    
-flow.series([createGroups, createStocks, writeDefinitions]);
+    stocks = {},
+    cursor = null;
+
+// DETECT IF RUNNING AS STANDALONE SCRIPT, OR AS MODULE IMPORTED
+// BY THE MAIN APP (FOR DYNAMIC REFRESHING)
+if(require.main === module) {
+  flow.series([createGroups, createStocks, writeDefinitions]);
+  cursor = ansi(process.stdout);
+}
+else {
+  var events = require('events');
+  function Updater() {
+    this.update = function(req, res) {
+      if(res) {
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
+        cursor = ansi(res);
+      }
+      else {
+        cursor = ansi(process.stdout);
+      }
+      flow.series([createGroups, createStocks, writeDefinitions, function() { if(res) res.end(); }]);
+    };
+  }
+  Updater.prototype = Object.create(events.EventEmitter.prototype, {
+      constructor: {
+          value: Updater,
+          enumerable: false
+      }
+  });
+  module.exports = new Updater();
+}
     
 function createGroups(callback) {
   request(urlBase + 'GetBlufinIndexList', function(error, response, body) {
@@ -101,21 +128,28 @@ function createStocks(callback) {
   });
 }
 
-function writeDefinitions() {
+function writeDefinitions(callback) {
+  var groupsJSON = Object.keys(groups).map(function(key) { return groups[key]; });
   var stocksJSON = {
     headers: ['id', 'name', 'sym'],
     data: Object.keys(stocks).sort().map(function(key) { return stocks[key]; })
   };
-  fs.writeFileSync(__dirname + '/public/data/blufin/stocks.json', JSON.stringify(stocksJSON));
   
-  var groupsJSON = Object.keys(groups).map(function(key) { return groups[key]; });
-  fs.writeFileSync(__dirname + '/public/data/blufin/groups.json', JSON.stringify(groupsJSON));
+  if(module.exports instanceof Updater) {
+    module.exports.emit('update', groupsJSON, stocksJSON);
+  }
+  else {
+    fs.writeFileSync(__dirname + '/public/data/blufin/groups.json', JSON.stringify(groupsJSON));
+    fs.writeFileSync(__dirname + '/public/data/blufin/stocks.json', JSON.stringify(stocksJSON));
+  }
     
   cursor
     .hex('#00ff00')
     .bold()
     .write('DONE\n')
     .reset();
+    
+  callback();
 }
 
 /*

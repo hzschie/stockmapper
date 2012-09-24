@@ -24,6 +24,7 @@ app.configure(function(){
   app.set('view engine', 'jade');
   
   app.use(express['static'](__dirname + '/public'));
+  app.use(express.favicon(__dirname + '/public/images/favicon.ico'));
   app.use(app.router);
 });
 
@@ -40,17 +41,27 @@ BundleUp(app, __dirname + '/lib/assets', {
 console.log("process.env = ", process.env);
 
 
-// STOCK AND GROUP DEFINITION JSON
-var groups = JSON.stringify(JSON.parse(// Parse and Stringify the data to strip whitespace
-  fs.readFileSync(__dirname + '/public/data/' + dataDomain + '/groups.json', 'utf8')
-));
-var stocks = JSON.stringify(JSON.parse(// Parse and Stringify the data to strip whitespace
-  fs.readFileSync(__dirname + '/public/data/' + dataDomain + '/stocks.json', 'utf8')
-));
 // DOMAIN SPECIFIC CONFIGURATION
 var dataConfig = JSON.stringify(JSON.parse(// Parse and Stringify the data to strip whitespace
   fs.readFileSync(__dirname + '/public/data/' + dataDomain + '/config.json', 'utf8')
 ));
+
+// STOCK AND GROUP DEFINITION JSON
+var groups = fs.readFileSync(__dirname + '/public/data/' + dataDomain + '/groups.json', 'utf8');
+var stocks = fs.readFileSync(__dirname + '/public/data/' + dataDomain + '/stocks.json', 'utf8');
+
+// SETUP DYNAMIC DEFINITIONS (WHICH LOAD THE DEFINITIONS INTO MEMORY, AND REGENERATE PERIODICALLY)
+if(process.env.DYNAMIC && process.env.DYNAMIC.toLowerCase() == 'true') {
+  groups = stocks = null;
+  var definitions = require('./build_' + dataDomain + '_definitions');
+  definitions.on('update', function(_groups, _stocks) {
+    groups = JSON.stringify(_groups);
+    stocks = JSON.stringify(_stocks);
+  });
+  definitions.update();
+  // Add a route to enable triggering a refresh
+  app.get('/refresh/definitions', definitions.update);
+}
 
 // ROUTES
 app.get('/series/intraday/:id', dataRoutes.getIntraday);
@@ -59,6 +70,13 @@ app.get('/series/daily/:id', dataRoutes.getDaily);
 app.get('/news/:id', dataRoutes.getNews);
 
 app.get('/*', function(req, res) {
+  if(!groups || !stocks) {
+    // In dynamic mode, if the definitions aren't ready, we wait for them.
+    var handler = arguments.callee;// This response handler
+    definitions.on('update', function() { handler(req, res); });
+    return;
+  }
+  
   var ua = req.headers['user-agent'],
       isMobile = /mobile/i.test(ua) || req.query.mobile || false;
       
