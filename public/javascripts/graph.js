@@ -67,7 +67,8 @@
           .tickSize(-w)
           .ticks(2)
           .tickPadding(4)
-          .orient('right');
+          .orient('right')
+          .tickFormat(mapper.Template.metricFormat);
     
     var rangeId;
     this.setRange = function(_rangeId) {

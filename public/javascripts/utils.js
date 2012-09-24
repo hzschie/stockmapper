@@ -136,7 +136,7 @@ else {
         var $field = binding.$ ? $container.find(binding.$) : $container,
             val = (model.get && model.get(binding.field)) || (!model.get && model[binding.field]);
 
-        val = (binding.formatter || String)( val, $field );
+        val = (binding.formatter || String)( val, $field, model );
         if(val != null) $field.html(val);
       });
     };
