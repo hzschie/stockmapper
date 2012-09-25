@@ -8,6 +8,7 @@
         var isUp = counts[0] > counts[1],
             fraction = (counts[0] == counts[1] ? 0 : 1) * (isUp ? 1 : -1) * (2 * counts[isUp ? 0 : 1] / group.get('members').length - 1);
         $container.css({ 
+          // backgroundColor: mapper.fractionToGreenRedHex(fraction, true)
           backgroundColor: 'rgb(' + mapper.fractionToGreenRedHex(fraction) + ')'
         });
         return null;
