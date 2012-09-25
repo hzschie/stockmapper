@@ -46,7 +46,6 @@ input {
   font:16px/22px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
   display:inline-block;
   vertical-align:middle;
-  margin-left:4px;
 }
 .selector a {
   cursor:pointer;

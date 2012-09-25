@@ -3,10 +3,11 @@
     group: [
       { $:'.counts', field:'upsAndDowns', formatter:function(counts) { return '+' + counts[0] + '-' + counts[1]; } },
       { $:null, field:'upsAndDowns', formatter:function(counts, $container, group) {
-        // var fraction = !counts[1] ? (counts[0] && 1) : (counts[0]/counts[1] - 1);
+        var fraction = !counts[1] ? (counts[0] && 1) : (counts[0]/counts[1] - 1);
         // var fraction = 2*counts[0]/(counts[0]+counts[1])-1;
-        var isUp = counts[0] > counts[1],
-            fraction = (counts[0] == counts[1] ? 0 : 1) * (isUp ? 1 : -1) * (2 * counts[isUp ? 0 : 1] / group.get('members').length - 1);
+        // var isUp = counts[0] > counts[1],
+        //     fraction = (counts[0] == counts[1] ? 0 : 1) * (isUp ? 1 : -1) * (2 * counts[isUp ? 0 : 1] / (counts[0] + counts[1]) - 1);
+            // fraction = (counts[0] == counts[1] ? 0 : 1) * (isUp ? 1 : -1) * (2 * counts[isUp ? 0 : 1] / group.get('members').length - 1);
         $container.css({ 
           // backgroundColor: mapper.fractionToGreenRedHex(fraction, true)
           backgroundColor: 'rgb(' + mapper.fractionToGreenRedHex(fraction) + ')'
@@ -61,7 +62,7 @@
         schemes = [],
         scheme = pickScheme();
         
-    tagW = Math.floor((width - gap * scheme.numCols) / scheme.numCols);
+    tagW = Math.floor((width - gap * scheme.numCols - gap/2) / scheme.numCols);
     $groups.css({ height:(tagH + 2 * pad) * scheme.numRows - 2 * pad + gap });
     
     var table = scheme.getTable();

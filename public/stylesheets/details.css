@@ -4,7 +4,7 @@
   padding:0 10px 0 10px;
   background-color:#333;
   padding-top:10px;
-  border-top:1px solid #aaa;
+  border-top:1px solid #555;
   
   position:fixed;
   left:0;
@@ -12,13 +12,13 @@
   bottom:0;
   z-index:4;
   
-  background: -moz-linear-gradient(top,  rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.95) 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.88)), color-stop(100%,rgba(0,0,0,0.95))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top,  rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.95) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top,  rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.95) 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top,  rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.95) 100%); /* IE10+ */
-  background: linear-gradient(to bottom,  rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.95) 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0000000', endColorstr='#f2000000',GradientType=0 ); /* IE6-9 */
+  background: -moz-linear-gradient(top,  rgba(34,34,34,0.99) 0%, rgba(30,30,30,0.94) 23%, rgba(17,17,17,0.99) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(34,34,34,0.99)), color-stop(23%,rgba(30,30,30,0.94)), color-stop(100%,rgba(17,17,17,0.99))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(34,34,34,0.99) 0%,rgba(30,30,30,0.94) 23%,rgba(17,17,17,0.99) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(34,34,34,0.99) 0%,rgba(30,30,30,0.94) 23%,rgba(17,17,17,0.99) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(34,34,34,0.99) 0%,rgba(30,30,30,0.94) 23%,rgba(17,17,17,0.99) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba(34,34,34,0.99) 0%,rgba(30,30,30,0.94) 23%,rgba(17,17,17,0.99) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7222222', endColorstr='#fc111111',GradientType=0 ); /* IE6-9 */
 }
 .details .close {
   width:18px;
@@ -36,6 +36,7 @@
 .details .header {
   display:inline-block;
   position:relative;
+  margin-top:-2px;
 }
 .details h3 {
   font-size:16px;

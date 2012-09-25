@@ -2,6 +2,7 @@
   position:relative;
   display:block;
   font-size:12px;
+  margin-top:14px;
 }
 .graph.pending {
   background:transparent url('/images/busy.gif?123456') no-repeat scroll center center;
@@ -13,7 +14,6 @@
 }
 .graph .ui .ranges {
   color:#ddf;
-  text-align:right;
   margin-right:40px;
   margin-bottom:-10px;
 }
