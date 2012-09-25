@@ -23,6 +23,7 @@
   width:28px;
   text-align:center;
   cursor:pointer;
+  padding:0 4px;
 }
 .graph .ui .range:hover {
   font-weight:bold;
@@ -33,6 +34,7 @@
   line-height:18px;
   padding-top:1px;
   font-weight:bold;
+  border-radius:12px;
 }
 
 .graph svg {
