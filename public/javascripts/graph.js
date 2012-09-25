@@ -205,9 +205,15 @@
       
       if(series.type == '5day') xax.selectAll('text').attr('dx', _w/2);
       else xax.selectAll('text').attr('dx', 0);
-        
-      dLine.defined(isWithinMarketHours);
-      dArea.defined(isWithinMarketHours);
+      
+      if(series.type == '5day') {
+        dLine.defined(function(slice) { return slice.t >= date0 && slice.t <= date1; });
+        dArea.defined(function(slice) { return slice.t >= date0 && slice.t <= date1; });
+      }
+      else {
+        dLine.defined(isWithinMarketHours);
+        dArea.defined(isWithinMarketHours);
+      }
     };
   }
 })();
