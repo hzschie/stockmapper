@@ -51,14 +51,20 @@ function createGroups(callback) {
     // Log
     cursor.hex('#00ff00').bold().write(groupsJson.length + ' groups\n').reset();
     
-    // Gather required properties for each group and index it by index id
-    groupsJson.forEach(function(index, i) {
-      var indexId = index.id;// IndexId
-      groups[indexId] = {
-        id: indexId,
-        name: index.n,// IndexName
-        nickname: index.n.replace(/^blufin /i, '').replace(/ index$/i, '').replace(/ and /, ' & '),
-        type: index.c,// Category
+    // Gather required properties for each group and index it by group id
+    groupsJson.forEach(function(group, i) {
+      var groupId = group.id;// IndexId
+      
+      // Log
+      cursor
+        .hex('#6666ff').write(String(group.id))
+        .hex('#3333aa').write(' (' + group.n + ')\n');
+        
+      groups[groupId] = {
+        id: groupId,
+        name: group.n,// IndexName
+        nickname: group.n.replace(/^blufin /i, '').replace(/ index$/i, '').replace(/ and /, ' & '),
+        type: group.c,// Category
         ids: []
       };
     });
@@ -96,6 +102,10 @@ function createStocks(callback) {
         broadGroup = groups['1000'],
         niftyGroup = groups['nifty'],
         sensexGroup = groups['sensex'];
+        
+    // Log
+    cursor.hex('#00ff00').bold().write('\n' + stocksRaw.length + ' stocks\n').reset();
+    
     stocksRaw.forEach(function(stock) {
       var sym = stock.s;// ScripId
       stocks[sym] = stocks[sym] || [stock.cid, stock.n, sym];//[ScripCode, ScripName, sym]
@@ -107,6 +117,7 @@ function createStocks(callback) {
           isNifty = stock.nifty == 1,
           isSensex = stock.sensex == 1;
 
+      // Log
       cursor
         .hex('#6666ff').write('\n' + stock.s)
         .hex('#3333aa').write(' (' + stock.n + '):\n');
@@ -117,6 +128,7 @@ function createStocks(callback) {
             group == broadGroup || (isNifty && group == niftyGroup) || (isSensex && group == sensexGroup)) {
           group.ids.push(stock.cid);// ScripCode
           
+          // Log
           cursor
             .hex('#3333aa').write('Add ')
             .hex('#6666ff').write(stock.s)
