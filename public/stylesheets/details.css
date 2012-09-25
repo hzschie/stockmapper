@@ -40,34 +40,33 @@
 }
 
 .details .header {
-  display:inline-block;
+  display:block;
   position:relative;
-}
-.details h3 {
-  font-size:16px;
-  line-height:16px;
-  color:#ddf;
-}
-
-.details .sym, .details .last_trade, .details .change {
+  padding-right: 28px;
   font-size:24px;
-  display:inline-block;
-  vertical-align:top;
+}
+.details .last_trade, .details .change {
+  float:right;
+  text-align:right;
+  margin-left:20px;
 }
 .details .timestamp {
-  position:absolute;
-  right:0;
-  bottom:2px;
   color:#888;
   font-size:12px;
 }
 .details .sym {
-  font-weight:bold;
-  width: 185px;
+  font-size:16px;
+  line-height:14px;
+  color:#ddf;
+  white-space:nowrap;
+  display:inline-block;
+}
+.details .name {
+  margin-right:10px;
+  display:inline-block;
 }
 .details .last_trade {
   font-weight:bold;
-  width: 175px;
 }
 .details .red {
   color:#f33;
