@@ -89,6 +89,7 @@ mapper.Mobile.ready = function() {
             $(this).css({ position:'absolute' }).hide();
           }
         });
+      else $container.children().hide();
         
       $current = $child;
       
