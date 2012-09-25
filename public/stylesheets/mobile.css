@@ -104,6 +104,7 @@ body {
   margin:0;
 }
 .mobile .group_info .values .change {
+  float: none;
   font-size:12px;
   display:block;
 }
