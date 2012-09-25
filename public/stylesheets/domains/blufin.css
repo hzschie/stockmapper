@@ -49,16 +49,16 @@
 .inspector .right dt {
   padding-left: 35px;
 }
-.inspector .blufin_index .label {
+.inspector .index .label {
   font-weight:bold;
 }
-.inspector .blufin_index .last_trade {
+.inspector .index .last_trade {
   width:auto;
   margin-left:18px;
   margin-right:12px;
 }
 
-.inspector .blufin_index .change {
+.inspector .index .change {
   width:auto;
 }
 

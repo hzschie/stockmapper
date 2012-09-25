@@ -1,4 +1,4 @@
-mapper.config.getGroupType = function(type, group) { return type == 'Index' ? 'blufin_index' : 'group'; };
+mapper.config.getGroupType = function(type, group) { return type == 'Index' ? 'index' : 'group'; };
 
 mapper.config.getInspectorBindings = function(bindings) {
   _.each(bindings.stock, function(binding) {
@@ -14,7 +14,7 @@ mapper.config.getInspectorBindings = function(bindings) {
     }
   });
   return {
-    blufin_index: [
+    index: bindings.group.concat([
       { $:'.type', field:'type', formatter:function(val) { return 'Stocks by ' + mapper.capitalize(val); } },
       { $:'.label', field:'name' },
       { $:'.last_trade', field:'value', formatter:mapper.Template.commaFormat },
@@ -24,7 +24,7 @@ mapper.config.getInspectorBindings = function(bindings) {
       { $:'.previous', field:'previous', formatter:mapper.Template.commaFormat },
       { $:'.volume', field:'volume', formatter:mapper.Template.commaFormat },
       { $:'.market_cap', field:'marketCap', formatter:mapper.Template.commaFormat }
-    ]
+    ])
   };
 };
 
@@ -52,7 +52,7 @@ mapper.config.getGroupTagHtml = function(group, $container) {
 };
 mapper.config.getGroupBindings = function(bindings) {
   return {
-    blufin_index: [
+    index: [
       { $:'.value', field:'value', formatter:mapper.Template.blankIfNull(mapper.Template.commaFormat) },
       // { $:'.change', field:'changePct', formatter:mapper.Template.blankIfNull(mapper.Template.postfix(mapper.Template.changeFormat, '%')) },
       { $:'.change', field:'change', formatter:mapper.Template.blankIfNull(mapper.Template.changeFormat) },

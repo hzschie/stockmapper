@@ -25,7 +25,7 @@ block header
   | </header>
 
 block append inspector_content
-  .content.blufin_index
+  .content.index
     .header
       h3.type Amit was here
       .label Label
@@ -45,3 +45,29 @@ block append inspector_content
           .unit (Cr.)
           | :
         dd.market_cap 123,456
+
+block append mobile_inspector_content
+  .content.index
+    .fixed
+      .label SYM
+      .last_trade 123.45
+      .change
+        span.amount +12.34
+    dl.values
+      .col
+        dt Prev. Close:
+        dd.previous 12.34
+        dt Num Stocks Up:
+        dd.num_up.green 123
+        dt Num Stocks Down:
+        dd.num_down.red 123
+      .col
+        dt Pct. Chg.:
+        dd.change
+          span.percent 1.23%
+        dt Vol. Up:
+        dd.volume_up.green 123,456
+        dt Vol. Down:
+        dd.volume_down.red 123,456
+        dt Vol. Total:
+        dd.volume_total 123,456

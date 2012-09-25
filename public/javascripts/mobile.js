@@ -9,7 +9,7 @@ mapper.Mobile.ready = function() {
       groupsView = new mapper.GroupsView($('.groups_view'), mapper.groups),
       groupInfo = new mapper.GroupInfo($('.group_info')),
       sorts = new mapper.SelectorButtons($('.sorts'), function(id) { viewState.setState({ sort:id }); }),
-      map = new mapper.Map($('.map')),
+      map = new mapper.Map($('.map ul')),
       details = new mapper.Details($('.details'));
       
   function updateView(force) {

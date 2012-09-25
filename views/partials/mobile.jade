@@ -4,21 +4,22 @@ body.mobile
       .groups_view
     .contents
       .group_info.details
-        .content.group
-          .label SYM
-          dl.values
-            .col
-              dt Num Stocks Up:
-              dd.num_up.green 123
-              dt Num Stocks Down:
-              dd.num_down.red 123
-            .col
-              dt Vol. Up:
-              dd.volume_up.green 123,456
-              dt Vol. Down:
-              dd.volume_down.red 123,456
-              dt Vol. Total:
-              dd.volume_total 123,456
+        block mobile_inspector_content
+          .content.group
+            .label.fixed SYM
+            dl.values
+              .col
+                dt Num Stocks Up:
+                dd.num_up.green 123
+                dt Num Stocks Down:
+                dd.num_down.red 123
+              .col
+                dt Vol. Up:
+                dd.volume_up.green 123,456
+                dt Vol. Down:
+                dd.volume_down.red 123,456
+                dt Vol. Total:
+                dd.volume_total 123,456
       .map_ui
         .sorts
           a#sym Symbol
@@ -26,6 +27,7 @@ body.mobile
           a#vol Volume
           a#cap Mkt Cap
       .map
+        ul
     .details(style="visibility:hidden;")
       .left
         .sym SYM
