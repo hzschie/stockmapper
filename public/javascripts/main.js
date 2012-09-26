@@ -31,14 +31,17 @@ mapper.dataReady = function() {
       }
       
       if(viewState.hasChanged('currentStock') || force) {
-        details.query(viewState.get('currentStock'));
+        var currentStock = viewState.get('currentStock');
+        details.query(currentStock);
+        map.search(currentStock);
+        groups.search(currentStock);
       }
       
       if(viewState.hasChanged('range') || force) {
         details.setRange(viewState.get('range'));
       }
       
-      if(viewState.hasChanged('searchStock') || force) {
+      if(viewState.hasChanged('searchStock')) {
         var searchStock = viewState.get('searchStock');
         map.search(searchStock);
         groups.search(searchStock);
