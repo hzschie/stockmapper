@@ -45,7 +45,7 @@
   margin-bottom:3px;
   margin-left:9px;
   margin-right:9px;
-  padding-bottom:3px;
+  padding-bottom:7px;
 }
 .groups:before {
   background-color:#333;
@@ -116,7 +116,7 @@
   opacity:1;
 }
 .groups .group label {
-  font-family:'Open Sans Condensed', 'Helvetica Narrow', 'Arial Narrow', sans-serif;
+  font-weight:bold;
   line-height:14px;
   opacity:.8;
   position:relative;
@@ -129,6 +129,10 @@
   text-align:right;
   margin-right:2px;
   height:0;
+}
+.groups .group .val_right > * {
+  display:inline-block;
+  margin-left:5px;
 }
 .groups .label {
   font-size:14px;
@@ -179,7 +183,6 @@
   white-space:nowrap;
   padding-left:4px;
   font-weight:bold;
-  font-family:'Open Sans Condensed';
 }
 .groups_view .group .type {
   display:none;

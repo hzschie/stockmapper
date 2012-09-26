@@ -14,6 +14,18 @@
         });
         return null;
       }}
+    ],
+    index: [
+      { $:'.value', field:'value', formatter:mapper.Template.blankIfNull(mapper.Template.commaFormat) },
+      // { $:'.change', field:'changePct', formatter:mapper.Template.blankIfNull(mapper.Template.postfix(mapper.Template.changeFormat, '%')) },
+      { $:'.change', field:'change', formatter:mapper.Template.blankIfNull(mapper.Template.changeFormat) },
+      { $:null, field:'changePct', formatter:function(changePct, $container) {
+        if(changePct == null) return;
+        $container.css({ 
+          backgroundColor: mapper.changePctToHex(changePct, 5)
+        });
+        return null;
+      }}
     ]
   };
   
@@ -22,7 +34,10 @@
     _.extend(this, Backbone.Events);
     var _this = this,
         getGroupHtml = mapper.config.getGroupTagHtml || function(group) {
-          return '<div class="type">' + group.get('type').toUpperCase() + '</div>';
+          return [
+            '<div class="val_right counts"></div>',
+            '<label>', group.get('label'), '</label>'
+          ].join('');
         },
         template = new mapper.Template(
           $.extend(GroupsView.defaultBindings, mapper.config.getGroupBindings && mapper.config.getGroupBindings(GroupsView.defaultBindings))
@@ -54,16 +69,16 @@
     
     $groups.show();
     var width = $groups.width(),
-        gap = 5,
+        gap = 6,
         pad = 3,
         line = 1,
-        tagH = 16,
+        tagH = 15,
         tagW = null,
         schemes = [],
         scheme = pickScheme();
         
     tagW = Math.floor((width - gap * scheme.numCols - gap/2) / scheme.numCols);
-    $groups.css({ height:(tagH + 2 * pad) * scheme.numRows - 2 * pad + gap });
+    $groups.css({ height:(tagH + 2 * pad) * scheme.numRows });
     
     var table = scheme.getTable();
     for(var r = 0; r < scheme.numRows; r++) {
@@ -159,7 +174,7 @@
           _scheme;
       while(true) {
         _scheme = schemes[i] || new Scheme(clusters, i+2);
-        if(width / _scheme.numCols >= 140 || i > 20) break;
+        if(width / _scheme.numCols >= 140 || i > 20) break;//140 for blufin, 127 for nyse
         i++;
       }
       return _scheme;

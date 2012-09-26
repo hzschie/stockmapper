@@ -23,9 +23,13 @@
 }
 
 /* GROUPS */
-.groups .group .val_right > * {
-  display:inline-block;
-  margin-left:5px;
+.groups .group label {
+  font-family:'Open Sans Condensed', 'Helvetica Narrow', 'Arial Narrow', sans-serif;
+  font-weight:normal;
+}
+.groups_view .group label {
+  font-family:'Open Sans Condensed', 'Helvetica Narrow', 'Arial Narrow', sans-serif;
+  font-weight:normal;
 }
 
 /* INSPECTOR */

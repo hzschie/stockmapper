@@ -50,6 +50,7 @@ mapper.config.getGroupTagHtml = function(group, $container) {
       '<label>', group.get('label'), '</label>'
     ].join('');
 };
+/*
 mapper.config.getGroupBindings = function(bindings) {
   return {
     index: [
@@ -65,4 +66,4 @@ mapper.config.getGroupBindings = function(bindings) {
       }}
     ]
   };
-};
+};*/
