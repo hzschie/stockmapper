@@ -8,6 +8,7 @@
   margin:0 auto;
   position:relative;
   overflow:hidden;
+  padding:1px;
 }
 
 .map div.shadows {
@@ -83,6 +84,9 @@
   top:-1px;
   padding:1px;
   content:'';
+}
+.map li.active:hover:after {
+  padding:0;/* un-does the padding:1px from above */
 }
 
 .map li:hover {

@@ -16,10 +16,10 @@
   letter-spacing:-1px;
 }
 .map li.active:after {
-  width:58px;/*52px;*/
+  width:58px;
 }
 .map li:hover:after {
-  width:58px;/*52px;*/
+  width:58px;
 }
 
 /* GROUPS */
