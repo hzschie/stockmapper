@@ -7,6 +7,7 @@
 .map ul {
   margin:0 auto;
   position:relative;
+  overflow:hidden;
 }
 
 .map div.shadows {
