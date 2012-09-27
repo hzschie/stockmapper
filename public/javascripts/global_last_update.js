@@ -1,7 +1,8 @@
 (function() {
   mapper.GlobalLastUpdate = GlobalLastUpdate;
-  function GlobalLastUpdate($field, models) {
-    var lastUpdate = _.max(models.models, function(m) { return m.get('timestamp'); }).get('timestamp');
+  function GlobalLastUpdate($container, models) {
+    var $value = $('.value', $container),
+        lastUpdate = _.max(models.models, function(m) { return m.get('timestamp'); }).get('timestamp');
     update(null);
     console.log(lastUpdate, new Date(lastUpdate).toUTCString());
     models.on('change:timestamp', update);
@@ -12,7 +13,13 @@
         else lastUpdate = model.get('timestamp');
       }
       
-      $field.text(mapper.Template.timestamp(lastUpdate) + ' ' + mapper.config.marketHours.timezone);
+      Interval.callOnce({
+        key: 'global_last_update',
+        fn: function() {
+          $container.css({ opacity:1 });
+        }
+      }, Interval.LOW);
+      $value.text(mapper.Template.timestamp(lastUpdate) + ' ' + mapper.config.marketHours.timezone);
     }
   }
 })();

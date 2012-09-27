@@ -29,6 +29,11 @@ input {
   line-height:30px;
   margin-right:10px;
   color:#888;
+  opacity:0;
+  -webkit-transition:opacity .2s;
+  -moz-transition:opacity .2s;
+  -ms-transition:opacity .2s;
+  transition:opacity .2s;
 }
 #global_last_update .value {
   color:#ccc;
