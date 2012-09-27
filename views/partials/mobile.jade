@@ -30,14 +30,18 @@ body.mobile
         ul
     .details(style="visibility:hidden;")
       .left
-        h3.name Amit was here
-        .change
-          span.amount +12.34
-          | &nbsp;(
-          span.percent 1.23%
-          | )
-        .last_trade 123.45
-        .sym SYM
+        .quote
+          .last_trade 123.45
+          .change
+            span.amount +12.34
+            | &nbsp;(
+            span.percent 1.23%
+            | )
+            .timestamp Last traded: 
+              span.value Sep 24, 5:06PM EDT
+        span.name Amit was here
+        |  
+        span.sym SYM
         .values
           dl
             .col

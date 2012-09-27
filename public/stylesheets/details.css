@@ -45,19 +45,21 @@
   padding-right: 28px;
   font-size:24px;
 }
-.details .last_trade, .details .change {
+.details .quote {
+  float:right;
+  text-align:right;
+  margin-bottom:8px;
+  clear:both;
+}
+.details .quote .last_trade, .details .quote .change {
   display:inline-block;
   vertical-align:top;
   margin-left:20px;
 }
-.details .quote {
-  float:right;
-  text-align:right;
-}
 .details .timestamp {
   color:#888;
   font-size:12px;
-  line-height:8px;
+  margin-top:-4px;
 }
 .details .sym {
   font-size:16px;
@@ -86,7 +88,7 @@
   font-size:12px;
   line-height:16px;
   padding-right: 18px;
-  margin-left: -11px;
+  margin-left: -12px;
 }
 .details .values .col {
   width:25%;

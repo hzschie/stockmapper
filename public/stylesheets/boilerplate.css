@@ -14,3 +14,5 @@ input,textarea,select{*font-size:100%}
 legend{color:#000}
 object{outline:0 none;display:block}
 em { font-style:normal; }
+/*.clearfix { zoom:1; }
+.clearfix:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }*/
