@@ -31,6 +31,13 @@
           });
         }
       }, Interval.PRIORITY_LOW);
+
+      Interval.callOnce({
+        key:'resize_map',
+        fn:function() {
+          map.resize();
+        }
+      }, Interval.PRIORITY_LOW);
       
     });
     

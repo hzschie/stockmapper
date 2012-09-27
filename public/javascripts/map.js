@@ -48,6 +48,13 @@
       _this.trigger('inspect_tag', null);
     };
     
+    this.resize = function() {
+      var newNumCols = Math.floor($map.parent().width() / ($map.children().eq(1).outerWidth() - 1)),
+          newNumRows = Math.ceil(models.length / newNumCols);
+      grid.redefine(null, newNumCols, newNumRows);
+      rebuild();
+    };
+    
     if(_models) this.setModels(_models);
     
     function addModel(model, i, animate) {

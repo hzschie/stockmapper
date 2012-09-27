@@ -64,14 +64,14 @@ else {
         
     this.cellsClone = function() { return cells.concat(); };
     this.redefine = function(_n, _c, _r, _w, _h) {
-      var nOld = n;
+      var nOld = n, cOld = this.cols || c;
       n = _n || n;
       c = this.cols = _c || c;
       r = this.rows = _r || r;
       w = _w || w;
       h = _h || h;
 
-      if(n != nOld) {
+      if(n != nOld || c != cOld) {
         cells = makeCells(n, c, r);
       }
       // console.log('n='+n, 'c='+c, 'r='+r, 'w='+w, 'h='+h);

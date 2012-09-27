@@ -99,10 +99,10 @@
 }
 
 .map ul.animated {
-  -webkit-transition:height .6s;
-  -moz-transition:height .6s;
-  -ms-transition:height .6s;
-  transition:height .6s;
+  -webkit-transition:height .6s, width .2s;
+  -moz-transition:height .6s, width .2s;
+  -ms-transition:height .6s, width .2s;
+  transition:height .6s, width .2s;
 }
 .map ul.animated li, .map ul.animated .shadows div {
   -webkit-transition:left .6s, top .6s;
