@@ -4,27 +4,25 @@
   function Graph($graph, _w) {
     var marketHours = mapper.config.marketHours,
         series,
-        w = _w - 50,//600,
+        w,
         priceH = 160,
         gap = 20,
         volH = 80,
         h = priceH + volH + gap,
         pad = [10, 50, 10, 20],
-        svg = d3.select($graph[0]).select('svg').attr('width', (w+pad[L]+pad[R]) + 'px').attr('height', (h+pad[T]+pad[B]) + 'px'),
+        svg = d3.select($graph[0]).select('svg'),
         xax = svg.append('svg:g')
           .attr('class', 'x axis')
           .attr('transform', 'translate(' + pad[L] + ',' + (priceH+pad[T]) + ')'),
         priceAx = svg.append('svg:g')
-          .attr('class', 'y axis')
-          .attr('transform', 'translate(' + (w+pad[L]) + ',' + pad[T] + ')'),
+          .attr('class', 'y axis'),
         volAx = svg.append('svg:g')
-          .attr('class', 'y axis')
-          .attr('transform', 'translate(' + (w+pad[L]) + ',' + (priceH + pad[T] + gap) + ')'),
+          .attr('class', 'y axis'),
         divider1 = svg.append('line').attr('class', 'divider')
-          .attr('x1', pad[L]).attr('x2', w+pad[L])
+          .attr('x1', pad[L])
           .attr('y1', pad[T] + priceH + gap).attr('y2', pad[T] + priceH + gap),
         divider2 = svg.append('line').attr('class', 'divider')
-          .attr('x1', pad[L]).attr('x2', w+pad[L])
+          .attr('x1', pad[L])
           .attr('y1', pad[T] + h).attr('y2', pad[T] + h),
         priceArea = svg.append('path')
           .attr('class', 'graph_area')
@@ -40,8 +38,7 @@
         reference = svg.append('line')
           .attr('class', 'reference')
           .attr('stroke-dasharray', '4 2')
-          .attr('x1', pad[L])
-          .attr('x2', w+pad[L]),
+          .attr('x1', pad[L]),
         ball = svg.append('circle')
           .attr('class', 'ball')
           .attr('stroke-width', 2)
@@ -51,7 +48,7 @@
           .attr('width', 4)
           .attr('stroke-width', 2),
 
-        x = d3.time.scale.utc().range([0, w]),
+        x = d3.time.scale.utc(),
         xt = function(slice,i) { return x(slice.t); },
         isWithinMarketHours = function(slice) { var t = (slice.t % 8.64e7) / 60000; return t >= marketHours.t0 && t <= marketHours.t1; },
         
@@ -68,16 +65,29 @@
           .tickSize(-(priceH + pad[T]), 0, 0)
           .tickPadding(7),
         priceAxis = d3.svg.axis().scale(yp)
-          .tickSize(-w)//, -w, 0)
           .ticks(4)
           .tickPadding(4)
           .orient('right'),
         volAxis = d3.svg.axis().scale(yv)
-          .tickSize(-w)
           .ticks(2)
           .tickPadding(4)
           .orient('right')
           .tickFormat(mapper.Template.metricFormat);
+          
+    this.setWidth = function(_w) {
+      w = _w - 50;
+      svg.attr('width', (w+pad[L]+pad[R]) + 'px').attr('height', (h+pad[T]+pad[B]) + 'px');
+      priceAx.attr('transform', 'translate(' + (w+pad[L]) + ',' + pad[T] + ')');
+      volAx.attr('transform', 'translate(' + (w+pad[L]) + ',' + (priceH + pad[T] + gap) + ')');
+      divider1.attr('x2', w+pad[L]);
+      divider2.attr('x2', w+pad[L]);
+      reference.attr('x2', w+pad[L]);
+      x.range([0, w]);
+      priceAxis.tickSize(-w);
+      volAxis.tickSize(-w);
+      if(series) this.render(series);
+    };
+    this.setWidth(_w);
         
     var $svg = $('svg', $graph),
         $slice = $('.slice', $graph),

@@ -3,6 +3,8 @@
   display:block;
   font-size:12px;
   margin-top:8px;
+  clear:both;
+  overflow:hidden;
 }
 .graph.pending {
   background:transparent url('/images/busy.gif?123456') no-repeat scroll center center;

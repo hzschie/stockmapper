@@ -31,12 +31,15 @@
           });
         }
       }, Interval.PRIORITY_LOW);
+      
+      Interval.callOnce({
+        key:'resize_details',
+        fn:function() { details.resize(); }
+      }, Interval.PRIORITY_LOW);
 
       Interval.callOnce({
         key:'resize_map',
-        fn:function() {
-          map.resize();
-        }
+        fn:function() { map.resize(); }
       }, Interval.PRIORITY_LOW);
       
     });

@@ -88,6 +88,10 @@
       });
     };
     
+    this.resize = function() {
+      graph.setWidth( $('.left', $details).width() );
+    };
+    
     function updateQuote() {
       template.applyBindings('stock', $details, model);
     }
