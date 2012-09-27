@@ -4,7 +4,6 @@
     var $value = $('.value', $container),
         lastUpdate = _.max(models.models, function(m) { return m.get('timestamp'); }).get('timestamp');
     update(null);
-    console.log(lastUpdate, new Date(lastUpdate).toUTCString());
     models.on('change:timestamp', update);
     
     function update(model) {

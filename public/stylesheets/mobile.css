@@ -1,7 +1,7 @@
 html {
   min-height:100%;
 }
-body {
+body.mobile {
   overflow:scroll;
   min-height:100%;
 }
