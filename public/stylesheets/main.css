@@ -24,6 +24,16 @@ input {
   position:relative;
 }
 
+#global_last_update {
+  font:12px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
+  line-height:30px;
+  margin-right:10px;
+  color:#888;
+}
+#global_last_update .value {
+  color:#ccc;
+}
+
 
 .credit {
   color:#ddd;

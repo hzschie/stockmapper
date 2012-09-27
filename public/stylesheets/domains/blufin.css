@@ -37,7 +37,7 @@
   width: 200px;
 }
 .inspector .sym {
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: 'Open Sans Condensed', 'Helvetica Narrow', 'Arial Narrow';
   padding-bottom:2px;
   width:95px;
 }
@@ -67,6 +67,10 @@
 }
 
 
+/* SEARCH */
+.search .dropdown .sym {
+  font-family: 'Open Sans Condensed', 'Helvetica Narrow', 'Arial Narrow', sans-serif;
+}
 
 /* --------------------------------- HEADER BANNER --------------------------------- */
 header {
@@ -82,34 +86,29 @@ header {
 #panel {
   border: 0px solid #FF0000;
   height: 33px;
-  width: 473px;
   float: right;
   margin-right: 10px;
+  margin-top:4px;
+}
+#panel > * {
+  display:inline-block;
+  vertical-align:top;
 }
 #indices-info {
   background: url(http://www.blufin.in/BCI/images/info-bar.png) no-repeat;
   width: 169px;
   height:30px;
-  float:left;
-  margin-top:4px;
   margin-right: 6px;
-  margin-left: 70px;
   cursor: pointer;
 }
 #refresh-bar {
   background: url(http://www.blufin.in/BCI/images/refresh.png) no-repeat;
-  width:105px;
+  width:95px;
   height:30px;
-  width: 105px;
-  margin-top:4px;
   cursor: pointer;
-  float: left;
-  display:block;
 }
 #social-icons {
-  float: right;
-  height: 41px;
-  margin-top: -35px;
+  margin-top:-1px;
 }
 header #logo {
   color: #FFFFFF;
@@ -129,7 +128,6 @@ header #logo {
 #social-icons ul {
   width:130px;
   border:0px solid #00ff00;
-  margin:16px 0;
 }
 #social-icons ul li {
   display: inline-block;
@@ -151,11 +149,5 @@ a.twit, a.fb, a.ya, a.in {
   height: 30px;
   left: 5px;
   position: relative;
-  top: -10px;
   width: 29px;
-}
-
-/* SEARCH */
-.search .dropdown .sym {
-  font-family: 'Open Sans Condensed', 'Helvetica Narrow', 'Arial Narrow', sans-serif;
 }

@@ -10,6 +10,7 @@ mapper.dataReady = function() {
         inspector = new mapper.Inspector($('.inspector')),
         details = new mapper.Details($('.details')),
         search = new mapper.Search($('.search')),
+        lastUpdate = new mapper.GlobalLastUpdate($('#global_last_update .value'), mapper.stocks),
         viewState = new mapper.ViewState({
           defaultGroup: mapper.allGroup,
           defaultSort: mapper.sortFunctions.sym,
