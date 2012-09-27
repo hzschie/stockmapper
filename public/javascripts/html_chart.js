@@ -28,6 +28,10 @@
       models.on('reset', rebuild);
     };
     
+    this.resize = function() {
+      rebuild();
+    };
+    
     function addModel(model, i, animate) {
       model._chart = {};
       var $bar = model._chart.$bar = $(this)
