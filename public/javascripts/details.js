@@ -89,7 +89,14 @@
     };
     
     this.resize = function() {
-      graph.setWidth( $('.left', $details).width() );
+      var w;
+      if($details.is(':visible')) w = $('.left', $details).width();
+      else {
+        $details.show();
+        w = $('.left', $details).width();
+        $details.hide();
+      }
+      graph.setWidth(w);
     };
     
     function updateQuote() {
