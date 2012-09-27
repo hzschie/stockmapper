@@ -46,6 +46,10 @@
           .attr('class', 'ball')
           .attr('stroke-width', 2)
           .attr('r', 3),
+        ballBar = svg.append('rect')
+          .attr('class', 'ball_bar')
+          .attr('width', 4)
+          .attr('stroke-width', 2),
 
         x = d3.time.scale.utc().range([0, w]),
         xt = function(slice,i) { return x(slice.t); },
@@ -94,6 +98,12 @@
             .style('display', 'block')
             .attr('cx', pad[L] + x(slice.t))
             .attr('cy', pad[T] + yp(slice.price));
+            
+          ballBar
+            .style('display', 'block')
+            .attr('x', pad[L] + x(slice.t) - 2)
+            .attr('y', priceH + pad[T] + gap + yv(slice.volume) - 2)
+            .attr('height', volH - yv(slice.volume) + 4);
           
           template.applyBindings(bindings, $slice.css({ opacity:1 }), slice);
         });
@@ -102,6 +112,7 @@
         $svg.off('mousemove');
         $slice.css({ opacity:0 });
         ball.style('display', 'none');
+        ballBar.style('display', 'none');
       }
     );
     

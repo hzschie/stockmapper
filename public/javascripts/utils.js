@@ -111,16 +111,22 @@ else {
   Template.changeFormat = Template.NaIfNaN( d3.format('+.2f') );
   Template.pctFormat = Template.NaIfNaN( Template.postfix(d3.format('.1f'), '%') );
   Template.metricFormat = function(val) {
-    if(val >= 1e+12)
-      return val / 1e+12 + 'T';
-    else if(val >= 1e+9)
-      return val / 1e+9 + 'B';
-    else if(val >= 1e+6)
-      return val / 1e+6 + 'M';
-    else if(val >= 1e+3)
-      return val / 1e+3 + 'K';
-    else
-      return String(val);
+    var unit = '';
+    if(val >= 1e+12) {
+      val /= 1e+12;
+      unit = 'T';
+    } else if(val >= 1e+9) {
+      val /= 1e+9;
+      unit = 'B';
+    } else if(val >= 1e+6) {
+      val /= 1e+6;
+      unit = 'M';
+    } else if(val >= 1e+3) {
+      val /= 1e+3;
+      unit = 'K';
+    }
+    
+    return (Math.round(val * 10) / 10) + unit;
   };
   var timestampFormat = d3.time.format.utc('%b %d, %I:%M%p'),
       datestampFormat = d3.time.format.utc('%b %d, %Y');

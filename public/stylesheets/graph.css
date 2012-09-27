@@ -50,6 +50,10 @@
 }
 .graph .ui .slice .price, .graph .ui .slice .volume {
   color:#fff;
+  letter-spacing:1px;
+}
+.graph .ui .slice span {
+  margin-right:8px;
 }
 
 .graph svg {
@@ -102,6 +106,10 @@
   fill: #fff;
 }
 .graph .ball {
+  fill: #000;
+  stroke:#ddf;
+}
+.graph .ball_bar {
   fill: #000;
   stroke:#ddf;
 }
