@@ -1,6 +1,6 @@
 (function() {
   mapper.Layout = Layout;
-  function Layout(map, chart, inspector, details) {
+  function Layout(groups, map, chart, inspector, details) {
     _.extend(this, Backbone.Events);
     var $window = $(window),
         $layout = $('.layout'),
@@ -19,7 +19,20 @@
     
     $window.scroll(onScroll);
     
-    detectResize($window, function() { });
+    detectResize($window, function() {
+      Interval.callOnce({
+        key:'resize_groups',
+        fn:function() {
+          groups.resize();
+          $layout.css({ 'margin-top': topLine() });
+          $chart.css({ 
+            'min-height': $window.height() - $panel.outerHeight() - 42 - 20,
+            'padding-bottom': 20
+          });
+        }
+      }, Interval.PRIORITY_LOW);
+      
+    });
     
     map.on('transition_done', function() {
       onScroll();

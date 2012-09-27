@@ -67,36 +67,30 @@
       }
     );
     
+    if(mapper.perf.animate != false) {
+      setTimeout(function() {
+        $groups.addClass('animated');
+      }, 0);
+    }
+    
     $groups.show();
-    var width = $groups.width(),
+    var width,
         gap = 6,
         pad = 3,
         line = 1,
         tagH = 15,
         tagW = null,
         schemes = [],
-        scheme = pickScheme();
+        scheme,
+        table;
         
-    tagW = Math.floor((width - gap * scheme.numCols - gap/2) / scheme.numCols);
-    $groups.css({ height:(tagH + 2 * pad) * scheme.numRows });
-    
-    var table = scheme.getTable();
-    for(var r = 0; r < scheme.numRows; r++) {
-      for(var c = 0; c < scheme.numCols; c++) {
-        var obj = table[r][c];
-        
-        if(obj && typeof(obj) == 'string') addLabel(obj, c, r);
-        else obj && addGroup(obj, c, r);
-      }
-    }
-    
     this.setSelected = function(group) {
       if(selected) {
-        selected.get('$tag').removeClass('selected');
+        selected._groupView.$tag.removeClass('selected');
       }
       selected = group;
       if(selected) {
-        selected.get('$tag').addClass('selected');
+        selected._groupView.$tag.addClass('selected');
         $title.text(group.get('name'));
       }
     };
@@ -109,63 +103,91 @@
       else {
         $groups.addClass('dimmed');
         _.forEach(stock.get('groups'), function(group) {
-          group.get('$tag').addClass('search_result');
+          group._groupView.$tag.addClass('search_result');
         });
       }
     };
     
+    (this.resize = function() {
+      width = $groups.width();
+      scheme = pickScheme();
+      
+      tagW = Math.floor((width - gap * scheme.numCols - gap/2) / scheme.numCols);
+      $groups.css({ height:(tagH + 2 * pad) * scheme.numRows });
+
+      table = scheme.getTable();
+      for(var r = 0; r < scheme.numRows; r++) {
+        for(var c = 0; c < scheme.numCols; c++) {
+          var obj = table[r][c];
+
+          if(obj && obj.isLabel) addLabel(obj, c, r);
+          else obj && addGroup(obj, c, r);
+        }
+      }
+    })();
+    
     // -------------
     
     function addLabel(label, c, r) {
-      var $tag = $(document.createElement('div'))
-        .addClass('label')
-        .html(label)//.toUpperCase())
-        .css({
-          width: tagW + (typeof(table[r][c+1]) == 'string' || (table[r][c+1] && table[r][c+1].get('type') != label) ? 0 : gap/2 - line),
-          height: tagH + (r == 0 ? gap/2 : 0) + gap/2 - line,
-          left: c * (tagW + gap) + gap/2,
-          top: r * (tagH + gap)
-        })
-        .appendTo($groups);
+      var group = label.group,
+          $label = group._groupView && group._groupView.$label;
+      if(!$label) {
+        group._groupView = group._groupView || {};
+        $label = group._groupView.$label = $(document.createElement('div'))
+          .addClass('label')
+          .html(group.get('type'))//.toUpperCase())
+          .appendTo($groups);
+      }
+        
+      $label.css({
+        width: tagW + (table[r][c+1] && (table[r][c+1].isLabel || table[r][c+1].get('type') != label) ? 0 : gap/2 - line),
+        height: tagH + (r == 0 ? gap/2 : 0) + gap/2 - line,
+        left: c * (tagW + gap) + gap/2,
+        top: r * (tagH + gap)
+      });
     }
     
     function addGroup(group, c, r) {
-      var $tag = $(document.createElement('div'))
-        .addClass('group')
-        .html(getGroupHtml(group, $tag))
-        .css({
-          width: tagW + (scheme.shouldExtend(group, c+1, r) ? gap/2 - line : 0) + (scheme.shouldExtend(group, c-1, r) ? gap/2 : 0) - pad*2,
-          height: tagH + (scheme.shouldExtend(group, c, r+1) ? gap/2 - line : 0) + (scheme.shouldExtend(group, c, r-1) ? gap/2 : 0) - pad*2,
-          left: c * (tagW + gap) + (scheme.shouldExtend(group, c-1, r) ? 0 : gap/2),
-          top: r * (tagH + gap) + (scheme.shouldExtend(group, c, r-1) ? 0 : gap/2),
-          padding: pad
-        })
-        .appendTo($groups)
-        .click(function() {
+      var $tag = group._groupView && group._groupView.$tag;
+      if(!$tag) {
+        group._groupView = group._groupView || {};
+        $tag = group._groupView.$tag = $(document.createElement('div'))
+          .addClass('group')
+          .html(getGroupHtml(group, $tag))
+          .appendTo($groups)
+          .click(function() {
+            _this.trigger('select_group', group);
+          });
+        
+        group.on('change', updateGroup);
+        updateGroup(group);
+      
+        $tag.bind('click', function() {
           _this.trigger('select_group', group);
         });
-
-      group.set({ $tag: $tag }, { silent:true });
-      group.on('change', updateGroup);
-      updateGroup(group);
       
-      $tag.bind('click', function() {
-        _this.trigger('select_group', group);
+        $tag.hover(
+          function() {
+            _this.trigger('inspect_group', group, $tag);
+          },
+          function() {
+            _this.trigger('inspect_group', null, null);
+          }
+        );
+      }
+      
+      $tag.css({
+        width: tagW + (scheme.shouldExtend(group, c+1, r) ? gap/2 - line : 0) + (scheme.shouldExtend(group, c-1, r) ? gap/2 : 0) - pad*2,
+        height: tagH + (scheme.shouldExtend(group, c, r+1) ? gap/2 - line : 0) + (scheme.shouldExtend(group, c, r-1) ? gap/2 : 0) - pad*2,
+        left: c * (tagW + gap) + (scheme.shouldExtend(group, c-1, r) ? 0 : gap/2),
+        top: r * (tagH + gap) + (scheme.shouldExtend(group, c, r-1) ? 0 : gap/2),
+        padding: pad
       });
-      
-      $tag.hover(
-        function() {
-          _this.trigger('inspect_group', group, $tag);
-        },
-        function() {
-          _this.trigger('inspect_group', null, null);
-        }
-      );
     }
     
     function updateGroup(group) {
       var type = (mapper.config.getGroupType && mapper.config.getGroupType(group.get('type'), group)) || group.get('type');
-      template.applyBindings(type, group.get('$tag'), group);
+      template.applyBindings(type, group._groupView.$tag, group);
     }
     
     function pickScheme() {
@@ -200,7 +222,7 @@
     this.shouldExtend = function(group, toCol, toRow) {
       var target = this.table[toRow] && this.table[toRow][toCol];
       if(target) {
-        if(typeof(target) == 'string') return target == group.get('type');
+        if(target.isLabel) return target.group.get('type') == group.get('type');
         else if(target.get('type') == group.get('type')) return true;
         return false;
       }
@@ -235,7 +257,7 @@
     function placeCluster(cluster, dryRun) {
       var len = cluster.groups.length;
       
-      if(!dryRun) _this.table[row][col] = cluster.type;
+      if(!dryRun) _this.table[row][col] = { isLabel:true, group:cluster.groups[0] };
       row++;
       
       _.each(cluster.groups, function(group, i) {

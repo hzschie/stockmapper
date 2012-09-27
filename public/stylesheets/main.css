@@ -7,6 +7,7 @@ body {
   background: -ms-linear-gradient(top, #555555 0%,#333333 51%); /* IE10+ */
   background: linear-gradient(to bottom, #555555 0%,#333333 51%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endColorstr='#333333',GradientType=0 ); /* IE6-9 */
+  overflow-y:scroll;
 }
 
 input {
@@ -22,6 +23,10 @@ input {
 
 .layout {
   position:relative;
+  -webkit-transition:margin .4s;
+  -moz-transition:margin .4s;
+  -ms-transition:margin .4s;
+  transition:margin .4s;
 }
 
 #global_last_update {

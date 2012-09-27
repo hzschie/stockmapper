@@ -142,6 +142,13 @@
   line-height:28px;
 }
 
+.groups.animated .group, .groups.animated .label {
+  -webkit-transition:left .4s, top .4s, width .4s, height .4s;
+  -moz-transition:left .4s, top .4s, width .4s, height .4s;
+  -ms-transition:left .4s, top .4s, width .4s, height .4s;
+  transition:left .4s, top .4s, width .4s, height .4s;
+}
+
 /*---------------------------------------------*/
 
 .groups_view {
