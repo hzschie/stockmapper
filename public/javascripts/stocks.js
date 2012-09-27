@@ -49,7 +49,7 @@ var Stock = mapper.Stock = Backbone.Model.extend(
       if(this.get('news')) return callback(this.get('news'));
       var _this = this;
       $.getJSON(
-        '/news/' + this.get('sym'),
+        '/news/' + this.id,
         function(data) {
           data.sort(function(a,b) { return (a.t < b.t) - (a.t > b.t); });
           _this.set({ news:data });
