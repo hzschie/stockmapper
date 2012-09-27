@@ -122,9 +122,13 @@ else {
     else
       return String(val);
   };
-  var timestampFormat = d3.time.format.utc('%b %e, %I:%M%p');
+  var timestampFormat = d3.time.format.utc('%b %d, %I:%M%p'),
+      datestampFormat = d3.time.format.utc('%b %d, %Y');
   Template.timestamp = function(val) {
     if(typeof(val) == 'number') val = new Date(val);
+    if(val.getUTCHours() == 0) {
+      return datestampFormat(val);
+    }
     return timestampFormat(val);
   };
 

@@ -3,6 +3,7 @@
   var T=0,R=1,B=2,L=3;
   function Graph($graph, _w) {
     var marketHours = mapper.config.marketHours,
+        series,
         w = _w - 50,//600,
         priceH = 160,
         gap = 20,
@@ -41,6 +42,10 @@
           .attr('stroke-dasharray', '4 2')
           .attr('x1', pad[L])
           .attr('x2', w+pad[L]),
+        ball = svg.append('circle')
+          .attr('class', 'ball')
+          .attr('stroke-width', 2)
+          .attr('r', 3),
 
         x = d3.time.scale.utc().range([0, w]),
         xt = function(slice,i) { return x(slice.t); },
@@ -69,26 +74,59 @@
           .tickPadding(4)
           .orient('right')
           .tickFormat(mapper.Template.metricFormat);
+        
+    var $svg = $('svg', $graph),
+        $slice = $('.slice', $graph),
+        bindings = [
+          { $:'.time', field:'t', formatter:mapper.Template.timestamp },
+          { $:'.price', field:'price', formatter:mapper.Template.priceFormat },
+          { $:'.volume', field:'volume', formatter:mapper.Template.metricFormat }
+        ],
+        template = new mapper.Template();
+    $svg.hover(
+      function() {
+        $svg.on('mousemove', function(event) {
+          if(!series || isPending) return;
+          var localX = event.pageX - $svg.offset().left - pad[L],
+              time = x.invert(localX),
+              slice = series.getNearestSlice(time);
+          ball
+            .style('display', 'block')
+            .attr('cx', pad[L] + x(slice.t))
+            .attr('cy', pad[T] + yp(slice.price));
+          
+          template.applyBindings(bindings, $slice.css({ opacity:1 }), slice);
+        });
+      },
+      function() {
+        $svg.off('mousemove');
+        $slice.css({ opacity:0 });
+        ball.style('display', 'none');
+      }
+    );
     
     var rangeId;
     this.setRange = function(_rangeId) {
       rangeId = _rangeId;
     };
     
-    this.setPending = function(isPending) {
+    var isPending = false;
+    this.setPending = function(_isPending) {
+      isPending = _isPending;
       if(isPending) $graph.addClass('pending');
       else $graph.removeClass('pending');
     };
     
-    this.render = function(series) {
+    this.render = function(_series) {
+      series = _series;
       this.setPending(false);
       switch(series.type) {
         case 'intraday':
         case '5day':
-          renderIntraday(series);
+          renderIntraday();
           break;
         case 'daily':
-          renderDaily(series);
+          renderDaily();
           break;
       }
 
@@ -96,8 +134,14 @@
       var xd = x.domain(),
           tRange = [ xd[0], xd[xd.length - 1] ],
           pMin = series.getMin('price', tRange),
-          pMax = series.getMax('price', tRange),
-          dPad = (pMax - pMin) * .1;
+          pMax = series.getMax('price', tRange);
+          
+      if(series.price_ref != null) {
+        pMin = Math.min(series.price_ref, pMin);
+        pMax = Math.max(series.price_ref, pMax);
+      }
+      var dPad = (pMax - pMin) * .1;
+      
       yp.domain([Math.max(0, pMin - dPad), pMax + dPad]);
       yv.domain([0, series.getMax('volume', tRange) * 1.2]);
       
@@ -113,6 +157,13 @@
       priceAx.call(priceAxis);
 
       volAx.call(volAxis);
+      
+      reference
+        .style('display', series.price_ref == null ? 'none' : '')
+        .attr('y1', yp(series.price_ref || 0))
+        .attr('y2', yp(series.price_ref || 0));
+        
+      if(series.data.length == 0) return;
       
       var area = dArea(series.data),
           line = dLine(series.data);
@@ -137,13 +188,9 @@
         .style('display', function(slice) { return series.type == 'daily' ? true : isWithinMarketHours(slice) ? '' : 'none'; });
       bars.exit().remove();
       
-      reference
-        .style('display', series.price_ref == null ? 'none' : '')
-        .attr('y1', yp(series.price_ref || 0))
-        .attr('y2', yp(series.price_ref || 0));
     };
     
-    function renderDaily(series) {
+    function renderDaily() {
       var tMin;
       if(rangeId == 'rMax') tMin = series.getMin('t');
       else if(rangeId == 'r1y') tMin = series.getMax('t') - 314496e5;
@@ -168,7 +215,7 @@
       xax.call(xAxis);
     };
     
-    function renderIntraday(series) {
+    function renderIntraday() {
       var dayOf0 = series.getMin('t') - (series.getMin('t') % 8.64e7),
           date0 = new Date(dayOf0 + marketHours.t0 * 60000),
           dayOf1 = series.getMax('t') - (series.getMax('t') % 8.64e7),

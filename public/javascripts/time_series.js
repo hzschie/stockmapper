@@ -1,4 +1,5 @@
 (function() {
+  // ASSUMES THE DATA COMES SORTED
   mapper.TimeSeries = TimeSeries;
   function TimeSeries(def, type) {
     $.extend(this, def);
@@ -31,6 +32,22 @@
         if(this.data[i].t >= t0 && this.data[i].t <= t1) return true;
       }
       return false;
+    };
+    
+    this.getNearestSlice = function(t) {
+      var min = 0,// earliest
+          max = this.data.length - 1,// latest
+          i = 0;
+          
+      while(++i) {
+        if(max - min == 1) return Math.abs(this.data[max].t - t) < Math.abs(this.data[min].t - t) ? this.data[max] : this.data[min];
+        cur = Math.floor(.5 * (max + min));
+        if(this.data[cur].t > t) max = cur;
+        else if(this.data[cur].t < t) min = cur;
+        else return this.data[cur];
+        
+        if(i > 40) throw new Error('Too much recursion');
+      }
     };
 
     function getMinOrMax(minOrMax, field, range) {

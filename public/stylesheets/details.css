@@ -46,24 +46,26 @@
   font-size:24px;
 }
 .details .last_trade, .details .change {
+  display:inline-block;
+  vertical-align:top;
+  margin-left:20px;
+}
+.details .quote {
   float:right;
   text-align:right;
-  margin-left:20px;
 }
 .details .timestamp {
   color:#888;
   font-size:12px;
+  line-height:8px;
 }
 .details .sym {
   font-size:16px;
   line-height:14px;
   color:#ddf;
-  white-space:nowrap;
-  display:inline-block;
 }
 .details .name {
   margin-right:10px;
-  display:inline-block;
 }
 .details .last_trade {
   font-weight:bold;

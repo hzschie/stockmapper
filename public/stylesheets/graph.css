@@ -2,7 +2,7 @@
   position:relative;
   display:block;
   font-size:12px;
-  margin-top:14px;
+  margin-top:8px;
 }
 .graph.pending {
   background:transparent url('/images/busy.gif?123456') no-repeat scroll center center;
@@ -11,30 +11,45 @@
 .graph .ui {
   position:relative;
   z-index:1;
+  margin-bottom:-6px;
 }
 .graph .ui .ranges {
   color:#ddf;
-  margin-right:40px;
-  margin-bottom:-10px;
+  white-space:nowrap;
+  display:inline-block;
+  margin-right:20px;
 }
 .graph .ui .range {
-  color:#fff;
+  color:#ccc;
   display:inline-block;
   width:28px;
   text-align:center;
   cursor:pointer;
-  padding:0 4px;
+  padding:0 1px;
 }
 .graph .ui .range:hover {
-  font-weight:bold;
+  color:#fff;
 }
 .graph .ui .range.selected {
   background-color:#fff;
   color:#000;
-  line-height:18px;
+  line-height:14px;
   padding-top:1px;
   font-weight:bold;
   border-radius:12px;
+}
+
+.graph .ui .slice {
+  opacity:0;
+  display:inline-block;
+  color:#ddf;
+  -webkit-transition:opacity .2s;
+  -moz-transition:opacity .2s;
+  -ms-transition:opacity .2s;
+  transition:opacity .2s;
+}
+.graph .ui .slice .price, .graph .ui .slice .volume {
+  color:#fff;
 }
 
 .graph svg {
@@ -74,7 +89,6 @@
 .graph .axis .tick {
   fill: none;
   stroke: url(#fade);
-/*  stroke: #fff;*/
   stroke-width: 1px;
 }
 .graph .divider {
@@ -86,4 +100,8 @@
 }
 .graph .axis text {
   fill: #fff;
+}
+.graph .ball {
+  fill: #000;
+  stroke:#ddf;
 }

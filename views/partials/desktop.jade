@@ -22,30 +22,38 @@ body(style='padding:0 10px;')
   .details(style="visibility:hidden;")
     .left
       .header
-        .name Amit was here
-        .change
-          span.amount +12.34
-          | &nbsp;(
-          span.percent 1.23%
-          | )
-          .timestamp Last traded: 
-            span.value Sep 24, 5:06PM EDT
-        .last_trade 123.45
-        .sym SYM
+        .quote
+          .last_trade 123.45
+          .change
+            span.amount +12.34
+            | &nbsp;(
+            span.percent 1.23%
+            | )
+            .timestamp Last traded: 
+              span.value Sep 24, 5:06PM EDT
+        span.name Amit was here
+        |  
+        span.sym SYM
       .graph
         .ui
           .ranges
-            | Range:&nbsp;&nbsp;
+            | Range:&nbsp;
             #r1d.range.selected 1d
             #r5d.range 5d
             #r3m.range 3m
             #r1y.range 1y
             #rMax.range Max
+          .slice
+            span.time
+            |  Price: 
+            span.price
+            |  Volume: 
+            span.volume
         svg
           defs
             linearGradient#fade(gradientTransform="rotate(90)", gradientUnits="userSpaceOnUse", spreadMethod="reflect")
-              stop(offset="26%", stop-color="#FFF", stop-opacity=".09")
-              stop(offset="28%", stop-color="#FFF", stop-opacity="0")
+              stop(offset="21%", stop-color="#FFF", stop-opacity=".09")
+              stop(offset="30%", stop-color="#FFF", stop-opacity="0")
     .right
       .close
       .values
