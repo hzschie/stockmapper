@@ -8,9 +8,11 @@
 
 .search .field {
   position:relative;
+  padding-top:2px;
 }
 .search input {
   width:160px;
+  margin:0;
 }
 .search .x {
   width:20px;
