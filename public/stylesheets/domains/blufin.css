@@ -75,8 +75,8 @@
 /* --------------------------------- HEADER BANNER --------------------------------- */
 header {
   color:white;
-  height: 40px;
-  padding:10px 9px 0;
+  padding:4px 3px 0 9px;
+  max-height:60px;
 }
 #header-hr {
   margin-left: 24px;
@@ -85,10 +85,9 @@ header {
 }
 #panel {
   border: 0px solid #FF0000;
-  height: 33px;
-  float: right;
   margin-right: 10px;
-  margin-top:4px;
+  padding-top:8px;
+  text-align:right;
 }
 #panel > * {
   display:inline-block;
@@ -103,25 +102,30 @@ header {
 }
 #refresh-bar {
   background: url(http://www.blufin.in/BCI/images/refresh.png) no-repeat;
-  width:95px;
+  width:90px;
   height:30px;
   cursor: pointer;
+  margin-left:10px;
 }
 #social-icons {
   margin-top:-1px;
 }
 header #logo {
+  float:left;
   color: #FFFFFF;
-  float: left;
+  display:inline-block;
+  vertical-align:top;
   font-family: 'EB Garamond', serif;
   font-weight: normal;
   margin-top: 0px; /*only valid once every element has been layed out in the page*/
   height:33px;
   width: 129px;
+  margin-right:19px;
 }
 #logo-name {
   float:left;
-  margin-left:19px;
+  display:inline-block;
+  vertical-align:top;
   font-family: 'EB Garamond', serif;
   font-size:29px;  
 }
@@ -147,7 +151,6 @@ a.in {
 a.twit, a.fb, a.ya, a.in {
   display: block;
   height: 30px;
-  left: 5px;
   position: relative;
   width: 29px;
 }
