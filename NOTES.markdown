@@ -19,6 +19,7 @@ Quirksmode: http://www.quirksmode.org/css/contents.html
 GitHub deploy keys: https://help.github.com/articles/managing-deploy-keys
 Google pagespeed: https://developers.google.com/speed/pagespeed/
 Just for fun Google APIs: http://googlecode.blogspot.com/2011/05/spring-cleaning-for-some-of-our-apis.html
+JS/CSS/HTML Performance optimizations: http://www.developer.nokia.com/Community/Wiki/JavaScript_Performance_Best_Practices
 
 ## Blufin Service Urls
 The heart of it all: http://46.137.212.140:8080/Service/equities.svc/GetLatestIndexConstituentsDataByIndexID?IndexID=1000
