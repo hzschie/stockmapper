@@ -93,19 +93,19 @@ header {
   display:inline-block;
   vertical-align:top;
 }
-#indices-info {
-  background: url(http://www.blufin.in/BCI/images/info-bar.png) no-repeat;
-  width: 169px;
+#help_button {
+  background: url(/images/blufin/help_button.png) no-repeat;
+  width: 91px;
   height:30px;
-  margin-right: 6px;
+  margin-left:10px;
   cursor: pointer;
 }
 #refresh-bar {
   background: url(http://www.blufin.in/BCI/images/refresh.png) no-repeat;
-  width:90px;
+  width:92px;
   height:30px;
   cursor: pointer;
-  margin-left:10px;
+  margin-left:3px;
 }
 #social-icons {
   margin-top:-1px;

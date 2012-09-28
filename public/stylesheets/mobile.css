@@ -6,7 +6,7 @@ body.mobile {
   min-height:100%;
 }
 
-.map_ui {
+.mobile .map_ui {
   position:relative;
   margin-bottom:8px;
   padding:0 8px;

@@ -207,7 +207,7 @@
       grid.n(models.length);
       var bounds = grid.bounds();
       setTimeout(function() {
-        $map.css({ width: bounds.w, height: bounds.h });
+        $map.css({ width: bounds.w, height: bounds.h, marginLeft:($map.parent().width() - bounds.w) / 2 });
       }, bounds.h >= $map.height() ? 0 : getDelay(null, models.length - 1));
     }
     

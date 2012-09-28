@@ -3,6 +3,7 @@
   function Layout(groups, map, chart, inspector, details) {
     _.extend(this, Backbone.Events);
     var $window = $(window),
+        $help = $('.help'),
         $layout = $('.layout'),
         $panel = $('.panel'),
         $map = $('.map'),
@@ -19,35 +20,7 @@
     
     $window.scroll(onScroll);
     
-    detectResize($window, function() {
-      Interval.callOnce({
-        key:'resize_groups',
-        fn:function() {
-          groups.resize();
-          $layout.css({ 'margin-top': topLine() });
-          $chart.css({ 
-            'min-height': $window.height() - $panel.outerHeight() - 42 - 20,
-            'padding-bottom': 20
-          });
-        }
-      }, Interval.PRIORITY_LOW);
-      
-      Interval.callOnce({
-        key:'resize_details',
-        fn:function() { details.resize(); }
-      }, Interval.PRIORITY_LOW);
-
-      Interval.callOnce({
-        key:'resize_map',
-        fn:function() { map.resize(); }
-      }, Interval.PRIORITY_LOW);
-
-      Interval.callOnce({
-        key:'resize_chart',
-        fn:function() { chart.resize(); }
-      }, Interval.PRIORITY_LOW);
-      
-    });
+    detectResize($window, resize);
     
     map.on('transition_done', function() {
       onScroll();
@@ -64,6 +37,25 @@
         _this.trigger('select_view', view);
       });
     });
+    
+    Layout.toggleHelp = function() {
+      if($layout.hasClass('open_help')) {
+        $help.fadeOut({
+          complete: function() {
+            $layout.removeClass('open_help');
+            resize(true);
+          }
+        });
+      }
+      else {
+        $layout.addClass('open_help');
+        resize(true);
+        setTimeout(function() {
+          $help.fadeIn();
+        }, 400);
+      }
+    };
+    $('.close', $help).click(Layout.toggleHelp);
     
     this.frameView = function(viewName) {
       switch(viewName) {
@@ -96,7 +88,6 @@
         $views.children().removeClass('current');
         $views.find(':contains(' + view + ')').addClass('current');
       }
-      
     }
     
     function scrollTo(y) {
@@ -119,6 +110,39 @@
     
     function topLine() {
       return $panel.outerHeight() + 42;
+    }
+    
+    function resize(justLayout) {
+      if(!justLayout) {
+      
+        Interval.callOnce({
+          key:'resize_groups',
+          fn:function() {
+            groups.resize();
+            $layout.css({ 'margin-top': topLine() });
+            $chart.css({ 
+              'min-height': $window.height() - $panel.outerHeight() - 42 - 20,
+              'padding-bottom': 20
+            });
+          }
+        }, Interval.PRIORITY_LOW);
+      
+        Interval.callOnce({
+          key:'resize_details',
+          fn:function() { details.resize(); }
+        }, Interval.PRIORITY_LOW);
+        
+      }
+
+      Interval.callOnce({
+        key:'resize_map',
+        fn:function() { map.resize(); }
+      }, Interval.PRIORITY_LOW);
+
+      Interval.callOnce({
+        key:'resize_chart',
+        fn:function() { chart.resize(); }
+      }, Interval.PRIORITY_LOW);
     }
     
     
