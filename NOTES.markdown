@@ -29,6 +29,7 @@ Blufin last 4 days of data can be accessed from: http://46.137.212.140/BMI/data/
 Intraday: http://46.137.212.140:8080/Service/equities.svc/GetIntrdayData?ExchangeID=BSE&Key=LOVABLE
 News: http://46.137.212.140:8080/Service/News.svc/GetLatestNews?query=fedbank
 Index Intraday: http://46.137.212.140:8080/Service/equities.svc/GetIndexMinuteDataByTime?IndexId=108&timeStamp=08-17-2012%2015:18
+Hi/Lo (is 52wk 52 week): http://46.137.212.140:8080/Service/Equities.svc/GetIndexConstiuentsHighLow?IndexID=1000
 
 ## Synonyms
 Basic Materials => Materials

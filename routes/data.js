@@ -40,6 +40,11 @@ exports.getNews = function(req, res) {
   );
 };
 
+exports.getExtendedDataSet = function(req, res) {
+  dataSource.getExtendedDataSet(req.params.name, res);
+};
+
+
 exports.setIO = function(_io) {
   io = _io;
   io.sockets.on('connection', function (socket) {
