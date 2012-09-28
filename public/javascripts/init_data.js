@@ -14,23 +14,15 @@ $(function() {
       var limit = Interval.MAX,
           i = 0,
           t = Date.now(),
-          len = multiStockData.length;
-
+          len = multiStockData.length,
+          data, collection, model;
+          
       while(Date.now() - t < limit && i < len) {
-        var data = multiStockData[i];
-        try {
-          /* data[0] is type (ie. 'group' or 'stock'). data[1] is id */
-          mapper[ data[0] + 's' ].get(data[1]).update(data);
-        }
-        catch(e) {
-          if(e.type != 'non_object_property_call') {
-            console.log("couldn't update:", data.join(', '));
-            console.error(e.message, e.name, e.type);
-          }
-        }
-        finally {
-          i++;
-        }
+        data = multiStockData[i];
+        collection = mapper[ data[0] + 's' ];
+        model = collection && collection.get(data[1]);
+        model && model.update(data);
+        i++;
       }
 
       multiStockData.splice(0, i);
