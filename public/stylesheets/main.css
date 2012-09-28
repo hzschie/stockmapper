@@ -8,6 +8,7 @@ body {
   background: linear-gradient(to bottom, #555555 0%,#333333 51%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#555555', endColorstr='#333333',GradientType=0 ); /* IE6-9 */
   overflow-y:scroll;
+  overflow-x:hidden;
 }
 
 input {
