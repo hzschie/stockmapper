@@ -78,13 +78,15 @@ app.get('/*', function(req, res) {
   }
   
   var ua = req.headers['user-agent'],
-      isMobile = /mobile/i.test(ua) || req.query.mobile || false;
+      isTablet = /ipad/i.test(ua) || req.query.tablet || false,
+      isMobile = !isTablet && (/mobile/i.test(ua) || req.query.mobile || false);
       
   res.render(dataDomain, {
     dataDomain: dataDomain,
     dataConfig: dataConfig,
     groups: groups,
     stocks: stocks,
+    isTablet: isTablet,
     isMobile: isMobile
   });
 });

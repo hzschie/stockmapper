@@ -134,7 +134,7 @@
       if(!$label) {
         group._groupView = group._groupView || {};
         $label = group._groupView.$label = $(document.createElement('div'))
-          .addClass('label')
+          .addClass('category')
           .html(group.get('type'))//.toUpperCase())
           .appendTo($groups);
       }
