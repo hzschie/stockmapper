@@ -40,8 +40,8 @@ exports.getNews = function(req, res) {
   );
 };
 
-exports.getExtendedDataSet = function(req, res) {
-  dataSource.getExtendedDataSet(req.params.name, res);
+exports.getExtendedDataset = function(req, res) {
+  dataSource.getExtendedDataset(req.params.name, res);
 };
 
 

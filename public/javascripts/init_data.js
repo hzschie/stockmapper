@@ -1,10 +1,29 @@
 $(function() {
-  mapper.stocks = new Backbone.Collection();
+  mapper.stocks = new (Backbone.Collection.extend({
+    acquireDataset: function(name, opts) {
+      opts = opts || {};
+      var _this = this,
+          idPropName = opts.idPropName || 'id';
+      $.getJSON(
+        '/datasets/' + name,
+        function(data) {
+          for(var i = 0, len = data.length; i < len; i++) {
+            var datum = data[i],
+                model = _this.get(datum[idPropName]);
+            if(model) {
+              delete datum[idPropName];
+              model.set(datum, { silent:true });
+            }
+          }
+          opts.callback && opts.callback.call(_this, name);
+        }
+      );
+    }
+  }))();
   mapper.groups = new Backbone.Collection();
 
   // Socket
   var socket = io.connect(),
-  
       multiStockData = [],
       waitForFirstPass = true,
       isFirstPassDone = false;
