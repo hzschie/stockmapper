@@ -61,22 +61,18 @@
 
 .map li.highlighted {
   z-index:2;
+  border:1px solid #000;
 }
 
 .map li.highlighted:after {
   width:27px;
   height:10px;
-  border:1px solid #000;
+  border:1px solid rgba(255,255,255,.8);
   position:absolute;
-  left:-1px;
-  top:-1px;
-  padding:1px;
+  left:0;
+  top:0;
   content:'';
 }
-.map li.highlighted:hover:after {
-  padding:0;/* un-does the padding:1px from above */
-}
-
 .map li:hover {
   z-index:3;
 }
