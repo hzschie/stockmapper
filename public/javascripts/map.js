@@ -104,12 +104,12 @@
       }
       if(model.hasChanged('isHighlighted') || force) {
         if(model.get('isHighlighted')) {
-          $tag.addClass('active');
-          $shadow.addClass('active');
+          $tag.addClass('highlighted');
+          $shadow.addClass('highlighted');
         }
         else {
-          $tag.removeClass('active');
-          $shadow.removeClass('active');
+          $tag.removeClass('highlighted');
+          $shadow.removeClass('highlighted');
         }
       }
       

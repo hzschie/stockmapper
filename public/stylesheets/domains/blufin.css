@@ -15,7 +15,7 @@
 .map li .tight {
   letter-spacing:-1px;
 }
-.map li.active:after {
+.map li.highlighted:after {
   width:58px;
 }
 .map li:hover:after {

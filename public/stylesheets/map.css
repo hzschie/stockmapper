@@ -50,7 +50,7 @@
   width:29px;
   height:14px;
 }
-.map .shadows div.active {
+.map .shadows div.highlighted {
   display:block;
 }
 .map li {
@@ -59,11 +59,11 @@
   cursor: crosshair;
 }
 
-.map li.active {
+.map li.highlighted {
   z-index:2;
 }
 
-.map li.active:after {
+.map li.highlighted:after {
   width:27px;
   height:10px;
   border:1px solid #000;
@@ -73,7 +73,7 @@
   padding:1px;
   content:'';
 }
-.map li.active:hover:after {
+.map li.highlighted:hover:after {
   padding:0;/* un-does the padding:1px from above */
 }
 

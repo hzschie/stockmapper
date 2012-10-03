@@ -12,7 +12,7 @@ var Stock = mapper.Stock = Backbone.Model.extend(
       });
     },
     
-    update: function(array) {if(this.get('sym')=='LOVABLE')console.log(this.id, array);
+    update: function(array) {
       var hash = {};var _this=this;
       _.forEach(Stock.fields, function(field, i) {
         if(!field) return;
