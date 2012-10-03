@@ -67,7 +67,7 @@
       $container.removeClass('hidden');
       
       template.applyBindings('stock', $container, model);
-      inspectElement($subBar, '.stock', { x:57, y:20, yFixed:yFixed }, isVol);
+      inspectElement($subBar, '.stock', { x:57, y:0, yFixed:yFixed }, isVol);
     };
     
     this.inspectGroup = function(group, $tag) {

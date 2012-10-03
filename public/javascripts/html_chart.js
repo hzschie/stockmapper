@@ -255,7 +255,7 @@
         volMaxH = 300,
         barsX, barsWidth, fBarWidth, chgMax, volMax, chgTicks, volTicks,
         xi = function(i) { return Math.round(i * fBarWidth); },
-        wi = function(i) { return Math.max(2, xi(i+1) - xi(i) - 1); },
+        wi = function(i) { return Math.max(2, xi(i+1) - xi(i)) - (fBarWidth < 2.5 ? 0 : 1); },
         chgScl = d3.scale.linear().range([0, chgMaxH]),
         volScl = d3.scale.sqrt().range([0, volMaxH]),
         volSubScl = d3.scale.sqrt(),
