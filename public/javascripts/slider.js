@@ -75,5 +75,10 @@
       slider.val(val);
       if(!skipEvent) _this.trigger('change_val', val);
     }
+    
+    this.val = function(val) {
+      if(val == null) return slider.val();
+      update(val);
+    };
   }
 })();

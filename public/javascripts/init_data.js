@@ -1,5 +1,6 @@
 $(function() {
   mapper.stocks = new (Backbone.Collection.extend({
+    datasets: {},
     acquireDataset: function(name, opts) {
       opts = opts || {};
       var _this = this,
@@ -15,6 +16,7 @@ $(function() {
               model.set(datum, { silent:true });
             }
           }
+          _this.datasets[name] = true;
           opts.callback && opts.callback.call(_this, name);
         }
       );

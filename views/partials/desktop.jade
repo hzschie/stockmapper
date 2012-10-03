@@ -102,12 +102,33 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
             .plus
             | Highlight:
           a#active Very Active
-          a#best.disabled 52wk Best
-          a#worst.disabled 52wk Worst
+          a#best 52wk Best
+          a#worst 52wk Worst
           .panel.disabled
-            .info Ratio of volume to average volume greater than:
-            input
-            .slider
+            .content.active
+              .info Ratio of 
+                span.metric volume
+                |  to 
+                span.metric average volume
+                |  greater than:
+              input
+              .slider
+            .content.performance
+              .info Ratio of 
+                span.metric current price
+                |  to 
+                span.metric
+                  span.variable 52wk high
+                  |  price
+                |   greater than:
+              input
+              .slider
+              .periods.selector
+                a#p10yr 10yr
+                a#p52wk 52wk
+                a#pYTD YTD
+                a#p1mo 1mo
+                a#p1wk 1wk
       ul
     .chart
       .ticks

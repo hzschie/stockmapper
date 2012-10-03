@@ -102,8 +102,8 @@
           backgroundColor: mapper.changePctToHex( model.get('changePct') )
         });
       }
-      if(model.hasChanged('isVeryActive') || force) {
-        if(model.get('isVeryActive')) {
+      if(model.hasChanged('isHighlighted') || force) {
+        if(model.get('isHighlighted')) {
           $tag.addClass('active');
           $shadow.addClass('active');
         }

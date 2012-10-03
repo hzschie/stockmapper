@@ -7,12 +7,12 @@ var Stock = mapper.Stock = Backbone.Model.extend(
     initialize: function(hash) {
       this.set({
         sym: hash.sym || hash.id,
-        isVeryActive: false,
+        isHighlighted: false,
         groups: []
       });
     },
     
-    update: function(array) {
+    update: function(array) {if(this.get('sym')=='LOVABLE')console.log(this.id, array);
       var hash = {};var _this=this;
       _.forEach(Stock.fields, function(field, i) {
         if(!field) return;
@@ -21,9 +21,15 @@ var Stock = mapper.Stock = Backbone.Model.extend(
       hash['changeDir'] = hash['change'] == 0 ? 0 : (hash['change'] / Math.abs(hash['change']));
       hash['changePct'] = parseFloat(hash.changePctString);
       hash['marketCap'] = Stock.parseMarketCapString(hash.marketCapString);
-      hash['isVeryActive'] = hash.volume / (hash.avgVolume || hash.volume) >= (this.get('veryActiveRatio') || mapper.config.veryActiveRatio);//1.96;
       hash['hasData'] = true;
       this.set(hash);
+      
+      if(this.has('highlightFn')) this.set({ isHighlighted:this.get('highlightFn')(this) });
+    },
+    
+    setHighlightFunc: function(fn) {
+      this.set({ highlightFn: fn }, { silent: true });
+      this.set({ isHighlighted: fn(this) });
     },
     
     acquireTimeSeries: function(type, callback) {
