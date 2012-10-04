@@ -12,7 +12,7 @@
 }
 
 .news .article {
-  color:#999;
+  color:#ddf;
   display:block;
   padding: 5px 6px;
   text-decoration:none;
@@ -25,7 +25,7 @@
 
 .news .title {
   display:block;
-  color:#ddf;
+  color:#bbe;
   font-size:15px;
   line-height:16px;
 }
