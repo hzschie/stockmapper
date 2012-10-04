@@ -113,7 +113,7 @@ function createStocks(callback) {
       var sector = stock.sec,// Sector
           capitalization = stock.c,// Capitalization
           style = stock.st,// Style
-          crosstab = (capitalization + style).replace(/Index/, ''),
+          crosstab = (capitalization + ' ' + style),
           isNifty = stock.nifty == 1,
           isSensex = stock.sensex == 1;
 
