@@ -143,6 +143,8 @@
         key:'resize_chart',
         fn:function() { chart.resize(); }
       }, Interval.PRIORITY_LOW);
+      
+      inspector.setBottomConstraint($window.height() - ($details.is(':visible') ? $details.outerHeight() : 0));
     }
     
     

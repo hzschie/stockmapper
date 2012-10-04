@@ -127,7 +127,7 @@
       var currP = $container.offset();
       if(!targP || (currP.left == lastPos.left && currP.top == lastPos.top)) return;
       
-      var pad = 16,//20,
+      var pad = 20,//16
           ins = 10,// inset / how far is the pivot point from the corner
           diff = {
             x: currP.left - targP.left,
