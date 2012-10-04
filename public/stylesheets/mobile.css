@@ -14,7 +14,8 @@ body.mobile {
 }
 .map_ui .sorts a {
   color:rgba(255,255,255,.9);
-  font:14px/30px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
+  font-size:14px;
+  line-height:30px;
   font-weight:bold;
   width:25%;
   text-align:center;

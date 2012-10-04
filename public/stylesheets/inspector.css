@@ -1,6 +1,6 @@
 .inspector {
   position:absolute;
-  font:12px/16px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
+  line-height:16px;
   z-index:3;
   pointer-events:none;
   

@@ -1,6 +1,6 @@
 .details {
   color:#fff;
-  font:16px "Myriad Pro","Myriad", "Helvetica", "Arial",sans-serif;
+  font-size:16px;
   padding:0 10px 0 10px;
   background-color:#333;
   padding-top:10px;
@@ -44,6 +44,7 @@
   position:relative;
   padding-right: 28px;
   font-size:24px;
+  line-height:29px;
 }
 .details .quote {
   float:right;
@@ -59,11 +60,12 @@
 .details .timestamp {
   color:#888;
   font-size:12px;
+  line-height:14px;
   margin-top:-4px;
 }
 .details .sym {
   font-size:16px;
-  line-height:14px;
+  line-height:15px;
   color:#ddf;
 }
 .details .name {

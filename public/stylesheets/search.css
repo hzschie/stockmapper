@@ -1,5 +1,6 @@
 .search {
-  font:14px/20px "Myriad Pro","Myriad", "Helvetica", "Arial", sans-serif;
+  font-size:14px;
+  line-height:20px;
   display:inline-block;
   margin-bottom:4px;
   vertical-align:middle;

@@ -127,7 +127,8 @@ header #logo {
   display:inline-block;
   vertical-align:top;
   font-family: 'EB Garamond', serif;
-  font-size:29px;  
+  font-size:29px;
+  line-height:38px;
 }
 #social-icons ul {
   width:130px;
