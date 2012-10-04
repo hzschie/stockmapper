@@ -1,17 +1,16 @@
-var dataSourceClass;
+var DataSource;
 switch(process.env.DATA_DOMAIN) {
-  case 'blufin':
-    dataSourceClass = require(__dirname + '/../lib/blufin_data_source.js').BlufinDataSource;
-    break;
   case 'nyse':
-    dataSourceClass = require(__dirname + '/../lib/yahoo_data_source.js').YahooDataSource;
+    DataSource = require(__dirname + '/../lib/yahoo_data_source.js');
     break;
+  default:
+    DataSource = require(__dirname + '/../lib/' + process.env.DATA_DOMAIN + '_data_source.js');
 }
 
 var io;// Gets assigned via setter, below
 
-var dataSource = new dataSourceClass(function(data) {
-  io.sockets.emit("update", Array.isArray(data[0]) ? data : [data]);
+var dataSource = new DataSource(function(data) {
+  io && io.sockets.emit("update", Array.isArray(data[0]) ? data : [data]);
 });
 
 exports.getIntraday = function(req, res) {
@@ -40,8 +39,8 @@ exports.getNews = function(req, res) {
   );
 };
 
-exports.getExtendedDataset = function(req, res) {
-  dataSource.getExtendedDataset(req.params.name, res);
+exports.getDataset = function(req, res) {
+  dataSource.getDataset(req.params.name, res);
 };
 
 

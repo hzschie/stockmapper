@@ -24,12 +24,25 @@ $(function() {
   }))();
   mapper.groups = new Backbone.Collection();
 
-  // Socket
-  var socket = io.connect(),
+  var socket,
       multiStockData = [],
-      waitForFirstPass = true,
+      waitForFirstPass = !mapper.isMobile,//true,
       isFirstPassDone = false;
-  socket.on('update', function(_multiStockData) {
+  
+  if(window.io) {// io would be defined if server decided to use WebSocket
+    socket = io.connect();
+    socket.on('update', parseIncomingMultiStockData);
+  }
+  else {// otherwise, we use regular http queries for heatmap data
+    socket = { emit: function() { /* no-op */} };// Stub out socket
+    setInterval(function() {
+      $.getJSON('/datasets/heatmap', parseIncomingMultiStockData);
+    }, 60000);
+    $.getJSON('/datasets/heatmap', parseIncomingMultiStockData);
+  }
+  
+  // Parses incoming data regardless of transport method (WebSocket vs HTTP)
+  function parseIncomingMultiStockData(_multiStockData) {
     multiStockData = multiStockData.concat(_multiStockData);
     Interval.add({ fn: function() {
       var limit = Interval.MAX,
@@ -56,8 +69,8 @@ $(function() {
       }
     
     }, key: 'process_data_update' }, Interval.HIGH);
-  });
-
+  }
+  
   // Stocks JSON
   var field, i,
       headers = mapper.stocksJson.headers,

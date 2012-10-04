@@ -9,15 +9,19 @@ var express = require('express'),
 // NODE APP CONFIGURATION    
 var app = express(),
     server = http.createServer(app),
-    io = require('socket.io').listen(server, {
-      'log level': 0,
-      'transports': ['xhr-polling'],
-      'polling duration': 10,
-      'browser client minification': true
-    });
-
+    io = null;
+    
 server.listen(process.env.PORT || 3000);
-dataRoutes.setIO(io);
+
+if(/true/i.test(process.env.WEBSOCKET)) {
+  io = require('socket.io').listen(server, {
+    'log level': 0,
+    'transports': ['xhr-polling'],
+    'polling duration': 10,
+    'browser client minification': true
+  });
+  dataRoutes.setIO(io);
+}
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
@@ -34,7 +38,7 @@ var BundleUp = require('bundle-up');
 BundleUp(app, __dirname + '/lib/assets', {
   staticRoot: __dirname + '/public/',
   staticUrlRoot:'/',
-  bundle: (process.env.BUNDLE && process.env.BUNDLE.toLowerCase() == 'true'),
+  bundle: (/true/i.test(process.env.BUNDLE)),
   minifyCss: true,
   minifyJs: true
 });
@@ -51,7 +55,7 @@ var groups = fs.readFileSync(__dirname + '/public/data/' + dataDomain + '/groups
 var stocks = fs.readFileSync(__dirname + '/public/data/' + dataDomain + '/stocks.json', 'utf8');
 
 // SETUP DYNAMIC DEFINITIONS (WHICH LOAD THE DEFINITIONS INTO MEMORY, AND REGENERATE PERIODICALLY)
-if(process.env.DYNAMIC && process.env.DYNAMIC.toLowerCase() == 'true') {
+if(/true/i.test(process.env.DYNAMIC)) {
   groups = stocks = null;
   var definitions = require('./build_' + dataDomain + '_definitions');
   definitions.on('update', function(_groups, _stocks) {
@@ -64,11 +68,11 @@ if(process.env.DYNAMIC && process.env.DYNAMIC.toLowerCase() == 'true') {
 }
 
 // ROUTES
+app.get('/datasets/:name', dataRoutes.getDataset);
 app.get('/series/intraday/:id', dataRoutes.getIntraday);
 app.get('/series/5day/:id', dataRoutes.get5day);
 app.get('/series/daily/:id', dataRoutes.getDaily);
 app.get('/news/:id', dataRoutes.getNews);
-app.get('/datasets/:name', dataRoutes.getExtendedDataset);
 
 app.get('/*', function(req, res) {
   if(!groups || !stocks) {
@@ -88,6 +92,7 @@ app.get('/*', function(req, res) {
     groups: groups,
     stocks: stocks,
     isTablet: isTablet,
-    isMobile: isMobile
+    isMobile: isMobile,
+    useWebSocket: io != null
   });
 });
