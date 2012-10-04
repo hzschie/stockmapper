@@ -57,7 +57,7 @@
       }
       $details.css({ visibility:'visible' }).fadeIn();
       
-      if(model) model.off('change', updateQuote);
+      if(model) model.on('change', updateQuote);
       updateQuote();
       
       news.setPending(true);
@@ -100,6 +100,7 @@
     };
     
     function updateQuote() {
+      if(!model.get('hasData')) return;
       template.applyBindings('stock', $details, model);
     }
   }

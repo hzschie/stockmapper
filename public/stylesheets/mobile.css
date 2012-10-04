@@ -50,6 +50,9 @@ body.mobile {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#131313', endColorstr='#666666',GradientType=0 ); /* IE6-9 */
 }
 
+.mobile .details {
+  line-height:18px;
+}
 .mobile .details .left, .mobile .details .right {
   width:100%;
 }
@@ -76,7 +79,6 @@ body.mobile {
   padding-right:0;
   clear:both;
 }
-
 
 .mobile .graph .x.axis .tick {
   display:none;

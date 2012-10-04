@@ -48,6 +48,10 @@ mapper.Mobile.ready = function() {
   updateView(true);
   viewState.on('change', function() { updateView(false); });
   
+  Interval.callOnce(function() {
+    window.scrollTo(0,0);
+  }, Interval.PRIORITY_FREETIME);
+  
   groupsView.on('select_group', function(group) {
     viewState.setState({ filter: group.get('urlName') });
   });
