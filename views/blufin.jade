@@ -5,25 +5,27 @@ block links
   link(href='http://fonts.googleapis.com/css?family=EB+Garamond', rel='stylesheet', type='text/css')
   
 block header
-  | <header>
-  | <div id="logo-container">
-  |   <div id="logo"><a href="http://www.blufin.in/"><img width="130" height="33" src="http://www.blufin.in/BCI/images/blufin_logo.png" border="0"></a></div>
-  |   <div id="logo-name">StockMapper</div>
-  |   <div id="panel">
-  |     <div id="global_last_update">Last Update:&nbsp;&nbsp;<span class="value"></span></div>
-  |     <div id="help_button" onclick="mapper.Layout.toggleHelp()"></div>
-  |     <a id="refresh-bar" href="/"></a>
-  |     <div id="social-icons">
-  |       <ul>
-  |         <li><a href="https://twitter.com/#!/BluFinIndia" title="twitter" class="twit" target="_blank"></a></li>
-  |         <li><a href="https://www.facebook.com/pages/BluFinIndia/111282055662574" title="facebook" class="fb" target="_blank"></a></li>
-  |         <li><a href="http://www.linkedin.com/company/blufin-india" title="linkedin" class="in" target="_blank"></a></li>
-  |         <li><a href="http://www.youtube.com/user/BluFinIndia" title="youtube" class="ya" target="_blank"></a></li>
-  |       </ul>
-  |     </div>
-  |   </div>
-  | </div>
-  | </header>
+  header
+    #logo-container
+    #logo
+      a(href="http://www.blufin.in/")
+        img(width="130", height="33", src="http://www.blufin.in/BCI/images/blufin_logo.png", border="0")
+    #logo-name StockMapper
+    #panel
+      #global_last_update Last Update:&nbsp;&nbsp;
+        span.value
+      #help_button(onclick="mapper.Layout.toggleHelp();")
+      a#refresh-bar(href="/")
+      #social-icons
+        ul
+          li
+            a(href="https://twitter.com/#!/BluFinIndia", title="twitter", class="twit", target="_blank")
+          li
+            a(href="https://www.facebook.com/pages/BluFinIndia/111282055662574", title="facebook", class="fb", target="_blank")
+          li
+            a(href="http://www.linkedin.com/company/blufin-india", title="linkedin", class="in", target="_blank")
+          li
+            a(href="http://www.youtube.com/user/BluFinIndia", title="youtube", class="ya", target="_blank")
 
 block append inspector_content
   .content.index

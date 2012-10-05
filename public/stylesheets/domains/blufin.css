@@ -131,11 +131,11 @@ header #logo {
   line-height:38px;
 }
 #social-icons ul {
-  width:130px;
   border:0px solid #00ff00;
 }
 #social-icons ul li {
   display: inline-block;
+  margin-left:4px;
 }
 a.twit {
   background: url("http://www.blufin.in/BCI/images/social-nw-links.png") no-repeat scroll left top transparent;
