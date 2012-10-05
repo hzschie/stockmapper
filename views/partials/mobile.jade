@@ -1,4 +1,5 @@
 body.mobile
+  //- block mobile_header
   .layout
     .index
       .groups_view
@@ -21,7 +22,8 @@ body.mobile
                 dt Vol. Total:
                 dd.volume_total 123,456
       .map_ui
-        .sorts
+        .sorts.selector
+          label Sort By:
           a#sym Symbol
           a#chg % Change
           a#vol Volume

@@ -90,16 +90,15 @@ input {
 }
 
 
-.selector label {
-  line-height:30px;
-  margin-right:6px;
-  color:#ddf;
-}
 .selector {
+  line-height:30px;
   font-size:16px;
-  line-height:22px;
   display:inline-block;
   vertical-align:middle;
+}
+.selector label {
+  margin-right:6px;
+  color:#ddf;
 }
 .selector a {
   cursor:pointer;
