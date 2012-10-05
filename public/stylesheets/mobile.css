@@ -2,7 +2,7 @@ html {
   min-height:100%;
 }
 body.mobile {
-/*  max-width:320px;*/
+/*  max-width:300px;*/
   overflow:scroll;
   min-height:100%;
   background: rgb(34,34,34); /* Old browsers */
@@ -61,6 +61,7 @@ body.mobile {
 
 .mobile .details {
   line-height:18px;
+  padding:0;
 }
 .mobile .details .left, .mobile .details .right {
   width:100%;
@@ -70,13 +71,23 @@ body.mobile {
 }
 .mobile .details .last_trade, .mobile .details .change {
   font-size:18px;
-  margin-left: 10px;
+  margin-left: 8px;
+  float:right;
+}
+.mobile .details .quote {
+  margin:8px;
 }
 .mobile .details .sym {
   font-size:14px;
+  margin-left:8px;
+  top:8px;
+  position:relative;
 }
 .mobile .details .name {
   font-size:18px;
+  left:8px;
+  top:8px;
+  position:relative;
 }
 .mobile .details .timestamp {
   font-size:10px;
@@ -84,13 +95,27 @@ body.mobile {
 .mobile .details .values {
   margin-top:12px;
   margin-bottom:12px;
-  margin-right:-12px;
+  margin-left:0;
   padding-right:0;
   clear:both;
 }
+.details .values dt {
+  margin-left:8px;
+}
+.details .values dd {
+  margin:0 8px;
+}
 
+
+.mobile .graph {
+  left:8px;
+}
 .mobile .graph .x.axis .tick {
   display:none;
+}
+
+.mobile .news {
+  margin-left:2px;
 }
 
 .mobile .group_info {
@@ -105,13 +130,13 @@ body.mobile {
   position: fixed;
   top:6px;
   left:8px;
+  right:8px;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.85);
 }
 .mobile .group_info .label {
   font-size:20px;
   font-weight:bold;
-  display:inline-block;
-  vertical-align: top;
+  display:inline;
 }
 .mobile .group_info .last_trade {
   width:auto;

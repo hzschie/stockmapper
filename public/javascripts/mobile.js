@@ -32,6 +32,7 @@ mapper.Mobile.ready = function() {
     
     if(viewState.hasChanged('currentStock') || force) {
       var stock = viewState.get('currentStock');
+      map.search(stock);
       if(stock) {
         details.query(stock);
         layout.setPage(2);
@@ -48,11 +49,7 @@ mapper.Mobile.ready = function() {
   
   updateView(true);
   viewState.on('change', function() { updateView(false); });
-  
-  Interval.callOnce(function() {
-    window.scrollTo(0,0);
-  }, Interval.PRIORITY_FREETIME);
-  
+
   groupsView.on('select_group', function(group) {
     viewState.setState({ filter: group.get('urlName') });
   });
@@ -98,16 +95,21 @@ mapper.Mobile.ready = function() {
         
       $current = $child;
       
-      if($current) $current
-        .show()
-        .removeClass('active')
-        .animate({
-            opacity:1
-          }, {
-          complete: function() {
-            $(this).css({ position:'relative' });
-          }
-        });
+      if($current) {
+        $current
+          .css({ position:'relative' })
+          .show()
+          .removeClass('active')
+          .animate({
+              opacity:1
+            }, {
+            complete: function() {
+              //$(this).css({ position:'relative' });
+            }
+          });
+        
+        $(window).scrollTop(0);// Hides the address bar
+      }
     };
     
     if(num != null) this.setPage(num);
