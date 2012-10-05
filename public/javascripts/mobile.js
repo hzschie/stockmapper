@@ -15,6 +15,7 @@ mapper.Mobile.ready = function() {
   function updateView(force) {
     if(viewState.hasChanged('currentGroup') || force) {
       var currentGroup = viewState.get('currentGroup');
+      groupsView.setSelected(currentGroup);
       if(currentGroup) {
         groupInfo.setGroup(currentGroup);
         map.setModels(currentGroup.get('members'));

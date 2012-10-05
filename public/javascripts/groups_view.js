@@ -277,6 +277,7 @@
   function GroupsView($groups, groups) {
     _.extend(this, Backbone.Events);
     var _this = this,
+        selected = null,
         getGroupHtml = mapper.config.getGroupTagHtml || function(group) {
           return [
             '<div class="type">', group.get('type').toUpperCase(), '</div>', 
@@ -321,35 +322,49 @@
     });
 
     var w = $groups.width(),
-        gap = 2,
+        gap = 1,
         numCols = Math.floor(w / 150),
         tagW = Math.floor((w - gap * numCols) / numCols);
     _.forEach(sections, function(section) {
-      var $section = $(document.createElement('div')).addClass('section').html('<div class="type">' + section.type + '</div>');
+      var $section = $(document.createElement('div')).addClass('section').html('<div class="category">' + section.type + '</div>');
       _.forEach(section.tags, function(tag) {
         var group = tag.group;
-        var $tag = $(document.createElement('div'))
+        group._groupView = group._groupView || {};
+        var $tag = group._groupView.$tag = $(document.createElement('div'))
           .addClass('group')
           .html(getGroupHtml(group, $tag))
           .css({
-            width: tagW,
-            margin: gap/2
+            width: tagW - 8,
+            padding:4
           })
           .appendTo($section)
           .click(function() {
             _this.trigger('select_group', group);
           });
-              
-        group.set({ $tag: $tag }, { silent:true });
+        
         group.on('change', updateGroup);
         updateGroup(group);
       });
       $section.appendTo($groups);
     });
+    
+    this.setSelected = function(group) {
+      if(selected) {
+        selected._groupView.$tag.removeClass('selected');
+      }
+      selected = group;
+      if(selected) {
+        selected._groupView.$tag.addClass('selected');
+        $groups.addClass('dimmed');
+      }
+      else {
+        $groups.removeClass('dimmed');
+      }
+    };
 
     function updateGroup(group) {
       var type = (mapper.config.getGroupType && mapper.config.getGroupType(group.get('type'), group)) || group.get('type');
-      template.applyBindings(type, group.get('$tag'), group);
+      template.applyBindings(type, group._groupView.$tag, group);
     }
   }
 })();
