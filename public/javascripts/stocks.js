@@ -12,7 +12,7 @@ var Stock = mapper.Stock = Backbone.Model.extend(
       });
     },
     
-    update: function(array) {
+    update: function(array, opts) {
       var hash = {};var _this=this;
       _.forEach(Stock.fields, function(field, i) {
         if(!field) return;
@@ -22,9 +22,9 @@ var Stock = mapper.Stock = Backbone.Model.extend(
       hash['changePct'] = parseFloat(hash.changePctString);
       hash['marketCap'] = Stock.parseMarketCapString(hash.marketCapString);
       hash['hasData'] = true;
-      this.set(hash);
+      this.set(hash, opts);
       
-      if(this.has('highlightFn')) this.set({ isHighlighted:this.get('highlightFn')(this) });
+      if(this.has('highlightFn')) this.set({ isHighlighted:this.get('highlightFn')(this) }, opts);
     },
     
     setHighlightFunc: function(fn) {

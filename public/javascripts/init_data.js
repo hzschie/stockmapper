@@ -27,6 +27,7 @@ $(function() {
   var socket,
       multiStockData = [],
       waitForFirstPass = !mapper.isMobile,//true,
+      optimize = mapper.isMobile,
       isFirstPassDone = false;
   
   if(window.io) {// io would be defined if server decided to use WebSocket
@@ -55,16 +56,24 @@ $(function() {
         data = multiStockData[i];
         collection = mapper[ data[0] + 's' ];
         model = collection && collection.get(data[1]);
-        model && model.update(data);
+        model && model.update(data, { silent: optimize && !isFirstPassDone });
         i++;
       }
 
       multiStockData.splice(0, i);
       if(multiStockData.length == 0) {
         Interval.remove(this);
-        if(waitForFirstPass && !isFirstPassDone) {
+        
+        if(optimize) {
+          mapper.groups.each(function(group) {
+            group.updateCounts();
+            group.resortMembers(false);
+          });
+        }
+        
+        if(!isFirstPassDone) {
           isFirstPassDone = true;
-          tryPopulateGroups();
+          if(waitForFirstPass) tryPopulateGroups();
         }
       }
     
