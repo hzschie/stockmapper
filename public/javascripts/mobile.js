@@ -10,19 +10,26 @@ mapper.Mobile.ready = function() {
       groupInfo = new mapper.GroupInfo($('.group_info')),
       sorts = new mapper.SelectorButtons($('.sorts'), function(id) { viewState.setState({ sort:id }); }),
       map = new mapper.Map($('.map ul')),
-      details = new mapper.Details($('.details'));
+      details = new mapper.Details($('.details')),
+      
+      $back = $('header .back');
+      
+  var GROUPS_PAGE = 0,
+      MEMBERS_PAGE = 1,
+      DETAILS_PAGE = 2;
       
   function updateView(force) {
+    var pageNum = null;
     if(viewState.hasChanged('currentGroup') || force) {
       var currentGroup = viewState.get('currentGroup');
       groupsView.setSelected(currentGroup);
       if(currentGroup) {
         groupInfo.setGroup(currentGroup);
         map.setModels(currentGroup.get('members'));
-        layout.setPage(viewState.get('currentStock') ? 2 : 1);
+        pageNum = viewState.get('currentStock') ? DETAILS_PAGE : MEMBERS_PAGE;
       }
       else {
-        layout.setPage(viewState.get('currentStock') ? 2 : 0);
+        pageNum = viewState.get('currentStock') ? DETAILS_PAGE : GROUPS_PAGE;
       }
     }
     
@@ -35,15 +42,32 @@ mapper.Mobile.ready = function() {
       map.search(stock);
       if(stock) {
         details.query(stock);
-        layout.setPage(2);
+        pageNum = 2;
       }
       else {
-        layout.setPage(viewState.get('currentGroup') ? 1 : 0);
+        pageNum = viewState.get('currentGroup') ? MEMBERS_PAGE : GROUPS_PAGE;
       }
     }
     
     if(viewState.hasChanged('range') || force) {
       details.setRange(viewState.get('range'));
+    }
+    
+    if(pageNum != null) {
+      layout.setPage(pageNum);
+      switch(pageNum) {
+        case GROUPS_PAGE:
+          $back.fadeOut();
+          break;
+        case MEMBERS_PAGE:
+          $back.fadeIn().text('Groups');
+          $back.off('click').click(function() { console.log('???'); viewState.setState({ filter: null }); });
+          break;
+        case DETAILS_PAGE:
+          $back.fadeIn().text('Stocks');
+          $back.off('click').click(function() { viewState.setState({ q: null }); });
+          break;
+      }
     }
   }
   

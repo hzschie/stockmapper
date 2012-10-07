@@ -28,7 +28,7 @@ body.mobile {
   background-color:rgba(44,44,44,.9);
   border-bottom:1px solid rgba(0,0,0,.5);
 }
-.mobile header:after {
+.mobile header:before {
   position:absolute;
   left:0;
   right:0;
@@ -37,6 +37,21 @@ body.mobile {
   border-radius:4px;
   background-color:rgba(255,255,255,.1);
   content:'';
+}
+.mobile header .back {
+  position:absolute;
+  display:none;
+  top:10px;
+  left:8px;
+  color:#333;
+  border-radius:20px;
+  line-height:22px;
+  height:20px;
+  font-size:14px;
+  padding-left:20px;
+  padding-right:10px;
+  background:#fff url('/images/mobile/back_arrow.png') no-repeat scroll 3px 3px;
+  background-size: auto 74%;
 }
 .mobile header .logo {
   height:41px;
