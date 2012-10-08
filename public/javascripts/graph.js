@@ -158,14 +158,13 @@
           pMax = series.getMax('price', tRange);
           
       if(series.price_ref != null) {
-        pMin = Math.min(series.price_ref, pMin);
-        pMax = Math.max(series.price_ref, pMax);
+        pMin = Math.min(series.price_ref, pMin || (series.price_ref * .9));
+        pMax = Math.max(series.price_ref, pMax || (series.price_ref * 1.1));
       }
       var dPad = (pMax - pMin) * .1;
       
       yp.domain([Math.max(0, pMin - dPad), pMax + dPad]);
       yv.domain([0, series.getMax('volume', tRange) * 1.2]);
-      
       var gs = svg.selectAll('.x.axis g');
       gs.selectAll('.tick.bottom').remove();
       gs
@@ -237,9 +236,9 @@
     };
     
     function renderIntraday() {
-      var dayOf0 = series.getMin('t') - (series.getMin('t') % 8.64e7),
+      var dayOf0 = Math.floor(series.getMin('t') / 8.64e7) * 8.64e7,
           date0 = new Date(dayOf0 + marketHours.t0 * 60000),
-          dayOf1 = series.getMax('t') - (series.getMax('t') % 8.64e7),
+          dayOf1 = Math.floor(series.getMax('t') / 8.64e7) * 8.64e7,
           date1 = new Date(dayOf1 + marketHours.t1 * 60000);
 
       var t = dayOf0,
@@ -252,7 +251,7 @@
         var dayOfWeek = new Date(t).getUTCDay(),
             tOpen = t + marketHours.t0 * 60000,
             tClose = t + marketHours.t1 * 60000;
-        if(dayOfWeek != 0 && dayOfWeek != 6 && series.hasData(tOpen, tClose)) {
+        if(dayOfWeek != 0 && dayOfWeek != 6 && series.hasData(tOpen, tClose) || series.data.length == 0) {
           domain.push(tOpen);
           domain.push(tClose);
           range.push(d * _w);

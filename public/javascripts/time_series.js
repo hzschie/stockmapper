@@ -1,5 +1,5 @@
 (function() {
-  // ASSUMES THE DATA COMES SORTED
+  // ASSUMES THE DATA COMES CHRONOLOGICALLY SORTED
   mapper.TimeSeries = TimeSeries;
   function TimeSeries(def, type) {
     $.extend(this, def);
