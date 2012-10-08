@@ -45,22 +45,22 @@
         selected = null;
         
     var clusters = [],
-        currCluster, currType;
+        currCluster, currCategory;
     _.each(
       mapper.config.groupsTagOrder || groups.models,
       function(refOrGroup) {
-        var group, type;
+        var group, category;
         if(typeof(refOrGroup) == 'string') {
           var splt = refOrGroup.split(':');
-          group = groups.where({ type:splt[0], nickname:splt[1] })[0];
+          group = groups.where({ category:splt[0], nickname:splt[1] })[0];
         }
         else group = refOrGroup;
         
         if(!group) return;
         
-        if((type = group.get('type')) != currType) {
-          currType = type;
-          currCluster = { type:type, groups:[] };
+        if((category = group.get('category')) != currCategory) {
+          currCategory = category;
+          currCluster = { category:category, groups:[] };
           clusters.push(currCluster);
         }
         currCluster.groups.push(group);
@@ -135,12 +135,12 @@
         group._groupView = group._groupView || {};
         $label = group._groupView.$label = $(document.createElement('div'))
           .addClass('category')
-          .html(group.get('type'))//.toUpperCase())
+          .html(group.get('category'))
           .appendTo($groups);
       }
         
       $label.css({
-        width: tagW + (table[r][c+1] && (table[r][c+1].isLabel || table[r][c+1].get('type') != label) ? 0 : gap/2 - line),
+        width: tagW + (table[r][c+1] && (table[r][c+1].isLabel || table[r][c+1].get('category') != label) ? 0 : gap/2 - line),
         height: tagH + (r == 0 ? gap/2 : 0) + gap/2 - line,
         left: c * (tagW + gap) + gap/2,
         top: r * (tagH + gap)
@@ -186,8 +186,8 @@
     }
     
     function updateGroup(group) {
-      var type = (mapper.config.getGroupType && mapper.config.getGroupType(group.get('type'), group)) || group.get('type');
-      template.applyBindings(type, group._groupView.$tag, group);
+      var bindingsName = (mapper.config.getGroupType && mapper.config.getGroupType(group.get('category'), group)) || group.get('category');
+      template.applyBindings(bindingsName, group._groupView.$tag, group);
     }
     
     function pickScheme() {
@@ -222,8 +222,8 @@
     this.shouldExtend = function(group, toCol, toRow) {
       var target = this.table[toRow] && this.table[toRow][toCol];
       if(target) {
-        if(target.isLabel) return target.group.get('type') == group.get('type');
-        else if(target.get('type') == group.get('type')) return true;
+        if(target.isLabel) return target.group.get('category') == group.get('category');
+        else if(target.get('category') == group.get('category')) return true;
         return false;
       }
       else {
@@ -280,7 +280,7 @@
         selected = null,
         getGroupHtml = mapper.config.getGroupTagHtml || function(group) {
           return [
-            '<div class="type">', group.get('type').toUpperCase(), '</div>', 
+            '<div class="category">', group.get('category').toUpperCase(), '</div>', 
             '<label>', group.get('label'), '</label>'
           ].join('');
         },
@@ -298,9 +298,9 @@
           reference = refOrGroup;
           
           var splt = reference.split(':'),
-              type = splt[0],
+              category = splt[0],
               nickname = splt[1];
-          group = groups.where({ type:type, nickname:nickname })[0];
+          group = groups.where({ category:category, nickname:nickname })[0];
         }
         else {
           reference = refOrGroup.get('urlName');
@@ -313,10 +313,10 @@
     var sections = [],
         current = null;
     _.forEach(tagsOrder, function(obj) {
-      var type = obj.reference.split(':')[0];
-      if(!current || current != type) {
-        current = type;
-        sections.push({ type:type, tags:[] });
+      var category = obj.reference.split(':')[0];
+      if(!current || current != category) {
+        current = category;
+        sections.push({ category:category, tags:[] });
       }
       sections[sections.length - 1].tags.push(obj);
     });
@@ -326,7 +326,7 @@
         numCols = Math.floor(w / 150),
         tagW = Math.floor((w - gap * numCols) / numCols);
     _.forEach(sections, function(section) {
-      var $section = $(document.createElement('div')).addClass('section').html('<div class="category">' + section.type + '</div>');
+      var $section = $(document.createElement('div')).addClass('section').html('<div class="category">' + section.category + '</div>');
       _.forEach(section.tags, function(tag) {
         var group = tag.group;
         group._groupView = group._groupView || {};
@@ -363,8 +363,8 @@
     };
 
     function updateGroup(group) {
-      var type = (mapper.config.getGroupType && mapper.config.getGroupType(group.get('type'), group)) || group.get('type');
-      template.applyBindings(type, group._groupView.$tag, group);
+      var bindingsName = (mapper.config.getGroupType && mapper.config.getGroupType(group.get('category'), group)) || group.get('category');
+      template.applyBindings(bindingsName, group._groupView.$tag, group);
     }
   }
 })();

@@ -13,7 +13,7 @@ var Stock = mapper.Stock = Backbone.Model.extend(
     },
     
     update: function(array, opts) {
-      var hash = {};var _this=this;
+      var hash = {};
       _.forEach(Stock.fields, function(field, i) {
         if(!field) return;
         hash[field.name] = field.isNum && array[i] != null ? Number(array[i]) : array[i];
@@ -39,6 +39,8 @@ var Stock = mapper.Stock = Backbone.Model.extend(
       $.getJSON(
         '/series/' + type + '/' + this.id,
         function(data) {
+          if(!data) return callback(null);
+          
           var ts = new mapper.TimeSeries(data, type);
           setter[type] = ts;
         
@@ -110,16 +112,17 @@ var Stock = mapper.Stock = Backbone.Model.extend(
   }
 );
 
-var StockGroup = mapper.StockGroup = Backbone.Model.extend(
+var StockGroup = mapper.StockGroup = mapper.Stock.extend(//Backbone.Model.extend(
   {
     initialize: function(hash) {
+      hash.sym = hash.sym || hash.id;
       hash.members = new Backbone.Collection(hash.members);
       hash.upsAndDowns = [0,0];
       hash.volumeUp = 0;
       hash.volumeDown = 0;
       hash.volumeTotal = 0;
       hash.label = hash.label || hash.nickname;
-      hash.urlName = hash.type + ':' + hash.nickname.toLowerCase().replace(/\s|\/|\&/g, '+').replace(/\++/, '+');
+      hash.urlName = hash.category + ':' + hash.nickname.toLowerCase().replace(/\s|\/|\&/g, '+').replace(/\++/, '+');
       this.set(hash);
 
       var _this = this,

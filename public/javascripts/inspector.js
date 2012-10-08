@@ -3,7 +3,7 @@
   var Template = mapper.Template;
   Inspector.defaultBindings = {
     group: [
-      { $:'.type', field:'type', formatter:function(val) { return 'Stocks by ' + mapper.capitalize(val); } },
+      { $:'.category', field:'category', formatter:function(val) { return 'Stocks by ' + mapper.capitalize(val); } },
       { $:'.label', field:'name' },
       { $:'.num_up', field:'upsAndDowns', formatter:function(counts) { return counts[0]; } },
       { $:'.num_down', field:'upsAndDowns', formatter:function(counts) { return counts[1]; } },
@@ -78,9 +78,9 @@
       
       $container.removeClass('hidden');
       
-      var type = (mapper.config.getGroupType && mapper.config.getGroupType(group.get('type'), group)) || group.get('type');
-      template.applyBindings(type, $container, group);
-      inspectElement($tag, '.' + type, { x:20, y:20 });
+      var bindingsName = (mapper.config.getGroupType && mapper.config.getGroupType(group.get('category'), group)) || group.get('category');
+      template.applyBindings(bindingsName, $container, group);
+      inspectElement($tag, '.' + bindingsName, { x:20, y:20 });
     };
     
     this.suspendTillDone = function(status) {

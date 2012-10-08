@@ -45,8 +45,8 @@ reader.on('end', function() {
   fs.writeFileSync(__dirname + '/public/data/nyse/stocks.json', JSON.stringify(stocks));
 });
 
-function getOrCreateGroup(type, name) {
-  var groupId = type + '_' + name;
+function getOrCreateGroup(category, name) {
+  var groupId = category + '_' + name;
       group = groupsTable[groupId];
   if(!group) {
     var nickname;
@@ -86,11 +86,11 @@ function getOrCreateGroup(type, name) {
     group = groupsTable[groupId] = {
       name: name,
       nickname: nickname,
-      type: type,
+      category: category,
       ids: []
     };
     
-    if(type == 'index') {
+    if(category == 'index') {
       group.inspector_type = 'index';
       switch(name) {
         case 'S&P 500':

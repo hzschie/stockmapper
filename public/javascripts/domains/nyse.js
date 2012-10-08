@@ -1,5 +1,5 @@
-mapper.config.getGroupType = function(type, group) {
-  if(type == 'index') { return type; };
+mapper.config.getGroupType = function(category, group) {
+  if(cateogry == 'index') { return category; };
   return 'group';
 };
 
@@ -19,7 +19,7 @@ mapper.config.getMapTagHtml = function(model) {
 };
 
 mapper.config.getGroupTagHtml = function(group, $container) {
-  if(group.get('type') == 'index') return [
+  if(group.get('category') == 'index') return [
       '<div class="val_right">',
         '<div class="value"></div>',
         '<div class="change"></div>',

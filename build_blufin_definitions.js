@@ -64,7 +64,7 @@ function createGroups(callback) {
         id: groupId,
         name: group.n,// IndexName
         nickname: group.n.replace(/^blufin /i, '').replace(/ index$/i, '').replace(/ and /, ' & '),
-        type: group.c,// Category
+        category: group.c,// Category
         ids: []
       };
     });
@@ -74,14 +74,14 @@ function createGroups(callback) {
       id: 229,
       name: 'NIFTY',
       nickname: 'NIFTY',
-      type: 'Index',
+      category: 'Index',
       ids: []
     };
     groups['sensex'] = {
       id: 201,
       name: 'SENSEX',
       nickname: 'SENSEX',
-      type: 'Index',
+      category: 'Index',
       ids: []
     };
     

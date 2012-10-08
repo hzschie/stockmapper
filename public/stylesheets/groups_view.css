@@ -194,10 +194,6 @@
   line-height:18px;
   font-weight:bold;
 }
-.groups_view .group .type {
-  display:none;
-  font-size:16px;
-}
 .groups_view .val_right {
   float:right;
   line-height:20px;

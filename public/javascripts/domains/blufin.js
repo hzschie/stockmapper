@@ -1,4 +1,4 @@
-mapper.config.getGroupType = function(type, group) { return type == 'Index' ? 'index' : 'group'; };
+mapper.config.getGroupType = function(category, group) { return category == 'Index' ? 'index' : 'group'; };
 
 mapper.config.getInspectorBindings = function(bindings) {
   _.each(bindings.stock, function(binding) {
@@ -15,7 +15,7 @@ mapper.config.getInspectorBindings = function(bindings) {
   });
   return {
     index: bindings.group.concat([
-      { $:'.type', field:'type', formatter:function(val) { return 'Stocks by ' + mapper.capitalize(val); } },
+      { $:'.category', field:'category', formatter:function(val) { return 'Stocks by ' + mapper.capitalize(val); } },
       { $:'.label', field:'name' },
       { $:'.last_trade', field:'value', formatter:mapper.Template.commaFormat },
       { $:'.change', field:'changeDir', formatter:mapper.Template.makeRedOrGreen },
@@ -38,7 +38,7 @@ mapper.config.getMapTagHtml = function(model) {
 };
 
 mapper.config.getGroupTagHtml = function(group, $container) {
-  if(group.get('type') == 'Index') return [
+  if(group.get('category') == 'Index') return [
       '<div class="val_right">',
         '<div class="value"></div>',
         '<div class="change"></div>',
