@@ -13,32 +13,13 @@ var dataSource = new DataSource(function(data) {
   io && io.sockets.emit("update", Array.isArray(data[0]) ? data : [data]);
 });
 
-exports.getIntraday = function(req, res) {
-  dataSource.getIntraday(
-    req.params.id,
-    function(data) { res.json(data); }
-  );
+exports.getTimeSeries = function(req, res) {
+  req.query.id = req.params.id;
+  dataSource.getTimeSeries(req.query, function(data) { res.json(data); });
 };
-exports.get5day = function(req, res) {
-  dataSource.get5day(
-    req.params.id,
-    function(data) { res.json(data); }
-  );
-};
-exports.getDaily = function(req, res) {
-  dataSource.getDaily(
-    req.params.id,
-    function(data) { res.json(data); }
-  );
-};
-
 exports.getNews = function(req, res) {
-  dataSource.getNews(
-    req.params.id,
-    function(data) { res.json(data); }
-  );
+  dataSource.getNews(req.params, function(data) { res.json(data); });
 };
-
 exports.getDataset = function(req, res) {
   dataSource.getDataset(req.params.name, res);
 };

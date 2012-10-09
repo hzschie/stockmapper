@@ -69,10 +69,8 @@ if(/true/i.test(process.env.DYNAMIC)) {
 
 // ROUTES
 app.get('/datasets/:name', dataRoutes.getDataset);
-app.get('/series/intraday/:id', dataRoutes.getIntraday);
-app.get('/series/5day/:id', dataRoutes.get5day);
-app.get('/series/daily/:id', dataRoutes.getDaily);
-app.get('/news/:id', dataRoutes.getNews);
+app.get('/series/:id', dataRoutes.getTimeSeries);
+app.get('/:resource/:id/news', dataRoutes.getNews);
 
 app.get('/*', function(req, res) {
   if(!groups || !stocks) {

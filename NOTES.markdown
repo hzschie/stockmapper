@@ -12,7 +12,9 @@ week hi/lo,
 TODO: use CSS box-shadow for label drop-shadows. Yay.
 
 ## Links
-Yahoo finance API reference: http://code.google.com/p/yahoo-finance-managed/wiki/csvHistQuotesDownload and http://cliffngan.net/a/13
+Yahoo finance API reference: 
+http://www.yqlblog.net/blog/2009/06/02/getting-stock-information-with-yql-and-open-data-tables/
+http://code.google.com/p/yahoo-finance-managed/wiki/csvHistQuotesDownload and http://cliffngan.net/a/13
 YA csv module: https://github.com/koles/ya-csv/blob/master/lib/ya-csv.js
 NYSE stocks CSV: http://www.nyse.com/indexes/nyaindex.csv
 Quirksmode: http://www.quirksmode.org/css/contents.html
