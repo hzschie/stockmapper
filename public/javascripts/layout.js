@@ -1,6 +1,6 @@
 (function() {
   mapper.Layout = Layout;
-  function Layout(groups, map, chart, inspector, details) {
+  function Layout(groups, map, chart, inspector, stockDetails) {
     _.extend(this, Backbone.Events);
     var $window = $(window),
         $help = $('.help'),
@@ -8,7 +8,7 @@
         $panel = $('.panel'),
         $map = $('.map'),
         $chart = $('.chart'),
-        $details = $('.details'),
+        $stockDetails = $('#stock_details'),
         $views = $panel.find('.views'),
         _this = this;
         
@@ -26,8 +26,8 @@
       onScroll();
     });
     
-    details.on('open', function() { inspector.setBottomConstraint($window.height() - $details.outerHeight()); });
-    details.on('close', function() { inspector.setBottomConstraint($window.height()); });
+    stockDetails.on('open', function() { inspector.setBottomConstraint($window.height() - $stockDetails.outerHeight()); });
+    stockDetails.on('close', function() { inspector.setBottomConstraint($window.height()); });
     
 
     $views.children().each(function(i, el) {
@@ -129,7 +129,7 @@
       
         Interval.callOnce({
           key:'resize_details',
-          fn:function() { details.resize(); }
+          fn:function() { stockDetails.resize(); }
         }, Interval.PRIORITY_LOW);
         
       }
@@ -144,7 +144,7 @@
         fn:function() { chart.resize(); }
       }, Interval.PRIORITY_LOW);
       
-      inspector.setBottomConstraint($window.height() - ($details.is(':visible') ? $details.outerHeight() : 0));
+      inspector.setBottomConstraint($window.height() - ($stockDetails.is(':visible') ? $stockDetails.outerHeight() : 0));
     }
     
     

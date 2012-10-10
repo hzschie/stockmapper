@@ -8,7 +8,8 @@ mapper.dataReady = function() {
         highlights = new mapper.MapHighlights($('.map .highlights')),
         chart = new mapper.HtmlChart($('.chart')),
         inspector = new mapper.Inspector($('.inspector')),
-        details = new mapper.Details($('.details')),
+        stockDetails = new mapper.Details($('#stock_details')),
+        indexDetails = new mapper.Details($('#index_details')),
         search = new mapper.Search($('.search')),
         lastUpdate = new mapper.GlobalLastUpdate($('#global_last_update'), mapper.stocks),
         viewState = new mapper.ViewState({
@@ -16,7 +17,7 @@ mapper.dataReady = function() {
           defaultSort: mapper.sortFunctions.sym,
           trackedParams: ['filter', 'sort', 'q', 'range']
         }),
-        layout = new mapper.Layout(groups, map, chart, inspector, details);
+        layout = new mapper.Layout(groups, map, chart, inspector, stockDetails);
     
     function updateView(force) {
       if(viewState.hasChanged('currentGroup') || force) {
@@ -24,6 +25,7 @@ mapper.dataReady = function() {
         map.setModels(currentGroup.get('members'));
         chart.setModels(currentGroup.get('members'));
         groups.setSelected(currentGroup);
+        indexDetails.query(currentGroup);
         inspector.suspendTillDone(map);
       }
       
@@ -33,13 +35,14 @@ mapper.dataReady = function() {
       
       if(viewState.hasChanged('currentStock') || force) {
         var currentStock = viewState.get('currentStock');
-        details.query(currentStock);
+        stockDetails.query(currentStock);
         map.search(currentStock);
         groups.search(currentStock);
       }
       
       if(viewState.hasChanged('range') || force) {
-        details.setRange(viewState.get('range'));
+        stockDetails.setRange(viewState.get('range'));
+        indexDetails.setRange(viewState.get('range'));
       }
       
       if(viewState.hasChanged('searchStock')) {
@@ -48,7 +51,7 @@ mapper.dataReady = function() {
         groups.search(searchStock);
         
         if(searchStock) {
-          details.close();
+          stockDetails.close();
         }
       }
     }
@@ -88,10 +91,13 @@ mapper.dataReady = function() {
       inspector.inspectBar(model, $subBar, isVol, yFixed);
     });
     
-    details.on('click_close', function() {
+    stockDetails.on('click_close', function() {
       viewState.setState({ q: null });
     });
-    details.on('select_range', function(range) {
+    stockDetails.on('select_range', function(range) {
+      viewState.setState({ range: range });
+    });
+    indexDetails.on('select_range', function(range) {
       viewState.setState({ range: range });
     });
   });

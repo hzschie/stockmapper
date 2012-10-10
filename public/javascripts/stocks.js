@@ -97,7 +97,6 @@
         var hash = MapperModel.unpackUpdate(Stock.fields, array);
         hash['changeDir'] = hash['change'] == 0 ? 0 : (hash['change'] / Math.abs(hash['change']));
         hash['changePct'] = parseFloat(hash.changePctString);
-        hash['marketCap'] = Stock.parseMarketCapString(hash.marketCapString);
         hash['hasData'] = true;
         this.set(hash, opts);
         
@@ -120,7 +119,7 @@
         { name:'low', isNum:true },
         { name:'volume', isNum:true },
         { name:'changePctString', isNum:false },
-        { name:'marketCapString', isNum:false },
+        { name:'marketCap', isNum:false },
         { name:'avgVolume', isNum:true },
       
         { name:'pe', isNum:true },
@@ -241,6 +240,7 @@
         null,
         null, 
         { name:'value', isNum:true },
+        { name:'timestamp', isNum:true },
         { name:'previous', isNum:true },
         { name:'change', isNum:true },
         { name:'volume', isNum:true },

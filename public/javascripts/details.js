@@ -18,17 +18,30 @@
       
       { $:'.avg_volume', field:'avgVolume', formatter:Template.commaFormat },
       { $:'.volume', field:'volume', formatter:Template.commaFormat },
-      { $:'.market_cap', field:'marketCapString' },
+      { $:'.market_cap', field:'marketCap', formatter:Template.metricFormat },
 
       { $:'.pe', field:'pe', formatter:Template.priceFormat },
       { $:'.pb', field:'pb', formatter:Template.priceFormat },
       { $:'.ps', field:'ps', formatter:Template.priceFormat },
       { $:'.div_yield', field:'divYield', formatter:Template.priceFormat },
       { $:'.roe', field:'roe', formatter:Template.priceFormat }
+    ],
+    index: [
+      { $:'.name', field:'name' },
+      { $:'.last_trade', field:'value', formatter:Template.priceFormat },
+      { $:'.timestamp .value', field:'timestamp', formatter:Template.postfix(Template.timestamp, ' ' + mapper.config.marketHours.timezone) },
+      
+      { $:'.change', field:'changeDir', formatter:Template.makeRedOrGreen },
+      { $:'.change .amount', field:'change', formatter:Template.changeFormat },
+      { $:'.change .percent', field:'changePct', formatter:Template.postfix(Template.changeFormat, '%') },
+      
+      { $:'.previous', field:'previous', formatter:Template.priceFormat },
+      { $:'.volume', field:'volume', formatter:Template.commaFormat },
+      { $:'.market_cap', field:'marketCap', formatter:Template.metricFormat }
     ]
   };
   
-  function Details($details) {
+  function Details($details, opts) {
     _.extend(this, Backbone.Events);
     var _this = this,
     
@@ -36,7 +49,7 @@
         series_type = 'intraday',// 'daily',//
     
         template = new mapper.Template(Details.defaultBindings),
-        graph = new mapper.Graph($('.graph', $details), $('.left', $details).width()),
+        graph = new mapper.Graph($('.graph', $details), $('.left', $details).width(), opts),
         graphRange = new mapper.GraphRange($('.graph .ui .ranges'), function(id) { _this.trigger('select_range', id); }),
         news = new mapper.News($('.news', $details));
     $('.close', $details).click(function() { _this.trigger('click_close'); });
@@ -80,11 +93,8 @@
     
     this.updateGraph = function() {
       graph.setPending(true);
-      Interval.callOnce({ 
-        fn:function() {
+      Interval.callOnce(function() {
           model && model.acquireTimeSeries(series_type, function(series) { graph.render(series); });// Price+Volume graph          
-        },
-        key:'update_graph'
       });
     };
     
@@ -101,7 +111,7 @@
     
     function updateQuote() {
       if(!model.get('hasData')) return;
-      template.applyBindings('stock', $details, model);
+      template.applyBindings(model.get('modelType'), $details, model);
     }
   }
 })();
