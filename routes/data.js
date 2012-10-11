@@ -18,7 +18,8 @@ exports.getTimeSeries = function(req, res) {
   dataSource.getTimeSeries(req.query, function(data) { res.json(data); });
 };
 exports.getNews = function(req, res) {
-  dataSource.getNews(req.params, function(data) { res.json(data); });
+  req.query.id = req.params.id;
+  dataSource.getNews(req.query, function(data) { res.json(data); });
 };
 exports.getDataset = function(req, res) {
   dataSource.getDataset(req.params.name, res);

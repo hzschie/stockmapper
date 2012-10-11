@@ -55,7 +55,7 @@
     $('.close', $details).click(function() { _this.trigger('click_close'); });
     
     this.close = function() {
-      $details.fadeOut();
+      $details.addClass('disabled');
       this.trigger('close');
     };
     
@@ -68,7 +68,7 @@
         this.close();
         return;
       }
-      $details.css({ visibility:'visible' }).fadeIn();
+      $details.removeClass('disabled');
       
       if(model) model.on('change', updateQuote);
       updateQuote();
@@ -111,7 +111,7 @@
     
     function updateQuote() {
       if(!model.get('hasData')) return;
-      template.applyBindings(model.get('modelType'), $details, model);
+      template.applyBindings(model.get('type'), $details, model);
     }
   }
 })();

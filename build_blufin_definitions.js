@@ -69,12 +69,13 @@ function createGroups(callback) {
       };
     });
     
-    // Hardcodes creation of NIFTY and SENSEX groups
+    // Hardcoded creation of NIFTY and SENSEX groups
     groups['nifty'] = {
       id: 229,
       name: 'NIFTY',
       nickname: 'NIFTY',
       category: 'Index',
+      type: 'index',
       ids: []
     };
     groups['sensex'] = {
@@ -82,6 +83,7 @@ function createGroups(callback) {
       name: 'SENSEX',
       nickname: 'SENSEX',
       category: 'Index',
+      type: 'index',
       ids: []
     };
     

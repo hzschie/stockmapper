@@ -88,6 +88,10 @@
     this.render = function(_series) {
       series = _series;
       this.setPending(false);
+      
+      if(!series) return svg.style('opacity', .1);
+      else svg.style('opacity', 1);
+      
       switch(series.type) {
         case 'intraday':
         case '5day':

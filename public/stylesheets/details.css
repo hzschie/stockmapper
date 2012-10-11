@@ -20,18 +20,38 @@
 
 #index_details {
   margin-bottom:10px;
+  position:relative;
+  height:283px;
+}
+#index_details.disabled {
+  height:30px;
+}
+#index_details .quote {
+  margin-bottom:1px;
 }
 #index_details .graph_area {
   fill:none;
 }
+#index_details .values .col {
+  min-width: 160px;
+}
 #index_details .news {
-  height:226px;
+  height:219px;
 }
 
 
 .details {
   color:#fff;
   font-size:16px;
+  
+  -webkit-transition:opacity .6s, height .6s, visibility .1s linear .6s;
+  -moz-transition:opacity .6s, height .6s, visibility .1s linear .6s;
+  -ms-transition:opacity .6s, height .6s, visibility .1s linear .6s;
+  transition:opacity .6s, height .6s, visibility .1s linear .6s;
+}
+.details.disabled {
+  opacity:0;
+  visibility:hidden;
 }
 .details .content {
   display:none;

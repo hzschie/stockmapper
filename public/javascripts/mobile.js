@@ -61,7 +61,7 @@ mapper.Mobile.ready = function() {
           break;
         case MEMBERS_PAGE:
           $back.fadeIn().text('Groups');
-          $back.off('click').click(function() { console.log('???'); viewState.setState({ filter: null }); });
+          $back.off('click').click(function() { viewState.setState({ filter: null }); });
           break;
         case DETAILS_PAGE:
           $back.fadeIn().text('Stocks');

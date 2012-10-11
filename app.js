@@ -70,7 +70,7 @@ if(/true/i.test(process.env.DYNAMIC)) {
 // ROUTES
 app.get('/datasets/:name', dataRoutes.getDataset);
 app.get('/series/:id', dataRoutes.getTimeSeries);
-app.get('/:resource/:id/news', dataRoutes.getNews);
+app.get('/news/:id', dataRoutes.getNews);
 
 app.get('/*', function(req, res) {
   if(!groups || !stocks) {

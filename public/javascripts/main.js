@@ -25,8 +25,9 @@ mapper.dataReady = function() {
         map.setModels(currentGroup.get('members'));
         chart.setModels(currentGroup.get('members'));
         groups.setSelected(currentGroup);
-        indexDetails.query(currentGroup);
         inspector.suspendTillDone(map);
+        
+        indexDetails.query(currentGroup.get('type') == 'index' ? currentGroup : null);
       }
       
       if(viewState.hasChanged('currentSort') || force) {

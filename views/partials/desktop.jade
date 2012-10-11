@@ -19,7 +19,7 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
     .title
       
   
-  #stock_details.details(style="visibility:hidden;")
+  #stock_details.details.disabled
     .left
       .header
         .quote
@@ -96,7 +96,7 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
       .close
       include help
 
-    #index_details.details(style="visibility:hidden; visibility:visible; position:relative; background:none; bottom:auto; top:auto; left:auto; right:auto;")
+    #index_details.details
       .left
         .header
           .quote

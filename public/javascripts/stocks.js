@@ -4,7 +4,7 @@
       defaults: {
         hasData: false,
         isHighlighted: false,
-        modelType: 'model'
+        type: 'model'
       },
     
       update: function(array, opts) {
@@ -23,7 +23,7 @@
         var setter = {},
             _this = this;
         $.getJSON(
-          '/series/' + this.id + '?type=' + seriesType + '&resource=' + this.get('modelType'),
+          '/series/' + this.id + '?type=' + seriesType + '&resource=' + this.get('type'),
           function(data) {
             if(!data) return callback(null);
           
@@ -44,7 +44,7 @@
       
         var _this = this;
         $.getJSON(
-          '/' + this.get('modelType') + '/' + this.id + '/news',
+          '/news/' + this.id + '?resource=' + this.get('type'),
           function(data) {
             data.sort(function(a,b) { return (a.t < b.t) - (a.t > b.t); });
             _this.set({ news:data });
@@ -87,7 +87,7 @@
     {
       initialize: function(hash) {
         this.set({
-          modelType: 'stock',
+          type: 'stock',
           sym: hash.sym || hash.id,
           groups: []
         });
@@ -134,7 +134,7 @@
   var StockGroup = mapper.StockGroup = MapperModel.extend(
     {
       initialize: function(hash) {
-        hash.modelType = 'index';
+        hash.type = hash.type || 'group';
         hash.sym = hash.sym || hash.id;
         hash.members = new Backbone.Collection(hash.members);
         hash.upsAndDowns = [0,0];
