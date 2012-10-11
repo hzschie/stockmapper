@@ -4,6 +4,7 @@ mapper.dataReady = function() {
   $(mapper.isMobile ? mapper.Mobile.ready : function() {
     var groups = new mapper.SmartGroupsView(mapper.groups, $('.panel .groups'), $('.panel .title')),
         sorts = new mapper.SelectorButtons($('.panel .sorts'), function(id) { viewState.setState({ sort:id }); }),
+        views = new mapper.SelectorButtons($('.panel .views'), function(id) { layout.frameView(id); }),
         map = new mapper.Map($('.map ul')),
         highlights = new mapper.MapHighlights($('.map .highlights')),
         chart = new mapper.HtmlChart($('.chart')),
@@ -17,7 +18,7 @@ mapper.dataReady = function() {
           defaultSort: mapper.sortFunctions.sym,
           trackedParams: ['filter', 'sort', 'q', 'range']
         }),
-        layout = new mapper.Layout(groups, indexDetails, map, chart, inspector, stockDetails);
+        layout = new mapper.Layout(groups, indexDetails, views, map, chart, inspector, stockDetails);
     
     function updateView(force) {
       if(viewState.hasChanged('currentGroup') || force) {
@@ -27,7 +28,18 @@ mapper.dataReady = function() {
         groups.setSelected(currentGroup);
         inspector.suspendTillDone(map);
         
-        indexDetails.query(currentGroup.get('type') == 'index' ? currentGroup : null);
+        if(currentGroup.get('type') == 'index') {
+          setTimeout(function() {
+            views.enable('index');
+            indexDetails.query(currentGroup);
+          }, 1000);
+        }
+        else {
+          setTimeout(function() {
+            views.disable('index');
+            indexDetails.query(null);
+          }, 1000);
+        }
       }
       
       if(viewState.hasChanged('currentSort') || force) {

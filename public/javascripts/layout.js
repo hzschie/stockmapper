@@ -1,55 +1,52 @@
 (function() {
   mapper.Layout = Layout;
-  function Layout(groups, indexDetails, map, chart, inspector, stockDetails) {
+  function Layout(groups, indexDetails, viewSelector, map, chart, inspector, stockDetails) {
     _.extend(this, Backbone.Events);
     var $window = $(window),
         $help = $('.help'),
         $layout = $('.layout'),
         $panel = $('.panel'),
+        $index = $('#index_details'),
         $map = $('.map'),
         $chart = $('.chart'),
         $stockDetails = $('#stock_details'),
-        $views = $panel.find('.views'),
+        // $views = $panel.find('.views'),
         _this = this;
         
     $layout.css({ 'margin-top': topLine() });
     $chart.css({ 
-      'min-height': $window.height() - $panel.outerHeight() - 42 - 20,
+      'min-height': $window.height() - $panel.outerHeight() - 90,
       'padding-bottom': 20
     });
     
+    onScroll();
     $window.scroll(onScroll);
     
-    detectResize($window, resize);
+    detectResize($window, onResize);
     
     map.on('transition_done', function() {
-      onScroll();
+      setTimeout(function() {
+        onScroll();
+        // if(vvv) _this.frameView(vvv);
+      }, 500);
     });
     
     stockDetails.on('open', function() { inspector.setBottomConstraint($window.height() - $stockDetails.outerHeight()); });
     stockDetails.on('close', function() { inspector.setBottomConstraint($window.height()); });
     
 
-    $views.children().each(function(i, el) {
-      $(el).on('click', function() {
-        var view = $(el).text().toLowerCase();
-        _this.frameView(view);
-        _this.trigger('select_view', view);
-      });
-    });
-    
     Layout.toggleHelp = function() {
       if($layout.hasClass('open_help')) {
         $help.fadeOut({
           complete: function() {
             $layout.removeClass('open_help');
-            resize(true);
+            onResize(true);
           }
         });
       }
       else {
         $layout.addClass('open_help');
-        resize(true);
+        onResize(true);
         setTimeout(function() {
           $help.fadeIn();
         }, 400);
@@ -60,7 +57,10 @@
     this.frameView = function(viewName) {
       switch(viewName) {
         case 'chart':
-          scrollTo($chart.offset().top - $layout.offset().top - 5);
+          scrollTo($chart.offset().top - 45 - $layout.offset().top);
+          break;
+        case 'index':
+          scrollTo($index.offset().top - $layout.offset().top);
           break;
         case 'map':
         default:
@@ -69,24 +69,30 @@
       }
     };
     
-    var $currentView = null;
-    function onScroll() {
-      var y = $window.scrollTop() + topLine(),
+    var $currentView = null, 
+        vvv;
+    function onScroll(e) {
+      var bodyHeight = $(document).height();
+
+      var y = $window.scrollTop() + topLine() + 10 + ($layout.offset().top - topLine()),
           _$currentView,
           view;
-      if(y >= $chart.offset().top - 20) {
+      if(y >= $chart.offset().top - 45) {
         _$currentView = $chart;
-        view = 'CHART';
+        view = 'chart';
       }
       else if(y >= $map.offset().top) {
         _$currentView = $map;
-        view = 'MAP';
+        view = 'map';
       }
-      
+      else if(!$index.is('.disabled') && (y >= $index.offset().top)) {
+        _$currentView = $index;
+        view = 'index';
+      }
+      vvv = view;
       if(_$currentView && $currentView != _$currentView) {
         $currentView = _$currentView;
-        $views.children().removeClass('current');
-        $views.find(':contains(' + view + ')').addClass('current');
+        viewSelector.setCurrent(view);
       }
     }
     
@@ -112,7 +118,7 @@
       return $panel.outerHeight() + 11;
     }
     
-    function resize(justLayout) {
+    function onResize(justLayout) {
       if(!justLayout) {
       
         Interval.callOnce({
@@ -121,7 +127,7 @@
             groups.resize();
             $layout.css({ 'margin-top': topLine() });
             $chart.css({ 
-              'min-height': $window.height() - $panel.outerHeight() - 42 - 20,
+              'min-height': $window.height() - $panel.outerHeight() - 90,
               'padding-bottom': 20
             });
           }

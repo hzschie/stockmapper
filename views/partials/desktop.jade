@@ -3,8 +3,9 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
     block header
     .groups
     .views.selector
-      a MAP
-      a CHART
+      a.disabled(data-val="index") INDEX
+      a(data-val="map") MAP
+      a(data-val="chart") CHART
     .search
       .field
         input(placeholder="Search")
@@ -12,10 +13,10 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
       .dropdown
     .sorts.selector
       label Sort By:
-      a#sym Ticker Symbol
-      a#chg Percent Change
-      a#vol Volume
-      a#cap Market Cap
+      a(data-val="sym") Ticker Symbol
+      a(data-val="chg") Percent Change
+      a(data-val="vol") Volume
+      a(data-val="cap") Market Cap
     .title
       
   
@@ -96,7 +97,7 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
       .close
       include help
 
-    #index_details.details
+    #index_details.details.disabled
       .left
         .header
           .quote
@@ -136,12 +137,6 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
               dd.volume 123,456
               dt Market Cap:
               dd.market_cap 1.234B
-        .news
-          a.article(target="stockmapper_news")
-            .title
-            span.source
-            |  – 
-            span.date
 
     .map
       .map_ui
@@ -149,9 +144,9 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
           label
             .plus
             | Highlight:
-          a#active Very Active
-          a#best 52wk Best
-          a#worst 52wk Worst
+          a(data-val="active") Very Active
+          a(data-val="best") 52wk Best
+          a(data-val="worst") 52wk Worst
           .panel.disabled
             .content.active
               .info Ratio of 
@@ -172,11 +167,11 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
               input
               .slider
               .periods.selector
-                a#p10yr 10yr
-                a#p52wk 52wk
-                a#pYTD YTD
-                a#p1mo 1mo
-                a#p1wk 1wk
+                a(data-val="p10yr") 10yr
+                a(data-val="p52wk") 52wk
+                a(data-val="pYTD") YTD
+                a(data-val="p1mo") 1mo
+                a(data-val="p1wk") 1wk
       ul
     .chart
       .ticks

@@ -51,7 +51,9 @@
         template = new mapper.Template(Details.defaultBindings),
         graph = new mapper.Graph($('.graph', $details), $('.left', $details).width() + 20, opts),
         graphRange = new mapper.GraphRange($('.graph .ui .ranges'), function(id) { _this.trigger('select_range', id); }),
-        news = new mapper.News($('.news', $details));
+        
+        $news = $('.news', $details),
+        news = $news.length == 1 ? new mapper.News($news) : null;
     $('.close', $details).click(function() { _this.trigger('click_close'); });
     
     this.close = function() {
@@ -73,8 +75,10 @@
       if(model) model.on('change', updateQuote);
       updateQuote();
       
-      news.setPending(true);
-      model.acquireNews(function(data) { news.render(data); });// News feed
+      if(news) {
+        news.setPending(true);
+        model.acquireNews(function(data) { news.render(data); });// News feed
+      }
       
       this.updateGraph();
     };
