@@ -26,10 +26,10 @@ body.mobile
       .map_ui
         .sorts.selector
           label Sort By:
-          a#sym Symbol
-          a#chg % Change
-          a#vol Volume
-          a#cap Mkt Cap
+          a(data-val="sym") Symbol
+          a(data-val="chg") & Change
+          a(data-val="vol") Volume
+          a(data-val="cap") Mkt Cap
       .map
         ul
     .details.disabled
