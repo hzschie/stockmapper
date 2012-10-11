@@ -1,6 +1,6 @@
 (function() {
   mapper.Layout = Layout;
-  function Layout(groups, map, chart, inspector, stockDetails) {
+  function Layout(groups, indexDetails, map, chart, inspector, stockDetails) {
     _.extend(this, Backbone.Events);
     var $window = $(window),
         $help = $('.help'),
@@ -109,7 +109,7 @@
     }
     
     function topLine() {
-      return $panel.outerHeight() + 42;
+      return $panel.outerHeight() + 11;
     }
     
     function resize(justLayout) {
@@ -128,11 +128,16 @@
         }, Interval.PRIORITY_LOW);
       
         Interval.callOnce({
-          key:'resize_details',
+          key:'resize_stock_details',
           fn:function() { stockDetails.resize(); }
         }, Interval.PRIORITY_LOW);
         
       }
+      
+      Interval.callOnce({
+        key:'resize_index_details',
+        fn:function() { indexDetails.resize(); }
+      }, Interval.PRIORITY_LOW);
 
       Interval.callOnce({
         key:'resize_map',

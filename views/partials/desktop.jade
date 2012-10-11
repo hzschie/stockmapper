@@ -108,7 +108,6 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
               | )
               .timestamp Last traded: 
                 span.value Sep 24, 5:06PM EDT
-          span.name Amit was here
         .graph
           .ui
             .ranges
@@ -122,15 +121,12 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
               span.time
               | Price: 
               span.price
-              | Volume: 
-              span.volume
           svg
             defs
               linearGradient#fade(gradientTransform="rotate(90)", gradientUnits="userSpaceOnUse", spreadMethod="reflect")
                 stop(offset="21%", stop-color="#FFF", stop-opacity=".09")
                 stop(offset="30%", stop-color="#FFF", stop-opacity="0")
       .right
-        .close
         .values
           dl
             .col

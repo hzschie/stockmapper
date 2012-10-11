@@ -14,7 +14,7 @@
     });
     
     this.setCurrent = function(id) {
-      $next = id == NONE ? null : $('#' + id, $container);
+      var $next = id == NONE ? null : $('#' + id, $container);
       if($current && $next && $current[0] == $next[0]) return $next;
       $current && $current.removeClass('current');
       $current = $next;

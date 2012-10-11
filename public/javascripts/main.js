@@ -9,7 +9,7 @@ mapper.dataReady = function() {
         chart = new mapper.HtmlChart($('.chart')),
         inspector = new mapper.Inspector($('.inspector')),
         stockDetails = new mapper.Details($('#stock_details')),
-        indexDetails = new mapper.Details($('#index_details')),
+        indexDetails = new mapper.Details($('#index_details'), { graphVolume:false }),
         search = new mapper.Search($('.search')),
         lastUpdate = new mapper.GlobalLastUpdate($('#global_last_update'), mapper.stocks),
         viewState = new mapper.ViewState({
@@ -17,7 +17,7 @@ mapper.dataReady = function() {
           defaultSort: mapper.sortFunctions.sym,
           trackedParams: ['filter', 'sort', 'q', 'range']
         }),
-        layout = new mapper.Layout(groups, map, chart, inspector, stockDetails);
+        layout = new mapper.Layout(groups, indexDetails, map, chart, inspector, stockDetails);
     
     function updateView(force) {
       if(viewState.hasChanged('currentGroup') || force) {

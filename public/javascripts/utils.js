@@ -148,6 +148,7 @@ else {
     this.applyBindings = function(bindings, $container, model) {
       if(typeof(bindings) == 'string') bindings = this.getBindings(bindings);
       _.forEach(bindings, function(binding) {
+        if(!binding) return;
         var $field = binding.$ ? $container.find(binding.$) : $container,
             val = (model.get && model.get(binding.field)) || (!model.get && model[binding.field]);
 

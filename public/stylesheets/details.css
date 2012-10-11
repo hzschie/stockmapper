@@ -17,6 +17,18 @@
   background: linear-gradient(to bottom,  rgba(42,42,42,0.99) 0%,rgba(36,36,36,0.95) 23%,rgba(17,17,17,0.99) 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fc2a2a2a', endColorstr='#fc111111',GradientType=0 ); /* IE6-9 */
 }
+
+#index_details {
+  margin-bottom:10px;
+}
+#index_details .graph_area {
+  fill:none;
+}
+#index_details .news {
+  height:226px;
+}
+
+
 .details {
   color:#fff;
   font-size:16px;
@@ -91,12 +103,11 @@
   font-size:12px;
   line-height:16px;
   padding-right: 18px;
-  margin-left: -12px;
+  margin-left: -8px;
 }
 .details .values .col {
   width:25%;
   display:inline-block;
-/*  margin-right:24px;*/
   vertical-align:top;
 }
 .details .values .col:last-child {

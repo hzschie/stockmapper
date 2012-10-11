@@ -49,7 +49,7 @@
         series_type = 'intraday',// 'daily',//
     
         template = new mapper.Template(Details.defaultBindings),
-        graph = new mapper.Graph($('.graph', $details), $('.left', $details).width(), opts),
+        graph = new mapper.Graph($('.graph', $details), $('.left', $details).width() + 20, opts),
         graphRange = new mapper.GraphRange($('.graph .ui .ranges'), function(id) { _this.trigger('select_range', id); }),
         news = new mapper.News($('.news', $details));
     $('.close', $details).click(function() { _this.trigger('click_close'); });

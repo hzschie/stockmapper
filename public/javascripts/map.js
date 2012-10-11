@@ -139,7 +139,7 @@
         iDelay = function(model, i) { return (grid.c(i) + grid.r(i) / grid.rows) * delayMult * sizeMult; },
         xtraDelay = function(extra) { return function(model, i) { return extra + iDelay(model, i); }; };// slow device, make delay 1 sec longer
     function rebuild(collection, options, isNewCollection) {
-      var tt = dd1 = dd2 = Date.now();
+      var tt = Date.now();
       
       var oldGrid, oldRows;
       sizeMult = models.length > 1000 ? 3 : 1;
