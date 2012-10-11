@@ -60,7 +60,6 @@
 
 .graph svg {
   margin-left:-20px;
-  visibility:visible;
 }
 .graph.pending svg {
   visibility:hidden;
