@@ -5,7 +5,8 @@
         $shadows = $(document.createElement('div')).addClass('shadows').appendTo($map),
         grid = null,
         _this = this,
-        getTagHtml = mapper.config.getMapTagHtml || function(model) { return model.get('sym'); };
+        getTagHtml = mapper.config.getMapTagHtml || function(model) { return model.get('sym'); },
+        parentW = $map.parent().width();
         
 
     $map.mouseout(function(event) { 
@@ -49,7 +50,8 @@
     };
     
     this.resize = function() {
-      var newNumCols = Math.floor($map.parent().width() / ($map.children().eq(1).outerWidth() - 1)),
+      parentW = $map.parent().width();
+      var newNumCols = Math.floor(parentW / ($map.children().eq(1).outerWidth() - 1)),
           newNumRows = Math.ceil(models.length / newNumCols);
       grid.redefine(null, newNumCols, newNumRows);
       rebuild();
@@ -67,7 +69,7 @@
       model._map.$shadow = $shadow;
       
       if(!grid) {
-        grid = new mapper.Grid(models.length, $map.width(), $tag.outerWidth() - 1, $tag.outerHeight() - 1, makeCells);
+        grid = new mapper.Grid(models.length, parentW, $tag.outerWidth() - 1, $tag.outerHeight() - 1, makeCells);
         updateBounds();
       }
       
@@ -207,7 +209,7 @@
       grid.n(models.length);
       var bounds = grid.bounds();
       setTimeout(function() {
-        $map.css({ width: bounds.w, height: bounds.h, marginLeft:($map.parent().width() - bounds.w) / 2 });
+        $map.css({ width: bounds.w, height: bounds.h, marginLeft:(parentW - bounds.w) / 2 });
       }, bounds.h >= $map.height() ? 0 : getDelay(null, models.length - 1));
     }
     
