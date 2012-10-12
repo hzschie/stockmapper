@@ -35,6 +35,8 @@
     };
     
     this.getNearestSlice = function(t) {
+      if(!this.data || this.data.length == 0) return null;
+      
       var min = 0,// earliest
           max = this.data.length - 1,// latest
           i = 0;

@@ -58,7 +58,9 @@
           var localX = event.pageX - $svg.offset().left - pad[L],
               time = x.invert(localX),
               slice = series.getNearestSlice(time);
-              
+          
+          if(!slice) return;
+          
           priceGraph.highlight(slice, x);
           hasVolume && volumeGraph.highlight(slice, x);
           
@@ -141,9 +143,9 @@
     };
     
     function prepareIntraday() {
-      var dayOf0 = Math.floor(series.getMin('t') / 8.64e7) * 8.64e7,
+      var dayOf0 = Math.floor((series.getMin('t') || Date.now()) / 8.64e7) * 8.64e7,
           date0 = new Date(dayOf0 + marketHours.t0 * 60000),
-          dayOf1 = Math.floor(series.getMax('t') / 8.64e7) * 8.64e7,
+          dayOf1 = Math.floor((series.getMax('t') || Date.now()) / 8.64e7) * 8.64e7,
           date1 = new Date(dayOf1 + marketHours.t1 * 60000);
 
       var t = dayOf0,
