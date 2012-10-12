@@ -72,6 +72,13 @@ app.get('/datasets/:name', dataRoutes.getDataset);
 app.get('/series/:id', dataRoutes.getTimeSeries);
 app.get('/news/:id', dataRoutes.getNews);
 
+app.get('/scratchpad', function(req, res) {
+  res.render('scratchpad', {
+    groups: groups,
+    stocks: stocks
+  });
+});
+
 app.get('/*', function(req, res) {
   if(!groups || !stocks) {
     // In dynamic mode, if the definitions aren't ready, we wait for them.
