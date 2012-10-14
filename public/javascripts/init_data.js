@@ -117,7 +117,8 @@ $(function() {
       });
 
       // Create the "All" group, if defined
-      if(typeof(mapper.config.allGroup) == 'string') {
+      if(!mapper.config.allGroup) { /* do nothing */ }
+      else if(typeof(mapper.config.allGroup) == 'string') {
         mapper.allGroup = mapper.groups.where({ name:mapper.config.allGroup })[0];
       }
       else {
