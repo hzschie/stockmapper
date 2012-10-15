@@ -5,11 +5,15 @@
     var searchPending = false,
         $input = $('input', $search).on('keydown', keydown).on('focus', focus).on('blur', blur),
         $x = $('.x', $search).on('click', clear),
-        $dropdown = $('.dropdown', $search),
+        $dropdown = $('.search_dropdown', $search),
+        $body = $('body'),
         selection = -1,
         term, inputTerm,
         matches = [],
         _this = this;
+        
+    // Detach $dropdown and re-attach it to body, so that it appears on top
+    $dropdown.appendTo($body);
     
     function search() {
       if(searchPending) return;
@@ -52,7 +56,17 @@
       return false;
     }
     
-    function focus() { if(matches.length) $dropdown.fadeIn(); }
+    function focus() { 
+      if(matches.length) {
+        $dropdown.fadeIn();
+        
+        var pos = $input.show().offset();
+        $dropdown.css({
+          left:pos.left,
+          top:pos.top + 18
+        });
+      }
+    }
     function blur() { $dropdown.fadeOut(); }
     
     function setSelection(_selection) {
@@ -160,7 +174,7 @@
     
     function render() {
       if(matches.length > 0) {
-        $dropdown.fadeIn();
+        focus();
       }
       else {
         $dropdown.fadeOut();

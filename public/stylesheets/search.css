@@ -24,7 +24,8 @@
   top:6px;
   cursor:pointer;
 }
-.search .dropdown {
+.search_dropdown {
+  line-height:20px;
   position:absolute;
   background:rgba(0,0,0,.8);
   border:2px solid #000;
@@ -35,11 +36,11 @@
   margin-top:8px;
 }
 
-.search .dropdown .sym b {
+.search_dropdown .sym b {
   text-decoration:underline;
 }
 
-.search .dropdown .sym {
+.search_dropdown .sym {
   display:inline-block;
   min-width:70px;
   white-space:nowrap;
@@ -47,13 +48,13 @@
   padding-right:8px;
 }
 
-.search .dropdown .code {
+.search_dropdown .code {
   display:inline-block;
   width:60px;
   font-size:13px;
 }
 
-.search .dropdown .name {
+.search_dropdown .name {
   display:inline-block;
   max-width:200px;
   font-size:13px;
@@ -61,15 +62,15 @@
   white-space:nowrap;
   overflow:hidden;
 }
-.search .dropdown > div {
+.search_dropdown > div {
   cursor:pointer;
   padding:0 2px;
   background-color:rgba(128,128,128,0);
 }
-.search .dropdown > div:not(.selected):hover {
+.search_dropdown > div:not(.selected):hover {
   background:rgba(128,128,128,.2);
 }
-.search .dropdown .selected {
+.search_dropdown .selected {
   color:#fff;
   background-color:rgba(128,128,128,.4);
   -webkit-transition:background-color .25s;
