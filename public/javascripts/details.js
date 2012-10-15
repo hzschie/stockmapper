@@ -102,9 +102,10 @@
       });
     };
     
-    this.resize = function() {
+    this.resize = function(explicitW) {
       var w;
-      if($details.is(':visible')) w = $('.left', $details).width();
+      if(explicitW != null) w = explicitW;
+      else if($details.is(':visible')) w = $('.left', $details).width();
       else {
         $details.show();
         w = $('.left', $details).width();

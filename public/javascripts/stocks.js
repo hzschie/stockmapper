@@ -45,6 +45,7 @@
         var _this = this;
         $.getJSON(
           '/news/' + this.id + '?resource=' + this.get('type'),
+          // '/news/' + this.get('sym') + '?resource=' + this.get('type'),
           function(data) {
             data.sort(function(a,b) { return (a.t < b.t) - (a.t > b.t); });
             _this.set({ news:data });

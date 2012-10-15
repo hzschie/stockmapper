@@ -49,8 +49,8 @@
       _this.trigger('inspect_tag', null);
     };
     
-    this.resize = function() {
-      parentW = $map.parent().width();
+    this.resize = function(explicitW) {
+      parentW = explicitW != null ? explicitW : $map.parent().width();
       var newNumCols = Math.floor(parentW / ($map.children().eq(1).outerWidth() - 1)),
           newNumRows = Math.ceil(models.length / newNumCols);
       grid.redefine(null, newNumCols, newNumRows);

@@ -12,7 +12,22 @@ mapper.Mobile.ready = function() {
       map = new mapper.Map($('.map ul')),
       details = new mapper.Details($('.details')),
       
-      $back = $('header .back');
+      $back = $('header .back'),
+      $window = $(window);
+      
+  $window.resize(function() {
+    var w = $window.width();
+    Interval.callOnce({
+      key:'resize_map',
+      fn:function() { map.resize(w); }
+    }, Interval.PRIORITY_LOW);
+    
+    Interval.callOnce({
+      key:'resize_stock_details',
+      fn:function() { details.resize(w); }
+    }, Interval.PRIORITY_LOW);
+  });
+  
       
   var GROUPS_PAGE = 0,
       MEMBERS_PAGE = 1,
