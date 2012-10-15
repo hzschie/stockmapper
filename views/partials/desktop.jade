@@ -137,7 +137,13 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
               dd.volume 123,456
               dt Market Cap:
               dd.market_cap 1.234B
-
+        .news
+          a.article(target="stockmapper_news")
+            .title
+            span.source
+            |  – 
+            span.date
+      
     .map
       .map_ui
         .highlights.selector

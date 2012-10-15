@@ -103,6 +103,10 @@
       else {
         $groups.addClass('dimmed');
         _.forEach(stock.get('groups'), function(group) {
+          if(!group._groupView) {
+            // console.log('Tag missing for group:', group);
+            return;
+          }
           group._groupView.$tag.addClass('search_result');
         });
       }

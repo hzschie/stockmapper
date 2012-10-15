@@ -1,4 +1,7 @@
-var dataDomain = process.env.DATA_DOMAIN = process.env.DATA_DOMAIN || 'nyse';
+var dataDomain = process.env.DATA_DOMAIN;
+if(!dataDomain) {
+  throw new Error('Missing env variable DATA_DOMAIN');
+}
 
 var express = require('express'),
     http = require('http'),
