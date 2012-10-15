@@ -3,7 +3,7 @@ mapper.Mobile = function() {};
 mapper.Mobile.ready = function() {
   var layout = new CardLayout($('.layout')),
       viewState = new mapper.ViewState({
-        defaultSort: mapper.sortFunctions.sym,
+        defaultSort: mapper.sortFunctions.chg,
         trackedParams: ['filter', 'sort', 'q', 'range', 'mobile']
       }),
       groupsView = new mapper.GroupsView($('.groups_view'), mapper.groups),

@@ -15,7 +15,7 @@ mapper.dataReady = function() {
         lastUpdate = new mapper.GlobalLastUpdate($('#global_last_update'), mapper.stocks),
         viewState = new mapper.ViewState({
           defaultGroup: mapper.allGroup,
-          defaultSort: mapper.sortFunctions.sym,
+          defaultSort: mapper.sortFunctions.chg,
           trackedParams: ['filter', 'sort', 'q', 'range']
         }),
         layout = new mapper.Layout(groups, indexDetails, views, map, chart, inspector, stockDetails);
