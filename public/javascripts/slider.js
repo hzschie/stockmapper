@@ -1,14 +1,21 @@
 (function() {
   mapper.Slider = Slider;
+  
+  // Extracts mouse coordinates in a device-dependant way
+  Slider.extractPageX = function(event) {
+    var src = $.browser.touchDevice ? (event.changedTouches || event.originalEvent.changedTouches)[0] : event;
+    return src.pageX;
+  };
+  
   function Slider($container, vMin, vMax, val) {
     _.extend(this, Backbone.Events);
     
     vMin = vMin == null ? 0 : vMin;
     vMax = vMax == null ? 1 : vMax;
     val = val == null ? vMin + .5 * (vMax - vMin) : val;
-    
-    var $track = $('<div class="track"></div>').appendTo($container).click(dragChange),
-        $thumb = $('<div class="thumb"></div>').appendTo($container).mousedown(startDrag),
+
+    var $track = $('<div class="track"></div>').appendTo($container).on($.browser.touchDevice ? 'touchstart' : 'click', dragChange),
+        $thumb = $('<div class="thumb"></div>').appendTo($container).on($.browser.touchDevice ? 'touchstart' : 'mousedown', startDrag),
         
         thumbW = $thumb.width(),
         sliderW = $container.width() - thumbW,
@@ -34,25 +41,35 @@
         isDragged = false;
     function startDrag(event) {
       isDragged = true;
-      localX = event.pageX - $thumb.offset().left;
-      $(document).on('mousemove', dragChange);
-      $(document).on('mouseup', endDrag);
+      localX = Slider.extractPageX(event) - $thumb.offset().left;
+      $(document).on($.browser.touchDevice ? 'touchmove' : 'mousemove', dragChange);
+      $(document).on($.browser.touchDevice ? 'touchend' : 'mouseup', endDrag);
       event.preventDefault();
     }
 
     function dragChange(event) {
-      var mouseX = event.pageX - $container.offset().left - (this == $track[0] ? thumbW/2 : localX);
+      var mouseX = Slider.extractPageX(event) - $container.offset().left - (this == $track[0] ? thumbW/2 : localX);
       val = Math.min(vMax, Math.max(vMin,    vMin + (vMax - vMin) * (mouseX / sliderW)   ));
       update();
-      _this.trigger('change_val', val);
+      event.preventDefault();
+      
+      // Use interval here to allow the slider to move smoothly,
+      // independat of whether the event-listening method takes
+      // a very long time to complete.
+      Interval.callOnce({
+        key: 'trigger_slider_change',
+        fn: function() {
+          _this.trigger('change_val', val);
+        }
+      }, Interval.MID);
     }
 
     function endDrag(event) {
       dragChange(event);
       localX = null;
       isDragged = false;
-      $(document).off('mousemove', dragChange);
-      $(document).off('mouseup', endDrag);
+      $(document).off($.browser.touchDevice ? 'touchmove' : 'mousemove', dragChange);
+      $(document).off($.browser.touchDevice ? 'touchend' : 'mouseup', endDrag);
     }
   }
   

@@ -97,7 +97,8 @@
   width:24px;
   display:inline-block;
   vertical-align: middle;
-  font-size:14px;
+  font-size:13px;
+  line-height:16px;
 }
 .map_ui .highlights .slider {
   display:inline-block;
