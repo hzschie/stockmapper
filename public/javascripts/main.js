@@ -4,7 +4,7 @@ mapper.dataReady = function() {
   $(mapper.isMobile ? mapper.Mobile.ready : function() {
     var groups = new mapper.SmartGroupsView(mapper.groups, $('.panel .groups'), $('.panel .title')),
         sorts = new mapper.SelectorButtons($('.panel .sorts'), function(id) { viewState.setState({ sort:id }); }),
-        views = new mapper.SelectorButtons($('.panel .views'), function(id) { layout.frameView(id); }),
+        views = new mapper.SelectorButtons($('.panel .views'), viewSelected),
         map = new mapper.Map($('.map ul')),
         highlights = new mapper.MapHighlights($('.map .highlights')),
         chart = new mapper.HtmlChart($('.chart')),
@@ -71,16 +71,17 @@ mapper.dataReady = function() {
     
     updateView(true);
     viewState.on('change', function() { updateView(false); });
+    
+    function viewSelected(id) {
+      viewState.setState({ q: null });
+      layout.frameView(id);
+    }
 
     groups.on('select_group', function(group) {
       viewState.setState({ filter: group.get('urlName'), q: null });
     });
     groups.on('inspect_group', function(group, $tag) {
       inspector.inspectGroup(group, $tag);
-    });
-    
-    layout.on('select_view', function(viewName) {
-      viewState.setState({ q: null });
     });
     
     search.on('select_option', function(model) {
