@@ -29,6 +29,7 @@
           .tickPadding(7),
     
         priceGraph = new PriceGraph(svg, pad[L], pad[T], _w - pad[L] - pad[R], priceH, gap),
+        // changeGraph = new ChangeGraph(svg, pad[L], pad[T], _w - pad[L] - pad[R], priceH),
         volumeGraph = hasVolume && new VolumeGraph(svg, pad[L], pad[T] + priceH + gap, _w - pad[L] - pad[R], volH);
         
     this.setWidth = function(_w) {
@@ -38,6 +39,7 @@
       divider1.attr('x2', w - pad[R]);
       x.range([0, innerW]);
       priceGraph.setWidth(innerW);
+      // changeGraph.setWidth(innerW);
       hasVolume && volumeGraph.setWidth(innerW);
       if(series) this.render(series);
     };
@@ -62,6 +64,7 @@
           if(!slice) return;
           
           priceGraph.highlight(slice, x);
+          // changeGraph.highlight(slice, x);
           hasVolume && volumeGraph.highlight(slice, x);
           
           template.applyBindings(bindings, $slice.css({ opacity:1 }), slice);
@@ -71,6 +74,7 @@
         $svg.off('mousemove');
         $slice.css({ opacity:0 });
         priceGraph.highlight(null);
+        // changeGraph.highlight(null);
         hasVolume && volumeGraph.highlight(null);
       }
     );
@@ -117,6 +121,7 @@
       var xd = x.domain(),
           tRange = [ xd[0], xd[xd.length - 1] ];
       priceGraph.render(series, tRange, xt, isWithinMarketHours);
+      // changeGraph.render(series, tRange, xt, isWithinMarketHours);
       hasVolume && volumeGraph.render(series, tRange, xt, isWithinMarketHours);
     };
     
@@ -182,7 +187,87 @@
     };
   }
 
+/* ------------------------ ChangeGraph class ------------------------ */
 
+  function ChangeGraph(svg, x, y, w, h) {
+    var changeAx = svg.append('svg:g')
+          .attr('class', 'y axis'),
+        changePath = svg.append('path')
+          .attr('class', 'graph_path')
+          .attr('stroke-width', 1.5)
+          .attr('transform', 'translate(' + x + ',' + y + ')'),
+        reference = svg.append('line')
+          .attr('class', 'reference')
+          .attr('stroke', '#fff')
+          .attr('stroke-width', 2)
+          .attr('x1', x),
+        highlighter = svg.append('circle')
+          .attr('class', 'ball')
+          .attr('stroke-width', 2)
+          .attr('r', 3),
+      
+        yc = d3.scale.linear().range([h, 0]),
+        
+        price0 = null,
+        yChange = function(slice, i) { return yc( 100 * (slice.price - price0) / price0 ); },
+
+        dLine = d3.svg.line().y(yChange),
+    
+        changeAxis = d3.svg.axis().scale(yc)
+          .ticks(4)
+          .tickPadding(4)
+          .orient('right')
+          .tickFormat(function(val) { return val + '%'; });
+          
+    (this.setWidth = function(w) {
+      changeAx.attr('transform', 'translate(' + (x + w) + ',' + y + ')');
+      reference.attr('x2', x + w);
+      changeAxis.tickSize(-w);
+    })(w);
+
+    this.highlight = function(slice, fx) {
+      if(!slice) return highlighter.style('display', 'none');
+      highlighter
+        .style('display', 'block')
+        .attr('cx', x + fx(slice.t))
+        .attr('cy', y + yChange(slice));
+    };
+
+    this.render = function(series, tRange, xt, isWithinMarketHours) {
+      price0 = series.price_ref != null ? series.price_ref : series.getNearestSlice(tRange[0]).price;
+      
+      var pMin = series.getMin('price', tRange),
+          pMax = series.getMax('price', tRange),
+          cMin = 100 * (pMin - price0) / price0,
+          cMax = 100 * (pMax - price0) / price0,
+          dPad = (cMax - cMin) * .1;
+
+      yc.domain([cMin - dPad, cMax + dPad]);
+      
+      changeAx.call(changeAxis);
+
+      reference
+        .attr('y1', y + yc(0))
+        .attr('y2', y + yc(0));
+        
+      if(series.data.length == 0) return;
+
+      if(series.type == 'intraday') {
+        dLine.defined(isWithinMarketHours);
+      }
+      else {
+        dLine.defined(function(slice) { return slice.t >= tRange[0] && slice.t <= tRange[1]; });
+      }
+
+      var line = dLine.x(xt)(series.data);
+      if(line) {
+        changePath.style('display', 'block').attr('d', line);
+      }
+      else {
+        changePath.style('display', 'none');
+      }
+    };
+  }
   
 /* ------------------------ PriceGraph class ------------------------ */
   
@@ -198,6 +283,7 @@
           .attr('transform', 'translate(' + x + ',' + y + ')'),
         reference = svg.append('line')
           .attr('class', 'reference')
+          .attr('stroke', '#f66')
           .attr('stroke-dasharray', '4 2')
           .attr('x1', x),
         highlighter = svg.append('circle')

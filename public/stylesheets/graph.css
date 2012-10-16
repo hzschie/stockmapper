@@ -80,7 +80,7 @@
   shape-rendering: crispEdges;
 }
 .graph .reference {
-  stroke:#f66;
+/*  stroke:#f66;*/
 }
 
 .graph .axis {
