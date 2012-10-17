@@ -74,6 +74,7 @@ function createGroups(callback) {
       id: 229,
       name: 'NIFTY',
       nickname: 'NIFTY',
+      sym: 'NIFTY',
       category: 'Index',
       type: 'index',
       ids: []
@@ -82,6 +83,7 @@ function createGroups(callback) {
       id: 201,
       name: 'SENSEX',
       nickname: 'SENSEX',
+      sym: 'SENSEX',
       category: 'Index',
       type: 'index',
       ids: []

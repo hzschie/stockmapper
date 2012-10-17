@@ -30,6 +30,9 @@ body {
   font-family:'Open Sans Condensed', 'Helvetica Narrow', 'Arial Narrow', sans-serif;
   font-weight:normal;
 }
+.groups .group .val_right {
+  font-family:'Arial Narrow', 'Helvetica Narrow', sans-serif;
+}
 .groups_view .group label {
   font-family:'Open Sans Condensed', 'Helvetica Narrow', 'Arial Narrow', sans-serif;
   font-weight:normal;

@@ -14,6 +14,7 @@
 .search input {
   width:160px;
   margin:0;
+  line-height:18px;
 }
 .search .x {
   width:20px;

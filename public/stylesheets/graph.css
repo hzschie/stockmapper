@@ -15,30 +15,23 @@
   z-index:1;
   margin-bottom:-6px;
 }
+.graph .compare {
+  height:30px;
+}
 .graph .ui .ranges {
+  font-size:12px;
   color:#ddf;
   white-space:nowrap;
   display:inline-block;
   margin-right:20px;
 }
-.graph .ui .range {
-  color:#ccc;
-  display:inline-block;
+.graph .ui a {
   width:28px;
   text-align:center;
-  cursor:pointer;
   padding:0 1px;
 }
-.graph .ui .range:hover {
-  color:#fff;
-}
-.graph .ui .range.selected {
-  background-color:#fff;
-  color:#000;
-  line-height:14px;
-  padding-top:1px;
+.graph .ui .range.current {
   font-weight:bold;
-  border-radius:12px;
 }
 
 .graph .ui .slice {

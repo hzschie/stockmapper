@@ -50,7 +50,7 @@
     
         template = new mapper.Template(Details.defaultBindings),
         graph = new mapper.Graph($('.graph', $details), $('.left', $details).width() + 20, opts),
-        graphRange = new mapper.GraphRange($('.graph .ui .ranges'), function(id) { _this.trigger('select_range', id); }),
+        graphRange = new mapper.SelectorButtons($('.graph .ui .ranges'), function(id) { _this.trigger('select_range', id); }),
         
         $news = $('.news', $details),
         news = $news.length == 1 ? new mapper.News($news) : null;
@@ -85,7 +85,7 @@
     
     this.setRange = function(range) {
       range = range || 'r1d';
-      graphRange.setRange(range);
+      graphRange.setCurrent(range);
       graph.setRange(range);
 
       if(range == 'r1d') series_type = 'intraday';

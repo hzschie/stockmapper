@@ -37,13 +37,13 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
         span.sym SYM
       .graph
         .ui
-          .ranges
+          .ranges.selector
             | Range:&nbsp;
-            #r1d.range.selected 1d
-            #r5d.range 5d
-            #r3m.range 3m
-            #r1y.range 1y
-            #rMax.range Max
+            a.range(data-val="r1d") 1d
+            a.range(data-val="r5d") 5d
+            a.range(data-val="r3m") 3m
+            a.range(data-val="r1y") 1y
+            a.range(data-val="rMax") Max
           .slice
             span.time
             | Price: 
@@ -113,11 +113,11 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
           .ui
             .ranges
               | Range:&nbsp;
-              #r1d.range.selected 1d
-              #r5d.range 5d
-              #r3m.range 3m
-              #r1y.range 1y
-              #rMax.range Max
+              a.range.selected(data-val="r1d") 1d
+              a.range(data-val="r5d") 5d
+              a.range(data-val="r3m") 3m
+              a.range(data-val="r1y") 1y
+              a.range(data-val="rMax") Max
             .slice
               span.time
               | Price: 
