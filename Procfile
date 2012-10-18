@@ -1,1 +1,1 @@
-web: DYNAMIC=true NODE_ENV=production BUNDLE=true DATA_DOMAIN=blufin node app.js
+web: NODE_ENV=production BUNDLE=true DATA_DOMAIN=foreside WEBSOCKET=true node app.js
