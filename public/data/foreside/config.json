@@ -11,6 +11,6 @@
   "allGroup": {
     "name": "All ETFs",
     "label": "All ETFs",
-    "category": "index"
+    "category": "group"
   }
 }

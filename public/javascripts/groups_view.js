@@ -116,7 +116,7 @@
       width = $groups.width();
       scheme = pickScheme();
       
-      tagW = Math.floor((width - gap * scheme.numCols - gap/2) / scheme.numCols);
+      tagW = Math.min(250, Math.floor((width - gap * scheme.numCols - gap/2) / scheme.numCols));
       $groups.css({ height:(tagH + 2 * pad) * scheme.numRows });
 
       table = scheme.getTable();

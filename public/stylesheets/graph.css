@@ -6,7 +6,11 @@
 .compare .selection {
   display:inline-block;
 }
-.compare .selection > * {
+.compare .selection > div {
+  display:inline-block;
+  margin:0 4px;
+}
+.compare .selection > div span {
   display:inline-block;
   margin:0 4px;
 }
