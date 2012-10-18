@@ -11,7 +11,7 @@ mapper.dataReady = function() {
         inspector = new mapper.Inspector($('.inspector')),
         stockDetails = new mapper.Details($('#stock_details')),
         indexDetails = new mapper.Details($('#index_details'), { graphVolume:false }),
-        search = new mapper.Search($('.search')),
+        search = new mapper.Search($('.panel .search')),
         lastUpdate = new mapper.GlobalLastUpdate($('#global_last_update'), mapper.stocks),
         viewState = new mapper.ViewState({
           defaultGroup: mapper.allGroup,

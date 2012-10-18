@@ -27,3 +27,7 @@
 *   What unit is Market Cap in? (Append Cr)
 
 *   Can we get Average Volume and what's the difference between Volume and TotalVolume (Pending)
+
+
+TODO:
+Generalize "stocks" to "components"

@@ -142,6 +142,7 @@
         hash.volumeUp = 0;
         hash.volumeDown = 0;
         hash.volumeTotal = 0;
+        hash.nickname = hash.nickname || hash.name;
         hash.label = hash.label || hash.nickname;
         hash.urlName = hash.category + ':' + hash.nickname.toLowerCase().replace(/\s|\/|\&/g, '+').replace(/\++/, '+');
         this.set(hash);

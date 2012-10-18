@@ -1,3 +1,17 @@
+.compare {
+  height:30px;
+  font-size:12px;
+}
+.compare .search { margin-left:6px; }
+.compare .selection {
+  display:inline-block;
+}
+.compare .selection > * {
+  display:inline-block;
+  margin:0 4px;
+}
+
+
 .graph {
   position:relative;
   display:block;
@@ -14,9 +28,6 @@
   position:relative;
   z-index:1;
   margin-bottom:-6px;
-}
-.graph .compare {
-  height:30px;
 }
 .graph .ui .ranges {
   font-size:12px;

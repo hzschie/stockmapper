@@ -1,6 +1,7 @@
 var DataSource;
 switch(process.env.DATA_DOMAIN) {
   case 'nyse':
+  case 'foreside':
     DataSource = require(__dirname + '/../lib/yahoo_data_source.js');
     break;
   default:

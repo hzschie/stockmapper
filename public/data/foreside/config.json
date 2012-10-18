@@ -1,0 +1,16 @@
+{
+  "marketHours": {
+    "t0": 570,
+    "t1": 960,
+    "timezone": "EST"
+  },
+  
+  "groupsUrl": "/data/nyse/groups.json",
+  "stocksUrl": "/data/nyse/stocks.json",
+  
+  "allGroup": {
+    "name": "All ETFs",
+    "label": "All ETFs",
+    "category": "index"
+  }
+}

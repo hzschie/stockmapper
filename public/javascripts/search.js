@@ -1,6 +1,7 @@
 (function() {
   mapper.Search = Search;
-  function Search($search) {
+  function Search($search, opts) {
+    opts = opts || {};
     _.extend(this, Backbone.Events);
     var searchPending = false,
         $input = $('input', $search).on('keydown', keydown).on('focus', focus).on('blur', blur),
@@ -60,11 +61,13 @@
       if(matches.length) {
         $dropdown.fadeIn();
         
-        var pos = $input.show().offset();
-        $dropdown.css({
-          left:pos.left,
-          top:pos.top + 18
-        });
+        var pos = $input.show().offset(),
+            css = { left:pos.left };
+        
+        if(opts.dropdownNorth) css['bottom'] = $(window).height() - pos.top + 2 - $(window).scrollTop();
+        else css['top'] = pos.top + 18;
+        
+        $dropdown.css(css);
       }
     }
     function blur() { $dropdown.fadeOut(); }

@@ -106,7 +106,7 @@ $(function() {
 
   // Put stocks into groups
   function tryPopulateGroups(groups) {
-    if(mapper.stocks.length && mapper.groups.length && (!waitForFirstPass || isFirstPassDone)) {
+    if(mapper.stocks.length && (mapper.groups.length || mapper.groupsJson.length == 0) && (!waitForFirstPass || isFirstPassDone)) {
       mapper.groups.forEach(function(group) {
         var members = group.get('members');
         _.each(group.get('ids'), function(id) {

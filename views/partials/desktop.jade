@@ -55,6 +55,14 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
             linearGradient#fade(gradientTransform="rotate(90)", gradientUnits="userSpaceOnUse", spreadMethod="reflect")
               stop(offset="21%", stop-color="#FFF", stop-opacity=".09")
               stop(offset="30%", stop-color="#FFF", stop-opacity="0")
+      //- .compare Compare:
+      //-   .search
+      //-     .field
+      //-       input(placeholder="Search")
+      //-       .x
+      //-     .search_dropdown
+      //-   .selection
+
     .right
       .close
       .values
@@ -111,7 +119,7 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
                 span.value Sep 24, 5:06PM EDT
         .graph
           .ui
-            .ranges
+            .ranges.selector
               | Range:&nbsp;
               a.range.selected(data-val="r1d") 1d
               a.range(data-val="r5d") 5d

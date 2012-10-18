@@ -46,15 +46,19 @@
     var _this = this,
     
         model = null,
-        series_type = 'intraday',// 'daily',//
+        series_type = 'intraday',
     
         template = new mapper.Template(Details.defaultBindings),
+        // compare = new mapper.Compare($('.compare', $details)),
         graph = new mapper.Graph($('.graph', $details), $('.left', $details).width() + 20, opts),
         graphRange = new mapper.SelectorButtons($('.graph .ui .ranges'), function(id) { _this.trigger('select_range', id); }),
         
         $news = $('.news', $details),
         news = $news.length == 1 ? new mapper.News($news) : null;
-    $('.close', $details).click(function() { _this.trigger('click_close'); });
+        
+        $close = $('.close', $details);
+
+    if($close.length == 1) $close.click(function() { _this.trigger('click_close'); });
     
     this.close = function() {
       $details.addClass('disabled');

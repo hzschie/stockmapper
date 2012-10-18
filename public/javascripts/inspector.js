@@ -41,7 +41,10 @@
         bottomConstraint = $window.height(),
         lastPos = {},
         template = new mapper.Template(
-          $.extend(Inspector.defaultBindings, mapper.config.getInspectorBindings(Inspector.defaultBindings))
+          $.extend(
+            Inspector.defaultBindings,
+            mapper.config.getInspectorBindings ? mapper.config.getInspectorBindings(Inspector.defaultBindings) : {}
+          )
         );
         
     this.setBottomConstraint = function(c) {

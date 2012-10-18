@@ -27,7 +27,7 @@
 }
 .search_dropdown {
   line-height:20px;
-  position:absolute;
+  position:fixed;
   background:rgba(0,0,0,.8);
   border:2px solid #000;
   z-index:20;
