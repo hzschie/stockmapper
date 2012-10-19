@@ -5,7 +5,7 @@
     _.extend(this, Backbone.Events);
     var searchPending = false,
         $input = $('input', $search).on('keydown', keydown).on('focus', focus).on('blur', blur),
-        $x = $('.x', $search).on('click', clear),
+        $x = $('.x', $search).on('click', function() { _this.clear(); }),
         $dropdown = $('.search_dropdown', $search),
         $body = $('body'),
         selection = -1,
@@ -15,17 +15,17 @@
         
     // Detach $dropdown and re-attach it to body, so that it appears on top
     $dropdown.appendTo($body);
+
+    this.clear = function() {
+      $input.val('');
+      _this.trigger('commit_option', null);
+      search();
+    };
     
     function search() {
       if(searchPending) return;
       searchPending = true;
       _search();
-    }
-    
-    function clear() {
-      $input.val('');
-      _this.trigger('commit_option', null);
-      search();
     }
     
     function keydown(e) {
@@ -42,11 +42,9 @@
         if($dropdown.is(':visible') && selection != -1) {
           $dropdown.fadeOut();
         }
-        else {
-          if(selection != -1 || (matches[0].model.get('sym').toLowerCase() == term)) {
-            _this.trigger('commit_option', matches[selection == -1 ? 0 : selection].model);
-            blur();
-          }
+        if(selection != -1 || (matches[0].model.get('sym').toLowerCase() == term)) {
+          _this.trigger('commit_option', matches[selection == -1 ? 0 : selection].model);
+          blur();
         }
       }
       else {
