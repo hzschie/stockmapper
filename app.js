@@ -45,7 +45,7 @@ BundleUp(app, __dirname + '/lib/assets', {
   minifyCss: true,
   minifyJs: true
 });
-console.log("process.env = ", process.env);
+if(/true/i.test(process.env.VERBOSE)) console.log("process.env = ", process.env);
 
 
 // DOMAIN SPECIFIC CONFIGURATION
