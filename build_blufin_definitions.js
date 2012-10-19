@@ -3,7 +3,10 @@ var fs = require('fs'),
     flow = require('nimble'),
     ansi = require('ansi');
 
-var urlBase = 'http://46.137.212.140:8080/Service/equities.svc/',
+if(!process.env.DATA_HOST) throw new Error('Missing Environment Variable DATA_HOST (e.g. DATA_HOST=54.251.130.77:8080)');
+
+var verbose = /true/i.test(process.env.VERBOSE),
+    urlBase = 'http://' + process.env.DATA_HOST + '/Service/equities.svc/',
     actions = [],
     groups = {},
     stocks = {},
@@ -39,6 +42,12 @@ else {
 }
     
 function createGroups(callback) {
+  cursor
+    .hex('#00ff00')
+    .bold()
+    .write('Building definitions...\n')
+    .reset();
+    
   request(urlBase + 'GetBlufinIndexList', function(error, response, body) {
     if(error || response.statusCode >= 400) {
       if(error) console.error(error);
@@ -50,14 +59,14 @@ function createGroups(callback) {
     var groupsJson = JSON.parse(body);
     
     // Log
-    cursor.hex('#00ff00').bold().write(groupsJson.length + ' groups\n').reset();
+    verbose && cursor.hex('#00ff00').bold().write(groupsJson.length + ' groups\n').reset();
     
     // Gather required properties for each group and index it by group id
     groupsJson.forEach(function(group, i) {
       var groupId = group.id;// IndexId
       
       // Log
-      cursor
+      verbose && cursor
         .hex('#6666ff').write(String(group.id))
         .hex('#3333aa').write(' (' + group.n + ')\n');
         
@@ -110,7 +119,7 @@ function createStocks(callback) {
         sensexGroup = groups['sensex'];
         
     // Log
-    cursor.hex('#00ff00').bold().write('\n' + stocksRaw.length + ' stocks\n').reset();
+    verbose && cursor.hex('#00ff00').bold().write('\n' + stocksRaw.length + ' stocks\n').reset();
     
     stocksRaw.forEach(function(stock) {
       var sym = stock.s;// ScripId
@@ -124,7 +133,7 @@ function createStocks(callback) {
           isSensex = stock.sensex == 1;
 
       // Log
-      cursor
+      verbose && cursor
         .hex('#6666ff').write('\n' + stock.s)
         .hex('#3333aa').write(' (' + stock.n + '):\n');
 
@@ -135,7 +144,7 @@ function createStocks(callback) {
           group.ids.push(stock.cid);// ScripCode
           
           // Log
-          cursor
+          verbose && cursor
             .hex('#3333aa').write('Add ')
             .hex('#6666ff').write(stock.s)
             .hex('#3333aa').write(' to ')
@@ -145,7 +154,7 @@ function createStocks(callback) {
       
     });
 /*
-    cursor
+    verbose && cursor
       .hex('#6666ff').write('IndexId ' + indexId + ' (' + group.name + ')')
       .hex('#3333aa').write(' ids: ' + group.ids.join(',') + '\n');
 */
@@ -172,7 +181,7 @@ function writeDefinitions(callback) {
   cursor
     .hex('#00ff00')
     .bold()
-    .write('DONE\n')
+    .write('Definitions built successfully!\n')
     .reset();
     
   callback();
