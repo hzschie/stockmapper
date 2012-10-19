@@ -1,1 +1,1 @@
-web: DYNAMIC=true NODE_ENV=production BUNDLE=true DATA_DOMAIN=blufin node app.js
+web: DATA_HOST=54.251.130.77:8080 DYNAMIC=true NODE_ENV=production BUNDLE=true DATA_DOMAIN=blufin node app.js
