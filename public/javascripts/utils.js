@@ -100,7 +100,7 @@ else {
   mapper.Template = Template;
   Template.blankIfNull = function(fn) { return function(val, model) { return val == null ? '' : fn(val, model); }; };
   Template.NaIfNaN = function(fn) { return function(val, model) { return isNaN(val) ? 'N/A' : fn(val, model); }; };
-  Template.postfix = function(fn, postFix) { return function(val, model) { return fn(val, model) + postFix; }; };
+  Template.postfix = function(fn, postFix) { return function(val, model) { return (fn ? fn(val, model) : val) + postFix; }; };
   Template.makeRedOrGreen = function(val, $field) {
     $field.removeClass('red green');
     if(val) $field.addClass(val == 1 ? 'green' : 'red');

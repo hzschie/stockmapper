@@ -18,7 +18,7 @@
       
       { $:'.avg_volume', field:'avgVolume', formatter:Template.commaFormat },
       { $:'.volume', field:'volume', formatter:Template.commaFormat },
-      { $:'.market_cap', field:'marketCap', formatter:Template.metricFormat },
+      { $:'.market_cap', field:'marketCap', formatter:Template.postfix(Template.commaFormat, 'Cr') },// Blufin Specific. Non Should be Template.metricFormat
 
       { $:'.pe', field:'pe', formatter:Template.priceFormat },
       { $:'.pb', field:'pb', formatter:Template.priceFormat },
@@ -37,7 +37,7 @@
       
       { $:'.previous', field:'previous', formatter:Template.priceFormat },
       { $:'.volume', field:'volume', formatter:Template.commaFormat },
-      { $:'.market_cap', field:'marketCap', formatter:Template.metricFormat }
+      { $:'.market_cap', field:'marketCap', formatter:Template.postfix(Template.commaFormat, 'Cr') }// Blufin Specific. Should be Template.metricFormat
     ]
   };
   

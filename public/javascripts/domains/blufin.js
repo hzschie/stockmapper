@@ -4,7 +4,7 @@ mapper.config.getInspectorBindings = function(bindings) {
   _.each(bindings.stock, function(binding) {
     if(binding.$ == '.market_cap') {
       binding.field = 'marketCap';
-      binding.formatter = mapper.Template.commaFormat;
+      binding.formatter = mapper.Template.postfix(mapper.Template.commaFormat, 'Cr');
     }
     if(binding.$ == '.sym') {
       binding.formatter = function(val, $field) {
@@ -23,7 +23,7 @@ mapper.config.getInspectorBindings = function(bindings) {
       { $:'.change .percent', field:'changePct', formatter:mapper.Template.NaIfNaN(mapper.Template.postfix(mapper.Template.changeFormat, '%')) },
       { $:'.previous', field:'previous', formatter:mapper.Template.commaFormat },
       { $:'.volume', field:'volume', formatter:mapper.Template.commaFormat },
-      { $:'.market_cap', field:'marketCap', formatter:mapper.Template.commaFormat }
+      { $:'.market_cap', field:'marketCap', formatter:mapper.Template.postfix(mapper.Template.commaFormat, 'Cr') }
     ])
   };
 };
