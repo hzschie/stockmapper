@@ -12,7 +12,7 @@ mapper.dataReady = function() {
         stockDetails = new mapper.Details($('#stock_details')),
         indexDetails = new mapper.Details($('#index_details'), { graphVolume:false }),
         search = new mapper.Search($('.panel .search')),
-        lastUpdate = new mapper.GlobalLastUpdate($('#global_last_update'), mapper.stocks),
+        lastUpdate = new mapper.GlobalLastUpdate($('#global_last_update'), [mapper.stocks, mapper.groups]),
         viewState = new mapper.ViewState({
           defaultGroup: mapper.allGroup,
           defaultSort: mapper.sortFunctions.chg,

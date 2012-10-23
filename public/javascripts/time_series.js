@@ -8,21 +8,26 @@
         headers = def.headers,
         len = headers.length,
         _this = this;
-    this.data = $.map(this.data, function(row) {
-      output = {};
-      for(var i=0; i < len; i++) {
-        var field = headers[i],
-            val = row[i];
-        output[ field ] = val;
-        
-        if(val != null) {
-          _this[field + '_min'] = ((_this[field + '_min'] == null) ? val : Math.min(_this[field + '_min'], val));
-          _this[field + '_max'] = ((_this[field + '_max'] == null) ? val : Math.max(_this[field + '_max'], val));
-        }
-      }
-      return output;
-    });
+    
     this.type = type;
+    
+    this.data = [];
+    (this.append = function(rawData) {
+      $.each(rawData, function(j, row) {
+        var datum = {};
+        for(var i=0; i < len; i++) {
+          var field = headers[i],
+              val = row[i];
+          datum[ field ] = val;
+
+          if(val != null) {
+            _this[field + '_min'] = ((_this[field + '_min'] == null) ? val : Math.min(_this[field + '_min'], val));
+            _this[field + '_max'] = ((_this[field + '_max'] == null) ? val : Math.max(_this[field + '_max'], val));
+          }
+        }
+        _this.data.push(datum);
+      });
+    })(def.data);
     
     this.getMin = function(field, range) { return getMinOrMax('min', field, range); };
     this.getMax = function(field, range) { return getMinOrMax('max', field, range); };
@@ -50,6 +55,11 @@
         
         if(i > 40) throw new Error('Too much recursion');
       }
+    };
+    
+    this.getTimestamp = function() {
+      var lastSlice = this.data[this.data.length - 1];
+      return lastSlice && lastSlice.t;
     };
 
     function getMinOrMax(minOrMax, field, range) {

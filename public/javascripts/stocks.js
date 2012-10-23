@@ -17,17 +17,20 @@
       },
     
       acquireTimeSeries: function(seriesType, callback) {
-        // If time series is locally cached, return it. TODO: expire the cache
-        if(this.get(seriesType)) return callback(this.get(seriesType));
-      
-        var setter = {},
-            _this = this;
+        var existing = this.get(seriesType),
+            setter = {},
+            _this = this,
+            url = '/series/' + this.id + '?type=' + seriesType + '&resource=' + this.get('type');
+            
+        url += existing ? '&timestamp=' + (existing.getTimestamp() || '') : '';
+        url += '&random=' + Math.floor(Math.random() * 1000);
         $.getJSON(
-          '/series/' + this.id + '?type=' + seriesType + '&resource=' + this.get('type'),
+          url,
           function(data) {
             if(!data) return callback(null);
-          
-            var ts = new mapper.TimeSeries(data, seriesType);
+
+            if(existing) existing.append(data.data);
+            var ts = existing || new mapper.TimeSeries(data, seriesType);
             setter[seriesType] = ts;
         
             if(seriesType == 'intraday') ts.price_ref = _this.get('previous');

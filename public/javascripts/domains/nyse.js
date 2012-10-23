@@ -1,5 +1,5 @@
 mapper.config.getGroupType = function(category, group) {
-  if(cateogry == 'index') { return category; };
+  if(category == 'index') { return category; };
   return 'group';
 };
 

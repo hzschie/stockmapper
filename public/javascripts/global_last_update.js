@@ -1,10 +1,18 @@
 (function() {
   mapper.GlobalLastUpdate = GlobalLastUpdate;
+  // Expects models to be a Collection or an Array of Collections
   function GlobalLastUpdate($container, models) {
     var $value = $('.value', $container),
-        lastUpdate = _.max(models.models, function(m) { return m.get('timestamp'); }).get('timestamp');
+        lastUpdate;
+    
+    $.each(
+      models instanceof Array ? models : [models],
+      function(i, modelCollection) {
+        lastUpdate = _.max(modelCollection.models, function(m) { return m.get('timestamp'); }).get('timestamp');
+        modelCollection.on('change:timestamp', update);
+      }
+    );
     update(null);
-    models.on('change:timestamp', update);
     
     function update(model) {
       if(model) {

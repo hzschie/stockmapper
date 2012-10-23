@@ -102,7 +102,7 @@
     this.updateGraph = function() {
       graph.setPending(true);
       Interval.callOnce(function() {
-          model && model.acquireTimeSeries(series_type, function(series) { graph.render(series); });// Price+Volume graph          
+          model && model.acquireTimeSeries(series_type, function(series) { graph.render(series); });// Price+Volume graph
       });
     };
     
@@ -120,6 +120,13 @@
     
     function updateQuote() {
       if(!model.get('hasData')) return;
+      
+      if(model.hasChanged('timestamp')) {
+        console.log('tstamp');
+        graph.setPending(true);
+        model.acquireTimeSeries(series_type, function(series) { graph.render(series); });// Price+Volume graph
+      }
+      
       template.applyBindings(model.get('type'), $details, model);
     }
   }
