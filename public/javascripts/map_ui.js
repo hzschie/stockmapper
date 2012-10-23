@@ -14,7 +14,7 @@
           period: 'p52wk'
         },
         $('<div class="best performance content">' + $performance.html() + '</div>').appendTo($performance.parent()),
-        $('#best')
+        $('a.best', $container)
       ),
       worst: new PerformanceHighlighter(
         {
@@ -23,7 +23,7 @@
           period: 'p52wk'
         },
         $performance.addClass('worst'),
-        $('#worst')
+        $('a.worst', $container)
       )
     };
     
