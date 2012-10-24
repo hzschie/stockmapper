@@ -1,4 +1,9 @@
 (function() {
+  var getStockUpdateFields = mapper.config.getStockUpdateFields,
+      getGroupUpdateFields = mapper.config.getGroupUpdateFields;
+  if(!getStockUpdateFields) console.warn('Missing mapper.config.getStockUpdateFields');
+  if(!getGroupUpdateFields) console.warn('Missing mapper.config.getGroupUpdateFields');
+      
   var MapperModel = mapper.MapperModel = Backbone.Model.extend(
     {
       defaults: {
@@ -8,6 +13,11 @@
       },
     
       update: function(array, opts) {
+        var hash = MapperModel.unpackUpdate(this.constructor.fields, array);
+        hash['changeDir'] = hash['change'] == 0 ? 0 : (hash['change'] / Math.abs(hash['change']));
+        hash['hasData'] = true;
+        this.set(hash, opts);
+        
         if(this.has('highlightFn')) this.set({ isHighlighted:this.get('highlightFn')(this) }, opts);
       },
     
@@ -62,11 +72,16 @@
     {
       unpackUpdate: function(fields, array) {
         return _.reduce(fields, function(hash, field, i) {
-          if(field) hash[field.name] = field.isNum && array[i] != null ? Number(array[i]) : array[i];
+          if(field) {
+            hash[field.name] = field.formatter ? field.formatter(array[i], field.name, hash) : array[i];
+          }
+          // if(field) hash[field.name] = field.isNum && array[i] != null ? Number(array[i]) : array[i];
           return hash;
         }, {});
       },
-    
+      
+      // Formatters for fields
+      numeric: function(value, field, hash) { return value != null ? Number(value) : value; },
       parseMarketCapString: function(capString) {
         var f = parseFloat(capString),
             multKey = (capString.match(/[MBT]$/) || [])[0];
@@ -95,43 +110,12 @@
           sym: hash.sym || hash.id,
           groups: []
         });
-      },
-    
-      update: function(array, opts) {
-        var hash = MapperModel.unpackUpdate(Stock.fields, array);
-        hash['changeDir'] = hash['change'] == 0 ? 0 : (hash['change'] / Math.abs(hash['change']));
-        hash['changePct'] = parseFloat(hash.changePctString);
-        hash['hasData'] = true;
-        this.set(hash, opts);
-        
-        MapperModel.prototype.update.apply(this, arguments);
       }
     },
   
     // STATIC members
     {
-      fields: [
-        null,
-        null, 
-        { name:'lastTrade', isNum:true },
-        { name:'timestamp', isNum:true },
-        null,
-        { name:'change', isNum:true },
-        { name:'previous', isNum:true },
-        { name:'open', isNum:true },
-        { name:'high', isNum:true },
-        { name:'low', isNum:true },
-        { name:'volume', isNum:true },
-        { name:'changePctString', isNum:false },
-        { name:'marketCap', isNum:false },
-        { name:'avgVolume', isNum:true },
-      
-        { name:'pe', isNum:true },
-        { name:'pb', isNum:true },
-        { name:'ps', isNum:true },
-        { name:'divYield', isNum:true },
-        { name:'roe', isNum:true }
-      ]
+      fields: getStockUpdateFields && getStockUpdateFields()
     }
   );
 
@@ -179,7 +163,7 @@
           Interval.callOnce({ fn:function() {
             _this.resortPending = false;
             _this._resortMembers();
-          }, key:'resort_' + _this.get('urlName') }, Interval.LOW);
+          }, key:'resort_' + _this.get('urlName') }, Interval.FREETIME);
         }
       },
       _resortMembers: function() {
@@ -226,32 +210,12 @@
           volumeDown: volumeDown,
           volumeTotal: volumeTotal
         });
-      },
-    
-      update: function(array) {
-        var hash = MapperModel.unpackUpdate(StockGroup.fields, array);
-        hash['changeDir'] = hash['change'] == 0 ? 0 : (hash['change'] / Math.abs(hash['change']));
-        hash['changePct'] = parseFloat(hash.changePctString);
-        hash['hasData'] = true;
-        this.set(hash);
-        
-        MapperModel.prototype.update.apply(this, arguments);
       }
     },
   
     // STATIC members
     {
-      fields: [
-        null,
-        null, 
-        { name:'value', isNum:true },
-        { name:'timestamp', isNum:true },
-        { name:'previous', isNum:true },
-        { name:'change', isNum:true },
-        { name:'volume', isNum:true },
-        { name:'changePctString', isNum:false },
-        { name:'marketCap', isNum:true }
-      ]
+      fields: getGroupUpdateFields && getGroupUpdateFields()
     }
   );
 

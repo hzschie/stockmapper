@@ -16,8 +16,7 @@
       }}
     ],
     index: [
-      { $:'.value', field:'value', formatter:mapper.Template.blankIfNull(mapper.Template.commaFormat) },
-      // { $:'.change', field:'changePct', formatter:mapper.Template.blankIfNull(mapper.Template.postfix(mapper.Template.changeFormat, '%')) },
+      { $:'.value', field:'lastTrade', formatter:mapper.Template.blankIfNull(mapper.Template.commaFormat) },
       { $:'.change', field:'change', formatter:mapper.Template.blankIfNull(mapper.Template.changeFormat) },
       { $:null, field:'changePct', formatter:function(changePct, $container) {
         if(changePct == null) return;

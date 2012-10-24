@@ -16,10 +16,12 @@ var dataSource = new DataSource(function(data) {
 
 exports.getTimeSeries = function(req, res) {
   req.query.id = req.params.id;
+  if(!dataSource.getTimeSeries) return res.json(null);
   dataSource.getTimeSeries(req.query, function(data) { res.json(data); });
 };
 exports.getNews = function(req, res) {
   req.query.id = req.params.id;
+  if(!dataSource.getNews) return res.json([]);
   dataSource.getNews(req.query, function(data) { res.json(data); });
 };
 exports.getDataset = function(req, res) {

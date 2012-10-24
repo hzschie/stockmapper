@@ -1,3 +1,41 @@
+/* Mapping of Array positions to attributes that get applied to instances of Stock on data updates */
+mapper.config.getStockUpdateFields = function() { return [
+  null,
+  null, 
+  { name:'lastTrade' },
+  { name:'timestamp' },
+  null,
+  { name:'change' },
+  { name:'previous' },
+  { name:'open' },
+  { name:'high' },
+  { name:'low' },
+  { name:'volume' },
+  { name:'changePct' },
+  { name:'marketCap' },
+  { name:'avgVolume' },
+
+  { name:'pe' },
+  { name:'pb' },
+  { name:'ps' },
+  { name:'divYield' },
+  { name:'roe' }
+]; };
+
+/* Mapping of Array positions to attributes that get applied to instances of StockGroup on data updates */
+mapper.config.getGroupUpdateFields = function() { return [
+  null,
+  null, 
+  { name:'lastTrade' },
+  { name:'timestamp' },
+  { name:'previous' },
+  { name:'change' },
+  { name:'volume' },
+  { name:'changePct' },
+  { name:'marketCap' }
+]; };
+
+
 mapper.config.getGroupType = function(category, group) { return category == 'Index' ? 'index' : 'group'; };
 
 mapper.config.getInspectorBindings = function(bindings) {
@@ -17,7 +55,7 @@ mapper.config.getInspectorBindings = function(bindings) {
     index: bindings.group.concat([
       { $:'.category', field:'category', formatter:function(val) { return 'Stocks by ' + mapper.capitalize(val); } },
       { $:'.label', field:'name' },
-      { $:'.last_trade', field:'value', formatter:mapper.Template.commaFormat },
+      { $:'.last_trade', field:'lastTrade', formatter:mapper.Template.commaFormat },
       { $:'.change', field:'changeDir', formatter:mapper.Template.makeRedOrGreen },
       { $:'.change .amount', field:'change', formatter:mapper.Template.changeFormat },
       { $:'.change .percent', field:'changePct', formatter:mapper.Template.NaIfNaN(mapper.Template.postfix(mapper.Template.changeFormat, '%')) },
@@ -50,11 +88,12 @@ mapper.config.getGroupTagHtml = function(group, $container) {
       '<label>', group.get('label'), '</label>'
     ].join('');
 };
+
 /*
 mapper.config.getGroupBindings = function(bindings) {
   return {
     index: [
-      { $:'.value', field:'value', formatter:mapper.Template.blankIfNull(mapper.Template.commaFormat) },
+      { $:'.value', field:'lastTrade', formatter:mapper.Template.blankIfNull(mapper.Template.commaFormat) },
       // { $:'.change', field:'changePct', formatter:mapper.Template.blankIfNull(mapper.Template.postfix(mapper.Template.changeFormat, '%')) },
       { $:'.change', field:'change', formatter:mapper.Template.blankIfNull(mapper.Template.changeFormat) },
       { $:null, field:'changePct', formatter:function(changePct, $container) {

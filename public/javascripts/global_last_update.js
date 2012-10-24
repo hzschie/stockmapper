@@ -8,7 +8,8 @@
     $.each(
       models instanceof Array ? models : [models],
       function(i, modelCollection) {
-        lastUpdate = _.max(modelCollection.models, function(m) { return m.get('timestamp'); }).get('timestamp');
+        var mostRecentlyUpdated = _.max(modelCollection.models, function(m) { return m.get('timestamp'); });
+        lastUpdate = mostRecentlyUpdated && mostRecentlyUpdated.get('timestamp');
         modelCollection.on('change:timestamp', update);
       }
     );
@@ -26,7 +27,10 @@
           $container.css({ opacity:1 });
         }
       }, Interval.LOW);
-      $value.text(mapper.Template.timestamp(lastUpdate) + ' ' + mapper.config.marketHours.timezone);
+      
+      if(lastUpdate) {
+        $value.text(mapper.Template.timestamp(lastUpdate) + ' ' + mapper.config.marketHours.timezone);
+      }
     }
   }
 })();

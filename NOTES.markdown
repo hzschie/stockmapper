@@ -17,6 +17,7 @@ http://www.yqlblog.net/blog/2009/06/02/getting-stock-information-with-yql-and-op
 http://code.google.com/p/yahoo-finance-managed/wiki/csvHistQuotesDownload and http://cliffngan.net/a/13
 YA csv module: https://github.com/koles/ya-csv/blob/master/lib/ya-csv.js
 NYSE stocks CSV: http://www.nyse.com/indexes/nyaindex.csv
+NASDAQ FTP with symbol lists: ftp.nasdaqtrader.com
 Quirksmode: http://www.quirksmode.org/css/contents.html
 GitHub deploy keys: https://help.github.com/articles/managing-deploy-keys
 Google pagespeed: https://developers.google.com/speed/pagespeed/
