@@ -20,138 +20,17 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
     .title
       
   
-  #stock_details.details.disabled
-    .left
-      .header
-        .quote
-          .last_trade 123.45
-          .change
-            span.amount +12.34
-            | &nbsp;(
-            span.percent 1.23%
-            | )
-            .timestamp Last traded: 
-              span.value Sep 24, 5:06PM EDT
-        span.name Amit was here
-        |  
-        span.sym SYM
-      .graph
-        .ui
-          .ranges.selector
-            | Range:&nbsp;
-            a.range(data-val="r1d") 1d
-            a.range(data-val="r5d") 5d
-            a.range(data-val="r3m") 3m
-            a.range(data-val="r1y") 1y
-            a.range(data-val="rMax") Max
-          .slice
-            span.time
-            | Price: 
-            span.price
-            | Volume: 
-            span.volume
-        svg
-          defs
-            linearGradient#fade(gradientTransform="rotate(90)", gradientUnits="userSpaceOnUse", spreadMethod="reflect")
-              stop(offset="21%", stop-color="#FFF", stop-opacity=".09")
-              stop(offset="30%", stop-color="#FFF", stop-opacity="0")
-      //- .compare Compare:
-      //-   .search
-      //-     .field
-      //-       input(placeholder="Search")
-      //-       .x
-      //-     .search_dropdown
-      //-   .selection
-
-    .right
-      .close
-      .values
-        dl
-          .col
-            dt Open:
-            dd.open 12.34
-            dt High:
-            dd.high 12.34
-            dt Low:
-            dd.low 12.34
-          .col
-            dt Avg. Vol.:
-            dd.avg_volume 123,456
-            dt Volume:
-            dd.volume 123,456
-            dt Mkt. Cap:
-            dd.market_cap 1.234B
-          .col
-            dt Div/Yield:
-            dd.div_yield
-            dt ROE:
-            dd.roe
-          .col
-            dt P/E:
-            dd.pe
-            dt P/B:
-            dd.pb
-            dt P/S:
-            dd.ps
-      .news
-        a.article(target="stockmapper_news")
-          .title
-          span.source
-          |  – 
-          span.date
+  opts = { id: 'stock_details', closeable: true }
+  include details
 
   .layout
     .help
       .close
       include help
 
-    #index_details.details.disabled
-      .left
-        .header
-          .quote
-            .last_trade 123.45
-            .change
-              span.amount +12.34
-              | &nbsp;(
-              span.percent 1.23%
-              | )
-              .timestamp Last traded: 
-                span.value Sep 24, 5:06PM EDT
-        .graph
-          .ui
-            .ranges.selector
-              | Range:&nbsp;
-              a.range.selected(data-val="r1d") 1d
-              a.range(data-val="r5d") 5d
-              a.range(data-val="r3m") 3m
-              a.range(data-val="r1y") 1y
-              a.range(data-val="rMax") Max
-            .slice
-              span.time
-              | Price: 
-              span.price
-          svg
-            defs
-              linearGradient#fade(gradientTransform="rotate(90)", gradientUnits="userSpaceOnUse", spreadMethod="reflect")
-                stop(offset="21%", stop-color="#FFF", stop-opacity=".09")
-                stop(offset="30%", stop-color="#FFF", stop-opacity="0")
-      .right
-        .values
-          dl
-            .col
-              dt Previous Close:
-              dd.previous 123,456
-              dt Volume:
-              dd.volume 123,456
-              dt Mkt. Cap:
-              dd.market_cap 1.234B
-        .news
-          a.article(target="stockmapper_news")
-            .title
-            span.source
-            |  – 
-            span.date
-      
+    opts = { id: 'index_details', ro_volume: false, name_in_header: false }
+    include details
+
     .map
       .map_ui
         .highlights.selector

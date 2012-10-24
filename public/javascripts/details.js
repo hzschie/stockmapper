@@ -1,4 +1,8 @@
 (function() {
+  // Configurable Stuff:
+  var timezone = mapper.config.marketHours.timezone,
+      getDetailsBindings = mapper.config.getDetailsBindings;
+  
   mapper.Details = Details;
   var Template = mapper.Template;
   Details.defaultBindings = {
@@ -6,7 +10,7 @@
       { $:'.sym', field:'sym' },
       { $:'.name', field:'name' },
       { $:'.last_trade', field:'lastTrade', formatter:Template.priceFormat },
-      { $:'.timestamp .value', field:'timestamp', formatter:Template.postfix(Template.timestamp, ' ' + mapper.config.marketHours.timezone) },
+      { $:'.timestamp .value', field:'timestamp', formatter:Template.postfix(Template.timestamp, ' ' + timezone) },
 
       { $:'.change', field:'changeDir', formatter:Template.makeRedOrGreen },
       { $:'.change .amount', field:'change', formatter:Template.changeFormat },
@@ -18,18 +22,12 @@
       
       { $:'.avg_volume', field:'avgVolume', formatter:Template.commaFormat },
       { $:'.volume', field:'volume', formatter:Template.commaFormat },
-      { $:'.market_cap', field:'marketCap', formatter:Template.postfix(Template.commaFormat, 'Cr') },// Blufin Specific. Non Should be Template.metricFormat
-
-      { $:'.pe', field:'pe', formatter:Template.priceFormat },
-      { $:'.pb', field:'pb', formatter:Template.priceFormat },
-      { $:'.ps', field:'ps', formatter:Template.priceFormat },
-      { $:'.div_yield', field:'divYield', formatter:Template.priceFormat },
-      { $:'.roe', field:'roe', formatter:Template.priceFormat }
+      { $:'.market_cap', field:'marketCap', formatter:Template.metricFormat }
     ],
     index: [
       { $:'.name', field:'name' },
       { $:'.last_trade', field:'lastTrade', formatter:Template.priceFormat },
-      { $:'.timestamp .value', field:'timestamp', formatter:Template.postfix(Template.timestamp, ' ' + mapper.config.marketHours.timezone) },
+      { $:'.timestamp .value', field:'timestamp', formatter:Template.postfix(Template.timestamp, ' ' + timezone) },
       
       { $:'.change', field:'changeDir', formatter:Template.makeRedOrGreen },
       { $:'.change .amount', field:'change', formatter:Template.changeFormat },
@@ -37,7 +35,8 @@
       
       { $:'.previous', field:'previous', formatter:Template.priceFormat },
       { $:'.volume', field:'volume', formatter:Template.commaFormat },
-      { $:'.market_cap', field:'marketCap', formatter:Template.postfix(Template.commaFormat, 'Cr') }// Blufin Specific. Should be Template.metricFormat
+      { $:'.market_cap', field:'marketCap', formatter:Template.metricFormat }
+      // { $:'.market_cap', field:'marketCap', formatter:Template.postfix(Template.commaFormat, 'Cr') }// Blufin Specific. Should be Template.metricFormat
     ]
   };
   
@@ -48,7 +47,12 @@
         model = null,
         series_type = 'intraday',
     
-        template = new mapper.Template(Details.defaultBindings),
+        template = new mapper.Template(
+          $.extend(
+            Details.defaultBindings,
+            getDetailsBindings ? getDetailsBindings(Details.defaultBindings) : {}
+          )
+        ),
         // compare = new mapper.Compare($('.compare', $details)),
         graph = new mapper.Graph($('.graph', $details), $('.left', $details).width() + 20, opts),
         graphRange = new mapper.SelectorButtons($('.graph .ui .ranges'), function(id) { _this.trigger('select_range', id); }),
@@ -125,6 +129,9 @@
         graph.setPending(true);
         model.acquireTimeSeries(series_type, function(series) { graph.render(series); });// Price+Volume graph
       }
+      
+      $details.find('.content').removeClass('current');
+      $details.find('.' + model.get('type')).addClass('current');
       
       template.applyBindings(model.get('type'), $details, model);
     }

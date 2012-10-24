@@ -1,0 +1,79 @@
+.details.disabled(id=opts.id)
+  .left
+    .header
+      .quote
+        .last_trade 123.45
+        .change
+          span.amount +12.34
+          | &nbsp;(
+          span.percent 1.23%
+          | )
+          .timestamp Last traded: 
+            span.value Sep 24, 5:06PM EDT
+      if opts.name_in_header != false
+        span.name Amit was here
+        |  
+        span.sym SYM
+    .graph
+      .ui
+        .ranges.selector
+          | Range:&nbsp;
+          a.range(data-val="r1d") 1d
+          a.range(data-val="r5d") 5d
+          a.range(data-val="r3m") 3m
+          a.range(data-val="r1y") 1y
+          a.range(data-val="rMax") Max
+        .slice
+          span.time
+          | Price: 
+          span.price
+          if opts.ro_volume != false
+            | Volume: 
+            span.volume
+      svg
+        defs
+          linearGradient#fade(gradientTransform="rotate(90)", gradientUnits="userSpaceOnUse", spreadMethod="reflect")
+            stop(offset="21%", stop-color="#FFF", stop-opacity=".09")
+            stop(offset="30%", stop-color="#FFF", stop-opacity="0")
+    //- .compare Compare:
+    //-   .search
+    //-     .field
+    //-       input(placeholder="Search")
+    //-       .x
+    //-     .search_dropdown
+    //-   .selection
+
+  .right
+    if opts.closeable
+      .close
+    .values
+      dl.content.index
+        .col
+          dt Previous Close:
+          dd.previous 123,456
+          dt Volume:
+          dd.volume 123,456
+          dt Mkt. Cap:
+          dd.market_cap 1.234B
+      dl.content.stock
+        block details_stock_values
+          .col
+            dt Open:
+            dd.open 12.34
+            dt High:
+            dd.high 12.34
+            dt Low:
+            dd.low 12.34
+          .col
+            dt Avg. Vol.:
+            dd.avg_volume 123,456
+            dt Volume:
+            dd.volume 123,456
+            dt Mkt. Cap:
+            dd.market_cap 1.234B
+    .news
+      a.article(target="stockmapper_news")
+        .title
+        span.source
+        |  – 
+        span.date
