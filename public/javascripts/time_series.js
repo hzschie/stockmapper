@@ -13,13 +13,20 @@
     
     this.data = [];
     (this.append = function(rawData) {
+      // If the server didn't respect the timestamp param to 
+      // return data AFTER some date, and instead returned the
+      // full set, we have to clear all the data.
+      if(rawData.length && (rawData[0][0] < _this.t_max)) {
+        this.data = [];
+      }
+      
       $.each(rawData, function(j, row) {
         var datum = {};
         for(var i=0; i < len; i++) {
           var field = headers[i],
               val = row[i];
           datum[ field ] = val;
-
+          
           if(val != null) {
             _this[field + '_min'] = ((_this[field + '_min'] == null) ? val : Math.min(_this[field + '_min'], val));
             _this[field + '_max'] = ((_this[field + '_max'] == null) ? val : Math.max(_this[field + '_max'], val));
