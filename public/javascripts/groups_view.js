@@ -1,7 +1,9 @@
 (function() {
   GroupsView.defaultBindings = {
     group: [
-      { $:'.counts', field:'upsAndDowns', formatter:function(counts) { return '+' + counts[0] + '-' + counts[1]; } },
+      { $:'.counts', field:'upsAndDowns', formatter:function(counts) {
+        return '<span class="up">' + counts[0] + '</span><span class="dn">' + counts[1] + '</span>';
+      } },
       { $:null, field:'upsAndDowns', formatter:function(counts, $container, group) {
         var fraction = !counts[1] ? (counts[0] && 1) : (counts[0]/counts[1] - 1);
         // var fraction = 2*counts[0]/(counts[0]+counts[1])-1;
@@ -75,7 +77,8 @@
     $groups.show();
     var width,
         gap = 6,
-        pad = 3,
+        padX = 1,
+        padY = 3,
         line = 1,
         tagH = 15,
         tagW = null,
@@ -120,7 +123,7 @@
       scheme = pickScheme();
       
       tagW = Math.min(250, Math.floor((width - gap * scheme.numCols - gap/2) / scheme.numCols));
-      $groups.css({ height:(tagH + 2 * pad) * scheme.numRows });
+      $groups.css({ height:(tagH + 2 * padY) * scheme.numRows });
 
       table = scheme.getTable();
       for(var r = 0; r < scheme.numRows; r++) {
@@ -184,11 +187,11 @@
       }
       
       $tag.css({
-        width: tagW + (scheme.shouldExtend(group, c+1, r) ? gap/2 - line : 0) + (scheme.shouldExtend(group, c-1, r) ? gap/2 : 0) - pad*2,
-        height: tagH + (scheme.shouldExtend(group, c, r+1) ? gap/2 - line : 0) + (scheme.shouldExtend(group, c, r-1) ? gap/2 : 0) - pad*2,
+        width: tagW + (scheme.shouldExtend(group, c+1, r) ? gap/2 - line : 0) + (scheme.shouldExtend(group, c-1, r) ? gap/2 : 0) - padX*2,
+        height: tagH + (scheme.shouldExtend(group, c, r+1) ? gap/2 - line : 0) + (scheme.shouldExtend(group, c, r-1) ? gap/2 : 0) - padY*2,
         left: c * (tagW + gap) + (scheme.shouldExtend(group, c-1, r) ? 0 : gap/2),
         top: r * (tagH + gap) + (scheme.shouldExtend(group, c, r-1) ? 0 : gap/2),
-        padding: pad
+        padding: padY + 'px ' + padX + 'px'
       });
     }
     

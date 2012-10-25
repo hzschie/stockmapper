@@ -131,6 +131,7 @@
   line-height:14px;
   opacity:.8;
   position:relative;
+  padding-left:1px;
 }
 .groups .group .val_right {
   line-height:16px;
@@ -144,6 +145,14 @@
 .groups .group .val_right > * {
   display:inline-block;
   margin-left:5px;
+}
+.groups .group .val_right .up, .groups .group .val_right .dn {
+  background:transparent url('/images/sprites.png?10252012') no-repeat scroll -6px -78px;
+  margin-left:4px;
+  padding-left:6px;
+}
+.groups .group .val_right .dn {
+  background-position:-6px -97px;
 }
 .groups .category {
   font-size:14px;
@@ -210,4 +219,25 @@
   line-height:18px;
   margin-right:2px;
   margin-left:4px;
+}
+.groups_view .group .val_right .up, .groups_view .group .val_right .dn {
+  position:relative;
+  padding-left:14px;
+}
+.groups_view .group .val_right .up:after, .groups_view .group .val_right .dn:after {
+  background:transparent url('/images/mobile/up_arrow.png?XXX10252012') no-repeat scroll left top;
+  background-size:100%;
+  width:3px;
+  height:14px;
+  content:'';
+  position:absolute;
+  left:0px;
+  top:3px;
+  margin-left:4px;
+  padding-left:6px;
+}
+.groups_view .group .val_right .dn:after {
+  background:transparent url('/images/mobile/dn_arrow.png?XXX10252012') no-repeat scroll left top;
+  background-size:100%;
+  top:3px;
 }
