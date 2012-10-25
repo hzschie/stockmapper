@@ -69,7 +69,9 @@ function rmNonBundled(callback) {
     'public/images/psd',
     
     'public/data/nyse',
+    'public/data/foreside',
     'views/nyse.jade',
+    'views/foreside.jade',
     'lib/yahoo_data_source.js',
     'lib/assets.js'
   ];
@@ -95,32 +97,6 @@ function prepareJade(callback) {
   console.log('embedding ' + bundledCss + ' and ' + bundledJs);
   content = content.replace(/\!\= renderStyles\(\)/, 'link(rel="stylesheet", href="/generated/bundle/' + bundledCss + '")');
   content = content.replace(/\!\= renderJs\(\)/, 'script(type="text/javascript", src="/generated/bundle/' + bundledJs + '")');
-  
-  var split = content.split('\n'),
-      iGaq = -1, iGaq0, iGaq1;
-  for(var i=0; i < split.length; i++) {
-    if(/var _gaq/.test(split[i])) {
-      iGaq = i;
-      break;
-    }
-  }
-  if(iGaq > -1) {
-    while(--iGaq > 0) {
-      if((/script\(/).test(split[iGaq])) {
-        iGaq0 = iGaq;
-        break;
-      }
-    }
-    while(++iGaq < split.length) {
-      if((/\(\);/).test(split[iGaq])) {
-        iGaq1 = iGaq;
-        break;
-      }
-    }
-    split.splice(iGaq0, iGaq1 - iGaq0 + 1);
-    
-    content = split.join('\n');
-  }
   
   fs.writeFileSync(view, content, 'utf8');
   

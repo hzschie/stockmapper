@@ -71,7 +71,6 @@
     
     this.query = function(_model) {
       if(model) model.off('change', updateQuote);
-      else if(_model) this.trigger('open');
       
       model = _model;
       if(!model) {
@@ -79,6 +78,7 @@
         return;
       }
       $details.removeClass('disabled');
+      this.trigger('open');
       
       if(model) model.on('change', updateQuote);
       updateQuote();

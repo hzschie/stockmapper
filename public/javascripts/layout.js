@@ -31,8 +31,8 @@
       }, 500);
     });
     
-    stockDetails.on('open', function() { inspector.setBottomConstraint($window.height() - $stockDetails.outerHeight()); });
-    stockDetails.on('close', function() { inspector.setBottomConstraint($window.height()); });
+    stockDetails.on('open', updateBottomConstraint);
+    stockDetails.on('close', updateBottomConstraint);
     
 
     Layout.toggleHelp = function() {
@@ -94,6 +94,8 @@
         $currentView = _$currentView;
         viewSelector.setCurrent(view);
       }
+      
+      updateBottomConstraint();
     }
     
     function scrollTo(y) {
@@ -155,7 +157,11 @@
         fn:function() { chart.resize(); }
       }, Interval.PRIORITY_LOW);
       
-      inspector.setBottomConstraint($window.height() - ($stockDetails.is(':visible') ? $stockDetails.outerHeight() : 0));
+      updateBottomConstraint();
+    }
+    
+    function updateBottomConstraint() {
+      inspector.setBottomConstraint($window.height() - ($stockDetails.is('.disabled') ? 0 : $stockDetails.outerHeight()));
     }
     
     

@@ -104,6 +104,7 @@
 }
 
 .chart .advances, .chart .declines {
+  z-index:2;
   pointer-events:none;
   top:65px;
   color: #76f9fb;

@@ -19,7 +19,7 @@ server.listen(process.env.PORT || 3000);
 if(/true/i.test(process.env.WEBSOCKET)) {
   io = require('socket.io').listen(server, {
     'log level': 0,
-    // 'transports': ['xhr-polling'],
+    'transports': ['xhr-polling'],
     'polling duration': 10,
     'browser client minification': true
   });

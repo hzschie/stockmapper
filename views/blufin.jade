@@ -94,3 +94,15 @@ block append mobile_inspector_content
         dd.volume_down.red 123,456
         dt Vol. Total:
         dd.volume_total 123,456
+
+block analytics_code
+  script(type='text/javascript')
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30725697-1']);
+    _gaq.push(['_setDomainName', 'blufin.in']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
