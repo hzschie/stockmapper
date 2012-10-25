@@ -1,12 +1,14 @@
 var fs = require('fs'),
     request = require('request'),
     csv = require('ya-csv'),
+    flow = require('nimble'),
     ansi = require('ansi'),
     cursor = ansi(process.stdout);
 
 // "NAME","TICKER","COUNTRY","ICB","INDUS","SUP SEC","SEC","SUB SEC"
 var url = null,//'http://www.nyse.com/indexes/nyaindex.csv';
-    filename = __dirname + '/public/data/nyse/nya.csv',
+    nyaFile = __dirname + '/public/data/nyse/nya.csv',
+    spxFile = __dirname + '/public/data/nyse/spx.csv',
 
     stocks = {
       headers: ['id', 'name'],
@@ -14,6 +16,8 @@ var url = null,//'http://www.nyse.com/indexes/nyaindex.csv';
     },
     groups = [],
     groupsTable = {},
+    
+    spxStocks = [],
 
     regions = {
       'United States': 'United States',
@@ -53,25 +57,45 @@ var url = null,//'http://www.nyse.com/indexes/nyaindex.csv';
       'Argentina': 'Latin America',
       'Hong Kong': 'Asia/Pacific',
       'Israel': 'MidEast/Africa'
-    };    
-if(url) {
-  request(url, function(error, response, body) {
-    if(error || response.statusCode >= 400) {
-      if(error) console.error(error);
-      else console.error("Can't get NYA csv. Response status code is " + response.statusCode + '. Url: ' + url);
-      return;
-    }
-    parseNyaCsv(body.replace(/^.*\n/, ''));
+    };
+    
+flow.series([prepareSpxList, buildDefinitions]);
+
+function prepareSpxList(callback) {
+  // Prepare SPX members
+  var spxReader = csv.createCsvFileReader(spxFile, { 'separator': '\t', columnsFromHeader: true });
+  spxReader.on('data', function(componentRow) {
+    spxStocks.push(componentRow['Constituent Symbol']);
+  });
+  spxReader.on('end', function() {
+    callback();
   });
 }
-else if(filename) {
-  parseNyaCsv(fs.readFileSync(filename, 'utf8').replace(/^.*\n/, ''));
+
+function buildDefinitions(callback) {
+  // Load and parse stock lists
+  if(url) {
+    request(url, function(error, response, body) {
+      if(error || response.statusCode >= 400) {
+        if(error) console.error(error);
+        else console.error("Can't get NYA csv. Response status code is " + response.statusCode + '. Url: ' + url);
+        return;
+      }
+      parseNyaCsv(body.replace(/^.*\n/, ''));
+      callback();
+    });
+  }
+  else if(nyaFile) {
+    parseNyaCsv(fs.readFileSync(nyaFile, 'utf8').replace(/^.*\n/, ''));
+    callback();
+  }
 }
 
 function parseNyaCsv(stocksCsv) {
   var reader = csv.createCsvStreamReader(null, { columnsFromHeader: true }),
       countries = {},
-      sectors = {};
+      sectors = {},
+      spx = null;
   reader.on('data', function(stockRaw) {
     var sym = stockRaw.TICKER.replace('/', '-'),
         sector = getOrCreateGroup('sector', stockRaw.INDUS),
@@ -79,15 +103,20 @@ function parseNyaCsv(stocksCsv) {
         
     if(sector) sector.ids.push(sym);
     if(country) country.ids.push(sym);
+    if(spxStocks.indexOf(sym) > -1) {
+      spx = spx || getOrCreateGroup('Index', 'S&P 500', 'index', '^GSPC');
+      spx.ids.push(sym);
+    }
     
     stocks.data.push([sym, stockRaw.NAME]);
   });
   reader.parse(stocksCsv);
+
   fs.writeFileSync(__dirname + '/public/data/nyse/groups.json', JSON.stringify(groups));
   fs.writeFileSync(__dirname + '/public/data/nyse/stocks.json', JSON.stringify(stocks));
 }
 
-function getOrCreateGroup(category, name) {
+function getOrCreateGroup(category, name, type, id) {
   if(category == 'region') name = regions[name];
   if(!name || name == ',') return null;
   
@@ -101,21 +130,9 @@ function getOrCreateGroup(category, name) {
       ids: []
     };
     
-    // if(category == 'index') {
-    //   group.inspector_type = 'index';
-    //   switch(name) {
-    //     case 'S&P 500':
-    //       group.sym = 'SPX';
-    //       break;
-    //     case 'Dow Jones':
-    //       group.sym = 'DJI';
-    //       break;
-    //   }
-    // }
-    // else {
-      group.type = 'group';
-    // }
-  
+    group.type = type || 'group';
+    if(id) group.id = id;
+    
     groups.push(group);
   }
 
