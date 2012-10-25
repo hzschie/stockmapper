@@ -81,7 +81,7 @@
       
       $container.removeClass('hidden');
       
-      var bindingsName = (mapper.config.getGroupType && mapper.config.getGroupType(group.get('category'), group)) || group.get('category');
+      var bindingsName = group.get('type');
       template.applyBindings(bindingsName, $container, group);
       inspectElement($tag, '.' + bindingsName, { x:20, y:20 });
     };

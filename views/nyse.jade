@@ -5,14 +5,23 @@ block append inspector_content
     .header
       h3.name Amit was here
       .sym SYM
+      .last_trade 123.45
+      .change
+        span.amount +12.34
+        | &nbsp;(
+        span.percent 1.23%
+        | )
     dl
-      .left
-        dt Avg. Vol.:
-        dd.avg_volume 123,456
-        dt Vol.:
-        dd.volume 123,456
-      .right
-        dt Open:
-        dd.open 12.34
-        dt High:
-        dd.high 12.34
+    .wide
+        dt Previous Close:
+        dd.previous 12.34
+        dt Num of Stocks Up:
+        dd.num_up.green 123
+        dt Num of Stocks Down:
+        dd.num_down.red 123
+        dt Volume Up:
+        dd.volume_up.green 123,456
+        dt Volume Down:
+        dd.volume_down.red 123,456
+        dt Volume Total:
+        dd.volume_total 123,456

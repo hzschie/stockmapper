@@ -34,9 +34,9 @@
       { $:'.change .percent', field:'changePct', formatter:Template.postfix(Template.changeFormat, '%') },
       
       { $:'.previous', field:'previous', formatter:Template.priceFormat },
-      { $:'.volume', field:'volume', formatter:Template.commaFormat },
-      { $:'.market_cap', field:'marketCap', formatter:Template.metricFormat }
-      // { $:'.market_cap', field:'marketCap', formatter:Template.postfix(Template.commaFormat, 'Cr') }// Blufin Specific. Should be Template.metricFormat
+      { $:'.open', field:'open', formatter:Template.priceFormat },
+      { $:'.high', field:'high', formatter:Template.priceFormat },
+      { $:'.low', field:'low', formatter:Template.priceFormat }
     ]
   };
   

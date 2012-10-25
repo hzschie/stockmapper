@@ -84,6 +84,10 @@
         table;
         
     this.setSelected = function(group) {
+      if(!group._groupView) {
+        // console.log('Tag missing for group:', group);
+        return;
+      }
       if(selected) {
         selected._groupView.$tag.removeClass('selected');
       }
@@ -189,8 +193,7 @@
     }
     
     function updateGroup(group) {
-      var bindingsName = (mapper.config.getGroupType && mapper.config.getGroupType(group.get('category'), group)) || group.get('category');
-      template.applyBindings(bindingsName, group._groupView.$tag, group);
+      template.applyBindings(group.get('type'), group._groupView.$tag, group);
     }
     
     function pickScheme() {
@@ -366,8 +369,7 @@
     };
 
     function updateGroup(group) {
-      var bindingsName = (mapper.config.getGroupType && mapper.config.getGroupType(group.get('category'), group)) || group.get('category');
-      template.applyBindings(bindingsName, group._groupView.$tag, group);
+      template.applyBindings(group.get('type'), group._groupView.$tag, group);
     }
   }
 })();

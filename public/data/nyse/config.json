@@ -14,15 +14,17 @@
   "stocksUrl": "/data/nyse/stocks.json",
   
   "allGroup": {
+    "id": "^NYA",
     "name": "NYSE Composit Index",
     "label": "NYA (show all)",
     "nickname": "NYA",
     "sym": "NYA",
-    "category": "index"
+    "category": "Index",
+    "type": "index"
   },
   
   "groupsTagOrder": [
-    "index:NYA",
+    "Index:NYA",
     "index:Dow Jones",
     "index:S&P 500",
     "sector:Materials",

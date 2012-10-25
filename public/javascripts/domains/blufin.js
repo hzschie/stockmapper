@@ -36,9 +36,6 @@
     { name:'marketCap' }
   ]; };
 
-
-  mapper.config.getGroupType = function(category, group) { return category == 'Index' ? 'index' : 'group'; };
-
   mapper.config.getInspectorBindings = function(bindings) {
     var Template = mapper.Template;
     _.each(bindings.stock, function(binding) {
@@ -71,7 +68,7 @@
   mapper.config.getDetailsBindings = function(bindings) {
     var Template = mapper.Template,
         crMarketCap = Template.postfix(Template.commaFormat, 'Cr');
-    _.each(bindings.stock.concat(bindings.index), function(binding) {
+    _.each(bindings.stock, function(binding) {
       if(binding.field == 'marketCap') {
         binding.formatter = crMarketCap;
       }
@@ -84,6 +81,10 @@
         { $:'.ps', field:'ps', formatter:Template.priceFormat },
         { $:'.div_yield', field:'divYield', formatter:Template.priceFormat },
         { $:'.roe', field:'roe', formatter:Template.priceFormat }
+      ]),
+      index: bindings.index.concat([
+        { $:'.volume', field:'volume', formatter:Template.commaFormat },
+        { $:'.market_cap', field:'marketCap', formatter:crMarketCap }
       ])
     };
   };

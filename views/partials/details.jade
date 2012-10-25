@@ -48,13 +48,17 @@
       .close
     .values
       dl.content.index
-        .col
-          dt Previous Close:
-          dd.previous 123,456
-          dt Volume:
-          dd.volume 123,456
-          dt Mkt. Cap:
-          dd.market_cap 1.234B
+        block details_index_values
+          .col
+            dt Previous Close:
+            dd.previous 123,456
+            dt Open:
+            dd.open 12.34
+          .col
+            dt High:
+            dd.high 12.34
+            dt Low:
+            dd.low 12.34
       dl.content.stock
         block details_stock_values
           .col

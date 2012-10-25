@@ -22,29 +22,21 @@
   };
 
   /* Mapping of Array positions to attributes that get applied to instances of StockGroup on data updates */
-  mapper.config.getGroupUpdateFields = function() { return [
-    null,
-    null, 
-    { name:'lastTrade', isNum:true },
-    { name:'timestamp', isNum:true },
-    { name:'previous', isNum:true },
-    { name:'change', isNum:true },
-    { name:'volume', isNum:true },
-    { name:'changePctString', isNum:false },
-    { name:'marketCap', isNum:true }
-  ]; };
-
-  mapper.config.getGroupType = function(category, group) {
-    if(category == 'index') { return category; };
-    return 'group';
+  mapper.config.getGroupUpdateFields = function() {
+    return mapper.config.getStockUpdateFields();
   };
 
-  mapper.config.getInspectorBindings = function() { 
+  mapper.config.getInspectorBindings = function(bindings) { 
+    var Template = mapper.Template;
     return {
-      index: [
-        { $:'.name', field:'name' },
-        { $:'.sym', field:'sym' }
-      ]
+      index: bindings.group.concat([
+        { $:'.sym', field:'sym' },
+        { $:'.last_trade', field:'lastTrade', formatter:Template.priceFormat },
+        { $:'.previous', field:'previous', formatter:Template.commaFormat },
+        { $:'.change', field:'changeDir', formatter:Template.makeRedOrGreen },
+        { $:'.change .amount', field:'change', formatter:Template.changeFormat },
+        { $:'.change .percent', field:'changePct', formatter:Template.postfix(Template.changeFormat, '%') }
+      ])
     };
   };
 
@@ -55,7 +47,7 @@
   };
 
   mapper.config.getGroupTagHtml = function(group, $container) {
-    if(group.get('category') == 'index') return [
+    if(group.get('type') == 'index') return [
         '<div class="val_right">',
           '<div class="value"></div>',
           '<div class="change"></div>',

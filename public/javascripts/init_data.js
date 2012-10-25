@@ -1,4 +1,5 @@
 $(function() {
+  mapper.models = new Backbone.Collection();
   mapper.stocks = new (Backbone.Collection.extend({
     datasets: {},
     acquireDataset: function(name, opts) {
@@ -91,14 +92,31 @@ $(function() {
     }
   
     var stock = new mapper.Stock(hash);
+    mapper.models.add(stock);
     mapper.stocks.add(stock);
   });
   socket.emit('subscribe', mapper.stocks.pluck('id'));
 
   _.each(mapper.groupsJson, function(groupJson) {
+    groupJson.type = groupJson.type || 'group';
     var group = new mapper.StockGroup(groupJson);
-    if(true || group.get('ids').length) mapper.groups.add(group);
+    if(true || group.get('ids').length) {
+      mapper.models.add(group);
+      mapper.groups.add(group);
+    }
   });
+  
+  // Create the "All" group, if defined
+  if(!mapper.config.allGroup) { /* do nothing */ }
+  else if(typeof(mapper.config.allGroup) == 'string') {
+    mapper.allGroup = mapper.groups.where({ name:mapper.config.allGroup })[0];
+  }
+  else {
+    mapper.allGroup = new mapper.StockGroup(mapper.config.allGroup);
+    mapper.models.add(mapper.allGroup);
+    mapper.groups.add(mapper.allGroup);
+  }
+  
   var groupIds = _.reject(mapper.groups.pluck('id'), function(id) { return id == null; });
   groupIds.length && socket.emit('subscribe', groupIds);
   
@@ -115,18 +133,8 @@ $(function() {
           stock.get('groups').push(group);
         });
       });
-
-      // Create the "All" group, if defined
-      if(!mapper.config.allGroup) { /* do nothing */ }
-      else if(typeof(mapper.config.allGroup) == 'string') {
-        mapper.allGroup = mapper.groups.where({ name:mapper.config.allGroup })[0];
-      }
-      else {
-        mapper.allGroup = new mapper.StockGroup(
-          $.extend({ members: mapper.stocks.models }, mapper.config.allGroup)
-        );
-        mapper.groups.add(mapper.allGroup);
-      }
+      
+      mapper.allGroup && mapper.allGroup.get('members').add(mapper.stocks.models);
     
       mapper.dataReady();
     }
