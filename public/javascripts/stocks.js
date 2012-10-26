@@ -42,6 +42,7 @@
             if(existing) existing.append(data.data);
             var ts = existing || new mapper.TimeSeries(data, seriesType);
             setter[seriesType] = ts;
+            ts.ownerId = _this.id;
         
             if(seriesType == 'intraday') ts.price_ref = _this.get('previous');
 

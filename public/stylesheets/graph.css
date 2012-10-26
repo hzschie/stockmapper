@@ -1,6 +1,7 @@
 .compare {
   height:30px;
   font-size:12px;
+  white-space:nowrap;
 }
 .compare .search { margin-left:6px; }
 .compare .selection {
@@ -10,18 +11,35 @@
 .compare .selection .compare_to {
   display:inline-block;
   margin:0 6px;
+  line-height:18px;
 }
 .compare .selection .compare_to .x {
-  display:inline-block;
-  width:20px;
-  height:20px;
-  background:transparent url('/images/sprites.png?10252012') no-repeat scroll -2px -22px;
-  cursor:pointer;
-  vertical-align:middle;
-  margin-left:2px;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: transparent url('/images/sprites.png?10252012') no-repeat scroll -24px -2px;
+  cursor: pointer;
+  border-radius: 10px;
+  border:1px solid #000;
+  vertical-align: top;
+  margin-left: 2px;
+}
+.compare .search input {
+  font-size:12px;
+  line-height:16px;
+  width:100px;
+  background-color:#ddd;
+}
+.compare .search .x {
+  right: -1px;
+  top: 5px;
+}
+.compare .selection .compare_to.pending .x {
+    background:transparent url('/images/busy.gif?123456') no-repeat scroll center center;
 }
 .compare .selection .compare_to.pending .x {
   background:transparent url('/images/busy.gif?123456') no-repeat scroll center center;
+  background-color:transparent !important;
 }
 
 
@@ -87,6 +105,10 @@
   fill:none;
   shape-rendering: geometricPrecision;
 }
+.graph .change_path {
+  fill:none;
+  shape-rendering: geometricPrecision;
+}
 .graph .graph_area {
   stroke:none;
   fill:rgba(220,220,255,.15);
@@ -105,20 +127,23 @@
   fill: none;
 }
 .graph .x.axis .domain {
-  stroke: #fff;
+  stroke:#ccc;
   stroke-width: 1px;
 }
 .graph .axis .tick {
   fill: none;
-  stroke: url(#fade);
+  stroke:url(#fade);*/
   stroke-width: 1px;
 }
 .graph .divider {
   shape-rendering: crispEdges;
-  stroke: #fff;
+  stroke:#888;
+}
+.graph .divider.top {
+  stroke:#ccc;
 }
 .graph .y.axis .tick {
-  stroke: rgba(255,255,255,.3);
+  stroke: rgba(255,255,255,.2);
 }
 .graph .axis text {
   fill: #fff;

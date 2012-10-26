@@ -7,6 +7,8 @@
         series,
         w, innerW,
         hasVolume = opts.graphVolume || (opts.graphVolume == null),
+        _this = this,
+        isCompare = false,
         priceH = opts.priceH || 160,
         gap = opts.timelineH || 20,
         volH = hasVolume ? opts.volumeH || 80 : 0,
@@ -14,33 +16,72 @@
         h = pad[T] + priceH + volH + gap + pad[B],
         svg = d3.select($graph[0]).select('svg'),
         xax = svg.append('svg:g')
-          .attr('class', 'x axis')
-          .attr('transform', 'translate(' + pad[L] + ',' + (priceH+pad[T]) + ')'),
-        divider1 = svg.append('line').attr('class', 'divider')
-          .attr('x1', pad[L])
-          .attr('y1', pad[T] + priceH + gap).attr('y2', pad[T] + priceH + gap),
+          .attr('class', 'x axis'),
+        divider1 = svg.append('line').attr('class', 'divider top')
+          .attr('x1', pad[L]),
 
         x = d3.time.scale.utc(),
         xt = function(slice,i) { return x(slice.t); },
         isWithinMarketHours = function(slice) { var t = (slice.t % 8.64e7) / 60000; return t >= marketHours.t0 && t <= marketHours.t1; },
         
         xAxis = d3.svg.axis().scale(x)
-          .tickSize(-(priceH + pad[T]), 0, 0)
           .tickPadding(7),
-    
+          
+
         priceGraph = new PriceGraph(svg, pad[L], pad[T], _w - pad[L] - pad[R], priceH, gap),
-        // changeGraph = new ChangeGraph(svg, pad[L], pad[T], _w - pad[L] - pad[R], priceH),
-        volumeGraph = hasVolume && new VolumeGraph(svg, pad[L], pad[T] + priceH + gap, _w - pad[L] - pad[R], volH);
-        
+        changeGraph = this.changeGraph = new ChangeGraph(svg, pad[L], pad[T], _w - pad[L] - pad[R], priceH + volH),
+        volumeGraph = new VolumeGraph(svg, pad[L], pad[T] + priceH + gap, _w - pad[L] - pad[R], volH),
+
+        subgraphs = [];
+
+    updateSubgraphs();
+    
+    function updateSubgraphs() {
+      if(isCompare) {
+        subgraphs = [changeGraph.show()];
+        volumeGraph.hide();
+        priceGraph.hide();
+
+        xAxis.tickSize(-(priceH + volH + pad[T]), 0, 0);
+        xax.transition().attr('transform', 'translate(' + pad[L] + ',' + (priceH + volH + pad[T]) + ')');
+        divider1.transition().attr('y1', pad[T] + priceH + volH + gap).attr('y2', pad[T] + priceH + volH + gap);
+      }
+      else {
+        if(hasVolume) {
+          subgraphs = [priceGraph.show(), volumeGraph.show()];
+          changeGraph.hide();
+        }
+        else {
+          subgraphs = [priceGraph.show()];
+          volumeGraph.hide();
+          changeGraph.hide();
+        }
+
+        xAxis.tickSize(-(priceH + pad[T]), 0, 0);
+        xax.transition().attr('transform', 'translate(' + pad[L] + ',' + (priceH + pad[T]) + ')');
+        divider1.transition().attr('y1', pad[T] + priceH + gap).attr('y2', pad[T] + priceH + gap);
+      }
+      
+      if(series) _this.render(series);
+    }
+    
+    this.enableChangeGraph = function() {
+      isCompare = true;
+      updateSubgraphs();
+    };
+
+    this.disableChangeGraph = function() {
+      isCompare = false;
+      updateSubgraphs();
+    };
+
     this.setWidth = function(_w) {
       w = _w;
       innerW = w - pad[L] - pad[R];
       svg.attr('width', w + 'px').attr('height', h + 'px');
       divider1.attr('x2', w - pad[R]);
       x.range([0, innerW]);
-      priceGraph.setWidth(innerW);
-      // changeGraph.setWidth(innerW);
-      hasVolume && volumeGraph.setWidth(innerW);
+      $.each(subgraphs, function(i, subgraph) { subgraph.setWidth(innerW); });
       if(series) this.render(series);
     };
     this.setWidth(_w);
@@ -63,19 +104,14 @@
           
           if(!slice) return;
           
-          priceGraph.highlight(slice, x);
-          // changeGraph.highlight(slice, x);
-          hasVolume && volumeGraph.highlight(slice, x);
-          
+          $.each(subgraphs, function(i, subgraph) { subgraph.highlight(slice, x); });
           template.applyBindings(bindings, $slice.css({ opacity:1 }), slice);
         });
       },
       function() {
         $svg.off('mousemove');
         $slice.css({ opacity:0 });
-        priceGraph.highlight(null);
-        // changeGraph.highlight(null);
-        hasVolume && volumeGraph.highlight(null);
+        $.each(subgraphs, function(i, subgraph) { subgraph.highlight(null); });
       }
     );
     
@@ -119,9 +155,7 @@
 
       var xd = x.domain(),
           tRange = [ xd[0], xd[xd.length - 1] ];
-      priceGraph.render(series, tRange, xt, isWithinMarketHours);
-      // changeGraph.render(series, tRange, xt, isWithinMarketHours);
-      hasVolume && volumeGraph.render(series, tRange, xt, isWithinMarketHours);
+      $.each(subgraphs, function(i, subgraph) { subgraph.render(series, tRange, xt, isWithinMarketHours); });
       
       this.setPending(false);
     };
@@ -191,28 +225,22 @@
 /* ------------------------ ChangeGraph class ------------------------ */
 
   function ChangeGraph(svg, x, y, w, h) {
-    var changeAx = svg.append('svg:g')
+    var container = svg.append('svg:g'),
+        changeAx = container.append('svg:g')
           .attr('class', 'y axis'),
-        changePath = svg.append('path')
-          .attr('class', 'graph_path')
-          .attr('stroke-width', 1.5)
-          .attr('transform', 'translate(' + x + ',' + y + ')'),
-        reference = svg.append('line')
+        reference = container.append('line')
           .attr('class', 'reference')
-          .attr('stroke', '#fff')
-          .attr('stroke-width', 2)
+          .attr('stroke', '#eee')
+          .attr('stroke-dasharray', '4 2')
+          .attr('stroke-width', 1)
           .attr('x1', x),
-        highlighter = svg.append('circle')
-          .attr('class', 'ball')
-          .attr('stroke-width', 2)
-          .attr('r', 3),
       
         yc = d3.scale.linear().range([h, 0]),
         
-        price0 = null,
-        yChange = function(slice, i) { return yc( 100 * (slice.price - price0) / price0 ); },
-
-        dLine = d3.svg.line().y(yChange),
+        compared = [],
+        
+        // cached for redraws
+        series, tRange, xt, isWithinMarketHours,
     
         changeAxis = d3.svg.axis().scale(yc)
           .ticks(4)
@@ -226,89 +254,151 @@
       changeAxis.tickSize(-w);
     })(w);
 
-    this.highlight = function(slice, fx) {
-      if(!slice) return highlighter.style('display', 'none');
-      highlighter
-        .style('display', 'block')
-        .attr('cx', x + fx(slice.t))
-        .attr('cy', y + yChange(slice));
-    };
+    this.show = function() { container.style('display', ''); return this; };
+    (this.hide = function() { container.style('display', 'none');  return this; })();
 
-    this.render = function(series, tRange, xt, isWithinMarketHours) {
-      price0 = series.price_ref != null ? series.price_ref : series.getNearestSlice(tRange[0]).price;
+    this.highlight = function(slice, fx) {
+      if(!series) return;
       
-      var pMin = series.getMin('price', tRange),
-          pMax = series.getMax('price', tRange),
-          cMin = 100 * (pMin - price0) / price0,
-          cMax = 100 * (pMax - price0) / price0,
-          dPad = (cMax - cMin) * .1;
+      var allSeries = compared.concat([series]),
+          highlighters = container.selectAll('.change_ball').data(allSeries, function(_series) { return _series.ownerId; });
+      highlighters.enter()
+        .append('circle')
+        .attr('class', function(_series) { return _series == series ? 'ball change_ball' : 'change_ball'; })
+        .attr('stroke-width', 2)
+        .attr('r', 3);
+        
+      highlighters.exit().remove();
+
+      highlighters.each(function(_series, i) {
+        var price0 = _series.price_ref != null ? _series.price_ref : _series.getNearestSlice(tRange[0]).price,
+            yChange = function(slice, i) { return yc( 100 * (slice.price - price0) / price0 ); },
+            nearest = slice && _series.getNearestSlice(slice.t);
+            
+        if(!nearest) return d3.select(this).style('display', 'none');
+
+        d3.select(this)
+          .style('display', 'block')
+          .attr('fill', _series.color)
+          .attr('cx', x + fx(nearest.t))
+          .attr('cy', y + yChange(nearest));
+      });
+    };
+    
+    this.compareWith = function(_compared) {
+      compared = _compared;
+      this.render(series, tRange, xt, isWithinMarketHours);
+    };
+    
+    this.render = function(baseSeries, _tRange, _xt, _isWithinMarketHours) {
+      series = baseSeries;
+      tRange = _tRange;
+      xt = _xt;
+      isWithinMarketHours = _isWithinMarketHours;
+      
+      if(!series) return;
+      
+      var allSeries = compared.concat([series]),
+          changePaths = container.selectAll('.change_path').data(allSeries, function(_series) { return _series.ownerId; });
+      changePaths.enter()
+        .append('path')
+        .attr('class', function(_series) { return _series == series ? 'graph_path change_path' : 'change_path'; })
+        .attr('stroke-width', function(_series) { return _series == series ? 2 : 1; })
+        .attr('stroke', function(_series) { return _series.color; })
+        .attr('transform', 'translate(' + x + ',' + y + ')');
+        
+      changePaths.exit().remove();
+
+      var cMin = d3.min(allSeries, function(_series) {
+        var pMin = _series.getMin('price', tRange),
+            price0 = _series.price_ref != null ? _series.price_ref : _series.getNearestSlice(tRange[0]).price;
+        return 100 * (pMin - price0) / price0;
+      });
+
+      var cMax = d3.max(allSeries, function(_series) {
+        var pMax = _series.getMax('price', tRange),
+            price0 = _series.price_ref != null ? _series.price_ref : _series.getNearestSlice(tRange[0]).price;
+        return 100 * (pMax - price0) / price0;
+      });
+      
+      var dPad = (cMax - cMin) * .1;
 
       yc.domain([cMin - dPad, cMax + dPad]);
       
-      changeAx.call(changeAxis);
+      changeAx.transition().call(changeAxis);
 
       reference
         .attr('y1', y + yc(0))
         .attr('y2', y + yc(0));
+      
+      var pallette = d3.scale.category10();
+      changePaths.order().each(function(_series) {
+        var price0 = _series.price_ref != null ? _series.price_ref : _series.getNearestSlice(tRange[0]).price,
+            yChange = function(slice) { return yc( 100 * (slice.price - price0) / price0 ); },
+            dLine = d3.svg.line().y(yChange);
+
+        if(_series.type == 'intraday') {
+          dLine.defined(isWithinMarketHours);
+        }
+        else {
+          dLine.defined(function(slice) { return slice.t >= tRange[0] && slice.t <= tRange[1]; });
+        }
         
-      // if(series.data.length == 0) return;
+        var line = dLine.x(xt)(_series.data);
+        if(line) {
+          d3.select(this).style('display', 'block').transition().attr('d', line);
+        }
+        else {
+          d3.select(this).style('display', 'none');
+        }
+      });
 
-      if(series.type == 'intraday') {
-        dLine.defined(isWithinMarketHours);
-      }
-      else {
-        dLine.defined(function(slice) { return slice.t >= tRange[0] && slice.t <= tRange[1]; });
-      }
-
-      var line = dLine.x(xt)(series.data);
-      if(line) {
-        changePath.style('display', 'block').attr('d', line);
-      }
-      else {
-        changePath.style('display', 'none');
-      }
     };
   }
   
 /* ------------------------ PriceGraph class ------------------------ */
-  
+
   function PriceGraph(svg, x, y, w, h, gap) {
-    var priceAx = svg.append('svg:g')
+    var container = svg.append('svg:g'),
+        priceAx = container.append('svg:g')
           .attr('class', 'y axis'),
-        priceArea = svg.append('path')
+        priceArea = container.append('path')
           .attr('class', 'graph_area')
           .attr('transform', 'translate(' + x + ',' + y + ')'),
-        pricePath = svg.append('path')
+        pricePath = container.append('path')
           .attr('class', 'graph_path')
           .attr('stroke-width', 1.5)
           .attr('transform', 'translate(' + x + ',' + y + ')'),
-        reference = svg.append('line')
+        reference = container.append('line')
           .attr('class', 'reference')
           .attr('stroke', '#f66')
           .attr('stroke-dasharray', '4 2')
           .attr('x1', x),
-        highlighter = svg.append('circle')
+        highlighter = container.append('circle')
           .attr('class', 'ball')
           .attr('stroke-width', 2)
           .attr('r', 3),
-      
+
         yp = d3.scale.linear().range([h, 0]),
-        yPrice = function(slice, i) { return yp(slice.price); },
+        yPrice = function(slice) { return yp(slice.price); },
 
         dLine = d3.svg.line().y(yPrice),
         dArea = d3.svg.area().y1(yPrice).y0(h + gap),
-    
+
         priceAxis = d3.svg.axis().scale(yp)
           .ticks(4)
           .tickPadding(4)
           .orient('right');
-          
+
     (this.setWidth = function(w) {
       priceAx.attr('transform', 'translate(' + (x + w) + ',' + y + ')');
       reference.attr('x2', x + w);
       priceAxis.tickSize(-w);
     })(w);
-    
+
+    this.show = function() { container.style('display', ''); return this; };
+    (this.hide = function() { container.style('display', 'none');  return this; })();
+
     this.highlight = function(slice, fx) {
       if(!slice) return highlighter.style('display', 'none');
       highlighter
@@ -316,7 +406,7 @@
         .attr('cx', x + fx(slice.t))
         .attr('cy', y + yp(slice.price));
     };
-      
+
     this.render = function(series, tRange, xt, isWithinMarketHours) {
       var pMin = series.getMin('price', tRange),
           pMax = series.getMax('price', tRange);
@@ -326,17 +416,17 @@
         pMax = Math.max(series.price_ref, pMax || (series.price_ref * 1.1));
       }
       var dPad = (pMax - pMin) * .1;
-      
+
       yp.domain([Math.max(0, pMin - dPad), pMax + dPad]);
-      
+
       priceAx.call(priceAxis);
 
       reference
         .style('display', series.price_ref == null ? 'none' : '')
         .attr('y1', y + yp(series.price_ref || 0))
         .attr('y2', y + yp(series.price_ref || 0));
-        
-      // if(series.data.length == 0) return;
+
+      if(series.data.length == 0) return;
 
 
       if(series.type == 'intraday') {
@@ -360,41 +450,45 @@
       }
     };
   }
-  
-  
-  
+
+
+
   /* ------------------------ VolumeGraph class ------------------------ */
-  
+
   function VolumeGraph(svg, x, y, w, h) {
-    var volAx = svg.append('svg:g')
+    var container = svg.append('svg:g'),
+        volAx = container.append('svg:g')
           .attr('class', 'y axis'),
-        divider2 = svg.append('line').attr('class', 'divider')
+        divider2 = container.append('line').attr('class', 'divider')
           .attr('x1', x)
           .attr('y1', y + h).attr('y2', y + h),
-        volChart = svg.append('g')
+        volChart = container.append('g')
           .attr('class', 'volume_chart')
           .attr('stroke-width', 1)
           .attr('transform', 'translate(' + x + ',' + y + ')'),
-        highlighter = svg.append('rect')
+        highlighter = container.append('rect')
           .attr('class', 'ball_bar')
           .attr('width', 4)
           .attr('stroke-width', 2),
-          
+
         yv = d3.scale.linear().range([h, 0]),
-        yVol = function(slice, i) { var yvv = yv(slice.volume); return yvv == h ? h : Math.min(h-1, yvv); },
-        
+        yVol = function(slice) { var yvv = yv(slice.volume); return yvv == h ? h : Math.min(h-1, yvv); },
+
         volAxis = d3.svg.axis().scale(yv)
           .ticks(2)
           .tickPadding(4)
           .orient('right')
           .tickFormat(mapper.Template.metricFormat);
-    
+
     (this.setWidth = function(w) {
       volAx.attr('transform', 'translate(' + (x + w) + ',' + y + ')');
       divider2.attr('x2', x + w);
       volAxis.tickSize(-w);
     })(w);
-    
+
+    this.show = function() { container.style('display', ''); return this; };
+    (this.hide = function() { container.style('display', 'none');  return this; })();
+
     this.highlight = function(slice, fx) {
       if(!slice) return highlighter.style('display', 'none');
       highlighter
@@ -404,12 +498,12 @@
         .attr('height', h - yv(slice.volume) + 4);
     };
 
-    
+
     this.render = function(series, tRange, xt, isWithinMarketHours) {
       yv.domain([0, series.getMax('volume', tRange) * 1.2]);
-        
+
       volAx.call(volAxis);
-      
+
       var bars = volChart.selectAll('.bar').data(series.data);
       bars.enter()
         .append('line')

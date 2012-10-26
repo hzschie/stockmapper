@@ -53,9 +53,9 @@
             getDetailsBindings ? getDetailsBindings(Details.defaultBindings) : {}
           )
         ),
-        // compare = new mapper.Compare($('.compare', $details)),
         graph = new mapper.Graph($('.graph', $details), $('.left', $details).width() + 20, opts),
         graphRange = new mapper.SelectorButtons($('.graph .ui .ranges'), function(id) { _this.trigger('select_range', id); }),
+        compare = new mapper.Compare($('.compare', $details), graph),
         
         $news = $('.news', $details),
         news = $news.length == 1 ? new mapper.News($news) : null;
@@ -100,6 +100,7 @@
       else if(range == 'r5d') series_type = '5day';
       else series_type = 'daily';
       
+      compare.setSeriesType(series_type);
       this.updateGraph();
     };
     

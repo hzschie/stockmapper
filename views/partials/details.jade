@@ -35,13 +35,14 @@
           linearGradient#fade(gradientTransform="rotate(90)", gradientUnits="userSpaceOnUse", spreadMethod="reflect")
             stop(offset="21%", stop-color="#FFF", stop-opacity=".09")
             stop(offset="30%", stop-color="#FFF", stop-opacity="0")
-    //- .compare Compare:
-    //-   .search
-    //-     .field
-    //-       input(placeholder="Search")
-    //-       .x
-    //-     .search_dropdown
-    //-   .selection
+    if opts.comparable
+      .compare Compare:
+        .search
+          .field
+            input(placeholder="Search")
+            .x
+          .search_dropdown
+        .selection
 
   .right
     if opts.closeable
