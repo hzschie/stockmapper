@@ -101,6 +101,7 @@ app.get('/*', function(req, res) {
     stocks: stocks,
     isTablet: isTablet,
     isMobile: isMobile,
-    useWebSocket: io != null
+    useWebSocket: io != null,
+    analyticsCode: process.env.ANALYTICS_CODE
   });
 });
