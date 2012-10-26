@@ -93,7 +93,6 @@
     
     this.render = function(_series) {
       series = _series;
-      this.setPending(false);
       
       if(!series) return svg.style('opacity', .1);
       else svg.style('opacity', 1);
@@ -123,6 +122,8 @@
       priceGraph.render(series, tRange, xt, isWithinMarketHours);
       // changeGraph.render(series, tRange, xt, isWithinMarketHours);
       hasVolume && volumeGraph.render(series, tRange, xt, isWithinMarketHours);
+      
+      this.setPending(false);
     };
     
     function prepareDaily() {
@@ -250,7 +251,7 @@
         .attr('y1', y + yc(0))
         .attr('y2', y + yc(0));
         
-      if(series.data.length == 0) return;
+      // if(series.data.length == 0) return;
 
       if(series.type == 'intraday') {
         dLine.defined(isWithinMarketHours);
@@ -335,7 +336,7 @@
         .attr('y1', y + yp(series.price_ref || 0))
         .attr('y2', y + yp(series.price_ref || 0));
         
-      if(series.data.length == 0) return;
+      // if(series.data.length == 0) return;
 
 
       if(series.type == 'intraday') {
