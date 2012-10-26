@@ -98,8 +98,7 @@ block append mobile_inspector_content
 block analytics_code
   script(type='text/javascript')
     var _gaq = _gaq || [];
-    // _gaq.push(['_setAccount', '!{ analyticsCode || "UA-30725697-1" }']);
-    _gaq.push(['_setAccount', 'UA-30725697-1']);
+    _gaq.push(['_setAccount', '!{ analyticsCode || "UA-30725697-1" }']);
     _gaq.push(['_setDomainName', 'blufin.in']);
     _gaq.push(['_trackPageview']);
     (function() {

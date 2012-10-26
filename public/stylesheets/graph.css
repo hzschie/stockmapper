@@ -132,7 +132,7 @@
 }
 .graph .axis .tick {
   fill: none;
-  stroke:url(#fade);*/
+  stroke:url(#fade);
   stroke-width: 1px;
 }
 .graph .divider {
