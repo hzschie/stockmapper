@@ -130,7 +130,7 @@ body.mobile {
   left:8px;
 }
 .mobile .graph .x.axis .tick {
-  display:none;
+/*  display:none;*/
 }
 
 .mobile .news {
