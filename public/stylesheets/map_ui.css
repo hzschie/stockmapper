@@ -52,8 +52,9 @@
   text-align:left;
   line-height:20px;
   padding:8px;
-  left:-25px;
+  left:auto;
   right:0;
+  width:310px;
   border-radius:8px;
   z-index:10;
 
