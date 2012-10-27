@@ -238,6 +238,7 @@
         yc = d3.scale.linear().range([h, 0]),
         
         compared = [],
+        highlightCallbacks = [],
         
         // cached for redraws
         series, tRange, xt, isWithinMarketHours,
@@ -272,21 +273,28 @@
 
       highlighters.each(function(_series, i) {
         var price0 = _series.price_ref != null ? _series.price_ref : _series.getNearestSlice(tRange[0]).price,
-            yChange = function(slice, i) { return yc( 100 * (slice.price - price0) / price0 ); },
             nearest = slice && _series.getNearestSlice(slice.t);
             
-        if(!nearest) return d3.select(this).style('display', 'none');
+        if(!nearest) {
+          if(highlightCallbacks[i]) highlightCallbacks[i](null);
+          return d3.select(this).style('display', 'none');
+        }
+        
+        var change = 100 * (nearest.price - price0) / price0;
+        
+        if(highlightCallbacks[i]) highlightCallbacks[i](change);
 
         d3.select(this)
           .style('display', 'block')
           .attr('fill', _series.color)
           .attr('cx', x + fx(nearest.t))
-          .attr('cy', y + yChange(nearest));
+          .attr('cy', y + yc(change));
       });
     };
     
-    this.compareWith = function(_compared) {
+    this.compareWith = function(_compared, _highlightCallbacks) {
       compared = _compared;
+      highlightCallbacks = _highlightCallbacks;
       this.render(series, tRange, xt, isWithinMarketHours);
     };
     

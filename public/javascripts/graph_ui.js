@@ -6,7 +6,7 @@
         search = new mapper.Search($('.search', $compare), { dropdownNorth: true }),
         selection = [],
         series_type = null,
-        palette = ["#d62728", "#2ca02c", "#ff7f0e", "#9467bd", "#8c564b"],//.slice(0,2),//d3.scale.category10().range(),
+        palette = ["#d62728", "#2ca02c", "#ff7f0e", "#9467bd", "#8c564b"],
         _this = this;
     
     search.on('commit_option', addComparison);
@@ -61,18 +61,30 @@
       }
       else return graph.disableChangeGraph();
       
+      var callbacks = [];
       $.each(selection, function(i, model) {
         var series = model.get(series_type);
         if(series) series.color = model._compare.color;
-        $('<div class="compare_to' + (!series ? ' pending' : '') + '">' + model.get('sym') + '<span class="x"></span></div>')
+        
+        var $label = $('<div class="compare_to' + (!series ? ' pending' : '') + '">' + model.get('sym') + '<span class="x"></span><span class="value"></span></div>')
           .appendTo($selection)
-          .css({ color:model._compare.color })
-          .find('.x')
-            .css({ backgroundColor: model._compare.color })
-            .click(function() { removeComparison(model); });
+          .css({ color:model._compare.color });
+        
+        $label.find('.x')
+          .css({ backgroundColor: model._compare.color })
+          .click(function() { removeComparison(model); });
+        
+        var $val = $('.value', $label);
+        if(model.get(series_type)) {
+          callbacks.push(function(val) {
+            if(val == null) return $label.removeClass('inspected');
+            else $label.addClass('inspected');
+            $val.text(d3.format('+.1f')(val) + '%');
+          });
+        };
       });
       
-      graph.changeGraph.compareWith(availableSeries);
+      graph.changeGraph.compareWith(availableSeries, callbacks);
     }
   }
 })();
