@@ -23,9 +23,17 @@
     };
     
     this.setMain = function(model) {
+      if(main) {
+        main.off('start_update_time_series', update);
+        main.off('update_time_series', update);
+      }
+      
       main = model;
       main.on('start_update_time_series', update);
       main.on('update_time_series', update);
+      
+      selection = [];
+      update();
     };
     
     function addComparison(model) {
