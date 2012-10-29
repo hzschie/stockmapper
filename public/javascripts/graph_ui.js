@@ -37,7 +37,7 @@
     };
     
     function addComparison(model) {
-      if(!model || $.inArray(model, selection) > -1) return;
+      if(!model || (model == main) || $.inArray(model, selection) > -1) return;
       
       selection.push(model);
       // Trim selection to be, at most, as long as the palette array, in a first-in-first-out manner.
