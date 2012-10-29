@@ -36,16 +36,17 @@
             stop(offset="21%", stop-color="#FFF", stop-opacity=".09")
             stop(offset="30%", stop-color="#FFF", stop-opacity="0")
     if opts.comparable
-      .compare Compare:
-        .search
-          .field
-            input(placeholder="Search")
+      .compare
+        .pre Compare:
+          .main.compare_to
+            span.sym
             .x
-          .search_dropdown
-        .main.compare_to
-          span.sym
-          .x
-          .value
+            .value
+          .search
+            .field
+              input(placeholder="Search")
+              .x
+            .search_dropdown
         .selection
 
   .right

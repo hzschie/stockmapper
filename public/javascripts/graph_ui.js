@@ -105,8 +105,7 @@
         var $val = $('.value', $label);
         if(model.get(series_type)) {
           callbacks.push(function(val) {
-            if(val == null) return $label.removeClass('inspected');
-            else $label.addClass('inspected');
+            if(model == main) { $compare[val == null ? 'removeClass' : 'addClass']('inspected'); }
             $val.text(d3.format('+.1f')(val) + '%');
           });
         };
