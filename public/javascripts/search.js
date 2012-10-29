@@ -9,6 +9,7 @@
         $dropdown = $('.search_dropdown', $search),
         $body = $('body'),
         selection = -1,
+        baseModels = _.filter(mapper.models.models, function(model) { return typeof(model.get('sym')) == 'string'; }),//mapper.stocks,
         term, inputTerm,
         matches = [],
         _this = this;
@@ -116,9 +117,9 @@
       if(isInputNumeric) {
         // doScripCodeSearch();
         var regexp = new RegExp('^' + term),
-            models = mapper.stocks.models;
+            models = baseModels;
         
-        mapper.stocks.each(function(model) {
+        _.each(baseModels, function(model) {
           if(regexp.test(model.id)) {
             matches.push({ model:model, isNumeric:true, best:model.id.match(regexp)[0] });
           }
@@ -135,7 +136,7 @@
             new RegExp(term.split('').join('.?')),
             new RegExp(term)
           ],
-          models = mapper.stocks.models;
+          models = baseModels;
         
         
       for(var i = 0; i < models.length; i++) {

@@ -32,7 +32,7 @@
     this.search = function(model, andInspect) {
       searched = model;
       $('.search_result', $map).removeClass('search_result');
-      if(!model) {
+      if(!model || model.constructor == mapper.StockGroup) {
         $map.removeClass('dimmed');
       }
       else {

@@ -88,7 +88,12 @@ mapper.dataReady = function() {
       viewState.set({ searchStock: model });
     });
     search.on('commit_option', function(model) {
-      viewState.setState({ q: (model && model.id) || null });
+      if(model && model.constructor == mapper.StockGroup) {
+        viewState.setState({ filter: model.get('urlName'), q: null });
+      }
+      else {
+        viewState.setState({ q: (model && model.id) || null });
+      }
     });
     
     map.on('select_tag', function(model, $tag) {

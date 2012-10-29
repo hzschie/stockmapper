@@ -101,14 +101,16 @@
       }
     };
     
-    this.search = function(stock) {
+    this.search = function(model) {
       $('.search_result', $groups).removeClass('search_result');
-      if(!stock) {
-        $groups.removeClass('dimmed');
+      if(!model) return $groups.removeClass('dimmed');
+
+      $groups.addClass('dimmed');
+      if(model.constructor == mapper.StockGroup) {
+        model._groupView && model._groupView.$tag.addClass('search_result');
       }
       else {
-        $groups.addClass('dimmed');
-        _.forEach(stock.get('groups'), function(group) {
+        _.forEach(model.get('groups'), function(group) {
           if(!group._groupView) {
             // console.log('Tag missing for group:', group);
             return;
