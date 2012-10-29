@@ -34,10 +34,14 @@
             
         url += existing ? '&timestamp=' + (existing.getTimestamp() || '') : '';
         url += '&random=' + Math.floor(Math.random() * 1000);
+        
+        if(existing) existing.isPending = true;
+        _this.trigger('start_update_time_series', existing);
+        
         $.getJSON(
           url,
           function(data) {
-            if(!data) return callback(null);
+            if(!data) return callback && callback(null);
 
             if(existing) existing.append(data.data);
             var ts = existing || new mapper.TimeSeries(data, seriesType);
@@ -46,8 +50,10 @@
         
             if(seriesType == 'intraday') ts.price_ref = _this.get('previous');
 
+            ts.isPending = false;
             _this.set(setter);
-            callback(ts);
+            _this.trigger('update_time_series', ts);
+            callback && callback(ts);
           }
         );
       },

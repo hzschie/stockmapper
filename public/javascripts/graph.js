@@ -62,15 +62,17 @@
         divider1.transition().attr('y1', pad[T] + priceH + gap).attr('y2', pad[T] + priceH + gap);
       }
       
-      if(series) _this.render(series);
+      if(series) { _this.render(series); }
     }
     
     this.enableChangeGraph = function() {
+      if(isCompare) return;
       isCompare = true;
       updateSubgraphs();
     };
 
     this.disableChangeGraph = function() {
+      if(!isCompare) return;
       isCompare = false;
       updateSubgraphs();
     };
@@ -198,7 +200,7 @@
         var dayOfWeek = new Date(t).getUTCDay(),
             tOpen = t + marketHours.t0 * 60000,
             tClose = t + marketHours.t1 * 60000;
-        if(dayOfWeek != 0 && dayOfWeek != 6 && series.hasData(tOpen, tClose) || series.data.length == 0) {
+        if(series.hasData(tOpen, tClose) || series.data.length == 0) {//dayOfWeek != 0 && dayOfWeek != 6 && 
           domain.push(tOpen);
           domain.push(tClose);
           range.push(d * _w);
@@ -262,7 +264,7 @@
       if(!series) return;
       
       var allSeries = compared.concat([series]),
-          highlighters = container.selectAll('.change_ball').data(allSeries, function(_series) { return _series.ownerId; });
+          highlighters = container.selectAll('.change_ball').data(allSeries, function(_series) { return _series.ownerId + _series.type; });
       highlighters.enter()
         .append('circle')
         .attr('class', function(_series) { return _series == series ? 'ball change_ball' : 'change_ball'; })
@@ -307,7 +309,7 @@
       if(!series) return;
       
       var allSeries = compared.concat([series]),
-          changePaths = container.selectAll('.change_path').data(allSeries, function(_series) { return _series.ownerId; });
+          changePaths = container.selectAll('.change_path').data(allSeries, function(_series) { return _series.ownerId + _series.type; });
       changePaths.enter()
         .append('path')
         .attr('class', function(_series) { return _series == series ? 'graph_path change_path' : 'change_path'; })
@@ -334,12 +336,10 @@
       yc.domain([cMin - dPad, cMax + dPad]);
       
       changeAx.transition().call(changeAxis);
-
       reference
         .attr('y1', y + yc(0))
         .attr('y2', y + yc(0));
       
-      var pallette = d3.scale.category10();
       changePaths.order().each(function(_series) {
         var price0 = _series.price_ref != null ? _series.price_ref : _series.getNearestSlice(tRange[0]).price,
             yChange = function(slice) { return yc( 100 * (slice.price - price0) / price0 ); },
@@ -448,6 +448,7 @@
 
       var area = dArea.x(xt)(series.data),
           line = dLine.x(xt)(series.data);
+          
       if(area && line) {
         priceArea.style('display', 'block').attr('d', area);
         pricePath.style('display', 'block').attr('d', line);
@@ -503,7 +504,7 @@
         .style('display', 'block')
         .attr('x', x + fx(slice.t) - 2)
         .attr('y', y + yv(slice.volume) - 2)
-        .attr('height', h - yv(slice.volume) + 4);
+        .attr('height', Math.max(0, h - yv(slice.volume) + 4));
     };
 
 

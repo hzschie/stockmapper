@@ -7,7 +7,7 @@
   var Template = mapper.Template;
   Details.defaultBindings = {
     stock: [
-      { $:'.sym', field:'sym' },
+      { $:'.header .sym', field:'sym' },
       { $:'.name', field:'name' },
       { $:'.last_trade', field:'lastTrade', formatter:Template.priceFormat },
       { $:'.timestamp .value', field:'timestamp', formatter:Template.postfix(Template.timestamp, ' ' + timezone) },
@@ -55,7 +55,9 @@
         ),
         graph = new mapper.Graph($('.graph', $details), $('.left', $details).width() + 20, opts),
         graphRange = new mapper.SelectorButtons($('.graph .ui .ranges'), function(id) { _this.trigger('select_range', id); }),
-        compare = new mapper.Compare($('.compare', $details), graph),
+        
+        $compare = $('.compare', $details),
+        compare = $compare.length == 1 ? new mapper.Compare($compare, graph) : null,
         
         $news = $('.news', $details),
         news = $news.length == 1 ? new mapper.News($news) : null;
@@ -88,6 +90,8 @@
         model.acquireNews(function(data) { news.render(data); });// News feed
       }
       
+      compare && compare.setMain(model);
+      
       this.updateGraph();
     };
     
@@ -100,14 +104,17 @@
       else if(range == 'r5d') series_type = '5day';
       else series_type = 'daily';
       
-      compare.setSeriesType(series_type);
       this.updateGraph();
+      compare && compare.setSeriesType(series_type);
     };
     
     this.updateGraph = function() {
       graph.setPending(true);
-      Interval.callOnce(function() {
+      Interval.callOnce({
+        key: 'update_graph',
+        fn: function() {
           model && model.acquireTimeSeries(series_type, function(series) { graph.render(series); });
+        }
       });
     };
     

@@ -8,13 +8,18 @@
   display:inline-block;
   margin-left:10px;
 }
-.compare .selection .compare_to {
+.compare .compare_to {
   display:inline-block;
   margin:0 6px;
   line-height:18px;
   padding-right:12px;
 }
-.compare .selection .compare_to .x {
+.compare .main.compare_to {
+  color:#ddf;
+  font-weight:bold;
+  font-size:14px;
+}
+.compare .compare_to .x {
   display: inline-block;
   width: 16px;
   height: 16px;
@@ -25,16 +30,16 @@
   vertical-align: top;
   margin-left: 2px;
 }
-.compare .selection .compare_to .value {
+.compare .compare_to .value {
   font-size:10px;
   max-width:18px;
   margin-left:2px;
   display:none;
 }
-.compare .selection .compare_to.inspected .x {
+.compare .compare_to.inspected .x {
   display:none;
 }
-.compare .selection .compare_to.inspected .value {
+.compare .compare_to.inspected .value {
   display:inline-block;
 }
 .compare .search input {
@@ -47,10 +52,10 @@
   right: -1px;
   top: 5px;
 }
-.compare .selection .compare_to.pending .x {
+.compare .compare_to.pending .x {
     background:transparent url('/images/busy.gif?123456') no-repeat scroll center center;
 }
-.compare .selection .compare_to.pending .x {
+.compare .compare_to.pending .x {
   background:transparent url('/images/busy.gif?123456') no-repeat scroll center center;
   background-color:transparent !important;
 }

@@ -4,6 +4,8 @@
     _.extend(this, Backbone.Events);
     var $selection = $('.selection', $compare),
         search = new mapper.Search($('.search', $compare), { dropdownNorth: true }),
+        main = null,
+        $main = $('.main.compare_to', $compare),
         selection = [],
         series_type = null,
         palette = ["#d62728", "#2ca02c", "#ff7f0e", "#9467bd", "#8c564b"],
@@ -16,6 +18,14 @@
     
     this.setSeriesType = function(type) {
       series_type = type;
+      if(selection.length == 0) return;
+      _.each(selection, acquire);
+    };
+    
+    this.setMain = function(model) {
+      main = model;
+      main.on('start_update_time_series', update);
+      main.on('update_time_series', update);
     };
     
     function addComparison(model) {
@@ -26,13 +36,21 @@
       if(selection.length > palette.length) {
         selection.splice(0, selection.length - palette.length);
       }
-      model.acquireTimeSeries(series_type, update);
+      model.on('update_time_series', update);
+      model.on('change:timestamp', acquire);
+      acquire(model);
       update();
       
       search.clear();
     }
     
+    function acquire(model) {
+      model.acquireTimeSeries(series_type);
+    }
+    
     function removeComparison(model) {
+      model.off('update_time_series', update);
+      model.on('off:timestamp', acquire);
       selection.splice($.inArray(model, selection), 1);
       update();
     }
@@ -62,17 +80,27 @@
       else return graph.disableChangeGraph();
       
       var callbacks = [];
-      $.each(selection, function(i, model) {
-        var series = model.get(series_type);
-        if(series) series.color = model._compare.color;
+      $.each(selection.concat(main), function(i, model) {
+        var series = model.get(series_type),
+            $label;
+        if(model == main) $label = $main;
+        else {
+          $label = $('<div class="compare_to"></div')
+            .html($main.html())
+            .css({ color:model._compare.color })
+            .appendTo($selection);
+            
+          $label.find('.x')
+            .css({ backgroundColor: model == main ? null : model._compare.color })
+            .click(function() { removeComparison(model); });
+            
+          if(series) series.color = model._compare.color;
+        }
         
-        var $label = $('<div class="compare_to' + (!series ? ' pending' : '') + '">' + model.get('sym') + '<span class="x"></span><span class="value"></span></div>')
-          .appendTo($selection)
-          .css({ color:model._compare.color });
+        if(!series || series.isPending) $label.addClass('pending');
+        else $label.removeClass('pending');
         
-        $label.find('.x')
-          .css({ backgroundColor: model._compare.color })
-          .click(function() { removeComparison(model); });
+        $label.find('.sym').text(model.get('sym'));
         
         var $val = $('.value', $label);
         if(model.get(series_type)) {
@@ -83,7 +111,6 @@
           });
         };
       });
-      
       graph.changeGraph.compareWith(availableSeries, callbacks);
     }
   }
