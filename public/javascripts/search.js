@@ -57,18 +57,21 @@
     
     function focus() { 
       if(matches.length) {
-        $dropdown.fadeIn();
-        
-        var pos = $input.show().offset(),
-            css = { left:pos.left };
-        
-        if(opts.dropdownNorth) css['bottom'] = $(window).height() - pos.top + 2 - $(window).scrollTop();
-        else css['top'] = pos.top + 18;
-        
-        $dropdown.css(css);
+        $dropdown.fadeIn();        
+        repositionDropdown();
       }
     }
     function blur() { $dropdown.fadeOut(); }
+    
+    function repositionDropdown() {
+      var pos = $input.show().offset(),
+          css = { left:pos.left };
+          
+      if(opts.dropdownNorth) css['bottom'] = $(window).height() - (pos.top + 2 - $(window).scrollTop());
+      else css['top'] = pos.top + 18;
+      
+      $dropdown.css(css);
+    }
     
     function setSelection(_selection) {
       $dropdown.fadeIn();

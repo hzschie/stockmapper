@@ -29,6 +29,7 @@ input {
   -moz-transition:margin .4s;
   -ms-transition:margin .4s;
   transition:margin .4s;
+  z-index:1;
 }
 
 .layout.open_help > *{
