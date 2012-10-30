@@ -1,7 +1,8 @@
 var fs = require('fs'),
     request = require('request'),
     flow = require('nimble'),
-    ansi = require('ansi');
+    ansi = require('ansi'),
+    LogUtil = require('./lib/log_util');
 
 if(!process.env.DATA_HOST) throw new Error('Missing Environment Variable DATA_HOST (e.g. DATA_HOST=54.251.130.77:8080)');
 
@@ -47,13 +48,12 @@ function createGroups(callback) {
     .bold()
     .write('Building definitions...\n')
     .reset();
-    
-  request(urlBase + 'GetBlufinIndexList', function(error, response, body) {
+  
+  var url = urlBase + 'GetBlufinIndexList';
+  request(url, function(error, response, body) {
     if(error || response.statusCode >= 400) {
-      if(error) console.error(error);
-      else cursor.hex('#cc0000').write(
-        'Data not available for GetBlufinIndexList. Status code was ' + response.statusCode + '\n'
-      );
+      cursor.hex('#cc0000').write('');
+      console.error( LogUtil.cantGet('GetBlufinIndexList', null, error || response.statusCode, url) );
       return callback();
     }
     var groupsJson = JSON.parse(body);
@@ -106,10 +106,8 @@ function createGroups(callback) {
 function createStocks(callback) {
   request(urlBase + 'GetLatestIndexConstituentsDataByIndexID?IndexID=1000', function(error, response, body) {
     if(error || response.statusCode >= 400) {
-      if(error) console.error(error);
-      else cursor.hex('#cc0000').write(
-        'Data not available for GetLatestIndexConstituentsDataByIndexID?IndexId=1000. Status code was ' + response.statusCode + '\n'
-      );
+      cursor.hex('#cc0000').write('');
+      console.error( LogUtil.cantGet('index constituents', 'IndexId=1000', error || response.statusCode, url) );
       return callback();
     }
     
@@ -181,8 +179,14 @@ function writeDefinitions(callback) {
   cursor
     .hex('#00ff00')
     .bold()
-    .write('Definitions built successfully!\n')
+    .write(LogUtil.timestamp() + 'Definitions built successfully!\n')
     .reset();
+    
+  if(Object.keys(groups).length == 0 || Object.keys(stocks).length == 0) {
+      cursor.hex('#cc0000')
+      .write(LogUtil.timestamp() + 'However, definitions appear to be empty!\n')
+      .reset();
+  }
     
   callback();
 }
