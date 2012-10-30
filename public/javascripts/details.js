@@ -111,7 +111,7 @@
     this.updateGraph = function() {
       graph.setPending(true);
       Interval.callOnce({
-        key: 'update_graph',
+        key: 'update_graph_' + (model ? model.id : ''),
         fn: function() {
           model && model.acquireTimeSeries(series_type, function(series) { graph.render(series); });
         }
