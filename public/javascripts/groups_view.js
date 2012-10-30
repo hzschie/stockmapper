@@ -207,7 +207,7 @@
           _scheme;
       while(true) {
         _scheme = schemes[i] || new Scheme(clusters, i+2);
-        if(width / _scheme.numCols >= 140 || i > 20) break;//140 for blufin, 127 for nyse
+        if(width / _scheme.numCols >= 155 || i > 20) break;//140-155 for blufin, 127 for nyse
         i++;
       }
       return _scheme;
