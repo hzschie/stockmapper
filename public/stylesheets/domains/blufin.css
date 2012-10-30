@@ -164,7 +164,7 @@ a.twit, a.fb, a.ya, a.in {
 
 /* --------------------------------- MOBILE HEADER BANNER --------------------------------- */
 .mobile header .logo {
-  background:transparent url('/images/blufin/mobile_logo.png') no-repeat scroll top left;
+  background:transparent url('/images/blufin/mobile_logo.png?10302012') no-repeat scroll top left;
   width:96px;
   background-size: 100%;
 }
