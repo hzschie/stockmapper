@@ -18,6 +18,16 @@
 .compare.inspected .search {
   opacity:0;
 }
+.compare .pre > span:first-child {
+  opacity:1;
+  -webkit-transition:opacity .3s;
+  -moz-transition:opacity .3s;
+  -ms-transition:opacity .3s;
+  transition:opacity .3s;
+}
+.compare.inspected .pre > span:first-child {
+  opacity:0;
+}
 .compare .selection {
   display:inline-block;
   margin-left:10px;

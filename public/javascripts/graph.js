@@ -314,7 +314,6 @@
         .append('path')
         .attr('class', function(_series) { return _series == series ? 'graph_path change_path' : 'change_path'; })
         .attr('stroke-width', function(_series) { return _series == series ? 2 : 1; })
-        .attr('stroke', function(_series) { return _series.color; })
         .attr('transform', 'translate(' + x + ',' + y + ')');
         
       changePaths.exit().remove();
@@ -340,7 +339,10 @@
         .attr('y1', y + yc(0))
         .attr('y2', y + yc(0));
       
-      changePaths.order().each(function(_series) {
+      changePaths
+        .attr('stroke', function(_series) { return _series.color; })
+        .order()
+        .each(function(_series) {
         var price0 = _series.price_ref != null ? _series.price_ref : _series.getNearestSlice(tRange[0]).price,
             yChange = function(slice) { return yc( 100 * (slice.price - price0) / price0 ); },
             dLine = d3.svg.line().y(yChange);

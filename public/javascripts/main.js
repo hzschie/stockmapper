@@ -16,7 +16,7 @@ mapper.dataReady = function() {
         viewState = new mapper.ViewState({
           defaultGroup: mapper.allGroup,
           defaultSort: mapper.sortFunctions.chg,
-          trackedParams: ['filter', 'sort', 'q', 'range']
+          trackedParams: ['filter', 'sort', 'q', 'range', 'compare']
         }),
         layout = new mapper.Layout(groups, indexDetails, views, map, chart, inspector, stockDetails);
     
@@ -58,6 +58,12 @@ mapper.dataReady = function() {
         indexDetails.setRange(viewState.get('range'));
       }
       
+      if(viewState.hasChanged('compare') || force) {
+        var symbols = viewState.get('compare');
+        symbols = symbols ? symbols.split(',') : [];
+        stockDetails.setCompareSymbols(symbols);
+      }
+      
       if(viewState.hasChanged('searchStock')) {
         var searchStock = viewState.get('searchStock');
         map.search(searchStock);
@@ -73,12 +79,12 @@ mapper.dataReady = function() {
     viewState.on('change', function() { updateView(false); });
     
     function viewSelected(id) {
-      viewState.setState({ q: null });
+      viewState.setState({ q: null, compare:null });
       layout.frameView(id);
     }
 
     groups.on('select_group', function(group) {
-      viewState.setState({ filter: group.get('urlName'), q: null });
+      viewState.setState({ filter: group.get('urlName'), q: null, compare:null });
     });
     groups.on('inspect_group', function(group, $tag) {
       inspector.inspectGroup(group, $tag);
@@ -89,35 +95,38 @@ mapper.dataReady = function() {
     });
     search.on('commit_option', function(model) {
       if(model && model.constructor == mapper.StockGroup) {
-        viewState.setState({ filter: model.get('urlName'), q: null });
+        viewState.setState({ filter: model.get('urlName'), q: null, compare:null });
       }
       else {
-        viewState.setState({ q: (model && model.id) || null });
+        viewState.setState({ q: (model && model.id) || null, compare:null });
       }
     });
     
     map.on('select_tag', function(model, $tag) {
-      viewState.setState({ q: model.id });
+      viewState.setState({ q: model.id, compare:null });
     });
     map.on('inspect_tag', function(model, $tag) {
       inspector.inspectTag(model, $tag);
     });
     
     chart.on('select_bar', function(model, $bar) {
-      viewState.setState({ q: model.id });
+      viewState.setState({ q: model.id, compare:null });
     });
     chart.on('inspect_bar', function(model, $subBar, isVol, yFixed) {
       inspector.inspectBar(model, $subBar, isVol, yFixed);
     });
     
     stockDetails.on('click_close', function() {
-      viewState.setState({ q: null });
+      viewState.setState({ q: null, compare:null });
     });
     stockDetails.on('select_range', function(range) {
       viewState.setState({ range: range });
     });
     indexDetails.on('select_range', function(range) {
       viewState.setState({ range: range });
+    });
+    stockDetails.on('change_comparison', function(symbols) {
+      viewState.setState({ compare: !symbols || symbols.length == 0 ? null : symbols });
     });
   });
 };

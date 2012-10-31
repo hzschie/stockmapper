@@ -31,6 +31,7 @@ var ViewState = mapper.ViewState = Backbone.Model.extend(
             sort: null,
             q: null,
             range: null,
+            compare: null,
             mobile: null
           },
           _this = this;

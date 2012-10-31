@@ -66,6 +66,8 @@
 
     if($close.length == 1) $close.click(function() { _this.trigger('click_close'); });
     
+    compare && compare.on('change_selection', function(symbols) { _this.trigger('change_comparison', symbols); });
+    
     this.close = function() {
       $details.addClass('disabled');
       this.trigger('close');
@@ -106,6 +108,10 @@
       
       this.updateGraph();
       compare && compare.setSeriesType(series_type);
+    };
+    
+    this.setCompareSymbols = function(symbols) {
+      compare && compare.setSymbols(symbols);
     };
     
     this.updateGraph = function() {

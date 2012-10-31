@@ -32,11 +32,29 @@
       main.on('start_update_time_series', update);
       main.on('update_time_series', update);
       
-      selection = [];
       update();
     };
     
-    function addComparison(model) {
+    this.setSymbols = function(symbols) {
+      if(selection) {
+        var existingSymbols = _.uniq( $.map(selection, function(model) { return model.get('sym'); }) ).sort(),
+            newSymbols = _.uniq(symbols).sort();
+        if((newSymbols.length == existingSymbols.length) && (_.union(existingSymbols, newSymbols).length == newSymbols.length)) {
+          return;
+        }
+      }
+      while(selection.length > 0) {
+        removeComparison(selection[0], true);
+      }
+      $.each(symbols, function(i, sym) {
+        var search = new RegExp('^' + sym + '$', 'i');
+        var model = mapper.models.find(function(m) { return search.test(m.attributes.sym); });
+        if(model) addComparison(model, true);
+      });
+      update();
+    };
+    
+    function addComparison(model, skipUpdate) {
       if(!model || (model == main) || $.inArray(model, selection) > -1) return;
       
       selection.push(model);
@@ -47,20 +65,29 @@
       model.on('update_time_series', update);
       model.on('change:timestamp', acquire);
       acquire(model);
-      update();
       
       search.clear();
+      
+      if(skipUpdate) return;
+      update();
+      notify();
+    }
+    
+    function notify() {
+      _this.trigger('change_selection', $.map(selection, function(model) { return model.get('sym'); }));
     }
     
     function acquire(model) {
       model.acquireTimeSeries(series_type);
     }
     
-    function removeComparison(model) {
+    function removeComparison(model, skipUpdate) {
       model.off('update_time_series', update);
       model.on('off:timestamp', acquire);
       selection.splice($.inArray(model, selection), 1);
+      if(skipUpdate) return;
       update();
+      notify();
     }
     
     function update() {

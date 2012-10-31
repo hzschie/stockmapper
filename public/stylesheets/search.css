@@ -47,12 +47,14 @@
   white-space:nowrap;
   font-size:12px;
   padding-right:8px;
+  vertical-align:middle;
 }
 
 .search_dropdown .code {
   display:inline-block;
   width:60px;
   font-size:13px;
+  vertical-align:middle;
 }
 
 .search_dropdown .name {
@@ -62,6 +64,7 @@
   text-overflow:ellipsis;
   white-space:nowrap;
   overflow:hidden;
+  vertical-align:middle;
 }
 .search_dropdown > div {
   cursor:pointer;
