@@ -47,6 +47,9 @@ input {
   width:270px;
   margin-right:0;
 }
+.layout .help a {
+  color:#ddf;
+}
 .help .close {
   width:18px;
   height:18px;
