@@ -17,7 +17,7 @@ body.mobile {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#444444', endColorstr='#222222',GradientType=0 ); /* IE6-9 */
 }
 
-.mobile header {
+.mobile .app_header {
   position:fixed;
   top:0;
   left:0;
@@ -29,7 +29,7 @@ body.mobile {
   background-color:rgba(44,44,44,.9);
   border-bottom:1px solid rgba(0,0,0,.5);
 }
-.mobile header:before {
+.mobile .app_header:before {
   position:absolute;
   left:0;
   right:0;
@@ -39,7 +39,7 @@ body.mobile {
   background-color:rgba(255,255,255,.1);
   content:'';
 }
-.mobile header .back {
+.mobile .app_header .back {
   position:absolute;
   display:none;
   top:10px;
@@ -54,7 +54,7 @@ body.mobile {
   background:#fff url('/images/mobile/back_arrow.png') no-repeat scroll 3px 3px;
   background-size: auto 74%;
 }
-.mobile header .logo {
+.mobile .app_header .logo {
   height:41px;
   display:inline-block;
 }

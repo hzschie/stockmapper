@@ -6,9 +6,12 @@ html
     meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0")
     
     block links
-      
+
     != renderStyles()
-    
+
+    //if lt IE 9
+      script(type="text/javascript", src="/javascripts/lib/aight.min.js")
+            
     // script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
     script(type='text/javascript', src='/javascripts/lib/jquery-1.7.2.min.js')
     script(type='text/javascript')

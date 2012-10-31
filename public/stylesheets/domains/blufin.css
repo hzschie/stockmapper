@@ -79,8 +79,8 @@ body {
 }
 
 /* --------------------------------- HEADER BANNER --------------------------------- */
-header {
-  color:white;
+.app_header {
+  color:#fff;
   padding:4px 3px 0 9px;
   max-height:60px;
 }
@@ -116,7 +116,7 @@ header {
 #social-icons {
   margin-top:-1px;
 }
-header #logo {
+.app_header #logo {
   float:left;
   color: #FFFFFF;
   display:inline-block;
@@ -163,7 +163,7 @@ a.twit, a.fb, a.ya, a.in {
 }
 
 /* --------------------------------- MOBILE HEADER BANNER --------------------------------- */
-.mobile header .logo {
+.mobile .app_header .logo {
   background:transparent url('/images/blufin/mobile_logo.png?10302012') no-repeat scroll top left;
   width:96px;
   background-size: 100%;

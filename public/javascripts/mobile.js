@@ -12,7 +12,7 @@ mapper.Mobile.ready = function() {
       map = new mapper.Map($('.map ul')),
       details = new mapper.Details($('.details')),
       
-      $back = $('header .back'),
+      $back = $('.app_header .back'),
       $window = $(window);
       
   $window.resize(function() {
