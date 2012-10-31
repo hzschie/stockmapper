@@ -121,7 +121,7 @@
         
         _.each(baseModels, function(model) {
           if(regexp.test(model.id)) {
-            matches.push({ model:model, isNumeric:true, best:model.id.match(regexp)[0] });
+            matches.push({ model:model, isNumeric:true, best:String(model.id).match(regexp)[0] });
           }
         });
         matches = matches.slice(0,10);
@@ -189,7 +189,7 @@
         return [
           '<div>',
             '<span class="sym">', format(match.model.get('sym'), match.best), '</span>',
-            match.isNumeric ? '<span class="code">' + format(match.model.get('id'), match.best) + '</span>' : '',
+            match.isNumeric ? '<span class="code">' + format(String(match.model.get('id')), match.best) + '</span>' : '',
             '<span class="name">', format(match.model.get('name'), match.best), '</span>',
           '</div>'
         ].join('');
