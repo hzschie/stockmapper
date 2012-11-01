@@ -38,9 +38,9 @@ $(function() {
   else {// otherwise, we use regular http queries for heatmap data
     socket = { emit: function() { /* no-op */} };// Stub out socket
     setInterval(function() {
-      $.getJSON('/datasets/heatmap', parseIncomingMultiStockData);
+      $.getJSON('/datasets/heatmap?random=' + Math.floor(Math.random() * 1000), parseIncomingMultiStockData);
     }, 60000);
-    $.getJSON('/datasets/heatmap', parseIncomingMultiStockData);
+    $.getJSON('/datasets/heatmap?random=' + Math.floor(Math.random() * 1000), parseIncomingMultiStockData);
   }
   
   // Parses incoming data regardless of transport method (WebSocket vs HTTP)

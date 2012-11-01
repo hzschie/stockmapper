@@ -38,7 +38,6 @@
   background: -o-linear-gradient(left,  #fffdee 0%,#fffcde 100%); /* Opera 11.10+ */
   background: -ms-linear-gradient(left,  #fffdee 0%,#fffcde 100%); /* IE10+ */
   background: linear-gradient(left,  #fffdee 0%,#fffcde 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffdee', endColorstr='#fffcde',GradientType=1 ); /* IE6-9 */
 }
 
 .inspector .content {

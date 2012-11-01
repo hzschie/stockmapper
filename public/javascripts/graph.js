@@ -43,8 +43,8 @@
         priceGraph.hide();
 
         xAxis.tickSize(-(priceH + volH + pad[T]), 0, 0);
-        xax.transition().attr('transform', 'translate(' + pad[L] + ',' + (priceH + volH + pad[T]) + ')');
-        divider1.transition().attr('y1', pad[T] + priceH + volH + gap).attr('y2', pad[T] + priceH + volH + gap);
+        ($.browser.msie ? xax : xax.transition()).attr('transform', 'translate(' + pad[L] + ',' + (priceH + volH + pad[T]) + ')');
+        ($.browser.msie ? divider1 : divider1.transition()).attr('y1', pad[T] + priceH + volH + gap).attr('y2', pad[T] + priceH + volH + gap);
       }
       else {
         if(hasVolume) {
@@ -58,8 +58,8 @@
         }
 
         xAxis.tickSize(-(priceH + pad[T]), 0, 0);
-        xax.transition().attr('transform', 'translate(' + pad[L] + ',' + (priceH + pad[T]) + ')');
-        divider1.transition().attr('y1', pad[T] + priceH + gap).attr('y2', pad[T] + priceH + gap);
+        ($.browser.msie ? xax : xax.transition()).attr('transform', 'translate(' + pad[L] + ',' + (priceH + pad[T]) + ')');
+        ($.browser.msie ? divider1 : divider1.transition()).attr('y1', pad[T] + priceH + gap).attr('y2', pad[T] + priceH + gap);
       }
       
       if(series) { _this.render(series); }
@@ -96,7 +96,7 @@
           { $:'.volume', field:'volume', formatter:mapper.Template.metricFormat }
         ],
         template = new mapper.Template();
-    $svg.hover(
+    $graph.hover(
       function() {
         $svg.on('mousemove', function(event) {
           if(!series || isPending) return;
@@ -524,7 +524,7 @@
         .attr('x2', xt)
         .attr('y1', h)
         .attr('y2', yVol)
-        .style('display', function(slice) { return series.type == 'daily' ? true : isWithinMarketHours(slice) ? '' : 'none'; });
+        .style('display', function(slice) { return series.type == 'daily' ? '' : isWithinMarketHours(slice) ? '' : 'none'; });
       bars.exit().remove();
     };
   }

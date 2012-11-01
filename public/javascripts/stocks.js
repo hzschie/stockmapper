@@ -41,7 +41,10 @@
         $.getJSON(
           url,
           function(data) {
-            if(!data) return callback && callback(null);
+            if(!data) {
+              _this.trigger('failed_update_time_series', existing);
+              return callback && callback(null);
+            }
 
             if(existing) existing.append(data.data);
             var ts = existing || new mapper.TimeSeries(data, seriesType);
