@@ -10,7 +10,7 @@ mapper.Mobile.ready = function() {
       groupInfo = new mapper.GroupInfo($('.group_info')),
       sorts = new mapper.SelectorButtons($('.sorts'), function(id) { viewState.setState({ sort:id }); }),
       map = new mapper.Map($('.map ul')),
-      details = new mapper.Details($('.details')),
+      details = new mapper.Details($('.layout > .details')),
       
       $back = $('.app_header .back'),
       $window = $(window);
