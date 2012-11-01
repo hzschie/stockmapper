@@ -98,8 +98,8 @@ function parseNyaCsv(stocksCsv) {
       spx = null;
   reader.on('data', function(stockRaw) {
     var sym = stockRaw.TICKER.replace('/', '-'),
-        sector = getOrCreateGroup('sector', stockRaw.INDUS),
-        country = getOrCreateGroup('region', stockRaw.COUNTRY);
+        sector = getOrCreateGroup('Sector', stockRaw.INDUS),
+        country = getOrCreateGroup('Region', stockRaw.COUNTRY);
         
     if(sector) sector.ids.push(sym);
     if(country) country.ids.push(sym);
@@ -117,7 +117,7 @@ function parseNyaCsv(stocksCsv) {
 }
 
 function getOrCreateGroup(category, name, type, id) {
-  if(category == 'region') name = regions[name];
+  if(category == 'Region') name = regions[name];
   if(!name || name == ',') return null;
   
   var groupId = category + '_' + name;
