@@ -96,7 +96,7 @@
           { $:'.volume', field:'volume', formatter:mapper.Template.metricFormat }
         ],
         template = new mapper.Template();
-    $graph.hover(
+    ($.browser.msie ? $graph : $svg).hover(
       function() {
         $svg.on('mousemove', function(event) {
           if(!series || isPending) return;
