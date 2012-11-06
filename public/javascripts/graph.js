@@ -186,10 +186,15 @@
     
     function prepareIntraday() {
       var dayOf0 = Math.floor((series.getMin('t') || Date.now()) / 8.64e7) * 8.64e7,
-          date0 = new Date(dayOf0 + marketHours.t0 * 60000),
-          dayOf1 = Math.floor((series.getMax('t') || Date.now()) / 8.64e7) * 8.64e7,
-          date1 = new Date(dayOf1 + marketHours.t1 * 60000);
+          dayOf1 = Math.floor((series.getMax('t') || Date.now()) / 8.64e7) * 8.64e7;
 
+      if(series.type == 'intraday' && dayOf0 != dayOf1) {
+        dayOf0 = dayOf1 - 86400000;
+      }
+      
+      var date0 = new Date(dayOf0 + marketHours.t0 * 60000),
+          date1 = new Date(dayOf1 + marketHours.t1 * 60000);
+      
       var t = dayOf0,
           d = 0,
           _w = series.type == '5day' ? innerW / 5 : innerW,
@@ -209,6 +214,13 @@
           d++;
         }
         t += 8.64e7;
+      }
+
+      if(series.type == '5day' && d > 5) {
+        var diff = d - 5;
+        domain.splice(0, diff * 2);
+        range.splice(range.length - diff * 2, diff * 2);
+        values.splice(0, diff);
       }
 
       x.domain(domain);
