@@ -189,7 +189,7 @@
           dayOf1 = Math.floor((series.getMax('t') || Date.now()) / 8.64e7) * 8.64e7;
 
       if(series.type == 'intraday' && dayOf0 != dayOf1) {
-        dayOf0 = dayOf1 - 86400000;
+        dayOf0 = dayOf1;
       }
       
       var date0 = new Date(dayOf0 + marketHours.t0 * 60000),

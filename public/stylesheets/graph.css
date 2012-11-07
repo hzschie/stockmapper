@@ -192,7 +192,7 @@
   stroke:#ccc;
 }
 .graph .y.axis .tick {
-  stroke: rgba(255,255,255,.2);
+  stroke: rgba(180,180,255,.2);
 }
 .graph .axis text {
   fill: #fff;
