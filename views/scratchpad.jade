@@ -37,24 +37,29 @@ html
         //       nb = b.get('members').length;
         //   return (na < nb) - (nb < na);
         // });
+        groups.sort(function(a, b) {
+          var na = a.get('nickname'),
+              nb = b.get('nickname');console.log(na,nb);
+          return (na > nb) - (nb > na);
+        });
         function generateBinTree(groups, memo) {
           var memo = memo || {};
-          memo.n = d3.sum(groups, function(group) { return group.get('members').length; });
-          if(groups.length == 1) return memo.g = groups[0];
-          else memo.t = [{},{}];
+          memo.numMembers = d3.sum(groups, function(group) { return group.get('members').length; });
+          if(groups.length == 1) return memo.leaf = groups[0];
+          else memo.branches = [{},{}];
           
           for(var i = 0, count = 0, split = [[],[]], len = groups.length; i < len; i++) {
             var group = groups[i],
                 numMembers = group.get('members').length;
             
-            if(count + numMembers/2 <= memo.n / 2) split[0].push(group);
+            if(count + numMembers/2 <= memo.numMembers / 2) split[0].push(group);
             else split[1].push(group);
             
             count += numMembers;
           }
           
-          generateBinTree(split[0], memo.t[0]);
-          generateBinTree(split[1], memo.t[1]);
+          generateBinTree(split[0], memo.branches[0]);
+          generateBinTree(split[1], memo.branches[1]);
           
           return memo;
         }
@@ -63,84 +68,44 @@ html
         gridifyBinTree(tree, 15);
         console.log(tree);
         
-        function gridifyBinTree(tree, gridW) {
-          tree.gw = gridW;
-          tree.gh = Math.ceil(tree.n / tree.gw);
+        function gridifyBinTree(tree, numCols) {
+          tree.numCols = numCols;
+          tree.numRows = Math.ceil(tree.numMembers / tree.numCols);
           
-          if(tree.g) { return tree.gh; }
+          if(tree.leaf) { return tree.numRows; }
           
-          var f0 = tree.t[0].n / tree.n,
-              f1 = tree.t[1].n / tree.n;
+          var f0 = tree.branches[0].numMembers / tree.numMembers,
+              f1 = tree.branches[1].numMembers / tree.numMembers;
           
-          tree.Igh = tree.gh;
-          if( (tree.gw * uw) / (tree.gh * uh) < 2 || Math.round(Math.min(f0 * tree.gw, f1 * tree.gw)) < 3) {//uw/uh) {
+          if( (tree.numCols * uw) / (tree.numRows * uh) < 2 || Math.round(Math.min(f0 * tree.numCols, f1 * tree.numCols)) < 3) {//uw/uh) {
             tree.stack = VERT;
-            tree.gh = gridifyBinTree(tree.t[0], tree.gw) + gridifyBinTree(tree.t[1], tree.gw);
+            tree.numRows = gridifyBinTree(tree.branches[0], tree.numCols) + gridifyBinTree(tree.branches[1], tree.numCols);
           }
           else {
             tree.stack = HORZ
-            tree.gh = Math.max( gridifyBinTree(tree.t[0], Math.round(f0 * tree.gw)), gridifyBinTree(tree.t[1], Math.round(f1 * tree.gw)) );
+            tree.numRows = Math.max( gridifyBinTree(tree.branches[0], Math.round(f0 * tree.numCols)), gridifyBinTree(tree.branches[1], Math.round(f1 * tree.numCols)) );
           }
-          return tree.gh;
+          return tree.numRows;
         }
         
         function renderBinTreeGrid(tree, $container) {
           $container.css({
-            width: tree.gw * uw,
-            height: tree.gh * uh
+            width: tree.numCols * uw,
+            height: tree.numRows * uh
           });
           
-          if(tree.g) return $container.text(tree.g.get('nickname') + " " + tree.gw + 'x' + tree.gh + '(' + (Math.round(100*tree.n/tree.gw) / 100) + ')');
+          if(tree.leaf) return $container.text(tree.leaf.get('nickname') + " " + tree.numCols + 'x' + tree.numRows + '(' + (Math.round(100*tree.numMembers/tree.numCols) / 100) + ')');
           
           if(tree.stack == VERT) {
-            renderBinTreeGrid(tree.t[0], $('<div></div>').appendTo($container));
-            renderBinTreeGrid(tree.t[1], $('<div></div>').css({ top:tree.t[0].gh * uh - 1 }).appendTo($container));
+            renderBinTreeGrid(tree.branches[0], $('<div></div>').appendTo($container));
+            renderBinTreeGrid(tree.branches[1], $('<div></div>').css({ top:tree.branches[0].numRows * uh - 1 }).appendTo($container));
           }
           else {
-            renderBinTreeGrid(tree.t[0], $('<div></div>').appendTo($container));
-            renderBinTreeGrid(tree.t[1], $('<div></div>').css({ left:tree.t[0].gw * uw - 1 }).appendTo($container));
+            renderBinTreeGrid(tree.branches[0], $('<div></div>').appendTo($container));
+            renderBinTreeGrid(tree.branches[1], $('<div></div>').css({ left:tree.branches[0].numCols * uw - 1 }).appendTo($container));
           }
         }
         
-        function renderBinTree(tree, $container) {
-          if(tree.g) return $container.text(tree.g.get('nickname') + " " + tree.gw + 'x' + tree.gh + '(' + (tree.n/tree.gw) + ')');
-          
-          var w = $container.width(),
-              h = $container.height(),
-              $c0 = $('<div></div>').appendTo($container),
-              $c1 = $('<div></div>').appendTo($container),
-              f0 = tree.t[0].n / tree.n,
-              f1 = tree.t[1].n / tree.n,
-              temp;
-          
-          if(h > w) {
-            $c0.css({
-              width: w,
-              height: temp = f0 * h
-            });
-            $c1.css({
-              top: temp - 1,
-              width: w,
-              height: f1 * h
-            });
-          }
-          else {
-            $c0.css({
-              width: temp = f0 * w,
-              height: h
-            });
-            $c1.css({
-              left: temp - 1,
-              width: f1 * w,
-              height: h
-            });
-          }
-          
-          renderBinTree(tree.t[0], $c0);
-          renderBinTree(tree.t[1], $c1);
-        }
-        
-        // renderBinTree(tree, $('<div class="tree" style="width:600px; height:900px;"></div>').appendTo($('body')));
         renderBinTreeGrid(tree, $('<div class="tree"></div>').appendTo($('body')));
       };
 
