@@ -437,6 +437,10 @@
         pMin = Math.min(series.price_ref, pMin || (series.price_ref * .9));
         pMax = Math.max(series.price_ref, pMax || (series.price_ref * 1.1));
       }
+      
+      if(!pMin) pMin = 0;
+      if(!pMax) pMax = pMin;
+
       var dPad = (pMax - pMin) * .1;
 
       yp.domain([Math.max(0, pMin - dPad), pMax + dPad]);
@@ -448,7 +452,7 @@
         .attr('y1', y + yp(series.price_ref || 0))
         .attr('y2', y + yp(series.price_ref || 0));
 
-      if(series.data.length == 0) return;
+      // if(series.data.length == 0) return;
 
 
       if(series.type == 'intraday') {

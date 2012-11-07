@@ -16,8 +16,8 @@ var verbose = /true/i.test(process.env.VERBOSE),
 // DETECT IF RUNNING AS STANDALONE SCRIPT, OR AS MODULE IMPORTED
 // BY THE MAIN APP (FOR DYNAMIC REFRESHING)
 if(require.main === module) {
-  flow.series([createGroups, createStocks, writeDefinitions]);
   cursor = ansi(process.stdout);
+  flow.series([createGroups, createStocks, writeDefinitions]);
 }
 else {
   var events = require('events');
@@ -121,7 +121,7 @@ function createStocks(callback) {
     
     stocksRaw.forEach(function(stock) {
       var sym = stock.s;// ScripId
-      stocks[sym] = stocks[sym] || [stock.cid, stock.n, sym];//[ScripCode, ScripName, sym]
+      stocks[sym] = stocks[sym] || [stock.cid, stock.n, sym, stock.nse == 1];//[ScripCode, ScripName, sym, isNse]
       
       var sector = stock.sec,// Sector
           capitalization = stock.c,// Capitalization
@@ -164,7 +164,7 @@ function createStocks(callback) {
 function writeDefinitions(callback) {
   var groupsJSON = Object.keys(groups).map(function(key) { return groups[key]; });
   var stocksJSON = {
-    headers: ['id', 'name', 'sym'],
+    headers: ['id', 'name', 'sym', 'isNse'],
     data: Object.keys(stocks).sort().map(function(key) { return stocks[key]; })
   };
   

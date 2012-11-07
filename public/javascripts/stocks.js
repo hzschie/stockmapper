@@ -30,7 +30,7 @@
         var existing = this.get(seriesType),
             setter = {},
             _this = this,
-            url = '/series/' + this.id + '?type=' + seriesType + '&resource=' + this.get('type');
+            url = '/series/' + this.id + '?type=' + seriesType + '&resource=' + this.get('type') + '&nse=' + this.get('isNse');
             
         url += existing ? '&timestamp=' + (existing.getTimestamp() || '') : '';
         url += '&random=' + Math.floor(Math.random() * 1000);

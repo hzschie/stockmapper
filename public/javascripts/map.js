@@ -1,4 +1,6 @@
 (function() {
+  mapper.Map = Map;
+  
   function Map($map, _models) {
     _.extend(this, Backbone.Events);
     var models,
@@ -245,7 +247,8 @@
       }
       return cells;
     }
+    
+    function makeClusters(n, c, r) {
+    }
   };
-  
-  mapper.Map = Map;
 })();
