@@ -121,7 +121,7 @@ function createStocks(callback) {
     
     stocksRaw.forEach(function(stock) {
       var sym = stock.s;// ScripId
-      stocks[sym] = stocks[sym] || [stock.cid, stock.n, sym, stock.nse == 1];//[ScripCode, ScripName, sym, isNse]
+      stocks[sym] = [stock.cid, stock.n, sym, stock.nse == 1];//[ScripCode, ScripName, sym, isNse]
       
       var sector = stock.sec,// Sector
           capitalization = stock.c,// Capitalization
