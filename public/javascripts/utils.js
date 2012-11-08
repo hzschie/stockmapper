@@ -56,7 +56,7 @@ else {
   };
 
   
-  mapper.Grid = function(_n, bw, _w, _h, makeCells) {
+  mapper.Grid = function(_n, bw, _w, _h, makeCells, alwaysRemake) {
     var c, r, w, h, n, d,
         _this = this,
         cells,
@@ -71,8 +71,8 @@ else {
       w = _w || w;
       h = _h || h;
 
-      if(n != nOld || c != cOld) {
-        cells = makeCells(n, c, r);
+      if(alwaysRemake || n != nOld || c != cOld) {
+        cells = makeCells(n, c, r, w, h);
       }
       // console.log('n='+n, 'c='+c, 'r='+r, 'w='+w, 'h='+h);
     };

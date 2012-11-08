@@ -71,6 +71,7 @@
       model._map.$shadow = $shadow;
       
       if(!grid) {
+        // grid = new mapper.Grid(models.length, parentW, $tag.outerWidth() - 1, $tag.outerHeight() - 1, makeClusters, true);
         grid = new mapper.Grid(models.length, parentW, $tag.outerWidth() - 1, $tag.outerHeight() - 1, makeCells);
         updateBounds();
       }
@@ -248,7 +249,108 @@
       return cells;
     }
     
-    function makeClusters(n, c, r) {
+    var HORZ = 0, VERT = 1;
+    
+    function makeClusters(n, c, r, uw, uh) {
+      var category = 'Sector',//'Capitisation',//'Industry',//,
+          indexedModels = _.map(models.models, function(model, i) { return { i:i, model:model }; }),
+          nesting = d3.nest()
+            .key(function(indexedModel) {
+              var applicableGroup = _.find(
+                indexedModel.model.get('groups'), 
+                function(group) {
+                  return group.get('category') == category;
+                }
+              );
+              
+              return applicableGroup && applicableGroup.get('nickname');
+            })
+            .sortKeys(d3.ascending)
+            .entries(indexedModels),
+          tree = generateBinTree(nesting);
+      
+      gridifyBinTree(tree, c);
+      console.log(tree);
+      
+      return makeCells(tree);
+      
+      function generateBinTree(groups, memo) {
+        var memo = memo || {};
+        memo.numMembers = d3.sum(groups, function(group) { return group.values.length; });
+        if(groups.length == 1) return memo.leaf = groups[0];
+        else memo.branches = [{},{}];
+
+        for(var i = 0, count = 0, split = [[],[]], len = groups.length; i < len; i++) {
+          var group = groups[i],
+              numMembers = group.values.length;
+
+          if(count + numMembers/2 <= memo.numMembers / 2) split[0].push(group);
+          else split[1].push(group);
+
+          count += numMembers;
+        }
+
+        generateBinTree(split[0], memo.branches[0]);
+        generateBinTree(split[1], memo.branches[1]);
+
+        return memo;
+      }
+      
+      function gridifyBinTree(tree, numCols) {
+        tree.numCols = numCols;
+        tree.numRows = Math.ceil(tree.numMembers / tree.numCols);
+        
+        if(tree.leaf) { return tree.numRows; }
+        
+        var f0 = tree.branches[0].numMembers / tree.numMembers,
+            f1 = tree.branches[1].numMembers / tree.numMembers;
+        
+        // if( (tree.numCols * uw) / (tree.numRows * uh) < 2 || Math.round(Math.min(f0 * tree.numCols, f1 * tree.numCols)) < 3) {//uw/uh) {
+        var horzSlimness = uw * Math.min(f0 * tree.numCols, f1 * tree.numCols) / (tree.numRows * uh);
+            // vertFlatness = uw * tree.numCols / (Math.min(f0, f1) * uh * tree.numRows);console.log(vertFlatness);//vertFlatness < 2 && 
+            
+        var bestHorzAspect = uw * Math.max(f0, f1) * tree.numCols / (tree.numRows * uh),
+            bestVertAspect = uh * Math.max(f0, f1) * tree.numRows / (uw * tree.numCols),
+            numColsIfHorz = Math.round(Math.min(f0, f1) * tree.numCols);
+            console.log(bestHorzAspect, bestVertAspect);
+        
+        // if(horzSlimness < 1 || numColsIfHorz < 3) {
+        // if(Math.abs(1 - bestHorzAspect) > Math.abs(1 - bestVertAspect) || numColsIfHorz < 3) {
+        if(bestHorzAspect < bestVertAspect || numColsIfHorz < 3) {
+          tree.stack = VERT;
+          tree.numRows = gridifyBinTree(tree.branches[0], tree.numCols) + gridifyBinTree(tree.branches[1], tree.numCols);
+        }
+        else {
+          tree.stack = HORZ;
+          tree.numRows = Math.max( gridifyBinTree(tree.branches[0], Math.round(f0 * tree.numCols)), gridifyBinTree(tree.branches[1], Math.round(f1 * tree.numCols)) );
+        }
+        return tree.numRows;
+      }
+      
+      function makeCells(tree, cells, i0, pos0) {
+        cells = cells || [];
+        i0 = i0 || 0;
+        pos0 = pos0 || [0, 0];
+        
+        if(tree.leaf) {
+          var indexedModels = tree.leaf.values;
+          for(var i = 0; i < tree.numMembers; i++) {
+            cells[indexedModels[i]['i']] = [ pos0[0] + (i % tree.numCols), pos0[1] + Math.floor(i / tree.numCols) ];
+          }
+          return;
+        }
+          // $container.text(tree.leaf.get('nickname') + " " + tree.numCols + 'x' + tree.numRows + '(' + (Math.round(100*tree.numMembers/tree.numCols) / 100) + ')');
+        
+        if(tree.stack == VERT) {
+          makeCells(tree.branches[0], cells, i0, pos0);
+          makeCells(tree.branches[1], cells, i0 + tree.branches[0].numMembers, [pos0[0], pos0[1] + tree.branches[0].numRows]);
+        }
+        else {
+          makeCells(tree.branches[0], cells, i0, pos0);
+          makeCells(tree.branches[1], cells, i0 + tree.branches[0].numMembers, [pos0[0] + tree.branches[0].numCols, pos0[1]]);
+        }
+        return cells;
+      }
     }
   };
 })();

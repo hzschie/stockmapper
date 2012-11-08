@@ -77,7 +77,8 @@ html
           var f0 = tree.branches[0].numMembers / tree.numMembers,
               f1 = tree.branches[1].numMembers / tree.numMembers;
           
-          if( (tree.numCols * uw) / (tree.numRows * uh) < 2 || Math.round(Math.min(f0 * tree.numCols, f1 * tree.numCols)) < 3) {//uw/uh) {
+          // if( (tree.numCols * uw) / (tree.numRows * uh) < 2 || Math.round(Math.min(f0 * tree.numCols, f1 * tree.numCols)) < 3) {//uw/uh) {
+          if(Math.round(Math.min(f0 * tree.numCols, f1 * tree.numCols)) < 3) {//uw/uh) {
             tree.stack = VERT;
             tree.numRows = gridifyBinTree(tree.branches[0], tree.numCols) + gridifyBinTree(tree.branches[1], tree.numCols);
           }
