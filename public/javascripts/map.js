@@ -205,7 +205,6 @@
             delete model._map;
           });
       }, key:'map_add' });
-      // console.log(Date.now() - tt + ' ms, MAP redraw', '\t\t\t');
     }
     
     function updateBounds() {
@@ -276,19 +275,16 @@
         gridifyBinTree(tree, _c);
       }
       
-      // while(!tree.numCols || tree.numCols > _c) {
-      //   console.log(tree.numCols,'vs',_c);
-      //   gridifyBinTree(tree, tree.numCols ? tree.numCols - 1 : _c);
-      //   
-      //   if(_c < 10) break;
-      // }
-      
       return makeCells(tree);
       
       function generateBinTree(groups, memo) {
         var memo = memo || {};
         memo.numMembers = d3.sum(groups, function(group) { return group.values.length; });
-        if(groups.length == 1) return memo.leaf = groups[0];
+
+        if(groups.length == 1) {
+          memo.leaf = groups[0];
+          return memo;
+        }
         else memo.branches = [{},{}];
 
         for(var i = 0, count = 0, split = [[],[]], len = groups.length; i < len; i++) {
@@ -358,7 +354,7 @@
             cells[indexedModels[i]['i']] = [ pos0[0] + (i % tree.numCols) + tree.xGaps * uh/uw, pos0[1] + Math.floor(i / tree.numCols) + tree.yGaps ];
             // cells[indexedModels[i]['i']] = [ pos0[0] + Math.floor(i / tree.numRows) + tree.xGaps * uh/uw, pos0[1] + (i % tree.numRows) + tree.yGaps ];
           }
-          return;
+          return cells;
         }
         
         if(tree.stack == VERT) {
