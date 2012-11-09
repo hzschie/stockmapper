@@ -269,7 +269,7 @@
             .entries(indexedModels),
           tree = generateBinTree(nesting);
       
-      gridifyBinTree(tree, c);
+      gridifyBinTree(tree, c-5);
       console.log(tree);
       
       return makeCells(tree);
@@ -303,20 +303,18 @@
         if(tree.leaf) { return tree.numRows; }
         
         var f0 = tree.branches[0].numMembers / tree.numMembers,
-            f1 = tree.branches[1].numMembers / tree.numMembers;
+            f1 = tree.branches[1].numMembers / tree.numMembers,
+            fMin = Math.min(f0, f1),
+            fMax = Math.max(f0, f1);
         
-        // if( (tree.numCols * uw) / (tree.numRows * uh) < 2 || Math.round(Math.min(f0 * tree.numCols, f1 * tree.numCols)) < 3) {//uw/uh) {
-        var horzSlimness = uw * Math.min(f0 * tree.numCols, f1 * tree.numCols) / (tree.numRows * uh);
-            // vertFlatness = uw * tree.numCols / (Math.min(f0, f1) * uh * tree.numRows);console.log(vertFlatness);//vertFlatness < 2 && 
-            
-        var bestHorzAspect = uw * Math.max(f0, f1) * tree.numCols / (tree.numRows * uh),
-            bestVertAspect = uh * Math.max(f0, f1) * tree.numRows / (uw * tree.numCols),
-            numColsIfHorz = Math.round(Math.min(f0, f1) * tree.numCols);
-            console.log(bestHorzAspect, bestVertAspect);
+        var aspect = uw * tree.numCols / (tree.numRows * uh),
+            bestHorzAspect  = fMax * aspect,
+            // worstHorzAspect = fMin * aspect,
+            bestVertAspect  = fMax / aspect,
+            // worstVertAspect = fMin / aspect,
+            numColsIfHorz = Math.round(fMin * tree.numCols);
         
-        // if(horzSlimness < 1 || numColsIfHorz < 3) {
-        // if(Math.abs(1 - bestHorzAspect) > Math.abs(1 - bestVertAspect) || numColsIfHorz < 3) {
-        if(bestHorzAspect < bestVertAspect || numColsIfHorz < 3) {
+        if((bestHorzAspect < bestVertAspect) || numColsIfHorz < 3) {
           tree.stack = VERT;
           tree.numRows = gridifyBinTree(tree.branches[0], tree.numCols) + gridifyBinTree(tree.branches[1], tree.numCols);
         }
@@ -327,9 +325,8 @@
         return tree.numRows;
       }
       
-      function makeCells(tree, cells, i0, pos0) {
+      function makeCells(tree, cells, pos0) {
         cells = cells || [];
-        i0 = i0 || 0;
         pos0 = pos0 || [0, 0];
         
         if(tree.leaf) {
@@ -339,15 +336,14 @@
           }
           return;
         }
-          // $container.text(tree.leaf.get('nickname') + " " + tree.numCols + 'x' + tree.numRows + '(' + (Math.round(100*tree.numMembers/tree.numCols) / 100) + ')');
         
         if(tree.stack == VERT) {
-          makeCells(tree.branches[0], cells, i0, pos0);
-          makeCells(tree.branches[1], cells, i0 + tree.branches[0].numMembers, [pos0[0], pos0[1] + tree.branches[0].numRows]);
+          makeCells(tree.branches[0], cells, pos0);
+          makeCells(tree.branches[1], cells, [pos0[0], pos0[1] + tree.branches[0].numRows]);
         }
         else {
-          makeCells(tree.branches[0], cells, i0, pos0);
-          makeCells(tree.branches[1], cells, i0 + tree.branches[0].numMembers, [pos0[0] + tree.branches[0].numCols, pos0[1]]);
+          makeCells(tree.branches[0], cells, pos0);
+          makeCells(tree.branches[1], cells, [pos0[0] + tree.branches[0].numCols, pos0[1]]);
         }
         return cells;
       }
