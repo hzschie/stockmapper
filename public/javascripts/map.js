@@ -71,8 +71,8 @@
       model._map.$shadow = $shadow;
       
       if(!grid) {
-        // grid = new mapper.Grid(models.length, parentW, $tag.outerWidth() - 1, $tag.outerHeight() - 1, makeClusters, true);
-        grid = new mapper.Grid(models.length, parentW, $tag.outerWidth() - 1, $tag.outerHeight() - 1, makeCells);
+        grid = new mapper.Grid(models.length, parentW, $tag.outerWidth() - 1, $tag.outerHeight() - 1, makeClusters, true);
+        // grid = new mapper.Grid(models.length, parentW, $tag.outerWidth() - 1, $tag.outerHeight() - 1, makeCells);
         updateBounds();
       }
       
@@ -252,7 +252,7 @@
     var HORZ = 0, VERT = 1;
     
     function makeClusters(n, c, r, uw, uh) {
-      var category = 'Sector',//'Capitisation',//'Industry',//,
+      var category = 'Industry',//'Sector',//'Capitisation',//'Industry',//
           indexedModels = _.map(models.models, function(model, i) { return { i:i, model:model }; }),
           nesting = d3.nest()
             .key(function(indexedModel) {
@@ -269,8 +269,19 @@
             .entries(indexedModels),
           tree = generateBinTree(nesting);
       
-      gridifyBinTree(tree, c-5);
-      console.log(tree);
+      var _c = c-1;
+      gridifyBinTree(tree, _c);
+      if(tree.numCols > _c) {
+        _c -= 1;
+        gridifyBinTree(tree, _c);
+      }
+      
+      // while(!tree.numCols || tree.numCols > _c) {
+      //   console.log(tree.numCols,'vs',_c);
+      //   gridifyBinTree(tree, tree.numCols ? tree.numCols - 1 : _c);
+      //   
+      //   if(_c < 10) break;
+      // }
       
       return makeCells(tree);
       
@@ -296,11 +307,13 @@
         return memo;
       }
       
-      function gridifyBinTree(tree, numCols) {
+      function gridifyBinTree(tree, numCols, xGaps, yGaps) {
         tree.numCols = numCols;
         tree.numRows = Math.ceil(tree.numMembers / tree.numCols);
+        tree.xGaps = xGaps || 0;
+        tree.yGaps = yGaps || 0;
         
-        if(tree.leaf) { return tree.numRows; }
+        if(tree.leaf) { return; }
         
         var f0 = tree.branches[0].numMembers / tree.numMembers,
             f1 = tree.branches[1].numMembers / tree.numMembers,
@@ -314,15 +327,25 @@
             // worstVertAspect = fMin / aspect,
             numColsIfHorz = Math.round(fMin * tree.numCols);
         
-        if((bestHorzAspect < bestVertAspect) || numColsIfHorz < 3) {
+        if((bestHorzAspect < bestVertAspect) || numColsIfHorz < 3 ) { //|| (Math.round(fMax * tree.numCols) + numColsIfHorz > tree.numCols)) {
           tree.stack = VERT;
-          tree.numRows = gridifyBinTree(tree.branches[0], tree.numCols) + gridifyBinTree(tree.branches[1], tree.numCols);
+          gridifyBinTree(tree.branches[0], tree.numCols, tree.xGaps, tree.yGaps);
+          gridifyBinTree(tree.branches[1], tree.numCols, tree.xGaps, tree.branches[0].yGaps + 1);
+          tree.xGaps = Math.max(tree.branches[0].xGaps, tree.branches[1].xGaps);
+          tree.yGaps = tree.branches[1].yGaps;
+          tree.numCols = Math.max(tree.branches[0].numCols, tree.branches[1].numCols);
+          tree.numRows = tree.branches[0].numRows + tree.branches[1].numRows;
         }
         else {
           tree.stack = HORZ;
-          tree.numRows = Math.max( gridifyBinTree(tree.branches[0], Math.round(f0 * tree.numCols)), gridifyBinTree(tree.branches[1], Math.round(f1 * tree.numCols)) );
+          gridifyBinTree(tree.branches[0], Math.round(f0 * tree.numCols), tree.xGaps, tree.yGaps);
+          gridifyBinTree(tree.branches[1], Math.round(f1 * tree.numCols), tree.branches[0].xGaps + 1, tree.yGaps);
+          tree.xGaps = tree.branches[1].xGaps;
+          tree.yGaps = Math.max(tree.branches[0].yGaps, tree.branches[1].yGaps);
+          tree.numCols = tree.branches[0].numCols + tree.branches[1].numCols;
+          tree.numRows = Math.max(tree.branches[0].numRows, tree.branches[1].numRows);
         }
-        return tree.numRows;
+        return tree;
       }
       
       function makeCells(tree, cells, pos0) {
@@ -332,7 +355,8 @@
         if(tree.leaf) {
           var indexedModels = tree.leaf.values;
           for(var i = 0; i < tree.numMembers; i++) {
-            cells[indexedModels[i]['i']] = [ pos0[0] + (i % tree.numCols), pos0[1] + Math.floor(i / tree.numCols) ];
+            cells[indexedModels[i]['i']] = [ pos0[0] + (i % tree.numCols) + tree.xGaps * uh/uw, pos0[1] + Math.floor(i / tree.numCols) + tree.yGaps ];
+            // cells[indexedModels[i]['i']] = [ pos0[0] + Math.floor(i / tree.numRows) + tree.xGaps * uh/uw, pos0[1] + (i % tree.numRows) + tree.yGaps ];
           }
           return;
         }
