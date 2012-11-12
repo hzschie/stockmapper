@@ -57,28 +57,28 @@ else {
 
   
   mapper.Grid = function(_n, bw, _w, _h, makeCells, alwaysRemake) {
-    var c, r, w, h, n, d,
+    var w, h, n, d,
         _this = this,
         cells,
         rotated = true;
         
     this.cellsClone = function() { return cells.concat(); };
     this.redefine = function(_n, _c, _r, _w, _h) {
-      var nOld = n, cOld = this.cols || c;
+      var nOld = n, cOld = this.cols;
       n = _n || n;
-      c = this.cols = _c || c;
-      r = this.rows = _r || r;
+      this.cols = _c || this.cols;
+      this.rows = _r || this.rows;
       w = _w || w;
       h = _h || h;
 
-      if(alwaysRemake || n != nOld || c != cOld) {
-        cells = makeCells(n, c, r, w, h);
+      if(alwaysRemake || n != nOld || this.cols != cOld) {
+        cells = makeCells.apply(_this, [n, this.cols, this.rows, w, h]);
       }
       // console.log('n='+n, 'c='+c, 'r='+r, 'w='+w, 'h='+h);
     };
     
     this.n = function(_n) {
-      _this.redefine(_n, null, Math.ceil(_n / c), null, null);
+      _this.redefine(_n, null, Math.ceil(_n / this.cols), null, null);
     };
     
     (this.nwBound = function(_n, bw, _w, _h) {
@@ -94,7 +94,8 @@ else {
     this.y = function(_r) { return _r * h; };
     this.xi = function(i) { return _this.x( _this.c(i) ); };
     this.yi = function(i) { return _this.y( _this.r(i) ); };
-    this.bounds = function() { return { w: c * w, h: r * h }; };
+    this.bounds = function() { return { w: this.cols * w, h: this.rows * h }; };
+    
   };
   
   mapper.Template = Template;

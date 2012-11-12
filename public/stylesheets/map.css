@@ -28,6 +28,13 @@
   letter-spacing:-1px;
   position:absolute;
 }
+
+.map ul label {
+  position:absolute;
+  color:#888;/*#ddf;*/
+  font-size:14px;
+}
+
 .map ul.dimmed li {
   opacity:.2;
 }
@@ -93,7 +100,7 @@
   -ms-transition:height .6s, width .2s, margin .4s;
   transition:height .6s, width .2s, margin .4s;
 }
-.map ul.animated li, .map ul.animated .shadows div {
+.map ul.animated li, .map ul.animated .shadows div, .map ul.animated label {
   -webkit-transition:left .6s, top .6s;
   -moz-transition:left .6s, top .6s;
   -ms-transition:left .6s, top .6s;

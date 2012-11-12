@@ -5,6 +5,7 @@
     _.extend(this, Backbone.Events);
     var models,
         $shadows = $(document.createElement('div')).addClass('shadows').appendTo($map),
+        $labels = $(document.createElement('div')).addClass('labels').appendTo($map),
         grid = null,
         _this = this,
         getTagHtml = mapper.config.getMapTagHtml || function(model) { return model.get('sym'); },
@@ -53,7 +54,7 @@
     
     this.resize = function(explicitW) {
       parentW = explicitW != null ? explicitW : $map.parent().width();
-      var newNumCols = Math.floor(parentW / ($map.children().eq(1).outerWidth() - 1)),
+      var newNumCols = Math.floor(parentW / ($map.children().eq(2).outerWidth() - 1)),
           newNumRows = Math.ceil(models.length / newNumCols);
       grid.redefine(null, newNumCols, newNumRows);
       rebuild();
@@ -69,12 +70,6 @@
       
       var $shadow = $(document.createElement('div')).appendTo($shadows);
       model._map.$shadow = $shadow;
-      
-      if(!grid) {
-        grid = new mapper.Grid(models.length, parentW, $tag.outerWidth() - 1, $tag.outerHeight() - 1, makeClusters, true);
-        // grid = new mapper.Grid(models.length, parentW, $tag.outerWidth() - 1, $tag.outerHeight() - 1, makeCells);
-        updateBounds();
-      }
       
       var pos = {
         left: grid.xi(i),
@@ -153,7 +148,14 @@
         oldRows = grid.rows;
         updateBounds();
       }
-
+      else {
+        var $tag = $('<li class="tag"> </li>').appendTo($map);
+        grid = new mapper.Grid(models.length, parentW, $tag.outerWidth() - 1, $tag.outerHeight() - 1, makeClusters, true);
+        // grid = new mapper.Grid(models.length, parentW, $tag.outerWidth() - 1, $tag.outerHeight() - 1, makeCells);
+        $tag.remove();
+        updateBounds();
+      }
+      
       Interval.remove({ key:'map_add' });
       Interval.callOnce({ fn:function() {
         var tags = d3.select($map[0]).selectAll('li.tag'),
@@ -168,9 +170,24 @@
         else {
           getDelay = xtraDelay( 1000 + (oldLength - exiting) * 2);
         }
+        
         tags.enter()
           .append('li')
           .each(addModel);
+          
+        var labels = d3.select($labels[0]).selectAll('label').data(grid.groups, function(group) { return group.key + (exiting == oldLength ? group.values.length : ''); });
+        labels.enter()
+          .append('label')
+          .style('visibility', 'hidden')
+          .text(function(group) { return group.key || 'Uncatogrized'; })
+          .style("left", function (group) { return grid.xi(group.pos) + 'px'; })
+          .style("top", function (group) { return grid.yi(group.pos) - 14 + 'px'; })
+          .each(function(group) {
+            var _this = this;
+            setTimeout(function() {
+              d3.select(_this).style('visibility', 'visible');
+            }, getDelay(null, group.pos));
+          });
           
         Interval.remove({ key:'map_update' });
         Interval.callOnce({ fn:function() {
@@ -180,6 +197,17 @@
           getDelay = xtraDelay(200);
           tags
             .each(updateModel);
+
+          labels
+            .each(function(group) {
+              var _this = this;
+              setTimeout(function() {
+                d3.select(_this)
+                  .style("left", function (group) { return grid.xi(group.pos) + 'px'; })
+                  .style("top", function (group) { return grid.yi(group.pos) - 14 + 'px'; });
+              }, getDelay(null, group.pos));
+            });
+          labels.exit().remove();
             
           if(mapper.perf.animate != false && models.length && models.at(0).get('hasData') && !$map.hasClass('animated')) {
             setTimeout(function() {
@@ -251,7 +279,10 @@
     var HORZ = 0, VERT = 1;
     
     function makeClusters(n, c, r, uw, uh) {
-      var category = 'Industry',//'Sector',//'Capitisation',//'Industry',//
+      var category = 'Sector',//'Capitisation',//'Industry',//
+          MISC = 'Uncategorized',
+          xGapRatio = uh/uw,
+          yGapRatio = 2,
           indexedModels = _.map(models.models, function(model, i) { return { i:i, model:model }; }),
           nesting = d3.nest()
             .key(function(indexedModel) {
@@ -262,20 +293,31 @@
                 }
               );
               
-              return applicableGroup && applicableGroup.get('nickname');
+              return applicableGroup ? applicableGroup.get('nickname') : MISC;
             })
-            .sortKeys(d3.ascending)
+            .sortKeys(function(a,b) {
+              return a == MISC ? 1 : b == MISC ? -1 : d3.ascending(a,b);
+            })
             .entries(indexedModels),
+            
           tree = generateBinTree(nesting);
-      
-      var _c = c-1;
+          
+      var _c = c;
       gridifyBinTree(tree, _c);
-      if(tree.numCols > _c) {
+      var i = 0;
+      while(tree.numCols + tree.xGaps * xGapRatio > c) {
         _c -= 1;
         gridifyBinTree(tree, _c);
+        i++;
+        if(i > 8) break;
       }
+
+      // this.cols = tree.numCols + tree.xGaps * xGapRatio;
+      this.rows = tree.numRows + 2;// TODO: refine this to be more accurate
       
-      return makeCells(tree);
+      var cells = makeCells(tree);
+      this.groups = cells.groups;
+      return cells;
       
       function generateBinTree(groups, memo) {
         var memo = memo || {};
@@ -283,6 +325,7 @@
 
         if(groups.length == 1) {
           memo.leaf = groups[0];
+          // mappedGroups.push({ group:memo.leaf, model:memo.values[0] });
           return memo;
         }
         else memo.branches = [{},{}];
@@ -291,7 +334,8 @@
           var group = groups[i],
               numMembers = group.values.length;
 
-          if(count + numMembers/2 <= memo.numMembers / 2) split[0].push(group);
+          // if(count + numMembers/2 <= memo.numMembers / 2 && i != len-1) split[0].push(group);
+          if(count + numMembers/2 <= memo.numMembers / 2 && i != len-1) split[0].push(group);
           else split[1].push(group);
 
           count += numMembers;
@@ -303,67 +347,76 @@
         return memo;
       }
       
-      function gridifyBinTree(tree, numCols, xGaps, yGaps) {
-        tree.numCols = numCols;
-        tree.numRows = Math.ceil(tree.numMembers / tree.numCols);
-        tree.xGaps = xGaps || 0;
-        tree.yGaps = yGaps || 0;
+      function gridifyBinTree(_tree, numCols, xGaps, yGaps) {
+        _tree.numCols = numCols;//Math.max(3, Math.min(numCols, _tree.numMembers));
+        _tree.numRows = Math.ceil(_tree.numMembers / _tree.numCols);
+        _tree.xGaps = xGaps || 0;
+        _tree.yGaps = yGaps || 0;
         
-        if(tree.leaf) { return; }
+        if(_tree.leaf) {
+          _tree.numCols = Math.max(3, Math.min(numCols, _tree.numMembers));
+          return;
+        }
         
-        var f0 = tree.branches[0].numMembers / tree.numMembers,
-            f1 = tree.branches[1].numMembers / tree.numMembers,
+        var f0 = _tree.branches[0].numMembers / _tree.numMembers,
+            f1 = _tree.branches[1].numMembers / _tree.numMembers,
             fMin = Math.min(f0, f1),
             fMax = Math.max(f0, f1);
         
-        var aspect = uw * tree.numCols / (tree.numRows * uh),
+        var aspect = uw * _tree.numCols / (_tree.numRows * uh),
             bestHorzAspect  = fMax * aspect,
             // worstHorzAspect = fMin * aspect,
             bestVertAspect  = fMax / aspect,
             // worstVertAspect = fMin / aspect,
-            numColsIfHorz = Math.round(fMin * tree.numCols);
+            numColsIfHorz = Math.round(fMin * _tree.numCols);
         
-        if((bestHorzAspect < bestVertAspect) || numColsIfHorz < 3 ) { //|| (Math.round(fMax * tree.numCols) + numColsIfHorz > tree.numCols)) {
-          tree.stack = VERT;
-          gridifyBinTree(tree.branches[0], tree.numCols, tree.xGaps, tree.yGaps);
-          gridifyBinTree(tree.branches[1], tree.numCols, tree.xGaps, tree.branches[0].yGaps + 1);
-          tree.xGaps = Math.max(tree.branches[0].xGaps, tree.branches[1].xGaps);
-          tree.yGaps = tree.branches[1].yGaps;
-          tree.numCols = Math.max(tree.branches[0].numCols, tree.branches[1].numCols);
-          tree.numRows = tree.branches[0].numRows + tree.branches[1].numRows;
+        if((bestHorzAspect < bestVertAspect) || numColsIfHorz < 3 ) { //|| (Math.round(fMax * _tree.numCols) + numColsIfHorz > _tree.numCols)) {
+          _tree.stack = VERT;
+          gridifyBinTree(_tree.branches[0], _tree.numCols, _tree.xGaps, _tree.yGaps);
+          gridifyBinTree(_tree.branches[1], _tree.numCols, _tree.xGaps, _tree.branches[0].yGaps + 1);
+          _tree.xGaps = Math.max(_tree.branches[0].xGaps, _tree.branches[1].xGaps);
+          _tree.yGaps = _tree.branches[1].yGaps;
+          _tree.numCols = Math.max(_tree.branches[0].numCols, _tree.branches[1].numCols);
+          _tree.numRows = _tree.branches[0].numRows + _tree.branches[1].numRows;
         }
         else {
-          tree.stack = HORZ;
-          gridifyBinTree(tree.branches[0], Math.round(f0 * tree.numCols), tree.xGaps, tree.yGaps);
-          gridifyBinTree(tree.branches[1], Math.round(f1 * tree.numCols), tree.branches[0].xGaps + 1, tree.yGaps);
-          tree.xGaps = tree.branches[1].xGaps;
-          tree.yGaps = Math.max(tree.branches[0].yGaps, tree.branches[1].yGaps);
-          tree.numCols = tree.branches[0].numCols + tree.branches[1].numCols;
-          tree.numRows = Math.max(tree.branches[0].numRows, tree.branches[1].numRows);
+          _tree.stack = HORZ;
+          gridifyBinTree(_tree.branches[0], Math.round(f0 * _tree.numCols), _tree.xGaps, _tree.yGaps);
+          gridifyBinTree(_tree.branches[1], Math.round(f1 * _tree.numCols), _tree.branches[0].xGaps + 1, _tree.yGaps);
+          _tree.xGaps = _tree.branches[1].xGaps;
+          _tree.yGaps = Math.max(_tree.branches[0].yGaps, _tree.branches[1].yGaps);
+          _tree.numCols = _tree.branches[0].numCols + _tree.branches[1].numCols;
+          _tree.numRows = Math.max(_tree.branches[0].numRows, _tree.branches[1].numRows);
         }
-        return tree;
+        return _tree;
       }
       
-      function makeCells(tree, cells, pos0) {
+      function makeCells(_tree, cells, pos0) {
         cells = cells || [];
+        cells.groups = cells.groups || [];
         pos0 = pos0 || [0, 0];
         
-        if(tree.leaf) {
-          var indexedModels = tree.leaf.values;
-          for(var i = 0; i < tree.numMembers; i++) {
-            cells[indexedModels[i]['i']] = [ pos0[0] + (i % tree.numCols) + tree.xGaps * uh/uw, pos0[1] + Math.floor(i / tree.numCols) + tree.yGaps ];
-            // cells[indexedModels[i]['i']] = [ pos0[0] + Math.floor(i / tree.numRows) + tree.xGaps * uh/uw, pos0[1] + (i % tree.numRows) + tree.yGaps ];
+        if(_tree.leaf) {
+          var indexedModels = _tree.leaf.values;
+          for(var i = 0; i < _tree.numMembers; i++) {
+            cells[indexedModels[i]['i']] = [ pos0[0] + (i % _tree.numCols) + _tree.xGaps * xGapRatio, pos0[1] + Math.floor(i / _tree.numCols) + _tree.yGaps * yGapRatio + 1 ];
+            // cells[indexedModels[i]['i']] = [ pos0[0] + Math.floor(i / _tree.numRows) + _tree.xGaps * xGapRatio, pos0[1] + (i % _tree.numRows) + _tree.yGaps * yGapRatio + 1 ];
           }
+          
+          // Mapping between a group (which contains group name) to a position
+          _tree.leaf.pos = indexedModels[0]['i'];
+          cells.groups.push(_tree.leaf);
+          
           return cells;
         }
         
-        if(tree.stack == VERT) {
-          makeCells(tree.branches[0], cells, pos0);
-          makeCells(tree.branches[1], cells, [pos0[0], pos0[1] + tree.branches[0].numRows]);
+        if(_tree.stack == VERT) {
+          makeCells(_tree.branches[0], cells, pos0);
+          makeCells(_tree.branches[1], cells, [pos0[0], pos0[1] + _tree.branches[0].numRows]);
         }
         else {
-          makeCells(tree.branches[0], cells, pos0);
-          makeCells(tree.branches[1], cells, [pos0[0] + tree.branches[0].numCols, pos0[1]]);
+          makeCells(_tree.branches[0], cells, pos0);
+          makeCells(_tree.branches[1], cells, [pos0[0] + _tree.branches[0].numCols, pos0[1]]);
         }
         return cells;
       }
