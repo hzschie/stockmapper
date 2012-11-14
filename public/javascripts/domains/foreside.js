@@ -25,4 +25,13 @@
   mapper.config.getGroupUpdateFields = function() {
     return mapper.config.getStockUpdateFields();
   };
+  
+  mapper.config.getGroupsView = function(groups, $groups, $title) {
+    var instance = {
+      setSelected: function() {},
+      search: function() {}
+    };
+    _.extend(instance, Backbone.Events);
+    return instance;
+  };
 })();

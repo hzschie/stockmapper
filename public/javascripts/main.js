@@ -1,8 +1,11 @@
 // Initialize view and Historty
 mapper.dataReady = function() {
+  var getGroupsView = mapper.config.getGroupsView;
   // Init views on document ready
   $(mapper.isMobile ? mapper.Mobile.ready : function() {
-    var groups = new mapper.SmartGroupsView(mapper.groups, $('.panel .groups'), $('.panel .title')),
+    var groups = getGroupsView ? 
+          getGroupsView(mapper.groups, $('.panel .groups'), $('.panel .title')) : 
+          new mapper.SmartGroupsView(mapper.groups, $('.panel .groups'), $('.panel .title')),
         sorts = new mapper.SelectorButtons($('.panel .sorts'), function(id) { viewState.setState({ sort:id }); }),
         views = new mapper.SelectorButtons($('.panel .views'), viewSelected),
         map = new mapper.Map($('.map ul')),

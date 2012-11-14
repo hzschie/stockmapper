@@ -1,151 +1,154 @@
 body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
-  .panel
-    block header
-    .groups
-    .views.selector
-      a.disabled(data-val="index") INDEX
-      a(data-val="map") MAP
-      a(data-val="chart") CHART
-    .search
-      .field
-        input(placeholder="Search")
-        .x
-      .search_dropdown
-    .sorts.selector
-      label Sort By:
-      a(data-val="sym") Ticker Symbol
-      a(data-val="chg") Percent Change
-      a(data-val="vol") Volume
-      a(data-val="cap") Market Cap
-    .title
+  .wrapper
+    .panel
+      .inner
+        block header
+        .groups
+          block panel_groups
+        .views.selector
+          a.disabled(data-val="index") INDEX
+          a(data-val="map") MAP
+          a(data-val="chart") CHART
+        .search
+          .field
+            input(placeholder="Search")
+            .x
+          .search_dropdown
+        .sorts.selector
+          label Sort By:
+          a(data-val="sym") Ticker Symbol
+          a(data-val="chg") Percent Change
+          a(data-val="vol") Volume
+          a(data-val="cap") Market Cap
+        .title
 
-  opts = { id: 'stock_details', closeable: true, comparable: true }
-  include details
-
-  .layout
-    .help
-      .close
-      include help
-
-    opts = { id: 'index_details', ro_volume: false, name_in_header: false }
+    opts = { id: 'stock_details', closeable: true, comparable: true }
     include details
 
-    .map
-      .map_ui
-        .clustering
-          label
-            .plus
-            | Group By:
-          .selection 
-            .display
-            .panel.selector.disabled
-              block clustering_options
-                a(data-val="none") None
-                a(data-val="sector") Sector
-                a(data-val="region") Region
-        .highlights.selector
-          label
-            .plus
-            | Highlight:
-          a(data-val="active") Very Active
-          block highlights
-            a.best(data-val="best") 52wk Best
-            a.worst(data-val="worst") 52wk Worst
+    .layout
+      .help
+        .close
+        include help
+
+      opts = { id: 'index_details', ro_volume: false, name_in_header: false }
+      include details
+
+      .map
+        .map_ui
+          .clustering
+            label
+              .plus
+              | Group By:
+            .selection 
+              .display
+              .panel.selector.disabled
+                block clustering_options
+                  a(data-val="none") None
+                  a(data-val="sector") Sector
+                  a(data-val="region") Region
+          .highlights.selector
+            label
+              .plus
+              | Highlight:
+            a(data-val="active") Very Active
+            block highlights
+              a.best(data-val="best") 52wk Best
+              a.worst(data-val="worst") 52wk Worst
             
-          .panel.disabled
-            .content.active
-              .info Ratio of 
-                span.metric volume
-                |  to 
-                span.metric average volume
-                |  greater than:
-              input
-              .slider
-            .content.performance
-              .info Ratio of 
-                span.metric current price
-                |  to 
-                span.metric
-                  span.variable 52wk high
-                  |  price
-                |   greater than:
-              input
-              .slider
-              .periods.selector
-                a(data-val="p10yr") 10yr
-                a(data-val="p52wk") 52wk
-                a(data-val="pYTD") YTD
-                a(data-val="p1mo") 1mo
-                a(data-val="p1wk") 1wk
-      ul
-    .chart
-      .ticks
-      .bars
-      .most_active
-        .arrow
-        .note VOLUME<br>Most Active Stock: 
-          span.sym BIRLACOT
-      .advances
-        .arrow
-        .note 
-          span.count 203
-          |  Stocks UP
-        .arrow.right
-      .declines
-        .arrow
-        .note 
-          span.count 203
-          |  Stocks DOWN
-        .arrow.right
+            .panel.disabled
+              .content.active
+                .info Ratio of 
+                  span.metric volume
+                  |  to 
+                  span.metric average volume
+                  |  greater than:
+                input
+                .slider
+              .content.performance
+                .info Ratio of 
+                  span.metric current price
+                  |  to 
+                  span.metric
+                    span.variable 52wk high
+                    |  price
+                  |   greater than:
+                input
+                .slider
+                .periods.selector
+                  a(data-val="p10yr") 10yr
+                  a(data-val="p52wk") 52wk
+                  a(data-val="pYTD") YTD
+                  a(data-val="p1mo") 1mo
+                  a(data-val="p1wk") 1wk
+        ul
+      .chart
+        .ticks
+        .bars
+        .most_active
+          .arrow
+          .note VOLUME<br>Most Active Stock: 
+            span.sym BIRLACOT
+        .advances
+          .arrow
+          .note 
+            span.count 203
+            |  Stocks UP
+          .arrow.right
+        .declines
+          .arrow
+          .note 
+            span.count 203
+            |  Stocks DOWN
+          .arrow.right
         
-  .inspector.hidden
-    svg
-      path(stroke="#ccc", fill="#fffdee")
-    .body
-    block inspector_content
-      .content.stock
-        .header
-          h3.name Amit was here
-          .sym SYM
-          .last_trade 123.45
-          .change
-            span.amount +12.34
-            | &nbsp;(
-            span.percent 1.23%
-            | )
-        dl
-          .left
-            dt Avg. Vol.:
-            dd.avg_volume 123,456
-            dt Vol.:
-            dd.volume 123,456
-            dt MCap:
-            dd.market_cap 1.234B
-          .right
-            dt Open:
-            dd.open 12.34
-            dt High:
-            dd.high 12.34
-            dt Low:
-            dd.low 12.34
-      .content.group
-        .header
-          h3.category Amit was here
-          .label SYM
-        dl
-          .wide
-            dt Num of Stocks Up:
-            dd.num_up.green 123
-            dt Num of Stocks Down:
-            dd.num_down.red 123
-            dt Volume Up:
-            dd.volume_up.green 123,456
-            dt Volume Down:
-            dd.volume_down.red 123,456
-            dt Volume Total:
-            dd.volume_total 123,456
-  .credit Designed and built by 
-    a(href="http://www.two-n.com") TWO-N
-  script(type='text/javascript')
-    mapper.groupsJson = !{groups};
-    mapper.stocksJson = !{stocks};
+    .inspector.hidden
+      svg
+        path(stroke="#ccc", fill="#fffdee")
+      .body
+      block inspector_content
+        .content.stock
+          .header
+            h3.name Amit was here
+            .sym SYM
+            .last_trade 123.45
+            .change
+              span.amount +12.34
+              | &nbsp;(
+              span.percent 1.23%
+              | )
+          dl
+            .left
+              dt Avg. Vol.:
+              dd.avg_volume 123,456
+              dt Vol.:
+              dd.volume 123,456
+              dt MCap:
+              dd.market_cap 1.234B
+            .right
+              dt Open:
+              dd.open 12.34
+              dt High:
+              dd.high 12.34
+              dt Low:
+              dd.low 12.34
+        .content.group
+          .header
+            h3.category Amit was here
+            .label SYM
+          dl
+            .wide
+              dt Num of Stocks Up:
+              dd.num_up.green 123
+              dt Num of Stocks Down:
+              dd.num_down.red 123
+              dt Volume Up:
+              dd.volume_up.green 123,456
+              dt Volume Down:
+              dd.volume_down.red 123,456
+              dt Volume Total:
+              dd.volume_total 123,456
+    .credit Designed and built by 
+      a(href="http://www.two-n.com") TWO-N
+    script(type='text/javascript')
+      mapper.groupsJson = !{groups};
+      mapper.stocksJson = !{stocks};

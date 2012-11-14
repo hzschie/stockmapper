@@ -1,5 +1,103 @@
 extends main
 
+block header
+  .latest_news
+    label News:
+    a.article(target="stockmapper_news")
+      .headline How the Smart Money Is Positioning Itself Now
+      span.source Source: fool.com
+      |  – 
+      span.date 16 minutes ago
+
+block panel_groups
+  #all_etfs
+    .box
+      .picks
+        ul.gainers
+          label Gainers
+          li BXCD
+          li SPXS
+          li DGAZ
+          li VIIX
+        ul.losers
+          label Losers
+          li BXCD
+          li SPXS
+          li DGAZ
+          li VIIX
+        ul.active
+          label Active
+          li BXCD
+          li SPXS
+          li DGAZ
+          li VIIX
+      dl
+        dt Num ETFs Up:
+        dd.avg_volume 397 (22%)
+        dt Num ETFs Down:
+        dd.volume 1384 (78%)
+        dt Volume Up:
+        dd.market_cap 0.83T (24%)
+        dt Volume Down:
+        dd.market_cap 2.63T (76%)
+  #composite
+    .box
+      .picks
+        ul.gainers
+          label Gainers
+          li BXCD
+          li SPXS
+          li DGAZ
+          li VIIX
+          li BXCD
+          li SPXS
+          li DGAZ
+          li VIIX
+          li BXCD
+          li SPXS
+        ul.losers
+          label Losers
+          li BXCD
+          li SPXS
+          li DGAZ
+          li VIIX
+          li BXCD
+          li SPXS
+          li DGAZ
+          li VIIX
+          li BXCD
+          li SPXS
+        ul.active
+          label Active
+          li BXCD
+          li SPXS
+          li DGAZ
+          li VIIX
+          li BXCD
+          li SPXS
+          li DGAZ
+          li VIIX
+          li BXCD
+          li SPXS
+      dl
+        .quote
+          .last_trade 237.50
+          .change
+            span.amount –1.95
+            | &nbsp;(
+            span.percent –0.83%
+            | )
+          .timestamp Last Updated: 
+            span.value Nov 02, 03:00PM EST
+        dt Previous Close:
+        dd.previous 234.82
+        dt Open:
+        dd.open 233.05
+        dt High:
+        dd.high 237.40
+        dt Low:
+        dd.low 232.65
+
 block append inspector_content
   .content.index
     .header

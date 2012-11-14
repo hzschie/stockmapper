@@ -1,3 +1,199 @@
+body {
+  background: #203a4b; /* Old browsers */
+  background: -moz-linear-gradient(top, #376279 0%, #203a4b 51%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#376279), color-stop(51%,#203a4b)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #376279 0%,#203a4b 51%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #376279 0%,#203a4b 51%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #376279 0%,#203a4b 51%); /* IE10+ */
+  background: linear-gradient(to bottom, #376279 0%,#203a4b 51%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#376279', endColorstr='#203a4b',GradientType=0 ); /* IE6-9 */
+  font:12px/13px "Arial", "Helvetica", sans-serif;
+}
+
+.wrapper {
+  position:relative;
+  max-width:1080px;
+  min-width:900px;
+  margin:0 auto;
+}
+
+.selector {
+  font-size:14px;
+  line-height:22px;
+}
+
+.panel {
+  background:rgba(29,54,70,0.95);
+}
+
+.panel .inner {
+  position:relative;
+  max-width:1080px;
+  min-width:800px;
+  margin:0 auto;
+}
+
+.panel .groups {
+  margin:10px 0 0 0;
+}
+.panel .groups:before {
+  background:transparent;
+  border:none;
+}
+
 .inspector .content.group {
   width: 200px;
+}
+
+
+.panel .box {
+  border:1px solid #26465c;
+  height:180px;
+  position:relative;
+}
+.panel .box:before {
+  width:100px;
+  content:'';
+  position:absolute;
+  right:0;
+  top:0;
+  bottom:0;
+}
+.panel .picks {
+  width:62px;
+  float:right;
+  position:relative;
+  margin-right:20px;
+  margin-top:20px;
+}
+.panel .picks ul {
+  height:50px;
+}
+.panel .picks label {
+  color:#fff;
+  display:block;
+}
+.panel .picks li {
+  display:inline-block;
+  width:27px;
+  height:12px;
+  padding-left:2px;
+  white-space:nowrap;
+  font:11px/12px "Helvetica Narrow","Arial Narrow",sans-serif;
+  font-weight:bold;
+  letter-spacing:-1px;
+  border:1px solid rgba(0,0,0,.2);
+  background-color:#ccc;
+  color:#000;
+  cursor: crosshair;
+}
+.panel .box .quote {
+  height:40px;
+}
+.panel .box .last_trade {
+  display:inline-block;
+  color:#fff;
+  font-size:18px;
+  margin-right:8px;
+}
+.panel .box .change {
+  display:inline-block;
+  color:#ff6644;
+  font-size:16px;
+}
+.panel .box .timestamp {
+  color:#aaa;
+  font-size:10px;
+}
+
+.panel .box dl {
+  position:relative;
+  margin-right:120px;
+  margin-left:20px;
+  margin-top:70px;
+  line-height:14px;
+}
+.panel .box dt {
+  margin-top:1px;
+  float:left;
+  color:rgba(255, 255, 255, .7);
+}
+.panel .box dt .unit {
+  display:inline;
+  font-weight:normal;
+}
+.panel .box dd {
+  margin-top:1px;
+  text-align:right;
+  border-bottom:1px dotted #5e6f7a;
+  font-weight:bold;
+  color:#fff;
+}
+.panel .box dd:last-child {
+  border-bottom:none;
+}
+
+#all_etfs {
+  width:33.333%;
+  display:inline-block;
+  vertical-align:top;
+}
+#all_etfs .box {
+  margin-right:5px;
+  background: transparent url('/images/domains/foreside/all_etfs.png') no-repeat scroll left top;
+}
+#all_etfs .box:before {
+  background: transparent url('/images/domains/foreside/all_etfs.png') no-repeat scroll right top;
+}
+
+
+#composite {
+  width:66.666%;
+  display:inline-block;
+  vertical-align:top;
+}
+#composite .box {
+  margin-left:5px;
+  background: transparent url('/images/domains/foreside/cnbc_composite.png') no-repeat scroll left top;
+}
+#composite .box:before {
+  background: transparent url('/images/domains/foreside/cnbc_composite.png') no-repeat scroll right top;
+}
+#composite dl {
+  margin-right:213px;
+  margin-left:260px;
+  margin-top:30px;
+}
+#composite .picks {
+  width:155px;
+}
+
+
+
+.latest_news {
+  line-height:20px;
+  padding:10px 0 10px 10px;
+  border:1px solid #26465c;
+  position:relative;
+  margin-top:10px;
+  background:#1a3140;
+  font-size:16px;
+  color:#88aacc;
+  
+  -moz-box-shadow: inset 0 0 20px rgba(0,0,0,.3);
+  -webkit-box-shadow: inset 0 0 20px rgba(0,0,0,.3);
+  box-shadow: inset 0 0 20px rgba(0,0,0,.3);
+}
+.latest_news label {
+  display:inline-block;
+  margin-right:8px;
+}
+.latest_news .headline {
+  color:#fff;
+  display:inline-block;
+  margin-right:8px;
+}
+.latest_news .source, .latest_news .date {
+  display:inline-block;
+  font-size:12px;
 }
