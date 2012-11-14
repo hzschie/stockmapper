@@ -24,7 +24,7 @@ mapper.dataReady = function() {
     function updateView(force) {
       if(viewState.hasChanged('currentGroup') || force) {
         var currentGroup = viewState.get('currentGroup');
-        map.setModels(currentGroup.get('members'));
+        map.setModels(currentGroup.get('members'), currentGroup.get('category'));
         chart.setModels(currentGroup.get('members'));
         groups.setSelected(currentGroup);
         inspector.suspendTillDone(map);

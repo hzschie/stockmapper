@@ -39,9 +39,10 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
           .selection 
             .display
             .panel.selector.disabled
-              a(data-val="none") None
-              a(data-val="sector") Sector
-              a(data-val="region") Region
+              block clustering_options
+                a(data-val="none") None
+                a(data-val="sector") Sector
+                a(data-val="region") Region
         .highlights.selector
           label
             .plus

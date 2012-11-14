@@ -7,7 +7,7 @@
         $shadows = $(document.createElement('div')).addClass('shadows').appendTo($map),
         $labels = $(document.createElement('div')).addClass('labels').appendTo($map),
         grid = null,
-        clusterCategory = null,
+        clusterCategories = {},
         _this = this,
         getTagHtml = mapper.config.getMapTagHtml || function(model) { return model.get('sym'); },
         parentW = $map.parent().width();
@@ -18,13 +18,14 @@
         _this.trigger('inspect_tag', null);
     });
 
-    this.setModels = function(_models) {
+    this.setModels = function(_models, category) {
       if(models) {
         models.off('change', updateModel);
         models.off('reset', rebuild);
       }
       
       models = _models;
+      clusterCategories.current = category;
       rebuild(null, null, true);
 
       // Subscribe to subsequent adding of models
@@ -32,8 +33,8 @@
       models.on('reset', rebuild);
     };
     
-    this.clusterBy = function(category) {
-      clusterCategory = category;
+    this.clusterBy = function(category, currentCategory) {
+      clusterCategories.clusterBy = category;
       rebuild();
     };
     
@@ -194,7 +195,7 @@
               var _this = this;
               setTimeout(function() {
                 d3.select(_this).style('visibility', 'visible');
-              }, exiting == 0 ? 0 : getDelay(null, group.pos));
+              }, exiting == 0 ? iDelay(null, group.pos) : getDelay(null, group.pos));
             });
           
           Interval.remove({ key:'map_update' });
@@ -207,11 +208,11 @@
               .each(updateModel);
 
             labels
+              .style('display', grid.hideGroups ? 'none' : '')
               .each(function(group) {
                 var _this = this;
                 setTimeout(function() {
                   d3.select(_this)
-                    .style('display', grid.groups.length > 1 ? '' : 'none')
                     .style("left", function (group) { return grid.xi(group.pos) + 'px'; })
                     .style("top", function (group) { return grid.yi(group.pos) - 14 + 'px'; });
                 }, getDelay(null, group.pos));
@@ -289,7 +290,7 @@
     var HORZ = 0, VERT = 1;
     
     function makeClusters(n, c, r, uw, uh) {
-      var category = new RegExp('^' + clusterCategory + '$', 'i'),//'Sector',//'Capitisation',//'Industry',//
+      var category = new RegExp('^' + clusterCategories.clusterBy + '$', 'i'),
           MISC = 'Uncategorized',
           xGapRatio = uh/uw,
           yGapRatio = 2,
@@ -309,8 +310,8 @@
               return a == MISC ? 1 : b == MISC ? -1 : d3.ascending(a,b);
             })
             .entries(indexedModels),
-          
-          isSingleGroup = nesting.length == 1,
+
+          isSingleGroup = !clusterCategories.clusterBy || category.test(clusterCategories.current),
           tree = generateBinTree(nesting);
 
       var _c = c;
@@ -324,10 +325,11 @@
       }
 
       // this.cols = tree.numCols + tree.xGaps * xGapRatio;
-      this.rows = tree.numRows + 2;// TODO: refine this to be more accurate
+      this.rows = tree.numRows + tree.yGaps * yGapRatio;// TODO: refine this to be more accurate
       
       var cells = makeCells(tree);
       this.groups = cells.groups;
+      this.hideGroups = isSingleGroup;
       return cells;
       
       function generateBinTree(groups, memo) {
@@ -369,8 +371,8 @@
           return;
         }
         
-        var f0 = _tree.branches[0].numMembers / _tree.numMembers,
-            f1 = _tree.branches[1].numMembers / _tree.numMembers,
+        var f0 = Math.max(3, _tree.branches[0].numMembers) / _tree.numMembers,
+            f1 = Math.max(3, _tree.branches[1].numMembers) / _tree.numMembers,
             fMin = Math.min(f0, f1),
             fMax = Math.max(f0, f1);
         
