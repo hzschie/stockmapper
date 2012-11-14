@@ -383,7 +383,7 @@
             // worstVertAspect = fMin / aspect,
             numColsIfHorz = Math.round(fMin * _tree.numCols);
         
-        if((bestHorzAspect < bestVertAspect) || numColsIfHorz < 3 ) { //|| (Math.round(fMax * _tree.numCols) + numColsIfHorz > _tree.numCols)) {
+        if((bestHorzAspect < bestVertAspect) || numColsIfHorz < 3 ) {
           _tree.stack = VERT;
           gridifyBinTree(_tree.branches[0], _tree.numCols, _tree.xGaps, _tree.yGaps);
           gridifyBinTree(_tree.branches[1], _tree.numCols, _tree.xGaps, _tree.branches[0].yGaps + 1);
@@ -396,6 +396,12 @@
           _tree.stack = HORZ;
           gridifyBinTree(_tree.branches[0], Math.round(f0 * _tree.numCols), _tree.xGaps, _tree.yGaps);
           gridifyBinTree(_tree.branches[1], Math.round(f1 * _tree.numCols), _tree.branches[0].xGaps + 1, _tree.yGaps);
+          
+          // if(_tree.branches[0].yGaps > _tree.branches[1].yGaps) {
+          //   gridifyBinTree(_tree.branches[0], _tree.branches[0].numCols + 1, _tree.xGaps, _tree.yGaps);
+          //   gridifyBinTree(_tree.branches[1], _tree.branches[1].numCols - 1, _tree.branches[0].xGaps + 1, _tree.yGaps);
+          // }
+          
           _tree.xGaps = _tree.branches[1].xGaps;
           _tree.yGaps = Math.max(_tree.branches[0].yGaps, _tree.branches[1].yGaps);
           _tree.numCols = _tree.branches[0].numCols + _tree.branches[1].numCols;
