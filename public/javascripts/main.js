@@ -6,6 +6,7 @@ mapper.dataReady = function() {
         sorts = new mapper.SelectorButtons($('.panel .sorts'), function(id) { viewState.setState({ sort:id }); }),
         views = new mapper.SelectorButtons($('.panel .views'), viewSelected),
         map = new mapper.Map($('.map ul')),
+        clustering = new mapper.ClusteringSelector($('.map .clustering'), function(id) { viewState.setState({ cluster:id }); }),
         highlights = new mapper.MapHighlights($('.map .highlights')),
         chart = new mapper.HtmlChart($('.chart')),
         inspector = new mapper.Inspector($('.inspector')),
@@ -16,7 +17,7 @@ mapper.dataReady = function() {
         viewState = new mapper.ViewState({
           defaultGroup: mapper.allGroup,
           defaultSort: mapper.sortFunctions.chg,
-          trackedParams: ['filter', 'sort', 'q', 'range', 'compare']
+          trackedParams: ['filter', 'sort', 'cluster', 'q', 'range', 'compare']
         }),
         layout = new mapper.Layout(groups, indexDetails, views, map, chart, inspector, stockDetails);
     
@@ -51,6 +52,11 @@ mapper.dataReady = function() {
         stockDetails.query(currentStock);
         map.search(currentStock);
         groups.search(currentStock);
+      }
+      
+      if(viewState.hasChanged('cluster') || force) {
+        clustering.setCurrent(viewState.get('cluster'));
+        map.clusterBy(viewState.get('cluster'));
       }
       
       if(viewState.hasChanged('range') || force) {

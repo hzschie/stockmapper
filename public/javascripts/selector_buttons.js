@@ -14,7 +14,7 @@
     });
     
     this.setCurrent = function(id) {
-      var $next = id == NONE ? null : $('a[data-val=' + id + ']', $container);
+      var $next = allowDeselect && id == NONE ? null : $('a[data-val=' + id + ']', $container);
       if($current && $next && $current[0] == $next[0]) return $next;
       $current && $current.removeClass('current');
       $current = $next;

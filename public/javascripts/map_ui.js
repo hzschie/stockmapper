@@ -37,29 +37,11 @@
     
     var currentType = 'active',
         selector = new mapper.SelectorButtons($container, setHighlightType, true),
-        $panel = $('.panel', $container).fadeOut(),
-        $plus = $('.plus', $container),
-        
+        panel = new mapper.WidgetPanel( $('.panel', $container),  $('.plus', $container), $container ),
         _this = this;
         
     setHighlightType(currentType);
         
-    $plus.click(function() {
-      if($panel.hasClass('disabled')) _this.showPanel();
-      else _this.hidePanel();
-    });
-    
-    this.showPanel = function() {
-      $panel.removeClass('disabled');
-      $panel.fadeIn(150);
-      $plus.addClass('minus');
-    };
-    
-    this.hidePanel = function() {
-      $panel.fadeOut(150, function() { $panel.addClass('disabled'); });
-      $plus.removeClass('minus');
-    };
-    
     function setHighlightType(id) {
       if(currentType) mapper.highlighters[currentType].off('change');
       
@@ -68,8 +50,7 @@
       
       mapper.highlighters[currentType].on('change', updateModels);
 
-      $panel.children().removeClass('current');
-      $panel.find('.' + currentType).addClass('current');
+      panel.setContent('.' + currentType);
       
       updateModels();
     }

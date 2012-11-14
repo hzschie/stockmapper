@@ -7,6 +7,7 @@
         $shadows = $(document.createElement('div')).addClass('shadows').appendTo($map),
         $labels = $(document.createElement('div')).addClass('labels').appendTo($map),
         grid = null,
+        clusterCategory = null,
         _this = this,
         getTagHtml = mapper.config.getMapTagHtml || function(model) { return model.get('sym'); },
         parentW = $map.parent().width();
@@ -29,6 +30,11 @@
       // Subscribe to subsequent adding of models
       models.on('change', updateModel);
       models.on('reset', rebuild);
+    };
+    
+    this.clusterBy = function(category) {
+      clusterCategory = category;
+      rebuild();
     };
     
     var searched;
@@ -141,98 +147,102 @@
     function rebuild(collection, options, isNewCollection) {
       var tt = Date.now();
       
-      var oldGrid, oldRows;
-      sizeMult = models.length > 1000 ? 3 : 1;
-      if(grid) {
-        oldCells = grid.cellsClone();
-        oldRows = grid.rows;
-        updateBounds();
-      }
-      else {
-        var $tag = $('<li class="tag"> </li>').appendTo($map);
-        grid = new mapper.Grid(models.length, parentW, $tag.outerWidth() - 1, $tag.outerHeight() - 1, makeClusters, true);
-        // grid = new mapper.Grid(models.length, parentW, $tag.outerWidth() - 1, $tag.outerHeight() - 1, makeCells);
-        $tag.remove();
-        updateBounds();
-      }
-      
-      Interval.remove({ key:'map_add' });
+      Interval.remove({ key:'map_create_grid' });
       Interval.callOnce({ fn:function() {
-        var tags = d3.select($map[0]).selectAll('li.tag'),
-            oldLength = tags[0].length;
-        tags = tags.data(models.models, models.modelId);
-
-        var exiting = 0; tags.exit().each(function() { exiting++; });
-        
-        if(exiting == oldLength) {
-          getDelay = xtraDelay( 200 + (oldLength - exiting) * 2);
+        var oldGrid, oldRows;
+        sizeMult = models.length > 1000 ? 3 : 1;
+        if(grid) {
+          oldCells = grid.cellsClone();
+          oldRows = grid.rows;
+          updateBounds();
         }
         else {
-          getDelay = xtraDelay( 1000 + (oldLength - exiting) * 2);
+          var $tag = $('<li class="tag"> </li>').appendTo($map);
+          grid = new mapper.Grid(models.length, parentW, $tag.outerWidth() - 1, $tag.outerHeight() - 1, makeClusters, true);
+          // grid = new mapper.Grid(models.length, parentW, $tag.outerWidth() - 1, $tag.outerHeight() - 1, makeCells);
+          $tag.remove();
+          updateBounds();
         }
-        
-        tags.enter()
-          .append('li')
-          .each(addModel);
-          
-        var labels = d3.select($labels[0]).selectAll('label').data(grid.groups, function(group) { return group.key + (exiting == oldLength ? group.values.length : ''); });
-        labels.enter()
-          .append('label')
-          .style('visibility', 'hidden')
-          .text(function(group) { return group.key || 'Uncatogrized'; })
-          .style("left", function (group) { return grid.xi(group.pos) + 'px'; })
-          .style("top", function (group) { return grid.yi(group.pos) - 14 + 'px'; })
-          .each(function(group) {
-            var _this = this;
-            setTimeout(function() {
-              d3.select(_this).style('visibility', 'visible');
-            }, getDelay(null, group.pos));
-          });
-          
-        Interval.remove({ key:'map_update' });
+      
+        Interval.remove({ key:'map_add' });
         Interval.callOnce({ fn:function() {
-          _this.search(searched, false);
-          
-          sizeMult *= .75;
-          getDelay = xtraDelay(200);
-          tags
-            .each(updateModel);
+          var tags = d3.select($map[0]).selectAll('li.tag'),
+              oldLength = tags[0].length;
+          tags = tags.data(models.models, models.modelId);
 
-          labels
+          var exiting = 0; tags.exit().each(function() { exiting++; });
+        
+          if(exiting == oldLength) {
+            getDelay = xtraDelay( 200 + (oldLength - exiting) * 2);
+          }
+          else {
+            getDelay = xtraDelay( 1000 + (oldLength - exiting) * 2);
+          }
+        
+          tags.enter()
+            .append('li')
+            .each(addModel);
+          
+          var labels = d3.select($labels[0]).selectAll('label').data(grid.groups, function(group) { return group.key + (exiting == oldLength ? group.values.length : ''); });
+          labels.enter()
+            .append('label')
+            .style('visibility', 'hidden')
+            .text(function(group) { return group.key || 'Uncatogrized'; })
+            .style("left", function (group) { return grid.xi(group.pos) + 'px'; })
+            .style("top", function (group) { return grid.yi(group.pos) - 14 + 'px'; })
             .each(function(group) {
               var _this = this;
               setTimeout(function() {
-                d3.select(_this)
-                  .style("left", function (group) { return grid.xi(group.pos) + 'px'; })
-                  .style("top", function (group) { return grid.yi(group.pos) - 14 + 'px'; });
-              }, getDelay(null, group.pos));
+                d3.select(_this).style('visibility', 'visible');
+              }, exiting == 0 ? 0 : getDelay(null, group.pos));
             });
-          labels.exit().remove();
-            
-          if(mapper.perf.animate != false && models.length && models.at(0).get('hasData') && !$map.hasClass('animated')) {
-            setTimeout(function() {
-              $map.addClass('animated');
-            }, 0);
-          }
-        }, key:'map_update' });
-        
-        tags.exit()
-          .each(function(model, i) {
-            var _map = model._map,
-                $tag = model._map.$tag,
-                $shadow = model._map.$shadow,
-                index = model._map.index,
-                oldCell = oldCells[index],
-                delay = oldCell ? (oldCells[index][0] + oldCells[index][1] / oldRows) * .5 * mapper.perf.mapDelayMult : 0;
+          
+          Interval.remove({ key:'map_update' });
+          Interval.callOnce({ fn:function() {
+            _this.search(searched, false);
+          
+            sizeMult *= .75;
+            getDelay = xtraDelay(200);
+            tags
+              .each(updateModel);
 
-            $tag.removeClass('tag');
-            setTimeout(function() {
-              $tag.remove();
-              $shadow.remove();
-            }, delay);
-            delete model._map;
-          });
-      }, key:'map_add' });
+            labels
+              .each(function(group) {
+                var _this = this;
+                setTimeout(function() {
+                  d3.select(_this)
+                    .style('display', grid.groups.length > 1 ? '' : 'none')
+                    .style("left", function (group) { return grid.xi(group.pos) + 'px'; })
+                    .style("top", function (group) { return grid.yi(group.pos) - 14 + 'px'; });
+                }, getDelay(null, group.pos));
+              });
+            labels.exit().remove();
+            
+            if(mapper.perf.animate != false && models.length && models.at(0).get('hasData') && !$map.hasClass('animated')) {
+              setTimeout(function() {
+                $map.addClass('animated');
+              }, 0);
+            }
+          }, key:'map_update' });
+        
+          tags.exit()
+            .each(function(model, i) {
+              var _map = model._map,
+                  $tag = model._map.$tag,
+                  $shadow = model._map.$shadow,
+                  index = model._map.index,
+                  oldCell = oldCells[index],
+                  delay = oldCell ? (oldCells[index][0] + oldCells[index][1] / oldRows) * .5 * mapper.perf.mapDelayMult : 0;
+
+              $tag.removeClass('tag');
+              setTimeout(function() {
+                $tag.remove();
+                $shadow.remove();
+              }, delay);
+              delete model._map;
+            });
+        }, key:'map_add' });
+      }, key:'map_create_grid' });
     }
     
     function updateBounds() {
@@ -279,7 +289,7 @@
     var HORZ = 0, VERT = 1;
     
     function makeClusters(n, c, r, uw, uh) {
-      var category = 'Sector',//'Capitisation',//'Industry',//
+      var category = new RegExp('^' + clusterCategory + '$', 'i'),//'Sector',//'Capitisation',//'Industry',//
           MISC = 'Uncategorized',
           xGapRatio = uh/uw,
           yGapRatio = 2,
@@ -289,7 +299,7 @@
               var applicableGroup = _.find(
                 indexedModel.model.get('groups'), 
                 function(group) {
-                  return group.get('category') == category;
+                  return category.test(group.get('category'));
                 }
               );
               
@@ -299,9 +309,10 @@
               return a == MISC ? 1 : b == MISC ? -1 : d3.ascending(a,b);
             })
             .entries(indexedModels),
-            
-          tree = generateBinTree(nesting);
           
+          isSingleGroup = nesting.length == 1,
+          tree = generateBinTree(nesting);
+
       var _c = c;
       gridifyBinTree(tree, _c);
       var i = 0;
@@ -399,7 +410,7 @@
         if(_tree.leaf) {
           var indexedModels = _tree.leaf.values;
           for(var i = 0; i < _tree.numMembers; i++) {
-            cells[indexedModels[i]['i']] = [ pos0[0] + (i % _tree.numCols) + _tree.xGaps * xGapRatio, pos0[1] + Math.floor(i / _tree.numCols) + _tree.yGaps * yGapRatio + 1 ];
+            cells[indexedModels[i]['i']] = [ pos0[0] + (i % _tree.numCols) + _tree.xGaps * xGapRatio, pos0[1] + Math.floor(i / _tree.numCols) + _tree.yGaps * yGapRatio + (isSingleGroup ? 0 : 1) ];
             // cells[indexedModels[i]['i']] = [ pos0[0] + Math.floor(i / _tree.numRows) + _tree.xGaps * xGapRatio, pos0[1] + (i % _tree.numRows) + _tree.yGaps * yGapRatio + 1 ];
           }
           
