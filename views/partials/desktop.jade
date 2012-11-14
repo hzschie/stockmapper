@@ -1,4 +1,5 @@
 body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
+  include inspector
   .wrapper
     .panel
       .inner
@@ -101,52 +102,6 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
             |  Stocks DOWN
           .arrow.right
         
-    .inspector.hidden
-      svg
-        path(stroke="#ccc", fill="#fffdee")
-      .body
-      block inspector_content
-        .content.stock
-          .header
-            h3.name Amit was here
-            .sym SYM
-            .last_trade 123.45
-            .change
-              span.amount +12.34
-              | &nbsp;(
-              span.percent 1.23%
-              | )
-          dl
-            .left
-              dt Avg. Vol.:
-              dd.avg_volume 123,456
-              dt Vol.:
-              dd.volume 123,456
-              dt MCap:
-              dd.market_cap 1.234B
-            .right
-              dt Open:
-              dd.open 12.34
-              dt High:
-              dd.high 12.34
-              dt Low:
-              dd.low 12.34
-        .content.group
-          .header
-            h3.category Amit was here
-            .label SYM
-          dl
-            .wide
-              dt Num of Stocks Up:
-              dd.num_up.green 123
-              dt Num of Stocks Down:
-              dd.num_down.red 123
-              dt Volume Up:
-              dd.volume_up.green 123,456
-              dt Volume Down:
-              dd.volume_down.red 123,456
-              dt Volume Total:
-              dd.volume_total 123,456
     .credit Designed and built by 
       a(href="http://www.two-n.com") TWO-N
     script(type='text/javascript')
