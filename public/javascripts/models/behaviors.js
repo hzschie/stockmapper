@@ -68,7 +68,7 @@
 
     function _updatePicks() {
       var models = group.get('members').models,
-          chgSorted = models.concat().sort(mapper.sortFunctions.chg),
+          chgSorted = _.filter(models, function(model) { return !isNaN(model.get('changeDir')); }).sort(mapper.sortFunctions.chg),
           volSorted = models.concat().sort(mapper.sortFunctions.vol),
           setter = {
             gainers: _.filter(chgSorted.slice(0, n), function(model) { return model.get('changeDir') == 1; }),

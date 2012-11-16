@@ -27,8 +27,8 @@
   };
   
   mapper.config.getGroupsView = function(groups, $groups, $title) {
-    var $allEtfs = $('#all_etfs'),
-        allEtfs = groups.get('all_etfs'),
+    var allEtfs = groups.get('all_etfs'),
+        composite = groups.get('etf_composite'),
         bindings = {
           all_etfs: [
             { $:'.num_up', field:'upsAndDowns', formatter:function(counts, $field, group) { return countWithPct(counts[0], group.get('members').length); } },
@@ -41,20 +41,31 @@
         template = new mapper.Template(bindings);  
         
     mapper.GroupBehaviors.pickMembers(allEtfs, 4);
+    mapper.GroupBehaviors.pickMembers(composite, 10);
 
     allEtfs.on('change', updateGroup);
+    composite.on('change', updateGroup);
     
     var picks = ['gainers', 'losers', 'active'],
-        picksMaps = [];
+        picksMaps = {};
     function updateGroup(group) {
+      var $group = $('#' + group.id);
       if(group.hasChanged('upsAndDowns')) {
-        template.applyBindings(group.id, $allEtfs, allEtfs);
+        template.applyBindings(group.id, $group, group);
       }
       
       $.each(picks, function(i, pick) {
         if(group.hasChanged(pick)) {
           var map = picksMaps[i];
-          if(!map) map = picksMaps[i] = mapper.MapLite($allEtfs.find('.' + pick + ' ul'));
+          
+          var map = picksMaps[group.id];
+          if(!map) map = picksMaps[group.id] = [];
+          
+          map = map[i];
+          if(!map) {
+            map = picksMaps[group.id][i] = mapper.MapLite($group.find('.' + pick + ' ul'));
+          }
+          
           map.setModels(group.get(pick));
         }
       });

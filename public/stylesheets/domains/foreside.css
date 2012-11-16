@@ -149,24 +149,24 @@ body {
 }
 
 
-#composite {
+#etf_composite {
   width:66.666%;
   display:inline-block;
   vertical-align:top;
 }
-#composite .box {
+#etf_composite .box {
   margin-left:5px;
   background: transparent url('/images/domains/foreside/cnbc_composite.png') no-repeat scroll left top;
 }
-#composite .box:before {
+#etf_composite .box:before {
   background: transparent url('/images/domains/foreside/cnbc_composite.png') no-repeat scroll right top;
 }
-#composite dl {
+#etf_composite dl {
   margin-right:213px;
   margin-left:260px;
   margin-top:30px;
 }
-#composite .picks {
+#etf_composite .picks {
   width:155px;
 }
 
