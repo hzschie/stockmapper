@@ -144,28 +144,16 @@
         hash.urlName = hash.category + ':' + hash.nickname.toLowerCase().replace(/\s|\/|\&/g, '+').replace(/\++/, '+');
         this.set(hash);
 
-        mapper.GroupBehaviors.KeepCounts.apply(this);
-        mapper.GroupBehaviors.PickMembers.apply(this, 10);
-/*
-        var _this = this;
-        _.forEach(behaviors, function(behavior) {
-          behavior.apply(_this);
-        });
-*/
-        
-        // var _this = this,
-        //     members = this.get('members');
-        // members.on('add', function(model) {
-        //   if( model.get('hasData') ) _this.updateCounts();
-        // });
-        // members.on('change:changeDir change:volume', function(model) {
-        //   _this.updateCounts();
-        //   _this.resortMembers(false);
-        // });
+        mapper.GroupBehaviors.keepCounts(this);
       
         this.on('change:comparator', function(_this) {
           _this.get('members').comparator = _this.get('comparator');
           _this.resortMembers(true);
+        });
+        
+        var _this = this;
+        hash.members.on('change:changePct change:volume', function(model) {
+          _this.resortMembers(false);
         });
       
         hash.members.modelId = function(model) { return model.id; };
@@ -188,48 +176,7 @@
       _resortMembers: function() {
         if( !this.get('comparator') ) return;
         this.get('members').sort();
-      }//,
-
-      // // Use Interval to collapse recalculations, to avoid doing it
-      // // needlessly many times during a large update
-      // updateCounts: function() {
-      //   var _this = this;
-      //   if(!this.updatePending) {
-      //     this.updatePending = true;
-      //     Interval.callOnce({ fn:function() {
-      //       _this.updatePending = false;
-      //       _this._updateCounts();
-      //     }, key:'update_' + _this.get('urlName') }, Interval.LOW);
-      //   }
-      // },
-      // // Recalculate ups and downs figures
-      // _updateCounts: function() {
-      //   var members = this.get('members'),
-      //       upsAndDowns = [0,0],
-      //       volumeUp = 0,
-      //       volumeDown = 0,
-      //       volumeTotal = 0,
-      //       vol, dir;
-      //   members.each(function(model) {
-      //     vol = model.attributes.volume || 0;
-      //     dir = model.attributes.changeDir;
-      //     if(dir == 1) {
-      //       upsAndDowns[0] += 1;
-      //       volumeUp += vol;
-      //     }
-      //     else if(dir == -1) {
-      //       upsAndDowns[1] += 1;
-      //       volumeDown += vol;
-      //     }
-      //     volumeTotal += vol;
-      //   });
-      //   this.set({
-      //     upsAndDowns: upsAndDowns,
-      //     volumeUp: volumeUp,
-      //     volumeDown: volumeDown,
-      //     volumeTotal: volumeTotal
-      //   });
-      // }
+      }
     },
   
     // STATIC members
