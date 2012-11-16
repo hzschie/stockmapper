@@ -141,7 +141,7 @@
         hash.volumeTotal = 0;
         hash.nickname = hash.nickname || hash.name;
         hash.label = hash.label || hash.nickname;
-        hash.urlName = hash.category + ':' + hash.nickname.toLowerCase().replace(/\s|\/|\&/g, '+').replace(/\++/, '+');
+        hash.urlName = (hash.category ? hash.category + ':' : '') + hash.nickname.toLowerCase().replace(/\s|\/|\&/g, '+').replace(/\++/, '+');
         this.set(hash);
 
         mapper.GroupBehaviors.keepCounts(this);

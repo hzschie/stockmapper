@@ -46,6 +46,10 @@
     allEtfs.on('change', updateGroup);
     composite.on('change', updateGroup);
     
+    $groups.children().click(function() {
+      instance.trigger('select_group', groups.get( $(this).attr('id') ));
+    });
+    
     var picks = ['gainers', 'losers', 'active'],
         picksMaps = {};
     function updateGroup(group) {

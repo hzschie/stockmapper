@@ -139,6 +139,10 @@ body {
   width:33.333%;
   display:inline-block;
   vertical-align:top;
+  cursor:pointer;
+}
+#all_etfs:hover {
+  opacity:.8;
 }
 #all_etfs .box {
   margin-right:5px;
@@ -153,6 +157,10 @@ body {
   width:66.666%;
   display:inline-block;
   vertical-align:top;
+  cursor:pointer;
+}
+#etf_composite:hover {
+  opacity:.8;
 }
 #etf_composite .box {
   margin-left:5px;
