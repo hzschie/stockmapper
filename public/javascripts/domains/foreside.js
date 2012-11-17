@@ -29,6 +29,7 @@
   mapper.config.getGroupsView = function(groups, $groups, $title) {
     var allEtfs = groups.get('all_etfs'),
         composite = groups.get('etf_composite'),
+        selected = null,// the selected group
         bindings = {
           all_etfs: [
             { $:'.num_up', field:'upsAndDowns', formatter:function(counts, $field, group) { return countWithPct(counts[0], group.get('members').length); } },
@@ -81,7 +82,17 @@
     }
         
     var instance = {
-      setSelected: function() {},
+      setSelected: function(group) {
+        if(selected) $title.removeClass(selected.id);
+        selected = group;
+        if(group == composite) {
+          $title.text(group.get('name').toUpperCase());
+        }
+        else {
+          $title.text(group.get('name'));
+        }
+        $title.addClass(group.id);
+      },
       search: function() {},
       resize: function() {}
     };

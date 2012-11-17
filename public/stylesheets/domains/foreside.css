@@ -22,6 +22,24 @@ body {
   line-height:22px;
 }
 
+.panel .title {
+  font-family: "Gerogia", "Palatino", "Palatino Linotype", serif;
+  font-weight:normal;
+}
+.panel .title.etf_composite {
+  padding-left:29px;
+}
+.panel .title.etf_composite:after {
+  background:transparent url('/images/domains/foreside/cnbc_small.png') no-repeat scroll -1px -1px;
+  width:35px;
+  height:21px;
+  content:'';
+  display:block;
+  position:absolute;
+  top:2px;
+  left:0;
+}
+
 .panel {
   background:rgba(29,54,70,0.95);
 }
