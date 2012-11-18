@@ -110,16 +110,16 @@
             y: pointUp ? tagSz.h + spacing.y : -_bubbH - spacing.y
           },
           pos = {
-            left: tagPos.left + offset.x,
-            top: spacing.yFixed == null ? tagPos.top + offset.y : Math.min(spacing.yFixed, ($window.scrollTop() + bottomConstraint) - bubbH - 5 )
+            left: Math.round(tagPos.left + offset.x),
+            top: Math.round(spacing.yFixed == null ? tagPos.top + offset.y : Math.min(spacing.yFixed, ($window.scrollTop() + bottomConstraint) - bubbH - 5 ))
           };
       
       tagPos.width = tagSz.w;
       tagPos.height = tagSz.h;
       
       targP = {
-        left: tagPos.left + (pointLeft ? tagPos.width : 0),
-        top: tagPos.top + (pointUp ? tagPos.height : 0)
+        left: Math.round(tagPos.left + (pointLeft ? tagPos.width : 0)),
+        top: Math.round(tagPos.top + (pointUp ? tagPos.height : 0))
       };
       $container.css(pos);
     }
@@ -146,8 +146,8 @@
         height: Math.abs(diff.y + datum.y) + 2*pad
       });
       $tip.css({
-        left: Math.min(datum.x, -diff.x) - pad,
-        top: Math.min(datum.y, -diff.y) - pad
+        left: Math.round( Math.min(datum.x, -diff.x) - pad ),
+        top: Math.round( Math.min(datum.y, -diff.y) - pad )
       });
       
       var vect = {

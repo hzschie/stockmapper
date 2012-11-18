@@ -26,6 +26,25 @@
     return mapper.config.getStockUpdateFields();
   };
   
+  var surface,// The controller of the whole app, which we hang onto for extending default behaviors
+      picks = ['gainers', 'losers', 'active'],
+      picksMaps = {};// Mapping of pick – per group – to map instances
+  
+  mapper.config.init = function() {
+    surface = mapper.Surface.init();
+    surface.onUpdateView = function(force, viewState) {
+      if(viewState.hasChanged('searchStock') || viewState.hasChanged('currentStock') || force) {
+        var stock = viewState.get('searchStock') || viewState.get('currentStock') || null;
+        for(var key in picksMaps) {
+          $.each(picksMaps[key], function(i, map) {
+            map.search(stock);
+          });
+        }
+      }
+    };
+    return surface;
+  };
+  
   mapper.config.getGroupsView = function(groups, $groups, $title) {
     var allEtfs = groups.get('all_etfs'),
         composite = groups.get('etf_composite'),
@@ -46,21 +65,21 @@
 
     allEtfs.on('change', updateGroup);
     composite.on('change', updateGroup);
+    updateGroup(allEtfs, true);
+    updateGroup(composite, true);
     
     $groups.children().click(function() {
       instance.trigger('select_group', groups.get( $(this).attr('id') ));
     });
     
-    var picks = ['gainers', 'losers', 'active'],
-        picksMaps = {};
-    function updateGroup(group) {
+    function updateGroup(group, force) {
       var $group = $('#' + group.id);
       if(group.hasChanged('upsAndDowns')) {
         template.applyBindings(group.id, $group, group);
       }
-      
+
       $.each(picks, function(i, pick) {
-        if(group.hasChanged(pick)) {
+        if(group.hasChanged(pick) || (force && group.has(pick))) {
           var map = picksMaps[i];
           
           var map = picksMaps[group.id];
@@ -68,7 +87,14 @@
           
           map = map[i];
           if(!map) {
-            map = picksMaps[group.id][i] = mapper.MapLite($group.find('.' + pick + ' ul'));
+            map = picksMaps[group.id][i] = mapper.MapLite($group.find('.' + pick + ' ul').click(function(e) { e.stopPropagation(); }));
+            
+            map.on('select_tag', function(model, $tag) {
+              mapper.surface.query(model);//viewState.setState({ q: model.id, compare:null });
+            });
+            map.on('inspect_tag', function(model, $tag) {
+              mapper.surface.inspectTag(model, $tag);//inspector.inspectTag(model, $tag);
+            });
           }
           
           map.setModels(group.get(pick));
@@ -83,9 +109,15 @@
         
     var instance = {
       setSelected: function(group) {
-        if(selected) $title.removeClass(selected.id);
+        if(selected) {
+          $('#' + selected.id).removeClass('selected');
+          $title.removeClass(selected.id);
+        }
         selected = group;
-        if(group == composite) {
+        
+        $('#' + selected.id).addClass('selected');
+        
+        if(selected == composite) {
           $title.text(group.get('name').toUpperCase());
         }
         else {

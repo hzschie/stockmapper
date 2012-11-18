@@ -59,7 +59,6 @@ body {
   background:transparent;
   border:none;
 }
-
 .inspector .content.group {
   width: 200px;
 }
@@ -78,6 +77,31 @@ body {
   top:0;
   bottom:0;
 }
+.panel .groups .group .box:after {
+  content:'';
+  position:absolute;
+  left: -6px;
+  right: -6px;
+  top: -6px;
+  bottom: -6px;
+  border-radius: 6px;
+  pointer-events:none;
+  background:transparent;
+}
+.panel .groups .selected .box:after {
+  border: 5px solid rgba(255, 255, 255, 0.25);
+}
+.panel .groups .group:not(.selected):hover .box:after {
+  background:rgba(255, 255, 255, 0.05);
+}
+.panel .group:not(.selected) {
+  cursor:pointer;
+}
+.groups .group:hover:after, .groups .group.selected:after {
+  display:none;/* TODO: make this not be required by isolation groupview */
+}
+
+
 .panel .picks {
   width:62px;
   float:right;
@@ -85,8 +109,9 @@ body {
   margin-right:20px;
   margin-top:20px;
 }
-.panel .picks > * {
+.panel .picks .map {
   height:50px;
+  margin-bottom:0;
 }
 .panel .picks label {
   color:#fff;
@@ -94,19 +119,20 @@ body {
 }
 .panel .picks li {
   display:inline-block;
-  width:27px;
+  margin:-1px 0 0 -1px;
+  position:relative;
+/*  width:27px;
   height:12px;
   padding-left:2px;
   white-space:nowrap;
   font:11px/12px "Helvetica Narrow","Arial Narrow",sans-serif;
   font-weight:bold;
   letter-spacing:-1px;
-  margin:-1px 0 0 -1px;
   border:1px solid rgba(0,0,0,.2);
   background-color:#ccc;
   color:#000;
   cursor: crosshair;
-}
+*/}
 .panel .box .quote {
   height:40px;
 }
@@ -153,15 +179,19 @@ body {
   border-bottom:none;
 }
 
-#all_etfs {
-  width:33.333%;
+.panel .groups .group {
+  position:relative;
   display:inline-block;
   vertical-align:top;
-  cursor:pointer;
+  border:none;
+  cursor:default;
 }
-#all_etfs:hover {
+#all_etfs {
+  width:33.333%;
+}
+/*#all_etfs:hover {
   opacity:.8;
-}
+}*/
 #all_etfs .box {
   margin-right:5px;
   background: transparent url('/images/domains/foreside/all_etfs.png') no-repeat scroll left top;
@@ -173,13 +203,11 @@ body {
 
 #etf_composite {
   width:66.666%;
-  display:inline-block;
-  vertical-align:top;
-  cursor:pointer;
 }
+/*
 #etf_composite:hover {
   opacity:.8;
-}
+}*/
 #etf_composite .box {
   margin-left:5px;
   background: transparent url('/images/domains/foreside/cnbc_composite.png') no-repeat scroll left top;

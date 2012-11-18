@@ -63,6 +63,12 @@
         handler = fn;
       }
       
+/*
+      To test synchronisity
+      Interval.MAX = 100000000;
+      handler.apply(handler, [100000000].concat(params));return true;
+*/
+      
       if(handler.key != null && subscribersTable[ handler.key ] != null) {
         return false;
       }

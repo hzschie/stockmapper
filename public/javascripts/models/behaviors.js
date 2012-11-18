@@ -72,7 +72,7 @@
           volSorted = models.concat().sort(mapper.sortFunctions.vol),
           setter = {
             gainers: _.filter(chgSorted.slice(0, n), function(model) { return model.get('changeDir') == 1; }),
-            losers:  _.filter(chgSorted.slice(chgSorted.length - n, chgSorted.length), function(model) { return model.get('changeDir') == -1; }),
+            losers:  _.filter(chgSorted.slice(chgSorted.length - n, chgSorted.length), function(model) { return model.get('changeDir') == -1; }).reverse(),
             active:volSorted.slice(0, n)
           };
           

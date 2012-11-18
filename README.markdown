@@ -14,3 +14,11 @@
 
 TODO:
 Generalize "stocks" to "components"(?)
+
+
+## Deploy checklist
+A.  Desktop version
+  1.  Search
+  2.  Back & Forward Buttons
+  3.  State restoration on reload
+B.  Mobile version

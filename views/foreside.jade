@@ -10,16 +10,16 @@ block header
       span.date 16 minutes ago
 
 block panel_groups
-  #all_etfs
+  #all_etfs.group
     .box
       .picks
-        .gainers
+        .gainers.map
           label Gainers
           ul
-        .losers
+        .losers.map
           label Losers
           ul
-        .active
+        .active.map
           label Active
           ul
       dl
@@ -31,16 +31,16 @@ block panel_groups
         dd.volume_up &nbsp;
         dt Volume Down:
         dd.volume_down &nbsp;
-  #etf_composite
+  #etf_composite.group
     .box
       .picks
-        .gainers
+        .gainers.map
           label Gainers
           ul
-        .losers
+        .losers.map
           label Losers
           ul
-        .active
+        .active.map
           label Active
           ul
       dl
