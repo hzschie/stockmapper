@@ -22,14 +22,14 @@ body {
   line-height:22px;
 }
 
-.panel .title {
+.panel .inner > .title {
   font-family: "Gerogia", "Palatino", "Palatino Linotype", serif;
   font-weight:normal;
 }
-.panel .title.etf_composite {
+.panel .inner > .title.etf_composite {
   padding-left:29px;
 }
-.panel .title.etf_composite:after {
+.panel .inner > .title.etf_composite:after {
   background:transparent url('/images/domains/foreside/cnbc_small.png') no-repeat scroll -1px -1px;
   width:35px;
   height:21px;
@@ -225,15 +225,14 @@ body {
 }
 
 
-
 .latest_news {
-  line-height:20px;
-  padding:10px 0 10px 10px;
+  line-height:40px;
+  height:40px;
   border:1px solid #26465c;
   position:relative;
   margin-top:10px;
   background:#1a3140;
-  font-size:16px;
+  font-size:14px;
   color:#88aacc;
   
   -moz-box-shadow: inset 0 0 20px rgba(0,0,0,.3);
@@ -241,15 +240,14 @@ body {
   box-shadow: inset 0 0 20px rgba(0,0,0,.3);
 }
 .latest_news label {
-  display:inline-block;
-  margin-right:8px;
+  float:left;
+  margin-left:0;
+  margin-top:-1px;
 }
-.latest_news .headline {
-  color:#fff;
-  display:inline-block;
-  margin-right:8px;
+.latest_news .arrows {
+  margin-left:1px;
 }
-.latest_news .source, .latest_news .date {
-  display:inline-block;
-  font-size:12px;
+.latest_news.ticker .news {
+  display:block;
+  margin-left:70px;
 }

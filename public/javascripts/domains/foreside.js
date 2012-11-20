@@ -32,6 +32,10 @@
   
   mapper.config.init = function() {
     surface = mapper.Surface.init();
+    var ticker = mapper.NewsTicker($('.latest_news'));
+    mapper.stocks.at(10).acquireNews(function(news) {
+      ticker.setHeadlines(news);
+    });
     surface.onUpdateView = function(force, viewState) {
       if(viewState.hasChanged('searchStock') || viewState.hasChanged('currentStock') || force) {
         var stock = viewState.get('searchStock') || viewState.get('currentStock') || null;

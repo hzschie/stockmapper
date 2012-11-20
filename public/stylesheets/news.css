@@ -37,3 +37,65 @@
   margin-top:20px;
   color:#aac;
 }
+
+
+/* For mapper.NewsTicker class (news_ticker.js) */
+.ticker {
+  overflow:hidden;
+}
+
+.ticker .news {
+  height:40px;
+  overflow:visible;
+  margin-top:0;
+  -webkit-transition:margin .65s;
+  -moz-transition:margin .65s;
+  -ms-transition:margin .65s;
+  transition:margin .65s;
+}
+.ticker .news a {
+  opacity:0;
+  padding:0 6px;
+  margin:5px 5px 10px 0;
+  line-height:30px;
+  -webkit-transition:opacity .5s;
+  -moz-transition:opacity .5s;
+  -ms-transition:opacity .5s;
+  transition:opacity .5s;
+}
+.ticker .news a.current {
+  opacity:1;
+  -webkit-transition:opacity .5s linear .2s;
+  -moz-transition:opacity .5s linear .2s;
+  -ms-transition:opacity .5s linear .2s;
+  transition:opacity .5s linear .2s;
+}
+.ticker .news .title {
+  color:#fff;
+  display:inline-block;
+  margin-right:8px;
+  max-width: 70%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.ticker .news .source, .ticker .news .date {
+  display:inline-block;
+  font-size:12px;
+}
+.ticker .arrows {
+  float:left;
+}
+.ticker .arrows > * {
+  display:block;
+  width:22px;
+  height:19px;
+  background:transparent url('/images/sprites.png?10252012') no-repeat scroll -30px -40px;
+  cursor:pointer;
+}
+.ticker .arrows > *:hover {
+  opacity:.8;
+}
+.ticker .arrows > .down {
+  background-position:-30px -59px;
+}

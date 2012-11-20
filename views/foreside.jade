@@ -1,13 +1,17 @@
 extends main
 
 block header
-  .latest_news
+  .latest_news.ticker
+    .arrows
+      .up
+      .down
     label News:
-    a.article(target="stockmapper_news")
-      .headline How the Smart Money Is Positioning Itself Now
-      span.source Source: fool.com
-      |  – 
-      span.date 16 minutes ago
+    .news
+      a.article(target="stockmapper_news")
+        .title @nbsp;
+        span.source Source: source.com
+        |  – 
+        span.date ? minutes ago
 
 block panel_groups
   #all_etfs.group

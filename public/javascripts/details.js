@@ -60,7 +60,7 @@
         compare = $compare.length == 1 ? new mapper.Compare($compare, graph) : null,
         
         $news = $('.news', $details),
-        news = $news.length == 1 ? new mapper.News($news) : null;
+        news = $news.length == 1 ? mapper.NewsScroller($news) : null;
         
         $close = $('.close', $details);
 

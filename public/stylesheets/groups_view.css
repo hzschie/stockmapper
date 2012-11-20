@@ -23,7 +23,7 @@
   float:right;
   margin-right:9px;
 }
-.panel .title {
+.panel .inner > .title {
   position: absolute;
   bottom: -40px;
   font-size: 24px;

@@ -33,30 +33,6 @@
         template.applyBindings(News.bindings, $article, article);
       });
     };
-    
-    var velocity = 0;
-    function mousemove(e) {
-      var h = $news.height(),
-          y = e.pageY - $news.offset().top,
-          f = (y/h - .5) * 2;
-      
-      velocity = Math.floor( 16 * Math.pow(f,2) * Math.abs(f) / f );
-    }
-    
-    function updateScroll() {
-      $news.scrollTop( $news.scrollTop() + velocity);
-    }
-    
-    $news.hover(
-      function() {
-        $news.on('mousemove', mousemove);
-        Interval.add(updateScroll, Interval.HIGH);
-      },
-      function() {
-        $news.off('mousemove', mousemove);
-        Interval.remove(updateScroll);
-      }
-    );
   }
   
   var dateFormat = d3.time.format('%b %e, %Y');
