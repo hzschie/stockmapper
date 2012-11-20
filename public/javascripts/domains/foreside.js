@@ -31,11 +31,32 @@
       picksMaps = {};// Mapping of pick – per group – to map instances
   
   mapper.config.init = function() {
-    surface = mapper.Surface.init();
-    var ticker = mapper.NewsTicker($('.latest_news'));
-    mapper.stocks.at(10).acquireNews(function(news) {
-      ticker.setHeadlines(news);
+    var ticker = mapper.NewsTicker($('.latest_news')),
+        composite = mapper.groups.get('etf_composite');
+        
+    composite.on('change:active', function(group) {
+      var syms = $.map(group.get('active'), function(model){ return model.get('sym'); }),
+          news = [],
+          numDone = 0,
+          numExpected = 0,
+          step = 4;
+      for(var i = 0; i < syms.length; i += step) {
+        numExpected++;
+        $.getJSON(
+          '/news/' + syms.slice(i, i+step).join(),
+          function(data) {
+            news = news.concat(data);
+            numDone++;
+            if(numDone == numExpected) {
+              news.sort(function(a,b) { return (a.t < b.t) - (a.t > b.t); });
+              ticker.setHeadlines(news);
+            }
+          }
+        );
+      }
     });
+    
+    surface = mapper.Surface.init();
     surface.onUpdateView = function(force, viewState) {
       if(viewState.hasChanged('searchStock') || viewState.hasChanged('currentStock') || force) {
         var stock = viewState.get('searchStock') || viewState.get('currentStock') || null;
