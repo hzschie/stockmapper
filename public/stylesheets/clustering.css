@@ -69,4 +69,5 @@
 .clustering .panel a {
   display:block;
   margin-bottom:2px;
+  white-space:nowrap;
 }
