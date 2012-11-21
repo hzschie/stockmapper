@@ -89,18 +89,22 @@ body {
   background:transparent;
 }
 .panel .groups .selected .box:after {
-  border: 5px solid rgba(255, 255, 255, 0.25);
+  border: 5px solid rgba(255, 255, 255, 0.35);
 }
 .panel .groups .group:not(.selected):hover .box:after {
   background:rgba(255, 255, 255, 0.05);
 }
-.panel .group:not(.selected) {
+.panel .groups .group:not(.selected) {
   cursor:pointer;
 }
 .groups .group:hover:after, .groups .group.selected:after {
   display:none;/* TODO: make this not be required by isolation groupview */
 }
 
+.map ul label {
+  color: #fff;
+  font-size: 12px;
+}
 
 .panel .picks {
   width:62px;
@@ -121,18 +125,7 @@ body {
   display:inline-block;
   margin:-1px 0 0 -1px;
   position:relative;
-/*  width:27px;
-  height:12px;
-  padding-left:2px;
-  white-space:nowrap;
-  font:11px/12px "Helvetica Narrow","Arial Narrow",sans-serif;
-  font-weight:bold;
-  letter-spacing:-1px;
-  border:1px solid rgba(0,0,0,.2);
-  background-color:#ccc;
-  color:#000;
-  cursor: crosshair;
-*/}
+}
 .panel .box .quote {
   height:40px;
 }
@@ -143,10 +136,11 @@ body {
   margin-right:8px;
 }
 .panel .box .change {
-  display:inline-block;
-  color:#ff6644;
+  display:none;
   font-size:16px;
 }
+.panel .box .change.red   { color:#f00; display:inline-block }
+.panel .box .change.green { color:#0f0; display:inline-block }
 .panel .box .timestamp {
   color:#aaa;
   font-size:10px;

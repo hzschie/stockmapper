@@ -95,7 +95,6 @@ $(function() {
     mapper.models.add(stock);
     mapper.stocks.add(stock);
   });
-  socket.emit('subscribe', mapper.stocks.pluck('id'));
 
   _.each(mapper.groupsJson, function(groupJson) {
     groupJson.type = groupJson.type || 'group';
@@ -118,9 +117,10 @@ $(function() {
   }
   
   var groupIds = _.reject(mapper.groups.pluck('id'), function(id) { return id == null; });
-  groupIds.length && socket.emit('subscribe', groupIds);
   
   tryPopulateGroups();
+  
+  socket.emit('subscribe');
 
   // Put stocks into groups
   function tryPopulateGroups(groups) {

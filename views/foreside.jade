@@ -49,22 +49,22 @@ block panel_groups
           ul
       dl
         .quote
-          .last_trade 237.50
+          .last_trade &nbsp;
           .change
-            span.amount –1.95
+            span.amount &nbsp;
             | &nbsp;(
-            span.percent –0.83%
+            span.percent &nbsp;
             | )
           .timestamp Last Updated: 
-            span.value Nov 02, 03:00PM EST
+            span.value &nbsp;
         dt Previous Close:
-        dd.previous 234.82
+        dd.previous &nbsp;
         dt Open:
-        dd.open 233.05
+        dd.open &nbsp;
         dt High:
-        dd.high 237.40
+        dd.high &nbsp;
         dt Low:
-        dd.low 232.65
+        dd.low &nbsp;
 
 block append inspector_content
   .content.index
@@ -86,7 +86,9 @@ block append inspector_content
 , "Commodity", "Fixed Income", "Equity", "Currency
 block clustering_options
   a(data-val="none") None
-  a(data-val="global equity") Global Equity
-  a(data-val="commodity") Commodity
-  a(data-val="fixed income") Fixed Income
-  a(data-val="currency") Currency
+  a(data-val="cluster") Classification
+  //- a(data-val="equity") Equity
+  //- a(data-val="global equity") Global Equity
+  //- a(data-val="commodity") Commodity
+  //- a(data-val="fixed income") Fixed Income
+  //- a(data-val="currency") Currency

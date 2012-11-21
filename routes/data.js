@@ -36,15 +36,20 @@ exports.setIO = function(_io) {
       if(typeof(ids) == 'string') ids = [ids];
     
       var reply = [];
-      ids.forEach(function(id) {
-        socket.join(id);
-        var current = dataSource.get(id);
-        if(current) {
-          reply.push(current);
+      if(ids) {
+        ids.forEach(function(id) {
+          // socket.join(id);// TODO: remove this once conclusive it's not needed
+          var current = dataSource.get(id);
+          if(current) {
+            reply.push(current);
+          }
+        });
+        if(reply.length) {
+          socket.emit("update", reply);
         }
-      });
-      if(reply.length) {
-        socket.emit("update", reply);
+      }
+      else {
+        socket.emit("update", dataSource.getAllQuotes());
       }
     });
   });

@@ -132,6 +132,7 @@ else {
   var timestampFormat = d3.time.format.utc('%b %d, %I:%M%p'),
       datestampFormat = d3.time.format.utc('%b %d, %Y');
   Template.timestamp = function(val) {
+    if(!val) return null;
     if(typeof(val) == 'number') val = new Date(val);
     if(val.getUTCHours() == 0) {
       return datestampFormat(val);
@@ -151,7 +152,8 @@ else {
       _.forEach(bindings, function(binding) {
         if(!binding) return;
         var $field = binding.$ ? $container.find(binding.$) : $container,
-            val = (model.get && model.get(binding.field)) || (!model.get && model[binding.field]);
+            // val = (model.get && model.get(binding.field)) || (!model.get && model[binding.field]);
+            val = model.get ? model.get(binding.field) : model[binding.field];
 
         val = (binding.formatter || String)( val, $field, model );
         if(val != null) $field.html(val);

@@ -13,6 +13,7 @@
 
 
 TODO:
+!!!! BLUFIN make stocks={} at the beginning of createStocks, otherwise dynamic refresh won't work if stocks are removed.
 Generalize "stocks" to "components"(?)
 
 
@@ -21,4 +22,9 @@ A.  Desktop version
   1.  Search
   2.  Back & Forward Buttons
   3.  State restoration on reload
-B.  Mobile version
+B.  iPad version
+C.  iPhone version
+
+
+## To SSH
+* **Blufin:** ssh ec2-user@54.251.131.161

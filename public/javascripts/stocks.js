@@ -136,11 +136,12 @@
         hash.sym = hash.sym || hash.id;
         hash.members = new Backbone.Collection(hash.members);
         hash.upsAndDowns = [0,0];
-        hash.volumeUp = 0;
+        hash.volumeUp = 0;// TODO: SHOULD BE IN BEHAVIOURS!
         hash.volumeDown = 0;
         hash.volumeTotal = 0;
         hash.nickname = hash.nickname || hash.name;
         hash.label = hash.label || hash.nickname;
+        hash.domName = hash.safeId || hash.id;
         hash.urlName = (hash.category ? hash.category + ':' : '') + hash.nickname.toLowerCase().replace(/\s|\/|\&/g, '+').replace(/\++/, '+');
         this.set(hash);
 

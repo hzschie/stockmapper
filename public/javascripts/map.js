@@ -151,7 +151,7 @@
       Interval.remove({ key:'map_create_grid' });
       Interval.callOnce({ fn:function() {
         var oldGrid, oldRows;
-        sizeMult = models.length > 1000 ? 3 : 1;
+        sizeMult = models.length > 1000 ? 2 : 1;
         if(grid) {
           oldCells = grid.cellsClone();
           oldRows = grid.rows;
@@ -366,13 +366,15 @@
         _tree.xGaps = xGaps || 0;
         _tree.yGaps = yGaps || 0;
         
+        var minCols = 3;
+        
         if(_tree.leaf) {
-          _tree.numCols = Math.max(3, Math.min(numCols, _tree.numMembers));
+          _tree.numCols = Math.max(minCols, Math.min(numCols, _tree.numMembers));
           return;
         }
         
-        var f0 = Math.max(3, _tree.branches[0].numMembers) / _tree.numMembers,
-            f1 = Math.max(3, _tree.branches[1].numMembers) / _tree.numMembers,
+        var f0 = Math.max(minCols, _tree.branches[0].numMembers) / _tree.numMembers,
+            f1 = Math.max(minCols, _tree.branches[1].numMembers) / _tree.numMembers,
             fMin = Math.min(f0, f1),
             fMax = Math.max(f0, f1);
         
@@ -383,7 +385,7 @@
             // worstVertAspect = fMin / aspect,
             numColsIfHorz = Math.round(fMin * _tree.numCols);
         
-        if((bestHorzAspect < bestVertAspect) || numColsIfHorz < 3 ) {
+        if((bestHorzAspect < bestVertAspect) || (numColsIfHorz < minCols) || (numColsIfHorz * uw < 100) ) {
           _tree.stack = VERT;
           gridifyBinTree(_tree.branches[0], _tree.numCols, _tree.xGaps, _tree.yGaps);
           gridifyBinTree(_tree.branches[1], _tree.numCols, _tree.xGaps, _tree.branches[0].yGaps + 1);

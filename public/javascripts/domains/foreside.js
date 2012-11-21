@@ -32,7 +32,7 @@
   
   mapper.config.init = function() {
     var ticker = mapper.NewsTicker($('.latest_news')),
-        composite = mapper.groups.get('etf_composite');
+        composite = mapper.groups.get('^ETFCOMP');
         
     composite.on('change:active', function(group) {
       var syms = $.map(group.get('active'), function(model){ return model.get('sym'); }),
@@ -72,14 +72,29 @@
   
   mapper.config.getGroupsView = function(groups, $groups, $title) {
     var allEtfs = groups.get('all_etfs'),
-        composite = groups.get('etf_composite'),
+        composite = groups.get('^ETFCOMP'),
         selected = null,// the selected group
+        Template = mapper.Template,
+        timezone = mapper.config.marketHours.timezone,
         bindings = {
           all_etfs: [
             { $:'.num_up', field:'upsAndDowns', formatter:function(counts, $field, group) { return countWithPct(counts[0], group.get('members').length); } },
             { $:'.num_down', field:'upsAndDowns', formatter:function(counts, $field, group) { return countWithPct(counts[1], group.get('members').length); } },
             { $:'.volume_up', field:'volumeUp', formatter:function(volume, $field, group) { return countWithPct(volume, group.get('volumeTotal')); } },
             { $:'.volume_down', field:'volumeDown', formatter:function(volume, $field, group) { return countWithPct(volume, group.get('volumeTotal')); } }
+          ],
+          '^ETFCOMP': [
+            { $:'.last_trade', field:'lastTrade', formatter:Template.priceFormat },
+            { $:'.timestamp .value', field:'timestamp', formatter:Template.postfix(Template.blankIfNull(Template.timestamp), ' ' + timezone) },
+
+            { $:'.change', field:'changeDir', formatter:Template.makeRedOrGreen },
+            { $:'.change .amount', field:'change', formatter:Template.changeFormat },
+            { $:'.change .percent', field:'changePct', formatter:Template.postfix(Template.changeFormat, '%') },
+
+            { $:'.previous', field:'previous', formatter:Template.priceFormat },
+            { $:'.open', field:'open', formatter:Template.priceFormat },
+            { $:'.high', field:'high', formatter:Template.priceFormat },
+            { $:'.low', field:'low', formatter:Template.priceFormat }
           ]
         },
         
@@ -94,11 +109,12 @@
     updateGroup(composite, true);
     
     $groups.children().click(function() {
-      instance.trigger('select_group', groups.get( $(this).attr('id') ));
+      var idAttr = $(this).attr('id');
+      instance.trigger('select_group', idAttr == composite.get('domName') ? composite : groups.get(idAttr));
     });
     
     function updateGroup(group, force) {
-      var $group = $('#' + group.id);
+      var $group = $('#' + group.get('domName'));
       if(group.hasChanged('upsAndDowns')) {
         template.applyBindings(group.id, $group, group);
       }
@@ -115,10 +131,10 @@
             map = picksMaps[group.id][i] = mapper.MapLite($group.find('.' + pick + ' ul').click(function(e) { e.stopPropagation(); }));
             
             map.on('select_tag', function(model, $tag) {
-              mapper.surface.query(model);//viewState.setState({ q: model.id, compare:null });
+              mapper.surface.query(model);
             });
             map.on('inspect_tag', function(model, $tag) {
-              mapper.surface.inspectTag(model, $tag);//inspector.inspectTag(model, $tag);
+              mapper.surface.inspectTag(model, $tag);
             });
           }
           
@@ -135,12 +151,11 @@
     var instance = {
       setSelected: function(group) {
         if(selected) {
-          $('#' + selected.id).removeClass('selected');
+          $('#' + selected.get('domName')).removeClass('selected');
           $title.removeClass(selected.id);
         }
         selected = group;
-        
-        $('#' + selected.id).addClass('selected');
+        $('#' + selected.get('domName')).addClass('selected');
         
         if(selected == composite) {
           $title.text(group.get('name').toUpperCase());
