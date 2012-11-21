@@ -139,8 +139,8 @@ body {
   display:none;
   font-size:16px;
 }
-.panel .box .change.red   { color:#f00; display:inline-block }
-.panel .box .change.green { color:#0f0; display:inline-block }
+.panel .box .change.red   { color:#f00; display:inline-block; }
+.panel .box .change.green { color:#0f0; display:inline-block; }
 .panel .box .timestamp {
   color:#aaa;
   font-size:10px;
