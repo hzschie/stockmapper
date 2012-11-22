@@ -42,8 +42,8 @@ BundleUp(app, __dirname + '/lib/assets', {
   staticRoot: __dirname + '/public/',
   staticUrlRoot:'/',
   bundle: (/true/i.test(process.env.BUNDLE)),
-  minifyCss: true,
-  minifyJs: true
+  minifyCss: false,//true,
+  minifyJs: false//true
 });
 if(/true/i.test(process.env.VERBOSE)) console.log("process.env = ", process.env);
 
