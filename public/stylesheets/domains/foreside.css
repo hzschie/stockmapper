@@ -209,6 +209,33 @@ body {
 #etf_composite .box:before {
   background: transparent url('/images/domains/foreside/cnbc_composite.png') no-repeat scroll right top;
 }
+#etf_composite .micro.graph {
+  float:left;
+  margin-top: 78px;
+  width:216px;
+  height:88px;
+}
+.micro.graph svg {
+  margin-left:0;
+}
+.micro.graph .reference {
+  shape-rendering: crispEdges;
+}
+.micro.graph .axis .tick {
+  stroke:#fff;
+}
+.micro.graph .axis text {
+  font-size:10px;
+  font-weight:normal;
+}
+.micro.graph .x.axis .domain {
+  display:none;
+}
+.micro.graph .y.axis .domain {
+  stroke:#fff;
+}
+
+
 #etf_composite dl {
   margin-right:213px;
   margin-left:260px;

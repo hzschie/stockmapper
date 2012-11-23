@@ -98,7 +98,9 @@
           ]
         },
         
-        template = new mapper.Template(bindings);  
+        template = new mapper.Template(bindings),
+        
+        micrograph = new mapper.Micrograph($('.micro.graph', $groups));
         
     mapper.GroupBehaviors.pickMembers(allEtfs, 4);
     mapper.GroupBehaviors.pickMembers(composite, 10);
@@ -107,6 +109,8 @@
     composite.on('change', updateGroup);
     updateGroup(allEtfs, true);
     updateGroup(composite, true);
+    
+    composite.acquireTimeSeries('intraday', function(series) { micrograph.setTimeSeries(series); });
     
     $groups.children().click(function() {
       var idAttr = $(this).attr('id');
@@ -152,7 +156,7 @@
       setSelected: function(group) {
         if(selected) {
           $('#' + selected.get('domName')).removeClass('selected');
-          $title.removeClass(selected.id);
+          $title.removeClass(selected.get('domName'));
         }
         selected = group;
         $('#' + selected.get('domName')).addClass('selected');
@@ -163,7 +167,7 @@
         else {
           $title.text(group.get('name'));
         }
-        $title.addClass(group.id);
+        $title.addClass(selected.get('domName'));
       },
       search: function() {},
       resize: function() {}
