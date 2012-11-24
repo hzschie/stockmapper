@@ -26,6 +26,7 @@ block panel_groups
         .active.map
           label Active
           ul
+      .name All ETFs
       dl
         dt Num ETFs Up:
         dd.num_up &nbsp;
@@ -37,7 +38,9 @@ block panel_groups
         dd.volume_down &nbsp;
   #etf_composite.group
     .box
-      .micro.graph
+      .left
+        .name
+        .micro.graph
       .picks
         .gainers.map
           label Gainers
@@ -48,16 +51,16 @@ block panel_groups
         .active.map
           label Active
           ul
+      .quote
+        .last_trade &nbsp;
+        .change
+          span.amount &nbsp;
+          | &nbsp;(
+          span.percent &nbsp;
+          | )
+        .timestamp Last Updated: 
+          span.value &nbsp;
       dl
-        .quote
-          .last_trade &nbsp;
-          .change
-            span.amount &nbsp;
-            | &nbsp;(
-            span.percent &nbsp;
-            | )
-          .timestamp Last Updated: 
-            span.value &nbsp;
         dt Previous Close:
         dd.previous &nbsp;
         dt Open:

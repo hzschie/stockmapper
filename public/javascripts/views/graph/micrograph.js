@@ -58,20 +58,8 @@
             return i == 0 || h == lastHour ? h12 + (h < 12 ? 'am' : 'pm') : h12;
           }
         );
-/* // APPROPRITE, BUT UNTESTED
-        else if (series.type == '5day') model.xAxis.tickFormat(d3.time.format.utc('%a %b %e'));
-        else {
-          var span = model.timeRange[1] - model.timeRange[0];
-          if(span > 922752e5)// 3 years
-            model.xAxis.tickFormat(d3.time.format.utc('%Y'));
-          else if(span >= 307584e5)// 1 year
-            model.xAxis.tickFormat(d3.time.format.utc('%b %Y'));
-          else
-            model.xAxis.tickFormat(d3.time.format.utc('%b %Y'));
-        }
-*/
         xAxis.call(model.xAxis);
-        console.log(model.priceScale.domain());
+
         model.priceAxis.tickValues(model.priceScale.domain())
           .tickPadding(4)
           .orient('left')

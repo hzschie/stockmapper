@@ -2,6 +2,7 @@
   mapper.Map = Map;
   
   function Map($map, _models) {
+    this.$container = $map;
     _.extend(this, Backbone.Events);
     var models,
         $shadows = $(document.createElement('div')).addClass('shadows').appendTo($map),

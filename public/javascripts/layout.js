@@ -5,12 +5,11 @@
     var $window = $(window),
         $help = $('.help'),
         $layout = $('.layout'),
-        $panel = $('.panel'),
+        $panel = $('.wrapper > .panel'),
         $index = $('#index_details'),
-        $map = $('.map'),
+        $map = map.$container.parent(),
         $chart = $('.chart'),
         $stockDetails = $('#stock_details'),
-        // $views = $panel.find('.views'),
         _this = this;
         
     $layout.css({ 'margin-top': topLine() });
@@ -72,9 +71,10 @@
     var $currentView = null, 
         vvv;
     function onScroll(e) {
-      var bodyHeight = $(document).height();
+      var scrollTop = $window.scrollTop(),
+          bodyHeight = $(document).height();
 
-      var y = $window.scrollTop() + topLine() + 10 + ($layout.offset().top - topLine()),
+      var y = scrollTop + 10 + ($layout.offset().top),
           _$currentView,
           view;
       if(y >= $chart.offset().top - 45) {

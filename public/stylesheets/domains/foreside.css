@@ -23,12 +23,20 @@ body {
 }
 
 .panel .inner > .title {
-  font-family: "Gerogia", "Palatino", "Palatino Linotype", serif;
+  font-family: "Georgia", "Palatino", "Palatino Linotype", serif;
   font-weight:normal;
 }
 .panel .inner > .title.etf_composite {
   padding-left:29px;
 }
+.panel.collapsed {
+  height:150px;
+}
+
+.panel.collapsed .latest_news {
+  display:none;
+}
+
 .panel .inner > .title.etf_composite:after {
   background:transparent url('/images/domains/foreside/cnbc_small.png') no-repeat scroll -1px -1px;
   width:35px;
@@ -38,6 +46,9 @@ body {
   position:absolute;
   top:2px;
   left:0;
+}
+.panel .sorts {
+  margin-top:4px;
 }
 
 .panel {
@@ -128,6 +139,11 @@ body {
 }
 .panel .box .quote {
   height:40px;
+  margin-left: 260px;
+  margin-top: 30px;
+}
+.panel.collapsed .box .quote {
+  margin-top: 22px;
 }
 .panel .box .last_trade {
   display:inline-block;
@@ -188,61 +204,94 @@ body {
 }*/
 #all_etfs .box {
   margin-right:5px;
-  background: transparent url('/images/domains/foreside/all_etfs.png') no-repeat scroll left top;
+  background: transparent url('/images/domains/foreside/sprites.png') no-repeat scroll left top;
+/*  background: transparent url('/images/domains/foreside/all_etfs.png') no-repeat scroll left top;*/
 }
 #all_etfs .box:before {
-  background: transparent url('/images/domains/foreside/all_etfs.png') no-repeat scroll right top;
+  background: transparent url('/images/domains/foreside/sprites.png') no-repeat scroll right top;
+/*  background: transparent url('/images/domains/foreside/all_etfs.png') no-repeat scroll right top;*/
+}
+#all_etfs dl {
+  margin-top:20px;
+}
+#all_etfs .name {
+  font-family: "Georgia", "Palatino", "Palatino Linotype", serif;
+  font-weight:normal;
+  font-size:31px;
+  line-height:31px;
+  margin-bottom:19px;
+  margin-left: 20px;
+  margin-top: 20px;
+  color:#fff;
+}
+
+.panel.collapsed #all_etfs .name {
+  margin-bottom:21px;
+  margin-top: 18px;
 }
 
 
 #etf_composite {
   width:66.666%;
 }
+#etf_composite .left {
+  float:left;
+}
+#etf_composite .name {
+  height:46px;
+  width:220px;
+  margin-top:18px;
+  margin-left:8px;
+  background: transparent url('/images/domains/foreside/sprites.png') no-repeat scroll -9px -269px;
+}
+.panel.collapsed #etf_composite .name {
+  margin-top:12px;
+}
+
 /*
 #etf_composite:hover {
   opacity:.8;
 }*/
 #etf_composite .box {
   margin-left:5px;
-  background: transparent url('/images/domains/foreside/cnbc_composite.png') no-repeat scroll left top;
+  background: transparent url('/images/domains/foreside/sprites.png') no-repeat scroll left top;
+/*  background: transparent url('/images/domains/foreside/cnbc_composite.png') no-repeat scroll left top;*/
 }
 #etf_composite .box:before {
-  background: transparent url('/images/domains/foreside/cnbc_composite.png') no-repeat scroll right top;
+  background: transparent url('/images/domains/foreside/sprites.png') no-repeat scroll right top;
+/*  background: transparent url('/images/domains/foreside/cnbc_composite.png') no-repeat scroll right top;*/
 }
 #etf_composite .micro.graph {
   float:left;
-  margin-top: 78px;
+  margin-top: 16px;
   width:216px;
   height:88px;
 }
-.micro.graph svg {
-  margin-left:0;
+.panel.collapsed #etf_composite .micro.graph {
+  margin-top: 22px;
 }
-.micro.graph .reference {
-  shape-rendering: crispEdges;
-}
-.micro.graph .axis .tick {
-  stroke:#fff;
-}
-.micro.graph .axis text {
-  font-size:10px;
-  font-weight:normal;
-}
-.micro.graph .x.axis .domain {
-  display:none;
-}
-.micro.graph .y.axis .domain {
-  stroke:#fff;
-}
-
 
 #etf_composite dl {
   margin-right:213px;
   margin-left:260px;
-  margin-top:30px;
+  margin-top:0;
+}
+.panel.collapsed #etf_composite dl {
+  margin-top:8px;
 }
 #etf_composite .picks {
   width:155px;
+}
+
+.panel.collapsed .picks { display:none; }
+.panel.collapsed dl { display:none; }
+.panel.collapsed .graph { display:none; }
+.panel.collapsed .box {
+  height:70px;
+  background-position:left -190px !important;
+}
+.panel.collapsed .box:before {
+  background-position:right -190px !important;
 }
 
 

@@ -71,6 +71,24 @@
   };
   
   mapper.config.getGroupsView = function(groups, $groups, $title) {
+    var $panel = $('.wrapper > .panel'),
+        $window = $(window);
+    $window.scroll(function() {
+      var scrollTop = $window.scrollTop();
+      if(scrollTop > 150 && !$panel.hasClass('collapsed')) {
+        $panel
+          .addClass('collapsed')
+          .css({ top:0 });
+      }
+      else if(scrollTop < 150) {
+        $panel
+          .removeClass('collapsed')
+          .css({ top: Math.min(0, -scrollTop) });
+      }
+    });
+    
+        
+    
     var allEtfs = groups.get('all_etfs'),
         composite = groups.get('^ETFCOMP'),
         selected = null,// the selected group
