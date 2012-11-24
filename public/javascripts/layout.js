@@ -13,10 +13,7 @@
         _this = this;
         
     $layout.css({ 'margin-top': topLine() });
-    $chart.css({ 
-      'min-height': $window.height() - $panel.outerHeight() - 90,
-      'padding-bottom': 20
-    });
+    updateChartHeight();
     
     onScroll();
     $window.scroll(onScroll);
@@ -128,10 +125,7 @@
           fn:function() {
             groups.resize();
             $layout.css({ 'margin-top': topLine() });
-            $chart.css({ 
-              'min-height': $window.height() - $panel.outerHeight() - 90,
-              'padding-bottom': 20
-            });
+            updateChartHeight();
           }
         }, Interval.PRIORITY_LOW);
       
@@ -158,6 +152,13 @@
       }, Interval.PRIORITY_LOW);
       
       updateBottomConstraint();
+    }
+    
+    function updateChartHeight() {
+      $chart.css({ 
+        'min-height': $window.height() - (parseInt($panel.css('min-height'), 10) || $panel.outerHeight()) - 90,
+        'padding-bottom': 20
+      });
     }
     
     function updateBottomConstraint() {
