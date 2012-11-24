@@ -75,12 +75,12 @@
         $window = $(window);
     $window.scroll(function() {
       var scrollTop = $window.scrollTop();
-      if(scrollTop > 150 && !$panel.hasClass('collapsed')) {
+      if(scrollTop > 160 && !$panel.hasClass('collapsed')) {
         $panel
           .addClass('collapsed')
           .css({ top:0 });
       }
-      else if(scrollTop < 150) {
+      else if(scrollTop < 160) {
         $panel
           .removeClass('collapsed')
           .css({ top: Math.min(0, -scrollTop) });

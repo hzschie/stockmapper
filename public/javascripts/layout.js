@@ -10,6 +10,8 @@
         $map = map.$container.parent(),
         $chart = $('.chart'),
         $stockDetails = $('#stock_details'),
+        panelMinHeight = parseInt($panel.css('min-height'), 10),
+        panelMaxHeight = parseInt($panel.css('max-height'), 10),
         _this = this;
         
     $layout.css({ 'margin-top': topLine() });
@@ -53,14 +55,14 @@
     this.frameView = function(viewName) {
       switch(viewName) {
         case 'chart':
-          scrollTo($chart.offset().top - 45 - $layout.offset().top);
+          scrollTo($chart.offset().top - 45 - collapsedTopLine());
           break;
         case 'index':
-          scrollTo($index.offset().top - $layout.offset().top);
+          scrollTo($index.offset().top - collapsedTopLine());
           break;
         case 'map':
         default:
-          scrollTo($map.offset().top - $layout.offset().top);
+          scrollTo($map.offset().top - collapsedTopLine());
           break;
       }
     };
@@ -71,7 +73,7 @@
       var scrollTop = $window.scrollTop(),
           bodyHeight = $(document).height();
 
-      var y = scrollTop + 10 + ($layout.offset().top),
+      var y = scrollTop + 10 + (collapsedTopLine()),
           _$currentView,
           view;
       if(y >= $chart.offset().top - 45) {
@@ -114,7 +116,11 @@
     }
     
     function topLine() {
-      return $panel.outerHeight() + 11;
+      return (panelMaxHeight || $panel.outerHeight()) + 11;
+    }
+
+    function collapsedTopLine() {
+      return (panelMinHeight || $panel.outerHeight()) + 11;
     }
     
     function onResize(justLayout) {
@@ -156,7 +162,7 @@
     
     function updateChartHeight() {
       $chart.css({ 
-        'min-height': $window.height() - (parseInt($panel.css('min-height'), 10) || $panel.outerHeight()) - 90,
+        'min-height': $window.height() - (panelMinHeight || $panel.outerHeight()) - 90,
         'padding-bottom': 20
       });
     }
