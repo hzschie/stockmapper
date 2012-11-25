@@ -82,21 +82,23 @@
   };
   
   mapper.config.getGroupsView = function(groups, $groups, $title) {
-    var $panel = $('.wrapper > .panel'),
-        $window = $(window);
-    $window.scroll(function() {
-      var scrollTop = $window.scrollTop();
-      if(scrollTop > 160 && !$panel.hasClass('collapsed')) {
-        $panel
-          .addClass('collapsed')
-          .css({ 'margin-top':0 });
-      }
-      else if(scrollTop < 160) {
-        $panel
-          .removeClass('collapsed')
-          .css({ 'margin-top': Math.min(0, -scrollTop) });
-      }
-    });
+    if(!mapper.isTablet) {
+      var $panel = $('.wrapper > .panel'),
+          $window = $(window);
+      $window.scroll(function() {
+        var scrollTop = $window.scrollTop();
+        if(scrollTop > 160 && !$panel.hasClass('collapsed')) {
+          $panel
+            .addClass('collapsed')
+            .css({ 'margin-top':0 });
+        }
+        else if(scrollTop < 160) {
+          $panel
+            .removeClass('collapsed')
+            .css({ 'margin-top': Math.min(0, -scrollTop) });
+        }
+      });
+    }
         
     
     var allEtfs = groups.get('all_etfs'),
@@ -208,6 +210,7 @@
       }
     };
     _.extend(instance, Backbone.Events);
+    instance.resize();
     return instance;
   };
 })();

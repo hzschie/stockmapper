@@ -23,7 +23,7 @@ body {
   max-width:1140px;
   margin:0 auto;
 }
-.wrapper {
+body:not(.tablet) .wrapper {
   position:relative;
   min-width:900px;
 }
@@ -32,6 +32,11 @@ body {
   font-size:14px;
   line-height:22px;
 }
+
+.search input {
+  width:120px;
+}
+
 
 .wrapper > .panel {
   min-height:118px;
