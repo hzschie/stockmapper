@@ -1,4 +1,5 @@
 body {
+  overflow-x:auto;
   background: #203a4b; /* Old browsers */
   background: -moz-linear-gradient(top, #376279 0%, #203a4b 51%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#376279), color-stop(51%,#203a4b)); /* Chrome,Safari4+ */
@@ -18,14 +19,13 @@ body {
   background-color:#006;
 }
 
-.panel .inner, .wrapper {
-  max-width:1080px;
-  min-width:900px;
+.wrapper, .panel .inner, #stock_details .inner {
+  max-width:1140px;
+  margin:0 auto;
 }
-
 .wrapper {
   position:relative;
-  margin:0 auto;
+  min-width:900px;
 }
 
 .selector {
@@ -69,7 +69,6 @@ body {
 
 .panel .inner {
   position:relative;
-  margin:0 auto;
   padding: 0 10px;
 }
 
@@ -80,6 +79,26 @@ body {
   background:transparent;
   border:none;
 }
+
+.details .left {
+  width:66.666%;
+}
+.details .right {
+  width:33.333%;
+}
+.details .values .col {
+  width:50%;
+}
+#stock_details {
+  background: -moz-linear-gradient(top,  rgba(18,31,41,0.99) 0%, rgba(15,27,36,0.95) 23%, rgba(8,14,18,0.99) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(18,31,41,0.99)), color-stop(23%,rgba(15,27,36,0.95)), color-stop(100%,rgba(8,14,18,0.99))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(18,31,41,0.99) 0%,rgba(15,27,36,0.95) 23%,rgba(8,14,18,0.99) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(18,31,41,0.99) 0%,rgba(15,27,36,0.95) 23%,rgba(8,14,18,0.99) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(18,31,41,0.99) 0%,rgba(15,27,36,0.95) 23%,rgba(8,14,18,0.99) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba(18,31,41,0.99) 0%,rgba(15,27,36,0.95) 23%,rgba(8,14,18,0.99) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5121f29', endColorstr='#f5080e12',GradientType=0 ); /* IE6-9 */
+}
+
 
 
 .inspector .left {
@@ -160,6 +179,7 @@ body {
   position:relative;
 }
 .panel .box .quote {
+  position:relative;
   height:40px;
   margin-left: 260px;
   margin-top: 30px;
@@ -237,6 +257,7 @@ body {
   margin-top:20px;
 }
 #all_etfs .name {
+  position:relative;
   font-family: "Georgia", "Palatino", "Palatino Linotype", serif;
   font-weight:normal;
   font-size:31px;

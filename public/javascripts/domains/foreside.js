@@ -97,7 +97,6 @@
           .css({ 'margin-top': Math.min(0, -scrollTop) });
       }
     });
-    
         
     
     var allEtfs = groups.get('all_etfs'),
