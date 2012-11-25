@@ -198,7 +198,14 @@
         $title.addClass(selected.get('domName'));
       },
       search: function() {},
-      resize: function() {}
+      resize: function() {
+        var w = $groups.width(),
+            hasNarrow = $groups.hasClass('narrow');
+        if(w <= 990 && !hasNarrow) {
+          $groups.addClass('narrow');
+        }
+        else if(w >= 990 && hasNarrow) $groups.removeClass('narrow');
+      }
     };
     _.extend(instance, Backbone.Events);
     return instance;
