@@ -17,10 +17,11 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
           .search_dropdown
         .sorts.selector
           label Sort By:
-          a(data-val="sym") Ticker Symbol
-          a(data-val="chg") Percent Change
-          a(data-val="vol") Volume
-          a(data-val="cap") Market Cap
+          block sort_options
+            a(data-val="sym") Ticker Symbol
+            a(data-val="chg") Percent Change
+            a(data-val="vol") Volume
+            a(data-val="cap") Market Cap
         .title
 
     opts = { id: 'stock_details', closeable: true, comparable: true }

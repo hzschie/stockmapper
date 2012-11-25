@@ -10,6 +10,14 @@ body {
   font:12px/13px "Arial", "Helvetica", sans-serif;
 }
 
+.periods.selector {
+  display:none;
+}
+
+.map_ui .panel {
+  background-color:#006;
+}
+
 .panel .inner, .wrapper {
   max-width:1080px;
   min-width:900px;
@@ -34,7 +42,7 @@ body {
   font-weight:normal;
 }
 .panel .inner > .title.etf_composite {
-  padding-left:29px;
+  padding-left:30px;
 }
 
 .panel.collapsed .latest_news {
@@ -42,7 +50,7 @@ body {
 }
 
 .panel .inner > .title.etf_composite:after {
-  background:transparent url('/images/domains/foreside/cnbc_small.png') no-repeat scroll -1px -1px;
+  background:transparent url('/images/domains/foreside/sprites.png') no-repeat scroll -9px -320px;
   width:35px;
   height:21px;
   content:'';
@@ -120,7 +128,7 @@ body {
 }
 
 .panel .picks {
-  width:62px;
+  width:63px;
   float:right;
   position:relative;
   margin-right:20px;
@@ -282,7 +290,7 @@ body {
   margin-top:8px;
 }
 #etf_composite .picks {
-  width:155px;
+  width:156px;
 }
 
 .panel.collapsed .picks { display:none; }

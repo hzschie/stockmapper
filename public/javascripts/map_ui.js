@@ -139,7 +139,7 @@
     }
     
     this.ready = function(callback, pendingCallback) {
-      if(mapper.stocks.datasets.low_high) callback();
+      if(mapper.stocks.datasets.low_high || (mapper.stocks.length && mapper.stocks.at(0).get('ftwhl'))) callback();
       else {
         pendingCallback();
         mapper.stocks.acquireDataset('low_high', { idPropName: 'cid', callback: callback });

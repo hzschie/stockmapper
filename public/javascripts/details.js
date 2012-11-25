@@ -22,7 +22,7 @@
       
       { $:'.avg_volume', field:'avgVolume', formatter:Template.commaFormat },
       { $:'.volume', field:'volume', formatter:Template.commaFormat },
-      { $:'.market_cap', field:'marketCap', formatter:Template.metricFormat }
+      { $:'.market_cap', field:'marketCap', formatter:Template.NaIfNaN(function(val) { return Template.metricFormat(val); }) }
     ],
     index: [
       { $:'.name', field:'name' },

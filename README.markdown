@@ -15,6 +15,7 @@
 TODO:
 !!!! BLUFIN make stocks={} at the beginning of createStocks, otherwise dynamic refresh won't work if stocks are removed.
 Generalize "stocks" to "components"(?)
+52wk lo/hi is not very well generalized. Uses the blufin json structure instead of StockMapper's
 
 
 ## Deploy checklist

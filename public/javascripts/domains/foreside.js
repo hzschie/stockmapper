@@ -17,7 +17,18 @@
       { name:'volume', formatter:numeric },
       { name:'changePct', formatter:parseFloat },
       { name:'marketCapString', formatter:function(val, field, hash) { hash.marketCap = parseMCap(val); return val; } },
-      { name:'avgVolume', formatter:numeric }
+      { name:'avgVolume', formatter:numeric },
+      { name:'52wkLow', formatter:numeric },
+      { name:'52wkHigh', formatter:numeric },
+      { name:'ftwhl', formatter:function(val, field, hash) { 
+        val = {
+          l:hash['52wkLow'],
+          h:hash['52wkHigh']
+        };
+        delete hash['52wkLow'];
+        delete hash['52wkHigh'];
+        return val;
+      } }
     ];
   };
 
