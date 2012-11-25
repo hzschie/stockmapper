@@ -89,12 +89,12 @@
       if(scrollTop > 160 && !$panel.hasClass('collapsed')) {
         $panel
           .addClass('collapsed')
-          .css({ top:0 });
+          .css({ 'margin-top':0 });
       }
       else if(scrollTop < 160) {
         $panel
           .removeClass('collapsed')
-          .css({ top: Math.min(0, -scrollTop) });
+          .css({ 'margin-top': Math.min(0, -scrollTop) });
       }
     });
     

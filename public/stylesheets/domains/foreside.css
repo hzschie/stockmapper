@@ -80,9 +80,21 @@ body {
   background:transparent;
   border:none;
 }
-.inspector .content.group {
-  width: 200px;
+
+
+.inspector .left {
+  width:128px;
 }
+.inspector .right {
+  width:128px;
+}
+.inspector .change {
+  width:130px;
+}
+.inspector .last_trade {
+  width:78px;
+}
+
 
 
 .panel .box {
