@@ -38,7 +38,6 @@ exports.setIO = function(_io) {
       var reply = [];
       if(ids) {
         ids.forEach(function(id) {
-          // socket.join(id);// TODO: remove this once conclusive it's not needed
           var current = dataSource.get(id);
           if(current) {
             reply.push(current);
