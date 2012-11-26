@@ -63,9 +63,10 @@
   height:18px;
   background:transparent url('/images/sprites.png?10252012') no-repeat scroll -2px -2px;
   position:absolute;
-  right:0;
-  top:0;
+  right: 5px;
+  top: 10px;
   cursor:pointer;
+  z-index:1;
 }
 .details .close:hover {
   opacity:.8;

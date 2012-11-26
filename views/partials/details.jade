@@ -1,4 +1,6 @@
 .details.disabled(id=opts.id)
+  if opts.closeable
+    .close
   .inner
     .left
       .header
@@ -52,8 +54,6 @@
           .selection
 
     .right
-      if opts.closeable
-        .close
       .values
         dl.content.index
           block details_index_values
