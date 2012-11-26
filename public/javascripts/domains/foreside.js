@@ -99,8 +99,15 @@
         }
       });
     }
-        
     
+    $('.products', $groups)
+      .appendTo(
+        $('<div class="groups"></div>')
+          .appendTo('.chart')
+          .css('top', 540)
+      )
+      .show();
+
     var allEtfs = groups.get('all_etfs'),
         composite = groups.get('^ETFCOMP'),
         selected = null,// the selected group

@@ -41,6 +41,7 @@ body:not(.tablet) .wrapper {
 .wrapper > .panel {
   min-height:118px;
   max-height:280px;
+  padding-bottom:3px;
 }
 .panel .inner > .title {
   font-family: "Georgia", "Palatino", "Palatino Linotype", serif;
@@ -80,7 +81,7 @@ body:not(.tablet) .wrapper {
 .panel .groups {
   margin:10px 0 0 0;
 }
-.panel .groups:before {
+.groups:before {
   background:transparent;
   border:none;
 }
