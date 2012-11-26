@@ -53,22 +53,7 @@
     }
     
     function scrollTo(y) {
-      return $news.css('margin-top', -y);
-      var $dummy = $('<div></div>');
-      $dummy.css({ left:$news.scrollTop() });
-      $dummy.animate(
-        { left:y },
-        {
-          duration:650,
-          step: function() {
-            $news.scrollTop(parseInt($(this).css('left'), 10));
-          },
-          complete: function() {
-            $news.scrollTop(y);
-          },
-          easing:'swing'
-        }
-      );
+      $news.css('top', -y);
     }
         
     var instance = {
