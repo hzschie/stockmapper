@@ -251,7 +251,7 @@
       grid.n(models.length);
       var bounds = grid.bounds();
       setTimeout(function() {
-        $map.css({ width: bounds.w, height: bounds.h, marginLeft:(parentW - bounds.w) / 2 });
+        $map.css({ width: bounds.w, height: bounds.h/*, marginLeft:(parentW - bounds.w) / 2*/ });
       }, bounds.h >= $map.height() ? 0 : getDelay(null, models.length - 1));
     }
     
@@ -318,7 +318,7 @@
       var _c = c;
       gridifyBinTree(tree, _c);
       var i = 0;
-      while(tree.numCols + tree.xGaps * xGapRatio > c) {
+      while(tree.numCols + (tree.xGaps - 1) * xGapRatio > c) {
         _c -= 1;
         gridifyBinTree(tree, _c);
         i++;
@@ -326,7 +326,7 @@
       }
 
       // this.cols = tree.numCols + tree.xGaps * xGapRatio;
-      this.rows = tree.numRows + tree.yGaps * yGapRatio;// TODO: refine this to be more accurate
+      this.rows = tree.numRows + (tree.yGaps + 1) * yGapRatio;
       
       var cells = makeCells(tree);
       this.groups = cells.groups;

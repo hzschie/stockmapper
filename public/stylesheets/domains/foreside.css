@@ -20,7 +20,7 @@ body {
 }
 
 .wrapper, .panel .inner, #stock_details .inner {
-  max-width:1140px;
+  max-width:1172px;
   margin:0 auto;
 }
 body:not(.tablet) .wrapper {

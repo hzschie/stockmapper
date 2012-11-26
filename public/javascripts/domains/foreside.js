@@ -100,13 +100,19 @@
       });
     }
     
-    $('.products', $groups)
-      .appendTo(
-        $('<div class="groups"></div>')
-          .appendTo('.chart')
-          .css('top', 540)
-      )
-      .show();
+    setTimeout(function() {
+      Interval.callOnce(
+        function() {
+          $('.products', $groups)
+            .appendTo(
+              $('<div class="groups"></div>')
+                .appendTo('.chart')
+                .css('top', 540)
+            )
+            .show();
+        }, Interval.FREE_TIME
+      );
+    },1000);
 
     var allEtfs = groups.get('all_etfs'),
         composite = groups.get('^ETFCOMP'),

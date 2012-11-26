@@ -73,9 +73,10 @@
       var scrollTop = $window.scrollTop(),
           bodyHeight = $(document).height();
 
-      var y = scrollTop + 10 + (collapsedTopLine()),
+      var y = Math.max(topLine(), scrollTop + 10 + collapsedTopLine()) + 1,
           _$currentView,
           view;
+          
       if(y >= $chart.offset().top - 45) {
         _$currentView = $chart;
         view = 'chart';
@@ -162,7 +163,7 @@
     
     function updateChartHeight() {
       $chart.css({ 
-        'min-height': $window.height() - (panelMinHeight || $panel.outerHeight()) - 90,
+        'min-height': $window.height() - (panelMinHeight || $panel.outerHeight()) - 85,
         'padding-bottom': 20
       });
     }
