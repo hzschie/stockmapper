@@ -233,9 +233,6 @@ body:not(.tablet) .wrapper {
   margin-left: 260px;
   margin-top: 30px;
 }
-.group.collapsed .box .quote {
-  margin-top: 22px;
-}
 .group .box .last_trade {
   display:inline-block;
   color:#fff;
@@ -300,7 +297,7 @@ body:not(.tablet) .wrapper {
   margin-right:5px;
 }
 #all_etfs dl {
-  margin-top:20px;
+  margin-top:30px;
 }
 #all_etfs .name {
   position:relative;
@@ -308,15 +305,17 @@ body:not(.tablet) .wrapper {
   font-weight:normal;
   font-size:31px;
   line-height:31px;
-  margin-bottom:19px;
   margin-left: 20px;
   margin-top: 20px;
   color:#fff;
 }
+#global_last_update {
+  line-height:10px;
+  margin-left:20px
+}
 
 .panel.collapsed #all_etfs .name {
-  margin-bottom:21px;
-  margin-top: 18px;
+  margin-top: 14px;
 }
 
 
@@ -329,7 +328,7 @@ body:not(.tablet) .wrapper {
 #etf_composite .name {
   height:46px;
   width:220px;
-  margin-top:18px;
+  margin-top:20px;
   margin-left:8px;
   background: transparent url('/images/domains/foreside/sprites.png') no-repeat scroll -9px -269px;
 }
@@ -353,7 +352,7 @@ body:not(.tablet) .wrapper {
 #etf_composite dl {
   margin-right:213px;
   margin-left:260px;
-  margin-top:0;
+  margin-top:20px;
 }
 .panel.collapsed #etf_composite dl {
   margin-top:8px;
@@ -368,6 +367,9 @@ body:not(.tablet) .wrapper {
 .panel.collapsed .box {
   height:70px;
   background-position:left -190px !important;
+}
+.panel.collapsed .box .quote {
+  margin-top: 22px;
 }
 .panel.collapsed .box:before {
   background-position:right -190px !important;
