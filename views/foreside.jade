@@ -69,6 +69,37 @@ block panel_groups
         dd.high &nbsp;
         dt Low:
         dd.low &nbsp;
+  .products(style="display:none;")
+    #etf_50.group
+      .box
+        .name
+        .quote
+          .last_trade 168.30
+          .change.green
+            span.amount +2.10
+            | &nbsp;(
+            span.percent +1.25%
+            | )
+    #etf_25ne.group
+      .box
+        .name
+        .quote
+          .last_trade 237.50
+          .change.red
+            span.amount –1.95
+            | &nbsp;(
+            span.percent –0.83%
+            | )
+    #etf_25e.group
+      .box
+        .name
+        .quote
+          .last_trade 630.30
+          .change.green
+            span.amount +1.70
+            | &nbsp;(
+            span.percent +0.27%
+            | )
 
 block sort_options
   a(data-val="sym") Ticker Symbol

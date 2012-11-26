@@ -120,21 +120,22 @@ body:not(.tablet) .wrapper {
 }
 
 
-
-.panel .box {
+.group .box {
   border:1px solid #26465c;
   height:180px;
   position:relative;
+  background: transparent url('/images/domains/foreside/sprites.png') no-repeat scroll left top;
 }
-.panel .box:before {
+.group .box:before {
   width:100px;
   content:'';
   position:absolute;
   right:0;
   top:0;
   bottom:0;
+  background: transparent url('/images/domains/foreside/sprites.png') no-repeat scroll right top;
 }
-.panel .groups .group .box:after {
+.groups .group .box:after {
   content:'';
   position:absolute;
   left: -6px;
@@ -145,17 +146,56 @@ body:not(.tablet) .wrapper {
   pointer-events:none;
   background:transparent;
 }
-.panel .groups .selected .box:after {
+.groups .selected .box:after {
   border: 5px solid rgba(255, 255, 255, 0.35);
 }
-.panel .groups .group:not(.selected):hover .box:after {
+.groups .group:not(.selected):hover .box:after {
   background:rgba(255, 255, 255, 0.05);
 }
-.panel .groups .group:not(.selected) {
+.groups .group:not(.selected) {
   cursor:pointer;
 }
 .groups .group:hover:after, .groups .group.selected:after {
   display:none;/* TODO: make this not be required by isolation groupview */
+}
+
+.groups .products {
+  display:block;
+  position:relative;
+  margin-top:10px;
+}
+.groups .products .group {
+  width:33.3333%;
+}
+.groups .products .group .box {
+  height:70px;
+  background-position:left -190px;
+  margin:0 5px;
+}
+.groups .products .group:first-child .box { margin-left:0; }
+.groups .products .group:last-child .box { margin-right:0; }
+
+.groups .products .group .box .name {
+  background: transparent url('/images/domains/foreside/sprites.png') no-repeat scroll;
+  height:32px;
+  margin:4px 0 0 15px;
+}
+.groups .products .group .box .quote {
+  margin:9px 0 0 15px;
+}
+#etf_50 .name {
+  background-position: -10px -350px;
+}
+#etf_25ne .name {
+  background-position: -10px -390px;
+}
+#etf_25e .name {
+  background-position: -10px -430px;
+}
+
+
+.groups .products .group .box:before {
+  background-position:right -190px;
 }
 
 .map ul label {
@@ -163,86 +203,86 @@ body:not(.tablet) .wrapper {
   font-size: 12px;
 }
 
-.panel .picks {
+.group .picks {
   width:63px;
   float:right;
   position:relative;
   margin-right:20px;
   margin-top:20px;
 }
-.panel .groups.narrow .picks {
+.groups.narrow .picks {
   display:none;
 }
-.panel .picks .map {
+.group .picks .map {
   height:50px;
   margin-bottom:0;
 }
-.panel .picks label {
+.group .picks label {
   color:#fff;
   display:block;
 }
-.panel .picks li {
+.group .picks li {
   display:inline-block;
   margin:-1px 0 0 -1px;
   position:relative;
 }
-.panel .box .quote {
+.group .box .quote {
   position:relative;
   height:40px;
   margin-left: 260px;
   margin-top: 30px;
 }
-.panel.collapsed .box .quote {
+.group.collapsed .box .quote {
   margin-top: 22px;
 }
-.panel .box .last_trade {
+.group .box .last_trade {
   display:inline-block;
   color:#fff;
   font-size:18px;
   margin-right:8px;
 }
-.panel .box .change {
+.group .box .change {
   display:none;
   font-size:16px;
 }
-.panel .box .change.red   { color:#f00; display:inline-block; }
-.panel .box .change.green { color:#0f0; display:inline-block; }
-.panel .box .timestamp {
+.group .box .change.red   { color:#f00; display:inline-block; }
+.group .box .change.green { color:#0f0; display:inline-block; }
+.group .box .timestamp {
   color:#aaa;
   font-size:10px;
 }
 
-.panel .box dl {
+.group .box dl {
   position:relative;
   margin-right:120px;
   margin-left:20px;
   margin-top:70px;
   line-height:14px;
 }
-.panel .groups.narrow dl {
+.groups.narrow .group dl {
   margin-right:20px !important;
 }
-.panel .box dt {
+.group .box dt {
   margin-top:1px;
   float:left;
   color:rgba(255, 255, 255, .7);
 }
-.panel .box dt .unit {
+.group .box dt .unit {
   display:inline;
   font-weight:normal;
 }
-.panel .box dd {
+.group .box dd {
   margin-top:1px;
   text-align:right;
   border-bottom:1px dotted #5e6f7a;
   font-weight:bold;
   color:#fff;
 }
-.panel .box dd:last-child {
+.group .box dd:last-child {
   border-bottom:none;
 }
 
-.panel .groups .group {
+.groups .group {
   position:relative;
   display:inline-block;
   vertical-align:top;
@@ -257,12 +297,6 @@ body:not(.tablet) .wrapper {
 }*/
 #all_etfs .box {
   margin-right:5px;
-  background: transparent url('/images/domains/foreside/sprites.png') no-repeat scroll left top;
-/*  background: transparent url('/images/domains/foreside/all_etfs.png') no-repeat scroll left top;*/
-}
-#all_etfs .box:before {
-  background: transparent url('/images/domains/foreside/sprites.png') no-repeat scroll right top;
-/*  background: transparent url('/images/domains/foreside/all_etfs.png') no-repeat scroll right top;*/
 }
 #all_etfs dl {
   margin-top:20px;
@@ -302,18 +336,8 @@ body:not(.tablet) .wrapper {
   margin-top:12px;
 }
 
-/*
-#etf_composite:hover {
-  opacity:.8;
-}*/
 #etf_composite .box {
   margin-left:5px;
-  background: transparent url('/images/domains/foreside/sprites.png') no-repeat scroll left top;
-/*  background: transparent url('/images/domains/foreside/cnbc_composite.png') no-repeat scroll left top;*/
-}
-#etf_composite .box:before {
-  background: transparent url('/images/domains/foreside/sprites.png') no-repeat scroll right top;
-/*  background: transparent url('/images/domains/foreside/cnbc_composite.png') no-repeat scroll right top;*/
 }
 #etf_composite .micro.graph {
   float:left;
