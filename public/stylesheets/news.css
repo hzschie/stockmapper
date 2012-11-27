@@ -82,6 +82,11 @@
   text-overflow: ellipsis;
   overflow: hidden;
 }
+.ticker .news .none {
+  line-height: 40px;
+  font-size: 16px;
+  margin-top: 0px;
+}
 .ticker .news .source, .ticker .news .date {
   display:inline-block;
   font-size:12px;
