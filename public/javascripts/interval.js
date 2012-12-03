@@ -60,6 +60,11 @@
       if(typeof(handler) != 'function') {
         var fn = handler.fn;
         fn.key = handler.key;
+        
+        if(handler.context) {
+          params = handler.context;
+        }
+        
         handler = fn;
       }
       
@@ -110,6 +115,38 @@
         return true;
       }
       return false;
+    };
+    
+    this.each = function (array, fn, complete, priority, limit) {
+      Interval.add({ 
+        context: {
+          i: 0,
+          array: array,
+          len: array.length,
+          fn: fn,
+          limit: limit,
+          complete: complete
+        },
+        fn: function(tRec, context) {
+          var t0 = Date.now(),
+              quit = false;
+          while(Date.now() - t0 < (context.limit || tRec) && context.i < context.len) {
+            // If fn returns false, we break out of the loop
+            quit = false == fn(
+              context.array[context.i],
+              context.i
+            );
+            if (quit) break;
+            context.i++;
+          }
+          
+          if(context.i >= context.len || quit) {
+            Interval.remove(this);
+            context.complete && context.complete(!quit);
+          }
+          console.log(context.i + ' / ' + context.len + ' & tRec: ' + tRec);
+        }
+      }, Interval.HIGH);
     };
 
     this.remove = function (handler) {
