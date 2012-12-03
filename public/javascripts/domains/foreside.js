@@ -162,7 +162,7 @@
     
     function updateGroup(group, force) {
       var $group = $('#' + group.get('domName'));
-      if(group.hasChanged('upsAndDowns')) {
+      if(group.hasChanged('upsAndDowns') || force) {
         template.applyBindings(group.id, $group, group);
       }
 

@@ -28,7 +28,9 @@ $(function() {
   var socket,
       multiStockData = [],
       waitForFirstPass = !mapper.isMobile,//true,
-      optimize = mapper.isMobile,
+      optimize = mapper.perf.optimizeDataInit,
+      isStocksDone = false,
+      isGroupsDone = false,
       isFirstPassDone = false;
   
   if(window.io) {// io would be defined if server decided to use WebSocket
@@ -36,12 +38,16 @@ $(function() {
     socket.on('update', parseIncomingMultiStockData);
   }
   else {// otherwise, we use regular http queries for heatmap data
-    socket = { emit: function() { /* no-op */} };// Stub out socket
     setInterval(function() {
-      $.getJSON('/datasets/heatmap?random=' + Math.floor(Math.random() * 1000), parseIncomingMultiStockData);
+      socket.emit();
     }, 60000);
-    $.getJSON('/datasets/heatmap?random=' + Math.floor(Math.random() * 1000), parseIncomingMultiStockData);
+    socket = {
+      emit: function() { $.getJSON('/datasets/heatmap?random=' + Math.floor(Math.random() * 1000), parseIncomingMultiStockData); }
+    };
   }
+  
+  buildStockDefinitions(tryPopulateGroups);
+  buildGroupDefinitions(tryPopulateGroups);
   
   // Parses incoming data regardless of transport method (WebSocket vs HTTP)
   function parseIncomingMultiStockData(_multiStockData) {
@@ -60,6 +66,7 @@ $(function() {
         model && model.update(data, { silent: optimize && !isFirstPassDone });
         i++;
       }
+      console.log('silent ' + (optimize && !isFirstPassDone) + ' work ' + i + ' of ' + multiStockData.length);
 
       multiStockData.splice(0, i);
       if(multiStockData.length == 0) {
@@ -81,62 +88,83 @@ $(function() {
     }, key: 'process_data_update' }, Interval.HIGH);
   }
   
-  // Stocks JSON
-  var field, i,
-      headers = mapper.stocksJson.headers,
-      hash;
-  _.each(mapper.stocksJson.data, function(values) {
-    hash = {};
-    for(field = headers[0], i = 0; i < headers.length; field = headers[++i]) {
-      hash[field] = values[i];
-    }
-  
-    var stock = new mapper.Stock(hash);
-    mapper.models.add(stock);
-    mapper.stocks.add(stock);
-  });
-
-  _.each(mapper.groupsJson, function(groupJson) {
-    groupJson.type = groupJson.type || 'group';
-    var group = new mapper.StockGroup(groupJson);
-    if(true || group.get('ids').length) {
-      mapper.models.add(group);
-      mapper.groups.add(group);
-    }
-  });
-  
-  // Create the "All" group, if defined
-  if(!mapper.config.allGroup) { /* do nothing */ }
-  else if(typeof(mapper.config.allGroup) == 'string') {
-    mapper.allGroup = mapper.groups.where({ name:mapper.config.allGroup })[0];
-  }
-  else {
-    mapper.allGroup = new mapper.StockGroup(mapper.config.allGroup);
-    mapper.models.add(mapper.allGroup);
-    mapper.groups.add(mapper.allGroup);
+  function buildStockDefinitions(callback) {
+    var field, i,
+        headers = mapper.stocksJson.headers,
+        hash,
+        stocks = [];
+    Interval.each(
+      mapper.stocksJson.data, 
+      function(values) { 
+        hash = {};
+        for(field = headers[0], i = 0; i < headers.length; field = headers[++i]) {
+          hash[field] = values[i];
+        }
+        stocks.push(new mapper.Stock(hash));
+      },
+      function() {
+        mapper.models.add(stocks);
+        mapper.stocks.add(stocks);
+        isStocksDone = true;
+        callback();
+      },
+      Interval.HIGH, Interval.MAX
+    );
   }
   
-  var groupIds = _.reject(mapper.groups.pluck('id'), function(id) { return id == null; });
+  function buildGroupDefinitions(callback) {
+    var groups = [];
+    Interval.each(
+      mapper.groupsJson,
+      function(groupJson) {
+        groupJson.type = groupJson.type || 'group';
+        groups.push(new mapper.StockGroup(groupJson));
+      },
+      function() {
+        mapper.models.add(groups);
+        mapper.groups.add(groups);
+        
+        // Create the "All" group, if defined
+        if(!mapper.config.allGroup) { /* do nothing */ }
+        else if(typeof(mapper.config.allGroup) == 'string') {
+          mapper.allGroup = mapper.groups.where({ name:mapper.config.allGroup })[0];
+        }
+        else {
+          mapper.allGroup = new mapper.StockGroup(mapper.config.allGroup);
+          mapper.models.add(mapper.allGroup);
+          mapper.groups.add(mapper.allGroup);
+        }
+        isGroupsDone = true;
+        callback();
+      },
+      Interval.HIGH, Interval.MAX
+    );
+  }
   
-  tryPopulateGroups();
-  
-  socket.emit('subscribe');
-
   // Put stocks into groups
-  function tryPopulateGroups(groups) {
-    if(mapper.stocks.length && (mapper.groups.length || mapper.groupsJson.length == 0) && (!waitForFirstPass || isFirstPassDone)) {
-      mapper.groups.forEach(function(group) {
-        var members = group.get('members');
-        _.each(group.get('ids'), function(id) {
-          var stock = mapper.stocks.get(id);
-          members.add(stock);
-          stock.get('groups').push(group);
-        });
-      });
+  function tryPopulateGroups() {
+    if(isStocksDone && isGroupsDone) {
+      if(waitForFirstPass && !isFirstPassDone) {
+        socket.emit('subscribe');
+        return;
+      }
       
-      mapper.allGroup && mapper.allGroup.get('members').add(mapper.stocks.models);
-    
-      mapper.dataReady();
+      Interval.each(
+        mapper.groups.models,
+        function(group) {
+          var stocks = [];
+          _.each(group.get('ids'), function(id) {
+            var stock = mapper.stocks.get(id);
+            stocks.push(stock);
+            stock.get('groups').push(group);
+          });
+          group.get('members').add(stocks);
+        },
+        function() {
+          mapper.allGroup && mapper.allGroup.get('members').add(mapper.stocks.models);
+          Interval.callOnce(mapper.dataReady, Interval.LOW);
+        }
+      );
     }
   }
 });

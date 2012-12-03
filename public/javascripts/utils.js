@@ -5,7 +5,9 @@ $.browser.android = navigator.userAgent.match(/android/i) !== null;
 $.browser.touchDevice = $.browser.android || $.browser.iOS;
 $.browser.firefox = navigator.userAgent.match(/firefox/i) !== null;
 
-mapper.perf = {};
+mapper.perf = {
+  optimizeDataInit: $.browser.msie || mapper.isMobile
+};
 if($.browser.touchDevice) {
   mapper.perf.mapDelayMult = 0;//150;//0;//80;
   mapper.perf.chartDelayMult = 0;//2500;//0;//1500;
