@@ -74,8 +74,8 @@
   transition:opacity .5s linear .2s;
 }
 .ticker .news .title {
+  display:inline;
   color:#fff;
-  display:inline-block;
   margin-right:8px;
   max-width: 70%;
   white-space: nowrap;
@@ -88,7 +88,6 @@
   margin-top: 0px;
 }
 .ticker .news .source, .ticker .news .date {
-  display:inline-block;
   font-size:12px;
 }
 .ticker .arrows {
