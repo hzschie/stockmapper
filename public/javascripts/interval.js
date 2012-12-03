@@ -11,7 +11,7 @@
   /** This queue will execute only when there are no other active subscribers. */
       PRIORITY_FREETIME = 3,
       
-      MAX_FRAMETIME = 60,
+      MAX_FRAMETIME = 60,//1000000000,// To test synchronisity
       AVG_FRAMETIME = 30;
   
   Interval = new IntervalService();
@@ -68,11 +68,10 @@
         handler = fn;
       }
       
-/*
-      To test synchronisity
-      Interval.MAX = 100000000;
-      handler.apply(handler, [100000000].concat(params));return true;
-*/
+
+      // To test synchronisity
+      // handler.apply(handler, [100000000].concat(params));return true;
+
       
       if(handler.key != null && subscribersTable[ handler.key ] != null) {
         return false;
@@ -124,7 +123,7 @@
           array: array,
           len: array.length,
           fn: fn,
-          limit: limit,
+          limit: limit,//Interval.MAX to test synchronisity
           complete: complete
         },
         fn: function(tRec, context) {

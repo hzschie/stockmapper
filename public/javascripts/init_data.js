@@ -1,4 +1,5 @@
 $(function() {
+  var tt = Date.now();
   mapper.models = new Backbone.Collection();
   mapper.stocks = new (Backbone.Collection.extend({
     datasets: {},
@@ -38,12 +39,12 @@ $(function() {
     socket.on('update', parseIncomingMultiStockData);
   }
   else {// otherwise, we use regular http queries for heatmap data
-    setInterval(function() {
-      socket.emit();
-    }, 60000);
-    socket = {
-      emit: function() { $.getJSON('/datasets/heatmap?random=' + Math.floor(Math.random() * 1000), parseIncomingMultiStockData); }
-    };
+    setInterval(requestHeatmap, 60000);
+    socket = { emit: requestHeatmap };
+    
+    function requestHeatmap() {
+      $.getJSON('/datasets/heatmap?random=' + Math.floor(Math.random() * 1000), parseIncomingMultiStockData);
+    }
   }
   
   buildStockDefinitions(tryPopulateGroups);
@@ -162,7 +163,8 @@ $(function() {
         },
         function() {
           mapper.allGroup && mapper.allGroup.get('members').add(mapper.stocks.models);
-          Interval.callOnce(mapper.dataReady, Interval.LOW);
+          Interval.callOnce(mapper.dataReady, Interval.FREE_TIME);
+          if(!waitForFirstPass) socket.emit('subscribe');
         }
       );
     }
