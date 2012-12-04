@@ -1,0 +1,53 @@
+.map li {
+  border:1px solid #bbb;
+}
+
+.graph .y_axis {
+  border-left:1px solid #fff;
+  position:absolute;
+}
+.graph .x_axis {
+  position:absolute;
+}
+.graph .tick div {
+  color:#fff;
+  font-size:10px;
+}
+.graph .x_axis .tick {
+  position:absolute;
+  border-left:1px solid #fff;
+}
+.graph .x_axis .tick div {
+  line-height:20px;
+  margin-left:-50%;
+}
+.graph .y_axis .tick {
+  position:absolute;
+  border-top:1px solid #fff;
+}
+.graph .y_axis .tick div {
+  position:absolute;
+  right:9px;
+  margin-top:-8px;
+}
+.graph .reference {
+  position:absolute;
+  border-top:1px dashed #f66;
+}
+
+.selector a.current {
+  background:none;
+  color:#fff;
+  font-weight:bold;
+}
+
+.panel .views.selector a.disabled {
+  display:none;
+}
+
+.groups .group {
+  cursor:pointer;
+}
+.groups .group.selected {
+  cursor:normal;
+}

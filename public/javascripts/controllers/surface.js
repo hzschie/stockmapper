@@ -13,7 +13,7 @@
         map = new mapper.Map($('.layout .map ul')),
         clustering = new mapper.ClusteringSelector($('.map .clustering'), function(id) { viewState.setState({ cluster:id }); }),
         highlights = new mapper.MapHighlights($('.map .highlights')),
-        chart = new mapper.HtmlChart($('.chart')),
+        chart = new mapper.HtmlChart($('.chart')),/* STUB: { setModels:function(){}, on:function(){}, resize:function(){} } */
         inspector = new mapper.Inspector($('.inspector')),
         stockDetails = new mapper.Details($('#stock_details')),
         indexDetails = new mapper.Details($('#index_details'), { graphVolume:false }),

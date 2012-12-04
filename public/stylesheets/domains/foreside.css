@@ -70,6 +70,7 @@ body:not(.tablet) .wrapper {
 }
 
 .panel {
+  background:#203543;/* Fallback color */
   background:rgba(29,54,70,0.95);
 }
 
@@ -82,7 +83,8 @@ body:not(.tablet) .wrapper {
   margin:10px 0 0 0;
 }
 .groups:before {
-  background:transparent;
+  background:#203543;/* Fallback color */
+  background:rgba(0,0,0,0);
   border:none;
 }
 
@@ -145,9 +147,10 @@ body:not(.tablet) .wrapper {
   bottom: -6px;
   border-radius: 6px;
   pointer-events:none;
-  background:transparent;
+/*  background:transparent;*/
 }
 .groups .selected .box:after {
+  border: 5px solid #6d7c86;/* Fallback color */
   border: 5px solid rgba(255, 255, 255, 0.35);
 }
 .groups .group:not(.selected):hover .box:after {
@@ -264,7 +267,7 @@ body:not(.tablet) .wrapper {
 .group .box dt {
   margin-top:1px;
   float:left;
-  color:rgba(255, 255, 255, .7);
+  color:#88aacc;/*rgba(255, 255, 255, .7);*/
 }
 .group .box dt .unit {
   display:inline;
@@ -369,10 +372,10 @@ body:not(.tablet) .wrapper {
   height:70px;
   background-position:left -190px !important;
 }
-.panel.collapsed .box .quote {
+.panel.collapsed .groups .group .box .quote {
   margin-top: 22px;
 }
-.panel.collapsed .box:before {
+.panel.collapsed .groups .group .box:before {
   background-position:right -190px !important;
 }
 

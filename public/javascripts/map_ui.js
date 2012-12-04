@@ -5,28 +5,7 @@
     var $performance = $('.panel .performance', $container);
     
     // DEFINITIONS OF HIGHLIGHTERS
-    mapper.highlighters = {
-      active: new ActivityHighlighter(null, $('.panel .active', $container)),
-      best: new PerformanceHighlighter(
-        {
-          type: "Best",
-          val: .95,
-          period: 'p52wk'
-        },
-        $('<div class="best performance content">' + $performance.html() + '</div>').appendTo($performance.parent()),
-        $('a.best', $container)
-      ),
-      worst: new PerformanceHighlighter(
-        {
-          type: "Worst",
-          val: .95,
-          period: 'p52wk'
-        },
-        $performance.addClass('worst'),
-        $('a.worst', $container)
-      )
-    };
-    
+    mapper.highlighters = {};
     // The "NONE" highlighter
     mapper.highlighters[mapper.SelectorButtons.NONE] = {
       fn: function() { return false; },
@@ -40,8 +19,32 @@
         panel = new mapper.WidgetPanel( $('.panel', $container),  $('.plus', $container), $container ),
         _this = this;
         
-    setHighlightType(currentType);
-        
+    Interval.callOnce(function() {
+      mapper.highlighters.active = new ActivityHighlighter(null, $('.panel .active', $container));
+      mapper.highlighters.best = new PerformanceHighlighter(
+        {
+          type: "Best",
+          val: .95,
+          period: 'p52wk'
+        },
+        $('<div class="best performance content">' + $performance.html() + '</div>').appendTo($performance.parent()),
+        $('a.best', $container)
+      );
+      mapper.highlighters.worst = new PerformanceHighlighter(
+        {
+          type: "Worst",
+          val: .95,
+          period: 'p52wk'
+        },
+        $performance.addClass('worst'),
+        $('a.worst', $container)
+      );
+      
+      Interval.callOnce(function() {
+        setHighlightType(currentType);
+      }, Interval.LOW);
+    }, Interval.LOW);
+
     function setHighlightType(id) {
       if(currentType) mapper.highlighters[currentType].off('change');
       

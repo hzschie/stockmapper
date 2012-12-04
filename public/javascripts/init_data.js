@@ -39,12 +39,9 @@ $(function() {
     socket.on('update', parseIncomingMultiStockData);
   }
   else {// otherwise, we use regular http queries for heatmap data
+    function requestHeatmap() { $.getJSON('/datasets/heatmap?random=' + Math.floor(Math.random() * 1000), parseIncomingMultiStockData); }
     setInterval(requestHeatmap, 60000);
     socket = { emit: requestHeatmap };
-    
-    function requestHeatmap() {
-      $.getJSON('/datasets/heatmap?random=' + Math.floor(Math.random() * 1000), parseIncomingMultiStockData);
-    }
   }
   
   buildStockDefinitions(tryPopulateGroups);
@@ -95,7 +92,7 @@ $(function() {
         hash,
         stocks = [];
     Interval.each(
-      mapper.stocksJson.data, 
+      mapper.stocksJson.data,
       function(values) { 
         hash = {};
         for(field = headers[0], i = 0; i < headers.length; field = headers[++i]) {

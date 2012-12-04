@@ -6,7 +6,88 @@
         model = PriceGraphModel(GraphModel())
           .width($graph.innerWidth() - pad[L] - pad[R])
           .height($graph.innerHeight() - pad[T] - pad[B]),
-        svg = d3.select($graph[0]).append('svg'),
+        GraphImpl = typeof Raphael != 'undefined' ? RaphaelMicrograph : SvgMicrograph,
+        impl = new GraphImpl($graph, model, pad);
+        
+    this.setTimeSeries = function(_series) {
+      model.series(_series);
+      impl.update();
+    };
+  }
+  
+  function RaphaelMicrograph($graph, model, pad) {
+    var paper = Raphael($graph[0]),
+        
+        graph = d3.select($graph[0]),
+        xAxis = graph.append('div')
+          .attr('class', 'x_axis')
+          .style('left', pad[L] + 'px')
+          .style('top', pad[T] + model.height() + 'px'),
+        priceAxis = graph.append('div')
+          .attr('class', 'y_axis')
+          .style('left', pad[L] + 'px')
+          .style('top', pad[T] + 'px')
+          .style('height', model.height() + 'px'),
+        reference = graph.append('div')
+          .attr('class', 'reference')
+          .style('left', pad[L] + 'px')
+          .style('width', model.width() + 'px'),
+          
+        priceGenerator = d3.svg.line().x(model.xTime).y(model.yPrice).defined(model.isDefined);
+    
+    this.update = function() {
+      if(model.isGraphable) {
+        var series = model.series(),
+            yRef = model.priceScale(series.price_ref || 0);
+            
+        reference
+          .style('display', series.price_ref == null ? 'none' : '')
+          .style('top', (yRef + pad[T]) + 'px');
+
+        paper.clear();
+        var d = priceGenerator(series.data);
+        if(d) paper.path(d).transform('t' + pad[L] + ',' + pad[T]).attr('stroke', '#ddf').attr('stroke-width', 1.5);
+        
+        model.xAxis.tickPadding(3).tickSize(3);
+        
+        if (series.type == 'intraday') model.xAxis.tickFormat(
+          function(date, i) {
+            var h = date.getUTCHours(),
+                h12 = h == 12 ? 12 : h % 12,
+                lastHour = new Date(model.timeRange[1]).getUTCHours();
+            return i == 0 || h == lastHour ? h12 + (h < 12 ? 'am' : 'pm') : h12;
+          }
+        );
+
+        model.priceAxis.tickValues(model.priceScale.domain())
+          .tickPadding(4)
+          .orient('left')
+          .tickSize(-4);
+          
+        priceAxis.selectAll('.tick').data(model.priceScale.domain()).enter()
+          .append('div')
+          .attr('class', 'tick')
+          .style('width', Math.abs(model.priceAxis.tickSize()) + 'px')
+          .style('top', function(d) { return model.priceScale(d) + 'px'; })
+          .append('div')
+            .text(d3.format('f'));
+
+        xAxis.selectAll('.tick')
+          .data( model.xAxis.scale().ticks.apply(model.xAxis.scale(), model.xAxis.ticks()) )
+        .enter()
+          .append('div')
+          .attr('class', 'tick')
+          .style('position', 'absolute')
+          .style('height', Math.abs(model.xAxis.tickSize()) + 'px')
+          .style('left', function(d) { return model.timeScale(d) + 'px'; })
+          .append('div')
+            .text(model.xAxis.tickFormat());
+      }
+    };
+  }
+    
+  function SvgMicrograph($graph, model, pad) {
+    var svg = d3.select($graph[0]).append('svg'),
         main = svg.append('g'),
         graph = main.append('g')
           .attr('transform', 'translate(' + pad[L] + ',' + pad[T] + ')'),
@@ -28,12 +109,7 @@
           
         priceGenerator = d3.svg.line().x(model.xTime).y(model.yPrice).defined(model.isDefined);
     
-    this.setTimeSeries = function(_series) {
-      model.series(_series);
-      update();
-    };
-    
-    function update() {
+    this.update = function() {
       if(model.isGraphable) {
         var series = model.series(),
             yRef = model.priceScale(series.price_ref || 0);
@@ -67,7 +143,7 @@
           
         priceAxis.call(model.priceAxis);
       }
-    }
+    };
   }
   
   function PriceGraphModel(graphModel) {
