@@ -51,3 +51,7 @@
 .groups .group.selected {
   cursor:normal;
 }
+
+.inspector.hidden {
+  display:none;
+}

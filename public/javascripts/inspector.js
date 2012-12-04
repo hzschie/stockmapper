@@ -31,7 +31,9 @@
   };
 
   function Inspector($container) {
-    var $tip = $container.find('svg'),
+    var useRaphael = typeof Raphael != 'undefined',
+        $tip = useRaphael ? $('<div class="raphael_tip"></div>').appendTo($container).on('mouseover', function(e) { e.preventDefault(); return false; }) : $container.find('svg'),
+        paper = useRaphael ? Raphael($tip[0]) : null,
         $window = $(window),
         pointLeft = false,
         pointUp = false,
@@ -45,7 +47,7 @@
             Inspector.defaultBindings,
             mapper.config.getInspectorBindings ? mapper.config.getInspectorBindings(Inspector.defaultBindings) : {}
           )
-        );
+        );console.log($tip[0]);
         
     this.setBottomConstraint = function(c) {
       bottomConstraint = c;
@@ -141,10 +143,13 @@
             y: pointUp ? 0 : bubbH
           };
       
-      $tip.attr({
-        width: Math.abs(diff.x + datum.x) + 2*pad,
-        height: Math.abs(diff.y + datum.y) + 2*pad
-      });
+      if(useRaphael) {
+        $tip.attr({
+          width: Math.abs(diff.x + datum.x) + 2*pad,
+          height: Math.abs(diff.y + datum.y) + 2*pad
+        });
+      }
+      
       $tip.css({
         left: Math.round( Math.min(datum.x, -diff.x) - pad ),
         top: Math.round( Math.min(datum.y, -diff.y) - pad )
@@ -158,17 +163,21 @@
           norm = {
             x: -vect.y * ins / mag,
             y: vect.x * ins / mag
-          };
+          },
+          
+          pathStr = [
+            'M', Math.max(0, -diff.x - datum.x) + pad, Math.max(0, -diff.y - datum.y) + pad,// Start at target (i.e. tip)
+            'm', vect.x + norm.x, vect.y + norm.y,
+            'm', -2 * norm.x, -2 * norm.y,
+            'L', Math.max(0, -diff.x - datum.x) + pad, Math.max(0, -diff.y - datum.y) + pad,// Start at target (i.e. tip)
+            'l', vect.x + norm.x, vect.y + norm.y
+          ].join(' ');
       
-      $tip.find('path').attr({
-        d: [
-          'M', Math.max(0, -diff.x - datum.x) + pad, Math.max(0, -diff.y - datum.y) + pad,// Start at target (i.e. tip)
-          'm', vect.x + norm.x, vect.y + norm.y,
-          'm', -2 * norm.x, -2 * norm.y,
-          'L', Math.max(0, -diff.x - datum.x) + pad, Math.max(0, -diff.y - datum.y) + pad,// Start at target (i.e. tip)
-          'l', vect.x + norm.x, vect.y + norm.y
-        ].join(' ')
-      });
+      if(useRaphael) {
+        paper.clear();
+        paper.path(pathStr).attr('fill', '#fffdee').attr('stroke', '#cccccc');
+      }
+      else $tip.find('path').attr({ d: pathStr });
       
       lastPos.left = currP.left;
       lastPos.top  = currP.top;

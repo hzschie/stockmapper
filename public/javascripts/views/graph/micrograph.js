@@ -27,7 +27,8 @@
           .attr('class', 'y_axis')
           .style('left', pad[L] + 'px')
           .style('top', pad[T] + 'px')
-          .style('height', model.height() + 'px'),
+          .style('height', model.height() + 'px')
+          .style('display', 'none'),
         reference = graph.append('div')
           .attr('class', 'reference')
           .style('left', pad[L] + 'px')
@@ -64,7 +65,7 @@
           .orient('left')
           .tickSize(-4);
           
-        priceAxis.selectAll('.tick').data(model.priceScale.domain()).enter()
+        priceAxis.style('display', 'block').selectAll('.tick').data(model.priceScale.domain()).enter()
           .append('div')
           .attr('class', 'tick')
           .style('width', Math.abs(model.priceAxis.tickSize()) + 'px')

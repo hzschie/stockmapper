@@ -51,7 +51,7 @@
   display: block;
 }
 
-.inspector svg {
+.inspector svg, .inspector .raphael_tip {
   position:absolute;
   z-index:1;
 }
