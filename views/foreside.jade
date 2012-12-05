@@ -39,6 +39,10 @@ block panel_groups
         dt Volume Down:
         dd.volume_down &nbsp;
   #etf_composite.group
+    .foreside_credit
+      | Powered by: 
+      a(href="http://www.foreside.com/")
+        img(src="/images/domains/foreside/foreside_logo_inline.png")
     .box
       .left
         .name
@@ -129,6 +133,11 @@ block clustering_options
   a(data-val="none") None
   a(data-val="cluster") Classification
   
+block footer
+  a.credit(style="bottom:386px; border-bottom-left-radius:10px;")
+    img(src="/images/domains/foreside/etfrs_logo.png", style="margin-top:0; margin-right:2px; margin-bottom:2px;")
+    .more(style="margin-right:0; clear:both;") The first rated series of ETFs
+
 block analytics_code
   script(type='text/javascript')
     var _gaq = _gaq || [];

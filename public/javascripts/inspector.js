@@ -47,7 +47,7 @@
             Inspector.defaultBindings,
             mapper.config.getInspectorBindings ? mapper.config.getInspectorBindings(Inspector.defaultBindings) : {}
           )
-        );console.log($tip[0]);
+        );
         
     this.setBottomConstraint = function(c) {
       bottomConstraint = c;
@@ -143,12 +143,10 @@
             y: pointUp ? 0 : bubbH
           };
       
-      if(useRaphael) {
-        $tip.attr({
-          width: Math.abs(diff.x + datum.x) + 2*pad,
-          height: Math.abs(diff.y + datum.y) + 2*pad
-        });
-      }
+      $tip.attr({
+        width: Math.abs(diff.x + datum.x) + 2*pad,
+        height: Math.abs(diff.y + datum.y) + 2*pad
+      });
       
       $tip.css({
         left: Math.round( Math.min(datum.x, -diff.x) - pad ),

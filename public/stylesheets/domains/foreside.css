@@ -406,3 +406,16 @@ body:not(.tablet) .wrapper {
   display:block;
   margin-left:70px;
 }
+
+
+.foreside_credit {
+  position:absolute;
+  bottom:-30px;
+  left:8px;
+  font-size:14px;
+  color:#ddf;
+}
+.foreside_credit img {
+  margin-bottom:-1px;
+  margin-left:5px;
+}
