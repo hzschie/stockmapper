@@ -29,7 +29,7 @@ $(function() {
   var socket,
       multiStockData = [],
       waitForFirstPass = !mapper.isMobile,//true,
-      optimize = mapper.perf.optimizeDataInit,
+      optimize = !mapper.perf ? true : mapper.perf.optimizeDataInit,
       isStocksDone = false,
       isGroupsDone = false,
       isFirstPassDone = false;

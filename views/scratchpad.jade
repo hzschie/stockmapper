@@ -3,15 +3,48 @@ html
   head
     title= 'Scratch Pad'
     meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0")
+    meta(http-equiv="X-UA-Compatible", content="IE=Edge")
     
     style(type="text/css")
-      body { background-color:#fcc; }
-      .tree div { position:absolute; left:-1px; top:-1px; background:rgba(255,0,0,.2); border:1px solid; }
+      body { background-color:#fcc; padding:80px; }
       
+      .axis { position:relative; }
+      .axis.x { height:140px; }
+      .axis.y { width:140px; display:inline-block; }
+      
+      .x.tick {
+        position:absolute;
+        border-left:1px solid #000;
+      }
+      .y.tick {
+        position:absolute;
+        border-top:1px solid #000;
+      }
+      
+      .y.tick label {
+        margin-top:-8px;
+      }
+      
+      .domain {
+        border:1px solid #000;
+      }
+      
+      .side {
+        display:inline-block;
+        position:relative;
+        width:500px;
+        *display:inline;
+        zoom:1;
+      }
+    
+    //if lt IE 9
+      script(type="text/javascript", src="/javascripts/lib/aight.min.js")
+    
     script(type='text/javascript', src='/javascripts/lib/jquery-1.7.2.min.js')
     script(type='text/javascript', src='/javascripts/lib/underscore-min.js');
     script(type='text/javascript', src='/javascripts/lib/backbone-min.js');
     script(type='text/javascript', src='/javascripts/lib/d3.v2.min.js');
+    script(type='text/javascript', src='/javascripts/views/graph/html_axis.js');
     
     script(type='text/javascript')
       mapper = {
@@ -23,91 +56,69 @@ html
     script(type='text/javascript', src='/javascripts/interval.js');
     script(type='text/javascript', src='/javascripts/stocks.js');
     script(type='text/javascript', src='/javascripts/init_data.js');
+    script(type='text/javascript', src='/javascripts/models/behaviors.js');
             
     script(type='text/javascript')
+      var a,b,c,d;
       mapper.dataReady = function() {
-        //var nester = d3.nest().key(function(stock)
-        var VERT = 0, HORZ = 1,
-            uw = 64, uh = 14,
-            category = "Industry",//"Capitisation",//
-            groups = mapper.groups.where({ category: category });
+        a = d3.html.axis().orient('bottom');
+        a.scale().range([0,400]).domain([1.3, 8.653]);
+        a.tickSubdivide(3);
+        a.tickSize(10,-3,5);
+        d3.select('.left .axis.n1').call(a);
         
-        // groups.sort(function(a, b) {
-        //   var na = a.get('members').length,
-        //       nb = b.get('members').length;
-        //   return (na < nb) - (nb < na);
-        // });
-        groups.sort(function(a, b) {
-          var na = a.get('nickname'),
-              nb = b.get('nickname');console.log(na,nb);
-          return (na > nb) - (nb > na);
-        });
-        function generateBinTree(groups, memo) {
-          var memo = memo || {};
-          memo.numMembers = d3.sum(groups, function(group) { return group.get('members').length; });
-          if(groups.length == 1) return memo.leaf = groups[0];
-          else memo.branches = [{},{}];
-          
-          for(var i = 0, count = 0, split = [[],[]], len = groups.length; i < len; i++) {
-            var group = groups[i],
-                numMembers = group.get('members').length;
-            
-            if(count + numMembers/2 <= memo.numMembers / 2) split[0].push(group);
-            else split[1].push(group);
-            
-            count += numMembers;
-          }
-          
-          generateBinTree(split[0], memo.branches[0]);
-          generateBinTree(split[1], memo.branches[1]);
-          
-          return memo;
-        }
+        b = d3.html.axis().orient('bottom');
+        b.scale().range([0,400]).domain([1.3, 8.653]);
+        b.tickSubdivide(3);
+        b.tickSize(-80,3,10);
+        d3.select('.left .axis.n2').call(b);
         
-        var tree = generateBinTree(groups)
-        gridifyBinTree(tree, 15);
-        console.log(tree);
+        c = d3.html.axis().orient('left');
+        c.scale().range([0,400]).domain([1.3, 8.653]);
+        c.tickSubdivide(3);
+        c.tickSize(20,-3,10);
+        d3.select('.left .axis.n3').call(c);
         
-        function gridifyBinTree(tree, numCols) {
-          tree.numCols = numCols;
-          tree.numRows = Math.ceil(tree.numMembers / tree.numCols);
-          
-          if(tree.leaf) { return tree.numRows; }
-          
-          var f0 = tree.branches[0].numMembers / tree.numMembers,
-              f1 = tree.branches[1].numMembers / tree.numMembers;
-          
-          // if( (tree.numCols * uw) / (tree.numRows * uh) < 2 || Math.round(Math.min(f0 * tree.numCols, f1 * tree.numCols)) < 3) {//uw/uh) {
-          if(Math.round(Math.min(f0 * tree.numCols, f1 * tree.numCols)) < 3) {//uw/uh) {
-            tree.stack = VERT;
-            tree.numRows = gridifyBinTree(tree.branches[0], tree.numCols) + gridifyBinTree(tree.branches[1], tree.numCols);
-          }
-          else {
-            tree.stack = HORZ
-            tree.numRows = Math.max( gridifyBinTree(tree.branches[0], Math.round(f0 * tree.numCols)), gridifyBinTree(tree.branches[1], Math.round(f1 * tree.numCols)) );
-          }
-          return tree.numRows;
-        }
+        d = d3.html.axis().orient('left');
+        d.scale().range([0,400]).domain([1.3, 8.653]);
+        d.tickSubdivide(3);
+        d.tickSize(-80,3,10);
+        d3.select('.left .axis.n4').call(d);
         
-        function renderBinTreeGrid(tree, $container) {
-          $container.css({
-            width: tree.numCols * uw,
-            height: tree.numRows * uh
-          });
-          
-          if(tree.leaf) return $container.text(tree.leaf.get('nickname') + " " + tree.numCols + 'x' + tree.numRows + '(' + (Math.round(100*tree.numMembers/tree.numCols) / 100) + ')');
-          
-          if(tree.stack == VERT) {
-            renderBinTreeGrid(tree.branches[0], $('<div></div>').appendTo($container));
-            renderBinTreeGrid(tree.branches[1], $('<div></div>').css({ top:tree.branches[0].numRows * uh - 1 }).appendTo($container));
-          }
-          else {
-            renderBinTreeGrid(tree.branches[0], $('<div></div>').appendTo($container));
-            renderBinTreeGrid(tree.branches[1], $('<div></div>').css({ left:tree.branches[0].numCols * uw - 1 }).appendTo($container));
-          }
-        }
         
-        renderBinTreeGrid(tree, $('<div class="tree"></div>').appendTo($('body')));
+        a = d3.html.axis().orient('top');
+        a.scale().range([0,400]).domain([1.3, 8.653]);
+        a.tickSubdivide(3);
+        a.tickSize(10,-3,5);
+        d3.select('.right .axis.n1').call(a);
+        
+        b = d3.html.axis().orient('top');
+        b.scale().range([0,400]).domain([1.3, 8.653]);
+        b.tickSubdivide(3);
+        b.tickSize(-80,3,10);
+        d3.select('.right .axis.n2').call(b);
+        
+        c = d3.html.axis().orient('right');
+        c.scale().range([0,400]).domain([1.3, 8.653]);
+        c.tickSubdivide(3);
+        c.tickSize(20,-3,10);
+        d3.select('.right .axis.n3').call(c);
+        
+        d = d3.html.axis().orient('right');
+        d.scale().range([0,400]).domain([1.3, 8.653]);
+        d.tickSubdivide(3);
+        d.tickSize(-80,3,10);
+        d3.select('.right .axis.n4').call(d);
       };
 
 body
+  .left.side
+    .axis.x.n1
+    .axis.x.n2
+    .axis.y.n3
+    .axis.y.n4
+  .right.side
+    .axis.x.n1
+    .axis.x.n2
+    .axis.y.n3
+    .axis.y.n4
