@@ -72,6 +72,17 @@ body {
   width:auto;
 }
 
+.credit .more {
+  margin-top:7px;
+  margin-right:58px;
+}
+
+.credit img {
+  width: 40px;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+}
 
 /* SEARCH */
 .search .dropdown .sym {
