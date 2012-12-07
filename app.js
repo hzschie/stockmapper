@@ -25,15 +25,17 @@ passport.use(new LocalStrategy(
     if(password) {
       password = password.toLowerCase();
       if(['foreside', 'cnbc', 'state street', '2n'].indexOf(password) > -1) {
+        console.log('LOG IN: ' + password);
         done(null, { id: password });
       }
       else {
+        console.log('FAILED ATTEMP: ' + password);
         done(null, false, { message: 'Invalid password' });
       }
     }
-    process.nextTick(function () {
-      done(null, { id: password });
-    });
+    // process.nextTick(function () {
+    //   done(null, { id: password });
+    // });
     // if (err) { return done(err); }
     // if (!user) { return done(null, false, { message: 'Unknown user ' + username }); }
     // if (user.password != password) { return done(null, false, { message: 'Invalid password' }); }

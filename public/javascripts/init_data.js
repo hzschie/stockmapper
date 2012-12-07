@@ -64,7 +64,7 @@ $(function() {
         model && model.update(data, { silent: optimize && !isFirstPassDone });
         i++;
       }
-      console.log('silent ' + (optimize && !isFirstPassDone) + ' work ' + i + ' of ' + multiStockData.length);
+      // console.log('silent ' + (optimize && !isFirstPassDone) + ' work ' + i + ' of ' + multiStockData.length);
 
       multiStockData.splice(0, i);
       if(multiStockData.length == 0) {

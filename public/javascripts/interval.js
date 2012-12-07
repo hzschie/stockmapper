@@ -143,7 +143,7 @@
             Interval.remove(this);
             context.complete && context.complete(!quit);
           }
-          console.log(context.i + ' / ' + context.len + ' & tRec: ' + tRec);
+          // console.log(context.i + ' / ' + context.len + ' & tRec: ' + tRec);
         }
       }, Interval.HIGH);
     };
