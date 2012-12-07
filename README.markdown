@@ -16,6 +16,8 @@ TODO:
 !!!! BLUFIN make stocks={} at the beginning of createStocks, otherwise dynamic refresh won't work if stocks are removed.
 Generalize "stocks" to "components"(?)
 52wk lo/hi is not very well generalized. Uses the blufin json structure instead of StockMapper's
+If data timestamp same as what client has, skip the update
+Make search dropdown not be globally fixed. Instead, hide overlay when field is focused or typed into.
 
 
 ## Deploy checklist

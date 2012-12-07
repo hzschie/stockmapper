@@ -1,0 +1,146 @@
+!!!
+html
+  head
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0")
+    
+    link(rel="stylesheet", type="text/css", href="/stylesheets/domains/foreside.css")
+
+    style(type="text/css")
+      html {
+        height:100%;
+      }
+      body {
+        height:99%;
+        color: #fff;
+      }
+      .wrapper {
+        min-height:100%;
+      }
+      
+      .about {
+        padding:60px;
+        display:inline-block;
+      }
+      
+      .coming_soon {
+        //- padding-top:40px;
+        padding-left:5px;
+        font-size:16px
+      }
+      
+      .title {
+        font-family: "Georgia", "Palatino", "Palatino Linotype", serif;
+        font-weight:bold;
+        font-size:60px;
+        line-height:56px;
+        margin-bottom:10px;
+      }
+      
+      .info {
+        padding-left:60px;
+        margin-top:100px;
+        font-size:14px;
+        line-height:18px;
+        color:#8ac;
+      }
+      
+      .important {
+        font-size:18px;
+        line-height:22px;
+        color:#fff;
+      }
+      
+      form.invite {
+        text-align:right;
+      }
+      
+      form input {
+        vertical-align:middle;
+      }
+      
+      form label {
+        color:#8ac;
+        display: inline-block;
+        line-height: 24px;
+        font-size:14px;
+        vertical-align: middle;
+        text-decoration: underline;
+        cursor:pointer;
+      }
+      
+      input.invitation_code {
+        border-radius:16px;
+        font-size:14px;
+        font-weight:bold;
+        width:110px;
+        margin-left:10px;
+        line-height:18px;
+        height:18px;
+        padding:1px 0 1px 8px;
+      }
+      
+      .go {
+        margin-left:4px;
+        height:24px;
+        width:24px;
+        border-radius:16px;
+        display:inline-block;
+        background:#fff;
+        color:#376279;
+        padding:1px;
+        border:none;
+        font-weight:bold;
+      }
+      
+      .closed input {
+        display:none !important;
+      }
+      
+      .reveal {
+        display:inline-block;
+        width:162px;
+        white-space:nowrap;
+        -webkit-transition:width .6s;
+        overflow:hidden;
+      }
+      
+      .closed .reveal {
+        width:0;
+      }
+      
+      .disclaimer {
+        font-size:12px;
+        position:absolute;
+        bottom:12px;
+        left:60px;
+      }
+
+body
+  .wrapper
+    .about
+      .coming_soon COMING SOON
+      .title ETFs of ETFs
+      form.invite.closed(action="/login", method="post")
+        label Have an invitation code?
+        .reveal
+          input(type="hidden", name="username", value="any")
+          input(type="text", class="invitation_code", name="password", placeholder="Enter Code")
+          input(type="submit", class="go", value="GO")
+    
+    .info
+      | For more information, please call:<br>
+      .important
+        | Lee Morin<br>
+        | (207) 553-7123
+  
+    .disclaimer Not for Public Use :: For Demonstration Only
+    
+  // needs analytics
+  script(type='text/javascript', src='/javascripts/lib/jquery-1.7.2.min.js')
+  script(type="text/javascript")
+    $(function() {
+      $('form label').click(function () {
+        $('form').removeClass('closed');
+      });
+    });
+  
