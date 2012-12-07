@@ -1,1 +1,1 @@
-web: DATA_DOMAIN=foreside NODE_ENV=production BUNDLE=true node app.js
+web: REQUIRE_LOGIN=true DATA_DOMAIN=foreside NODE_ENV=production BUNDLE=true node app.js
