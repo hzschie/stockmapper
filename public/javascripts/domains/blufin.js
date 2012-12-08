@@ -102,8 +102,8 @@
   mapper.config.getGroupTagHtml = function(group, $container) {
     if(group.get('type') == 'index') return [
         '<div class="val_right">',
-          '<div class="value"></div>',
-          '<div class="change"></div>',
+          group.get('category') == 'Index' ? '<div class="value"></div>' : '',
+          '<div class="change' + (group.get('category') == 'Index' ? '' : '_pct') + '"></div>',
         '</div>',
         '<label>', group.get('label'), '</label>'
       ].join('');
@@ -113,6 +113,11 @@
       ].join('');
   };
 
+  mapper.config.getGroupBindings = function(bindings) {
+    var Template = mapper.Template;
+    bindings.index.push({ $:'.change_pct', field:'changePct', formatter:Template.pctChangeFormatter() });
+    return bindings;
+  };
   /*
   mapper.config.getGroupBindings = function(bindings) {
     return {
