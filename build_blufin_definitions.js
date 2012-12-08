@@ -75,7 +75,8 @@ function createGroups(callback) {
         name: group.n,// IndexName
         nickname: group.n.replace(/^blufin /i, '').replace(/ index$/i, '').replace(/ and /, ' & '),
         category: group.c,// Category
-        ids: []
+        ids: [],
+        type: groupId == 1000 ? 'group' : 'index'
       };
     });
     
@@ -110,6 +111,8 @@ function createStocks(callback) {
       console.error( LogUtil.cantGet('index constituents', 'IndexId=1000', error || response.statusCode, url) );
       return callback();
     }
+    
+    stocks = {};
     
     var stocksRaw = JSON.parse(body),
         broadGroup = groups['1000'],

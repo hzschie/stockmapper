@@ -9,7 +9,7 @@
         $dropdown = $('.search_dropdown', $search),
         $body = $('body'),
         selection = -1,
-        baseModels = _.filter(mapper.models.models, function(model) { return typeof(model.get('sym')) == 'string'; }),//mapper.stocks,
+        baseModels = mapper.models.models,//_.filter(mapper.models.models, function(model) { return typeof(model.get('sym')) == 'string'; }),//mapper.stocks,
         term, inputTerm,
         matches = [],
         _this = this;
@@ -140,7 +140,7 @@
         
         
       for(var i = 0; i < models.length; i++) {
-        var sym = models[i].get('sym').toLowerCase(),
+        var sym = String(models[i].get('sym')).toLowerCase(),
             name = models[i].get('name').toLowerCase(),
             j = 0,
             match = null,
@@ -188,7 +188,7 @@
       var html = $.map(matches, function(match) {
         return [
           '<div>',
-            '<span class="sym">', format(match.model.get('sym'), match.best), '</span>',
+            '<span class="sym">', format(String(match.model.get('sym')), match.best), '</span>',
             match.isNumeric ? '<span class="code">' + format(String(match.model.get('id')), match.best) + '</span>' : '',
             '<span class="name">', format(match.model.get('name'), match.best), '</span>',
           '</div>'

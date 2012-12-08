@@ -30,4 +30,10 @@ C.  iPhone version
 
 
 ## To SSH
-* **Blufin:** ssh ec2-user@54.251.131.161
+* **Blufin Production:** ssh ec2-user@54.251.131.161
+* **Blufin Staging:** ssh ec2-user@54.251.116.122
+
+
+## Blufin data servers
+* **Production:** http://54.251.130.77:8080
+* **UAT:** 46.137.212.140:8080
