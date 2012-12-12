@@ -15,12 +15,12 @@
   
   "allGroup": {
     "id": "^NYA",
-    "name": "NYSE Composit Index",
+    "name": "NYSE Composite Index",
     "label": "NYA (show all)",
     "nickname": "NYA",
     "sym": "NYA",
     "category": "Index",
-    "type": "index"
+    "type": "group"
   },
   
   "groupsTagOrder": [

@@ -32,7 +32,9 @@ app.configure(function(){
   app.set('view engine', 'jade');
 
   app.use(express['static'](__dirname + '/public'));
-  app.use(express.favicon(__dirname + '/public/images/favicon.ico'));
+  
+  var favicon = __dirname + '/public/images/domains/' + dataDomain + '/favicon.ico';
+  app.use(express.favicon(fs.existsSync(favicon) ? favicon : __dirname + '/public/images/favicon.ico'));
   
   if(loginSupport) loginSupport(app);
   

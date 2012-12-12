@@ -335,7 +335,7 @@
     var w = $groups.width(),
         gap = 1,
         numCols = Math.floor(w / 150),
-        tagW = Math.floor((w - gap * numCols) / numCols);
+        tagW = Math.round((w - gap * numCols) / numCols);
     _.forEach(sections, function(section) {
       var $section = $(document.createElement('div')).addClass('section').html('<div class="category">' + section.category + '</div>');
       _.forEach(section.tags, function(tag) {

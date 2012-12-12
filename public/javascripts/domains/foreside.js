@@ -20,6 +20,8 @@
       { name:'avgVolume', formatter:numeric },
       { name:'52wkLow', formatter:numeric },
       { name:'52wkHigh', formatter:numeric },
+      
+      // Derived property
       { name:'ftwhl', formatter:function(val, field, hash) { 
         val = {
           l:hash['52wkLow'],

@@ -252,7 +252,7 @@
       var bounds = grid.bounds();
       setTimeout(function() {
         $map.css({ width: bounds.w, height: bounds.h/*, marginLeft:(parentW - bounds.w) / 2*/ });
-      }, bounds.h >= $map.height() ? 0 : getDelay(null, models.length - 1));
+      }, bounds.h >= $map.height() ? 0 : (getDelay(null, models.length - 1) + 600));
     }
     
     function makeCells(n, c, r) {

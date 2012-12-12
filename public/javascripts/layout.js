@@ -4,6 +4,7 @@
     _.extend(this, Backbone.Events);
     var $window = $(window),
         $help = $('.help'),
+        $about = $('.about'),
         $layout = $('.layout'),
         $panel = $('.wrapper > .panel'),
         $index = $('#index_details'),
@@ -51,6 +52,26 @@
       }
     };
     $('.close', $help).click(Layout.toggleHelp);
+
+    Layout.toggleAbout = function() {
+      if($about.parent().hasClass('open')) {
+        $about.fadeOut({
+          complete: function() {
+            $about.parent().removeClass('open');
+            onResize(false);
+          }
+        });
+      }
+      else {
+        $about.parent().addClass('open');
+        $about.fadeIn({
+          complete: function() {
+            onResize(false);
+          }
+        });
+      }
+    };
+    // $('.close', $help).click(Layout.toggleHelp);
     
     this.frameView = function(viewName) {
       switch(viewName) {

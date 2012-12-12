@@ -1,8 +1,123 @@
+body {
+  font:12px/13px "Helvetica", "Arial", sans-serif;
+}
+
+.periods.selector {
+  display:none;
+}
+
+.groups .category {
+  color:#ddf;
+}
+
 .map li span {
   font-size:9px;
   padding-left:1px;
 }
 
+.map ul label {
+  color:#ddf;
+}
+
 .inspector .content.group {
   width: 200px;
+}
+
+.details .left {
+  width:66.666%;
+}
+.details .right {
+  width:33.333%;
+}
+.details .values .col {
+  width:50%;
+}
+
+
+.app_header {
+  color:#fff;
+  line-height: 34px;
+  margin-bottom: 2px;
+  margin-top:2px;
+}
+
+.app_header.open {
+  border-bottom:1px solid #555;
+/*  margin-left: 7px;*/
+}
+
+.app_header .logo {
+  background: url('/images/domains/nyse/stockmapper_logo.png') no-repeat scroll 2px 2px;
+  color: transparent;
+  float:left;
+  min-width:190px;
+  margin-left:7px;
+}
+.app_header > a {
+  font-size:12px;
+  padding:0 8px;
+  text-decoration:none;
+  color:#ccc;
+}
+.app_header a:hover {
+  color:#fff;
+}
+.app_header .about {
+  margin: 10px 12px;
+  display:none;
+}
+.app_header .about div {
+  display:inline-block;
+  vertical-align:top;
+  color:#bbe;
+  font-size: 14px;
+  line-height: 28px;
+}
+.app_header .about .left {
+  width:66.666%;
+/*  font-size: 14px;
+  line-height: 24px;*/
+}
+.app_header .about .right {
+  width:33.333%;
+/*  font-size: 12px;
+  line-height: 16px;*/
+}
+.app_header .about .left p {
+  padding-left:20px;
+  padding-right:70px;
+}
+.app_header .about .left p.main {
+  font-size:16px;
+}
+.app_header .about a {
+  color:#eef;
+  text-decoration:none;
+}
+.app_header .about a:hover {
+  text-decoration:underline;
+}
+.app_header .about .disclaimer {
+  font-size:10px;
+  line-height:14px;
+  margin-top:20px;
+/*  color:#ccc;*/
+}
+.app_header .twitter-share-button {
+  float:right;
+  margin:10px;
+}
+
+.panel {
+/*  background-color:#333;*/
+  background: url('/images/domains/nyse/grain.png'), no-repeat 0 50% -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,0.07) 92%, rgba(255,255,255,0.07) 100%); /* FF3.6+ */
+
+  background-color:rgba(51,51,51,0.95);
+  background: url('/images/domains/nyse/grain.png'), no-repeat 0 50% -moz-linear-gradient(top,  rgba(34,34,34,0.99) 0%, rgba(51,51,51,0.92) 100%); /* FF3.6+ */
+  background: url('/images/domains/nyse/grain.png'), no-repeat 0 50% -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(34,34,34,0.99)), color-stop(100%,rgba(51,51,51,0.92))); /* Chrome,Safari4+ */
+  background: url('/images/domains/nyse/grain.png'), no-repeat 0 50% -webkit-linear-gradient(top,  rgba(34,34,34,0.99) 0%,rgba(51,51,51,0.92) 100%); /* Chrome10+,Safari5.1+ */
+  background: url('/images/domains/nyse/grain.png'), no-repeat 0 50% -o-linear-gradient(top,  rgba(34,34,34,0.99) 0%,rgba(51,51,51,0.92) 100%); /* Opera 11.10+ */
+  background: url('/images/domains/nyse/grain.png'), no-repeat 0 50% -ms-linear-gradient(top,  rgba(34,34,34,0.99) 0%,rgba(51,51,51,0.92) 100%); /* IE10+ */
+  background: url('/images/domains/nyse/grain.png'), no-repeat 0 50% linear-gradient(to bottom,  rgba(34,34,34,0.99) 0%,rgba(51,51,51,0.92) 100%); /* W3C */
+
 }
