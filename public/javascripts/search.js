@@ -85,7 +85,13 @@
       }
       $dropdown.children().removeClass('selected').eq(selection).addClass(selection == -1 ? '' : 'selected');
       
-      term = selection == -1 ? inputTerm : matches[selection].model.get('sym');
+      if(selection == -1)
+        term = inputTerm;
+      else {
+        var sym = matches[selection].model.get('sym');
+        term = typeof sym == "number" ? matches[selection].model.get('name') : sym;
+      }
+      
       $input.val(term);
       term = term.toLowerCase();
       _this.trigger('select_option', selection == -1 ? null : matches[selection].model);
@@ -170,7 +176,10 @@
       }
       
       matches.sort(function(a, b) {
-        return (a.level < b.level) - (a.level > b.level);
+        var aType = a.model.get('type'),
+            bType = b.model.get('type');
+        if(aType == bType) return (a.level < b.level) - (a.level > b.level);
+        return (aType > bType) - (aType < bType);
       });
       
       matches = matches.slice(0,10);
@@ -188,7 +197,7 @@
       var html = $.map(matches, function(match) {
         return [
           '<div>',
-            '<span class="sym">', format(String(match.model.get('sym')), match.best), '</span>',
+            typeof match.model.get('sym') == "number" ? '' : '<span class="sym">' + format(String(match.model.get('sym')), match.best) + '</span>',
             match.isNumeric ? '<span class="code">' + format(String(match.model.get('id')), match.best) + '</span>' : '',
             '<span class="name">', format(match.model.get('name'), match.best), '</span>',
           '</div>'

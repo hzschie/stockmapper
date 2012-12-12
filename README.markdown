@@ -13,7 +13,7 @@
 
 
 TODO:
-!!!! BLUFIN make stocks={} at the beginning of createStocks, otherwise dynamic refresh won't work if stocks are removed.
+!!!! Configurize min-group width in groups view
 Generalize "stocks" to "components"(?)
 52wk lo/hi is not very well generalized. Uses the blufin json structure instead of StockMapper's
 If data timestamp same as what client has, skip the update

@@ -76,7 +76,8 @@ function createGroups(callback) {
         nickname: group.n.replace(/^blufin /i, '').replace(/ index$/i, '').replace(/ and /, ' & '),
         category: group.c,// Category
         ids: [],
-        type: groupId == 1000 ? 'group' : 'index'
+        type: 'index',
+        resourceParams: 'resource=index&blufin=true'
       };
     });
     
@@ -88,7 +89,8 @@ function createGroups(callback) {
       sym: 'NIFTY',
       category: 'Index',
       type: 'index',
-      ids: []
+      ids: [],
+      resourceParams: 'resource=index&nse=true'
     };
     groups['sensex'] = {
       id: 201,
@@ -97,7 +99,8 @@ function createGroups(callback) {
       sym: 'SENSEX',
       category: 'Index',
       type: 'index',
-      ids: []
+      ids: [],
+      resourceParams: 'resource=index'
     };
     
     callback();
@@ -124,7 +127,7 @@ function createStocks(callback) {
     
     stocksRaw.forEach(function(stock) {
       var sym = stock.s;// ScripId
-      stocks[sym] = [stock.cid, stock.n, sym, stock.nse == 1];//[ScripCode, ScripName, sym, isNse]
+      stocks[sym] = [stock.cid, stock.n, sym, 'type=stock&nse=' + (stock.nse == 1)];//[ScripCode, ScripName, sym, isNse]
       
       var sector = stock.sec,// Sector
           capitalization = stock.c,// Capitalization
@@ -167,7 +170,7 @@ function createStocks(callback) {
 function writeDefinitions(callback) {
   var groupsJSON = Object.keys(groups).map(function(key) { return groups[key]; });
   var stocksJSON = {
-    headers: ['id', 'name', 'sym', 'isNse'],
+    headers: ['id', 'name', 'sym', 'resourceParams'],
     data: Object.keys(stocks).sort().map(function(key) { return stocks[key]; })
   };
   

@@ -137,8 +137,8 @@
       sizeMult = models.length > 1000 ? 3 : 1;
       updateHelpers();
       updateBounds();
-      
-      if(models.comparator == mapper.sortFunctions['chg'] && models.at(0).get('hasData')) {
+
+      if(models.comparator == mapper.sortFunctions['chg'] && models.length && models.at(0).get('hasData')) {
         showUpsAndDowns();
       }
       else {

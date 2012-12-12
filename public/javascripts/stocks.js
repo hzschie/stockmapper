@@ -9,7 +9,8 @@
       defaults: {
         hasData: false,
         isHighlighted: false,
-        type: 'model'
+        type: 'model',
+        resourceParams:''
       },
     
       update: function(array, opts) {
@@ -30,7 +31,8 @@
         var existing = this.get(seriesType),
             setter = {},
             _this = this,
-            url = '/series/' + this.id + '?type=' + seriesType + '&resource=' + this.get('type') + '&nse=' + this.get('isNse');
+            // url = '/series/' + this.id + '?type=' + seriesType + '&resource=' + this.get('type') + '&nse=' + this.get('isNse');
+            url = '/series/' + this.id + '?type=' + seriesType + '&' + this.get('resourceParams');
             
         url += existing ? '&timestamp=' + (existing.getTimestamp() || '') : '';
         url += '&random=' + Math.floor(Math.random() * 1000);
@@ -67,8 +69,8 @@
       
         var _this = this;
         $.getJSON(
-          // '/news/' + this.id + '?resource=' + this.get('type'),
-          '/news/' + this.get('sym') + '?resource=' + this.get('type'),
+          // '/news/' + this.get('sym') + '?resource=' + this.get('type'),
+          '/news/' + this.get('sym') + '?' + this.get('resourceParams'),
           function(data) {
             data.sort(function(a,b) { return (a.t < b.t) - (a.t > b.t); });
             _this.set({ news:data });

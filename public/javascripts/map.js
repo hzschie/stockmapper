@@ -184,7 +184,7 @@
           tags.enter()
             .append('li')
             .each(addModel);
-          
+            
           var labels = d3.select($labels[0]).selectAll('label').data(grid.groups, function(group) { return group.key + (exiting == oldLength ? group.values.length : ''); });
           labels.enter()
             .append('label')
@@ -220,7 +220,7 @@
               });
             labels.exit().remove();
             
-            if(mapper.perf.animate != false && models.length && models.at(0).get('hasData') && !$map.hasClass('animated')) {
+            if(mapper.perf.animate != false && models.length && models.length && models.at(0).get('hasData') && !$map.hasClass('animated')) {
               setTimeout(function() {
                 $map.addClass('animated');
               }, 0);
@@ -252,7 +252,7 @@
       var bounds = grid.bounds();
       setTimeout(function() {
         $map.css({ width: bounds.w, height: bounds.h/*, marginLeft:(parentW - bounds.w) / 2*/ });
-      }, bounds.h >= $map.height() ? 0 : (getDelay(null, models.length - 1) + 600));
+      }, isNaN(bounds.h) || bounds.h >= $map.height() ? 0 : (getDelay(null, models.length - 1) + 600));
     }
     
     function makeCells(n, c, r) {
@@ -291,6 +291,8 @@
     var HORZ = 0, VERT = 1;
     
     function makeClusters(n, c, r, uw, uh) {
+      if(n == 0) return [];
+      
       var category = new RegExp('^' + clusterCategories.clusterBy + '$', 'i'),
           MISC = 'Uncategorized',
           xGapRatio = uh/uw,
@@ -312,8 +314,14 @@
             })
             .entries(indexedModels),
 
-          isSingleGroup = !clusterCategories.clusterBy || category.test(clusterCategories.current),
-          tree = generateBinTree(nesting);
+          isSingleGroup = !clusterCategories.clusterBy || category.test(clusterCategories.current);
+
+      if(nesting.length == 0) {
+        this.groups = [];
+        return [];
+      }
+
+      var tree = generateBinTree(nesting);
 
       var _c = c;
       gridifyBinTree(tree, _c);
