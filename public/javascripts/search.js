@@ -15,7 +15,7 @@
         _this = this;
         
     // Detach $dropdown and re-attach it to body, so that it appears on top
-    $dropdown.appendTo($body);
+    // $dropdown.appendTo($body);
 
     this.clear = function() {
       $input.val('');
@@ -61,6 +61,7 @@
         $dropdown.fadeIn();        
         repositionDropdown();
       }
+      _this.trigger('focus_field');
     }
     function blur() { $dropdown.fadeOut(); }
     
@@ -68,8 +69,10 @@
       var pos = $input.show().offset(),
           css = { left:pos.left };
           
-      if(opts.dropdownNorth) css['bottom'] = $(window).height() - (pos.top + 2 - $(window).scrollTop());
-      else css['top'] = pos.top + 18;
+      // if(opts.dropdownNorth) css['bottom'] = $(window).height() - (pos.top + 2 - $(window).scrollTop());
+      // else css['top'] = pos.top + 18;
+      if(opts.dropdownNorth) css['bottom'] = $input.outerHeight() + 10;
+      
       
       $dropdown.css(css);
     }
@@ -85,6 +88,8 @@
       }
       $dropdown.children().removeClass('selected').eq(selection).addClass(selection == -1 ? '' : 'selected');
       
+      // term = selection == -1 ? inputTerm : matches[selection].model.get('sym');
+      // for not showing numeric ids, instead of above line:
       if(selection == -1)
         term = inputTerm;
       else {
@@ -197,7 +202,8 @@
       var html = $.map(matches, function(match) {
         return [
           '<div>',
-            typeof match.model.get('sym') == "number" ? '' : '<span class="sym">' + format(String(match.model.get('sym')), match.best) + '</span>',
+            '<span class="sym">', format(String(match.model.get('sym')), match.best), '</span>',
+            /* for not showing numeric ids: */// typeof match.model.get('sym') == "number" ? '' : '<span class="sym">' + format(String(match.model.get('sym')), match.best) + '</span>',
             match.isNumeric ? '<span class="code">' + format(String(match.model.get('id')), match.best) + '</span>' : '',
             '<span class="name">', format(match.model.get('name'), match.best), '</span>',
           '</div>'

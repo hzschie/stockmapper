@@ -125,6 +125,9 @@
         viewState.setState({ q: (model && model.id) || null, compare:null });
       }
     });
+    search.on('focus_field', function() {
+      stockDetails.close();
+    });
 
     map.on('select_tag', function(model, $tag) {
       viewState.setState({ q: model.id, compare:null });

@@ -135,7 +135,8 @@
         if(!series || series.isPending) $label.addClass('pending');
         else $label.removeClass('pending');
         
-        $label.find('.sym').text(model.get('sym'));
+        var label = model.get('sym');
+        $label.find('.sym').text(typeof label == "number" ? model.get('nickname') : label);
         
         var $val = $('.value', $label);
         if(model.get(series_type)) {
