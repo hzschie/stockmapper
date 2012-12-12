@@ -30,7 +30,7 @@ else {
       else {
         cursor = ansi(process.stdout);
       }
-      flow.series([createGroups, createStocks, writeDefinitions, function() { if(res) res.end(); }]);
+      flow.series([createGroups, setListOrIndex, createStocks, writeDefinitions, function() { if(res) res.end(); }]);
     };
   }
   Updater.prototype = Object.create(events.EventEmitter.prototype, {
@@ -56,6 +56,9 @@ function createGroups(callback) {
       console.error( LogUtil.cantGet('GetBlufinIndexList', null, error || response.statusCode, url) );
       return callback();
     }
+    
+    groups = {};
+    
     var groupsJson = JSON.parse(body);
     
     // Log
@@ -76,7 +79,6 @@ function createGroups(callback) {
         nickname: group.n.replace(/^blufin /i, '').replace(/ index$/i, '').replace(/ and /, ' & '),
         category: group.c,// Category
         ids: [],
-        type: 'index',
         resourceParams: 'resource=index&blufin=true'
       };
     });
@@ -102,6 +104,29 @@ function createGroups(callback) {
       ids: [],
       resourceParams: 'resource=index'
     };
+    
+    callback();
+  });
+}
+
+/* Request GetLatestIndexDatabyIndexId, to extract "type":"INDEX" or "LIST", since that's not available in GetBlufinIndexList */
+function setListOrIndex(callback) {
+  var url = urlBase + 'GetLatestIndexDatabyIndexId?IndexID=0';
+
+  request(url, function(error, response, body) {
+    if(error || response.statusCode >= 400) {
+      cursor.hex('#cc0000').write('');
+      console.error( LogUtil.cantGet('GetLatestIndexDatabyIndexId', null, error || response.statusCode, url) );
+      return callback();
+    }
+    var groupsJson = JSON.parse(body);
+    groupsJson.forEach(function(groupJson) {
+      var id = groupJson.id,
+          group = id && groups[id];
+      if(group) {
+        if(groupJson.type == 'INDEX') group.type = 'index';// Otherwise, type is left blank, implying type of "group"
+      }
+    });
     
     callback();
   });
