@@ -60,20 +60,23 @@ var dataConfig = JSON.stringify(JSON.parse(// Parse and Stringify the data to st
 ));
 
 // STOCK AND GROUP DEFINITION JSON
-var groups = fs.readFileSync(__dirname + '/public/data/' + dataDomain + '/groups.json', 'utf8');
-var stocks = fs.readFileSync(__dirname + '/public/data/' + dataDomain + '/stocks.json', 'utf8');
+var groups, stocks;
 
 // SETUP DYNAMIC DEFINITIONS (WHICH LOAD THE DEFINITIONS INTO MEMORY, AND REGENERATE PERIODICALLY)
 if(/true/i.test(process.env.DYNAMIC)) {
-  groups = stocks = null;
-  var definitions = require('./build_' + dataDomain + '_definitions');
-  definitions.on('update', function(_groups, _stocks) {
-    groups = JSON.stringify(_groups);
-    stocks = JSON.stringify(_stocks);
+  var definitions = require('./build_definitions');
+  definitions.on('update', function(data) {
+    groups = JSON.stringify(data.groups);
+    stocks = JSON.stringify(data.stocks);
   });
   definitions.update();
+  
   // Add a route to enable triggering a refresh
   app.get('/refresh/definitions', definitions.update);
+}
+else {
+  groups = fs.readFileSync(__dirname + '/public/data/' + dataDomain + '/groups.json', 'utf8');
+  stocks = fs.readFileSync(__dirname + '/public/data/' + dataDomain + '/stocks.json', 'utf8');
 }
 
 // ROUTES

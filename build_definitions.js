@@ -27,6 +27,7 @@ if(require.main === module) {
 else {
   var events = require('events');
   function Builder() {
+    var _this = this;
     this.update = function(req, res) {
       if(res) {
         res.writeHead(200, { 'Content-Type': 'text/plain' });
@@ -46,7 +47,7 @@ else {
   }
   Builder.prototype = Object.create(events.EventEmitter.prototype, {
     constructor: {
-      value: Updater,
+      value: Builder,
       enumerable: false
     }
   });
