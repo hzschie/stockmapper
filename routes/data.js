@@ -1,14 +1,5 @@
-var DataSource;
-switch(process.env.DATA_DOMAIN) {
-  case 'nyse':
-  case 'foreside':
-    DataSource = require(__dirname + '/../lib/yahoo_data_source.js');
-    break;
-  default:
-    DataSource = require(__dirname + '/../lib/' + process.env.DATA_DOMAIN + '_data_source.js');
-}
-
-var io;// Gets assigned via setter, below
+var DataSource = require(__dirname + '/../lib/domains/' + process.env.DATA_DOMAIN + '/data_source.js'),
+    io;// Gets assigned via setter, below
 
 var dataSource = new DataSource(function(data) {
   io && io.sockets.emit("update", Array.isArray(data[0]) ? data : [data]);
