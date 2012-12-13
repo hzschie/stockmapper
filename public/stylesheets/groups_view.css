@@ -23,17 +23,6 @@
   float:right;
   margin-right:9px;
 }
-.panel .inner > .title {
-  position: absolute;
-  bottom: -40px;
-  font-size: 24px;
-  line-height:29px;
-  color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.85);
-  left: 10px;
-  background-color: rgba(74, 74, 74, .25);
-  z-index:2;
-}
 .panel .views.selector {
   margin-left:9px;
 }

@@ -9,6 +9,7 @@
         $panel = $('.wrapper > .panel'),
         $index = $('#index_details'),
         $map = map.$container.parent(),
+        $title = $('.title', $map),
         $chart = $('.chart'),
         $stockDetails = $('#stock_details'),
         panelMinHeight = parseInt($panel.css('min-height'), 10),
@@ -92,17 +93,24 @@
         vvv;
     function onScroll(e) {
       var scrollTop = $window.scrollTop(),
-          bodyHeight = $(document).height();
+          bodyHeight = $(document).height(),
+          mapTop = $map.offset().top;
+          
+      if(mapTop == 0) return;// Not ready
 
-      var y = Math.max(topLine(), scrollTop + 10 + collapsedTopLine()) + 1,
+      var y = Math.max(topLine(), scrollTop + collapsedTopLine()),
           _$currentView,
           view;
           
-      if(y >= $chart.offset().top - 45) {
+      if(y > mapTop) $title.addClass('fixed').css({ top: topLine() });
+      else $title.removeClass('fixed').css({ top: '' });
+
+      // console.log(y, '>', $chart.offset().top - 55,'|',mapTop,'|',$index.offset().top);
+      if(y >= $chart.offset().top - 55) {
         _$currentView = $chart;
         view = 'chart';
       }
-      else if(y >= $map.offset().top) {
+      else if(y >= mapTop || $index.is('.disabled')) {
         _$currentView = $map;
         view = 'map';
       }

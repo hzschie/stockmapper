@@ -18,12 +18,14 @@
 }
 
 #index_details {
-  margin-bottom:10px;
   position:relative;
-  height:293px;
+  height:300px;
 }
 #index_details.disabled {
-  height:25px;
+  height:0;
+}
+#index_details .sym {
+  display:none;
 }
 #index_details .quote {
   margin-bottom:1px;

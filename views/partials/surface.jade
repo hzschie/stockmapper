@@ -22,7 +22,6 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
             a(data-val="chg") Percent Change
             a(data-val="vol") Volume
             a(data-val="cap") Market Cap
-        .title
 
     opts = { id: 'stock_details', closeable: true, comparable: true }
     include details
@@ -32,10 +31,11 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
         .close
         include help
 
-      opts = { id: 'index_details', ro_volume: false, name_in_header: false }
+      opts = { id: 'index_details', ro_volume: false, name_in_header: false, comparable: true }
       include details
 
       .map
+        .title
         .map_ui
           .clustering
             label

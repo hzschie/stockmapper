@@ -70,6 +70,7 @@
     
     this.close = function() {
       $details.addClass('disabled');
+      updateHeight();
       this.trigger('close');
     };
     
@@ -86,6 +87,8 @@
       
       if(model) model.on('change', updateQuote);
       updateQuote();
+      
+      updateHeight();
       
       if(news) {
         news.setPending(true);
@@ -134,6 +137,7 @@
         $details.hide();
       }
       graph.setWidth(w);
+      updateHeight();
     };
     
     function updateQuote() {
@@ -147,6 +151,13 @@
       $details.find('.' + model.get('type')).addClass('current');
       
       template.applyBindings(model.get('type'), $details, model);
+    }
+    
+    function updateHeight() {
+      $details.css({ height: $details.is('.disabled') ? '' : $('.inner', $details).height() + 15 });// Adjust height
+      setTimeout(function() {
+        $(window).scroll();// Easiest way to get layout to refresh view selector :|
+      }, 600);
     }
   }
 })();

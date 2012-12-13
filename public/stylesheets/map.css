@@ -1,7 +1,23 @@
+.map .title {
+  position: absolute;
+  font-size: 24px;
+  line-height:29px;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.85);
+  background-color: rgba(74, 74, 74, .25);
+  z-index:200;
+  top:0;
+}
+
+.map .title.fixed {
+  position:fixed;
+}
+
+
 .map {
   position:relative;
   line-height:13px;
-  z-index:0;
+  z-index:1;
   margin-bottom:60px;
 }
 .map ul {

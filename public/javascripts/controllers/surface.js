@@ -6,8 +6,8 @@
   
   Surface.init = function() {
     var groups = getGroupsView ? 
-          getGroupsView(mapper.groups, $('.panel .groups'), $('.panel .title')) : 
-          new mapper.SmartGroupsView(mapper.groups, $('.panel .groups'), $('.panel .title')),
+          getGroupsView(mapper.groups, $('.panel .groups'), $('.map .title')) : 
+          new mapper.SmartGroupsView(mapper.groups, $('.panel .groups'), $('.map .title')),
         sorts = new mapper.SelectorButtons($('.panel .sorts'), function(id) { viewState.setState({ sort:id }); }),
         views = new mapper.SelectorButtons($('.panel .views'), viewSelected),
         map = new mapper.Map($('.layout .map ul')),
