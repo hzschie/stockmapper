@@ -25,6 +25,10 @@ body {
   width:58px;
 }
 
+#index_details .news {
+  height: 195px;
+}
+
 /* GROUPS */
 .groups .group label {
   font-family:'Open Sans Condensed', 'Helvetica Narrow', 'Arial Narrow', sans-serif;
