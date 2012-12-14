@@ -59,23 +59,10 @@
     function focus() { 
       if(matches.length) {
         $dropdown.fadeIn();        
-        repositionDropdown();
       }
       _this.trigger('focus_field');
     }
     function blur() { $dropdown.fadeOut(); }
-    
-    function repositionDropdown() {
-      var pos = $input.show().offset(),
-          css = { left:pos.left };
-          
-      // if(opts.dropdownNorth) css['bottom'] = $(window).height() - (pos.top + 2 - $(window).scrollTop());
-      // else css['top'] = pos.top + 18;
-      if(opts.dropdownNorth) css['bottom'] = $input.outerHeight() + 10;
-      
-      
-      $dropdown.css(css);
-    }
     
     function setSelection(_selection) {
       $dropdown.fadeIn();

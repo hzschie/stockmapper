@@ -5,6 +5,7 @@
   margin-bottom:4px;
   vertical-align:middle;
   margin-left:20px;
+  position:relative;
 }
 
 .search .field {
@@ -27,7 +28,7 @@
 }
 .search_dropdown {
   line-height:20px;
-  position:fixed;
+  position:absolute;
   background:#000;/* fallback color */
   background:rgba(0,0,0,.8);
   border:2px solid #000;
@@ -71,6 +72,7 @@
   cursor:pointer;
   padding:0 2px;
   background-color:rgba(128,128,128,0);
+  white-space:nowrap;
 }
 .search_dropdown > div:not(.selected):hover {
   background:rgba(128,128,128,.2);

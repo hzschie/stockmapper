@@ -89,8 +89,9 @@ body {
 }
 
 /* SEARCH */
-.search .dropdown .sym {
+.search_dropdown .sym {
   font-family: 'Open Sans Condensed', 'Helvetica Narrow', 'Arial Narrow', sans-serif;
+  min-width:90px;
 }
 
 /* --------------------------------- HEADER BANNER --------------------------------- */
