@@ -190,5 +190,12 @@ body.mobile {
 }
 
 .mobile .credit {
-  margin:6px 8px;
+  position:relative;
+}
+.mobile .credit img {
+  margin-right:8px;
+}
+.mobile .credit .more {
+  opacity:1;
+  text-align:right;
 }
