@@ -27,7 +27,7 @@ function prepareDestination(callback) {
 function cpContent(callback) {
   var copied = [
     'app.js',
-    'build_blufin_definitions.js',
+    'build_definitions.js',
     'lib',
     'package.json',
     'Procfile',
@@ -67,12 +67,17 @@ function rmNonBundled(callback) {
     'public/javascripts',
     'public/stylesheets',
     'public/images/psd',
+    'public/images/domains',// CAUTION: might cause deletion of blufin stuff in future
     
     'public/data/nyse',
     'public/data/foreside',
     'views/nyse.jade',
     'views/foreside.jade',
+    'views/domains',// CAUTION: might cause deletion of blufin stuff in future
+    'lib/domains/foreside',
+    'lib/domains/nyse',
     'lib/yahoo_data_source.js',
+    'lib/login_support.js',
     'lib/assets.js'
   ];
   flow.series(
