@@ -43,11 +43,11 @@ body:not(.tablet) .wrapper {
   max-height:280px;
   padding-bottom:3px;
 }
-.panel .inner > .title {
+.map .title {
   font-family: "Georgia", "Palatino", "Palatino Linotype", serif;
   font-weight:normal;
 }
-.panel .inner > .title.etf_composite {
+.map .title.etf_composite {
   padding-left:30px;
 }
 
@@ -55,7 +55,7 @@ body:not(.tablet) .wrapper {
   display:none;
 }
 
-.panel .inner > .title.etf_composite:after {
+.map .title.etf_composite:after {
   background:transparent url('/images/domains/foreside/sprites.png') no-repeat scroll -9px -320px;
   width:35px;
   height:21px;

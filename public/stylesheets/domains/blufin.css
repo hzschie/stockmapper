@@ -30,6 +30,9 @@ body {
 }
 
 /* GROUPS */
+.groups .group {
+  background:#888;
+}
 .groups .group label {
   font-family:'Open Sans Condensed', 'Helvetica Narrow', 'Arial Narrow', sans-serif;
   font-weight:normal;

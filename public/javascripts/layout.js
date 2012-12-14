@@ -101,9 +101,11 @@
       var y = Math.max(topLine(), scrollTop + collapsedTopLine()),
           _$currentView,
           view;
-          
-      if(y > mapTop) $title.addClass('fixed').css({ top: topLine() });
-      else $title.removeClass('fixed').css({ top: '' });
+      
+      if(!mapper.isTablet) {    
+        if(y > mapTop) $title.addClass('fixed').css({ top: collapsedTopLine() });
+        else $title.removeClass('fixed').css({ top: '' });
+      }
 
       // console.log(y, '>', $chart.offset().top - 55,'|',mapTop,'|',$index.offset().top);
       if(y >= $chart.offset().top - 55) {
