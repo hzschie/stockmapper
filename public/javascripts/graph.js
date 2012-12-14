@@ -42,7 +42,7 @@
         volumeGraph.hide();
         priceGraph.hide();
 
-        xAxis.tickSize(-(priceH + volH + pad[T]), 0, 0);
+        // xAxis.tickSize(-(priceH + volH + pad[T]));//, 0, 0);
         ($.browser.msie ? xax : xax.transition()).attr('transform', 'translate(' + pad[L] + ',' + (priceH + volH + pad[T]) + ')');
         ($.browser.msie ? divider1 : divider1.transition()).attr('y1', pad[T] + priceH + volH + gap).attr('y2', pad[T] + priceH + volH + gap);
       }
@@ -174,13 +174,24 @@
       xAxis.tickValues(null);
       
       var span = x.domain()[1] - x.domain()[0];
-      if(span > 922752e5)// 3 years
-        xAxis.ticks(d3.time.years, 1).tickFormat(d3.time.format.utc('%Y'));
+      if(span > 76896e7) {// 25 years
+        xAxis.ticks(d3.time.years, 5).tickFormat(d3.time.format.utc('%Y')).tickSubdivide(4);
+      }
+      else if(span > 307584e6) {// 10 years
+        xAxis.ticks(d3.time.years, 2).tickFormat(d3.time.format.utc('%Y')).tickSubdivide(1);
+      }
+      else if(span > 922752e5) {// 3 years
+        xAxis.ticks(d3.time.years, 1).tickFormat(d3.time.format.utc('%Y')).tickSubdivide(0);
+      }
       else if(span >= 307584e5)// 1 year
-        xAxis.ticks(d3.time.months, 3).tickFormat(d3.time.format.utc('%b %Y'));
+        xAxis.ticks(d3.time.months, 3).tickFormat(d3.time.format.utc('%b %Y')).tickSubdivide(2);
       else
-        xAxis.ticks(d3.time.months, 1).tickFormat(d3.time.format.utc('%b %Y'));
-        
+        xAxis.ticks(d3.time.months, 1).tickFormat(d3.time.format.utc('%b %Y')).tickSubdivide(0);
+      
+      // For some reason tickSubdivide overrides this
+      var sz = -(priceH + volH + pad[T]);
+      xAxis.tickSize(sz, sz, 0);
+      
       xax.call(xAxis);
     };
     
@@ -226,9 +237,13 @@
       x.domain(domain);
       x.range(range);
       
-      if(series.type == '5day') xAxis.tickValues(values).tickFormat(d3.time.format.utc('%a %b %e'));
-      else xAxis.tickValues(null).ticks(d3.time.hours, 1).tickFormat(d3.time.format.utc('%H:%M'));
+      if(series.type == '5day') xAxis.tickValues(values).tickFormat(d3.time.format.utc('%a %b %e')).tickSubdivide(0);
+      else xAxis.tickValues(null).ticks(d3.time.hours, 1).tickFormat(d3.time.format.utc('%H:%M')).tickSubdivide(0);
       
+      // For some reason tickSubdivide overrides this
+      var sz = -(priceH + volH + pad[T]);
+      xAxis.tickSize(sz, sz, 0);
+
       xax.call(xAxis);
       
       if(series.type == '5day') xax.selectAll('text').attr('dx', _w/2);

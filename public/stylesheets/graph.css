@@ -184,6 +184,9 @@
   stroke:url(#fade);
   stroke-width: 1px;
 }
+.graph .axis .tick.minor {
+  opacity:.5 !important;
+}
 .graph .divider {
   shape-rendering: crispEdges;
   stroke:#888;
