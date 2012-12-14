@@ -78,9 +78,10 @@
   display:block;
   position:relative;
   padding-right: 28px;
-  font-size:24px;
-  line-height:29px;
+  font-size:18px;
+  line-height:1.2;
 }
+
 .details .quote {
   float:right;
   text-align:right;
@@ -94,12 +95,12 @@
 }
 .details .timestamp {
   color:#888;
-  font-size:12px;
+  font-size:.5em;
   line-height:14px;
   margin-top:-4px;
 }
 .details .header .sym {
-  font-size:16px;
+  font-size:.66em;
   line-height:15px;
   color:#ddf;
 }
@@ -122,11 +123,12 @@
   vertical-align:top;
 }
 .details .values {
-  font-size:12px;
+  font-size:10px;
   line-height:16px;
   padding-right: 18px;
   margin-left: -8px;
 }
+
 .details .values .col {
   width:25%;
   display:inline-block;
@@ -138,14 +140,29 @@
 .details .values dt {
   float:left;
   color:#ddf;
-  margin-left:12px;
+  margin-left:6px;
 }
 .details .values dd {
   font-weight:bold;
   text-align:right;
   border-bottom:1px dotted #888;
-  margin:0 12px;
+  margin:0 6px;
 }
 .details .values dd:last-child {
   border-bottom:none;
+}
+
+@media (min-width: 1080px) {
+  .details .header {
+    font-size:24px;
+  }
+  .details .values {
+    font-size:12px;
+  }
+  .details .values dt {
+    margin-left:12px;
+  }
+  .details .values dd {
+    margin:0 12px;
+  }
 }
