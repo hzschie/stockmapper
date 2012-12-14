@@ -8,7 +8,7 @@
   Details.defaultBindings = {
     stock: [
       { $:'.header .sym', field:'sym' },
-      { $:'.name', field:'name' },
+      { $:'.header .name', field:'name' },
       { $:'.last_trade', field:'lastTrade', formatter:Template.priceFormat },
       { $:'.timestamp .value', field:'timestamp', formatter:Template.postfix(Template.timestamp, ' ' + timezone) },
 
@@ -25,7 +25,7 @@
       { $:'.market_cap', field:'marketCap', formatter:Template.NaIfNaN(function(val) { return Template.metricFormat(val); }) }
     ],
     index: [
-      { $:'.name', field:'name' },
+      { $:'.header .name', field:'name' },
       { $:'.last_trade', field:'lastTrade', formatter:Template.priceFormat },
       { $:'.timestamp .value', field:'timestamp', formatter:Template.postfix(Template.timestamp, ' ' + timezone) },
       

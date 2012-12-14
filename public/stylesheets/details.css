@@ -24,7 +24,7 @@
 #index_details.disabled {
   height:0;
 }
-#index_details .sym {
+#index_details .header .sym {
   display:none;
 }
 #index_details .quote {

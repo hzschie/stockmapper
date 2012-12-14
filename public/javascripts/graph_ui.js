@@ -3,7 +3,8 @@
   function Compare($compare, graph) {
     _.extend(this, Backbone.Events);
     var $selection = $('.selection', $compare),
-        search = new mapper.Search($('.search', $compare), { dropdownNorth: true }),
+        $search = $('.search', $compare),
+        search = new mapper.Search($search, { dropdownNorth: $(window).height() - $search.offset().top < 200 }),
         main = null,
         $main = $('.main.compare_to', $compare),
         selection = [],

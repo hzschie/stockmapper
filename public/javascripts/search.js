@@ -6,7 +6,7 @@
     var searchPending = false,
         $input = $('input', $search).on('keydown', keydown).on('focus', focus).on('blur', blur),
         $x = $('.x', $search).on('click', function() { _this.clear(); }),
-        $dropdown = $('.search_dropdown', $search),
+        $dropdown = $('.search_dropdown', $search).css({ bottom: opts.dropdownNorth ? 25 : 'auto' }),
         $body = $('body'),
         selection = -1,
         baseModels = mapper.models.models,//_.filter(mapper.models.models, function(model) { return typeof(model.get('sym')) == 'string'; }),//mapper.stocks,
