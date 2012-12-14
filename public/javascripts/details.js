@@ -56,6 +56,8 @@
         graph = new mapper.Graph($('.graph', $details), $('.left', $details).width() + 20, opts),
         graphRange = new mapper.SelectorButtons($('.graph .ui .ranges'), function(id) { _this.trigger('select_range', id); }),
         
+        $inner = $('.inner', $details),
+        
         $compare = $('.compare', $details),
         compare = $compare.length == 1 ? new mapper.Compare($compare, graph) : null,
         
@@ -152,9 +154,8 @@
       
       template.applyBindings(model.get('type'), $details, model);
     }
-    
     function updateHeight() {
-      $details.css({ height: $details.is('.disabled') ? '' : $('.inner', $details).height() + 15 });// Adjust height
+      $details.css({ height: $details.is('.disabled') || !$inner.length ? '' : $inner.height() + 15 });// Adjust height
       setTimeout(function() {
         $(window).scroll();// Easiest way to get layout to refresh view selector :|
       }, 600);

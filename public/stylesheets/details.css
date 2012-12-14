@@ -44,7 +44,9 @@
 .details {
   color:#fff;
   font-size:16px;
+}
   
+body:not(.mobile) .details {
   -webkit-transition:opacity .2s, height .6s, visibility .1s linear .2s;
   -moz-transition:opacity .2s, height .6s, visibility .1s linear .2s;
   -ms-transition:opacity .2s, height .6s, visibility .1s linear .2s;

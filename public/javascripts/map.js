@@ -62,6 +62,7 @@
     
     this.resize = function(explicitW) {
       parentW = explicitW != null ? explicitW : $map.parent().width();
+      if(!models) return;
       var newNumCols = Math.floor(parentW / ($map.children().eq(2).outerWidth() - 1)),
           newNumRows = Math.ceil(models.length / newNumCols);
       grid.redefine(null, newNumCols, newNumRows);
@@ -145,7 +146,7 @@
         sizeMult = 1,
         getDelay,
         iDelay = function(model, i) { return (grid.c(i) + grid.r(i) / grid.rows) * delayMult * sizeMult; },
-        xtraDelay = function(extra) { return function(model, i) { return extra + iDelay(model, i); }; };// slow device, make delay 1 sec longer
+        xtraDelay = function(extra) { return function(model, i) { return extra + iDelay(model, i); }; };
     function rebuild(collection, options, isNewCollection) {
       var tt = Date.now();
       
