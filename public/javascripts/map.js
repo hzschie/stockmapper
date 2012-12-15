@@ -13,11 +13,12 @@
         getTagHtml = mapper.config.getMapTagHtml || function(model) { return model.get('sym'); },
         parentW = $map.parent().width();
         
-
-    $map.mouseout(function(event) { 
-      if(event.toElement != $map[0] && !$(event.toElement).is('li')) 
-        _this.trigger('inspect_tag', null);
-    });
+    if(!$.browser.touchDevice) {
+      $map.mouseout(function(event) { 
+        if(!$(event.toElement).is('li')) 
+          _this.trigger('inspect_tag', null);
+      });
+    }
 
     this.setModels = function(_models, category) {
       if(models) {
@@ -91,9 +92,12 @@
       setTimeout(function() {
         $tag.css({ visibility: 'visible' });
         $shadow.css({ visibility: 'visible' });
-        $tag.mouseover(function() {
-          _this.trigger('inspect_tag', model, $tag);
-        });
+        
+        if(!$.browser.touchDevice) {
+          $tag.mouseover(function() {
+            _this.trigger('inspect_tag', model, $tag);
+          });
+        }
         $tag.click(function() {
           _this.trigger('select_tag', model, $tag);
         });
