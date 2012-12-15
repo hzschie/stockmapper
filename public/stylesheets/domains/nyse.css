@@ -70,8 +70,8 @@ body {
   display:inline-block;
   vertical-align:top;
   color:#bbe;
-  font-size: 14px;
-  line-height: 28px;
+  font-size: 12px;
+  line-height: 24px;
 }
 .app_header .about .left {
   width:66.666%;
@@ -84,11 +84,12 @@ body {
   line-height: 16px;*/
 }
 .app_header .about .left p {
-  padding-left:20px;
   padding-right:70px;
 }
 .app_header .about .left p.main {
-  font-size:16px;
+  color:#fff;
+  font-size:20px;
+  line-height: 32px;
 }
 .app_header .about a {
   color:#eef;
