@@ -89,6 +89,10 @@
       }
     };
     
+    this.frameTag = function($tag) {
+      scrollTo($tag.offset().top - collapsedTopLine() - 40);
+    };
+    
     var $currentView = null, 
         vvv;
     function onScroll(e) {
@@ -155,6 +159,10 @@
       return (panelMinHeight || $panel.outerHeight()) + 11;
     }
     
+    function bottomLine() {
+      return $window.height() - ($stockDetails.is('.disabled') ? 0 : $stockDetails.outerHeight());
+    }
+    
     function onResize(justLayout) {
       if(!justLayout) {
       
@@ -200,7 +208,7 @@
     }
     
     function updateBottomConstraint() {
-      inspector.setBottomConstraint($window.height() - ($stockDetails.is('.disabled') ? 0 : $stockDetails.outerHeight()));
+      inspector.setBottomConstraint(bottomLine());
     }
     
     

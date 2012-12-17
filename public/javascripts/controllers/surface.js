@@ -66,8 +66,13 @@
       if(viewState.hasChanged('currentStock') || force) {
         var currentStock = viewState.get('currentStock');
         stockDetails.query(currentStock);
-        map.search(currentStock);
+        map.search(currentStock, false);
         groups.search(currentStock);
+        
+        if(currentStock) {
+          var $tag = currentStock._map && currentStock._map.$tag;
+          $tag && layout.frameTag($tag);
+        }
       }
 
       if(viewState.hasChanged('cluster') || force) {
