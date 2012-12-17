@@ -63,33 +63,32 @@ body {
   color:#fff;
 }
 .app_header .about {
-  margin: 10px 12px;
+  margin: 10px 12px 4px;
   display:none;
 }
 .app_header .about div {
   display:inline-block;
   vertical-align:top;
-  color:#bbe;
+  color:#ddf;
   font-size: 12px;
-  line-height: 24px;
+  line-height: 20px;
 }
 .app_header .about .left {
   width:66.666%;
-/*  font-size: 14px;
-  line-height: 24px;*/
 }
 .app_header .about .right {
   width:33.333%;
-/*  font-size: 12px;
-  line-height: 16px;*/
 }
 .app_header .about .left p {
   padding-right:70px;
+  line-height:24px;
+  font-size:14px;
 }
 .app_header .about .left p.main {
   color:#fff;
   font-size:20px;
   line-height: 32px;
+  margin-bottom:16px;
 }
 .app_header .about a {
   color:#eef;
@@ -98,11 +97,11 @@ body {
 .app_header .about a:hover {
   text-decoration:underline;
 }
-.app_header .about .disclaimer {
+.app_header .about p.disclaimer {
   font-size:10px;
-  line-height:14px;
+  line-height:12px;
   margin-top:20px;
-/*  color:#ccc;*/
+  text-align:justify;
 }
 .app_header .twitter-share-button {
   float:right;
