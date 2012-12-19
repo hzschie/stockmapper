@@ -124,6 +124,9 @@ $(function() {
         
         // Create the "All" group, if defined
         if(!mapper.config.allGroup) { /* do nothing */ }
+        else if(mapper.allGroup = mapper.groups.get(mapper.config.allGroup)) {
+          /* mapper.allGroup was find by id. So do nothing */
+        }
         else if(typeof(mapper.config.allGroup) == 'string') {
           mapper.allGroup = mapper.groups.where({ name:mapper.config.allGroup })[0];
         }

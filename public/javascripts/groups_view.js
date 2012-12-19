@@ -48,10 +48,13 @@
     var clusters = [],
         currCluster, currCategory;
     _.each(
-      mapper.config.groupsTagOrder || groups.models,
+      mapper.config.groupsOrderById || mapper.config.groupsTagOrder || groups.models,
       function(refOrGroup) {
         var group, category;
-        if(typeof(refOrGroup) == 'string') {
+        if(group = groups.get(refOrGroup)) {
+          /* group was found by id, so do nothing */
+        }
+        else if(typeof(refOrGroup) == 'string') {
           var splt = refOrGroup.split(':');
           group = groups.where({ category:splt[0], nickname:splt[1] })[0];
         }
@@ -303,10 +306,13 @@
     // If tags order is explicitly defined in config, use it. Otherwise, assume all groups 
     // should be added, and create tagsOrder based on that.
     var tagsOrder = _.map(
-      mapper.config.groupsTagOrder || groups.models,
+      mapper.config.groupsOrderById || mapper.config.groupsTagOrder || groups.models,
       function(refOrGroup) {
         var reference, group;
-        if(typeof(refOrGroup) == 'string') {
+        if(group = groups.get(refOrGroup)) {
+          reference = group.get('urlName');
+        }
+        else if(typeof(refOrGroup) == 'string') {
           reference = refOrGroup;
           
           var splt = reference.split(':'),
