@@ -36,13 +36,33 @@ body {
 .groups .group label {
   font-family:'Open Sans Condensed', 'Helvetica Narrow', 'Arial Narrow', sans-serif;
   font-weight:normal;
+  line-height:7px;
+  font-size:11px;
 }
 .groups .group .val_right {
   font-family:'Arial Narrow', 'Helvetica Narrow', sans-serif;
+  line-height:9px;
+  margin-top:-1px;
+}
+.groups .group .val_right > div {
+  display:block !important;
+}
+.groups .group .changes {
+  white-space:nowrap;
+}
+.groups .group .change {
+  font-weight:bold;
+}
+/* GROUPS MOBILE */
+.groups_view .group {
+  letter-spacing:-1px;
 }
 .groups_view .group label {
   font-family:'Open Sans Condensed', 'Helvetica Narrow', 'Arial Narrow', sans-serif;
   font-weight:normal;
+}
+.groups_view .group .changes span:last-child {
+  display:none;
 }
 
 /* INSPECTOR */

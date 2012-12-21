@@ -83,7 +83,7 @@
         padX = 1,
         padY = 3,
         line = 1,
-        tagH = 15,
+        tagH = 17,
         tagW = null,
         schemes = [],
         scheme,

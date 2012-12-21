@@ -102,8 +102,11 @@
   mapper.config.getGroupTagHtml = function(group, $container) {
     if(group.get('type') == 'index') return [
         '<div class="val_right">',
-          group.get('category') != 'Index' ? '' : '<div class="value"></div>',
-          '<div class="change' + (group.get('category') != 'Index' ? '_pct' : '') + '"></div>',
+          '<div class="value"></div>',
+          '<div class="changes">',
+            '<span class="change"></span> ',
+            '<span>(<span class="change_pct"></span>)</span>',
+          '</div>',
         '</div>',
         '<label>', group.get('label'), '</label>'
       ].join('');
