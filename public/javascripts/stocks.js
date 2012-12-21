@@ -103,14 +103,7 @@
           case 'M': return Math.round(f * 1e+6);
           default: return f;
         }
-      },
-    
-      // Convenience getters, for d3 neatness
-      sym: function(model) { return model.attributes['sym']; },
-      changePct: function(model) { return model.attributes['changePct'] || 0; },
-      changePctAbs: function(model) { return Math.abs(MapperModel.changePct(model)); },
-      changePctToHex: function(model) { return mapper.changePctToHex(MapperModel.changePct(model)); },
-      volume: function(model) { return model.attributes['volume'] || 0; }
+      }
     }
   );
 
