@@ -36,8 +36,9 @@ body {
 .groups .group label {
   font-family:'Open Sans Condensed', 'Helvetica Narrow', 'Arial Narrow', sans-serif;
   font-weight:normal;
-  line-height:7px;
   font-size:11px;
+  line-height:6px;
+  display:block;
 }
 .groups .group .val_right {
   font-family:'Arial Narrow', 'Helvetica Narrow', sans-serif;
