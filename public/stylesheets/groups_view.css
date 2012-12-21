@@ -117,7 +117,7 @@
 }
 .groups .group label {
   font-weight:bold;
-  line-height:14px;
+  line-height:16px;
   opacity:.8;
   position:relative;
   padding-left:1px;
@@ -136,12 +136,12 @@
   margin-left:5px;
 }
 .groups .group .val_right .up, .groups .group .val_right .dn {
-  background:transparent url('/images/sprites.png?10252012') no-repeat scroll -6px -78px;
+  background:transparent url('/images/sprites.png?10252012') no-repeat scroll -6px -77px;
   margin-left:4px;
   padding-left:6px;
 }
 .groups .group .val_right .dn {
-  background-position:-6px -97px;
+  background-position:-6px -96px;
 }
 .groups .category {
   font-size:14px;
