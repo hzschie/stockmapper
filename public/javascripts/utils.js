@@ -114,8 +114,8 @@ else {
   Template.changeFormat = Template.NaIfNaN( d3.format('+.2f') );
   Template.pctFormat = Template.NaIfNaN( Template.postfix(d3.format('.1f'), '%') );
   Template.pctChangeFormatter = function(formatStr) {
-    var formatter = d3.format('+' + (formatStr || '.1f')),
-        zeroFormatter = d3.format(formatStr || '.1f');
+    var formatter = d3.format('+' + (formatStr || '.2f')),
+        zeroFormatter = d3.format(formatStr || '.2f');
     return function(val) {
       return Template.NaIfNaN( Template.postfix(val == 0 ? zeroFormatter : formatter, '%') )(val);
     };
