@@ -95,9 +95,20 @@ body {
   margin-left:18px;
   margin-right:12px;
 }
-
 .inspector .index .change {
   width:auto;
+}
+.inspector .content.stock .historical {
+}
+.inspector .content.stock .change_from {
+  float:left;
+  line-height:32px;
+  font-weight:bold;
+}
+.inspector .content.stock .historical_change {
+  text-align:right;
+  font-size:20px;
+  line-height:28px;
 }
 
 .credit .more {

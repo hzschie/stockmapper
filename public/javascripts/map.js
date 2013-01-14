@@ -5,6 +5,7 @@
     this.$container = $map;
     _.extend(this, Backbone.Events);
     var models,
+        changeProp = 'changePct',
         $shadows = $(document.createElement('div')).addClass('shadows').appendTo($map),
         $labels = $(document.createElement('div')).addClass('labels').appendTo($map),
         grid = null,
@@ -19,6 +20,11 @@
           _this.trigger('inspect_tag', null);
       });
     }
+    
+    this.setChangeProp = function(propName) {
+      changeProp = propName;
+      rebuild();
+    };
 
     this.setModels = function(_models, category) {
       if(models) {
@@ -112,7 +118,7 @@
       if(model.hasChanged('change') || force) {
         $tag.css({
           // backgroundColor: 'rgb(' + mapper.fractionChangeToHex(Math.min(5, Math.max(-5, model.get('changePct'))) / 5) + ')'
-          backgroundColor: mapper.changePctToHex( model.get('changePct') )
+          backgroundColor: mapper.changePctToHex( model.get(changeProp) )
         });
       }
       if(model.hasChanged('isHighlighted') || force) {

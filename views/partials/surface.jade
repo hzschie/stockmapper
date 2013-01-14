@@ -15,6 +15,7 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
             input(placeholder="Search")
             .x
           .search_dropdown
+        block additional_panel_ui
         .sorts.selector
           label Sort By:
           block sort_options
@@ -37,7 +38,7 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
       .map
         .title
         .map_ui
-          .clustering
+          .clustering.dropdown_selector
             label
               .plus
               | Group By:

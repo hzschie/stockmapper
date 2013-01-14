@@ -2,6 +2,7 @@
   function Chart($chart) {
     _.extend(this, Backbone.Events);
     var models,
+        changeProp = 'changePct',
         $bars = $('.bars', $chart),
         $ticks = $('.ticks', $chart),
         $mostActive = $('.most_active', $chart),
@@ -13,6 +14,11 @@
       if(event.toElement != $chart[0] && !$(event.toElement).is('li')) 
         _this.trigger('inspect_bar', null);
     });
+    
+    this.setChangeProp = function(propName) {
+      changeProp = propName;
+      rebuild();
+    };
 
     this.setModels = function(_models) {
       if(models) {
@@ -42,7 +48,7 @@
               visibility:'hidden',
               height: chgMaxH + 1 + volMaxH
             }),
-          chgPct = model.get('changePct') || 0,
+          chgPct = model.get(changeProp) || 0,
           $chgBar = model._chart.$chgBar = $('<div></div>')
             .addClass('chg')
             .css({
@@ -80,7 +86,7 @@
           $volBar = model._chart.$volBar;
       
       if(model.hasChanged('change') || force) {
-        var chgPct = model.get('changePct') || 0;
+        var chgPct = model.get(changeProp) || 0;
         $chgBar.css({
           'background-color': mapper.changePctToHex(chgPct),
           'top': chgMaxH - chgY(chgPct),
@@ -220,9 +226,9 @@
     }
     
     function showUpsAndDowns() {
-      var firstNotUp = models.find(function(model, i) { return model.get('changePct') <= 0; }),
-          firstDn = models.find(function(model, i) { return model.get('changePct') < 0; }),
-          firstNA = models.find(function(model, i) { return isNaN(model.get('changePct')); }),
+      var firstNotUp = models.find(function(model, i) { return model.get(changeProp) <= 0; }),
+          firstDn = models.find(function(model, i) { return model.get(changeProp) < 0; }),
+          firstNA = models.find(function(model, i) { return isNaN(model.get(changeProp)); }),
           
           lastUpIndex = _.indexOf(models.models, firstNotUp),
           firstDnIndex = _.indexOf(models.models, firstDn),
@@ -268,7 +274,7 @@
       fBarWidth = Math.min(60, barsWidth / stocks.length);
       chgMax = 0;
       chgMax = $.map(stocks, function(m, i) {
-        chgMax = Math.max(chgMax, Math.abs(m.attributes['changePct'] || 0));
+        chgMax = Math.max(chgMax, Math.abs(m.get(changeProp) || 0));
         return i == stocks.length - 1 ? chgMax : null;
       })[0];
       volMax = 0;

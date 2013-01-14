@@ -31,6 +31,7 @@ else {
   };
   
   mapper.changePctToHex = function(changePct, bound) {
+    if(isNaN(changePct)) return '';
     bound = bound || 5;
     return mapper.fractionChangeToHex(Math.min(bound, Math.max(-bound, changePct)) / bound);
   };

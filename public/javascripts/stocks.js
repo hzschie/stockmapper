@@ -20,11 +20,54 @@
         this.set(hash, opts);
         
         if(this.has('highlightFn')) this.set({ isHighlighted:this.get('highlightFn')(this) }, opts);
+        this.recomputeProps(opts);
       },
     
       setHighlightFunc: function(fn) {
         this.set({ highlightFn: fn }, { silent: true });
         this.set({ isHighlighted: fn(this) });
+      },
+      
+      /* Passing null for fn will remove the computed prop */
+      setComputedProp: function(propName, fn) {
+        var computedProps = this.get('computedProps');
+        if(!computedProps) {
+          computedProps = [];
+          this.set({ computedProps:computedProps });
+        }
+        var existing = _.find(computedProps, function(obj) { return obj.name == propName; });
+
+        if(fn) {
+          if(existing) {
+            existing.fn = fn;
+            // console.log(this.get('sym') + ' update fn of existing prop ' + propName);
+          }
+          else {
+            computedProps.push({ name:propName, fn:fn });
+            // console.log(this.get('sym') + ' add new prop ' + propName);
+          }
+        }
+        else if(existing) {
+          computedProps.splice(_.indexOf(existing, computedProps), 1);
+          // console.log(this.get('sym') + ' remove existing prop ' + propName);
+        }
+        
+        var setter = {};
+        setter[propName] = fn ? fn(this) : null;// compute the initial value for the computedProp (if fn is not null)
+        this.set(setter);// set the initial value for the computedProp
+      },
+      
+      recomputeProps: function(opts) {
+        var computedProps = this.get('computedProps');
+        if(!computedProps || !computedProps.length) return;
+        
+        var setter = {},
+            _this = this;
+        $.each(computedProps, function(i, prop) {
+          setter[prop.name] = prop.fn(_this);
+          // console.log(_this.get('sym') + ' recompute ' + prop.name + ' to ' + setter[prop.name]);
+        });
+        this.set(setter, opts);
       },
     
       acquireTimeSeries: function(seriesType, callback) {
@@ -181,7 +224,8 @@
     }
   );
 
-  mapper.sortBy = function(attribute) {
+  mapper.sortBy = function(_attribute) {
+    var attribute = _attribute;
     var sortFunction = function(a, b) {
       var val1 = a.get(attribute),
           val2 = b.get(attribute);
@@ -190,6 +234,8 @@
         mapper.sortFunctions.sym(a, b);
     };
     sortFunction.prop = attribute;// If prop changes, we need to resort
+    
+    sortFunction.setAttribute = function(_attribute) { attribute = _attribute; };
     return sortFunction;
   };
   mapper.sortFunctions = {

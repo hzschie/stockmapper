@@ -30,6 +30,7 @@ var ViewState = mapper.ViewState = Backbone.Model.extend(
             filter: null,
             sort: null,
             cluster: null,
+            change_from: null,
             q: null,
             range: null,
             compare: null,

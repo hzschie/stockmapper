@@ -11,7 +11,7 @@
         sorts = new mapper.SelectorButtons($('.panel .sorts'), function(id) { viewState.setState({ sort:id }); }),
         views = new mapper.SelectorButtons($('.panel .views'), viewSelected),
         map = new mapper.Map($('.layout .map ul')),
-        clustering = new mapper.ClusteringSelector($('.map .clustering'), function(id) { viewState.setState({ cluster:id }); }),
+        clustering = new mapper.DropdownSelector($('.map .clustering'), function(id) { viewState.setState({ cluster:id }); }),
         highlights = new mapper.MapHighlights($('.map .highlights')),
         chart = new mapper.HtmlChart($('.chart')),/* STUB: { setModels:function(){}, on:function(){}, resize:function(){} } */
         inspector = new mapper.Inspector($('.inspector')),
@@ -34,7 +34,10 @@
       query: function(model) {
         viewState.setState({ q: model.id, compare:null });
       },
-      onUpdateView: function(force, viewState) { /* can be implemented vy extending class */ }
+      onUpdateView: function(force, viewState) { /* can be implemented vy extending class */ },
+      viewState: viewState,
+      map: map,
+      chart: chart
     };
 
     function updateView(force) {

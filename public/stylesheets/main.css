@@ -127,30 +127,3 @@ input {
   margin-bottom: 10px;
   pointer-events: all;
 }
-
-.selector {
-  line-height:30px;
-  font-size:16px;
-  display:inline-block;
-  vertical-align:middle;
-}
-.selector label {
-  margin-right:6px;
-  color:#ddf;
-}
-.selector a {
-  cursor:pointer;
-  display:inline-block;
-  color:#ccc;
-  padding: 2px 8px 0;
-  line-height:16px;
-  position:relative;
-}
-.selector a:hover {
-  color:#fff;
-}
-.selector a.current {
-  color:#000;
-  background:#fff;
-  border-radius:12px;
-}

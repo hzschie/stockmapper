@@ -29,6 +29,22 @@ block header
           li
             a(href="http://www.youtube.com/user/BluFinIndia", title="youtube", class="ya", target="_blank")
 
+block additional_panel_ui
+  .coloring.dropdown_selector
+    label
+      .plus
+      | Color By:
+    .selection
+      .display
+      .panel.selector.disabled
+        block coloring_options
+          a(data-val="today") Today's change
+          a(data-val="p1wk") 1wk change
+          a(data-val="p1mo") 1mo change
+          a(data-val="pYTD") YTD change
+          a(data-val="p52wk") 52wk change
+          a(data-val="p10yr") 10yr change
+
 block append inspector_content
   .content.index
     .header

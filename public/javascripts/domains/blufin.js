@@ -36,6 +36,60 @@
     { name:'marketCap' }
   ]; };
 
+  var surface,
+      coloringSelector,
+      coloringPeriod;
+  mapper.config.init = function() {
+    mapper.stocks.acquireDataset('low_high', { idPropName: 'cid' });
+    surface = mapper.Surface.init();
+    
+    // Enable coloring by historical change
+    surface.viewState.get('trackedParams').push('change_from');
+    coloringSelector = new mapper.DropdownSelector($('.coloring'), function(id) { surface.viewState.setState({ change_from:id }); });
+    coloringSelector.periodProps = {
+      p10yr: { prop:'typ', label:"from 10 years ago" },
+      p52wk: { prop:'ftwp', label:"from 52 weeks ago" },
+      pYTD: { prop:'ytdp', label:"for this year" },
+      p1mo: { prop:'mp', label:"from 1 month ago" },
+      p1wk: { prop:'wp', label:"from 1 week ago" }
+    };
+    // Prepare inspector to show historical change info
+    $('.inspector .content.stock').append($([
+      '<div class="historical">',
+        '<div class="change_from"></div>',
+        '<div class="historical_change"></div>',
+      '</div>'
+    ].join('')));
+    
+    surface.onUpdateView = function(force, viewState) {
+      if(viewState.hasChanged('change_from') || force) {
+        var changeFrom = viewState.get('change_from') || 'today';
+        coloringSelector.setCurrent(changeFrom);// Update the selector
+
+        coloringPeriod = coloringSelector.periodProps[changeFrom];
+        var periodProp = coloringPeriod && coloringPeriod.prop,
+            changeProp = changeFrom == 'today' ? 'changePct' : 'historicalChangePct';
+
+        var fn = function(stock) {
+          return !periodProp ? null : 100 * (stock.get('lastTrade') / stock.get(periodProp) - 1);
+        };
+        mapper.stocks.each(function(s) {
+          s.setComputedProp('historicalChangePct', fn);
+        });
+      
+        // Update views to use selectoed property
+        surface.map.setChangeProp(changeProp);
+        surface.chart.setChangeProp(changeProp);
+        
+        // Update sorting
+        mapper.sortFunctions.chg.setAttribute(changeProp);
+        viewState.get('currentGroup').resortMembers(false);
+      }
+    };
+
+    return surface;
+  };
+  
   mapper.config.getInspectorBindings = function(bindings) {
     var Template = mapper.Template;
     _.each(bindings.stock, function(binding) {
@@ -51,6 +105,13 @@
       }
     });
     return {
+      stock: bindings.stock.concat([
+        { $:'.change_from', formatter:function() { return '% Change ' + (coloringPeriod && coloringPeriod.label) + ':'; } },
+        { $:'.historical_change', field:'historicalChangePct', formatter:Template.pctChangeFormatter() },
+        { $:'.historical_change', field:'historicalChangePct', formatter:function(val, $val) { Template.makeRedOrGreen(val < 0 ? -1 : val > 0 ? 1 : 0, $val); }  },
+        { $:'.historical', field:'historicalChangePct', formatter:function(val, $container) { val == null ? $container.hide() : $container.show(); } },
+        { $:'.stock dl', field:'historicalChangePct', formatter:function(val, $container) { val == null ? $container.show() : $container.hide(); } }
+      ]),
       index: bindings.group.concat([
         { $:'.category', field:'category', formatter:function(val) { return 'Stocks by ' + mapper.capitalize(val); } },
         { $:'.label', field:'name' },
