@@ -213,12 +213,15 @@ a.twit, a.fb, a.ya, a.in {
   width: 29px;
 }
 
+.selector {
+  font-size:14px;
+}
+
 .coloring.dropdown_selector {
   float:right;
-  font-size: 16px;
   line-height: 30px;
   vertical-align: middle;
-  margin-right:40px;
+  margin-right:30px;
 }
 
 @media (max-width: 1080px) {
