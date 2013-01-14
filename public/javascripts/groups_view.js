@@ -100,7 +100,7 @@
       selected = group;
       if(selected) {
         selected._groupView.$tag.addClass('selected');
-        $title.text(group.get('name'));
+        $('.main', $title).text(group.get('name'));
       }
     };
     

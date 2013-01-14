@@ -84,6 +84,9 @@
         // Update sorting
         mapper.sortFunctions.chg.setAttribute(changeProp);
         viewState.get('currentGroup').resortMembers(false);
+        
+        // Update title
+        $('.map .title .sub').text(coloringPeriod ? '% change ' + coloringPeriod.label : '');
       }
     };
 
@@ -105,7 +108,7 @@
       }
     });
     return {
-      stock: bindings.stock.concat([
+      stock: (bindings.stock || []).concat([
         { $:'.change_from', formatter:function() { return '% Change ' + (coloringPeriod && coloringPeriod.label) + ':'; } },
         { $:'.historical_change', field:'historicalChangePct', formatter:Template.pctChangeFormatter() },
         { $:'.historical_change', field:'historicalChangePct', formatter:function(val, $val) { Template.makeRedOrGreen(val < 0 ? -1 : val > 0 ? 1 : 0, $val); }  },
