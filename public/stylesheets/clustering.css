@@ -6,9 +6,3 @@
 .clustering .selection {
   min-width:60px;
 }
-.clustering .minus {
-  background-position:0 -42px;
-}
-.clustering .plus:hover {
-  opacity:.8;
-}

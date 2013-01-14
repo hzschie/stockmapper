@@ -15,7 +15,6 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
             input(placeholder="Search")
             .x
           .search_dropdown
-        block additional_panel_ui
         .sorts.selector
           label Sort By:
           block sort_options
@@ -23,6 +22,7 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
             a(data-val="chg") Percent Change
             a(data-val="vol") Volume
             a(data-val="cap") Market Cap
+        block additional_panel_ui
 
     opts = { id: 'stock_details', closeable: true, comparable: true }
     include details

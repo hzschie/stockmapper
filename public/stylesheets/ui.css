@@ -59,6 +59,12 @@
   -ms-transition:background-position .3s;
   transition:background-position .3s;
 }
+.dropdown_selector .minus {
+  background-position:0 -42px;
+}
+.dropdown_selector .plus:hover {
+  opacity:.8;
+}
 .dropdown_selector .panel {
   position:absolute;
   top:26px;

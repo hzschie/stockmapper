@@ -213,6 +213,27 @@ a.twit, a.fb, a.ya, a.in {
   width: 29px;
 }
 
+.coloring.dropdown_selector {
+  float:right;
+  font-size: 16px;
+  line-height: 30px;
+  vertical-align: middle;
+  margin-right:40px;
+}
+
+@media (max-width: 1080px) {
+  .coloring.dropdown_selector {
+    font-size:12px;
+    margin-right:20px;
+  }
+  .sorts.selector {
+    font-size:12px;
+  }
+  .panel .views.selector {
+    font-size:12px;
+  }
+}
+
 /* --------------------------------- MOBILE HEADER BANNER --------------------------------- */
 .mobile .app_header .logo {
   background:transparent url('/images/blufin/mobile_logo.png?10302012') no-repeat scroll top left;

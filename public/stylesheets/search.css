@@ -17,6 +17,12 @@
   margin:0;
   line-height:18px;
 }
+@media (max-width: 1080px) {
+  .search input {
+    width:90px;
+  }
+}
+
 .search .x {
   width:20px;
   height:20px;
