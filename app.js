@@ -91,6 +91,14 @@ app.get('/scratchpad', function(req, res) {
   });
 });
 
+try {
+  // Load domain specific routes, if exit
+  var domainSpecificRoutes = require(__dirname + '/lib/domains/' + process.env.DATA_DOMAIN + '/routes.js')(app);
+}
+catch (e) {
+  // No problem
+}
+
 var mainRouteArgs = ['/*'];
 if(loginSupport) mainRouteArgs.push(loginSupport.ensureAuthenticated);
 mainRouteArgs.push(
