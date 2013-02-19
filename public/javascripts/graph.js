@@ -165,6 +165,7 @@
     function prepareDaily() {
       var tMin;
       if(rangeId == 'rMax') tMin = series.getMin('t');
+      else if(rangeId == 'r5y') tMin = series.getMax('t') - 157248e6;
       else if(rangeId == 'r1y') tMin = series.getMax('t') - 314496e5;
       else if(rangeId == 'r3m') tMin = series.getMax('t') - 78624e5;
       x
