@@ -158,7 +158,7 @@ body {
   cursor: pointer;
 }
 #refresh-bar {
-  background: url(http://www.blufin.in/BCI/images/refresh.png) no-repeat;
+  background: url(/images/blufin/refresh.png) no-repeat;
   width:92px;
   height:30px;
   cursor: pointer;
@@ -195,16 +195,16 @@ body {
   margin-left:4px;
 }
 a.twit {
-  background: url("http://www.blufin.in/BCI/images/social-nw-links.png") no-repeat scroll left top transparent;
+  background: url("/images/blufin/social-nw-links.png") no-repeat scroll left top transparent;
 }
 a.fb {
-  background: url("http://www.blufin.in/BCI/images/social-nw-links.png") no-repeat scroll left -48px transparent;
+  background: url("/images/blufin/social-nw-links.png") no-repeat scroll left -48px transparent;
 }
 a.ya {
-  background: url("http://www.blufin.in/BCI/images/social-nw-links.png") no-repeat scroll left -139px transparent;
+  background: url("/images/blufin/social-nw-links.png") no-repeat scroll left -139px transparent;
 }
 a.in {
-  background: url("http://www.blufin.in/BCI/images/social-nw-links.png") no-repeat scroll left -99px transparent;
+  background: url("/images/blufin/social-nw-links.png") no-repeat scroll left -99px transparent;
 }
 a.twit, a.fb, a.ya, a.in {
   display: block;
