@@ -58,7 +58,9 @@
           var splt = refOrGroup.split(':');
           group = groups.where({ category:splt[0], nickname:splt[1] })[0];
         }
-        else group = refOrGroup;
+        else if (refOrGroup instanceof Backbone.Model) {
+          group = refOrGroup;
+        }
         
         if(!group) return;
         
