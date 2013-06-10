@@ -1,1 +1,1 @@
-web: ANALYTICS_CODE="UA-33273275-2" DATA_HOST=46.137.212.140:8080 DYNAMIC=true NODE_ENV=production BUNDLE=true DATA_DOMAIN=blufin node app.js
+web: ANALYTICS_CODE="UA-33273275-2" DATA_HOST=blufin.in DYNAMIC=true NODE_ENV=production BUNDLE=true DATA_DOMAIN=blufin node app.js
