@@ -34,5 +34,7 @@ C.  iPhone version
 
 
 ## Blufin data servers
-* **Production:** http://54.251.130.77:8080
-* **UAT:** 46.137.212.140:8080
+* **Production:** blufin.in (was http://54.251.130.77:8080)
+* **UAT:** uat.blufin.in (was 46.137.212.140:8080)
+
+

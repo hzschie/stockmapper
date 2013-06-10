@@ -162,7 +162,9 @@ $(function() {
           group.get('members').add(stocks);
         },
         function() {
-          mapper.allGroup && mapper.allGroup.get('members').add(mapper.stocks.models);
+          if(mapper.allGroup && mapper.allGroup.get('members').length == 0) {
+            mapper.allGroup.get('members').add(mapper.stocks.models);
+          }
           Interval.callOnce(mapper.dataReady, Interval.FREE_TIME);
           if(!waitForFirstPass) socket.emit('subscribe');
         }
