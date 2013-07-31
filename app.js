@@ -97,7 +97,12 @@ try {
   var domainSpecificRoutes = require(__dirname + '/lib/domains/' + process.env.DATA_DOMAIN + '/routes.js')(app);
 }
 catch (e) {
-  // No problem
+  if(e.code == 'MODULE_NOT_FOUND') {
+    // no problem
+  }
+  else {
+    throw e;
+  }
 }
 
 var mainRouteArgs = ['/*'];
