@@ -24,7 +24,9 @@ body{
   padding:0px;
   margin:0px;
   background:#69aec2;
+  font-family: 'Conv_Lato-Regular'; *font-family:Lato; 
   font-size: 16px;
+  color: #fff;
 }
 
 .main_content { width: 100%; max-width: 900px; margin: 0 auto; }
@@ -54,22 +56,40 @@ h1,h2,h3,h4,h5,h6{ padding:0px; margin:0px; font-weight:normal;}
 #nav #products_submenu { position: absolute; background-color: #3b93ae; padding: 10px 0; border: 1px solid #0c799a; }
 #nav #products_submenu li { float: none; display: block; font-size: .6em; }
 
+.no-masthead { height: 100px; margin-bottom: 25px; }
+
 /*-------------------------------------------------------MASTHEAD-------------------------------------------------------*/
 #masthead { background:url(blank) no-repeat center bottom; background-size:100% auto; width:100%; height:0; padding-top:48%; }
 #masthead.slide1{ background-image: url(/images/domains/foreside/slide1.png); }
 #masthead.slide2{ background-image: url(/images/domains/foreside/slide2.png); }
 #masthead.slide3{ background-image: url(/images/domains/foreside/slide3.png); }
 
+/*-------------------------------------------------------COLUMNS-------------------------------------------------------*/
+.row-3col { padding: 0 25px; margin-bottom: 25px; }
+.row-3col .col { width:31%; margin-right: 3.5%; display: inline-block; vertical-align: top; }
+.row-3col .col:last-child { margin-right: 0; }
+.row-3col .col h3 { font-size: .875em; text-transform: uppercase; color: #0c799a; border-top: solid 2px #0c799a; }
+.row-3col .col p { font-size: .875em; padding-top: 5px; }
+
+/*-------------------------------------------------------PARTNERS-------------------------------------------------------*/
+.parners_page .partner_logo { color: rgba(0,0,0,0); height: 60px; margin-bottom:3px; background: url(blank) no-repeat bottom left; }
+.parners_page .foreside .partner_logo { background-image: url(/images/domains/foreside/foreside_partner_logo.png) }
+.parners_page .two-n .partner_logo { background-image: url(/images/domains/foreside/2n_partner_logo.png) }
+.parners_page .ise .partner_logo { background-image: url(/images/domains/foreside/ise_partner_logo.png) }
+.parners_page .kl_gates .partner_logo { background-image: url(/images/domains/foreside/kl_partner_logo.png) }
+
 /*-------------------------------------------------------HOME-------------------------------------------------------*/
 h3.tagline { font-size:4.5em; line-height:1; color:#0c799a; font-family: 'Conv_Lato-Black'; *font-family:"Lato Black"; text-transform:uppercase; padding:3px 0px 5px 0px; overflow:hidden; }
 
+
+
 /*-------------------------------------------------------FOOTER-------------------------------------------------------*/
-#quotes { border-top:solid 2px #0c799a; padding-bottom:23px; margin-top: 30px; }
-#quotes h1{ font-size: 0.75em; color:#0c799a; font-family: 'Conv_Lato-Regular'; *font-family:Lato; text-transform:uppercase; padding:3px 0; margin-bottom: 10px; }
+#quotes { border-top: solid 2px #0c799a; padding-bottom:23px; margin-top: 30px; }
+#quotes h1{ font-size: 0.75em; color:#0c799a; text-transform:uppercase; padding:3px 0; margin-bottom: 10px; }
 #quotes li { width: 33%; display: inline-block; height: 45px; white-space: nowrap; }
 #quotes li > * { display: inline-block; *display: inline; zoom: 1; vertical-align: top; }
 #quotes li img { height: 100%; }
-#quotes .quote { font-family: 'Conv_Lato-Regular'; margin-left: 10px; text-align: right; color: #fff; }
+#quotes .quote { margin-left: 10px; text-align: right; }
 #quotes .quote .price { font-size:1.5em; line-height: .8; }
 #quotes .quote .change { font-size:0.875em; line-height: .8; padding-top: .65em; }
 #quotes .quote .change.up { color: #060; }
