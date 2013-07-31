@@ -1,1 +1,43 @@
-h1 This is the header
+header#header.clearfix
+  .logo
+    a(href='home.html')
+      img(src='/images/domains/foreside/etflabs_logo.png', alt='')
+  nav#nav
+    ul#menu_bar
+      li
+        a(href='partners.html') Partners
+      li#products
+        a(href='#') Products
+        ul#products_submenu(style="display:none;")
+          li
+            a(href='composite.html') ETF Composite
+          li
+            a(href='etf50.html') ETF50
+          li
+            a(href='etf25e.html') ETF25 Equity
+          li
+            a(href='etf25ne.html') ETF25 Non Equity
+          li
+            a(href='mapper.html') ETF Mapper
+      li
+        a(href='about.html') About
+      li
+        a(href='demo.html') Demo
+      li.login_main
+        a(href='#') login
+        //- ul.in_search
+        //-   li.inner_search
+        //-     | Username:
+        //-     input(type='text', name='a', value='')
+        //-   li.inner_search
+        //-     | Password:
+        //-     input(type='password', name='a', value='')
+        //-   li.in_login
+        //-     a(href='#') LOGIN
+  .social
+    a(href='#')
+      img(src='/images/domains/foreside/s1.png', alt='')
+    a(href='#')
+      img(src='/images/domains/foreside/s2.png', alt='')
+    a(href='#')
+      img(src='/images/domains/foreside/s3.png', alt='')

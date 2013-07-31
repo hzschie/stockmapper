@@ -1,3 +1,9 @@
 $(document).ready(function() {
-  console.log('this is the foreside javascript', $('body'));
+  var $productsMenuItem = $('#products'),
+      $productsSubMenu = $('#products_submenu');
+  $productsMenuItem.hover(
+    function() { $productsSubMenu.show(); },
+    function() { $productsSubMenu.hide(); }
+  );
+  
 });

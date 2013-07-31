@@ -1,0 +1,38 @@
+@font-face {
+	font-family: 'Conv_gill_sans_mt';
+	src: url('gill_sans_mt.eot');
+	src: local('☺'), url('gill_sans_mt.woff') format('woff'), url('gill_sans_mt.ttf') format('truetype'), url('gill_sans_mt.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body{
+	padding:0px;
+	margin:0px;
+	background:#69aec2;
+}
+
+/*-------------------------------------------------------RESET-------------------------------------------------------*/
+a{ text-decoration:none;}
+img{ border:none;}
+ul{ padding:0px; margin:0px;}
+ul li{ list-style-type:none;}
+p{ padding:0px; margin:0px;}
+h1,h2,h3,h4,h5,h6{ padding:0px; margin:0px; font-weight:normal;}
+
+.clearfix { zoom:1; }
+.clearfix:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
+
+/*-------------------------------------------------------HEADER-------------------------------------------------------*/
+#header{ *width:1258px; width:100%; margin:0px auto; background:url(/images/domains/foreside/header_bg.png) repeat-x center bottom; }
+.logo{ float:left; padding:24px 0px 32px 23px; overflow:hidden;}
+#nav { float:left; padding:35px 0px 0px 12px; font-size:30px; font-weight:bold; }
+#nav ul{ padding:0px; margin:0px;}
+#nav ul li{ float:left; display:inline; font-family: 'Conv_gill_sans_mt'; *font-family:"Gill Sans MT";  padding:0px 15px; text-transform:uppercase; line-height:30px;}
+#nav ul li a{ color:#cee4eb; display:inline-block;}
+#nav ul li a:hover{ border-bottom:solid 2px #cee4eb; overflow:hidden; color:#fff; margin-bottom:-2px;}
+.social{ float:right; padding:35px 14px 0px 0px;}
+.social img{ float:left; padding-left:16px;}
+
+#nav #products_submenu { position: absolute; background-color: #3b93ae; padding: 10px 0; border: 1px solid #0c799a; }
+#nav #products_submenu li { float: none; display: block; font-size: .6em; }
