@@ -1,4 +1,11 @@
 @font-face {
+	font-family: 'Conv_Lato-Black';
+	src: url('Lato-Black.eot');
+	src: local('☺'), url('Lato-Black.woff') format('woff'), url('Lato-Black.ttf') format('truetype'), url('Lato-Black.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
 	font-family: 'Conv_gill_sans_mt';
 	src: url('gill_sans_mt.eot');
 	src: local('☺'), url('gill_sans_mt.woff') format('woff'), url('gill_sans_mt.ttf') format('truetype'), url('gill_sans_mt.svg') format('svg');
@@ -10,7 +17,10 @@ body{
 	padding:0px;
 	margin:0px;
 	background:#69aec2;
+	font-size: 16px;
 }
+
+.main_content { width: 100%; max-width: 900px; margin: 0 auto; }
 
 /*-------------------------------------------------------RESET-------------------------------------------------------*/
 a{ text-decoration:none;}
@@ -24,7 +34,7 @@ h1,h2,h3,h4,h5,h6{ padding:0px; margin:0px; font-weight:normal;}
 .clearfix:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
 
 /*-------------------------------------------------------HEADER-------------------------------------------------------*/
-#header{ *width:1258px; width:100%; margin:0px auto; background:url(/images/domains/foreside/header_bg.png) repeat-x center bottom; }
+#header{ *width:1258px; width:100%; margin:0px auto; background:url(/images/domains/foreside/header_bg.png) repeat-x center bottom; position: fixed; }
 .logo{ float:left; padding:24px 0px 32px 23px; overflow:hidden;}
 #nav { float:left; padding:35px 0px 0px 12px; font-size:30px; font-weight:bold; }
 #nav ul{ padding:0px; margin:0px;}
@@ -36,3 +46,16 @@ h1,h2,h3,h4,h5,h6{ padding:0px; margin:0px; font-weight:normal;}
 
 #nav #products_submenu { position: absolute; background-color: #3b93ae; padding: 10px 0; border: 1px solid #0c799a; }
 #nav #products_submenu li { float: none; display: block; font-size: .6em; }
+
+/*-------------------------------------------------------MASTHEAD-------------------------------------------------------*/
+#masthead { background:url(blank) no-repeat center bottom; background-size:100% auto; width:100%; height:0; padding-top:48%; }
+#masthead.slide1{ background-image: url(/images/domains/foreside/slide1.png); }
+#masthead.slide2{ background-image: url(/images/domains/foreside/slide2.png); }
+#masthead.slide3{ background-image: url(/images/domains/foreside/slide3.png); }
+
+/*-------------------------------------------------------HOME-------------------------------------------------------*/
+h3.tagline { font-size:4.5em; line-height:1; color:#0c799a; font-family: 'Conv_Lato-Black'; *font-family:"Lato Black"; text-transform:uppercase; padding:3px 0px 5px 0px; overflow:hidden; }
+
+/*-------------------------------------------------------FOOTER-------------------------------------------------------*/
+#quotes { border-top:solid 2px #0c799a; padding-bottom:23px;}
+#quotes li { width: 33%; display: inline-block;}
