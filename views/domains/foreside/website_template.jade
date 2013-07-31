@@ -1,7 +1,9 @@
 !!!
 head
-  script.
-    console.log("HELLO WORLD")
+  link(rel="stylesheet", type="text/css", href="/stylesheets/domains/foreside_website.css")
+  script(type='text/javascript', src='/javascripts/lib/jquery-1.7.2.min.js')
 body
   include header
   block body_content
+  include quotes
+  script(src="/javascripts/domains/foreside_website.js");
