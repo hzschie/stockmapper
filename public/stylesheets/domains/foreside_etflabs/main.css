@@ -96,6 +96,9 @@ h1,h2,h3,h4,h5,h6{ padding:0px; margin:0px; font-weight:normal;}
 /*-------------------------------------------------------ABOUT-------------------------------------------------------*/
 .about_page .learn-more { font-size:.75em; margin-top: 10px; color: #0c799a; text-transform:uppercase; display: block; }
 
+/*-------------------------------------------------------DEMO-------------------------------------------------------*/
+.demo_page { width: 90%; margin: 30px auto; text-align: center; }
+
 /*-------------------------------------------------------HOME-------------------------------------------------------*/
 h3.tagline { font-size:4.5em; line-height:1; color:#0c799a; font-family: 'Conv_Lato-Black'; *font-family:"Lato Black"; text-transform:uppercase; padding:3px 0px 5px 0px; overflow:hidden; }
 
