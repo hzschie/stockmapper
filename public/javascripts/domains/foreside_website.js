@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  console.log($('#nav [data-id=' + window.currentPage + ']').addClass('selected')[0]);
   var $productsMenuItem = $('#products'),
       $productsSubMenu = $('#products_submenu');
   $productsMenuItem.hover(
