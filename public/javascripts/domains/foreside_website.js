@@ -6,9 +6,15 @@ $(document).ready(function() {
     function() { $productsSubMenu.hide(); }
   );
   
-  quote();
-  setInterval(quote, 60000);
+  quotes();
+  setInterval(quotes, 60000);
 });
+
+function quotes(){
+  quote('comp');
+  quote(50);
+  quote(25);
+}
 
 function checkChange(changeEle, data){
   if(data['change'] < 0){
@@ -26,12 +32,13 @@ function checkChange(changeEle, data){
   }
 }
 
-function quote(){
+function quote(kind){
+      var target = 'etf' + kind + '_quote';
       $.ajax({
-        url: '/quote/^ETFCOMP',
+        url: '/' + target + '/^ETFCOMP',
         success: function(data){
-          $('.etfcomp_quote > .price').text(data['last_trade_price']);
-          var changeEle = $('.etfcomp_quote > .quote > .change');
+          $('.' + target + ' > .quote > .price').text(data['last_trade_price']);
+          var changeEle = $('.' + target + ' > .quote > .change');
           checkChange(changeEle, data);
           changeEle.text(data['change'] + ' (' + data['change_percent'] + ')');
         },
