@@ -11,4 +11,6 @@ head
 body
   include header
   block body_content
-  script(src="/javascripts/domains/foreside_website.js");
+  script.
+    window.currentPage = "#{currentPage}";
+  script(src="/javascripts/domains/foreside_website.js")

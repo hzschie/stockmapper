@@ -1,11 +1,19 @@
 $(document).ready(function() {
+  console.log($('#nav [data-id=' + window.currentPage + ']').addClass('selected')[0]);
   var $productsMenuItem = $('#products'),
       $productsSubMenu = $('#products_submenu');
   $productsMenuItem.hover(
     function() { $productsSubMenu.show(); },
     function() { $productsSubMenu.hide(); }
   );
-  
+
+  var $loginMenuItem = $('#login'),
+      $loginBox = $('#login_box');
+  $loginMenuItem.hover(
+    function() { $loginBox.show(); },
+    function() { $loginBox.hide(); }
+  );
+
   quotes();
   setInterval(quotes, 60000);
 });

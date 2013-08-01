@@ -5,35 +5,35 @@ header#header.clearfix
   nav#nav
     ul#menu_bar
       li
-        a(href='partners.html') Partners
+        a(href='partners.html', data-id="partners") Partners
       li#products
         a(href='#') Products
         ul#products_submenu(style="display:none;")
           li
-            a(href='composite.html') ETF Composite
+            a(href='composite.html', data-id="composite") ETF Composite
           li
-            a(href='etf50.html') ETF50
+            a(href='etf50.html', data-id="etf50") ETF50
           li
-            a(href='etf25e.html') ETF25 Equity
+            a(href='etf25e.html', data-id="etf25e") ETF25 Equity
           li
-            a(href='etf25ne.html') ETF25 Non Equity
+            a(href='etf25ne.html', data-id="etf25ne") ETF25 Non Equity
           li
-            a(href='mapper.html') ETF Mapper
+            a(href='mapper.html', data-id="mapper") ETF Mapper
       li
-        a(href='about.html') About
+        a(href='about.html', data-id="about") About
       li
-        a(href='demo.html') Demo
-      li.login_main
+        a(href='demo.html', data-id="demo") Demo
+      li#login
         a(href='#') login
-        //- ul.in_search
-        //-   li.inner_search
-        //-     | Username:
-        //-     input(type='text', name='a', value='')
-        //-   li.inner_search
-        //-     | Password:
-        //-     input(type='password', name='a', value='')
-        //-   li.in_login
-        //-     a(href='#') LOGIN
+        ul#login_box(style="display:none;")
+          .field
+            | Username:
+            input(type='text', name='a', value='')
+          .field
+            | Password:
+            input(type='password', name='a', value='')
+          .submit
+            a(href='#') LOGIN
   .social
     a(href='#')
       img(src='/images/domains/foreside/s1.png', alt='')
