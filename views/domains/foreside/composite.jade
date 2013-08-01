@@ -1,0 +1,75 @@
+extends website_template
+
+block header_content
+  title ETF Composite
+  link(rel="stylesheet", type="text/css", href="/stylesheets/map.css")
+  
+block body_content
+  .no-masthead &nbsp;
+  .main_content.composite_page.product_page
+    h1 ETF Composite
+    p The FORESIDE ETF Composite™ Index has been created to provide investors with a product allowing them to track US ETFs. The Index uses an equal weighted allocation across the constituents. Index components are reviewed semi-annually for eligibility, and the weights are re-set according to that distribution. 
+
+    h3 Component Eligibility Requirements
+
+    p All of the following requirements must be met in order for a security to be eligible for inclusion:
+    ol
+      li The component security must be an Exchange Traded Fund listed in the US.
+      li The component security must not be an Exchange Traded Note.
+      li The component security must not be levered or inverse.
+      li The component security must have over $5 million in assets.
+
+    br
+    a.view-on(href="#") View on Bloomberg:&nbsp;
+      strong ETFCOMP
+    a.view-on(href="#") View on Yahoo Finance:&nbsp;
+      strong ^ETFCOMP
+
+    br
+    .product-quote
+      .picks
+        .gainers.map
+          label Gainers
+          ul
+            li(style='background: #00ff00;', data-id='TDX') TDX
+            li(style='background: #15ff15;', data-id='EGPT') EGPT
+            li(style='background: #40ff40;', data-id='VNM') VNM
+            li(style='background: #40ff40;', data-id='EWK') EWK
+            li(style='background: #40ff40;', data-id='PLTM') PLTM
+            li(style='background: #40ff40;', data-id='ITB') ITB
+            li(style='background: #40ff40;', data-id='PSCH') PSCH
+            li(style='background: #55ff55;', data-id='USO') USO
+            li(style='background: #55ff55;', data-id='PMNA') PMNA
+            li(style='background: #55ff55;', data-id='DBB') DBB
+        .losers.map
+          label Losers
+          ul
+            li(style='background: #ff1515;', data-id='URA') URA
+            li(style='background: #ff4040;', data-id='GDXJ') GDXJ
+            li(style='background: #ff4040;', data-id='TUR') TUR
+            li(style='background: #ff4040;', data-id='ICN') ICN
+            li(style='background: #ff4040;', data-id='GLDX') GLDX
+            li(style='background: #ff4040;', data-id='AGOL') AGOL
+            li(style='background: #ff4040;', data-id='SOIL') SOIL
+            li(style='background: #ff4040;', data-id='TDV') TDV
+            li(style='background: #ff5555;', data-id='KBWY') KBWY
+            li(style='background: #ff5555;', data-id='PSR') PSR
+        .active.map
+          label Most Active
+          ul
+            li(style='background: #d5ffd5;', data-id='SPY') SPY
+            li(style='background: #ff9595;', data-id='EEM') EEM
+            li(style='background: #d5ffd5;', data-id='XLF') XLF
+            li(style='background: #bfffbf;', data-id='IWM') IWM
+            li(style='background: #ffd5d5;', data-id='EWJ') EWJ
+            li(style='background: #ffbfbf;', data-id='GDX') GDX
+            li(style='background: #bfffbf;', data-id='QQQ') QQQ
+            li(style='background: #bfffbf;', data-id='EFA') EFA
+            li(style='background: #ff9595;', data-id='VWO') VWO
+            li(style='background: #ffaaaa;', data-id='FXI') FXI
+
+      .main.etfcomp_quote
+        img(src="/images/domains/foreside/etfcomp_quote_logo.png")
+        .quote
+          h2.price 1,024.15
+          h3.change.up +7.99 (+0.97%)

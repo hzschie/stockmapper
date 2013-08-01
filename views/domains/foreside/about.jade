@@ -4,16 +4,18 @@ block header_content
   title ETF Labs - About
   
 block body_content
-  .no-masthead &nbsp;
-  .parners_page
+  #masthead.slide2 &nbsp;
+  .about_page
     .row-3col
       .col
         h3 ETF Composite
         p ETF Composite is powered by the International Securities Exchange. The index tracks a portfolio of 50 exchange-traded funds (ETFs), grantor trusts, exchange-traded commodity pools, and other such similar products, that are listed on a regulated securities exchange in the US. The constituent ETFs must meet a variety of eligibility requirements that focus on, among other things, assets under management, liquidity, and share price performance. The index excludes exchange-traded notes and leveraged exchange-traded products (ETPs).
+        a.learn-more(href="/composite.html") Learn More
     
       .col
         h3 ETF Mapper
         p Stockmapper is a platform for presenting and classifying large collections of stocks or other financial instruments, providing an at-a-glance heat map view of the market, alongside detailed quotes, news feeds and historical graphs.
+        a.learn-more(href="/mapper.html") Learn More
     
       .col
         h3 ETF Labs
@@ -23,11 +25,16 @@ block body_content
       .col
         h3 ETF50
         p The ISE ETF 50™ Index has been created to provide investors with a product allowing them to track US ETFs.  The ISE ETF 50™ Index quantitatively ranks ETFs by fees, volatility and performance and selects the top 25 equity-focused funds and the top 25 non-equity focused funds.
+        a.learn-more(href="/etf50.html") Learn More
     
       .col
         h3 ETF25 Equity
         p The index tracks a portfolio of 25 exchange-traded funds (ETFs),that are listed on a regulated securities exchange in the US and are equity-focused.  The constituent ETFs must meet a variety of eligibility requirements that focus on, among other things, assets under management, liquidity, and share price performance.  The index excludes exchange-traded notes and leveraged exchange-traded products (ETPs).
-    
+        a.learn-more(href="/etf25e.html") Learn More
+        
       .col
         h3 ETF25 Non-Equity
         p The index tracks a portfolio of 25 exchange-traded funds (ETFs), grantor trusts, exchange-traded commodity pools, and other such similar products, that are listed on a regulated securities exchange in the US and are non-equity focused.  The constituent ETFs must meet a variety of eligibility requirements that focus on, among other things, assets under management, liquidity, and share price performance.  The index excludes exchange-traded notes and leveraged exchange-traded products (ETPs).
+        a.learn-more(href="/etf25ne.html") Learn More
+
+  include quotes
