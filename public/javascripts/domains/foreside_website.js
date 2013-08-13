@@ -1,4 +1,6 @@
 $(document).ready(function() {
+  $('#nav [data-id=' + window.currentPage + ']').addClass('selected')[0];
+  
   var $productsMenuItem = $('#products'),
       $productsSubMenu = $('#products_submenu');
   $productsMenuItem.hover(
@@ -50,6 +52,6 @@ function quote(kind){
           changeEle.text(data['change'] + ' (' + data['change_percent'] + ')');
         },
         error:function(){console.log('error');},
-        dataType: 'JSON',
+        dataType: 'JSON'
       });
   }

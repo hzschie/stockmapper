@@ -93,9 +93,6 @@ h1,h2,h3,h4,h5,h6{ padding:0px; margin:0px; font-weight:normal;}
 .parners_page .ise .partner_logo { background-image: url(/images/domains/foreside/ise_partner_logo.png) }
 .parners_page .kl_gates .partner_logo { background-image: url(/images/domains/foreside/kl_partner_logo.png) }
 
-/*-------------------------------------------------------ABOUT-------------------------------------------------------*/
-.about_page .learn-more { font-size:.75em; margin-top: 10px; color: #0c799a; text-transform:uppercase; display: block; }
-
 /*-------------------------------------------------------DEMO-------------------------------------------------------*/
 .demo_page { width: 90%; margin: 30px auto; text-align: center; }
 

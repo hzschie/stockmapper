@@ -93,7 +93,7 @@ app.get('/scratchpad', function(req, res) {
 });
 
 try {
-  // Load domain specific routes, if exit
+  // Load domain specific routes, if exist
   var domainSpecificRoutes = require(__dirname + '/lib/domains/' + process.env.DATA_DOMAIN + '/routes.js')(app);
 }
 catch (e) {
