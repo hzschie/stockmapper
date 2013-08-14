@@ -48,25 +48,25 @@
         composite = mapper.groups.get('^ETFCOMP');
         
     composite.on('change:active', function(group) {
-      var syms = $.map(group.get('active'), function(model){ return model.get('sym'); }),
-          news = [],
-          numDone = 0,
-          numExpected = 0,
-          step = 4;
-      for(var i = 0; i < syms.length; i += step) {
-        numExpected++;
-        $.getJSON(
-          '/news/' + syms.slice(i, i+step).join(),
-          function(data) {
-            news = news.concat(data);
-            numDone++;
-            if(numDone == numExpected) {
-              news.sort(function(a,b) { return (a.t < b.t) - (a.t > b.t); });
-              ticker.setHeadlines(news);
-            }
-          }
-        );
-      }
+      // var syms = $.map(group.get('active'), function(model){ return model.get('sym'); }),
+      //     news = [],
+      //     numDone = 0,
+      //     numExpected = 0,
+      //     step = 4;
+      // for(var i = 0; i < syms.length; i += step) {
+      //   numExpected++;
+      //   $.getJSON(
+      //     '/news/' + syms.slice(i, i+step).join(),
+      //     function(data) {
+      //       news = news.concat(data);
+      //       numDone++;
+      //       if(numDone == numExpected) {
+      //         news.sort(function(a,b) { return (a.t < b.t) - (a.t > b.t); });
+      //         ticker.setHeadlines(news);
+      //       }
+      //     }
+      //   );
+      // }
     });
     
     surface = mapper.Surface.init();
