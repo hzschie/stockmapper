@@ -1,1 +1,1 @@
-web: ANALYTICS_CODE="UA-33273275-2" DATA_HOST=www.blufinresearch.com DYNAMIC=true NODE_ENV=production BUNDLE=true DATA_DOMAIN=blufin node app.js
+web: REQUIRE_LOGIN=true DATA_DOMAIN=foreside NODE_ENV=production BUNDLE=true node app.js
