@@ -13,12 +13,14 @@ var ViewState = mapper.ViewState = Backbone.Model.extend(
             var state = History.getState();
             _this.fromUrl(state.url);
           });
-          _this.fromUrl(History.getState().url, true);
+          var initState = History.getState();
+          _this.urlBase = initState.hash.split('?')[0];// '/' or '/mapper'
+          _this.fromUrl(initState.url, true);
       })(window);
     },
     
     setState: function(hash) {
-      History.pushState(null, null, '/?' + this.toParamsString(hash));
+      History.pushState(null, null, this.urlBase + '?' + this.toParamsString(hash));
     },
     
     fromUrl: function(url, force) {
