@@ -93,7 +93,7 @@ h1,h2,h3,h4,h5,h6{ padding:0px; margin:0px; font-weight:normal;}
 .parners_page .ise .partner_logo { background-image: url(/images/domains/foreside/ise_partner_logo.png) }
 .parners_page .kl_gates .partner_logo { background-image: url(/images/domains/foreside/kl_partner_logo.png) }
 
-/*-------------------------------------------------------stats-------------------------------------------------------*/
+/*-------------------------------------------------------STATS-------------------------------------------------------*/
 .stats_page { width: 90%; margin: 30px auto; text-align: center; }
 
 /*-------------------------------------------------------HOME-------------------------------------------------------*/
@@ -113,6 +113,10 @@ h3.tagline { font-size:4.5em; line-height:1; color:#0c799a; font-family: 'Conv_L
 .picks label { font-size: .75em; }
 .picks .map { width: 152px; margin-left: 20px; display:inline-block;}
 .picks .map li { position: relative; margin-left: -1px; color: #000; }
+
+/*-------------------------------------------------------MEDIA-------------------------------------------------------*/
+.media_page .read-more { font-size:.75em; margin-top: 10px; color: #0c799a; text-transform:uppercase; display: block; }
+
 
 /*-------------------------------------------------------FOOTER-------------------------------------------------------*/
 #quotes { border-top: solid 2px #0c799a; padding-bottom:23px; margin-top: 30px; }
