@@ -93,8 +93,8 @@ h1,h2,h3,h4,h5,h6{ padding:0px; margin:0px; font-weight:normal;}
 .parners_page .ise .partner_logo { background-image: url(/images/domains/foreside/ise_partner_logo.png) }
 .parners_page .kl_gates .partner_logo { background-image: url(/images/domains/foreside/kl_partner_logo.png) }
 
-/*-------------------------------------------------------DEMO-------------------------------------------------------*/
-.demo_page { width: 90%; margin: 30px auto; text-align: center; }
+/*-------------------------------------------------------stats-------------------------------------------------------*/
+.stats_page { width: 90%; margin: 30px auto; text-align: center; }
 
 /*-------------------------------------------------------HOME-------------------------------------------------------*/
 h3.tagline { font-size:4.5em; line-height:1; color:#0c799a; font-family: 'Conv_Lato-Black'; *font-family:"Lato Black"; text-transform:uppercase; padding:3px 0px 5px 0px; overflow:hidden; }
