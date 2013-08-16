@@ -94,7 +94,7 @@ app.get('/scratchpad', function(req, res) {
 
 try {
   // Load domain specific routes, if exist
-  var domainSpecificRoutes = require(__dirname + '/lib/domains/' + process.env.DATA_DOMAIN + '/routes.js')(app);
+  var domainSpecificRoutes = require(__dirname + '/lib/domains/' + process.env.DATA_DOMAIN + '/routes.js')(app, loginSupport);
 }
 catch (e) {
   if(e.code == 'MODULE_NOT_FOUND') {

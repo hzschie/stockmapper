@@ -9,8 +9,9 @@ head
   link(rel="stylesheet", type="text/css", href="/stylesheets/domains/foreside_etflabs/main.css")
   script(type='text/javascript', src='/javascripts/lib/jquery-1.7.2.min.js')
 body
-  include header
+  block nav_header
+    include header
   block body_content
   script.
-    window.currentPage = "#{currentPage}";
+    window.currentPage = "#{typeof currentPage == "undefined" ? null : currentPage}";
   script(src="/javascripts/domains/foreside_website.js")
