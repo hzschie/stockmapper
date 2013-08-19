@@ -1,15 +1,49 @@
 extends website_template
 
 block header_content
-  title ETF Mapper Demo
+  title ETFLabs Media
   
 block body_content
   .no-masthead &nbsp;
-  .main_content.media_page
-    h3.tagline Big Headline #1
-    p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    .read-more Read more
-    
-    h3.tagline Big Headline #2
-    p Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-    .read-more Read more
+  .media_page
+    .row-3col
+      .col2
+        article
+          h3.big_news_headline Quisque a feugiat est, quis dictum
+          p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          a.read-more(href="/media/quisque-a-feugiat-est-quis-dictum") Read more
+          
+        article
+          h3.big_news_headline Curabitur elementum molestie
+          p Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+          a.read-more(href="/media/curabitur-elementum-molestie") Read more
+        
+        article
+          h3.big_news_headline Phasellus nisi ipsum, scelerisque id
+          p Curabitur tempus et libero quis vehicula. Quisque a feugiat est, quis dictum nisi. Nam congue gravida pretium. Pellentesque vitae quam feugiat, lacinia magna id, laoreet enim. Etiam ut nisi lorem. Proin at euismod metus, sit amet dignissim justo. Curabitur dui ipsum, vehicula et congue vel, malesuada non urna.
+          a.read-more(href="/media/phasellus-nisi-ipsum-scelerisque-id") Read more
+
+      .col
+        h3 Market News
+        #other_news
+        script.
+          $.ajax({
+            url: '/news/EWZ,IWM,QQQ,VWO',
+            success: function(data){
+              var html = $.map(data, function(entry) {
+                return [
+                  '<a href="' + entry.href + '" target="_blank">',
+                    '<h4>',
+                      entry.title,
+                    '</h4>',
+                    '<div class="source">',
+                      entry.source,
+                    '</div>',
+                  '</a>'
+                ].join('');
+              }).join('');
+              $('#other_news').html(html);
+            },
+            error:function(){console.log('error');},
+            dataType: 'JSON'
+          });

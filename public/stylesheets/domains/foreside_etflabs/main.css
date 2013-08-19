@@ -86,6 +86,9 @@ h1,h2,h3,h4,h5,h6{ padding:0px; margin:0px; font-weight:normal;}
 .row-3col .col h3 { font-size: .875em; text-transform: uppercase; color: #0c799a; border-top: solid 2px #0c799a; }
 .row-3col .col p { font-size: .875em; padding-top: 5px; }
 
+.row-3col .col2 { width:65.5%; margin-right: 3.5%; display: inline-block; vertical-align: top; }
+
+
 /*-------------------------------------------------------PARTNERS-------------------------------------------------------*/
 .parners_page .partner_logo { color: rgba(0,0,0,0); height: 60px; margin-bottom:3px; background: url(blank) no-repeat bottom left; }
 .parners_page .partner_logo a { color: rgba(0,0,0,0); display:block; height:100%; width:100%; }
@@ -117,7 +120,15 @@ h3.tagline { font-size:4.5em; line-height:1; color:#0c799a; font-family: 'Conv_L
 
 /*-------------------------------------------------------MEDIA-------------------------------------------------------*/
 .media_page .read-more { font-size:.75em; margin-top: 10px; color: #0c799a; text-transform:uppercase; display: block; }
+.media_page article { margin-bottom: 20px; }
+.media_page h3.big_news_headline { font-size:2em; line-height:1; color:#0c799a; font-family: 'Conv_Lato-Black'; *font-family:"Lato Black"; text-transform:uppercase; padding:3px 0px 5px 0px; overflow:hidden; }
+.media_page #other_news a { display: block; margin-bottom: 10px; color: inherit; }
+.media_page #other_news h4 { }
+.media_page #other_news .source { color: #0c799a; font-size:.75em; }
 
+/*-------------------------------------------------------MEDIA-------------------------------------------------------*/
+.article_page h3 { font-size:2em; line-height:1; color:#0c799a; font-family: 'Conv_Lato-Black'; *font-family:"Lato Black"; text-transform:uppercase; padding:3px 0px 5px 0px; overflow:hidden; }
+.article_page p { margin-bottom: 10px; }
 
 /*-------------------------------------------------------FOOTER-------------------------------------------------------*/
 #quotes { border-top: solid 2px #0c799a; padding-bottom:23px; margin-top: 30px; }
