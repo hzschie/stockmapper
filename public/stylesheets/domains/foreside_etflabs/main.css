@@ -88,6 +88,7 @@ h1,h2,h3,h4,h5,h6{ padding:0px; margin:0px; font-weight:normal;}
 
 /*-------------------------------------------------------PARTNERS-------------------------------------------------------*/
 .parners_page .partner_logo { color: rgba(0,0,0,0); height: 60px; margin-bottom:3px; background: url(blank) no-repeat bottom left; }
+.parners_page .partner_logo a { color: rgba(0,0,0,0); display:block; height:100%; width:100%; }
 .parners_page .foreside .partner_logo { background-image: url(/images/domains/foreside/foreside_partner_logo.png) }
 .parners_page .two-n .partner_logo { background-image: url(/images/domains/foreside/2n_partner_logo.png) }
 .parners_page .ise .partner_logo { background-image: url(/images/domains/foreside/ise_partner_logo.png) }
