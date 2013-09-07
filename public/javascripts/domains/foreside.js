@@ -109,7 +109,7 @@
             .appendTo(
               $('<div class="groups"></div>')
                 .appendTo('.chart')
-                .css('top', 540)
+                .css('top', 495)
             )
             .show();
         }, Interval.FREE_TIME
@@ -207,7 +207,7 @@
         $('#' + selected.get('domName')).addClass('selected');
         
         if(selected == composite) {
-          $title.text(group.get('name').toUpperCase());
+          $title.text('');
         }
         else {
           $title.text(group.get('name'));

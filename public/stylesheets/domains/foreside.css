@@ -56,13 +56,13 @@ body:not(.tablet) .wrapper {
 }
 
 .map .title.etf_composite:after {
-  background:transparent url('/images/domains/foreside/sprites.png') no-repeat scroll -9px -320px;
-  width:35px;
-  height:21px;
+  background:transparent url('/images/domains/foreside/sprites.png') no-repeat scroll -10px -319px;
+  width:110px;
+  height:30px;
   content:'';
   display:block;
   position:absolute;
-  top:2px;
+  top:-2px;
   left:0;
 }
 .panel .sorts {
@@ -330,11 +330,11 @@ body:not(.tablet) .wrapper {
   float:left;
 }
 #etf_composite .name {
-  height:46px;
-  width:220px;
-  margin-top:20px;
+  height:53px;
+  width:190px;
+  margin-top:10px;
   margin-left:8px;
-  background: transparent url('/images/domains/foreside/sprites.png') no-repeat scroll -9px -269px;
+  background: transparent url('/images/domains/foreside/sprites.png') no-repeat scroll -10px -264px;
 }
 .panel.collapsed #etf_composite .name {
   margin-top:12px;
@@ -345,7 +345,7 @@ body:not(.tablet) .wrapper {
 }
 #etf_composite .micro.graph {
   float:left;
-  margin-top: 16px;
+  margin-top: 23px;
   width:216px;
   height:88px;
 }
@@ -416,6 +416,6 @@ body:not(.tablet) .wrapper {
   color:#ddf;
 }
 .foreside_credit img {
-  margin-bottom:-1px;
-  margin-left:5px;
+  margin-bottom:-9px;
+  margin-left:3px;
 }
