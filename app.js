@@ -67,8 +67,8 @@ var groups, stocks;
 if(/true/i.test(process.env.DYNAMIC)) {
   var definitions = require('./build_definitions');
   definitions.on('update', function(data) {
-    groups = JSON.stringify(data.groups);
-    stocks = JSON.stringify(data.stocks);
+    app.groups = JSON.stringify(data.groups);
+    app.stocks = JSON.stringify(data.stocks);
   });
   definitions.update();
   
@@ -76,8 +76,8 @@ if(/true/i.test(process.env.DYNAMIC)) {
   app.get('/refresh/definitions', definitions.update);
 }
 else {
-  groups = fs.readFileSync(__dirname + '/public/data/' + dataDomain + '/groups.json', 'utf8');
-  stocks = fs.readFileSync(__dirname + '/public/data/' + dataDomain + '/stocks.json', 'utf8');
+  app.groups = groups = fs.readFileSync(__dirname + '/public/data/' + dataDomain + '/groups.json', 'utf8');
+  app.stocks = stocks = fs.readFileSync(__dirname + '/public/data/' + dataDomain + '/stocks.json', 'utf8');
 }
 
 // ROUTES

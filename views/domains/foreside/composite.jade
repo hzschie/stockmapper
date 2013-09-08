@@ -68,8 +68,10 @@ block body_content
             li(style='background: #ff9595;', data-id='VWO') VWO
             li(style='background: #ffaaaa;', data-id='FXI') FXI
 
-      .main.etfcomp_quote
+      .main.etf_composite.product_quote
         img(src="/images/domains/foreside/etfcomp_quote_logo.png")
         .quote
-          h2.price 1,024.15
-          h3.change.up +7.99 (+0.97%)
+          h2.price
+          h3.change
+            span.amount
+            span.percent

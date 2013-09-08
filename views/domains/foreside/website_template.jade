@@ -8,6 +8,25 @@ head
 
   link(rel="stylesheet", type="text/css", href="/stylesheets/domains/foreside_etflabs/main.css")
   script(type='text/javascript', src='/javascripts/lib/jquery-1.7.2.min.js')
+  
+  script(type='text/javascript', src='/javascripts/lib/underscore-min.js');
+  script(type='text/javascript', src='/javascripts/lib/backbone-min.js');
+  script(type='text/javascript', src='/javascripts/lib/d3.v2.min.js');
+  
+  script(type='text/javascript')
+    mapper = {
+      config: {}
+    };
+    mapper.groupsJson = !{groups};
+    mapper.stocksJson = !{stocks};
+
+  script(type='text/javascript', src='/javascripts/domains/foreside.js');
+  script(type='text/javascript', src='/javascripts/interval.js');
+  script(type='text/javascript', src='/javascripts/utils.js');
+  script(type='text/javascript', src='/javascripts/stocks.js');
+  script(type='text/javascript', src='/javascripts/init_data.js');
+  script(type='text/javascript', src='/javascripts/models/behaviors.js');
+
 body
   block nav_header
     include header

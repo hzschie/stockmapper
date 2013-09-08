@@ -139,9 +139,9 @@ h3.tagline { font-size:4.5em; line-height:1; color:#0c799a; font-family: 'Conv_L
 
 .quote { margin-left: 10px; text-align: right; }
 .quote .price { font-size:1.5em; line-height: .8; }
-.quote .change { font-size:0.875em; line-height: .8; padding-top: .65em; margin-top: 0; }
-.quote .change.up { color: #060; }
-.quote .change.down { color: #900; }
+.quote .change { font-size:0.875em; line-height: .8; padding-top: .65em; margin-top: 0; color: #0c799a; }
+.quote .change.green { color: #060; }
+.quote .change.red { color: #900; }
 
 /*-------------------------------------------------------LOGIN-------------------------------------------------------*/
 .login_page { position: relative; }
