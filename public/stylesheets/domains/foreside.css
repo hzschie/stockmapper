@@ -56,7 +56,7 @@ body:not(.tablet) .wrapper {
 }
 
 .map .title.etf_composite:after {
-  background:transparent url('/images/domains/foreside/sprites.png') no-repeat scroll -10px -319px;
+  background:transparent url('/images/domains/foreside/sprites.png') no-repeat scroll -10px -339px;
   width:110px;
   height:30px;
   content:'';
@@ -170,8 +170,12 @@ body:not(.tablet) .wrapper {
   position:relative;
   margin-top:-30px;
 }
+.product-groups {
+  margin: 0 !important;
+  padding-bottom: 10px !important;
+}
 .groups .products .group {
-  width:33.3333%;
+  width:25%;
 }
 .groups .products .group .box {
   height:70px;
@@ -183,20 +187,23 @@ body:not(.tablet) .wrapper {
 
 .groups .products .group .box .name {
   background: transparent url('/images/domains/foreside/sprites.png') no-repeat scroll;
-  height:32px;
-  margin:4px 0 0 15px;
+  height:43px;
+  margin:4px 0 0 10px;
 }
 .groups .products .group .box .quote {
-  margin:9px 0 0 15px;
+  margin:0 0 0 10px;
 }
 #etf_50 .name {
-  background-position: -10px -350px;
+  background-position: -10px -375px;
 }
-#etf_25ne .name {
-  background-position: -10px -390px;
+#etf_50ne .name {
+  background-position: -10px -463px;
 }
 #etf_25e .name {
-  background-position: -10px -430px;
+  background-position: -10px -419px;
+}
+#etf_25ne .name {
+  background-position: -10px -507px;
 }
 
 
@@ -244,6 +251,10 @@ body:not(.tablet) .wrapper {
   color:#fff;
   font-size:18px;
   margin-right:8px;
+}
+.group .box .last_trade.coming_soon {
+  color: #8ac;
+  font-size:14px;
 }
 .group .box .change {
   display:none;
@@ -334,20 +345,16 @@ body:not(.tablet) .wrapper {
 #etf_composite .name {
   height:53px;
   width:190px;
-  margin-top:10px;
+  margin-top:8px;
   margin-left:8px;
-  background: transparent url('/images/domains/foreside/sprites.png') no-repeat scroll -10px -264px;
+  background: transparent url('/images/domains/foreside/sprites.png') no-repeat scroll -10px -284px;
 }
-.panel.collapsed #etf_composite .name {
-  margin-top:12px;
-}
-
 #etf_composite .box {
   margin-left:5px;
 }
 #etf_composite .micro.graph {
   float:left;
-  margin-top: 23px;
+  margin-top: 24px;
   width:216px;
   height:88px;
 }

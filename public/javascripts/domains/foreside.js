@@ -107,7 +107,7 @@
         function() {
           $('.products', $groups)
             .appendTo(
-              $('<div class="groups"></div>')
+              $('<div class="product-groups groups"></div>')
                 .insertAfter('.chart')
                 // .appendTo('.chart')
                 // .css('top', 495)
