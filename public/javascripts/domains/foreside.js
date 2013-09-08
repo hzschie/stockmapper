@@ -119,6 +119,7 @@
 
     var allEtfs = groups.get('all_etfs'),
         composite = groups.get('^ETFCOMP'),
+        etf50 = groups.get('^ETFF'),
         selected = null,// the selected group
         Template = mapper.Template,
         timezone = mapper.config.marketHours.timezone,
@@ -142,6 +143,8 @@
             { $:'.high', field:'high', formatter:Template.priceFormat },
             { $:'.low', field:'low', formatter:Template.priceFormat }
           ]
+          // product: [
+          
         },
         
         template = new mapper.Template(bindings),
@@ -153,8 +156,10 @@
 
     allEtfs.on('change', updateGroup);
     composite.on('change', updateGroup);
+    etf50.on('change', updateProduct);
     updateGroup(allEtfs, true);
     updateGroup(composite, true);
+    updateProduct(etf50, true);
     
     composite.acquireTimeSeries('intraday', function(series) { micrograph.setTimeSeries(series); });
     
@@ -191,6 +196,11 @@
           map.setModels(group.get(pick));
         }
       });
+    }
+    
+    function updateProduct(product, force) {
+      var $product = $('#' + product.get('domName'));
+      template.applyBindings('^ETFCOMP', $product, product);
     }
     
     function countWithPct(count, total) {

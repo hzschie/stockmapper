@@ -11,6 +11,10 @@ body {
   font:12px/13px "Helvetica", "Arial", sans-serif;
 }
 
+.chart {
+  margin-bottom: -70px;
+}
+
 .periods.selector {
   display:none;
 }
