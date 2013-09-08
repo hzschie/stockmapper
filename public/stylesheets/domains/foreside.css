@@ -78,7 +78,9 @@ body:not(.tablet) .wrapper {
   position:relative;
   padding: 0 10px;
 }
-
+.groups {
+  margin-bottom: 0;
+}
 .panel .groups {
   margin:10px 0 0 0;
 }
@@ -166,7 +168,7 @@ body:not(.tablet) .wrapper {
 .groups .products {
   display:block;
   position:relative;
-  margin-top:10px;
+  margin-top:-30px;
 }
 .groups .products .group {
   width:33.3333%;

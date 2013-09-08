@@ -108,8 +108,9 @@
           $('.products', $groups)
             .appendTo(
               $('<div class="groups"></div>')
-                .appendTo('.chart')
-                .css('top', 495)
+                .insertAfter('.chart')
+                // .appendTo('.chart')
+                // .css('top', 495)
             )
             .show();
         }, Interval.FREE_TIME
