@@ -1,0 +1,45 @@
+extends website_template
+
+block header_content
+  title ETF 50
+  link(rel="stylesheet", type="text/css", href="/stylesheets/map.css")
+  
+block body_content
+  .no-masthead &nbsp;
+  .main_content.composite_page.product_page
+    h1 ETF 50
+    p The ISE ETF 50™ Index has been created to provide investors with a product allowing them to track US ETFs.  The ISE ETF 50™ Index quantitatively ranks ETFs by fees, volatility and performance and selects the top 25 equity-focused funds and the top 25 non-equity focused funds. The Index uses an equal weighted allocation across the constituents. Index components are reviewed quarterly for eligibility, and the weights are re-set according to that distribution.
+
+    h3 Component Eligibility Requirements
+
+    ol
+      li US Exchange listed ETFs
+        span.comment Includes 40 Act and 33 Act products 
+      li No levered products – no products tracking multiple of index daily returns
+        span.comment Avoids path dependent index tracking problems
+      li No ETNs
+        span.comment Avoids issuer credit risk
+      li ETF assets > $100 Million
+      li ETF daily value traded > $1 Million
+        span.comment Only large and liquid ETFs
+      li Weight distribution limits
+      li Top 50 after ranking equally by three criteria:
+      li Fees 
+      li Volatility over the last quarter
+      li Total return performance over the last quarter
+      li Equal-weighted portfolio
+        span.comment Reduces concentration in any particular ETF
+      li Rebalanced quarterly
+      li Reconstituted quarterly
+        span.comment All selection criteria applied each quarter
+      li No fund tracking this ISE index methodology may be included in the Top 50
+
+
+    br
+    a.view-on(href="#") View on Bloomberg:&nbsp;
+      strong ETFF
+    a.view-on(href="#") View on Yahoo Finance:&nbsp;
+      strong ^ETFF
+
+    br
+    include deep_quote

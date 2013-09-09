@@ -107,6 +107,8 @@ h3.tagline { font-size:4.5em; line-height:1; color:#0c799a; font-family: 'Conv_L
 .product_page h1 { font-size:2.5em; line-height:1; color:#0c799a; font-family: 'Conv_Lato-Black'; *font-family:"Lato Black"; text-transform:uppercase; padding:3px 0px 5px 0px; overflow:hidden; }
 .product_page ol { font-size: .875em; }
 .product_page ol li { padding: 3px 0; }
+.product_page ol li .comment { color: #0c799a; font-sizeX: .8em; }
+.product_page ol li .comment:before { content: ' – '; }
 .product_page h3 { margin-top: 25px; }
 .product_page .view-on { display: block; color:#0c799a; padding:3px 0;}
 

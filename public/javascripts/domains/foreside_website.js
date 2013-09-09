@@ -23,15 +23,24 @@ mapper.dataReady = function() {
           { $:'.price', field:'lastTrade', formatter:Template.priceFormat },
           { $:'.change', field:'changeDir', formatter:Template.makeRedOrGreen },
           { $:'.change .amount', field:'change', formatter:Template.postfix(Template.changeFormat, '&nbsp;(') },
-          { $:'.change .percent', field:'changePct', formatter:Template.postfix(Template.changeFormat, '%)') }
+          { $:'.change .percent', field:'changePct', formatter:Template.postfix(Template.changeFormat, '%)') },
+          { $:'img', field:'domName', formatter:function(val, $img) {
+            $img.attr('src', "/images/domains/foreside/" + val + "_quote_logo.png"); }
+          }
         ]
       });
   
   function updateProducts() {
-    _.each(['^ETFCOMP', '^ETFF'], function(sym) {
-      var product = mapper.groups.get(sym);
-      var $product = $('.product_quote.' + product.get('domName'));
-      template.applyBindings('product', $product, product);
+    var $products = $('.product_quote'),
+        symbols = null;
+        
+    if (window.currentPage == 'composite') { symbols = ['^ETFCOMP']; }
+    else if (window.currentPage == 'etf50') { symbols = ['^ETFF']; }
+    else if (window.currentPage == 'etf25') { symbols = ['^ETF25']; }
+    else { symbols = ['^ETFCOMP', '^ETFF']; }
+    
+    _.each(symbols, function(sym, i) {
+      template.applyBindings('product', $products.eq(i), mapper.groups.get(sym));
     });
   }
   setInterval(updateProducts, 60000);
