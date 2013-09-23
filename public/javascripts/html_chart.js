@@ -71,7 +71,7 @@
         $bar.css({ visibility:'visible' });
         $bar.mouseover(function(e) {
           var barTop = $bar.offset().top,
-              isVol = e.pageY - barTop > chgMaxH;
+              isVol = e.pageY - barTop >= chgMaxH;
           _this.trigger('inspect_bar', model, isVol ? $volBar : $chgBar, isVol, barTop + (isVol ? chgMaxH + 1 + volMaxH - 80 : -40) );
         });
         $bar.click(function() {
