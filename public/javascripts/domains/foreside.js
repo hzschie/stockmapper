@@ -1,4 +1,48 @@
 (function() {
+  
+  var navBar;
+  var pager;
+  $(document).ready(function() {
+    var NavBar = Backbone.View.extend({
+      events: {
+        "click a": "link_clicked"
+      },
+      initialize: function() {
+        var $haveSubmenus = this.$('.has-submenu');
+        $haveSubmenus.hover(
+          function() { $(this).find('.submenu').show(); },
+          function() { $(this).find('.submenu').hide(); }
+        );
+      },
+      link_clicked: function(e) {
+        if(!e.metaKey) {
+          e.preventDefault();
+          var href = $(e.target).attr('href') || $(e.target).parent().attr('href');
+          this.trigger('link_clicked', href);
+        }
+      }
+    });
+    var Pager = Backbone.View.extend({
+      initialize: function() {
+        this.$current = null;
+      },
+      setPage: function(id) {
+        if(this.$current) {
+          if(this.$current.data('url') == id) { return; }
+          this.$current.slideUp();
+        }
+        this.$current = this.$('.page[data-url="' + id + '"]');
+        this.$current.slideDown();
+      }
+    });
+    navBar = new NavBar({ el: '#header' });
+    pager = new Pager({ el: '.website > .inner' });
+    $('[data-url="' + window.location.pathname + '"]').show();
+    // pager.setPage(window.location.pathname);
+  });
+
+
+  
   /* Mapping of Array positions to attributes that get applied to instances of Stock on data updates */
   mapper.config.getStockUpdateFields = function() {
     var numeric = mapper.MapperModel.numeric,
@@ -44,8 +88,14 @@
       picksMaps = {};// Mapping of pick – per group – to map instances
   
   mapper.config.init = function() {
+    navBar.on('link_clicked', function(href) {
+      pager.setPage(href);
+      surface.viewState.setState({}, href);
+    });
+    
     surface = mapper.Surface.init();
     surface.onUpdateView = function(force, viewState) {
+      pager.setPage(viewState.urlBase);
       if(viewState.hasChanged('searchStock') || viewState.hasChanged('currentStock') || force) {
         var stock = viewState.get('searchStock') || viewState.get('currentStock') || null;
         for(var key in picksMaps) {
@@ -59,12 +109,6 @@
   };
   
   mapper.config.getGroupsView = function(groups, $groups, $title) {
-    var $haveSubmenus = $('.has-submenu');
-    $haveSubmenus.hover(
-      function() { $(this).find('.submenu').show(); },
-      function() { $(this).find('.submenu').hide(); }
-    );
-
     setTimeout(function() {
       Interval.callOnce(
         function() {

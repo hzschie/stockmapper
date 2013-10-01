@@ -25,7 +25,7 @@ body {
 }
 
 /*.layout, .panel .groups, #stock_details .inner, #header .inner {*/
-.layout, .panel .inner, #stock_details .inner, #header .inner, #website .inner {
+.layout, .panel .inner, #stock_details .inner, #header .inner, .website .inner {
   max-width:1172px;
   padding: 0 10px;
   margin:0 auto;
@@ -437,23 +437,39 @@ body:not(.tablet) .wrapper {
   margin-left:3px;
 }
 
+.layout { margin-top: 0 !important; }
 /*-------------------------------------------------------"WEBSITE"-------------------------------------------------------*/
 
 .page, .clearfix { zoom:1; }
 .page:after, .clearfix:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
 a{ text-decoration:none;}
 
-#website { position: relative; z-index: 3; color:#cee4eb; background:#203543; line-height: 1.66; }
-#website .page { padding-top: 40px; padding-bottom: 40px; }
+.website { position: relative; z-index: 3; color:#cee4eb; background:#203543; line-height: 1.66; }
+.website .page { display:none; padding-top: 40px; padding-bottom: 40px; }
+.website a { cursor: pointer; color: #289BBB;/*#00789a*/ }
 /*-------------------------------------------------------PARTNERS-------------------------------------------------------*/
-.partner.page .partner_logo { color: rgba(0,0,0,0); height: 60px; margin-bottom:3px; background: url(blank) no-repeat bottom left; }
+.partner.page .partner_logo { color: rgba(0,0,0,0); height: 60px; margin-bottom:3px; background: url(blank) no-repeat top left; }
 .partner.page .partner_logo a { color: rgba(0,0,0,0); display:block; height:100%; width:100%; }
-.partner.page h3 { text-transform: uppercase; padding-top:3px; }
-.partner.page .site_link { color: #00789a; text-decoration: underline; }
-.partner.page.foreside .partner_logo { height: 50px; margin-left:-3px; background-image: url(/images/domains/foreside/foreside_partner_logo.png) }
+.partner.page h3 { font-size:1em; color: inherit; text-transform: uppercase; padding-top:3px; }
+.partner.page .site_link { text-decoration: underline; display: block; }
+.partner.page.foreside .partner_logo { margin-left:-3px; background-image: url(/images/domains/foreside/foreside_partner_logo.png) }
 .partner.page.two-n .partner_logo { background-image: url(/images/domains/foreside/2n_partner_logo.png) }
 .partner.page.ise .partner_logo { background-image: url(/images/domains/foreside/ise_partner_logo.png) }
-.partner.page.kl_gates .partner_logo { height: 35px; background-image: url(/images/domains/foreside/kl_partner_logo.png) }
+.partner.page.klgates .partner_logo { background-image: url(/images/domains/foreside/kl_partner_logo.png) }
+/*-------------------------------------------------------PRODUCTS-------------------------------------------------------*/
+.product.page ol { font-size:1.16em; }
+.product.page ol li { list-style-type: decimal; list-style-position: inside; }
+.product.page ol li .comment { color: #0c799a; }
+.product.page ol li .comment:before { content: ' – '; }
+.product.page .product_logo { display: block; margin-bottom: 20px; }
+.product.page .product_link { display: block; }
+.product.page .document_link { }
+.product.page .document_link img { opacity: .75; margin-top:20px; }
+.product.page .document_link .product_link { text-decoration: underline; display: block; }
+
+.media.page h3 { font-size:2em; line-height:1; color:inherit; text-transform:uppercase; padding:3px 0px 0px 0px; overflow:hidden; }
+.media.page .read-more { text-transform:uppercase; text-decoration:underline; margin-top: -10px; display: block; margin-bottom: 20px; }
+.media.page h3.market-news { font-size: 1.2em; }
 
 /*-------------------------------------------------------HEADER-------------------------------------------------------*/
 #header{
@@ -482,6 +498,8 @@ a{ text-decoration:none;}
 #nav .submenu a { display: block; }
 #nav .submenu a:hover { color: #fff; }
 /*-------------------------------------------------------PAGE-------------------------------------------------------*/
-.page .col, .page .col2 { float: left; }
-.page .col { width: 33%; }
+.page .col1, .page .col2 { float: left; }
+.page .col1 { width: 33%; }
 .page .col2 { width: 66%; }
+.page h3 { font-size: 2em; line-height: 1; padding-top:.5em; padding-bottom:5px; text-transform: uppercaseX; color: #0c799a; }
+.page p { padding-bottom: 10px; }

@@ -19,11 +19,13 @@ var ViewState = mapper.ViewState = Backbone.Model.extend(
       })(window);
     },
     
-    setState: function(hash) {
+    setState: function(hash, urlBase) {
+      if(urlBase) { this.urlBase = urlBase; }
       History.pushState(null, null, this.urlBase + '?' + this.toParamsString(hash));
     },
     
     fromUrl: function(url, force) {
+      this.urlBase = window.location.pathname;// '/' or '/mapper'
       var matches = url.match(/\?(.*)$/),
           paramsString = matches && matches[1] || null,
           params = paramsString && paramsString.split('&'),
@@ -70,6 +72,7 @@ var ViewState = mapper.ViewState = Backbone.Model.extend(
           }
         }
       }
+      newAttribs.urlBase = this.urlBase;
       this.set(newAttribs);
     },
     
