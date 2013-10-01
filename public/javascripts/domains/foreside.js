@@ -33,6 +33,7 @@
         }
         this.$current = this.$('.page[data-url="' + id + '"]');
         this.$current.slideDown();
+        $(window).scrollTop(0);
       }
     });
     navBar = new NavBar({ el: '#header' });
@@ -90,7 +91,11 @@
   mapper.config.init = function() {
     navBar.on('link_clicked', function(href) {
       pager.setPage(href);
-      surface.viewState.setState({}, href);
+      var params = {};
+      if(href == "/products/etfcomposite") {
+        params.filter = "etf+composite";
+      }
+      surface.viewState.setState(params, href);
     });
     
     surface = mapper.Surface.init();
