@@ -1,34 +1,42 @@
 header#header.clearfix
-  .logo
-    a(href='/')
-      img(src='/images/domains/foreside/etflabs_logo.png', alt='')
-  .social
-    a(href='#')
-      img(src='/images/domains/foreside/s1.png', alt='')
-    a(href='#')
-      img(src='/images/domains/foreside/s2.png', alt='')
-    a(href='#')
-      img(src='/images/domains/foreside/s3.png', alt='')
-  nav#nav
-    ul#menu_bar
-      li
-        a(href='/partners.html', data-id="partners") Partners
-      li#products
-        a(href='#') Products
-        ul#products_submenu(style="display:none;")
-          li
-            a(href='/composite.html', data-id="composite") ETF Composite
-          li
-            a(href='/etf50.html', data-id="etf50") ETF50
-          li
-            a(href='/etf25.html', data-id="etf25") ETF25 Equity
-          li
-            a(href='/etf25ne.html', data-id="etf25ne") ETF25 Non Equity
-          li
-            a(href='/etfmapper.html', data-id="etfmapper") ETF Mapper
-      li
-        a(href='/media.html', data-id="media") Media
-      li
-        a(href='/mapper', target="_blank") Mapper
-      li
-        a(href='/stats.html', data-id="stats") Stats
+  .inner
+    .logo
+      a(href='/')
+        img(src='/images/domains/foreside/etflabs_header_logo.png', alt='')
+    .social
+      a(href='#')
+        img(src='/images/domains/foreside/s1.png', alt='')
+      a(href='#')
+        img(src='/images/domains/foreside/s2.png', alt='')
+      a(href='#')
+        img(src='/images/domains/foreside/s3.png', alt='')
+    nav#nav
+      ul#menu_bar
+        li#partners.has-submenu
+          a(href='#', data-id="partners") Partners
+          ul#partners_submenu.submenu(style="display:none;")
+            li
+              a(href='/composite.html', data-id="composite") Foreside
+            li
+              a(href='/etf50.html', data-id="etf50") ISE
+            li
+              a(href='/etf25.html', data-id="etf25") State Street
+            li
+              a(href='/etf25ne.html', data-id="etf25ne") K&L Gates
+            li
+              a(href='/etfmapper.html', data-id="etfmapper") 2N
+        li#products.has-submenu
+          a(href='#') Products
+          ul#products_submenu.submenu(style="display:none;")
+            li
+              a(href='/composite.html', data-id="composite") ETF Composite
+            li
+              a(href='/etf50.html', data-id="etf50") ETF50
+            li
+              a(href='/etf25.html', data-id="etf25") ETF25 Equity
+            li
+              a(href='/etf25ne.html', data-id="etf25ne") ETF25 Non Equity
+            li
+              a(href='/etfmapper.html', data-id="etfmapper") ETF Mapper
+        li
+          a(href='/media.html', data-id="media") News

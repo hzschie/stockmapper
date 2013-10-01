@@ -9,6 +9,7 @@ body {
   background: linear-gradient(to bottom, #376279 0%,#203a4b 51%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#376279', endColorstr='#203a4b',GradientType=0 ); /* IE6-9 */
   font:12px/13px "Helvetica", "Arial", sans-serif;
+  padding: 0 !important;
 }
 
 .chart {
@@ -23,8 +24,10 @@ body {
   background-color:#006;
 }
 
-.wrapper, .panel .inner, #stock_details .inner {
+/*.layout, .panel .groups, #stock_details .inner, #header .inner {*/
+.layout, .panel .inner, #stock_details .inner, #header .inner, #website .inner {
   max-width:1172px;
+  padding: 0 10px;
   margin:0 auto;
 }
 body:not(.tablet) .wrapper {
@@ -76,17 +79,18 @@ body:not(.tablet) .wrapper {
 .panel {
   background:#203543;/* Fallback color */
   background:rgba(29,54,70,0.95);
+  position: relative;
 }
 
 .panel .inner {
   position:relative;
-  padding: 0 10px;
+  padding: 0;
 }
 .groups {
   margin-bottom: 0;
 }
 .panel .groups {
-  margin:10px 0 0 0;
+  padding-top:10px;
 }
 .groups:before {
   background:#203543;/* Fallback color */
@@ -432,3 +436,52 @@ body:not(.tablet) .wrapper {
   margin-bottom:-9px;
   margin-left:3px;
 }
+
+/*-------------------------------------------------------"WEBSITE"-------------------------------------------------------*/
+
+.page, .clearfix { zoom:1; }
+.page:after, .clearfix:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
+a{ text-decoration:none;}
+
+#website { position: relative; z-index: 3; color:#cee4eb; background:#203543; line-height: 1.66; }
+#website .page { padding-top: 40px; padding-bottom: 40px; }
+/*-------------------------------------------------------PARTNERS-------------------------------------------------------*/
+.partner.page .partner_logo { color: rgba(0,0,0,0); height: 60px; margin-bottom:3px; background: url(blank) no-repeat bottom left; }
+.partner.page .partner_logo a { color: rgba(0,0,0,0); display:block; height:100%; width:100%; }
+.partner.page h3 { text-transform: uppercase; padding-top:3px; }
+.partner.page .site_link { color: #00789a; text-decoration: underline; }
+.partner.page.foreside .partner_logo { height: 50px; margin-left:-3px; background-image: url(/images/domains/foreside/foreside_partner_logo.png) }
+.partner.page.two-n .partner_logo { background-image: url(/images/domains/foreside/2n_partner_logo.png) }
+.partner.page.ise .partner_logo { background-image: url(/images/domains/foreside/ise_partner_logo.png) }
+.partner.page.kl_gates .partner_logo { height: 35px; background-image: url(/images/domains/foreside/kl_partner_logo.png) }
+
+/*-------------------------------------------------------HEADER-------------------------------------------------------*/
+#header{
+  -moz-box-shadow: 0px 4px 8px rgba(0,0,0,.75);
+  -webkit-box-shadow: 0px 4px 8px rgba(0,0,0,.75);
+  box-shadow: 0px 4px 8px rgba(0,0,0,.75);
+}
+.logo { float:left; padding:15px 0px 13px 0; overflow:hidden;}
+#nav { float:left; padding:15px 0px 0px 12px; /*font-weight:bold; */font-size:20px; }
+#nav ul{ padding:0px; margin:0px;}
+#nav ul li{ float:left; display:inline; padding:0px 15px; text-transform:uppercase; line-height:1; padding-top:5px; padding-bottom:3px; }
+#nav ul li a { color:#cee4eb; display:inline-block;}
+#nav ul li a.selected { color: #fff; }
+#nav > ul > li > a:hover{ border-bottom:solid 2px #cee4eb; overflow:hidden; color:#fff; margin-bottom:-2px;}
+#nav > ul > li > a.selected { border-bottom:solid 2px #fff; }
+.social{ float:right; padding:10px 0 0px 0px;}
+.social img{ float:left; padding-left:16px;}
+
+#nav .submenu { position: absolute; background:#203543; border: 1px solid #0b7999; 
+  -moz-box-shadow: 1px 1px 6px rgba(0,0,0,1);
+  -webkit-box-shadow: 1px 1px 6px rgba(0,0,0,1);
+  box-shadow: 1px 1px 6px rgba(0,0,0,1);
+}
+#nav .submenu li { float: none; display: block; font-size: .6em; line-height: 1; padding: 5px 10px; position: relative; border-bottom: 1px dotted #0b7999; }
+#nav .submenu li:last-child { border-bottom: none; }
+#nav .submenu a { display: block; }
+#nav .submenu a:hover { color: #fff; }
+/*-------------------------------------------------------PAGE-------------------------------------------------------*/
+.page .col, .page .col2 { float: left; }
+.page .col { width: 33%; }
+.page .col2 { width: 66%; }

@@ -44,31 +44,6 @@
       picksMaps = {};// Mapping of pick – per group – to map instances
   
   mapper.config.init = function() {
-    var ticker = mapper.NewsTicker($('.latest_news')),
-        composite = mapper.groups.get('^ETFCOMP');
-        
-    composite.on('change:active', function(group) {
-      var syms = $.map(group.get('active'), function(model){ return model.get('sym'); }),
-          news = [],
-          numDone = 0,
-          numExpected = 0,
-          step = 4;
-      for(var i = 0; i < syms.length; i += step) {
-        numExpected++;
-        $.getJSON(
-          '/news/' + syms.slice(i, i+step).join(),
-          function(data) {
-            news = news.concat(data);
-            numDone++;
-            if(numDone == numExpected) {
-              news.sort(function(a,b) { return (a.t < b.t) - (a.t > b.t); });
-              ticker.setHeadlines(news);
-            }
-          }
-        );
-      }
-    });
-    
     surface = mapper.Surface.init();
     surface.onUpdateView = function(force, viewState) {
       if(viewState.hasChanged('searchStock') || viewState.hasChanged('currentStock') || force) {
@@ -84,24 +59,12 @@
   };
   
   mapper.config.getGroupsView = function(groups, $groups, $title) {
-    if(!mapper.isTablet) {
-      var $panel = $('.wrapper > .panel'),
-          $window = $(window);
-      $window.scroll(function() {
-        var scrollTop = $window.scrollTop();
-        if(scrollTop > 160 && !$panel.hasClass('collapsed')) {
-          $panel
-            .addClass('collapsed')
-            .css({ 'margin-top':0 });
-        }
-        else if(scrollTop < 160) {
-          $panel
-            .removeClass('collapsed')
-            .css({ 'margin-top': Math.min(0, -scrollTop) });
-        }
-      });
-    }
-    
+    var $haveSubmenus = $('.has-submenu');
+    $haveSubmenus.hover(
+      function() { $(this).find('.submenu').show(); },
+      function() { $(this).find('.submenu').hide(); }
+    );
+
     setTimeout(function() {
       Interval.callOnce(
         function() {
