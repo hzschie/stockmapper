@@ -458,6 +458,7 @@ a{ text-decoration:none;}
 .partner.page.two-n .partner_logo { background-image: url(/images/domains/foreside/2n_partner_logo.png) }
 .partner.page.ise .partner_logo { background-image: url(/images/domains/foreside/ise_partner_logo.png) }
 .partner.page.klgates .partner_logo { background-image: url(/images/domains/foreside/kl_partner_logo.png) }
+.partner.page.statestreet .partner_logo { background-image: url(/images/domains/foreside/statestreet_partner_logo.png) }
 /*-------------------------------------------------------PRODUCTS-------------------------------------------------------*/
 .product.page ol { font-size:1.16em; }
 .product.page ol li { list-style-type: decimal; list-style-position: inside; }
