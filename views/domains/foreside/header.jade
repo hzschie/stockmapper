@@ -13,6 +13,15 @@ header#header.clearfix
     nav#nav
       ul#menu_bar
         li#partners.has-submenu
+          a(data-id="partners") About
+          ul#partners_submenu.submenu(style="display:none;")
+            li
+              a(href='/about/us') About Us
+            li
+              a(href='/comingsoon') Mission Statement
+            li
+              a(href='/about/contact') Concat Us
+        li#partners.has-submenu
           a(data-id="partners") Partners
           ul#partners_submenu.submenu(style="display:none;")
             li

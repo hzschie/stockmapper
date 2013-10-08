@@ -474,7 +474,10 @@ a{ text-decoration:none;}
 .media.page h3 { font-size:2em; line-height:1; color:inherit; text-transform:uppercase; padding:3px 0px 0px 0px; overflow:hidden; }
 .media.page .read-more { text-transform:uppercase; text-decoration:underline; margin-top: -10px; display: block; margin-bottom: 20px; }
 .media.page h3.market-news { font-size: 1.2em; }
-
+/*-------------------------------------------------------ABOUT-------------------------------------------------------*/
+.about.page .etflabs_logo { color: rgba(0,0,0,0); height: 60px; margin-bottom:3px; background: url(/images/domains/foreside/etflabs_logo.png) no-repeat top left; }
+.about.page.contact p, .about.page.contact h3 { padding: 0;}
+.about.page.contact h4 { padding-bottom: 5px; }
 /*-------------------------------------------------------HEADER-------------------------------------------------------*/
 #header{
   -moz-box-shadow: 0px 4px 8px rgba(0,0,0,.75);
