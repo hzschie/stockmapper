@@ -59,10 +59,10 @@ body:not(.tablet) .wrapper {
   padding-left:30px;
 }
 
-.panel.collapsed .latest_news {
+/*.panel.collapsed .latest_news {
   display:none;
 }
-
+*/
 .map .title.etf_composite:after {
   background:transparent url('/images/domains/foreside/sprites.png') no-repeat scroll -10px -339px;
   width:110px;
@@ -398,7 +398,7 @@ body:not(.tablet) .wrapper {
 }
 
 
-.latest_news {
+/*.latest_news {
   line-height:40px;
   height:40px;
   border:1px solid #26465c;
@@ -423,7 +423,7 @@ body:not(.tablet) .wrapper {
 .latest_news.ticker .news {
   display:block;
   margin-left:70px;
-}
+}*/
 
 
 .foreside_credit {
@@ -487,7 +487,7 @@ a{ text-decoration:none;}
   background:#203543;
   z-index: 4;
 }
-.logo { float:left; padding:15px 0px 13px 0; overflow:hidden;}
+.logo { float:left; padding:15px 0px 13px 0; overflow:hidden; line-height:1;}
 #nav { float:left; padding:15px 0px 0px 12px; /*font-weight:bold; */font-size:20px; }
 #nav ul{ padding:0px; margin:0px;}
 #nav ul li{ float:left; display:inline; padding:0px 15px; text-transform:uppercase; line-height:1; padding-top:5px; padding-bottom:3px; }
