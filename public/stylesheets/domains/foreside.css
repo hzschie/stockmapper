@@ -449,6 +449,7 @@ a{ text-decoration:none;}
 .website .page { display:none; padding-top: 40px; padding-bottom: 40px; }
 .website a { cursor: pointer; color: #289BBB; }
 .website .inner { margin-top: 58px; }
+.website .close-btn { font-size: 2em; float: right; cursor: pointer; }
 /*-------------------------------------------------------PARTNERS-------------------------------------------------------*/
 .partner.page .partner_logo { color: rgba(0,0,0,0); height: 60px; margin-bottom:3px; background: url(blank) no-repeat top left; }
 .partner.page .partner_logo a { color: rgba(0,0,0,0); display:block; height:100%; width:100%; }

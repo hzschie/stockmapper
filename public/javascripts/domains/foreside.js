@@ -2,6 +2,7 @@
   
   var navBar;
   var pager;
+  var $closeWebPage;
   $(document).ready(function() {
     var NavBar = Backbone.View.extend({
       events: {
@@ -39,7 +40,12 @@
     navBar = new NavBar({ el: '#header' });
     pager = new Pager({ el: '.website > .inner' });
     $('[data-url="' + window.location.pathname + '"]').show();
-    // pager.setPage(window.location.pathname);
+    
+    $closeWebPage = $('.website .close-btn')
+      .on('click', function() {
+        pager.setPage('/');
+        surface.viewState.setState({}, '/');
+      });
   });
 
 
@@ -101,6 +107,7 @@
     surface = mapper.Surface.init();
     surface.onUpdateView = function(force, viewState) {
       pager.setPage(viewState.urlBase);
+      $closeWebPage.css('display', viewState.urlBase && viewState.urlBase.length > 1 ? 'block' : 'none');
       if(viewState.hasChanged('searchStock') || viewState.hasChanged('currentStock') || force) {
         var stock = viewState.get('searchStock') || viewState.get('currentStock') || null;
         for(var key in picksMaps) {

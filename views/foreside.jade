@@ -1,9 +1,13 @@
 extends main
 
+block page_title
+  title ETFMapper
+
 block pre
   .website.clearfix
     include domains/foreside/header
     .inner
+      .close-btn(style="display:none;") &times;
       .page.about.us(data-url="/about/us")
         .col1
           h2.etflabs_logo &nbsp;
