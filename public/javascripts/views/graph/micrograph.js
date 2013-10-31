@@ -56,7 +56,7 @@
             var h = date.getUTCHours(),
                 h12 = h == 12 ? 12 : h % 12,
                 lastHour = new Date(model.timeRange[1]).getUTCHours();
-            return i == 0 || h == lastHour ? h12 + (h < 12 ? 'am' : 'pm') : h12;
+            return i == 0 || h == lastHour ? h12 + (h < 12 ? 'a' : 'p') : h12;
           }
         );
 
@@ -127,12 +127,13 @@
         
         model.xAxis.tickPadding(3).tickSize(3);
         
+        isVeryNarrow = model.width() < 160
         if (series.type == 'intraday') model.xAxis.tickFormat(
           function(date, i) {
             var h = date.getUTCHours(),
                 h12 = h == 12 ? 12 : h % 12,
                 lastHour = new Date(model.timeRange[1]).getUTCHours();
-            return i == 0 || h == lastHour ? h12 + (h < 12 ? 'am' : 'pm') : h12;
+            return i == 0 || h == lastHour ? h12 + (h < 12 ? 'am' : 'pm') : isVeryNarrow ? '' : h12;
           }
         );
         xAxis.call(model.xAxis);

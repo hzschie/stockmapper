@@ -48,7 +48,7 @@ body:not(.tablet) .wrapper {
 
 .wrapper > .panel {
   min-height:118px;
-  max-height:280px;
+  max-height:310px;/*280px;*/
   padding-bottom:3px;
 }
 .map .title {
@@ -63,15 +63,27 @@ body:not(.tablet) .wrapper {
   display:none;
 }
 */
-.map .title.etf_composite:after {
-  background:transparent url('/images/domains/foreside/sprites.png') no-repeat scroll -10px -339px;
-  width:110px;
-  height:30px;
+.map .title.etf_composite:after, .map .title.etf_50:after, .map .title.etf_25:after, .map .title.etf_25ne:after {
+  height:34px;
   content:'';
   display:block;
   position:absolute;
   top:-2px;
   left:0;
+  width:110px;
+}
+.map .title.etf_composite:after {
+  background:transparent url('/images/domains/foreside/sprites.png') no-repeat scroll -10px -339px;
+}
+.map .title.etf_50:after {
+  background:transparent url('/images/domains/foreside/sprites.png') no-repeat scroll -10px -378px;
+}
+.map .title.etf_25:after {
+  background:transparent url('/images/domains/foreside/sprites.png') no-repeat scroll -10px -422px;
+}
+.map .title.etf_25ne:after {
+  background:transparent url('/images/domains/foreside/sprites.png') no-repeat scroll -10px -510px;
+  width:140px;
 }
 .panel .sorts {
   margin-top:4px;
@@ -177,14 +189,14 @@ body:not(.tablet) .wrapper {
 .groups .products {
   display:block;
   position:relative;
-  margin-top:-30px;
+  margin-top:10px;
 }
 .product-groups {
   margin: 0 !important;
   padding-bottom: 10px !important;
 }
 .groups .products .group {
-  width:25%;
+  width:33.33333%;/*25%;*/
 }
 .groups .products .group .box {
   height:70px;
@@ -201,6 +213,7 @@ body:not(.tablet) .wrapper {
 }
 .groups .products .group .box .quote {
   margin:0 0 0 10px;
+  white-space: nowrap;
 }
 #etf_50 .name {
   background-position: -10px -375px;
@@ -208,7 +221,7 @@ body:not(.tablet) .wrapper {
 #etf_50ne .name {
   background-position: -10px -463px;
 }
-#etf_25e .name {
+#etf_25 .name {
   background-position: -10px -419px;
 }
 #etf_25ne .name {
@@ -367,6 +380,12 @@ body:not(.tablet) .wrapper {
   width:216px;
   height:88px;
 }
+#etf_50 .micro.graph {
+  float:right;
+  margin-top: 5px;
+  width:130px;
+  height:64px;
+}
 .panel.collapsed #etf_composite .micro.graph {
   margin-top: 22px;
 }
@@ -428,7 +447,7 @@ body:not(.tablet) .wrapper {
 
 .foreside_credit {
   position:absolute;
-  bottom:-30px;
+  bottom:-27px;
   left:8px;
   font-size:12px;
   color:#ddf;

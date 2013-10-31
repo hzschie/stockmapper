@@ -121,21 +121,6 @@
   };
   
   mapper.config.getGroupsView = function(groups, $groups, $title) {
-    setTimeout(function() {
-      Interval.callOnce(
-        function() {
-          $('.products', $groups)
-            .appendTo(
-              $('<div class="product-groups groups"></div>')
-                .insertAfter('.chart')
-                // .appendTo('.chart')
-                // .css('top', 495)
-            )
-            .show();
-        }, Interval.FREE_TIME
-      );
-    },1000);
-
     var allEtfs = groups.get('all_etfs'),
         composite = groups.get('^ETFCOMP'),
         etf50 = groups.get('^ETFF'),
@@ -168,7 +153,8 @@
         
         template = new mapper.Template(bindings),
         
-        micrograph = new mapper.Micrograph($('.micro.graph', $groups));
+        compositeMicrograph = new mapper.Micrograph($('#etf_composite .micro.graph', $groups));
+        etf50Micrograph = new mapper.Micrograph($('#etf_50 .micro.graph', $groups));
         
     mapper.GroupBehaviors.pickMembers(allEtfs, 4);
     mapper.GroupBehaviors.pickMembers(composite, 10);
@@ -180,11 +166,13 @@
     updateGroup(composite, true);
     updateProduct(etf50, true);
     
-    composite.acquireTimeSeries('intraday', function(series) { micrograph.setTimeSeries(series); });
+    composite.acquireTimeSeries('intraday', function(series) { compositeMicrograph.setTimeSeries(series); });
+    etf50.acquireTimeSeries('intraday', function(series) { etf50Micrograph.setTimeSeries(series); });
     
-    $groups.children().click(function() {
+    $groups.find('.group').click(function() {
       var idAttr = $(this).attr('id');
-      instance.trigger('select_group', idAttr == composite.get('domName') ? composite : groups.get(idAttr));
+      var group = groups.where({ domName: idAttr })[0];
+      instance.trigger('select_group', group || groups.get(idAttr));
     });
     
     function updateGroup(group, force) {
@@ -236,7 +224,7 @@
         selected = group;
         $('#' + selected.get('domName')).addClass('selected');
         
-        if(selected == composite) {
+        if(selected != allEtfs) {
           $title.text('');
         }
         else {

@@ -226,10 +226,6 @@ block panel_groups
         dt Volume Down:
         dd.volume_down &nbsp;
   #etf_composite.group
-    .foreside_credit
-      | Brought to you by 
-      a(href="http://www.foreside.com/")
-        img(src="/images/domains/foreside/etflabs_logo_inline.png?081212")
     .box
       .left
         .name
@@ -262,9 +258,10 @@ block panel_groups
         dd.high &nbsp;
         dt Low:
         dd.low &nbsp;
-  .products(style="display:none;")
+  .products
     #etf_50.group
       .box
+        .micro.graph
         .name
         .quote
           .last_trade
@@ -273,16 +270,20 @@ block panel_groups
             | &nbsp;(
             span.percent
             | )
-    #etf_50ne.group
+    //- #etf_50ne.group
+    //-   .box
+    //-     .name
+    //-     .quote
+    //-       .last_trade.coming_soon COMING SOON
+    #etf_25.group
       .box
         .name
         .quote
           .last_trade.coming_soon COMING SOON
-    #etf_25e.group
-      .box
-        .name
-        .quote
-          .last_trade.coming_soon COMING SOON
+      .foreside_credit
+        | Brought to you by 
+        a(href="http://www.foreside.com/")
+          img(src="/images/domains/foreside/etflabs_logo_inline.png?081212")
     #etf_25ne.group
       .box
         .name
