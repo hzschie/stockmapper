@@ -112,7 +112,7 @@ else {
   };
   Template.priceFormat = Template.NaIfNaN( d3.format(',.2f') );
   Template.commaFormat = Template.NaIfNaN( d3.format(',') );
-  Template.changeFormat = Template.NaIfNaN( d3.format('+.2f') );
+  Template.changeFormat = Template.NaIfNaN( d3.format('+,.2f') );
   Template.pctFormat = Template.NaIfNaN( Template.postfix(d3.format('.1f'), '%') );
   Template.pctChangeFormatter = function(formatStr) {
     var formatter = d3.format('+' + (formatStr || '.2f')),

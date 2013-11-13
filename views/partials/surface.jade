@@ -29,9 +29,10 @@ body(style='padding:0 10px;', class=isTablet ? 'tablet' : null)
     include details
 
     .layout
-      .help
-        .close
-        include help
+      block side_panels
+        .help
+          .close
+          include help
 
       opts = { id: 'index_details', ro_volume: false, name_in_header: false, comparable: true }
       include details

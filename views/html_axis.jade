@@ -1,0 +1,124 @@
+!!!
+html
+  head
+    title= 'Scratch Pad'
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0")
+    meta(http-equiv="X-UA-Compatible", content="IE=Edge")
+    
+    style(type="text/css")
+      body { background-color:#fcc; padding:80px; }
+      
+      .axis { position:relative; }
+      .axis.x { height:140px; }
+      .axis.y { width:140px; display:inline-block; }
+      
+      .x.tick {
+        position:absolute;
+        border-left:1px solid #000;
+      }
+      .y.tick {
+        position:absolute;
+        border-top:1px solid #000;
+      }
+      
+      .y.tick label {
+        margin-top:-8px;
+      }
+      
+      .domain {
+        border:1px solid #000;
+      }
+      
+      .side {
+        display:inline-block;
+        position:relative;
+        width:500px;
+        *display:inline;
+        zoom:1;
+      }
+    
+    //if lt IE 9
+      script(type="text/javascript", src="/javascripts/lib/aight.min.js")
+    
+    script(type='text/javascript', src='/javascripts/lib/jquery-1.7.2.min.js')
+    script(type='text/javascript', src='/javascripts/lib/underscore-min.js');
+    script(type='text/javascript', src='/javascripts/lib/backbone-min.js');
+    script(type='text/javascript', src='/javascripts/lib/d3.v2.min.js');
+    script(type='text/javascript', src='/javascripts/views/graph/html_axis.js');
+    
+    script(type='text/javascript')
+      mapper = {
+        config: {}
+      };
+      mapper.groupsJson = !{groups};
+      mapper.stocksJson = !{stocks};
+
+    script(type='text/javascript', src='/javascripts/interval.js');
+    script(type='text/javascript', src='/javascripts/stocks.js');
+    script(type='text/javascript', src='/javascripts/init_data.js');
+    script(type='text/javascript', src='/javascripts/models/behaviors.js');
+            
+    script(type='text/javascript')
+      var a,b,c,d;
+      mapper.dataReady = function() {
+        a = d3.html.axis().orient('bottom');
+        a.scale().range([0,400]).domain([1.3, 8.653]);
+        a.tickSubdivide(3);
+        a.tickSize(10,-3,5);
+        d3.select('.left .axis.n1').call(a);
+        
+        b = d3.html.axis().orient('bottom');
+        b.scale().range([0,400]).domain([1.3, 8.653]);
+        b.tickSubdivide(3);
+        b.tickSize(-80,3,10);
+        d3.select('.left .axis.n2').call(b);
+        
+        c = d3.html.axis().orient('left');
+        c.scale().range([0,400]).domain([1.3, 8.653]);
+        c.tickSubdivide(3);
+        c.tickSize(20,-3,10);
+        d3.select('.left .axis.n3').call(c);
+        
+        d = d3.html.axis().orient('left');
+        d.scale().range([0,400]).domain([1.3, 8.653]);
+        d.tickSubdivide(3);
+        d.tickSize(-80,3,10);
+        d3.select('.left .axis.n4').call(d);
+        
+        
+        a = d3.html.axis().orient('top');
+        a.scale().range([0,400]).domain([1.3, 8.653]);
+        a.tickSubdivide(3);
+        a.tickSize(10,-3,5);
+        d3.select('.right .axis.n1').call(a);
+        
+        b = d3.html.axis().orient('top');
+        b.scale().range([0,400]).domain([1.3, 8.653]);
+        b.tickSubdivide(3);
+        b.tickSize(-80,3,10);
+        d3.select('.right .axis.n2').call(b);
+        
+        c = d3.html.axis().orient('right');
+        c.scale().range([0,400]).domain([1.3, 8.653]);
+        c.tickSubdivide(3);
+        c.tickSize(20,-3,10);
+        d3.select('.right .axis.n3').call(c);
+        
+        d = d3.html.axis().orient('right');
+        d.scale().range([0,400]).domain([1.3, 8.653]);
+        d.tickSubdivide(3);
+        d.tickSize(-80,3,10);
+        d3.select('.right .axis.n4').call(d);
+      };
+
+body
+  .left.side
+    .axis.x.n1
+    .axis.x.n2
+    .axis.y.n3
+    .axis.y.n4
+  .right.side
+    .axis.x.n1
+    .axis.x.n2
+    .axis.y.n3
+    .axis.y.n4

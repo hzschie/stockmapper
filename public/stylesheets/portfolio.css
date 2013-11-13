@@ -1,0 +1,66 @@
+.portfolio_prompt {
+  font-size: 15px;
+  text-align: center;
+  border: 1px solid #1D485E;
+  background: #192E3C;
+  padding: 20px;
+}
+
+.portfolio_holdings {
+  width: 100%;
+}
+.portfolio_holdings th, .portfolio_holdings .bottom_line {
+  text-align: center;
+  border-bottom: 1px solid #1D485E;
+  border-top: 1px solid #1D485E;
+  background: #192E3C;
+}
+.portfolio_holdings .bottom_line {
+  font-weight: bold;
+}
+
+.portfolio_holdings th, .portfolio_holdings td {
+  border-left: 1px solid #1D485E;
+  border-right: 1px solid #1D485E;
+  padding: 4px 8px;
+}
+.portfolio_holdings th:first-child {
+  text-align: left;
+}
+
+.portfolio_holdings td {
+  text-align: right;
+}
+
+.portfolio_entry {
+  white-space: nowrap;
+  margin-bottom: 1px;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.portfolio_entry .sym {
+  text-align: left;
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.portfolio_entry .quantity, .portfolio_entry .price {
+  width: 90px;
+  text-align: center;
+}
+.portfolio_entry .quantity input, .portfolio_entry .price input {
+  width: 56px;
+  text-align: right;
+  background-color: #1D485E;
+  color: #8ac;
+  padding-bottom: 2px;
+  vertical-align: middle;
+}
+.portfolio_holdings .red {
+  color:#f33;
+}
+.portfolio_holdings .green {
+  color:#3f3;
+}

@@ -36,23 +36,29 @@
     
 
     Layout.toggleHelp = function() {
-      if($layout.hasClass('open_help')) {
-        $help.fadeOut({
+      Layout.toggleSidePanel($help)
+    };
+    $('.close', $help).click(Layout.toggleHelp);
+
+    Layout.toggleSidePanel = function($content) {
+      $content = $content || $('')
+      if($layout.hasClass('open_sidepanel')) {
+        $content.fadeOut({
           complete: function() {
-            $layout.removeClass('open_help');
+            $layout.removeClass('open_sidepanel');
             onResize(true);
           }
         });
       }
       else {
-        $layout.addClass('open_help');
+        $layout.addClass('open_sidepanel');
         onResize(true);
         setTimeout(function() {
-          $help.fadeIn();
+          $content.fadeIn();
         }, 400);
       }
     };
-    $('.close', $help).click(Layout.toggleHelp);
+    $('.close', $help).click(Layout.toggleSidePanel);
 
     Layout.toggleAbout = function() {
       if($about.parent().hasClass('open')) {
@@ -72,7 +78,7 @@
         });
       }
     };
-    // $('.close', $help).click(Layout.toggleHelp);
+    // $('.close', $help).click(Layout.toggleSidePanel);
     
     this.frameView = function(viewName) {
       switch(viewName) {

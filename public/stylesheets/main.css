@@ -32,7 +32,7 @@ input {
   z-index:1;
 }
 
-.layout.open_help > *{
+.layout.open_sidepanel > *{
   margin-right:300px;
 }
 

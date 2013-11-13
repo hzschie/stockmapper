@@ -105,6 +105,12 @@
     });
     
     surface = mapper.Surface.init();
+    
+    var portfolio = window.portfolio = new mapper.Portfolio({
+      el: '.portfolio.page',
+      map: surface.map
+    });
+
     surface.onUpdateView = function(force, viewState) {
       pager.setPage(viewState.urlBase);
       $closeWebPage.css('display', viewState.urlBase && viewState.urlBase.length > 1 ? 'block' : 'none');

@@ -8,6 +8,38 @@ block pre
     include domains/foreside/header
     .inner
       .close-btn(style="display:none;") &times;
+      
+      .page.portfolio(data-url="/portfolio")
+        .portfolio_prompt To start building your portfolio, drag ETFs into this area.
+        table.portfolio_holdings(style="display:none;")
+          thead
+            tr.super_header
+              th(colspan=2) &nbsp;
+              th(colspan=2) Change
+              th(colspan=3) &nbsp;
+              th(colspan=2) Total Gain
+              th &nbsp;
+            tr.main_header
+              th Symbol
+              th Last Trade
+              //- Change
+              th $
+              th %
+              th Quantity
+              th Price Paid
+              th Day's Gain
+              //- Total Gain
+              th $
+              th %
+              th Market Value
+          tbody
+            tr.bottom_line
+              td(colspan=6) Totals
+              td.day_gain
+              td.total_gain.amount
+              td.total_gain.percent
+              td.market_value
+
       .page.about.us(data-url="/about/us")
         .col1
           h2.etflabs_logo &nbsp;
