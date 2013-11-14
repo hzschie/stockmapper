@@ -78,8 +78,8 @@
           return memo;
         }, { dayGain: 0, totalGain: 0, marketValue: 0 });
         bottomLine.totalGainPct = 100 * bottomLine.totalGain / (bottomLine.marketValue - bottomLine.totalGain);
-        bottomLine.changeDir = bottomLine.dayGain == 0 ? 0 : Math.abs(bottomLine.dayGain) / bottomLine.dayGain
-        bottomLine.totalGainDir = bottomLine.totalGain == 0 ? 0 : Math.abs(bottomLine.totalGain) / bottomLine.totalGain
+        bottomLine.changeDir = bottomLine.dayGain == 0 ? 0 : Math.abs(bottomLine.dayGain) / bottomLine.dayGain;
+        bottomLine.totalGainDir = bottomLine.totalGain == 0 ? 0 : Math.abs(bottomLine.totalGain) / bottomLine.totalGain;
         template.applyBindings(bindings, _this.$bottomLine, bottomLine);
       });
       
@@ -92,10 +92,33 @@
         }
       );
 
+      this.$cursor = $('<div class="drag_cursor">ETF</div>')
+        .css({
+          position: "absolute",
+          color: "#fff",
+          top: 0,
+          left: 0,
+          "font-size": "1.2em",
+          "z-index": 20,
+          "pointer-events": "none",
+          background: "rgba(0,0,0,.8)",
+          "line-height": 1,
+          padding: "2px 4px"
+        })
+        .hide()
+        .appendTo($('body'));
       var drag = d3.behavior.drag()
         .on('dragstart', function() {
-          // console.log(this);
-          // _this.dragged = this;
+          _this.$cursor
+            .html(d3.select(this).html())
+            .fadeIn();
+        })
+        .on('drag', function() {
+          var mouse = d3.mouse(_this.$cursor.parent().parent()[0]);
+          _this.$cursor.css({
+            left: mouse[0],
+            top: mouse[1]
+          });
         })
         .on('dragend', function() {
           if(_this.isOver) {
@@ -107,6 +130,7 @@
             }));
             _this.render();
           }
+          _this.$cursor.fadeOut();
         });
         
       this.options.map.on('inspect_tag', function(model, $tag) {
