@@ -116,8 +116,8 @@
         .on('drag', function() {
           var mouse = d3.mouse(_this.$cursor.parent().parent()[0]);
           _this.$cursor.css({
-            left: mouse[0],
-            top: mouse[1]
+            left: mouse[0] + 3,
+            top: mouse[1] + 3
           });
         })
         .on('dragend', function() {
