@@ -9,8 +9,10 @@
 .portfolio_holdings {
   width: 100%;
 }
-.portfolio_holdings th, .portfolio_holdings .bottom_line {
+.portfolio_holdings th {
   text-align: center;
+}
+.portfolio_holdings th, .portfolio_holdings .bottom_line td {
   border-bottom: 1px solid #1D485E;
   border-top: 1px solid #1D485E;
   background: #192E3C;
@@ -24,7 +26,14 @@
   border-right: 1px solid #1D485E;
   padding: 4px 8px;
 }
-.portfolio_holdings th:first-child {
+.portfolio_holdings .remove, .portfolio_holdings .remove {
+  border: none !important;
+  background: none !important;
+  padding: 0;
+  width: 20px;
+  text-align: center;
+}
+.portfolio_holdings th.sym {
   text-align: left;
 }
 

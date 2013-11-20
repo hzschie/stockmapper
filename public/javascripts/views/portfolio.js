@@ -1,7 +1,7 @@
 (function() {
   var Acquisition = Backbone.Model.extend({
     get: function (prop) {
-      var stock = this.attributes.stock;
+      var stock = mapper.stocks.get(this.attributes.sym);
       switch(prop) {
         case 'dayGain': return this.get('quantity') * stock.get('change');
         case 'marketValue': return this.get('quantity') * stock.get('lastTrade');
@@ -16,8 +16,41 @@
       else { return Backbone.Model.prototype.get.call(this, prop); }
     }
   });
+  var Holdings = Backbone.Collection.extend({
+    model: Acquisition,
+    localStorage: new Backbone.LocalStorage("stockmapperPortfolio")
+  });
   
   mapper.Portfolio = Backbone.View.extend({
+    events: {
+      "click td.remove": "removeAcquisition"
+    },
+    
+    addAcquisition: function(acq) {
+      this.holdings.create(acq);
+    },
+    
+    removeAcquisition: function(event) {
+      var $entry = $(event.target).parent();
+      var removed = this.holdings.at( $entry.index() );
+      removed.destroy();
+      $entry.fadeOut();
+      this.updateBottomLine();
+    },
+    
+    updateBottomLine: function() {
+      var bottomLine = this.holdings.reduce(function(memo, acq) {
+        memo.dayGain += acq.get('dayGain');
+        memo.totalGain += acq.get('totalGain');
+        memo.marketValue += acq.get('marketValue');
+        return memo;
+      }, { dayGain: 0, totalGain: 0, marketValue: 0 });
+      bottomLine.totalGainPct = 100 * bottomLine.totalGain / (bottomLine.marketValue - bottomLine.totalGain);
+      bottomLine.changeDir = bottomLine.dayGain == 0 ? 0 : Math.abs(bottomLine.dayGain) / bottomLine.dayGain;
+      bottomLine.totalGainDir = bottomLine.totalGain == 0 ? 0 : Math.abs(bottomLine.totalGain) / bottomLine.totalGain;
+      this.template.applyBindings("acquisition", this.$bottomLine, bottomLine);
+    },
+    
     initialize: function() {
       var _this = this,
           Template = mapper.Template,
@@ -40,15 +73,16 @@
             { $:'.total_gain.percent', field:'totalGainPct', formatter:Template.postfix(Template.changeFormat, '%') },
             
             { $:'.market_value', field:'marketValue', formatter:Template.priceFormat }
-          ],
-          template = new mapper.Template();
+          ];
+          
+      this.template = new mapper.Template({ "acquisition": bindings });
           
       this.$prompt = this.$(".portfolio_prompt");
       this.$holdings = this.$(".portfolio_holdings");
       this.$bottomLine = this.$holdings.find('.bottom_line');
       
-      this.models = new Backbone.Collection();
-      this.models.on('add', function(acq) {
+      this.holdings = new Holdings();
+      this.holdings.on('add', function(acq) {
         _this.$prompt.hide();
         var $entry = $([
           '<tr class="portfolio_entry">',
@@ -62,26 +96,18 @@
             '<td class="total_gain amount"></td>',
             '<td class="total_gain percent"></td>',
             '<td class="market_value"></td>',
+            '<td class="remove">X</td>',
           '</div>'
         ].join(''))
           .hide()
           .insertBefore(_this.$bottomLine);
         _this.$holdings.fadeIn();
-        template.applyBindings(bindings, $entry, acq);
+        _this.template.applyBindings("acquisition", $entry, acq);
         $entry.fadeIn();
         
-        // Update bottom line
-        var bottomLine = this.models.reduce(function(memo, acq) {
-          memo.dayGain += acq.get('dayGain');
-          memo.totalGain += acq.get('totalGain');
-          memo.marketValue += acq.get('marketValue');
-          return memo;
-        }, { dayGain: 0, totalGain: 0, marketValue: 0 });
-        bottomLine.totalGainPct = 100 * bottomLine.totalGain / (bottomLine.marketValue - bottomLine.totalGain);
-        bottomLine.changeDir = bottomLine.dayGain == 0 ? 0 : Math.abs(bottomLine.dayGain) / bottomLine.dayGain;
-        bottomLine.totalGainDir = bottomLine.totalGain == 0 ? 0 : Math.abs(bottomLine.totalGain) / bottomLine.totalGain;
-        template.applyBindings(bindings, _this.$bottomLine, bottomLine);
+        _this.updateBottomLine();
       });
+      this.holdings.fetch();
       
       this.$el.hover(
         function() {
@@ -123,12 +149,11 @@
         .on('dragend', function() {
           if(_this.isOver) {
             var stock = d3.select(this).datum();
-            _this.models.add(new Acquisition({
-              stock: stock,
+            _this.addAcquisition({
+              sym: stock.get('sym'),
               quantity: 3100,
               price: stock.get('lastTrade') * (1 - .5 * (Math.random() - .5))
-            }));
-            _this.render();
+            });
           }
           _this.$cursor.fadeOut();
         });

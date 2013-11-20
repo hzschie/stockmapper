@@ -11,6 +11,7 @@ block pre
       
       .page.portfolio(data-url="/portfolio")
         .portfolio_prompt To start building your portfolio, drag ETFs into this area.
+        .slider
         table.portfolio_holdings(style="display:none;")
           thead
             tr.super_header
@@ -19,8 +20,9 @@ block pre
               th(colspan=3) &nbsp;
               th(colspan=2) Total Gain
               th &nbsp;
+              th.remove &nbsp;
             tr.main_header
-              th Symbol
+              th.sym Symbol
               th Last Trade
               //- Change
               th $
@@ -32,6 +34,7 @@ block pre
               th $
               th %
               th Market Value
+              th.remove &nbsp;
           tbody
             tr.bottom_line
               td(colspan=6) Totals
@@ -39,6 +42,7 @@ block pre
               td.total_gain.amount
               td.total_gain.percent
               td.market_value
+              td.remove &nbsp;
 
       .page.about.us(data-url="/about/us")
         .col1
