@@ -26,12 +26,17 @@
   border-right: 1px solid #1D485E;
   padding: 4px 8px;
 }
-.portfolio_holdings .remove, .portfolio_holdings .remove {
-  border: none !important;
-  background: none !important;
+.portfolio_holdings .remove, .portfolio_holdings .bottom_line .remove {
+  border: none;
+  background: none;
   padding: 0;
-  width: 20px;
-  text-align: center;
+  width: 13px;
+  font-size: 1.3em;
+  text-align: right;
+  line-height: 1;
+}
+.portfolio_holdings td.remove.button {
+  cursor: pointer;
 }
 .portfolio_holdings th.sym {
   text-align: left;
@@ -60,7 +65,7 @@
   text-align: center;
 }
 .portfolio_entry .quantity input, .portfolio_entry .price input {
-  width: 56px;
+  width: 70px;
   text-align: right;
   background-color: #1D485E;
   color: #8ac;

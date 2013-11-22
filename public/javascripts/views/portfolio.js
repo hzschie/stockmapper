@@ -1,4 +1,5 @@
 (function() {
+  // Acquisition is a model representing a stock purchased at some price
   var Acquisition = Backbone.Model.extend({
     get: function (prop) {
       var stock = mapper.stocks.get(this.attributes.sym);
@@ -16,14 +17,18 @@
       else { return Backbone.Model.prototype.get.call(this, prop); }
     }
   });
+  // Holdings is a collection of Acquisitions, backed by a LocalStore
   var Holdings = Backbone.Collection.extend({
     model: Acquisition,
     localStorage: new Backbone.LocalStorage("stockmapperPortfolio")
   });
   
+  // The Portfolio View
   mapper.Portfolio = Backbone.View.extend({
     events: {
-      "click td.remove": "removeAcquisition"
+      "click td.remove": "removeAcquisition",
+      "change td.quantity": "changeAcquisitionQuantity",
+      "change td.price": "changeAcquisitionPrice"
     },
     
     addAcquisition: function(acq) {
@@ -31,14 +36,44 @@
     },
     
     removeAcquisition: function(event) {
-      var $entry = $(event.target).parent();
+      var $entry = $(event.target).parents('.portfolio_entry');
       var removed = this.holdings.at( $entry.index() );
       removed.destroy();
-      $entry.fadeOut();
+      $entry.fadeOut(function() { $entry.remove(); });
+      this.updateBottomLine();
+    },
+    
+    changeAcquisitionQuantity: function(event) {
+      var $input = $(event.target);
+      this._updateAcquisitionPropFromInput($input, 'quantity');
+    },
+    changeAcquisitionPrice: function(event) {
+      var $input = $(event.target);
+      this._updateAcquisitionPropFromInput($input, 'price');
+    },
+    
+    _updateAcquisitionPropFromInput: function($input, prop) {
+      var $entry = $input.parents('.portfolio_entry');
+      var acq = this.holdings.at( $entry.index() );
+      var newVal = $input.val().replace(/,|\s/g, '');
+      if((/^\d*\,?\d*\.?\d*$/).test(newVal)) {//(String(Number(newVal)) == newVal) {
+        acq.set(prop, Number(newVal));
+        acq.save();
+      }
+      this.template.applyBindings("acquisition", $entry, acq);
       this.updateBottomLine();
     },
     
     updateBottomLine: function() {
+      if(this.holdings.length) {
+        this.$prompt.hide();
+        this.$holdings.show();
+      }
+      else {
+        this.$prompt.show();
+        this.$holdings.hide();
+      }
+      
       var bottomLine = this.holdings.reduce(function(memo, acq) {
         memo.dayGain += acq.get('dayGain');
         memo.totalGain += acq.get('totalGain');
@@ -62,7 +97,7 @@
             { $:'.change.amount', field:'change', formatter:Template.changeFormat },
             { $:'.change.percent', field:'changePct', formatter:Template.postfix(Template.changeFormat, '%') },
 
-            { $:'.quantity input', field:'quantity', formatter: function(quantity, $field, acq) { $field.val(Template.commaFormat(quantity)); } },
+            { $:'.quantity input', field:'quantity', formatter: function(quantity, $field, acq) { $field.val(quantity); } },
             { $:'.price input', field:'price', formatter: function(price, $field, acq) { $field.val(Template.priceFormat(price)); } },
 
             { $:'.day_gain', field:'changeDir', formatter:Template.makeRedOrGreen },
@@ -83,20 +118,19 @@
       
       this.holdings = new Holdings();
       this.holdings.on('add', function(acq) {
-        _this.$prompt.hide();
         var $entry = $([
           '<tr class="portfolio_entry">',
             '<td class="sym"></td>',
             '<td class="last_trade"></td>',
             '<td class="change amount"></td>',
             '<td class="change percent"></td>',
-            '<td class="quantity"><input/></td>',
-            '<td class="price"><input/></td>',
+            '<td class="quantity"><input type="number" /></td>',
+            '<td class="price"><input type="number" step=".01" /></td>',
             '<td class="day_gain"></td>',
             '<td class="total_gain amount"></td>',
             '<td class="total_gain percent"></td>',
             '<td class="market_value"></td>',
-            '<td class="remove">X</td>',
+            '<td class="remove button">×</td>',
           '</div>'
         ].join(''))
           .hide()
@@ -151,8 +185,8 @@
             var stock = d3.select(this).datum();
             _this.addAcquisition({
               sym: stock.get('sym'),
-              quantity: 3100,
-              price: stock.get('lastTrade') * (1 - .5 * (Math.random() - .5))
+              quantity: 1,//3100,
+              price: stock.get('lastTrade') // * (1 - .5 * (Math.random() - .5))
             });
           }
           _this.$cursor.fadeOut();
