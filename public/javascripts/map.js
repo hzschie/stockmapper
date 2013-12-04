@@ -30,6 +30,7 @@
       if(models) {
         models.off('change', updateModel);
         models.off('reset', rebuild);
+        models.off('sort', rebuild);
       }
       
       models = _models;
@@ -39,6 +40,7 @@
       // Subscribe to subsequent adding of models
       models.on('change', updateModel);
       models.on('reset', rebuild);
+      models.on('sort', rebuild);
     };
     
     this.clusterBy = function(category, currentCategory) {
