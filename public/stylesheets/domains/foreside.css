@@ -45,6 +45,19 @@ body:not(.tablet) .wrapper {
   width:120px;
 }
 
+.highlights.selector {
+  display: none;
+}
+.coloring.dropdown_selector {
+  float:right;
+  line-height: 30px;
+  vertical-align: middle;
+  margin-right:10px;
+}
+.coloring.dropdown_selector .panel {
+  left: auto;
+  right: -8px;
+}
 
 .wrapper > .panel {
   min-height:118px;
@@ -144,7 +157,18 @@ body:not(.tablet) .wrapper {
 .inspector .last_trade {
   width:78px;
 }
-
+.inspector .content.stock .historical {
+}
+.inspector .content.stock .change_from {
+  float:left;
+  line-height:32px;
+  font-weight:bold;
+}
+.inspector .content.stock .historical_change {
+  text-align:right;
+  font-size:20px;
+  line-height:28px;
+}
 
 .group .box {
   border:1px solid #26465c;

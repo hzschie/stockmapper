@@ -348,6 +348,22 @@ block append inspector_content
         dt High:
         dd.high 12.34
 
+block additional_map_ui
+  .coloring.dropdown_selector
+    label
+      .plus
+      | Ratings:
+    .selection
+      .display
+      .panel.selector.disabled
+        block coloring_options
+          a(data-val="today") Today
+          a(data-val="p1wk") Week
+          a(data-val="p1mo") Month
+          a(data-val="pYTD") YTD
+          a(data-val="p52wk") 52 weeks
+          a(data-val="p10yr") 10 years
+          
 block clustering_options
   a(data-val="none") None
   a(data-val="cluster") Classification

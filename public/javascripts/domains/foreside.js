@@ -110,6 +110,24 @@
       el: '.portfolio.page',
       map: surface.map
     });
+    
+    // Enable coloring by historical change
+    surface.viewState.get('trackedParams').push('change_from');
+    coloringSelector = new mapper.DropdownSelector($('.coloring'), function(id) { surface.viewState.setState({ change_from:id }); });
+    coloringSelector.periodProps = {
+      p10yr: { prop:'typ', f:1, label:"from 10 years ago" },
+      p52wk: { prop:'ftwp', f:1, label:"from 52 weeks ago" },
+      pYTD: { prop:'ytdp', f:.6, label:"for this year" },
+      p1mo: { prop:'mp', f:.3, label:"from 1 month ago" },
+      p1wk: { prop:'wp', f:.1, label:"from 1 week ago" }
+    };
+    // Prepare inspector to show historical change info
+    $('.inspector .content.stock').append($([
+      '<div class="historical">',
+        '<div class="change_from"></div>',
+        '<div class="historical_change"></div>',
+      '</div>'
+    ].join('')));
 
     surface.onUpdateView = function(force, viewState) {
       pager.setPage(viewState.urlBase);
@@ -122,8 +140,58 @@
           });
         }
       }
+      
+      // Update based on coloring selection
+      if(viewState.hasChanged('change_from') || force) {
+        var changeFrom = viewState.get('change_from') || 'today';
+        coloringSelector.setCurrent(changeFrom);// Update the selector
+
+        coloringPeriod = coloringSelector.periodProps[changeFrom];
+        var periodProp = coloringPeriod && coloringPeriod.prop,
+            changeProp = changeFrom == 'today' ? 'changePct' : 'historicalChangePct';
+
+        var fn = function(stock) {
+          var ftwhl = stock.get('ftwhl');
+          if(!periodProp) return null;
+          if(!ftwhl) { return NaN; }
+          var currentPrice = stock.get('lastTrade');
+          var low = currentPrice + (ftwhl.l - currentPrice) * coloringPeriod.f;
+          var high = currentPrice + (ftwhl.h - currentPrice) * coloringPeriod.f;
+          var historicalPrice = (low + high) / 2;
+          return !periodProp ? null : 100 * (currentPrice / historicalPrice - 1);
+        };
+        mapper.stocks.each(function(s) {
+          s.setComputedProp('historicalChangePct', fn);
+        });
+      
+        // Update views to use selectoed property
+        surface.map.setChangeProp(changeProp);
+        surface.chart.setChangeProp(changeProp);
+        
+        // Update sorting
+        mapper.sortFunctions.chg.setAttribute(changeProp);
+        viewState.get('currentGroup').resortMembers(false);
+        
+        // Update title
+        $('.map .title .sub').text(coloringPeriod ? '% change ' + coloringPeriod.label : '');
+      }
+
     };
+    
     return surface;
+  };
+  
+  mapper.config.getInspectorBindings = function(bindings) {
+    var Template = mapper.Template;
+    return {
+      stock: (bindings.stock || []).concat([
+        { $:'.change_from', formatter:function() { return '% Change ' + (coloringPeriod && coloringPeriod.label) + ':'; } },
+        { $:'.historical_change', field:'historicalChangePct', formatter:Template.pctChangeFormatter() },
+        { $:'.historical_change', field:'historicalChangePct', formatter:function(val, $val) { Template.makeRedOrGreen(val < 0 ? -1 : val > 0 ? 1 : 0, $val); }  },
+        { $:'.historical', field:'historicalChangePct', formatter:function(val, $container) { val == null ? $container.hide() : $container.show(); } },
+        { $:'.stock dl', field:'historicalChangePct', formatter:function(val, $container) { val == null ? $container.show() : $container.hide(); } }
+      ])
+    };
   };
   
   mapper.config.getGroupsView = function(groups, $groups, $title) {
