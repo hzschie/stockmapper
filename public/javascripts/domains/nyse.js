@@ -55,8 +55,8 @@
 
   mapper.config.getMapTagHtml = function(model) {
     var sym = model.get('sym');
-    sym.match(/^(\w*)\-?(\w*)$/);
-    return RegExp.$1 + (RegExp.$2 ? '<span>' + RegExp.$2 + '</span>' : '');
+    sym.match(/^(\w*)\.?(\w*)$/) || sym.match(/^(\w*)\-?(\w*)$/);
+	return RegExp.$1 + (RegExp.$2 ? '<span>' + RegExp.$2 + '</span>' : '');
   };
 
   mapper.config.getGroupTagHtml = function(group, $container) {

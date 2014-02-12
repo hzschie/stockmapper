@@ -1,5 +1,7 @@
+@import url(http://fonts.googleapis.com/css?family=Lato);
+
 body {
-  font:12px/13px "Helvetica", "Arial", sans-serif;
+  font:12px/13px "Lato", "Helvetica", "Arial", sans-serif;
 }
 
 .periods.selector {
@@ -36,8 +38,8 @@ body {
 
 .app_header {
   color:#fff;
-  line-height: 34px;
-  margin-bottom: 2px;
+  line-height: 30px;
+  margin-bottom: 1px;
   margin-top:2px;
 }
 

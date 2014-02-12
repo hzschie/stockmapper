@@ -45,13 +45,13 @@
 
 .map li, .map .shadows div {
   display:inline-block;
-  width:27px;
-  height:12px;
+  width:40px;/*27px;*/
+  height:12px;/*12px;*/
   padding-left:2px;
   white-space:nowrap;
-  font:11px/12px "Helvetica Narrow","Arial Narrow", "Arial", sans-serif;
-  font-weight:bold;
-  letter-spacing:-1px;
+  font:11px/12px "Lato", sans-serif;
+  /*font-weight:bold;*/
+  /*letter-spacing:-1px;*/
   position:absolute;
 }
 
@@ -78,10 +78,10 @@
 /*  margin-left:1px;
   margin-top:1px;
 */
-  margin-left:2px;
-  margin-top:2px;
+  margin-left:1px;
+  margin-top:1px;
   
-  width:29px;
+  width:42px;
   height:14px;
 }
 .map .shadows div.highlighted {
@@ -99,8 +99,8 @@
 }
 
 .map li.highlighted:after {
-  width:27px;
-  height:10px;
+  width:40px;/*27px;*/
+  height:10px;/*10px;*/
   border:1px solid rgba(255,255,255,.8);
   position:absolute;
   left:0;
@@ -111,8 +111,8 @@
   z-index:3;
 }
 .map li:hover:after {
-  width:27px;
-  height:10px;
+  width:40px;/*27px;*/
+  height:10px;/*10px;*/
   border:2px solid #fffcce;
   left:-1px;
   top:-1px;

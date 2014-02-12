@@ -15,8 +15,8 @@
   
   "allGroup": {
     "id": "^NYA",
-    "name": "NYSE Composite Index",
-    "label": "NYA (show all)",
+    "name": "All Stocks",
+    "label": "SHOW ALL",
     "nickname": "NYA",
     "sym": "NYA",
     "category": "Index",
@@ -26,7 +26,11 @@
   "groupsTagOrder": [
     "Index:NYA",
     "Index:Dow Jones",
+    "Index:Russell 1000",
     "Index:S&P 500",
+    "Index:NASDAQ 100",
+    "Index:FTSE 100",
+    "Index:S&P Global 100",
     "Sector:Materials",
     "Sector:Goods",
     "Sector:Services",
@@ -42,6 +46,7 @@
     "Region:Canada",
     "Region:Europe",
     "Region:Latin America",
-    "Region:MidEast/Africa"
+    "Region:MidEast/Africa",
+    "Region:Other"
   ]
 }

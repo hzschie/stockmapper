@@ -76,11 +76,11 @@
 .inspector .header > div {
   display:inline-block;
   vertical-align:bottom;
-  font-size:16px;
+  font-size:14px; /*16*/
 }
 
 .inspector .sym {
-  width:50px
+  width:60px
 }
 
 .inspector .last_trade {

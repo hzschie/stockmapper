@@ -3,6 +3,7 @@
     group: [
       { $:'.counts', field:'upsAndDowns', formatter:function(counts) {
         return '<span class="up">' + counts[0] + '</span><span class="dn">' + counts[1] + '</span>';
+		
       } },
       { $:null, field:'upsAndDowns', formatter:function(counts, $container, group) {
         var fraction = !counts[1] ? (counts[0] && 1) : (counts[0]/counts[1] - 1);

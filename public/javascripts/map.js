@@ -197,12 +197,14 @@
           tags.enter()
             .append('li')
             .each(addModel);
-            
+
+          // 'Group By'- label  
           var labels = d3.select($labels[0]).selectAll('label').data(grid.groups, function(group) { return group.key + (exiting == oldLength ? group.values.length : ''); });
           labels.enter()
             .append('label')
             .style('visibility', 'hidden')
-            .text(function(group) { return group.key || 'Uncatogrized'; })
+            .text(function(group) { return group.key + ' (' + group.values.length +')' || 'Uncatogrized'; })
+			//'<span class="up">' + counts[0] + '</span><span class="dn">' + counts[1] + '</span>'
             .style("left", function (group) { return grid.xi(group.pos) + 'px'; })
             .style("top", function (group) { return grid.yi(group.pos) - 14 + 'px'; })
             .each(function(group) {
