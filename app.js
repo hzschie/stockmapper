@@ -44,6 +44,7 @@ app.configure(function(){
 
 
 // ASSET PACKAGER CONFIGURATION
+require('coffee-script');
 var BundleUp = require('bundle-up');
 BundleUp(app, __dirname + '/lib/assets', {
   staticRoot: __dirname + '/public/',
