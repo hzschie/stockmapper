@@ -13,6 +13,25 @@ body {
   margin: 0;
 }
 
+.map li, .map .shadows div {
+  font:11px/12px "Helvetica Narrow","Arial Narrow", "Arial", sans-serif;
+  font-weight:700;
+  letter-spacing:-1px;
+  width:27px;
+}
+
+.map .shadows div {
+  width: 30px;
+  height: 15px;
+}
+.map li.highlighted:after {
+  width:27px;
+}
+.map li:hover:after {
+  width:27px;
+}
+
+
 .chart {
   margin-bottom: -70px;
 }
