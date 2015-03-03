@@ -1,4 +1,5 @@
 Constituent Symbol	Constituent Name
+AAL	AMERICAN AIRLINES GP
 AAPL	Apple Inc
 ADBE	Adobe Systems Inc
 ADI	Analog Devices Inc
@@ -21,49 +22,65 @@ CELG	Celgene Corp
 CERN	Cerner Corp
 CHKP	Check Point Software
 CHRW	C H Robinson Worldwide
+CHTR	Charter Comm Inc
 CMCSA	Comcast Corp
+CMCSK	COMCAST CL A SPCL
 COST	Costco Wholesale Corp
 CSCO	Cisco Systems
 CTRX	Catamaran Corporatio
 CTSH	Cognizant Tech Solution
 CTXS	Citrix Systems Inc
 DISCA	Discovery Communicatns
+DISCK	DISCOVERY COMM INC
+DISH	Dish Network Corp
 DLTR	Dollar Tree Inc
 DTV	Directv Group Inc
+EA	ELECTRONIC ARTS INC
 EBAY	eBay Inc
 EQIX	Equinix Inc
 ESRX	Express Scripts Hold Co
 EXPD	Expeditors Intl Of Wash
-EXPE	Expedia Inc
 FAST	Fastenal Co
 FB	Facebook Inc
-FFIV	F5 Networks Inc
 FISV	Fiserv Inc
+FOX	21ST CENTRY FOX B CM
+FOXA	Twenty-First Century Fox
 GILD	Gilead Sciences Inc
+GMCR	Green Mtn Coffee Roaste
 GOOG	Google Inc
+GOOGL	GOOGLE INC CL A CMN
 GRMN	Garmin Ltd
 HSIC	Schein Henry Inc
+ILMN	Illumina Inc
 INTC	Intel Corp
 INTU	Intuit
 ISRG	Intuitive Surgical Inc
 KLAC	Kla Tencor Corp
+KRFT	Kraft Foods Inc
 LBTYA	Liberty Global Inc
-LINTA	Liberty Interactive
+LBTYK	LIBERTY GLOBAL ORD C
 LLTC	Linear Technology Co
+LMCA	Liberty Media Corp
+LMCK	LIBERTY MEDIA C
+LRCX	LAM RESEARCH CORP
+LVNTA	LIBERTY VNTRS SRS A
+MAR	Marriott Intl Inc
 MAT	Mattel Inc
 MDLZ	Mondelez Intl Cmn A
 MNST	Monster Beverage Corp
 MSFT	Microsoft Corp
 MU	Micron Technology Inc
-MXIM	Maxim Integrated Prods
 MYL	Mylan Inc
+NFLX	Netflix Inc
 NTAP	Netapp Inc
 NVDA	Nvidia Corp
+NXPI	NXP Semiconductors N.V.
 ORLY	O Reilly Automotive Inc
 PAYX	Paychex Inc
 PCAR	Paccar Inc
 PCLN	Priceline Com Inc
 QCOM	Qualcomm Inc
+QVCA	LIBERTY INTATV SRS A
 REGN	Regeneron Pharmaceuticals
 ROST	Ross Stores Inc
 SBAC	SBA Communications Corp
@@ -75,8 +92,12 @@ SPLS	Staples Inc
 SRCL	Stericycle Inc
 STX	Seagate Technology
 SYMC	Symantec Corp
+TRIP	Tripadvisor Inc
+TSCO	Tractor Supply Co
+TSLA	Tesla Mtrs Inc
 TXN	Texas Instruments Inc
 VIAB	Viacom Inc
+VIP	VimpelCom Ltd.
 VOD	Vodafone Group
 VRSK	Verisk Analytics Inc
 VRTX	Vertex Pharmaceuticals
@@ -85,17 +106,3 @@ WFM	Whole Foods Market Inc
 WYNN	Wynn Resorts Ltd
 XLNX	Xilinx Inc
 YHOO	Yahoo Inc
-VIP	VimpelCom Ltd.  
-NXPI	NXP Semiconductors N.V.  
-CHTR	Charter Comm Inc
-DISH	Dish Network Corp
-GMCR	Green Mtn Coffee Roaste
-ILMN	Illumina Inc
-KRFT	Kraft Foods Inc
-MAR	Marriott Intl Inc
-NFLX	Netflix Inc
-TRIP	Tripadvisor Inc
-TSCO	Tractor Supply Co
-TSLA	Tesla Mtrs Inc
-FOXA	Twenty-First Century Fox
-LMCA	Liberty Media Corp
