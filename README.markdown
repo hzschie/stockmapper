@@ -1,5 +1,5 @@
 ## To Run
-*  **NYSE version:** `WEBSOCKET=true DATA_DOMAIN=nyse port=3000 node app.js`
+*  **NYSE version:** `WEBSOCKET=true DATA_DOMAIN=nyse PORT=3000 node app.js`
 *  **Blufin version:** `PORT=3001 DYNAMIC=true DATA_DOMAIN=blufin DATA_HOST=54.251.130.77:8080 node app.js`
 
 ## Hosts/Deploys

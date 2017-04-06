@@ -11,16 +11,16 @@
     , "ansi": "= 0.1.2"
     , "bundle-up": "git://github.com/Cowboy-coder/bundle-up.git"
     , "cron": "= 1.0.1"
-    , "time": "= 0.9.2"
+    , "time": "= 0.12.0"
     , "nimble": ">= 0.0.2"
-    , "strftime": ">= 0.4.7"
-    , "feedparser": ">= 0.10.6"
+    , "strftime": "= 0.4.7"
+    , "feedparser": "= 1.1.6"
     , "passport": "= 0.1.15"
     , "passport-local": "= 0.1.6"
     , "coffee-script": "~1.6.2"
   }
   , "engines": {
-      "node": "0.8"
-    , "npm":  "1.1.x"
+      "node": "6.5"
+    , "npm":  "3.10.x"
   }
 }
