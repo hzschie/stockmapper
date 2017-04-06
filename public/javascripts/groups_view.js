@@ -350,6 +350,8 @@
       var $section = $(document.createElement('div')).addClass('section').html('<div class="category">' + section.category + '</div>');
       _.forEach(section.tags, function(tag) {
         var group = tag.group;
+        if (!group) return // quick'n'dirty fix for mobile
+
         group._groupView = group._groupView || {};
         var $tag = group._groupView.$tag = $(document.createElement('div'))
           .addClass('group')
