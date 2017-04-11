@@ -86,6 +86,82 @@ app.get('/datasets/:name', dataRoutes.getDataset);
 app.get('/series/:id', dataRoutes.getTimeSeries);
 app.get('/news/:id', dataRoutes.getNews);
 
+// TEMP PROMO ROUTE
+var request = require('request');
+app.post('/promo/smp', express.bodyParser(), function(req, res) {
+  let { email, feedback, PRICE, IMPRESSION, GID, GNUM } = req.body;
+
+  var mailchimpListId = '2fcdaf14af';
+  var mailchimpApiKey = 'b559aba7b3419b79820919d4ce86cdc2-us8';
+  var mailchimpDataCenter = mailchimpApiKey.split('-')[1];
+  var mailchimpSubscribeUrl = [
+    'http://',
+    mailchimpDataCenter,
+    '.api.mailchimp.com/3.0/lists/',
+    mailchimpListId,
+    '/members/'
+  ].join('');
+
+  var subscription = {
+    email_address: email,
+    status: 'subscribed',
+    merge_fields: { PRICE, IMPRESSION, GID, GNUM }
+  }
+
+  // Add feedback if present. Need to split it into
+  // merge_fields with FEEDBACK1 thru 8, to avoid
+  // exceeding the field's size (chunkLen)
+  if (typeof feedback === 'string') {
+    var chunkLen = 250;
+    var numChunks = 1;
+    var maxChunks = 8;
+
+    if (feedback.length > chunkLen * maxChunks) {
+      res.status(400);
+      res.end('Sorry, but your feedback message exceeded the allowed length.');
+
+      return
+    }
+
+    while (feedback.length > 0 && numChunks <= maxChunks) {
+      subscription.merge_fields['FEEDBACK' + numChunks] = feedback.substr(0, chunkLen);
+      feedback = feedback.substr(chunkLen)
+      numChunks += 1;
+    }
+  }
+
+  request.post({
+    url: mailchimpSubscribeUrl,
+    body: JSON.stringify(subscription),
+    headers: {
+      'Authorization': 'apikey ' + mailchimpApiKey,
+      'Content-Type': 'application/json'
+    }
+  },
+  function(err, response, body) {
+    var result = JSON.parse(body)
+    if (result.status === 'subscribed') {
+      res.status(200);
+      res.end('The e-mail address ' + email + ' has been submitted. Thanks for you interest!');
+    }
+    else {
+      if (err) { console.log('Unexpected error:', err); }
+      var message = err || result.detail;
+      if (message.indexOf(' API ') > -1) {
+        message = 'There was an error.'
+      }
+      message = (message + ' ').split('. ')[0] + '.'
+
+
+      console.log('err', err);
+      console.log('result', result);
+
+      res.status(400);
+      res.end(message);
+    }
+  })
+})
+
 app.get('/scratchpad', function(req, res) {
   res.render('scratchpad', {
     groups: groups,

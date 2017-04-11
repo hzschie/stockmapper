@@ -1,0 +1,368 @@
+style.
+  .flash_message {
+    color: #ddf;
+    font-size: 20px;
+    line-height: 32px;
+    display:block;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding: 10px 15px;
+    margin: 20px 0;
+    background: rgba(255,255,255,0.1);
+  }
+  .flash_message .dismiss-btn {
+    color:#ccc;
+    font-size:12px;
+    margin-left: 10px;
+    float:right;
+    cursor:pointer;
+  }
+  .flash_message .dismiss-btn .x {
+    width: 20px;
+    height: 20px;
+    background: transparent url(/images/sprites.png?10252012) no-repeat scroll -2px -22px;
+    display:inline-block;
+    vertical-align: middle;
+    margin-left:5px;
+    opacity:.7
+  }
+
+  .flash_message .stockmapper-premium {
+    display:inline-block;
+    white-space:nowrap;
+  }
+  .flash_message .stockmapper-logo {
+    background: url(/images/domains/nyse/stockmapper_logo.png) no-repeat scroll -2px -2px;
+    color: transparent;
+    display:inline-block;
+    min-width: 178px;
+  }
+  .flash_message .highlighted {
+    color: #fff;
+    /* font-size: 24px; */
+    font-size: 1.2em;
+  }
+  .flash_message .stockmapper-premium .highlighted {
+  }
+
+  .pill-btn {
+    font-size: 14px;
+    display: inline-block;
+    position:relative;
+    top:-1px;
+    color: #000;
+    background: #fff;
+    border-radius: 12px;
+    cursor: pointer;
+    padding: 0.07em 0.57em;
+    line-height: 1.15em;
+  }
+  .pill-btn:hover {
+    color: #aaa;
+  }
+  .submit-btn {
+    vertical-align: bottom;
+    margin-left: 0.5em;
+    font-size: 16px;
+    float: right;
+    margin-top: 0.6em;
+  }
+
+  .flash_message .error-message {
+    color:#f00;
+    text-align: right;
+  }
+  .confirmation:after { clear:both; content: ' '; display: table;}
+  .flash_message .success-message {
+    font-size: 16px;
+    float: left;
+  }
+  .flash_message .form {
+    display: inline-block;
+    max-width: 495px;
+    width: 100%;
+  }
+  .flash_message .form label {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .flash_message .form input {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .flash_message .email input {
+    font-size: 20px;
+    padding: 5px 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .flash_message .feedback {
+
+  }
+  .flash_message .feedback textarea {
+    width: 100%;
+    max-width: 100%;
+    min-height: 160px;
+    border-radius: 16px;
+    box-sizing: border-box;
+    padding: 6px 12px;
+    -webkit-box-shadow: inset 2px 2px 6px 0px #000000;
+    -moz-box-shadow: inset 2px 2px 6px 0px #000000;
+    box-shadow: inset 2px 2px 6px 0px #000000;
+    font-size: 14px;
+  }
+  .flash_message .chars-remaining {
+    float: left;
+    font-size: 12px;
+  }
+  .flash_message .chars-remaining.invalid {
+    color: #f00;
+  }
+
+  .stage-4 .plus {
+    background-position: 0 -42px;
+  }
+
+  .stage-0 { display: none; }
+  .stage-1 .hidden-in-stage-1 { display: none; }
+  .stage-2 .hidden-in-stage-2 { display: none; }
+  .stage-3 .hidden-in-stage-3 { display: none; }
+  .stage-4 .hidden-in-stage-4 { display: none; }
+  .stage-5 .hidden-in-stage-5 { display: none; }
+
+
+#smp_promo.flash_message.stage-0
+  div.hidden-in-stage-5
+    .dismiss-btn
+      | DISMISS
+      .x &nbsp;
+    span(style='margin-right: 20px;')
+      | We're working on a &nbsp;
+      span.stockmapper-premium
+        //- span.stockmapper-logo Stockmapper
+        span.highlighted Stockmapper&nbsp;Premium&nbsp;
+      |  version! &nbsp;&nbsp;
+      .learn-more-btn.pill-btn.hidden-in-stage-2.hidden-in-stage-3.hidden-in-stage-4 LEARN MORE
+
+  div.learn-more.hidden-in-stage-1.hidden-in-stage-5
+    ul(style='font-size: 16px; line-height: 1.5; margin: 10px 0;')
+      li &nbsp;–&nbsp;&nbsp;Looking for more customization?
+      li &nbsp;–&nbsp;&nbsp;Want to track your own portfolios?
+      li &nbsp;–&nbsp;&nbsp;Need real-time data?
+    div(style='font-size: 16px; Xdisplay:none;/* temp */')
+      span
+        span.highlighted Pre-subscribe now &nbsp;
+        | and pay just &nbsp;
+        span.price.highlighted
+          | $
+          span.dollar-value ##
+          |  per month
+        |  for the first year &nbsp;&nbsp;
+        //- | — a 20% saving. &nbsp;&nbsp;
+      .presubscribe-btn.pill-btn.hidden-in-stage-3.hidden-in-stage-4 PRE-SUBSCRIBE
+
+  div.presubscribe.hidden-in-stage-1.hidden-in-stage-2.hidden-in-stage-5(style='font-size: 16px;')
+    .form
+      div.email
+        input(type='text', placeholder='Enter Your Email')
+      .error-message
+      .dropdown_selector(style='font-size: 14px; float:left;')
+        .plus &nbsp;
+        | Additional feedback
+      div.feedback.hidden-in-stage-3
+        textarea(placeholder="Your message (optional)")
+        div.chars-remaining
+      .submit-btn.pill-btn SUBMIT
+
+  div.confirmation.hidden-in-stage-1.hidden-in-stage-2.hidden-in-stage-3.hidden-in-stage-4
+    .success-message
+    .dismiss-btn(style='margin-top: 0.7em;')
+      .x &nbsp;
+
+
+script.
+  $('ready', function() {
+    // Cookie parsing module copy+pasted from https://github.com/scottious/google-analytics-dissection
+    GADissect = {
+      emptyValue: "",
+      readCookie: function() {
+        return document.cookie;
+      },
+      cookieProperties: function() {
+        var cookie = this.readCookie();
+        var properties = {};
+        var referralCookie = this.parseCookieFragment(cookie, '__utmz=', ';');
+        var source   = this.parseCookieFragment(referralCookie, 'utmcsr=', '|');
+        var medium   = this.parseCookieFragment(referralCookie, 'utmcmd=', '|');
+        var term     = this.parseCookieFragment(referralCookie, 'utmctr=', '|');
+        var content  = this.parseCookieFragment(referralCookie, 'utmcct=', '|');
+        var campaign = this.parseCookieFragment(referralCookie, 'utmccn=', '|');
+        var gclid    = this.parseCookieFragment(referralCookie, 'utmgclid=', '|');
+        if (gclid !== this.emptyValue) {
+          source = 'google';
+          medium = 'cpc';
+        }
+        var customVarCookie = this.parseCookieFragment(cookie, '__utmv=', ';');
+        var customSegment   = this.emptyValue;
+        if (customVarCookie !== this.emptyValue) {
+          var match = customVarCookie.match(/[1-9]*?\.([^|]*)/);
+          if(match && match[1] && match[1] !== "") {
+            customSegment = match[1];
+          }
+        }
+        var uniqueVisitorCookie = this.parseCookieFragment(cookie, '__utma=', ';');
+        var uniqueCookieChunks  = uniqueVisitorCookie.split('.');
+        var numVisits = parseInt(uniqueCookieChunks[5], 10) || 0;
+        properties.source    = source;
+        properties.medium    = medium;
+        properties.term      = term;
+        properties.content   = content;
+        properties.campaign  = campaign;
+        properties.customSegment = customSegment;
+        properties.numVisits = numVisits;
+        properties.uniqueVisitorID = uniqueCookieChunks.slice(0, 3).join('.');
+        properties.crossDomainVisitorID = uniqueCookieChunks[1];
+        return properties;
+      },
+      parseCookieFragment: function(fragment, startString, endString) {
+        if (!fragment || fragment === "" || !startString || startString === "" || !endString || endString === "") {
+          return this.emptyValue;
+        }
+        var substring = this.emptyValue;
+        var startIndex = fragment.indexOf(startString);
+        var assignmentIndex = startString.indexOf("=") + 1;
+        if (startIndex > -1) {
+          var endIndex = fragment.indexOf(endString, startIndex);
+          if (endIndex < 0) {
+            endIndex = fragment.length;
+          }
+          substring = decodeURIComponent(fragment.substring((startIndex + assignmentIndex), endIndex));
+        }
+        return substring;
+      }
+    };
+    // -----------------------------------------
+
+    var analyticsInfo = GADissect.cookieProperties();
+
+    var COOKIE_STAGE = '__smp_stage',
+        NUM_IMPRESSIONS = '__smp_imp',
+        OFFER_PRICE = '__smp_prc',
+
+        STAGE_FIRSTTIME = '-1',
+        STAGE_HIDDEN = '0',
+        STAGE_BANNER = '1',
+        STAGE_LEARNING = '2',
+        STAGE_SUBSCRIBING = '3',
+        STAGE_SUBSCRIBING_FEEDBACK = '4',
+        STAGE_CONFIRMING = '5',
+        STAGE_SUBSCRIBED = '6',
+        STAGE_DISMISSED = '7'
+    ;
+
+    var LONG_EXPIRY = '; expires=' + new Date(Date.now() + 5 * 365 * 86400000).toGMTString() + '; path=/'
+
+    var cookie = GADissect.readCookie();
+    var hasUtmz = GADissect.parseCookieFragment(cookie, '__utmz=', ';').length > 0;
+    var cookieStage = GADissect.parseCookieFragment(cookie, COOKIE_STAGE + '=', ';') || STAGE_FIRSTTIME;
+
+    var numImpressions = parseInt(GADissect.parseCookieFragment(cookie, NUM_IMPRESSIONS + '=', ';') || 0, 10)
+    document.cookie = NUM_IMPRESSIONS + '=' + String(numImpressions+1) + LONG_EXPIRY;
+
+    var offerPrice = parseInt(GADissect.parseCookieFragment(cookie, OFFER_PRICE + '=', ';') || 0, 10)
+    if (!offerPrice) {
+      offerPrice = 5 * Math.floor(Math.random() * 3 + 2);
+      document.cookie = OFFER_PRICE + '=' + offerPrice + LONG_EXPIRY;
+    }
+
+    var $promo = $('#smp_promo');
+    var $emailInput    = $promo.find('.email input')
+      .keyup(function(event) {
+        if (event.keyCode === 13) {
+          setTimeout(submitForm, 200)
+        }
+      })
+    var $feedbackInput = $promo.find('.feedback textarea')
+    var $charsRemaining = $promo.find('.chars-remaining')
+
+    $feedbackInput.keyup(function () {
+      var diff = 2000 - $feedbackInput.val().length
+      if (diff > 200) {
+        $charsRemaining.text('')
+      }
+      else {
+        $charsRemaining
+          .toggleClass('invalid', diff < 0)
+          .html(Math.abs(diff) + ' characters ' + (diff >= 0 ? 'remaining' : 'over the limit'))
+      }
+    })
+
+    var currentStage = null; // stage variable
+    function setStage (stage, setCookieStage) {
+      currentStage = stage;
+      for(var i = 0; i <= 5; i++) {
+        $promo.toggleClass('stage-' + i, String(i) === currentStage);
+      }
+
+      if (setCookieStage != null) {
+        document.cookie = COOKIE_STAGE + '=' + setCookieStage + LONG_EXPIRY;
+      }
+    }
+
+    $promo.find('.dollar-value').text(offerPrice)
+
+    switch (cookieStage) {
+      case STAGE_FIRSTTIME: {
+        setStage(STAGE_BANNER, STAGE_BANNER);
+        break;
+      }
+      case STAGE_SUBSCRIBED:
+      case STAGE_DISMISSED: {
+        setStage(STAGE_HIDDEN);
+        break;
+      }
+      default: {
+        setStage(cookieStage);
+        break;
+      }
+    }
+
+    $promo.find('.learn-more-btn').click(function() { setStage(STAGE_LEARNING, STAGE_LEARNING) });
+    $promo.find('.presubscribe-btn').click(function() { setStage(STAGE_SUBSCRIBING, STAGE_SUBSCRIBING) });
+    $promo.find('.dropdown_selector').click(function() {
+      var options = [STAGE_SUBSCRIBING, STAGE_SUBSCRIBING_FEEDBACK];
+      setStage(options[Number(!options.indexOf(currentStage))], STAGE_SUBSCRIBING);
+    });
+    $promo.find('.dismiss-btn').click(function() {
+      setStage(STAGE_HIDDEN, currentStage === STAGE_CONFIRMING ? null : STAGE_DISMISSED)
+    });
+
+    var $submit = $promo.find('.submit-btn').click(submitForm)
+    var $errorMessage = $promo.find('.error-message')
+    var $successMessage = $promo.find('.success-message')
+    var $submit = $promo.find('.submit-btn');
+    function submitForm() {
+      $submit.css('visibility', 'hidden');
+      $errorMessage.text('');
+      var data = {
+        email:       $emailInput.val(),
+        feedback:    $feedbackInput.val(),
+        PRICE:       offerPrice,
+        IMPRESSION:  numImpressions,
+        GID:         analyticsInfo.uniqueVisitorID,
+        GNUM:        analyticsInfo.numVisits
+      };
+      $.post('/promo/smp', data)
+        .done(function(message) {
+          $successMessage.text(message);
+          setStage(STAGE_CONFIRMING, STAGE_SUBSCRIBED);
+          setTimeout(function() { setStage(STAGE_HIDDEN) }, 10000);
+        })
+        .fail(function(data) {
+          $errorMessage.text(data.responseText);
+        })
+        .always(function() {
+          $submit.css('visibility', '');
+        })
+    };
+  })
