@@ -303,6 +303,7 @@ script.
       for(var i = 0; i <= 5; i++) {
         $promo.toggleClass('stage-' + i, String(i) === currentStage);
       }
+      mapper.Layout.onResize && mapper.Layout.onResize() // Update the rest of the layout :o
 
       if (setCookieStage != null) {
         document.cookie = COOKIE_STAGE + '=' + setCookieStage + LONG_EXPIRY;

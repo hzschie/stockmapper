@@ -78,6 +78,10 @@
         });
       }
     };
+
+    Layout.onResize = function(justLayout) {
+      onResize(justLayout)
+    }
     // $('.close', $help).click(Layout.toggleSidePanel);
     
     this.frameView = function(viewName) {
