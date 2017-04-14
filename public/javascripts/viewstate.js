@@ -73,7 +73,39 @@ var ViewState = mapper.ViewState = Backbone.Model.extend(
         }
       }
       newAttribs.urlBase = this.urlBase;
+
       this.set(newAttribs);
+
+      var pageGroup = this.get('currentGroup')
+      var pageStock = this.get('currentStock')
+
+
+      var pageTitle = ''
+      var stockStr = pageStock ? pageStock.get('sym') : ''
+
+      if (pageGroup.get('label') == 'SHOW ALL') {
+        pageTitle = stockStr
+      }
+      else if (pageGroup.get('category') === 'Index') {
+        pageTitle = (stockStr ? stockStr + ' \\ ' : '') + pageGroup.get('name')
+      }
+      else {
+        pageTitle = (stockStr ? stockStr + ' \\ ' : '') + pageGroup.get('category') + ': ' + pageGroup.get('name')
+      }
+
+      var clusterStr = this.get('cluster');
+      var sortStr = this.get('currentSort').id;
+      var pageUrl = pageGroup.get('urlName').toLowerCase() + '/per-' + (clusterStr || '*') + '/by-' + sortStr + '/' + stockStr
+
+      document.title = pageTitle + (pageTitle ? ' — ' + 'Stockmapper' : 'Stockmapper')
+
+      ga(function(tracker) {
+        var currPageUrl = tracker.get('page');
+        if (currPageUrl !== pageUrl) {
+          ga('set', 'page', pageUrl);
+          ga('send', 'pageview');
+        }
+      });
     },
     
     toParamsString: function(hash) {

@@ -8,11 +8,17 @@
       $(this).on('click', function() {
         if($(this).hasClass('disabled')) return false;
         var selectorId = $(this).data('val');
-        if($current && $current.data('val') == selectorId && allowDeselect) callback(NONE);
-        else callback(selectorId);
+
+        var topic = $container.attr('class').split(' selector')[0];
+        if($current && $current.data('val') == selectorId && allowDeselect) {
+          callback(NONE);
+        } else {
+          ga('send', 'event', 'selector', 'select-' + topic, topic + '-' + selectorId)
+          callback(selectorId);
+        }
       });
     });
-    
+
     this.setCurrent = function(id) {
       var $next = allowDeselect && id == NONE ? null : $('a[data-val="' + id + '"]', $container);
       if($current && $next && $current[0] == $next[0]) return $next;

@@ -260,6 +260,19 @@ script.
         STAGE_DISMISSED = '7'
     ;
 
+
+    var stageName = {
+        '-1': 'firsttime',
+         '0': 'hidden',
+         '1': 'banner',
+         '2': 'learning',
+         '3': 'subscribing',
+         '4': 'subscribing+feedback',
+         '5': 'confirming',
+         '6': 'subscribed',
+         '7': 'dismissed'
+    }
+
     var LONG_EXPIRY = '; expires=' + new Date(Date.now() + 5 * 365 * 86400000).toGMTString() + '; path=/'
 
     var cookie = GADissect.readCookie();
@@ -314,6 +327,7 @@ script.
 
     switch (cookieStage) {
       case STAGE_FIRSTTIME: {
+        ga('send', 'event', 'smp-promo', 'first-impression', analyticsInfo.numVisits > 0 ? 'returning-user' : 'new-user', analyticsInfo.numVisits);
         setStage(STAGE_BANNER, STAGE_BANNER);
         break;
       }
@@ -323,22 +337,46 @@ script.
         break;
       }
       default: {
+        ga('send', 'event', 'smp-promo', 're-impression', stageName[cookieStage], numImpressions);
+        ga('send', 'event', 'smp-promo', 're-impression', analyticsInfo.numVisits > 0 ? 'returning-user' : 'new-user', numImpressions);
         setStage(cookieStage);
         break;
       }
     }
 
-    $promo.find('.learn-more-btn').click(function() { setStage(STAGE_LEARNING, STAGE_LEARNING) });
-    $promo.find('.presubscribe-btn').click(function() { setStage(STAGE_SUBSCRIBING, STAGE_SUBSCRIBING) });
+    $promo.find('.learn-more-btn').click(function() {
+      ga('send', 'event', 'smp-promo', 'learn-more', 'impressions', numImpressions);
+      ga('send', 'event', 'smp-promo', 'learn-more', 'visits',      analyticsInfo.numVisits);
+      setStage(STAGE_LEARNING, STAGE_LEARNING)
+    });
+    $promo.find('.presubscribe-btn').click(function() {
+      ga('send', 'event', 'smp-promo', 'click-presubscribe', '$' + offerPrice,             offerPrice);
+      ga('send', 'event', 'smp-promo', 'click-presubscribe', '$' + offerPrice + ' visits', analyticsInfo.numVisits);
+      setStage(STAGE_SUBSCRIBING, STAGE_SUBSCRIBING)
+    });
     $promo.find('.dropdown_selector').click(function() {
       var options = [STAGE_SUBSCRIBING, STAGE_SUBSCRIBING_FEEDBACK];
-      setStage(options[Number(!options.indexOf(currentStage))], STAGE_SUBSCRIBING);
+      var idx = options.indexOf(currentStage)
+      ga('send', 'event', 'smp-promo', ['show-feedback', 'hide-feedback'][idx], '$' + offerPrice,  offerPrice);
+      ga('send', 'event', 'smp-promo', ['show-feedback', 'hide-feedback'][idx], 'visits',          analyticsInfo.numVisits);
+      setStage(options[Number(!idx)], STAGE_SUBSCRIBING);
     });
     $promo.find('.dismiss-btn').click(function() {
+      if (currentStage !== STAGE_CONFIRMING) {
+        ga('send', 'event', 'smp-promo', 'dismiss', stageName[currentStage], numImpressions);
+        ga('send', 'event', 'smp-promo', 'dismiss', 'visits',                analyticsInfo.numVisits);
+        ga('send', 'event', 'smp-promo', 'dismiss', '$' + offerPrice,        offerPrice);
+      }
       setStage(STAGE_HIDDEN, currentStage === STAGE_CONFIRMING ? null : STAGE_DISMISSED)
     });
 
-    var $submit = $promo.find('.submit-btn').click(submitForm)
+    var isFirstSubmit = true;
+    var $submit = $promo.find('.submit-btn').click(function() {
+      ga('send', 'event', 'smp-promo', (isFirstSubmit ? '' : 're-') + 'submit', stageName[currentStage]);
+      ga('send', 'event', 'smp-promo', (isFirstSubmit ? '' : 're-') + 'submit', '$' + offerPrice, offerPrice);
+      isFirstSubmit = false;
+      submitForm()
+    })
     var $errorMessage = $promo.find('.error-message')
     var $successMessage = $promo.find('.success-message')
     var $submit = $promo.find('.submit-btn');
@@ -358,9 +396,12 @@ script.
           $successMessage.text(message);
           setStage(STAGE_CONFIRMING, STAGE_SUBSCRIBED);
           setTimeout(function() { setStage(STAGE_HIDDEN) }, 10000);
+          ga('send', 'event', 'smp-promo', 'subscribed', $feedbackInput.val() ? 'with feedback' : 'email only', analyticsInfo.numVisits);
+          ga('send', 'event', 'smp-promo', 'subscribed', '$' + offerPrice, offerPrice);
         })
         .fail(function(data) {
           $errorMessage.text(data.responseText);
+          ga('send', 'event', 'smp-promo', 'failed-submit', data.responseText);
         })
         .always(function() {
           $submit.css('visibility', '');
