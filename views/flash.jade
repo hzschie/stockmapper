@@ -8,7 +8,7 @@ style.
     border-bottom: 1px solid rgba(255,255,255,0.3);
     padding: 10px 15px;
     margin: 20px 0;
-    background: rgba(255,255,255,0.1);
+    background-color: rgba(255,255,255,0.1);
   }
   .flash_message .dismiss-btn {
     color:#ccc;
@@ -129,6 +129,21 @@ style.
   .stage-3 .hidden-in-stage-3 { display: none; }
   .stage-4 .hidden-in-stage-4 { display: none; }
   .stage-5 .hidden-in-stage-5 { display: none; }
+
+  .flash_message.stage-1 {
+    animation: bg-pulse 1s infinite;
+  }
+  @keyframes bg-pulse {
+    0% {
+      background-color: rgba(255,255,255,0.1);
+    }
+    50% {
+      background-color: rgba(255,255,200,0.15);
+    }
+    100% {
+      background-color: rgba(255,255,255,0.1);
+    }
+  }
 
 
 #smp_promo.flash_message.stage-0
