@@ -111,6 +111,34 @@ app.get('/datasets/:name', dataRoutes.getDataset);
 app.get('/series/:id', dataRoutes.getTimeSeries);
 app.get('/news/:id', dataRoutes.getNews);
 
+// Diagnostic endpoint to check file existence
+app.get('/diagnostic/files', function(req, res) {
+  var fs = require('fs');
+  var path = require('path');
+  
+  var checks = [
+    '/public/javascripts/lib/backbone-min.js',
+    '/public/javascripts/lib/d3.v2.min.js',
+    '/public/javascripts/stocks.js',
+    '/public/stylesheets/main.css'
+  ];
+  
+  var results = checks.map(function(file) {
+    var fullPath = __dirname + file;
+    return {
+      path: file,
+      exists: fs.existsSync(fullPath),
+      fullPath: fullPath
+    };
+  });
+  
+  res.json({
+    __dirname: __dirname,
+    cwd: process.cwd(),
+    files: results
+  });
+});
+
 // TEMP PROMO ROUTE - COMMENTED OUT FOR SECURITY
 // Contains hardcoded API keys - use environment variables in production
 /*
