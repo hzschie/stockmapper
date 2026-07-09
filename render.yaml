@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: stockmapper
+    env: node
+    buildCommand: npm install
+    startCommand: node app.js
+    envVars:
+      - key: DATA_DOMAIN
+        value: nyse
+      - key: CANNED_DATA
+        value: true
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+    healthCheckPath: /
