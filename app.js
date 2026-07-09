@@ -111,13 +111,15 @@ app.get('/datasets/:name', dataRoutes.getDataset);
 app.get('/series/:id', dataRoutes.getTimeSeries);
 app.get('/news/:id', dataRoutes.getNews);
 
-// TEMP PROMO ROUTE
+// TEMP PROMO ROUTE - COMMENTED OUT FOR SECURITY
+// Contains hardcoded API keys - use environment variables in production
+/*
 var request = require('request');
 app.post('/promo/smp', express.bodyParser(), function(req, res) {
   let { email, feedback, PRICE, IMPRESSION, GID, GNUM } = req.body;
 
-  var mailchimpListId = '2fcdaf14af';
-  var mailchimpApiKey = 'b559aba7b3419b79820919d4ce86cdc2-us8';
+  var mailchimpListId = process.env.MAILCHIMP_LIST_ID;
+  var mailchimpApiKey = process.env.MAILCHIMP_API_KEY;
   var mailchimpDataCenter = mailchimpApiKey.split('-')[1];
   var mailchimpSubscribeUrl = [
     'http://',
@@ -186,6 +188,7 @@ app.post('/promo/smp', express.bodyParser(), function(req, res) {
     }
   })
 })
+*/
 
 app.get('/scratchpad', function(req, res) {
   res.render('scratchpad', {
