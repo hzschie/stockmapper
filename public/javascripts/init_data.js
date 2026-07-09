@@ -156,8 +156,10 @@ $(function() {
           var stocks = [];
           _.each(group.get('ids'), function(id) {
             var stock = mapper.stocks.get(id);
-            stocks.push(stock);
-            stock.get('groups').push(group);
+            if (stock) {  // Only add stock if it exists
+              stocks.push(stock);
+              stock.get('groups').push(group);
+            }
           });
           group.get('members').add(stocks);
         },

@@ -50,9 +50,11 @@ body {
 
 .app_header .logo {
   background: url('/images/domains/nyse/stockmapper_logo.png') no-repeat scroll 2px 2px;
+  background-size: contain;
   color: transparent;
   float:left;
-  min-width:190px;
+  width: 140px;
+  height: 32px;
   margin-left:7px;
 }
 .app_header > a {

@@ -44,15 +44,40 @@ app.configure(function(){
 
 
 // ASSET PACKAGER CONFIGURATION
-require('coffee-script');
-var BundleUp = require('bundle-up');
-BundleUp(app, __dirname + '/lib/assets', {
-  staticRoot: __dirname + '/public/',
-  staticUrlRoot:'/',
-  bundle: (/true/i.test(process.env.BUNDLE)),
-  minifyCss: true,
-  minifyJs: true
-});
+// Commented out for compatibility with modern Node.js
+// require('coffee-script');
+// var BundleUp = require('bundle-up');
+// BundleUp(app, __dirname + '/lib/assets', {
+//   staticRoot: __dirname + '/public/',
+//   staticUrlRoot:'/',
+//   bundle: (/true/i.test(process.env.BUNDLE)),
+//   minifyCss: true,
+//   minifyJs: true
+// });
+
+// Simple replacements for bundle-up functions
+var assetsList = require('./lib/assets');
+var mockAssets = {
+  root: __dirname + '/public',
+  css: [],
+  js: [],
+  addCss: function(path) { this.css.push(path); },
+  addJs: function(path) { this.js.push(path); }
+};
+assetsList(mockAssets);
+
+app.locals.renderStyles = function() {
+  return mockAssets.css.map(function(path) {
+    return '<link rel="stylesheet" href="' + path + '">';
+  }).join('\n    ');
+};
+
+app.locals.renderJs = function() {
+  return mockAssets.js.map(function(path) {
+    return '<script src="' + path + '"></script>';
+  }).join('\n    ');
+};
+
 if(/true/i.test(process.env.VERBOSE)) console.log("process.env = ", process.env);
 
 

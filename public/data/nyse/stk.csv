@@ -1,652 +1,791 @@
-"New Stock List as of 1/17/2014",,,,
+"New Stock List as of 1/17/2014",,,
 TICKER,NAME,EXCHANGE,COUNTRY,INDUS
 A,Agilent Technologies,NYSE Euronext,United States,Industrials
 AA,Alcoa Inc,NYSE Euronext,United States,Materials
 AAL.L,Anglo American Plc,London Stock Exchange,United Kingdom,Materials
-AAN,Aarons Inc,NYSE Euronext,United States,Services
 AAP,Advance Auto Parts Inc,NYSE Euronext,United States,Services
 AAPL,Apple Inc,NASDAQ Global Select,United States,Technology
-ABBN.VX,ABB Ltd,Swiss Stock Exchange,Switzerland,Industrials
+AAT,"AMERICAN ASSETS TRUST, INC.",NYQ,United States,Financials
 ABBV,AbbVie,NYSE Euronext,United States,Health Care
-ABC,AmeriSourceBergen Corp,NYSE Euronext,United States,Services
 ABF.L,Associated British Foods,London Stock Exchange,United Kingdom,Goods
+ABG,"ASBURY AUTOMOTIVE GROUP, INC.",NYQ,United States,ConsumerDiscr
+ABI.BR,ANHEUSER-BUSCH INBEV SA/NV,BRU,Belgium,ConsumerStpl
+ABM,ABM INDUSTRIES INCORPORATED,NYQ,United States,Industrials
+ABNB,"Airbnb, Inc.",NMS,United States,Goods
+ABR,"ARBOR REALTY TRUST, INC.",NYQ,United States,Financials
 ABT,Abbott Laboratories,NYSE Euronext,United States,Health Care
-ACAS,American Capital Ltd,NASDAQ Global Select,United States,Financials
-ACC,American Campus Commun,NYSE Euronext,United States,Financials
-ACE,Ace Ltd,NYSE Euronext,United States,Financials
+ABX,"ABACUS GLOBAL MANAGEMENT, INC.",NYQ,United States,Financials
 ACGL,Arch Cap Group Ltd,NASDAQ Global Select,United Kingdom,Financials
+ACH,"ACCENDRA HEALTH, INC.",NYQ,United States,Healthcare
+ACI,"ALBERTSONS COMPANIES, INC.",NYQ,United States,ConsumerStpl
 ACM,Aecom Technology Corp D,NYSE Euronext,United States,Industrials
 ACN,Accenture Plc Ireland,NYSE Euronext,United States,Industrials
-ACT,Actavis Plc,,Ireland,Health Care
+ACTV,LEADERSHARES ACTIVIST LEADERS ETF,PCX,US,Technology
+AD.AS,KONINKLIJKE AHOLD DELHAIZE N.V.,AMS,Netherlands,ConsumerStpl
 ADBE,Adobe Systems Inc,NASDAQ Global Select,United States,Technology
+ADC,AGREE REALTY CORPORATION,NYQ,United States,Financials
 ADI,Analog Devices Inc,NASDAQ Global Select,United States,Technology
 ADM,Archer Daniels Midland,NYSE Euronext,United States,Goods
 ADM.L,Admiral Group,London Stock Exchange,United Kingdom,Financials
-ADN.L,Aberdeen Asset Management,London Stock Exchange,United Kingdom,Financials
 ADP,Automatic Data Process,NASDAQ Global Select,United States,Technology
-ADS,Alliance Data Systems,NYSE Euronext,United States,Industrials
 ADSK,Autodesk Inc,NASDAQ Global Select,United States,Technology
-ADT,ADT Corp,NYSE Euronext,United States,Industrials
+AEC,ANFIELD ENERGY INC.,NCM,Canada,Energy
 AEE,Ameren Corp,NYSE Euronext,United States,Utilities
+AEG,AEGON LTD.,NYQ,Netherlands,Financials
+AEM,AGNICO EAGLE MINES LIMITED,NYQ,Canada,BasicMaterials
 AEO,American Eagle Outfitte,NYSE Euronext,United States,Services
 AEP,American Electric Power,NYSE Euronext,United States,Utilities
+AER,AERCAP HOLDINGS N.V.,NYQ,Ireland,Industrials
 AES,AES Corp,NYSE Euronext,United States,Utilities
-AET,Aetna Inc,NYSE Euronext,United States,Health Care
 AFG,American Financial Grou,NASDAQ Global Select,United States,Financials
 AFL,Aflac Inc,NYSE Euronext,United States,Financials
+AG,FIRST MAJESTIC SILVER CORP.,NYQ,Canada,BasicMaterials
 AGCO,Agco Corp,NYSE Euronext,United States,Industrials
-AGK.L,Aggreko,London Stock Exchange,United Kingdom,Financials
-AGN,Allergan Inc,NYSE Euronext,United States,Health Care
-AGNC,American Capital Agency,NASDAQ Global Select,United States,Services
+AGM,FEDERAL AGRICULTURAL MORTGAGE CORPORATION,NYQ,United States,Financials
 AGO,Assured Guaranty Ltd,NYSE Euronext,United States,Financials
-AHL,Aspen Insurance Holding,NYSE Euronext,United States,Financials
+AGRO,ADECOAGRO S.A.,NYQ,Luxembourg,ConsumerStpl
+AHT,"ASHFORD HOSPITALITY TRUST, INC.",NYQ,United States,Financials
+AI,"C3.AI, INC.",NYQ,United States,Technology
+AI.PA,L'AIR LIQUIDE S.A.,PAR,France,BasicMaterials
 AIG,American Intl Group,NYSE Euronext,United States,Financials
+AIN,ALBANY INTERNATIONAL CORP.,NYQ,United States,ConsumerDiscr
+AIQ,GLOBAL X ARTIFICIAL INTELLIGENCE & TECHNOLOGY ETF,NGM,US,Technology
+AIR,AAR CORP.,NYQ,United States,Industrials
+AIR.PA,AIRBUS SE,PAR,Netherlands,Industrials
+AIT,"APPLIED INDUSTRIAL TECHNOLOGIES, INC.",NYQ,United States,Industrials
 AIV,Apartment Invt & Mgmt,NYSE Euronext,United States,Financials
 AIZ,Assurant Inc,NYSE Euronext,United States,Financials
 AJG,Gallagher Arthur J & Co,NYSE Euronext,United States,Financials
-AKAM,Akamai Technologies,NASDAQ Global Select,United States,Technology
-AL,Air Lease Corp,NYSE Euronext,United States,Industrials
+AKO-A,EMBOTELLADORA ANDINA S.A.,NYQ,Chile,ConsumerStpl
+AKO-B,EMBOTELLADORA ANDINA S.A.,NYQ,Chile,ConsumerStpl
+AKR,ACADIA REALTY TRUST,NYQ,United States,Financials
+ALAB,"ASTERA LABS, INC.",NMS,United States,Technology
 ALB,Albemarle Corp,NYSE Euronext,United States,Materials
+ALC,ALCON INC.,NYQ,Switzerland,Healthcare
+ALG,ALAMO GROUP INC.,NYQ,United States,Industrials
+ALGN,"Align Technology, Inc.",NMS,United States,Health Care
 ALK,Alaska Air Group,NYSE Euronext,United States,Services
-ALKS,Alkermes Plc,NASDAQ Global Select,United States,Health Care
 ALL,Allstate Corp,NYSE Euronext,United States,Financials
-ALLE,Allegion,,Ireland,Industrials
-ALR,Alere Inc,NYSE Euronext,United States,Health Care
-ALSN,Allison Transmission,NYSE Euronext,United States,Goods
-ALTR,Altera Corp,NASDAQ Global Select,United States,Technology
+ALNY,"ALNYLAM PHARMACEUTICALS, INC.",NMS,United States,Technology
+ALV,"AUTOLIV, INC.",NYQ,Sweden,ConsumerDiscr
 ALV.DE,Allianz,Frankfurt Stock Exchange,Germany,Financials
-ALXN,Alexion Pharmaceuticals,NASDAQ Global Select,United States,Health Care
+ALX,"ALEXANDER'S, INC.",NYQ,United States,Financials
+AM,ANTERO MIDSTREAM CORPORATION,NYQ,United States,Energy
 AMAT,Applied Matls Inc,NASDAQ Global Select,United States,Technology
-AMCX,AMC Networks Inc,NASDAQ Global Select,United States,Services
+AMBO,AMBOW EDUCATION HOLDING LTD.,ASE,United States,ConsumerStpl
+AMCR,Amcor plc,NYQ,Switzerland,Goods
 AMD,Advanced Micro Devices,NYSE Euronext,United States,Technology
 AME,Ametek Inc,NYSE Euronext,United States,Industrials
-AMEC.L,AMEC,London Stock Exchange,United Kingdom,Oil & Gas
 AMG,Affiliated Managers Grp,NYSE Euronext,United States,Financials
 AMGN,Amgen Inc,NASDAQ Global Select,United States,Health Care
 AMP,Ameriprise Financial In,NYSE Euronext,United States,Financials
+AMR,"ALPHA METALLURGICAL RESOURCES, INC.",NYQ,United States,BasicMaterials
+AMRC,"AMERESCO, INC.",NYQ,United States,Industrials
 AMT,American Tower Corp,NYSE Euronext,United States,Financials
-AMTD,TD Ameritrade Holding,NYSE Euronext,United States,Financials
+AMX,"AMÉRICA MÓVIL, S.A.B. DE C.V.",NYQ,Mexico,Technology
 AMZN,Amazon Com Inc,NASDAQ Global Select,United States,Services
 AN,Autonation Inc,NYSE Euronext,United States,Services
-ANAT,American National Ins C,NASDAQ Global Select,United States,Financials
+ANET,"Arista Networks, Inc.",NYQ,United States,Technology
 ANF,Abercrombie & Fitch,NYSE Euronext,United States,Services
-ANSS,Ansys Inc,NASDAQ Global Select,United States,Technology
 ANTO.L,Antofagasta,London Stock Exchange,United Kingdom,Materials
-AOL,AOL Inc,NYSE Euronext,United States,Technology
 AON,Aon Plc,NYSE Euronext,United States,Financials
 AOS,AO Smith Corp,NYSE Euronext,United States,Goods
+AP,AMPCO-PITTSBURGH CORPORATION,NYQ,United States,Industrials
 APA,Apache Corp,NASDAQ Global Select,United States,Oil & Gas
-APAM,Artisan Partners Asset,NYSE Euronext,United States,Financials
 APC,Anadarko Petroleum Corp,NYSE Euronext,United States,Oil & Gas
 APD,Air Prods & Chems Inc,NYSE Euronext,United States,Materials
 APH,Amphenol Corp,NYSE Euronext,United States,Industrials
-APOL,Apollo Group Inc,NASDAQ Global Select,United States,Services
-ARCC,Ares Cap Corp,NASDAQ Global Select,United States,Financials
+APO,"Apollo Global Management, Inc.",NYQ,United States,Financials
+APP,AppLovin Corporation,NMS,United States,Services
+APTV,Aptiv PLC,NYQ,Switzerland,Goods
+ARB,ALTSHARES MERGER ARBITRAGE ETF,PCX,US,Technology
+ARCO,ARCOS DORADOS HOLDINGS INC.,NYQ,Uruguay,ConsumerDiscr
 ARE,Alexandria Real Estate,NYSE Euronext,United States,Financials
-ARG,Airgas Inc,NYSE Euronext,United States,Materials
-ARIA,Ariad Pharmaceuticals,NASDAQ Global Select,United States,Health Care
-ARM.L,Arm Holdings,London Stock Exchange,United Kingdom,Technology
+ARES,Ares Management Corporation,NYQ,United States,Financials
+ARI,"APOLLO COMMERCIAL REAL ESTATE FINANCE, INC.",NYQ,United States,Financials
+ARL,"AMERICAN REALTY INVESTORS, INC.",NYQ,United States,Financials
+ARM,ARM HOLDINGS PLC,NMS,United Kingdom,Technology
+ARR,"ARMOUR RESIDENTIAL REIT, INC.",NYQ,United States,Financials
 ARW,Arrow Electronics Inc,NYSE Euronext,United States,Industrials
-ASBC,Associated Banc Corp,NASDAQ Global Select,United States,Financials
+ARX,ACCELERANT HOLDINGS,NYQ,Cayman Islands,Financials
 ASH,Ashland Inc,NYSE Euronext,United States,Materials
+ASML,ASML HOLDING N.V.,NMS,Netherlands,Technology
 ASML.AS,ASML Holding,Euronext Amsterdam,Netherlands,Technology
-ASNA,Ascena Retail Group Inc,NASDAQ Global Select,United States,Services
+ASR,"GRUPO AEROPORTUARIO DEL SURESTE, S. A. B. DE C. V.",NYQ,Mexico,Industrials
+ASX,"ASE TECHNOLOGY HOLDING CO., LTD.",NYQ,Taiwan,Technology
 ATI,Allegheny Technologies,NYSE Euronext,United States,Materials
-ATK,Alliant Techsystems,NYSE Euronext,United States,Industrials
-ATML,Atmel Corp,NASDAQ Global Select,United States,Technology
 ATO,Atmos Energy Corp,NYSE Euronext,United States,Utilities
 ATR,Aptargroup Inc,NYSE Euronext,United States,Industrials
-ATVI,Activision Blizzard Inc,NASDAQ Global Select,United States,Technology
-ATW,Atwood Oceanics Inc,NYSE Euronext,United States,Oil & Gas
+AU,ANGLOGOLD ASHANTI PLC,NYQ,United States,BasicMaterials
+AUTO.L,AUTOTRADER GROUP PLC,LSE,United Kingdom,Technology
+AV,CORGI AEROSPACE & COMMERCIAL AVIATION ETF,BTS,US,Technology
 AV.L,AVIVA,London Stock Exchange,United Kingdom,Financials
+AVA,AVISTA CORPORATION,NYQ,United States,Utilities
 AVB,Avalonbay Cmntys Inc,NYSE Euronext,United States,Financials
+AVD,AMERICAN VANGUARD CORPORATION,NYQ,United States,BasicMaterials
 AVGO,Avago Technologies Ltd,NASDAQ Global Select,Singapore,Technology
-AVP,Avon Products Inc,NYSE Euronext,United States,Goods
 AVT,Avnet Inc,NYSE Euronext,United States,Industrials
 AVX,AVX Corp,NYSE Euronext,United States,Industrials
 AVY,Avery Dennison Corp,NYSE Euronext,United States,Materials
-AWAY,Homeaway Inc,NASDAQ Global Select,United States,Technology
-AWH,Allied Wrld Assur Com,NYSE Euronext,United States,Financials
 AWI,Armstrong World Inds In,NYSE Euronext,United States,Industrials
 AWK,American Wtr Wks Co Inc,NYSE Euronext,United States,Utilities
+AWR,AMERICAN STATES WATER COMPANY,NYQ,United States,Utilities
+AXON,"Axon Enterprise, Inc.",NMS,United States,Industrials
 AXP,American Express Co,NYSE Euronext,United States,Financials
+AXR,AMREP CORPORATION,NYQ,United States,Financials
 AXS,Axis Capital Holdings,NYSE Euronext,United States,Financials
+AYI,ACUITY INC.,NYQ,United States,Industrials
+AZN,ASTRAZENECA PLC,NYQ,United Kingdom,Healthcare
 AZN.L,Astrazeneca,London Stock Exchange,United Kingdom,Health Care
 AZO,Autozone Inc,NYSE Euronext,United States,Services
+AZZ,AZZ INC.,NYQ,United States,Industrials
+B,BARRICK MINING CORPORATION,NYQ,Canada,BasicMaterials
 BA,Boeing Co,NYSE Euronext,United States,Industrials
 BA.L,BAE Systems,London Stock Exchange,United Kingdom,Goods
 BAB.L,Babcock International,London Stock Exchange,United Kingdom,Services
 BAC,Bank Of America,NYSE Euronext,United States,Financials
 BAH,Booz Allen Hamilton Hld,NYSE Euronext,United States,Industrials
+BALL,Ball Corporation,NYQ,United States,Goods
+BALT,INNOVATOR DEFINED WEALTH SHIELD ETF,BTS,US,Technology
+BAM,BROOKFIELD ASSET MANAGEMENT LTD.,NYQ,United States,Financials
+BAP,CREDICORP LTD.,NYQ,Peru,Financials
 BARC.L,Barclays,London Stock Exchange,United Kingdom,Financials
-BAS,BASF,NYSE Euronext,United States,Oil & Gas
+BAS.DE,BASF SE,GER,Germany,BasicMaterials
 BATS.L,British American Tobacco,London Stock Exchange,United Kingdom,Goods
 BAX,Baxter International,NYSE Euronext,United States,Health Care
 BAYN.DE,Bayer Ag,Frankfurt Stock Exchange,Germany,Health Care
-BBBY,Bed Bath & Beyond,NASDAQ Global Select,United States,Services
 BBT,BB&T Corp,NYSE Euronext,United States,Financials
 BBVA,Banco Bilbao Vizcaya Argentaria,Madrid Stock Exchange,Spain,Financials
+BBVA.MC,"BANCO BILBAO VIZCAYA ARGENTARIA, S.A.",MCE,Spain,Financials
+BBW,"BUILD-A-BEAR WORKSHOP, INC.",NYQ,United States,ConsumerDiscr
 BBY,Best Buy Inc,NYSE Euronext,United States,Services
-BCR,Bard C R Inc,NYSE Euronext,United States,Health Care
+BC,BRUNSWICK CORPORATION,NYQ,United States,ConsumerDiscr
+BCE,BCE INC.,NYQ,Canada,Technology
+BCH,BANCO DE CHILE,NYQ,Chile,Financials
+BCO,THE BRINK'S COMPANY,NYQ,United States,Industrials
+BCS,BARCLAYS PLC,NYQ,United Kingdom,Financials
+BDC,BELDEN INC.,NYQ,United States,Technology
 BDN,Brandywine Realty Trust,NYSE Euronext,United States,Financials
 BDX,Becton Dickinson & Co,NYSE Euronext,United States,Health Care
 BEAM,Beam Inc,NYSE Euronext,United States,Goods
-BEAV,Be Aerospace Inc,NASDAQ Global Select,United States,Goods
 BEN,Franklin Resources Inc,NYSE Euronext,United States,Financials
+BF-A,BROWN-FORMAN CORPORATION,NYQ,United States,ConsumerStpl
 BF-B,Brown Forman Corp,NYSE Euronext,United States,Goods
+BFS,"SAUL CENTERS, INC.",NYQ,United States,Financials
 BG,Bunge Limited,NYSE Euronext,United States,Goods
-BG.L,BG Group,London Stock Exchange,United Kingdom,Materials
-BHI,Baker Hughes Inc,NYSE Euronext,United States,Oil & Gas
+BGC,"BGC GROUP, INC.",NMS,United States,Financials
+BGS,"B&G FOODS, INC.",NYQ,United States,ConsumerStpl
+BH,BIGLARI HOLDINGS INC.,NYQ,United States,ConsumerDiscr
+BHE,"BENCHMARK ELECTRONICS, INC.",NYQ,United States,Technology
 BHP,BHP Billiton,NYSE Euronext,United Kingdom,Materials
-BIDU,Baidu Inc,NASDAQ Global Select,China,Technology
-BIG,Big Lots Inc,NYSE Euronext,United States,Services
 BIIB,Biogen Idec Inc,NASDAQ Global Select,United States,Health Care
 BIO,Bio Rad Laboratories In,NYSE Euronext,United States,Health Care
+BIO-B,"BIO-RAD LABORATORIES, INC.",NYQ,United States,Healthcare
+BITA,ISHARES BITCOIN PREMIUM INCOME ETF,NGM,US,Technology
 BK,Bank Of New York Mellon,NYSE Euronext,United States,Financials
 BKD,Brookdale Senior Living,NYSE Euronext,United States,Health Care
+BKE,"THE BUCKLE, INC.",NYQ,United States,ConsumerDiscr
+BKG.L,THE BERKELEY GROUP HOLDINGS PLC,LSE,United Kingdom,ConsumerDiscr
+BKH,BLACK HILLS CORPORATION,NYQ,United States,Utilities
+BKNG,Booking Holdings Inc.,NMS,United States,Goods
+BKR,Baker Hughes Company,NMS,United States,Oil & Gas
 BKU,Bankunited Inc,NYSE Euronext,United States,Financials
-BKW,Burger King Worldwide,NYSE Euronext,United States,Services
+BLDR,"Builders FirstSource, Inc.",NYQ,United States,Industrials
 BLK,Blackrock Inc,NYSE Euronext,United States,Financials
-BLL,Ball Corp,NYSE Euronext,United States,Industrials
 BLND.L,British Land Co,London Stock Exchange,United Kingdom,Financials
-BMC,BMC Software Inc,NASDAQ Global Select,United States,Technology
+BLX,BLADEX INC.,NYQ,Panama,Financials
+BMA,BANCO MACRO S.A.,NYQ,Argentina,Financials
+BMI,"BADGER METER, INC.",NYQ,United States,Technology
+BMO,BANK OF MONTREAL,NYQ,Canada,Financials
 BMR,Biomed Realty Trust Inc,NYSE Euronext,United States,Financials
-BMRN,Biomarin Pharmaceutical,NASDAQ Global Select,United States,Health Care
-BMS,Bemis Inc,NYSE Euronext,United States,Industrials
 BMW.DE,BMW,Frankfurt Stock Exchange,Germany,Goods
 BMY,Bristol Myers Squibb,NYSE Euronext,United States,Health Care
 BN.PA,Danone,Euronext Paris,France,Goods
 BNP.PA,BNP Paribas,Euronext Paris,France,Financials
+BNS,THE BANK OF NOVA SCOTIA,NYQ,Canada,Financials
+BNY,The Bank of New York Mellon Cor,NYQ,United States,Financials
 BNZL.L,Bunzl,London Stock Exchange,United Kingdom,Services
 BOH,Bank Of Hawaii,NYSE Euronext,United States,Financials
-BOKF,BOK Financial Corp,NASDAQ Global Select,United States,Financials
+BOX,"BOX, INC.",NYQ,United States,Technology
 BP,BP,NYSE Euronext,United Kingdom,Oil & Gas
-BPOP,Popular Inc,NASDAQ Global Select,United States,Financials
+BP.L,BP P.L.C.,LSE,United Kingdom,Energy
+BPI,GRAYSCALE BITCOIN PREMIUM INCOME ETF,PCX,US,Technology
 BR,Broadridge Financial In,NYSE Euronext,United States,Industrials
 BRBY.L,Burberry Group,London Stock Exchange,United Kingdom,Services
-BRCD,Brocade Communications,NASDAQ Global Select,United States,Technology
-BRCM,Broadcom Corp,NASDAQ Global Select,United States,Technology
-BRDCY,Bridgestone Corp,,Japan,Goods
-BRE,Bre Properties Inc,NYSE Euronext,United States,Financials
+BRC,BRADY CORPORATION,NYQ,United States,Industrials
+BRK-A,BERKSHIRE HATHAWAY INC.,NYQ,United States,Financials
 BRK-B,Berkshire Hathaway,NYSE Euronext,United States,Financials
-BRKR,Bruker Corp,NASDAQ Global Select,United States,Goods
 BRO,Brown & Brown Inc,NYSE Euronext,United States,Financials
+BRT,BRT APARTMENTS CORP.,NYQ,United States,Financials
 BSX,Boston Scientific Co,NYSE Euronext,United States,Health Care
-BSY.L,British Sky Broadcasting Group,London Stock Exchange,United Kingdom,Services
-BT,BT Group,London Stock Exchange,United Kingdom,Technology
+BT-A.L,BT GROUP PLC,LSE,United Kingdom,Technology
+BTE,BAYTEX ENERGY CORP.,NYQ,Canada,Energy
 BTU,Peabody Energy Corp,NYSE Euronext,United States,Materials
+BUD,ANHEUSER-BUSCH INBEV SA/NV,NYQ,Belgium,ConsumerStpl
+BVN,COMPAÑÍA DE MINAS BUENAVENTURA S.A.A.,NYQ,Peru,BasicMaterials
 BWA,Borg Warner Inc,NYSE Euronext,United States,Goods
-BWC,Babcock & Wilcox Compan,NYSE Euronext,United States,Industrials
+BX,Blackstone Inc.,NYQ,United States,Financials
+BXC,BLUELINX HOLDINGS INC.,NYQ,United States,Industrials
 BXP,Boston Properties Inc,NYSE Euronext,United States,Financials
-BYI,Bally Technologies Inc,NYSE Euronext,United States,Services
+BYD,BOYD GAMING CORPORATION,NYQ,United States,ConsumerDiscr
+BZ,KANZHUN LIMITED,NMS,China,Technology
+BZH,"BEAZER HOMES USA, INC.",NYQ,United States,ConsumerDiscr
 C,Citigroup Inc,NYSE Euronext,United States,Financials
-CA,CA Inc,NASDAQ Global Select,United States,Technology
 CA.PA,Carrefour,Euronext Paris,France,Services
-CAB,Cabelas Inc,NYSE Euronext,United States,Services
+CACI,CACI INTERNATIONAL INC,NYQ,United States,Technology
+CAE,CAE INC.,NYQ,Canada,Industrials
 CAG,Conagra Foods Inc,NYSE Euronext,United States,Goods
 CAH,Cardinal Health Inc,NYSE Euronext,United States,Services
-CAJ,Canon Inc,,Japan,Goods
+CALX,"CALIX, INC.",NYQ,United States,Technology
 CAM,Cameron Intl Corp,NYSE Euronext,United States,Oil & Gas
-CAR,Avis Budget Group,NASDAQ Global Select,United States,Services
+CARR,Carrier Global Corporation,NYQ,United States,Industrials
+CAS,SIMPLIFY CHINA A SHARES PLUS INCOME ETF,PCX,US,Technology
+CASY,"Casey's General Stores, Inc.",NMS,United States,Goods
 CAT,Caterpillar Inc,NYSE Euronext,United States,Industrials
+CATO,THE CATO CORPORATION,NYQ,United States,ConsumerDiscr
 CB,Chubb Corp,NYSE Euronext,United States,Financials
-CBG,CBRE Group Inc,NYSE Euronext,United States,Financials
 CBI,Chicago Bridge & Iron,NYSE Euronext,Netherlands,Industrials
+CBK,"COMMERCIAL BANCGROUP, INC.",NCM,United States,Financials
 CBL,CBL & Associates Properties,NYSE Euronext,United States,Financials
 CBOE,CBOE Hldgs Inc,NASDAQ Global Select,United States,Financials
-CBS,CBS Corporation,NYSE Euronext,United States,Services
-CBSH,Commerce Bancshares Inc,NASDAQ Global Select,United States,Financials
-CBST,Cubist Pharmaceuticals,,United States,Health Care
+CBRE,"CBRE Group, Inc.",NYQ,United States,Financials
 CBT,Cabot Corp,NYSE Euronext,United States,Materials
-CCE,Coca Cola Enterprise,NYSE Euronext,United States,Goods
+CBU,"COMMUNITY FINANCIAL SYSTEM, INC.",NYQ,United States,Financials
+CBZ,"CBIZ, INC.",NYQ,United States,Industrials
+CCC,CCC INTELLIGENT SOLUTIONS HOLDINGS INC.,NMS,United States,Technology
+CCEP,COCA-COLA EUROPACIFIC PARTNERS PLC,NMS,United Kingdom,Technology
+CCG,CHECHE GROUP INC.,NCM,China,Technology
+CCH.L,COCA-COLA HBC AG,LSE,Switzerland,ConsumerStpl
 CCI,Crown Castle Intl Corp,NYSE Euronext,United States,Technology
+CCJ,CAMECO CORPORATION,NYQ,Canada,Energy
 CCK,Crown Holdings Inc,NYSE Euronext,United States,Industrials
 CCL,Carnival Corp,NYSE Euronext,United Kingdom,Services
+CCM,CONCORD MEDICAL SERVICES HOLDINGS LIMITED,NYQ,China,Healthcare
 CCO,Clear Channel Outdoor,NYSE Euronext,United States,Services
+CCU,COMPAÑÍA CERVECERÍAS UNIDAS S.A.,NYQ,Chile,ConsumerStpl
+CDE,"COEUR MINING, INC.",NYQ,United States,BasicMaterials
 CDNS,Cadence Design Systems,NASDAQ Global Select,United States,Technology
+CDW,CDW Corporation,NMS,United States,Technology
 CE,Celanese Corp,NYSE Euronext,United States,Materials
-CELG,Celgene Corp,NASDAQ Global Select,United States,Health Care
-CERN,Cerner Corp,NASDAQ Global Select,United States,Health Care
+CEG,Constellation Energy Corporation,NMS,United States,Utilities
 CF,Cf Industries Holdings,NYSE Euronext,United States,Materials
-CFN,Carefusion Corp,NYSE Euronext,United States,Health Care
+CFG,"Citizens Financial Group, Inc.",NYQ,United States,Financials
 CFR,Cullen Frost Bankers,NYSE Euronext,United States,Financials
-CFX,Colfax Corp,NYSE Euronext,United States,Industrials
+CGV,CONDUCTOR GLOBAL EQUITY VALUE ETF,NYQ,US,Technology
+CHA,CHAGEE HOLDINGS LIMITED,NMS,China,ConsumerDiscr
 CHD,Church & Dwight Inc,NYSE Euronext,United States,Goods
+CHE,CHEMED CORPORATION,NYQ,United States,Healthcare
 CHH,Choice Hotels Intl Inc,NYSE Euronext,United States,Services
-CHK,Chesapeake Energy Corp,NYSE Euronext,United States,Oil & Gas
-CHKP,Check Point Software,NASDAQ Global Select,Israel,Technology
-CHRW,C H Robinson Worldwide,NASDAQ Global Select,United States,Industrials
-CHS,Chicos Fas Inc,NYSE Euronext,United States,Services
+CHT,"CHUNGHWA TELECOM CO., LTD.",NYQ,Taiwan,Technology
 CHTR,Charter Comm Inc,NASDAQ Global Select,United States,Services
 CI,Cigna Corp,NYSE Euronext,United States,Health Care
-CIE,Cobalt Intl Energy,NYSE Euronext,United States,Oil & Gas
+CIA,"CITIZENS, INC.",NYQ,United States,Financials
+CIEN,Ciena Corporation,NYQ,United States,Technology
+CIG-C,COMPANHIA ENERGÉTICA DE MINAS GERAIS - CEMIG,NYQ,Brazil,Utilities
 CIM,Chimera Investment Corp,NYSE Euronext,United States,Financials
-CINF,Cincinnati Financial,NASDAQ Global Select,United States,Financials
-CIT,CIT Group Inc,NYSE Euronext,United States,Financials
+CIR,CORGI CRCL 2X DAILY ETF,BTS,US,Technology
 CL,Colgate Palmolive Co,NYSE Euronext,United States,Goods
+CLB,CORE LABORATORIES INC.,NYQ,United States,Energy
+CLDT,CHATHAM LODGING TRUST,NYQ,United States,Financials
 CLF,Cliffs Natural Resource,NYSE Euronext,United States,Materials
-CLGX,Corelogic Inc,NYSE Euronext,United States,Industrials
 CLH,Clean Harbors Inc,NYSE Euronext,United States,Industrials
-CLI,Mack Cali Realty Corp,NYSE Euronext,United States,Financials
-CLR,Continental Resources,NYSE Euronext,United States,Oil & Gas
+CLS,CELESTICA INC.,NYQ,Canada,Technology
+CLW,CLEARWATER PAPER CORPORATION,NYQ,United States,BasicMaterials
 CLX,Clorox Co,NYSE Euronext,United States,Goods
-CMA,Comerica Inc,NYSE Euronext,United States,Financials
+CM,CANADIAN IMPERIAL BANK OF COMMERCE,NYQ,Canada,Financials
+CMC,COMMERCIAL METALS COMPANY,NYQ,United States,Industrials
 CMCSA,Comcast Corp,NASDAQ Global Select,United States,Services
 CME,CME Group Inc,NASDAQ Global Select,United States,Financials
 CMG,Chipotle Mexican Grill,NYSE Euronext,United States,Services
 CMI,Cummins Inc,NYSE Euronext,United States,Industrials
 CMP,Compass Minerals Intl,NYSE Euronext,United States,Materials
+CMRE,COSTAMARE INC.,NYQ,Monaco,Industrials
 CMS,CMS Energy Corp,NYSE Euronext,United States,Utilities
 CNA,CNA Financial Corp,NYSE Euronext,United States,Financials
 CNA.L,Centrica,London Stock Exchange,United Kingdom,Utilities
-CNHI,CNH Industrial N V,NYSE Euronext,Netherlands,Industrials
+CNC,Centene Corporation,NYQ,United States,Health Care
+CNH,CNH INDUSTRIAL N.V.,NYQ,United Kingdom,Industrials
+CNI,CANADIAN NATIONAL RAILWAY COMPANY,NYQ,Canada,Industrials
 CNK,Cinemark Holdings Inc,NYSE Euronext,United States,Services
+CNL,COLLECTIVE MINING LTD.,ASE,United States,BasicMaterials
+CNO,"CNO FINANCIAL GROUP, INC.",NYQ,United States,Financials
 CNP,Centerpoint Energy Inc,NYSE Euronext,United States,Utilities
-CNQR,Concur Technologies Inc,NASDAQ Global Select,United States,Technology
-CNW,Conway Inc,NYSE Euronext,United States,Industrials
+CNQ,CANADIAN NATURAL RESOURCES LIMITED,NYQ,Canada,Energy
+CNS,"COHEN & STEERS, INC.",NYQ,United States,Financials
 CNX,Consol Energy Inc,NYSE Euronext,United States,Materials
 COF,Capital One Financial,NYSE Euronext,United States,Financials
-COG,Cabot Oil & Gas Corp,NYSE Euronext,United States,Oil & Gas
-COH,Coach Inc,NYSE Euronext,United States,Goods
-COL,Rockwell Collins Inc,NYSE Euronext,United States,Industrials
+COHR,Coherent Corp.,NYQ,United States,Technology
+COIN,"Coinbase Global, Inc.",NMS,United States,Financials
 COO,Cooper Companies Inc,NYSE Euronext,United States,Health Care
 COP,ConocoPhillips,NYSE Euronext,United States,Oil & Gas
+COR,"Cencora, Inc.",NYQ,United States,Health Care
 COST,Costco Wholesale Corp,NASDAQ Global Select,United States,Services
-COV,Covidien Plc,NYSE Euronext,United States,Health Care
+CP,CANADIAN PACIFIC KANSAS CITY LIMITED,NYQ,Canada,Industrials
 CPA,Copa Holdings Sa,NYSE Euronext,Panama,Services
+CPAY,"Corpay, Inc.",NYQ,United States,Technology
 CPB,Campbell Soup Co,NYSE Euronext,United States,Goods
+CPF,CENTRAL PACIFIC FINANCIAL CORP.,NYQ,United States,Financials
 CPG.L,Compass Group,London Stock Exchange,United Kingdom,Services
 CPI.L,Capita,London Stock Exchange,United Kingdom,Services
-CPN,Calpine Corp,NYSE Euronext,United States,Utilities
+CPK,CHESAPEAKE UTILITIES CORPORATION,NYQ,United States,Utilities
 CPRT,Copart Inc,NASDAQ Global Select,United States,Services
 CPT,Camden Property Trust,NYSE Euronext,United States,Financials
-CPWR,Compuware Corp,NASDAQ Global Select,United States,Technology
 CR,Crane Co,NYSE Euronext,United States,Industrials
+CRD-A,CRAWFORD & COMPANY,NYQ,United States,Financials
+CRD-B,CRAWFORD & COMPANY,NYQ,United States,Financials
 CRDA.L,Croda International,London Stock Exchange,United Kingdom,Materials
-CREE,Cree Inc,NASDAQ Global Select,United States,Technology
-CRH.L,CRH,London Stock Exchange,Ireland,Goods
+CRH,CRH plc,NYQ,Ireland,Materials
 CRI,Carter Inc,NYSE Euronext,United States,Goods
+CRK,"COMSTOCK RESOURCES, INC.",NYQ,United States,Energy
 CRL,Charles River Labs Intl,NYSE Euronext,United States,Health Care
 CRM,Salesforce Com Inc,NYSE Euronext,United States,Technology
 CRS,Carpenter Technology,NYSE Euronext,United States,Materials
+CRWD,"CrowdStrike Holdings, Inc.",NMS,United States,Technology
+CRWV,"COREWEAVE, INC.",NMS,United States,Technology
+CRY,GRANITESHARES YIELDBOOST CRCL ETF,NGM,US,Technology
 CS.PA,AXA Group,Euronext Paris,France,Financials
-CSC,Computer Sciences Corp,NYSE Euronext,United States,Technology
+CSA,VICTORYSHARES US SMALL CAP VOLATILITY WTD ETF,NGM,US,Technology
 CSCO,Cisco Systems,NASDAQ Global Select,United States,Technology
-CSE,CapitalSource Inc,NYSE Euronext,United States,Financials
-CSGN.VX,Credit Suisse Group Ag,Swiss Stock Exchange,Switzerland,Financials
+CSGP,"CoStar Group, Inc.",NMS,United States,Financials
 CSL,Carlisle Cos Inc,NYSE Euronext,United States,Industrials
-CST,CST Brands Inc,NYSE Euronext,United States,Services
+CSV,"CARRIAGE SERVICES, INC.",NYQ,United States,ConsumerDiscr
 CSX,CSX Corp,NYSE Euronext,United States,Industrials
 CTAS,Cintas Corp,NASDAQ Global Select,United States,Services
-CTL,Centurylink Inc,NYSE Euronext,United States,Technology
-CTRX,Catamaran Corporatio,NASDAQ Global Select,United States,Financials
+CTS,CTS CORPORATION,NYQ,United States,Technology
 CTSH,Cognizant Tech Solution,NASDAQ Global Select,United States,Technology
-CTXS,Citrix Systems Inc,NASDAQ Global Select,United States,Technology
-CVA,Covanta Holding Corp,NYSE Euronext,United States,Industrials
-CVC,Cablevision Systems Cor,NYSE Euronext,United States,Services
-CVD,Covance Inc,NYSE Euronext,United States,Health Care
+CTVA,"Corteva, Inc.",NYQ,United States,Materials
+CUB,LIONHEART HOLDINGS,NGM,United States,Financials
+CUBE,CUBESMART,NYQ,United States,Financials
+CUK,CUK,UNKNOWN,US,Technology
+CUZ,COUSINS PROPERTIES INCORPORATED,NYQ,United States,Financials
+CV,"CAPSOVISION, INC.",NCM,United States,Healthcare
+CVE,CENOVUS ENERGY INC.,NYQ,Canada,Energy
+CVG,CONVERGYS CORPORATION,YHD,US,Technology
 CVI,CVR Energy Inc,,United States,Oil & Gas
+CVNA,Carvana Co.,NYQ,United States,Goods
 CVS,Cvs/Caremark Corp,NYSE Euronext,United States,Services
 CVX,Chevron Corp,NYSE Euronext,United States,Oil & Gas
+CW,CURTISS-WRIGHT CORPORATION,NYQ,United States,Industrials
 CWH,Commonwealth Reit,NYSE Euronext,United States,Financials
-CXO,Concho Resources Inc,NYSE Euronext,United States,Oil & Gas
+CWT,CALIFORNIA WATER SERVICE GROUP,NYQ,United States,Utilities
+CX,"CEMEX, S.A.B. DE C.V.",NYQ,Mexico,BasicMaterials
 CXW,Corrections Corp Of Ame,NYSE Euronext,United States,Industrials
+CYD,CHINA YUCHAI INTERNATIONAL LIMITED,NYQ,Singapore,ConsumerDiscr
 CYH,Community Health System,NYSE Euronext,United States,Health Care
 CYN,City National Corp,NYSE Euronext,United States,Financials
-CYT,Cytec Industries Inc,NYSE Euronext,United States,Materials
 D,Dominion Resources Inc,NYSE Euronext,United States,Utilities
-DAI.DE,Daimler Ag,Frankfurt Stock Exchange,Germany,Goods
+DAC,DANAOS CORPORATION,NYQ,Greece,Industrials
 DAL,Delta Air Lines Inc,NYSE Euronext,United States,Services
-DATA,Tableau Software Inc,,United States,Technology
+DAN,DANA INCORPORATED,NYQ,United States,ConsumerDiscr
+DAR,DARLING INGREDIENTS INC.,NYQ,United States,ConsumerStpl
+DASH,"DoorDash, Inc.",NMS,United States,Goods
+DB,DEUTSCHE BANK AKTIENGESELLSCHAFT,NYQ,Germany,Financials
+DB1.DE,DEUTSCHE BÖRSE AG,GER,Germany,Financials
 DBD,Diebold Inc,NYSE Euronext,United States,Technology
 DBK.DE,Deutsche Bank Ag,Frankfurt Stock Exchange,Germany,Financials
+DCC.L,DCC PLC,LSE,Ireland,Energy
 DCI,Donaldson Inc,NYSE Euronext,United States,Industrials
+DCO,DUCOMMUN INCORPORATED,NYQ,United States,Industrials
 DD,Du Pont E I De Nemours,NYSE Euronext,United States,Materials
 DDD,3D Systems Corp,NYSE Euronext,United States,Technology
-DDR,DDR Corp,NYSE Euronext,United States,Financials
+DDOG,"Datadog, Inc.",NMS,United States,Technology
 DDS,Dillards Inc,NYSE Euronext,United States,Services
 DE,Deere & Co,NYSE Euronext,United States,Industrials
 DECK,Deckers Outdoor Corp,NASDAQ Global Select,United States,Goods
 DEI,Douglas Emmett Inc,NYSE Euronext,United States,Financials
-DF,Dean Foods Company,NYSE Euronext,United States,Goods
-DFS,Discover Financial Srvc,NYSE Euronext,United States,Financials
+DELL,Dell Technologies Inc.,NYQ,United States,Technology
+DEO,DIAGEO PLC,NYQ,United Kingdom,ConsumerStpl
 DG,Dollar General Corp,NYSE Euronext,United States,Services
 DG.PA,Vinci,Euronext Paris,France,Goods
 DGE.L,Diageo,London Stock Exchange,United Kingdom,Goods
 DGX,Quest Diagnostics Inc,NYSE Euronext,United States,Health Care
 DHI,D R Horton Inc,NYSE Euronext,United States,Goods
+DHL.DE,DEUTSCHE POST AG,GER,Germany,Industrials
 DHR,Danaher Corp,NYSE Euronext,United States,Industrials
+DHT,"DHT HOLDINGS, INC.",NYQ,Bermuda,Energy
+DHX,"DHI GROUP, INC.",NYQ,United States,Technology
+DIN,"DINE BRANDS GLOBAL, INC.",NYQ,United States,ConsumerDiscr
 DIS,The Walt Disney Company,NYSE Euronext,United States,Services
-DISCA,Discovery Communicatns,NASDAQ Global Select,United States,Services
-DISH,Dish Network Corp,NASDAQ Global Select,United States,Services
+DK,"DELEK US HOLDINGS, INC.",NYQ,United States,Energy
+DKNG,DRAFTKINGS INC.,NMS,United States,ConsumerDiscr
 DKS,Dicks Sporting Goods In,NYSE Euronext,United States,Services
 DLB,Dolby Laboratories Inc,NYSE Euronext,United States,Services
-DLPH,Delphi Automotive Plc,NYSE Euronext,United States,Goods
 DLR,Digital Realty Trust In,NYSE Euronext,United States,Financials
 DLTR,Dollar Tree Inc,NASDAQ Global Select,United States,Services
-DNB,Dun & Bradstreet Corp,NYSE Euronext,United States,Services
-DNKN,Dunkin Brands Group Inc,NASDAQ Global Select,United States,Services
-DNR,Denbury Resources Inc,NYSE Euronext,United States,Oil & Gas
-DO,Diamond Offshr Drilling,NYSE Euronext,United States,Oil & Gas
+DLX,DELUXE CORPORATION,NYQ,United States,Industrials
+DOC,"Healthpeak Properties, Inc.",NYQ,United States,Financials
+DOLE,DOLE PLC,NYQ,Ireland,ConsumerStpl
 DOV,Dover Corp,NYSE Euronext,United States,Industrials
 DOW,Dow Chemical Co,NYSE Euronext,United States,Materials
 DOX,Amdocs Ltd,NYSE Euronext,United States,Technology
-DPS,Dr Pepper Snapple Group,NYSE Euronext,United States,Goods
 DPZ,Dominos Pizza Inc,NYSE Euronext,United States,Services
-DRC,Dresser Rand Group Inc,NYSE Euronext,United States,Oil & Gas
-DRE,Duke Realty Corp,NYSE Euronext,United States,Financials
+DQ,DAQO NEW ENERGY CORP.,NYQ,China,Technology
+DRH,DIAMONDROCK HOSPITALITY COMPANY,NMS,United States,Financials
 DRI,Darden Restaurants Inc,NYSE Euronext,United States,Services
-DRQ,Dril-Quip Inc,,United States,Materials
-DST,Dst Systems Inc,NYSE Euronext,United States,Technology
-DSW,DSW Inc,NYSE Euronext,United States,Services
+DSX,DIANA SHIPPING INC.,NYQ,Greece,Industrials
+DSY.PA,DASSAULT SYSTÈMES SE,PAR,France,Technology
 DTE,DTE Energy Co,NYSE Euronext,United States,Utilities
 DTE.DE,Deutsche Telekom,Frankfurt Stock Exchange,Germany,Technology
-DTV,Directv Group Inc,NASDAQ Global Select,United States,Services
+DTG,DTE ENERGY COMPANY 2021 SERIES ,NYQ,US,Technology
 DUK,Duke Energy Corp,NYSE Euronext,United States,Utilities
 DV,DeVry Education Group,NYSE Euronext,United States,Services
 DVA,Davita Inc,NYSE Euronext,United States,Health Care
 DVN,Devon Energy Corp,NYSE Euronext,United States,Oil & Gas
-DWA,Dreamworks Animation,NASDAQ Global Select,United States,Services
+DX,"DYNEX CAPITAL, INC.",NYQ,United States,Financials
+DXCM,"DexCom, Inc.",NMS,United States,Health Care
+DY,"DYCOM INDUSTRIES, INC.",NYQ,United States,Industrials
+DYN,"DYNE THERAPEUTICS, INC.",NMS,United States,Healthcare
+E,ENI S.P.A.,NYQ,Italy,Energy
 EA,Electronic Arts Inc,NASDAQ Global Select,United States,Technology
 EAT,Brinker International,NYSE Euronext,United States,Services
-EBAY,eBay Inc,NASDAQ Global Select,United States,Technology
+EBF,"ENNIS, INC.",NYQ,United States,Industrials
+EBS,EMERGENT BIOSOLUTIONS INC.,NYQ,United States,Healthcare
+EC,ECOPETROL S.A.,NYQ,Colombia,Energy
+ECHO,EchoStar Corporation,NMS,United States,Services
 ECL,Ecolab Inc,NYSE Euronext,United States,Materials
 ED,Consolidated Edison Inc,NYSE Euronext,United States,Utilities
+EDN,EMPRESA DISTRIBUIDORA Y COMERCIALIZADORA NORTE SOCIEDAD ANÓNIMA,NYQ,Argentina,Utilities
+EDU,NEW ORIENTAL EDUCATION & TECHNOLOGY GROUP INC.,NYQ,China,ConsumerStpl
+EE,"EXCELERATE ENERGY, INC.",NYQ,United States,Energy
 EFX,Equifax Inc,NYSE Euronext,United States,Financials
-EGN,Energen Corp,NYSE Euronext,United States,Oil & Gas
-EI.PA,Essilor International,Euronext Paris,France,Health Care
+EG,"Everest Group, Ltd.",NYQ,Bermuda,Financials
+EGO,ELDORADO GOLD CORPORATION,NYQ,Canada,BasicMaterials
+EGP,"EASTGROUP PROPERTIES, INC.",NYQ,United States,Financials
+EGY,"VAALCO ENERGY, INC.",NYQ,United States,Energy
+EIG,"EMPLOYERS HOLDINGS, INC.",NYQ,United States,Financials
 EIX,Edison International,NYSE Euronext,United States,Utilities
 EL,Estee Lauder Companies,NYSE Euronext,United States,Goods
 ELS,Equity Lifestyle Prop,NYSE Euronext,United States,Financials
+ELV,"Elevance Health, Inc.",NYQ,United States,Health Care
 EMC,EMC Corporation,NYSE Euronext,United States,Technology
+EME,"EMCOR Group, Inc.",NYQ,United States,Industrials
 EMN,Eastman Chemical Co,NYSE Euronext,United States,Materials
 EMR,Emerson Electric Co,NYSE Euronext,United States,Industrials
-ENDP,Endo Health Solutions,NASDAQ Global Select,United States,Health Care
+EN.PA,BOUYGUES SA,PAR,France,Industrials
+ENB,ENBRIDGE INC.,NYQ,Canada,Energy
 ENEL.MI,Enel SpA,Milan Stock Exchange,Italy,Utilities
-ENH,Endurance Specialty Hld,NYSE Euronext,United States,Financials
+ENGI.PA,ENGIE SA,PAR,France,Utilities
 ENI.MI,ENI,Milan Stock Exchange,Italy,Oil & Gas
 ENR,Energizer Holdings Inc,NYSE Euronext,United States,Goods
+ENS,ENERSYS,NYQ,United States,Industrials
 EOAN.DE,Eon Se,Frankfurt Stock Exchange,Germany,Utilities
 EOG,Eog Resources Inc,NYSE Euronext,United States,Oil & Gas
+EP,EMPIRE PETROLEUM CORPORATION,ASE,United States,Energy
+EPR,EPR PROPERTIES,NYQ,United States,Financials
 EQIX,Equinix Inc,NASDAQ Global Select,United States,Utilities
 EQR,Equity Residential,NYSE Euronext,United States,Financials
 EQT,Eqt Corporation,NYSE Euronext,United States,Oil & Gas
-ERIC,Ericsson,NASDAQ Global Select,Sweden,Technology
 ERIE,Erie Indemnity Co,NASDAQ Global Select,United States,Financials
-ESRX,Express Scripts Hold Co,NASDAQ Global Select,United States,Health Care
+ES,Eversource Energy,NYQ,United States,Utilities
+ESE,ESCO TECHNOLOGIES INC.,NYQ,United States,Technology
+ESI,ELEMENT SOLUTIONS INC,NYQ,United States,BasicMaterials
 ESS,Essex Property Trust In,NYSE Euronext,United States,Financials
-ESV,Ensco Plc,,United Kingdom,Oil & Gas
-ETFC,E Trade Financial Corp,NASDAQ Global Select,United States,Financials
+ETH,GRAYSCALE ETHEREUM MINI TRUST ETF,PCX,US,Technology
 ETN,Eaton Corp,NYSE Euronext,United States,Industrials
 ETR,Entergy Corp,NYSE Euronext,United States,Utilities
 EV,Eaton Vance Corp,NYSE Euronext,United States,Financials
-EVR.L,Evraz,London Stock Exchange,United Kingdom,Materials
+EVC,ENTRAVISION COMMUNICATIONS CORPORATION,NYQ,United States,Technology
+EVR,EVERCORE INC.,NYQ,United States,Financials
+EVRG,"Evergy, Inc.",NMS,United States,Utilities
 EW,Edwards Lifesciences,NYSE Euronext,United States,Health Care
-EWBC,East West Bancorp Inc,NASDAQ Global Select,United States,Financials
 EXC,Exelon Corp,NYSE Euronext,United States,Utilities
+EXE,Expand Energy Corporation,NMS,United States,Oil & Gas
+EXK,ENDEAVOUR SILVER CORP.,NYQ,Canada,BasicMaterials
 EXP,Eagle Materials Inc,,United States,Materials
-EXPD,Expeditors Intl Of Wash,NASDAQ Global Select,United States,Industrials
-EXPE,Expedia Inc,NASDAQ Global Select,United States,Services
 EXPN.L,Experian,London Stock Exchange,United Kingdom,Services
 EXR,Extra Space Storage Inc,NYSE Euronext,United States,Financials
 F,Ford Motor Co,NYSE Euronext,United States,Goods
+FAC,FACTORIAL ENERGY INC.,NGM,United States,Industrials
+FAF,FIRST AMERICAN FINANCIAL CORPORATION,NYQ,United States,Financials
+FANG,"Diamondback Energy, Inc.",NMS,United States,Oil & Gas
 FAST,Fastenal Co,NASDAQ Global Select,United States,Industrials
-FB,Facebook Inc,NASDAQ Global Select,United States,Technology
-FBHS,Fortune Brands Home & Security,NYSE Euronext,United States,Industrials
-FCE-A,Forest City Entrprs,NYSE Euronext,United States,Financials
-FCNCA,First Citizens Bancshrs,NASDAQ Global Select,United States,Financials
-FCS,Fairchild Semiconductor,NYSE Euronext,United States,Technology
+FBP,FIRST BANCORP.,NYQ,United States,Financials
+FC,FRANKLIN COVEY CO.,NYQ,United States,ConsumerStpl
+FCF,FIRST COMMONWEALTH FINANCIAL CORPORATION,NYQ,United States,Financials
+FCN,"FTI CONSULTING, INC.",NYQ,United States,Industrials
 FCX,Freeport-Mcmoran C&G,NYSE Euronext,United States,Materials
-FDO,Family Dollar Stores,NYSE Euronext,United States,Services
+FDP,DEL MONTE CORPORATION,NYQ,Cayman Islands,Technology
 FDS,Factset Research System,NASDAQ Global Select,United States,Services
 FDX,Fedex Corp,NYSE Euronext,United States,Industrials
+FDXF,"FedEx Freight Holding Company, Inc.",NYQ,United States,Industrials
 FE,Firstenergy Corp,NYSE Euronext,United States,Utilities
-FFIV,F5 Networks Inc,NASDAQ Global Select,United States,Technology
+FENG,PHOENIX NEW MEDIA LIMITED,NYQ,China,Technology
+FER,FERROVIAL N.V.,NMS,Netherlands,Industrials
+FF,FUTUREFUEL CORP.,NYQ,United States,BasicMaterials
 FHN,First Horizon Natl Corp,NYSE Euronext,United States,Financials
-FII,Federated Investors Inc,NYSE Euronext,United States,Financials
+FICO,Fair Isaac Corporation,NYQ,United States,Technology
 FIS,Fidelity Natl Info Svcs,NYSE Euronext,United States,Industrials
 FISV,Fiserv Inc,NASDAQ Global Select,United States,Technology
-FITB,Fifth Third Bancorp,NASDAQ Global Select,United States,Financials
-FL,Foot Locker Inc,NYSE Euronext,United States,Services
-FLIR,Flir Systems Inc,NASDAQ Global Select,United States,Goods
+FIX,"Comfort Systems USA, Inc.",NYQ,United States,Industrials
+FLEX,Flex Ltd.,NMS,United States,Technology
 FLO,Flowers Foods Inc,NYSE Euronext,United States,Goods
 FLR,Fluor Corp,NYSE Euronext,United States,Industrials
 FLS,Flowserve Corp,NYSE Euronext,United States,Industrials
-FLT,Fleetcor Technologies,NYSE Euronext,United States,Industrials
+FLY,FIREFLY AEROSPACE INC.,NGM,United States,Industrials
 FMC,Fmc Corp,NYSE Euronext,United States,Materials
+FMS,FRESENIUS MEDICAL CARE AG,NYQ,Germany,Healthcare
+FN,FABRINET,NYQ,Cayman Islands,Technology
+FNB,F.N.B. CORPORATION,NYQ,United States,Financials
 FNF,Fidelity National Finl,NYSE Euronext,United States,Financials
-FNFG,First Niagara Finl Grp,NASDAQ Global Select,United States,Financials
-FOSL,Fossil Inc,NASDAQ Global Select,United States,Goods
-FOXA,Twenty-First Century Fox,,United States,Services
-FP.PA,Total Sa,Euronext Paris,France,Oil & Gas
-FRC,First Republic Bank,NYSE Euronext,United States,Financials
+FNV,FRANCO-NEVADA CORPORATION,NYQ,Canada,BasicMaterials
+FOR,FORESTAR GROUP INC.,NYQ,United States,Financials
+FOX,Fox Corporation,NMS,United States,Services
+FR,"FIRST INDUSTRIAL REALTY TRUST, INC.",NYQ,United States,Financials
+FRE.DE,FRESENIUS SE & CO. KGAA,GER,Germany,Healthcare
 FRES.L,Fresnillo,London Stock Exchange,United Kingdom,Materials
+FRO,FRONTLINE PLC,NYQ,Cyprus,Energy
 FRT,Federal Realty Invt,NYSE Euronext,United States,Financials
-FRX,Forest Labs Inc,NYSE Euronext,United States,Health Care
-FSL,Freescale Semiconductor,NYSE Euronext,United States,Technology
-FSLR,First Solar Inc,,United States,Industrials
+FSM,FORTUNA MINING CORP.,NYQ,Canada,BasicMaterials
+FSS,FEDERAL SIGNAL CORPORATION,NYQ,United States,Industrials
 FTI,Fmc Technologies Inc,NYSE Euronext,United States,Oil & Gas
+FTK,"FLOTEK INDUSTRIES, INC.",NYQ,United States,Energy
 FTNT,Fortinet Inc,NASDAQ Global Select,United States,Technology
-FTR,Frontier Communications,NASDAQ Global Select,United States,Technology
-FUJIY,Fujifilm Holdings,,Japan,Goods
-FULT,Fulton Financial Corp,NASDAQ Global Select,United States,Financials
+FTV,Fortive Corporation,NYQ,United States,Technology
+FUL,H.B. FULLER COMPANY,NYQ,United States,BasicMaterials
 G,Genpact Ltd,NYSE Euronext,United States,Industrials
 G.MI,Assicurazioni Generali,Milan Stock Exchange,Italy,Financials
-GAS,AGL Resources Inc,NYSE Euronext,United States,Utilities
-GCI,Gannett Inc,NYSE Euronext,United States,Services
+GBX,"THE GREENBRIER COMPANIES, INC.",NYQ,United States,Industrials
+GCO,GENESCO INC.,NYQ,United States,ConsumerDiscr
 GD,General Dynamics Corp,NYSE Euronext,United States,Industrials
+GDDY,GoDaddy Inc.,NYQ,United States,Technology
+GDOT,GREEN DOT CORPORATION,NYQ,United States,Financials
 GE,General Electric Co,NYSE Euronext,United States,Industrials
 GEF,Greif Inc,NYSE Euronext,United States,Industrials
-GES,Guess Inc,NYSE Euronext,United States,Services
-GFS.L,G4S,London Stock Exchange,United Kingdom,Services
+GEF-B,"GREIF, INC.",NYQ,United States,ConsumerDiscr
+GEHC,GE HealthCare Technologies Inc.,NMS,United States,Health Care
+GEN,Gen Digital Inc.,NMS,United States,Technology
+GEO,"THE GEO GROUP, INC.",NYQ,United States,Industrials
+GEV,GE Vernova Inc.,NYQ,United States,Industrials
+GFF,GRIFFON CORPORATION,NYQ,United States,Industrials
+GFI,GOLD FIELDS LIMITED,NYQ,South Africa,BasicMaterials
 GGG,Graco Inc,NYSE Euronext,United States,Industrials
-GGP,General Growth Properties,NYSE Euronext,United States,Financials
-GHC,Graham Holdings,,United States,Services
+GIB,CGI INC.,NYQ,Canada,Technology
+GIL,GILDAN ACTIVEWEAR INC.,NYQ,Canada,ConsumerDiscr
 GILD,Gilead Sciences Inc,NASDAQ Global Select,United States,Health Care
 GIS,General Mills Inc,NYSE Euronext,United States,Goods
-GKN.L,GKN,London Stock Exchange,United Kingdom,Goods
+GL,Globe Life Inc.,NYQ,United States,Financials
 GLE.PA,Societe Generale,Euronext Paris,France,Financials
 GLEN.L,Glencore Xstrata,London Stock Exchange,United Kingdom,Materials
-GLNG,Golar Lng Ltd Bermuda,NASDAQ Global Select,United Kingdom,Services
 GLW,Corning Inc,NYSE Euronext,United States,Technology
 GM,General Motors,NYSE Euronext,United States,Goods
-GMCR,Green Mtn Coffee Roaste,NASDAQ Global Select,United States,Goods
 GME,Gamestop Corp,NYSE Euronext,United States,Services
-GMT,Gatx Corp,NYSE Euronext,United States,Industrials
-GNC,Gnc Hldgs Inc,NYSE Euronext,United States,Services
-GNTX,Gentex Corp,NASDAQ Global Select,United States,Goods
+GNE,GENIE ENERGY LTD.,NYQ,United States,Utilities
+GNK,GENCO SHIPPING & TRADING LIMITED,NYQ,United States,Industrials
+GNRC,Generac Holdings Inc.,NYQ,United States,Industrials
 GNW,Genworth Financial Inc,NYSE Euronext,United States,Financials
 GOOG,Google Inc,NASDAQ Global Select,United States,Technology
+GOOGL,Alphabet Inc.,NMS,United States,Services
 GPC,Genuine Parts Co,NYSE Euronext,United States,Goods
+GPI,"GROUP 1 AUTOMOTIVE, INC.",NYQ,United States,ConsumerDiscr
+GPK,GRAPHIC PACKAGING HOLDING COMPANY,NYQ,United States,ConsumerDiscr
 GPN,Global Payments Inc,NYSE Euronext,United States,Industrials
-GPOR,Gulfport Energy Corp,,United States,Oil & Gas
-GPS,Gap Inc,NYSE Euronext,United States,Services
-GRA,WR Grace & Co,NYSE Euronext,United States,Materials
-GRMN,Garmin Ltd,NASDAQ Global Select,United States,Goods
-GRPN,Groupon Inc,NASDAQ Global Select,United States,Technology
+GRO,BRAZIL POTASH CORP.,ASE,Canada,BasicMaterials
 GS,Goldman Sachs Group,NYSE Euronext,United States,Financials
-GS,Goldman Sachs Group,NYSE Euronext,United States,Financials
+GSK,GSK PLC,NYQ,United Kingdom,Healthcare
 GSK.L,Glaxosmithkline,London Stock Exchange,United Kingdom,Health Care
-GSZ.PA,Gdf Suez,Euronext Paris,France,Utilities
+GSL,"GLOBAL SHIP LEASE, INC.",NYQ,Greece,Industrials
 GT,Goodyear Tire & Rubber,NASDAQ Global Select,United States,Goods
-GWR,Genesee & Wyoming Inc,,United States,Services
+GTN,"GRAY MEDIA, INC.",NYQ,United States,Technology
+GTN-A,"GRAY MEDIA, INC.",NYQ,United States,Technology
+GTY,GETTY REALTY CORP.,NYQ,United States,Financials
+GVA,GRANITE CONSTRUCTION INCORPORATED,NYQ,United States,Industrials
 GWW,W W Grainger Inc,NYSE Euronext,United States,Industrials
-GXP,Great Plains Energy Inc,NYSE Euronext,United States,Utilities
 H,Hyatt Hotels Corp,NYSE Euronext,United States,Services
+HAE,HAEMONETICS CORPORATION,NYQ,United States,Healthcare
 HAL,Halliburton Co,NYSE Euronext,United States,Oil & Gas
-HAR,Harman International In,NYSE Euronext,United States,Goods
-HAS,Hasbro Inc,NASDAQ Global Select,United States,Goods
-HBAN,Huntington Bancshares,NASDAQ Global Select,United States,Financials
-HBI,Hanesbrand Inc,NYSE Euronext,United States,Goods
+HBM,HUDBAY MINERALS INC.,NYQ,Canada,BasicMaterials
 HCA,HCA Holdings Inc,NYSE Euronext,United States,Health Care
-HCBK,Hudson City Bancorp,NASDAQ Global Select,United States,Financials
 HCC,HCC Insurance Hldgs In,NYSE Euronext,United States,Financials
-HCN,Health Care Reit Inc,NYSE Euronext,United States,Financials
-HCP,HCP Inc,NYSE Euronext,United States,Financials
 HD,Home Depot Inc,NYSE Euronext,United States,Services
+HDB,HDFC BANK LIMITED,NYQ,India,Financials
 HE,Hawaiian Electric Inds,NYSE Euronext,United States,Utilities
-HES,Hess Corp,NYSE Euronext,United States,Oil & Gas
-HFC,HollyFrontier Corp,NYSE Euronext,United States,Oil & Gas
-HHC,Howard Hughes Corp,NYSE Euronext,United States,Financials
+HEI,HEICO CORPORATION,NYQ,United States,Industrials
+HEI-A,HEICO CORPORATION,NYQ,United States,Industrials
+HEI.DE,HEIDELBERG MATERIALS AG,GER,Germany,BasicMaterials
+HEN3.DE,HENKEL AG & CO. KGAA,GER,Germany,ConsumerStpl
+HF,DGA CORE PLUS ABSOLUTE RETURN ETF,NYQ,US,Technology
+HHS,"HARTE HANKS, INC.",NGM,United States,Industrials
 HIG,Hartford Finl Svcs Grp,NYSE Euronext,United States,Financials
 HII,Huntington Ingalls Ind,NYSE Euronext,United States,Industrials
-HL.L,Hargreaves Lansdown,London Stock Exchange,United Kingdom,Financials
+HIK.L,HIKMA PHARMACEUTICALS PLC,LSE,United Kingdom,Healthcare
+HIT,"HEALTH IN TECH, INC.",NCM,United States,Technology
+HIW,"HIGHWOODS PROPERTIES, INC.",NYQ,United States,Financials
+HL,HECLA MINING COMPANY,NYQ,United States,BasicMaterials
 HLF,Herbalife Ltd,NYSE Euronext,United States,Goods
-HMA,Health Management Associates,NYSE Euronext,United States,Health Care
+HLT,Hilton Worldwide Holdings Inc.,NYQ,United States,Goods
+HLX,"HELIX ENERGY SOLUTIONS GROUP, INC.",NYQ,United States,Energy
 HMC,Honda Motor,,Japan,Goods
-HME,Home Properties Inc,NYSE Euronext,United States,Financials
+HMN,HORACE MANN EDUCATORS CORPORATION,NYQ,United States,Financials
 HMSO.L,Hammerson,London Stock Exchange,United Kingdom,Financials
-HNT,Health Net Inc,NYSE Euronext,United States,Health Care
+HMY,HARMONY GOLD MINING COMPANY LIMITED,NYQ,South Africa,BasicMaterials
+HNI,HNI CORPORATION,NYQ,United States,ConsumerDiscr
 HOG,Harley Davidson Inc,NYSE Euronext,United States,Goods
-HOLX,Hologic Inc,NASDAQ Global Select,United States,Health Care
 HON,Honeywell International,NYSE Euronext,United States,Industrials
-HOT,Starwood Hotels,NYSE Euronext,United States,Services
+HONA,Honeywell Aerospace Inc.,NMS,United States,Industrials
+HOOD,"Robinhood Markets, Inc.",NMS,United States,Financials
+HOV,"HOVNANIAN ENTERPRISES, INC.",NYQ,United States,ConsumerDiscr
 HP,Helmerich & Payne Inc,NYSE Euronext,United States,Oil & Gas
+HPE,Hewlett Packard Enterprise Company,NYQ,United States,Technology
+HPP,"HUDSON PACIFIC PROPERTIES, INC.",NYQ,United States,Financials
 HPQ,Hewlett Packard Co,NYSE Euronext,United States,Technology
-HPT,Hospitality Pptys Trust,NYSE Euronext,United States,Financials
+HR,HEALTHCARE REALTY TRUST INCORPORATED,NYQ,United States,Financials
 HRB,H&R Block Inc,NYSE Euronext,United States,Services
-HRC,Hill Rom Holdings Inc,NYSE Euronext,United States,Health Care
 HRL,Hormel Foods Corp,NYSE Euronext,United States,Goods
-HRS,Harris Corp,NYSE Euronext,United States,Technology
 HSBA.L,HSBC Holdings,London Stock Exchange,United Kingdom,Financials
-HSC,Harsco Corp,NYSE Euronext,United States,Industrials
-HSH,The Hillshire Brands Co,,United States,Goods
 HSIC,Schein Henry Inc,NASDAQ Global Select,United States,Health Care
-HSP,Hospira Inc,NYSE Euronext,United States,Health Care
 HST,Host Hotels & Resorts,NYSE Euronext,United States,Financials
 HSY,Hershey Company,NYSE Euronext,United States,Goods
-HTA,Healthcare Tr Amer Inc,,United States,Health Care
-HTS,Hatteras Finl Corp,NYSE Euronext,United States,Financials
+HTH,HILLTOP HOLDINGS INC.,NYQ,United States,Financials
 HTZ,Hertz Global Holdings,NYSE Euronext,United States,Services
-HUB-B,Hubbell Inc,NYSE Euronext,United States,Industrials
+HUBB,Hubbell Incorporated,NYQ,United States,Industrials
 HUM,Humana Inc,NYSE Euronext,United States,Health Care
 HUN,Huntsman Corp,NYSE Euronext,United States,Materials
+HVT,"HAVERTY FURNITURE COMPANIES, INC.",NYQ,United States,ConsumerDiscr
+HVT-A,"HAVERTY FURNITURE COMPANIES, INC.",NYQ,United States,ConsumerDiscr
+HWM,Howmet Aerospace Inc.,NYQ,United States,Industrials
 HXL,Hexcel Corp,,United States,Goods
-I,Intelsat S A,,United States,Technology
-IACI,IAC/InterActiveCorp,NASDAQ Global Select,United States,Services
+HZO,"MARINEMAX, INC.",NYQ,United States,ConsumerDiscr
+IAG,IAMGOLD CORPORATION,NYQ,Canada,BasicMaterials
 IAG.L,Intl Consolidated Airlines,London Stock Exchange,United Kingdom,Services
-IBDRY,Iberdrola,Madrid Stock Exchange,Spain,Utilities
+IBE.MC,"IBERDROLA, S.A.",MCE,Spain,Utilities
 IBKR,Interactive Brokers Gro,NASDAQ Global Select,United States,Financials
 IBM,IBM,NYSE Euronext,United States,Technology
+IBN,ICICI BANK LIMITED,NYQ,India,Financials
 ICE,IntercontinentalExchange Group,NYSE Euronext,United States,Financials
+IDA,"IDACORP, INC.",NYQ,United States,Utilities
+IDT,IDT CORPORATION,NYQ,United States,Technology
 IDXX,Idexx Labs Inc,NASDAQ Global Select,United States,Health Care
 IEX,Idex Corp,NYSE Euronext,United States,Industrials
 IFF,Intl Flavors & Fragranc,NYSE Euronext,United States,Materials
-IGT,Intl Game Technology,NYSE Euronext,United States,Services
+IFX.DE,INFINEON TECHNOLOGIES AG,GER,Germany,Technology
+IHG,INTERCONTINENTAL HOTELS GROUP PLC,NYQ,United Kingdom,ConsumerDiscr
 IHG.L,Intercontinental Hotels Group,London Stock Exchange,United Kingdom,Services
 IHS,IHS Inc,NYSE Euronext,United States,Services
+III.L,3I GROUP ORD,LSE,United Kingdom,Financials
 ILMN,Illumina Inc,NASDAQ Global Select,United States,Goods
-IM,Ingram Micro Inc,NYSE Euronext,United States,Technology
+IMAX,IMAX CORPORATION,NYQ,Canada,Technology
+IMB.L,IMPERIAL BRANDS PLC,LSE,United Kingdom,ConsumerStpl
 IMI.L,IMI,London Stock Exchange,United Kingdom,Goods
-IMT.L,Imperial Tobacco Group,London Stock Exchange,United Kingdom,Goods
 INCY,Incyte Corp,NASDAQ Global Select,United States,Health Care
-INFA,Informatica Corp,NASDAQ Global Select,United States,Technology
+INF.L,INFORMA PLC,LSE,United Kingdom,Technology
+ING,ING GROEP N.V.,NYQ,Netherlands,Financials
 INGA.AS,ING Groep Nv,Euronext Amsterdam,Netherlands,Financials
-INGR,Ingredion Inc,NYSE Euronext,United States,Goods
-INT,World Fuel Svcs Corp,NYSE Euronext,United States,Industrials
+INN,"SUMMIT HOTEL PROPERTIES, INC.",NYQ,United States,Financials
 INTC,Intel Corp,NASDAQ Global Select,United States,Technology
 INTU,Intuit,NASDAQ Global Select,United States,Technology
-INTU.L,Intu Properties,London Stock Exchange,United Kingdom,Financials
+INVH,Invitation Homes Inc.,NYQ,United States,Financials
+INVN,ALGER RUSSELL INNOVATION ETF,PCX,US,Technology
 IP,International Paper Co,NYSE Euronext,United States,Materials
-IPG,Interpublic Group Of Co,NYSE Euronext,United States,Services
-IPGP,IPG Photonics Corp,NASDAQ Global Select,Russia,Technology
+IPI,"INTREPID POTASH, INC.",NYQ,United States,BasicMaterials
+IQV,IQVIA Holdings Inc.,NYQ,United States,Health Care
 IR,Ingersoll-Rand Plc,NYSE Euronext,United States,Industrials
+IRE,DEFIANCE DAILY TARGET 2X LONG IREN ETF,PCX,US,Technology
 IRM,Iron Mountain Inc,NYSE Euronext,United States,Industrials
+IRS,IRSA INVERSIONES Y REPRESENTACIONES SOCIEDAD ANÓNIMA,NYQ,Argentina,Financials
 ISP.MI,Intesa Sanpaolo,Milan Stock Exchange,Italy,Financials
 ISRG,Intuitive Surgical Inc,NASDAQ Global Select,United States,Health Care
 IT,Gartner Inc,NYSE Euronext,United States,Technology
-ITC,ITC Holdings Corp,NYSE Euronext,United States,Utilities
+ITG,"ITG, INC. CLASS A COMMON STOCK",NMS,US,Technology
 ITRK.L,Intertek Group,London Stock Exchange,United Kingdom,Services
 ITT,ITT Corporation,NYSE Euronext,United States,Industrials
 ITV.L,ITV,London Stock Exchange,United Kingdom,Services
 ITW,Illinois Tool Works Inc,NYSE Euronext,United States,Industrials
+ITX.MC,"INDUSTRIA DE DISEÑO TEXTIL, S.A.",MCE,Spain,ConsumerDiscr
+IVR,INVESCO MORTGAGE CAPITAL INC.,NYQ,United States,Financials
 IVZ,Invesco Ltd,NYSE Euronext,United States,Financials
-JAH,Jarden Corp,NYSE Euronext,United States,Goods
-JAZZ,Jazz Pharmaceuticals,,United States,Health Care
+IX,ORIX CORPORATION,NYQ,Japan,Financials
+J,Jacobs Solutions Inc.,NYQ,United States,Industrials
 JBHT,JB Hunt Transport Services,NASDAQ Global Select,United States,Industrials
 JBL,Jabil Circuit Inc,NYSE Euronext,United States,Industrials
 JCI,Johnson Controls Inc,NYSE Euronext,United States,Goods
-JCP,JC Penney Inc,NYSE Euronext,United States,Services
-JDSU,JDS Uniphase Corp,NASDAQ Global Select,United States,Technology
-JEC,Jacobs Engineering Grp,NYSE Euronext,United States,Industrials
+JD.L,JD SPORTS FASHION PLC,LSE,United Kingdom,ConsumerDiscr
+JEF,JEFFERIES FINANCIAL GROUP INC.,NYQ,United States,Financials
 JKHY,Jack Henry & Associates,NASDAQ Global Select,United States,Technology
+JKS,"JINKOSOLAR HOLDING CO., LTD.",NYQ,China,Technology
 JLL,Jones Lang Lasalle Inc,NYSE Euronext,United States,Financials
 JMAT.L,Johnson Matthey,London Stock Exchange,United Kingdom,Materials
 JNJ,Johnson & Johnson,NYSE Euronext,United States,Health Care
-JNPR,Juniper Networks Inc,NYSE Euronext,United States,Technology
 JOE,St Joe Co,NYSE Euronext,United States,Financials
-JOY,Joy Global Inc,NYSE Euronext,United States,Industrials
 JPM,JPMorgan Chase & Co,NYSE Euronext,United States,Financials
-JW-A,Wiley John & Sons Inc,NYSE Euronext,United States,Services
-JWN,Nordstrom Inc,NYSE Euronext,United States,Services
-K,Kellogg Co,NYSE Euronext,United States,Goods
-KAR,Kar Auction Services In,NYSE Euronext,United States,Services
-KAZ.L,Kazakhmys,London Stock Exchange,United Kingdom,Materials
+KAI,KADANT INC.,NYQ,United States,Industrials
+KB,KB FINANCIAL GROUP INC.,NYQ,South Korea,Financials
+KBH,KB HOME,NYQ,United States,ConsumerDiscr
 KBR,KBR Inc,NYSE Euronext,United States,Industrials
+KDP,Keurig Dr Pepper Inc.,NMS,United States,Goods
+KEM,KRANESHARES DYNAMIC EMERGING MARKETS STRATEGY ETF,PCX,US,Technology
+KEP,KOREA ELECTRIC POWER CORPORATION,NYQ,South Korea,Utilities
 KEX,Kirby Corp,NYSE Euronext,United States,Industrials
 KEY,Keycorp,NYSE Euronext,United States,Financials
+KEYS,"Keysight Technologies, Inc.",NYQ,United States,Technology
+KFS,KINGSWAY FINANCIAL SERVICES INC,NYQ,United States,Financials
+KFY,KORN FERRY,NYQ,United States,Industrials
+KGC,KINROSS GOLD CORPORATION,NYQ,Canada,BasicMaterials
 KGF.L,Kingfisher,London Stock Exchange,United Kingdom,Services
+KHC,The Kraft Heinz Company,NMS,United States,Goods
 KIM,Kimco Realty Corp,NYSE Euronext,United States,Financials
+KKR,KKR & Co. Inc.,NYQ,United States,Financials
 KLAC,Kla Tencor Corp,NASDAQ Global Select,United States,Goods
 KMB,Kimberly Clark Corp,NYSE Euronext,United States,Goods
 KMI,Kinder Morgan Inc Del,NYSE Euronext,United States,Oil & Gas
 KMPR,Kemper Corporation,NYSE Euronext,United States,Financials
 KMT,Kennametal Inc,NYSE Euronext,United States,Industrials
 KMX,Carmax Inc,NYSE Euronext,United States,Services
+KNX,KNIGHT-SWIFT TRANSPORTATION HOLDINGS INC.,NYQ,United States,Industrials
 KO,The Coca-Cola Company,NYSE Euronext,United States,Goods
-KORS,Michael Kors Hldgs Ltd,NYSE Euronext,Hong Kong,Goods
+KOF,"COCA-COLA FEMSA, S.A.B. DE C.V.",NYQ,Mexico,ConsumerStpl
+KOP,KOPPERS HOLDINGS INC.,NYQ,United States,BasicMaterials
 KOS,Kosmos Energy Ltd,NYSE Euronext,United States,Oil & Gas
 KR,Kroger Co,NYSE Euronext,United States,Services
 KRC,Kilroy Realty Corp,NYSE Euronext,United States,Financials
-KRFT,Kraft Foods Inc,NASDAQ Global Select,United States,Goods
+KRG,KITE REALTY GROUP TRUST,NYQ,United States,Financials
 KRO,Kronos Worldwide Inc,NYSE Euronext,United States,Materials
+KS,KAPSTONE PAPER AND PACKAGING CORPORATION,YHD,US,Technology
 KSS,Kohls Corp,NYSE Euronext,United States,Services
-KSU,Kansas City Southern,NYSE Euronext,United States,Industrials
+KT,KT CORPORATION,NYQ,South Korea,Technology
+KVUE,Kenvue Inc.,NYQ,United States,Goods
+KW,"KENNEDY-WILSON HOLDINGS, INC.",NYQ,United States,Financials
+KWR,QUAKER CHEMICAL CORPORATION,NYQ,United States,BasicMaterials
 L,Loews Corp,NYSE Euronext,United States,Financials
-LAMR,Lamar Advertising Co,NASDAQ Global Select,United States,Technology
+LAD,"LITHIA MOTORS, INC.",NYQ,United States,ConsumerDiscr
 LAND.L,Land Securities Group,London Stock Exchange,United Kingdom,Financials
 LAZ,Lazard Ltd,NYSE Euronext,United States,Financials
-LB,L Brands Inc,NYSE Euronext,United States,Services
-LBTYA,Liberty Global Inc,NASDAQ Global Select,United States,Services
+LDOS,"Leidos Holdings, Inc.",NYQ,United States,Technology
 LEA,Lear Corp,NYSE Euronext,United States,Goods
-LECO,Lincoln Electric Hldgs,NASDAQ Global Select,United States,Technology
 LEG,Leggett & Platt Inc,NYSE Euronext,United States,Goods
 LEN,Lennar Corp,NYSE Euronext,United States,Goods
+LEN-B,LENNAR CORPORATION,NYQ,United States,ConsumerDiscr
 LGEN.L,Legal & General Group,London Stock Exchange,United Kingdom,Financials
-LGF,Lions Gate Entertainment,,United States,Services
 LH,Laboratory Corp Of Amer,NYSE Euronext,United States,Health Care
-LIFE,Life Technologies Corp,NASDAQ Global Select,United States,Health Care
+LHX,"L3Harris Technologies, Inc.",NYQ,United States,Industrials
 LII,Lennox International In,NYSE Euronext,United States,Industrials
-LINTA,Liberty Interactive,NASDAQ Global Select,United States,Services
-LKQ,LKQ Corp,NASDAQ Global Select,United States,Services
-LLL,L-3 Communications,NYSE Euronext,United States,Industrials
+LIN,Linde plc,NMS,United Kingdom,Materials
+LIN.DE,LINDE PLC,GER,US,Technology
+LITE,Lumentum Holdings Inc.,NMS,United States,Technology
 LLOY.L,Lloyds Banking Group,London Stock Exchange,United Kingdom,Financials
-LLTC,Linear Technology Co,NASDAQ Global Select,United States,Technology
 LLY,Lilly Eli & Co,NYSE Euronext,United States,Health Care
-LM,Legg Mason Inc,NYSE Euronext,United States,Financials
-LMCA,Liberty Media Corp,,United States,Services
 LMT,Lockheed Martin Corp,NYSE Euronext,United States,Industrials
 LNC,Lincoln National Corp,NYSE Euronext,United States,Financials
-LNG,Cheniere Energy Inc,AMEX,United States,Oil & Gas
-LNKD,LinkedIn Corp,NYSE Euronext,United States,Industrials
+LNN,LINDSAY CORPORATION,NYQ,United States,Industrials
 LNT,Alliant Energy Corp,NYSE Euronext,United States,Utilities
-LO,Lorillard Inc,NYSE Euronext,United States,Goods
 LOW,Lowe's Companies,NYSE Euronext,United States,Services
-LPI,Laredo Pet Hldgs Inc,NYSE Euronext,United States,Oil & Gas
-LPLA,LPL Financial Holdings,NASDAQ Global Select,United States,Financials
-LPNT,Lifepoint Hospitals,NASDAQ Global Select,United States,Health Care
-LPS,Lender Processing Svcs,NYSE Euronext,United States,Industrials
+LPL,"LG DISPLAY CO., LTD.",NYQ,South Korea,Technology
+LPX,LOUISIANA-PACIFIC CORPORATION,NYQ,United States,Industrials
 LRCX,Lam Research Corp,NASDAQ Global Select,United States,Technology
-LRY,Liberty Property Trust,NYSE Euronext,United States,Financials
-LSI,LSI Corporation,NASDAQ Global Select,United States,Technology
-LSTR,Landstar Systems Inc,NASDAQ Global Select,United States,Industrials
-LUK,Leucadia National Corp,NYSE Euronext,United States,Financials
+LRN,"STRIDE, INC.",NYQ,United States,ConsumerStpl
+LSE,"LEISHEN ENERGY HOLDING CO., LTD.",NCM,China,Energy
+LSEG.L,LONDON STOCK EXCHANGE GROUP PLC,LSE,United Kingdom,Financials
+LTC,"LTC PROPERTIES, INC.",NYQ,United States,Financials
+LTM,LATAM AIRLINES GROUP S.A.,NYQ,Chile,Industrials
+LULU,lululemon athletica inc.,NMS,Canada,Goods
 LUV,Southwest Airlines Co,NYSE Euronext,United States,Services
-LVLT,Level 3 Communications,NYSE Euronext,United States,Technology
-LVNTA,Liberty Ventures,,United States,Services
+LUX,TEMA ETF TRUST - TEMA LUXURY ETF,PCX,US,Technology
 LVS,Las Vegas Sands Corp,NYSE Euronext,United States,Services
-LXK,Lexmark International,NYSE Euronext,United States,Technology
+LXP,LXP INDUSTRIAL TRUST,NYQ,United States,Financials
+LXU,"LSB INDUSTRIES, INC.",NYQ,United States,BasicMaterials
 LYB,Lyondellbasell Inds,NYSE Euronext,United States,Materials
+LYG,LLOYDS BANKING GROUP PLC,NYQ,United Kingdom,Financials
+LYV,"Live Nation Entertainment, Inc.",NYQ,United States,Services
+LZB,LA-Z-BOY INCORPORATED,NYQ,United States,ConsumerDiscr
 M,Macys Inc,NYSE Euronext,United States,Services
 MA,Mastercard Inc,NYSE Euronext,United States,Financials
 MAA,Mid-America Apartment,NYSE Euronext,United States,Financials
@@ -654,517 +793,613 @@ MAC,Macerich Co,NYSE Euronext,United States,Financials
 MAN,ManpowerGroup,NYSE Euronext,United States,Industrials
 MAR,Marriott Intl Inc,NYSE Euronext,United States,Services
 MAS,Masco Corp,NYSE Euronext,United States,Industrials
-MAT,Mattel Inc,NASDAQ Global Select,United States,Goods
+MBG.DE,MERCEDES-BENZ GROUP AG,GER,Germany,ConsumerDiscr
 MBI,MBIA Inc,NYSE Euronext,United States,Financials
 MC.PA,Moet Hennessy Louis Vuitton,Euronext Paris,France,Services
 MCD,McDonalds Corp,NYSE Euronext,United States,Services
 MCHP,Microchip Technology,NASDAQ Global Select,United States,Technology
 MCK,McKesson Corp,NYSE Euronext,United States,Services
 MCO,Moodys Corp,NYSE Euronext,United States,Financials
-MCRS,Micros Systems Inc,NASDAQ Global Select,United States,Technology
+MCS,THE MARCUS CORPORATION,NYQ,United States,Technology
 MCY,Mercury General Corp,NYSE Euronext,United States,Financials
 MD,Mednax Inc,NYSE Euronext,United States,Health Care
 MDLZ,Mondelez Intl Cmn A,NASDAQ Global Select,United States,Goods
-MDR,McDermott Intl Inc,NYSE Euronext,United States,Oil & Gas
-MDRX,Allscripts Healthcare,NASDAQ Global Select,United States,Technology
 MDT,Medtronic Inc,NYSE Euronext,United States,Health Care
 MDU,MDU Resources Group,NYSE Euronext,United States,Industrials
-MDVN,Medivation Inc,NASDAQ Global Select,United States,Health Care
+MED,"MEDIFAST, INC.",NYQ,United States,ConsumerDiscr
+MEI,"METHODE ELECTRONICS, INC.",NYQ,United States,Technology
+MELI,"MERCADOLIBRE, INC.",NMS,Uruguay,Technology
 MET,MetLife Inc,NYSE Euronext,United States,Financials
+META,"Meta Platforms, Inc.",NMS,United States,Services
 MFA,MFA Financial Inc,NYSE Euronext,United States,Financials
-MGGT.L,Meggitt,London Stock Exchange,United Kingdom,Goods
+MFC,MANULIFE FINANCIAL CORPORATION,NYQ,Canada,Financials
+MFG,"MIZUHO FINANCIAL GROUP, INC.",NYQ,Japan,Financials
+MG,"MISTRAS GROUP, INC.",NYQ,United States,Industrials
+MGA,MAGNA INTERNATIONAL INC.,NYQ,Canada,ConsumerDiscr
 MGM,MGM Resorts Intl,NYSE Euronext,United States,Services
-MHFI,McGraw Hill Financial,NYSE Euronext,United States,Financials
 MHK,Mohawk Industries Inc,NYSE Euronext,United States,Goods
-MJN,Mead Johnson Nutrition,NYSE Euronext,United States,Goods
+MHO,"M/I HOMES, INC.",NYQ,United States,ConsumerDiscr
+MIG,VANECK MOODY'S ANALYTICS IG CORPORATE BOND ETF,BTS,US,Technology
+MITT,"TPG MORTGAGE INVESTMENT TRUST, INC.",NYQ,United States,Financials
 MKC,McCormick & Co Inc,NYSE Euronext,United States,Goods
+MKC-V,"MCCORMICK & COMPANY, INCORPORATED",NYQ,United States,ConsumerStpl
 MKL,Markel Corp,NYSE Euronext,United States,Financials
 MKS.L,Marks & Spencer Group,London Stock Exchange,United Kingdom,Services
+MLI,"MUELLER INDUSTRIES, INC.",NYQ,United States,Industrials
 MLM,Martin Marietta Materials,NYSE Euronext,United States,Industrials
-MMC,Marsh & Mclennan Cos,NYSE Euronext,United States,Financials
+MLP,"MAUI LAND & PINEAPPLE COMPANY, INC.",NYQ,United States,Financials
+MLR,"MILLER INDUSTRIES, INC.",NYQ,United States,ConsumerDiscr
+MMI,"MARCUS & MILLICHAP, INC.",NYQ,United States,Financials
 MMM,3M Co,NYSE Euronext,United States,Industrials
-MNK,Mallinckrodt Plc,,United States,Health Care
+MMS,"MAXIMUS, INC.",NYQ,United States,Industrials
+MNG.L,M&G PLC,LSE,United Kingdom,Financials
+MNR,MACH NATURAL RESOURCES LP,NYQ,United States,Energy
 MNST,Monster Beverage Corp,NASDAQ Global Select,United States,Goods
 MO,Altria Group Inc,NYSE Euronext,United States,Goods
-MOLX,Molex Inc,NASDAQ Global Select,United States,Goods
-MON,Monsanto Co,NYSE Euronext,United States,Goods
-MORN,Morningstar Inc,NASDAQ Global Select,United States,Financials
+MOD,MODINE MANUFACTURING COMPANY,NYQ,United States,ConsumerDiscr
+MOG-A,MOOG INC.,NYQ,United States,Industrials
+MOG-B,MOOG INC.,NYQ,United States,Industrials
+MOH,"MOLINA HEALTHCARE, INC.",NYQ,United States,Healthcare
 MOS,Mosaic Company,NYSE Euronext,United States,Materials
+MOV,"MOVADO GROUP, INC.",NYQ,United States,ConsumerDiscr
 MPC,Marathon Petroleum Corp,NYSE Euronext,United States,Oil & Gas
-MRC,MRC Global Inc,NYSE Euronext,United States,Goods
+MPG,LEVERAGE SHARES 2X LONG MP DAILY ETF,NGM,US,Technology
+MPWR,"Monolithic Power Systems, Inc.",NMS,United States,Technology
+MPX,MARINE PRODUCTS CORP,NYQ,United States,ConsumerDiscr
 MRK,Merck & Co Inc,NYSE Euronext,United States,Health Care
-MRO,Marathon Oil Corp,NYSE Euronext,United States,Oil & Gas
+MRNA,"Moderna, Inc.",NMS,United States,Health Care
 MRO.L,Melrose Plc,London Stock Exchange,United Kingdom,Financials
+MRSH,"Marsh & McLennan Companies, Inc.",NYQ,United States,Financials
+MRT,"MARTI TECHNOLOGIES, INC.",ASE,Turkey,Technology
 MRVL,Marvell Technology Group,NASDAQ Global Select,United States,Technology
-MRW.L,Morrison Supermarkets,London Stock Exchange,United Kingdom,Services
+MRX,MAREX GROUP LIMITED,NMS,United Kingdom,Financials
 MS,Morgan Stanley,NYSE Euronext,United States,Financials
+MSA,MSA SAFETY INCORPORATED,NYQ,United States,Industrials
 MSCI,MSCI Inc,NYSE Euronext,United States,Financials
 MSFT,Microsoft Corp,NASDAQ Global Select,United States,Technology
-MSG,Madison Square Garden,NASDAQ Global Select,United States,Services
 MSI,Motorola Solutions Inc,NYSE Euronext,United States,Technology
 MSM,MSC Industrial Direct ,NYSE Euronext,United States,Industrials
+MSTR,STRATEGY INC,NMS,United States,Technology
+MT,ARCELORMITTAL S.A.,NYQ,Luxembourg,BasicMaterials
 MT.AS,ArcelorMittal,Euronext Amsterdam,Luxembourg,Materials
 MTB,M & T Bank Corp,NYSE Euronext,United States,Financials
 MTD,Mettler Toledo Intl Inc,NYSE Euronext,United States,Industrials
+MTG,MGIC INVESTMENT CORPORATION,NYQ,United States,Financials
+MTH,MERITAGE HOMES CORPORATION,NYQ,United States,ConsumerDiscr
+MTN,"VAIL RESORTS, INC.",NYQ,United States,ConsumerDiscr
+MTRN,MATERION CORPORATION,NYQ,United States,BasicMaterials
 MTW,The Manitowoc Company,NYSE Euronext,United States,Industrials
+MTX,MINERALS TECHNOLOGIES INC.,NYQ,United States,BasicMaterials
+MTZ,"MASTEC, INC.",NYQ,United States,Industrials
 MU,Micron Technology Inc,NASDAQ Global Select,United States,Technology
 MUR,Murphy Oil Corp,NYSE Euronext,United States,Oil & Gas
+MUSA,MURPHY USA INC.,NYQ,United States,ConsumerDiscr
 MUV2.DE,Munich Re Ag,Frankfurt Stock Exchange,Germany,Financials
-MWV,Meadwestvaco Corp,NYSE Euronext,United States,Industrials
-MXIM,Maxim Integrated Prods,NASDAQ Global Select,United States,Technology
-MYGN,Myriad Genetics Inc,NASDAQ Global Select,United States,Health Care
-MYL,Mylan Inc,NASDAQ Global Select,United States,Health Care
-N,Netsuite Inc,NYSE Euronext,United States,Technology
-NATI,National Instrs Corp,NASDAQ Global Select,United States,Technology
-NAV,Navistar Intl Corp New,NYSE Euronext,United States,Industrials
-NBL,Noble Energy Inc,NYSE Euronext,United States,Oil & Gas
+MWA,"MUELLER WATER PRODUCTS, INC.",NYQ,United States,Industrials
+MX,MAGNACHIP SEMICONDUCTOR CORPORATION,NYQ,South Korea,Technology
+MXL,"MAXLINEAR, INC.",NMS,United States,Technology
+MYE,"MYERS INDUSTRIES, INC.",NYQ,United States,ConsumerDiscr
+NAT,NORDIC AMERICAN TANKERS LIMITED,NYQ,Bermuda,Energy
+NBIS,NEBIUS GROUP,NMS,Netherlands,Technology
 NBR,Nabors Industries Ltd,NYSE Euronext,United States,Oil & Gas
+NC,"NACCO INDUSTRIES, INC.",NYQ,United States,Energy
+NCI,NEO-CONCEPT INTERNATIONAL GROUP HOLDINGS LIMITED,NCM,Hong Kong,ConsumerDiscr
 NCLH,Norwegian Cruise Line,,United States,Services
-NCR,NCR Corp,NYSE Euronext,United States,Technology
-NDAQ,Nasdaq Omx Group Inc,NASDAQ Global Select,United States,Financials
+NCT,INTERCONT (CAYMAN) LIMITED,NCM,Hong Kong,Industrials
 NDSN,Nordson Corp,NASDAQ Global Select,United States,Goods
 NE,Noble Corp,,Switzerland,Oil & Gas
 NEE,Nextera Energy Inc,NYSE Euronext,United States,Utilities
 NEM,Newmont Mining Corp,NYSE Euronext,United States,Materials
-NESN.VX,Nestle Sa Reg,Swiss Stock Exchange,Switzerland,Goods
+NET,"CLOUDFLARE, INC.",NYQ,United States,Technology
 NEU,Newmarket Corporation,NYSE Euronext,United States,Materials
 NFG,National Fuel Gas Co,NYSE Euronext,United States,Utilities
 NFLX,Netflix Inc,NASDAQ Global Select,United States,Services
 NFX,Newfield Exploration Co,NYSE Euronext,United States,Oil & Gas
+NG.L,NATIONAL GRID PLC,LSE,United Kingdom,Utilities
 NGG,National Grid,London Stock Exchange,United Kingdom,Utilities
+NGS,"NATURAL GAS SERVICES GROUP, INC.",NYQ,United States,Energy
+NHI,"NATIONAL HEALTH INVESTORS, INC.",NYQ,United States,Financials
 NI,Nisource Inc,NYSE Euronext,United States,Utilities
+NJR,NEW JERSEY RESOURCES CORPORATION,NYQ,United States,Utilities
 NKE,Nike Inc,NYSE Euronext,United States,Goods
-NLSN,Nielsen Holdings,NYSE Euronext,United States,Services
+NL,"NLI HOLDINGS, INC.",NYQ,United States,Industrials
 NLY,Annaly Capital Mgmt Inc,NYSE Euronext,United States,Financials
+NMR,"NOMURA HOLDINGS, INC.",NYQ,Japan,Financials
+NNI,"NELNET, INC.",NYQ,United States,Financials
 NNN,National Retail Pptys,NYSE Euronext,United States,Financials
+NOA,NORTH AMERICAN CONSTRUCTION GROUP LTD.,NYQ,Canada,Energy
+NOAH,NOAH HOLDINGS LIMITED,NYQ,Singapore,Financials
 NOC,Northrop Grumman Corp,NYSE Euronext,United States,Industrials
 NOK,Nokia Corp,Helsinki Stock Exchange,Finland,Technology
 NOV,National Oilwell Varco,NYSE Euronext,United States,Oil & Gas
-NOVN.VX,Novartis Ag Reg,Swiss Stock Exchange,Switzerland,Health Care
 NOW,ServiceNow Inc,,United States,Technology
+NP,NEPTUNE INSURANCE HOLDINGS INC.,NYQ,United States,Financials
+NPK,"NATIONAL PRESTO INDUSTRIES, INC.",NYQ,United States,Industrials
+NPO,ENPRO INC.,NYQ,United States,Industrials
 NRG,NRG Energy Inc,NYSE Euronext,United States,Utilities
-NSANY,Nissan Motor,,Japan,Goods
 NSC,Norfolk Southern Corp,NYSE Euronext,United States,Industrials
-NSM,Nationstar Mtg Hldgs,,United States,Financials
-NSR,Neustar Inc,NYSE Euronext,United States,Industrials
-NTAP,Netapp Inc,NASDAQ Global Select,United States,Technology
-NTRS,Northern Trust Corp,NASDAQ Global Select,United States,Financials
+NSP,"INSPERITY, INC.",NYQ,United States,Industrials
+NTZ,NATUZZI S.P.A.,NYQ,Italy,ConsumerDiscr
 NU,Northeast Utilities,NYSE Euronext,United States,Utilities
-NUAN,Nuance Communications,NASDAQ Global Select,United States,Technology
 NUE,Nucor Corp,NYSE Euronext,United States,Materials
 NUS,Nu Skin Enterprises,NYSE Euronext,United States,Goods
 NVDA,Nvidia Corp,NASDAQ Global Select,United States,Technology
-NVE,NV Energy Inc,NYSE Euronext,United States,Utilities
+NVO,NOVO NORDISK A/S,NYQ,Denmark,Healthcare
 NVR,NVR Inc,NYSE Euronext,United States,Goods
+NVS,NOVARTIS AG,NYQ,Switzerland,Healthcare
+NWE,"NORTHWESTERN ENERGY GROUP, INC.",NMS,United States,Utilities
+NWG.L,NATWEST GROUP PLC,LSE,United Kingdom,Financials
 NWL,Newell Rubbermaid Inc,NYSE Euronext,United States,Goods
-NWSA,News Corp,NASDAQ Global Select,United States,Services
+NWN,NORTHWEST NATURAL HOLDING COMPANY,NYQ,United States,Utilities
+NWS,News Corporation,NMS,United States,Services
+NX,QUANEX BUILDING PRODUCTS CORPORATION,NYQ,United States,Industrials
 NXPI,NXP Semiconductors N.V.  ,NASDAQ Global Select,Netherlands,Technology
 NXT.L,Next,London Stock Exchange,United Kingdom,Services
+NYT,THE NEW YORK TIMES COMPANY,NYQ,United States,Technology
 O,Realty Income Corp,NYSE Euronext,United States,Financials
-OAS,Oasis Pete Inc,,United States,Materials
 OC,Owens Corning New,NYSE Euronext,United States,Industrials
-OCN,Ocwen Financial Corp,,United States,Financials
-OCR,Omnicare Inc,NYSE Euronext,United States,Services
+ODC,OIL-DRI CORPORATION OF AMERICA,NYQ,United States,BasicMaterials
 ODFL,Old Dominion Freight,,United States,Services
-OFC,Corporate Office Pptys,NYSE Euronext,United States,Financials
+OFG,OFG BANCORP,NYQ,United States,Financials
 OGE,OGE Energy Corp,NYSE Euronext,United States,Oil & Gas
 OHI,Omega Healthcare Invs,,United States,Health Care
 OI,Owens Illinois Inc,NYSE Euronext,United States,Industrials
 OII,Oceaneering Intl,NYSE Euronext,United States,Oil & Gas
 OIS,Oil States International,NYSE Euronext,United States,Oil & Gas
 OKE,Oneok Inc,NYSE Euronext,United States,Utilities
+OLN,OLIN CORPORATION,NYQ,United States,BasicMaterials
+OLP,"ONE LIBERTY PROPERTIES, INC.",NYQ,United States,Financials
 OMC,Omnicom Group Inc,NYSE Euronext,United States,Services
-OML.L,Old Mutual,London Stock Exchange,United Kingdom,Financials
-ONNN,On Semiconductor Corp,NASDAQ Global Select,United States,Technology
-ONXX,Onyx Pharmaceuticals In,NASDAQ Global Select,United States,Health Care
+ON,ON Semiconductor Corporation,NMS,United States,Technology
+ONB,OLD NATIONAL BANCORP,NMS,United States,Financials
+OPK,"OPKO HEALTH, INC.",NMS,United States,Healthcare
+OPY,OPPENHEIMER HOLDINGS INC.,NYQ,United States,Financials
 OR.PA,L'Oreal,Euronext Paris,France,Goods
-ORAN,Orange - France Telecom,Euronext Paris,France,Technology
+ORA,"ORMAT TECHNOLOGIES, INC.",NYQ,United States,Utilities
 ORCL,Oracle Corp,NASDAQ Global Select,United States,Technology
 ORI,Old Republic Intl Corp,NYSE Euronext,United States,Financials
 ORLY,O Reilly Automotive Inc,NASDAQ Global Select,United States,Services
+ORN,"ORION GROUP HOLDINGS, INC.",NYQ,United States,Industrials
+OSG,"OCTAVE SPECIALTY GROUP, INC.",NYQ,United States,Financials
 OSK,Oshkosh Corp,NYSE Euronext,United States,Industrials
+OTIS,Otis Worldwide Corporation,NYQ,United States,Industrials
+OXM,"OXFORD INDUSTRIES, INC.",NYQ,United States,ConsumerDiscr
 OXY,Occidental Pete Corp,NYSE Euronext,United States,Oil & Gas
 P,Pandora Media Inc,NYSE Euronext,United States,Services
+PAC,"GRUPO AEROPORTUARIO DEL PACÍFICO, S.A.B. DE C.V.",NYQ,Mexico,Industrials
+PAG,"PENSKE AUTOMOTIVE GROUP, INC.",NYQ,United States,ConsumerDiscr
+PAM,PAMPA ENERGÍA S.A.,NYQ,Argentina,Industrials
 PANW,Palo Alto Networks Inc,,United States,Technology
+PAR,PAR TECHNOLOGY CORPORATION,NYQ,United States,Technology
 PAY,Verifone Systems Inc,NYSE Euronext,United States,Technology
 PAYX,Paychex Inc,NASDAQ Global Select,United States,Services
-PBCT,Peoples United Financia,NASDAQ Global Select,United States,Financials
-PBF,PBF Energy Inc,,United States,Oil & Gas
+PBH,PRESTIGE CONSUMER HEALTHCARE INC.,NYQ,United States,Healthcare
 PBI,Pitney Bowes Inc,NYSE Euronext,United States,Technology
+PBR,PETRÓLEO BRASILEIRO S.A. - PETROBRAS,NYQ,Brazil,Energy
+PC,PREMIUM CATERING (HOLDINGS) LIMITED,NCM,Singapore,Industrials
 PCAR,Paccar Inc,NASDAQ Global Select,United States,Industrials
 PCG,PG&E Corp,NYSE Euronext,United States,Utilities
 PCL,Plum Creek Timber Co In,NYSE Euronext,United States,Financials
-PCLN,Priceline Com Inc,NASDAQ Global Select,United States,Industrials
-PCP,Precision Castparts,NYSE Euronext,United States,Industrials
-PCRFY,Panasonic Corp,,Japan,Technology
-PCYC,Pharmacyclics Inc,,United States,Health Care
-PDCO,Patterson Cos Inc,NASDAQ Global Select,United States,Health Care
+PCS,PGIM CORPORATE BOND 0-5 YEAR ETF,BTS,US,Technology
+PDD,PDD HOLDINGS INC.,NMS,Ireland,Technology
 PDM,Piedmont Office Rlty Tr,NYSE Euronext,United States,Financials
+PDS,PRECISION DRILLING CORPORATION,NYQ,Canada,Energy
+PEB,PEBBLEBROOK HOTEL TRUST,NYQ,United States,Financials
 PEG,Public Svc Enterprise,NYSE Euronext,United States,Utilities
-PENN,Penn National Gaming,NASDAQ Global Select,United States,Services
 PEP,Pepsico Inc,NYSE Euronext,United States,Goods
-PETM,Petsmart Inc,NASDAQ Global Select,United States,Services
-PF,Pinnacle Foods Inc Del,,United States,Goods
-PFC.L,Petrofac Ltd,London Stock Exchange,United Kingdom,Oil & Gas
 PFE,Pfizer Inc,NYSE Euronext,United States,Health Care
 PFG,Principal Financial Grp,NYSE Euronext,United States,Financials
+PFS,"PROVIDENT FINANCIAL SERVICES, INC.",NYQ,United States,Financials
 PG,Procter & Gamble Co,NYSE Euronext,United States,Goods
 PGR,Progressive Corp,NYSE Euronext,United States,Financials
 PH,Parker Hannifin Corp,NYSE Euronext,United States,Industrials
+PHG,KONINKLIJKE PHILIPS N.V.,NYQ,Netherlands,Healthcare
+PHI,PLDT INC.,NYQ,Philippines,Technology
 PHIA.AS,Royal Philips Electronics,Euronext Amsterdam,Netherlands,Industrials
 PHM,Pultegroup Inc,NYSE Euronext,United States,Goods
 PII,Polaris Industries Inc,NYSE Euronext,United States,Goods
+PKE,PARK AEROSPACE CORP.,NYQ,United States,Industrials
 PKG,Packaging Corp Of Amer,NYSE Euronext,United States,Industrials
-PKI,Perkinelmer Inc,NYSE Euronext,United States,Industrials
+PKX,POSCO HOLDINGS INC.,NYQ,South Korea,BasicMaterials
 PL,Protective Life Corp,NYSE Euronext,United States,Financials
-PLCM,Polycom Inc,NASDAQ Global Select,United States,Utilities
 PLD,Prologis Inc,NYSE Euronext,United States,Financials
-PLL,Pall Corp,NYSE Euronext,United States,Industrials
+PLOW,"DOUGLAS DYNAMICS, INC.",NYQ,United States,ConsumerDiscr
+PLT,DEFIANCE LEVERAGED LONG + INCOME PLTR ETF,NGM,US,Technology
+PLTR,Palantir Technologies Inc.,NMS,United States,Technology
 PM,Philip Morris Intl,NYSE Euronext,United States,Goods
+PMT,PENNYMAC MORTGAGE INVESTMENT TRUST,NYQ,United States,Financials
 PNC,PNC Financial Svcs Grou,NYSE Euronext,United States,Financials
 PNR,Pentair Inc,NYSE Euronext,United States,Industrials
-PNRA,Panera Bread Co,NASDAQ Global Select,United States,Services
 PNW,Pinnacle West Capital C,NYSE Euronext,United States,Utilities
-POLY.L,Polymetal Intl,London Stock Exchange,United Kingdom,Materials
+PODD,Insulet Corporation,NMS,United States,Health Care
 POM,Pepco Holdings Inc,NYSE Euronext,United States,Utilities
+POR,PORTLAND GENERAL ELECTRIC COMPANY,NYQ,United States,Utilities
+PPC,PILGRIM'S PRIDE CORPORATION,NMS,United States,ConsumerStpl
 PPG,PPG Industries Inc,NYSE Euronext,United States,Materials
 PPL,PPL Corp,NYSE Euronext,United States,Utilities
-PPS,Post Properties Inc,NYSE Euronext,United States,Financials
 PRA,Proassurance Corp,NYSE Euronext,United States,Financials
 PRE,Partnerre Ltd,NYSE Euronext,United States,Financials
-PRGO,Perrigo Co,NASDAQ Global Select,United States,Health Care
+PRI,"PRIMERICA, INC.",NYQ,United States,Financials
 PRU,Prudential Financial,NYSE Euronext,United States,Financials
+PRU.L,PRUDENTIAL PLC,LSE,Hong Kong,Financials
 PSA,Public Storage Inc,NYSE Euronext,United States,Financials
+PSKY,Paramount Skydance Corporation,NMS,United States,Services
+PSO,PEARSON PLC,NYQ,United Kingdom,Technology
 PSON.L,Pearson,London Stock Exchange,United Kingdom,Services
-PSX,Phillips 66,NYSE Euronext,United States,Oil & Gas
-PTEN,Patterson Uti Energy,NASDAQ Global Select,United States,Oil & Gas
+PTC,PTC Inc.,NMS,United States,Technology
+PUK,PRUDENTIAL PLC,NYQ,Hong Kong,Financials
+PULS,PGIM ULTRA SHORT BOND ETF,PCX,US,Technology
 PVH,PVH Corp,NYSE Euronext,United States,Goods
 PWR,Quanta Services Inc,NYSE Euronext,United States,Industrials
-PX,Praxair Inc,NYSE Euronext,United States,Materials
-PXD,Pioneer Nat Resources C,NYSE Euronext,United States,Oil & Gas
+PYPL,"PayPal Holdings, Inc.",NMS,United States,Financials
 Q,Quintiles Transnational,,United States,Health Care
 QCOM,Qualcomm Inc,NASDAQ Global Select,United States,Technology
-QEP,Qep Resources Inc,NYSE Euronext,United States,Oil & Gas
-QGEN,Qiagen Nv,NASDAQ Global Select,Germany,Health Care
+QUAD,"QUAD/GRAPHICS, INC.",NYQ,United States,Industrials
 R,Ryder System Inc,NYSE Euronext,United States,Industrials
-RAI,Reynolds American Inc,NYSE Euronext,United States,Goods
-RAX,Rackspace Hosting Inc,NYSE Euronext,United States,Technology
-RB.L,Reckitt Benckiser Group,London Stock Exchange,United Kingdom,Goods
+RA,BROOKFIELD REAL ASSETS INCOME FUND INC.,NYQ,United States,Financials
+RATE,GLOBAL X INTEREST RATE HEDGE ETF,PCX,US,Technology
+RBA,"RB GLOBAL, INC.",NYQ,United States,Industrials
 RBC,Regal Beloit Corp,NYSE Euronext,United States,Industrials
-RBS.L,Royal Bank Of Scotland,London Stock Exchange,United Kingdom,Financials
+RC,READY CAPITAL CORPORATION,NYQ,United States,Financials
+RCI,ROGERS COMMUNICATIONS INC.,NYQ,Canada,Technology
 RCL,Royal Caribbean Cruises,NYSE Euronext,United States,Services
-RDC,Rowan Companies Plc,NYSE Euronext,United States,Oil & Gas
-RDSA.L,Royal Dutch Shell,London Stock Exchange,United Kingdom,Oil & Gas
-RE,Everest Re Group Ltd,NYSE Euronext,United States,Financials
+RDN,RADIAN GROUP INC.,NYQ,United States,Financials
+RDY,DR. REDDY'S LABORATORIES LIMITED,NYQ,India,Healthcare
 REG,Regency Centers Corp,NYSE Euronext,United States,Financials
 REGN,Regeneron Pharmaceuticals,NASDAQ Global Select,United States,Health Care
 REL.L,Reed Elsevier,London Stock Exchange,United Kingdom,Services
-REPYY,Repsol Sa,Madrid Stock Exchange,Spain,Oil & Gas
+REP.MC,"REPSOL, S.A.",MCE,Spain,Energy
 RES,RPC Inc,NYSE Euronext,United States,Oil & Gas
-REX.L,Rexam,London Stock Exchange,United Kingdom,Goods
+REX,REX AMERICAN RESOURCES CORPORATION,NYQ,United States,BasicMaterials
 RF,Regions Financial Corp,NYSE Euronext,United States,Financials
 RGA,Reinsurance Grp Of Amer,NYSE Euronext,United States,Financials
 RGC,Regal Entmt Group,NYSE Euronext,United States,Services
-RGLD,Royal Gold Inc,NASDAQ Global Select,United States,Industrials
+RGR,"STURM, RUGER & COMPANY, INC.",NYQ,United States,Industrials
+RGS,REGIS CORPORATION,NGM,United States,ConsumerDiscr
 RHI,Robert Half Intl Inc,NYSE Euronext,United States,Industrials
-RHT,Red Hat Inc,NYSE Euronext,United States,Technology
 RIG,Transocean,,Switzerland,Oil & Gas
 RIO,Rio Tinto,London Stock Exchange,United Kingdom,Materials
+RIO.L,RIO TINTO GROUP,LSE,United Kingdom,BasicMaterials
 RJF,Raymond James Financial,NYSE Euronext,United States,Financials
+RKLB,ROCKET LAB CORPORATION,NMS,United States,Industrials
 RKT,Rock-Tenn Co,NYSE Euronext,United States,Industrials
+RKT.L,RECKITT BENCKISER GROUP PLC,LSE,United Kingdom,ConsumerStpl
 RL,Ralph Lauren Corp,NYSE Euronext,United States,Goods
-RLGY,Realogy Holdings Corp,,United States,Financials
+RLI,RLI CORP.,NYQ,United States,Financials
+RLJ,RLJ LODGING TRUST,NYQ,United States,Financials
 RMD,ResMed Inc,NYSE Euronext,United States,Health Care
+RMS.PA,HERMÈS INTERNATIONAL SOCIÉTÉ EN COMMANDITE PAR ACTIONS,PAR,France,ConsumerDiscr
 RNR,Renaissancere Holdings,NYSE Euronext,United States,Financials
 ROC,Rockwood Holdings Inc,NYSE Euronext,United States,Materials
+ROG,ROGERS CORPORATION,NYQ,United States,Technology
 ROK,Rockwell Automation Inc,NYSE Euronext,United States,Industrials
 ROL,Rollins Inc,NYSE Euronext,United States,Services
 ROP,Roper Industries Inc,NYSE Euronext,United States,Industrials
 ROST,Ross Stores Inc,NASDAQ Global Select,United States,Services
-ROVI,Rovi Corporation,NASDAQ Global Select,United States,Services
-RPAI,Retail Pptys Amer Inc,NYSE Euronext,United States,Services
 RPM,Rpm International Inc,NYSE Euronext,United States,Materials
+RPT,RITHM PROPERTY TRUST INC.,NYQ,United States,Financials
 RR.L,Rolls Royce,London Stock Exchange,United Kingdom,Goods
 RRC,Range Resources Corp,NYSE Euronext,United States,Oil & Gas
-RRD,Donnelley R R & Sons Co,NASDAQ Global Select,United States,Services
-RRS.L,Randgold Resources Ltd,London Stock Exchange,United Kingdom,Materials
+RRR,"RED ROCK RESORTS, INC.",NMS,United States,ConsumerDiscr
+RRTS,"ROADRUNNER TRANSPORTATION SYSTEMS, INC.",PNK,United States,Industrials
 RS,Reliance Steel & Alum,NYSE Euronext,United States,Materials
-RSA.L,RSA Insurance Group,London Stock Exchange,United Kingdom,Financials
 RSG,Republic Services Inc,NYSE Euronext,United States,Industrials
-RSL.L,Resolution Ltd,London Stock Exchange,United Kingdom,Financials
-RTN,Raytheon Co,NYSE Euronext,United States,Industrials
-RVBD,Riverbed Technology Inc,NASDAQ Global Select,United States,Technology
+RTO.L,RENTOKIL INITIAL PLC,LSE,United Kingdom,Industrials
+RTX,RTX Corporation,NYQ,United States,Industrials
+RVTY,"Revvity, Inc.",NYQ,United States,Health Care
 RWE.DE,RWE Ag,Frankfurt Stock Exchange,Germany,Utilities
+RWT,"REDWOOD TRUST, INC.",NYQ,United States,Financials
+RY,ROYAL BANK OF CANADA,NYQ,Canada,Financials
 RYN,Rayonier Inc,NYSE Euronext,United States,Financials
 S,Sprint Nextel,NYSE Euronext,United States,Technology
-SAB.L,SABMiller,London Stock Exchange,United Kingdom,Goods
+SAF.PA,SAFRAN SA,PAR,France,Industrials
+SAH,"SONIC AUTOMOTIVE, INC.",NYQ,United States,ConsumerDiscr
+SAM,"THE BOSTON BEER COMPANY, INC.",NYQ,United States,ConsumerStpl
 SAN,Banco Santander,NYSE Euronext,Spain,Financials
+SAN.MC,"BANCO SANTANDER, S.A.",MCE,Spain,Financials
 SAN.PA,Sanofi,Euronext Paris,France,Health Care
+SAP,SAP SE,NYQ,Germany,Technology
 SAP.DE,SAP,Frankfurt Stock Exchange,Germany,Technology
-SATS,Echostar Corp,NASDAQ Global Select,United States,Technology
+SB,"SAFE BULKERS, INC.",NYQ,Monaco,Industrials
 SBAC,SBA Communications Corp,NASDAQ Global Select,United States,Services
 SBH,Sally Beauty Holdings,NYSE Euronext,United States,Services
-SBNY,Signature Bank,NASDAQ Global Select,United States,Financials
 SBRY.L,Sainsbury,London Stock Exchange,United Kingdom,Services
+SBS,COMPANHIA DE SANEAMENTO BÁSICO DO ESTADO DE SÃO PAULO - SABESP,NYQ,Brazil,Utilities
 SBUX,Starbucks Corp,NASDAQ Global Select,United States,Services
 SCCO,Southern Copper Corp,NYSE Euronext,United States,Materials
-SCG,Scana Corp,NYSE Euronext,United States,Utilities
 SCHW,Schwab Charles Corp,NYSE Euronext,United States,Financials
 SCI,Service Corp Intl,NYSE Euronext,United States,Services
-SCTY,Solarcity Corp,,United States,Technology
+SCL,STEPAN COMPANY,NYQ,United States,BasicMaterials
 SD,Sandridge Energy Inc,NYSE Euronext,United States,Oil & Gas
 SDR.L,Schroders,London Stock Exchange,United Kingdom,Financials
 SDRL,Seadrill Limited,,United States,Materials
 SE,Spectra Energy Corp,NYSE Euronext,United States,Utilities
-SEAS,Seaworld Entertainment,,United States,Services
-SEE,Sealed Air Corp,NYSE Euronext,United States,Industrials
-SEIC,Sei Investments Co,NASDAQ Global Select,United States,Financials
-SFG,Stancorp Financial Grou,NYSE Euronext,United States,Financials
+SEM,SELECT MEDICAL HOLDINGS CORP,NYQ,United States,Healthcare
+SEMG,SUNCOAST SELECT GROWTH ETF,PCX,US,Technology
+SF,STIFEL FINANCIAL CORP.,NYQ,United States,Financials
+SFD,"SMITHFIELD FOODS, INC.",NMS,United States,ConsumerStpl
+SFL,SFL CORPORATION LTD.,NYQ,Bermuda,Industrials
+SFY,SOFI SELECT 500 ETF,PCX,US,Technology
 SGE.L,Sage Group,London Stock Exchange,United Kingdom,Technology
-SGEN,Seattle Genetics Inc,,United States,Health Care
 SGO.PA,Compagnie De Saint-Gobain,Euronext Paris,France,Industrials
-SHLD,Sears Holdings Corp,NASDAQ Global Select,United States,Services
-SHP.L,Shire,London Stock Exchange,United Kingdom,Health Care
+SGRO.L,SEGRO PLC,LSE,United Kingdom,Financials
+SHEL.L,SHELL PLC,LSE,United Kingdom,Energy
+SHG,"SHINHAN FINANCIAL GROUP CO., LTD.",NYQ,South Korea,Financials
+SHO,"SUNSTONE HOTEL INVESTORS, INC.",NYQ,United States,Financials
+SHOP,SHOPIFY INC.,NMS,Canada,Technology
 SHW,Sherwin Williams Co,NYSE Euronext,United States,Industrials
-SIAL,Sigma Aldrich Corp,NASDAQ Global Select,United States,Materials
+SI,"SHOULDER INNOVATIONS, INC.",NYQ,US,Technology
+SID,COMPANHIA SIDERÚRGICA NACIONAL,NYQ,Brazil,BasicMaterials
 SIE.DE,Siemens Ag,Frankfurt Stock Exchange,Germany,Industrials
 SIG,Signet Jewelers Ltd,NYSE Euronext,United States,Services
-SIRI,Sirius Xm Radio,NASDAQ Global Select,United States,Services
-SIRO,Sirona Dental Sys Inc,NASDAQ Global Select,United States,Health Care
-SIVB,SVB Financial Group,NASDAQ Global Select,United States,Financials
-SIX,Six Flags Entmt Corp Ne,,United States,Services
 SJM,The JM Smucker Company,NYSE Euronext,United States,Goods
+SKM,"SK TELECOM CO., LTD.",NYQ,South Korea,Technology
 SKT,Tanger Factory Outlet,NYSE Euronext,United States,Financials
-SL.L,Standard Life,London Stock Exchange,United Kingdom,Financials
-SLAB,Silicon Laboratories In,NASDAQ Global Select,United States,Technology
+SKY,"CHAMPION HOMES, INC.",NYQ,United States,ConsumerDiscr
 SLB,Schlumberger Ltd,NYSE Euronext,United States,Oil & Gas
+SLE,"SUPER LEAGUE ENTERPRISE, INC.",NCM,United States,Technology
+SLF,SUN LIFE FINANCIAL INC.,NYQ,Canada,Financials
 SLG,Sl Green Realty Corp,NYSE Euronext,United States,Financials
-SLGN,Silgan Holdings Inc,NASDAQ Global Select,United States,Goods
-SLH,Solera Holdings Inc,NYSE Euronext,United States,Technology
-SLM,SLM Corporation,NASDAQ Global Select,United States,Financials
-SLXP,Salix Pharmaceuticals,NASDAQ Global Select,United States,Health Care
 SM,SM Energy Co,NYSE Euronext,United States,Oil & Gas
+SMA,"SMARTSTOP SELF STORAGE REIT, INC.",NYQ,United States,Financials
+SMCI,"Super Micro Computer, Inc.",NMS,United States,Technology
+SMFG,"SUMITOMO MITSUI FINANCIAL GROUP, INC.",NYQ,Japan,Financials
 SMG,Scotts Miracle,NYSE Euronext,United States,Goods
+SMI,VANECK HIP SUSTAINABLE MUNI ETF,BTS,US,Technology
 SMIN.L,Smiths Group,London Stock Exchange,United Kingdom,Goods
+SMP,"STANDARD MOTOR PRODUCTS, INC.",NYQ,United States,ConsumerDiscr
+SMWH.L,WH SMITH PLC,LSE,United Kingdom,ConsumerDiscr
+SN,"SHARKNINJA, INC.",NYQ,United States,ConsumerDiscr
 SN.L,Smith & Nephew,London Stock Exchange,United Kingdom,Health Care
 SNA,Snap On Inc,NYSE Euronext,United States,Goods
 SNDK,Sandisk Corp,NASDAQ Global Select,United States,Technology
-SNE,Sony Corp,,Japan,Technology
-SNH,Senior Housing Pptys Tr,NYSE Euronext,United States,Financials
-SNI,Scripps Networks Interactive,NYSE Euronext,United States,Services
+SNN,SMITH & NEPHEW PLC,NYQ,United Kingdom,Healthcare
+SNOW,SNOWFLAKE INC.,NYQ,United States,Technology
 SNPS,Synopsys Inc,NASDAQ Global Select,United States,Technology
-SNV,Synovus Financial Corp,NYSE Euronext,United States,Financials
+SNX,TD SYNNEX CORPORATION,NYQ,United States,Technology
 SNY,Sanofi-Aventis,,France,Health Care
 SO,Southern Co,NYSE Euronext,United States,Utilities
+SOLV,Solventum Corporation,NYQ,United States,Health Care
 SON,Sonoco Products Co,NYSE Euronext,United States,Industrials
+SPB,"SPECTRUM BRANDS HOLDINGS, INC.",NYQ,United States,ConsumerStpl
+SPCX,SPACE EXPLORATION TECHNOLOGIES CORP.,NMS,United States,Industrials
 SPG,Simon Property Group In,NYSE Euronext,United States,Financials
-SPLK,Splunk Inc,NASDAQ Global Select,United States,Technology
-SPLS,Staples Inc,NASDAQ Global Select,United States,Services
-SPN,Superior Energy Service,NYSE Euronext,United States,Oil & Gas
-SPR,Spirit Aerosystems,NYSE Euronext,United States,Industrials
-SPW,SPX Corp,NYSE Euronext,United States,Industrials
-SRCL,Stericycle Inc,NASDAQ Global Select,United States,Industrials
+SPGI,S&P Global Inc.,NYQ,United States,Financials
+SPX.L,SPIRAX GROUP PLC,LSE,United Kingdom,Industrials
+SQM,SOCIEDAD QUÍMICA Y MINERA DE CHILE S.A.,NYQ,Chile,BasicMaterials
+SQNS,SEQUANS COMMUNICATIONS S.A.,NYQ,France,Technology
+SR,SPIRE INC.,NYQ,United States,Utilities
 SRE,Sempra Energy,NYSE Euronext,United States,Utilities
-SREN.VX,Swiss Re Reg,Swiss Stock Exchange,Switzerland,Financials
+SRI,"STONERIDGE, INC.",NYQ,United States,ConsumerDiscr
 SRP.L,Serco Group,London Stock Exchange,United Kingdom,Services
+SSD,"SIMPSON MANUFACTURING CO., INC.",NYQ,United States,BasicMaterials
 SSE.L,SSE,London Stock Exchange,United Kingdom,Utilities
-SSNLF,Samsung Electronics,,South Korea,Goods
-SSYS,Stratasys Ltd,,United States,Technology
+SSL,SASOL LIMITED,NYQ,South Africa,BasicMaterials
+SSP,THE E.W. SCRIPPS COMPANY,NMS,United States,Technology
+SSS,CYBER HORNET S&P 500AND SOLANA 75/25 STRATEGY ETF,NGM,US,Technology
+STAG,"STAG INDUSTRIAL, INC.",NYQ,United States,Financials
 STAN.L,Standard Chartered,London Stock Exchange,United Kingdom,Financials
+STC,STEWART INFORMATION SERVICES CORPORATION,NYQ,United States,Financials
+STE,STERIS plc,NYQ,United States,Health Care
 STI,Suntrust Banks Inc,NYSE Euronext,United States,Financials
-STJ,St Jude Medical Inc,NYSE Euronext,United States,Health Care
+STJ.L,ST. JAMES'S PLACE PLC,LSE,United Kingdom,Financials
 STLD,Steel Dynamics Inc,NASDAQ Global Select,United States,Industrials
-STR,Questar Corp,NYSE Euronext,United States,Utilities
+STM,STMICROELECTRONICS N.V.,NYQ,Netherlands,Technology
+STN,STANTEC INC.,NYQ,Canada,Industrials
+STNG,SCORPIO TANKERS INC.,NYQ,Monaco,Energy
 STT,State Street Corp,NYSE Euronext,United States,Financials
 STWD,Starwood Ppty Trust Inc,,United States,Financials
 STX,Seagate Technology,NASDAQ Global Select,United States,Technology
 STZ,Constellation Brands,NYSE Euronext,United States,Goods
+SU,SUNCOR ENERGY INC.,NYQ,Canada,Energy
 SU.PA,Schneider Electric,Euronext Paris,France,Industrials
+SUI,"SUN COMMUNITIES, INC.",NYQ,United States,Financials
+SUN,SUNOCO LP,NYQ,United States,Energy
+SVM,SILVERCORP METALS INC.,ASE,Canada,BasicMaterials
 SVT.L,Severn Trent,London Stock Exchange,United Kingdom,Utilities
-SWI,Solarwinds Inc,NYSE Euronext,United States,Technology
+SW,Smurfit Westrock Plc,NYQ,Ireland,Goods
 SWK,Stanley Black & Decker,NYSE Euronext,United States,Goods
 SWKS,Skyworks Solutions Inc,NASDAQ Global Select,United States,Technology
-SWN,Southwestern Energy Co,NYSE Euronext,United States,Oil & Gas
-SWY,Safeway Inc,NYSE Euronext,United States,Services
+SWX,"SOUTHWEST GAS HOLDINGS, INC.",NYQ,United States,Utilities
+SXC,"SUNCOKE ENERGY, INC.",NYQ,United States,BasicMaterials
+SXI,STANDEX INTERNATIONAL CORPORATION,NYQ,United States,Industrials
+SXT,SENSIENT TECHNOLOGIES CORPORATION,NYQ,United States,BasicMaterials
+SYF,Synchrony Financial,NYQ,United States,Financials
 SYK,Stryker Corporation,NYSE Euronext,United States,Health Care
-SYMC,Symantec Corp,NASDAQ Global Select,United States,Technology
 SYY,Sysco Corp,NYSE Euronext,United States,Services
 T,AT&T Inc,NYSE Euronext,United States,Technology
-TAHO,Tahoe Res Inc,NYSE Euronext,Canada,Industrials
+TAC,TRANSALTA CORPORATION,NYQ,Canada,Utilities
+TAL,TAL EDUCATION GROUP,NYQ,China,ConsumerStpl
 TAP,Molson Coors Brewing Co,NYSE Euronext,United States,Goods
+TAP-A,MOLSON COORS BEVERAGE COMPANY,NYQ,United States,ConsumerStpl
 TATE.L,Tate & Lyle,London Stock Exchange,United Kingdom,Goods
-TCB,TCF Financial Corp,NYSE Euronext,United States,Financials
-TCO,Taubman Centers Inc,NYSE Euronext,United States,Financials
+TBI,"TRUEBLUE, INC.",NYQ,United States,Industrials
+TC,TOKEN CAT LIMITED,NCM,China,Technology
+TCI,"TRANSCONTINENTAL REALTY INVESTORS, INC.",NYQ,United States,Financials
+TD,THE TORONTO-DOMINION BANK,NYQ,Canada,Financials
 TDC,Teradata Corp,NYSE Euronext,United States,Technology
 TDG,Transdigm Group Inc,NYSE Euronext,United States,Industrials
 TDS,Telephone & Data System,NYSE Euronext,United States,Technology
 TDW,Tidewater Inc,NYSE Euronext,United States,Oil & Gas
+TDY,Teledyne Technologies Incorporated,NYQ,United States,Technology
 TE,Teco Energy Inc,NYSE Euronext,United States,Utilities
-TECD,Tech Data Corp,NASDAQ Global Select,United States,Technology
+TEAM,ATLASSIAN CORPORATION,NMS,Australia,Technology
 TECH,Techne Corp,NASDAQ Global Select,United States,Health Care
-TEF,Telefónica,NYSE Euronext,Spain,Technology
-TEG,Integrys Energy Group,NYSE Euronext,United States,Utilities
+TEF.MC,"TELEFÓNICA, S.A.",MCE,Spain,Technology
 TEL,TE Connectivity Ltd,,Switzerland,Technology
+TEN,TSAKOS ENERGY NAVIGATION LIMITED,NYQ,Greece,Energy
+TEO,TELECOM ARGENTINA S.A.,NYQ,Argentina,Technology
 TER,Teradyne Inc,NYSE Euronext,United States,Technology
 TEX,Terex Corp,NYSE Euronext,United States,Industrials
-TFM,Fresh Market Inc,NASDAQ Global Select,United States,Services
-TFSL,TFS Financial Corp,NASDAQ Global Select,United States,Financials
+TFC,Truist Financial Corporation,NYQ,United States,Financials
 TFX,Teleflex Inc,NYSE Euronext,United States,Health Care
-TGI,Triumph Group Inc,NYSE Euronext,United States,Industrials
+TG,TREDEGAR CORPORATION,NYQ,United States,Industrials
+TGS,TRANSPORTADORA DE GAS DEL SUR S.A.,NYQ,Argentina,Energy
 TGT,Target Corp,NYSE Euronext,United States,Services
 THC,Tenet Healthcare Corp,NYSE Euronext,United States,Health Care
 THG,Hanover Insurance Group,NYSE Euronext,United States,Financials
 THO,Thor Industries Inc,NYSE Euronext,United States,Goods
-THRX,Theravance Inc,,United States,Health Care
-TIBX,Tibco Software Inc,NASDAQ Global Select,United States,Technology
-TIF,Tiffany & Co,NYSE Euronext,United States,Services
 TJX,The TJX Companies,NYSE Euronext,United States,Services
 TK,Teekay Corp,NYSE Euronext,United States,Industrials
+TKC,TURKCELL ILETISIM HIZMETLERI A.S.,NYQ,Turkey,Technology
+TKO,"TKO Group Holdings, Inc.",NYQ,United States,Services
 TKR,Timken Co,NYSE Euronext,United States,Industrials
+TLK,PERUSAHAAN PERSEROAN (PERSERO) PT TELEKOMUNIKASI INDONESIA TBK,NYQ,Indonesia,Technology
 TLW.L,Tullow Oil,London Stock Exchange,United Kingdom,Materials
 TM,Toyota Motor,,Japan,Goods
-TMHC,Taylor Morrison Home,,United States,Goods
-TMK,Torchmark Corp,NYSE Euronext,United States,Financials
+TMH,TOYOTA MOTOR CORPORATION ADRHEDGED,PCX,US,Technology
 TMO,Thermo Fisher Scientifi,NYSE Euronext,United States,Health Care
+TMS,TEAMSHARES INC.,NCM,United States,Financials
 TMUS,T-Mobile US,,United States,Technology
+TNC,TENNANT COMPANY,NYQ,United States,Industrials
+TNK,TEEKAY TANKERS LTD.,NYQ,Bermuda,Energy
 TOL,Toll Brothers Inc,NYSE Euronext,United States,Goods
-TOSBF,Toshiba Corp,,Japan,Technology
-TPX,Tempur Pedic Intl Inc,NYSE Euronext,United States,Goods
+TOT,LIONSHARES U.S. EQUITY TOTAL RETURN ETF,PCX,US,Technology
+TPC,TUTOR PERINI CORPORATION,NYQ,United States,Industrials
+TPL,Texas Pacific Land Corporation,NYQ,United States,Oil & Gas
+TPR,"Tapestry, Inc.",NYQ,United States,Goods
+TR,"TOOTSIE ROLL INDUSTRIES, INC.",NYQ,United States,ConsumerStpl
+TRC,TEJON RANCH CO.,NYQ,United States,Industrials
+TREX,"TREX COMPANY, INC.",NYQ,United States,Industrials
+TRGP,Targa Resources Corp.,NYQ,United States,Oil & Gas
 TRI,Thomson Reuters Corp,NYSE Euronext,Canada,Services
-TRIP,Tripadvisor Inc,NASDAQ Global Select,United States,Technology
 TRMB,Trimble Navigation Ltd,NASDAQ Global Select,United States,Goods
 TRN,Trinity Industries Inc,NYSE Euronext,United States,Industrials
-TROW,T Rowe Price Group,NASDAQ Global Select,United States,Financials
+TRNO,TERRENO REALTY CORPORATION,NYQ,United States,Financials
+TRP,TC ENERGY CORPORATION,NYQ,Canada,Energy
 TRV,The Travelers Companies,NYSE Euronext,United States,Financials
-TRW,Trw Automotive Hldgs,NYSE Euronext,United States,Goods
-TSCO,Tractor Supply Co,NASDAQ Global Select,United States,Services
+TS,TENARIS S.A.,NYQ,Luxembourg,Energy
 TSCO.L,Tesco,London Stock Exchange,United Kingdom,Services
+TSL,GRANITESHARES 1.25X LONG TSLA DAILY ETF,NGM,US,Technology
 TSLA,Tesla Mtrs Inc,NASDAQ Global Select,United States,Goods
+TSM,TAIWAN SEMICONDUCTOR MANUFACTURING COMPANY LIMITED,NYQ,Taiwan,Technology
 TSN,Tyson Foods Inc,NYSE Euronext,United States,Goods
-TSO,Tesoro Corp,NYSE Euronext,United States,Oil & Gas
-TSS,Total System Services,NYSE Euronext,United States,Industrials
-TT.L,Tui Travel,London Stock Exchange,United Kingdom,Goods
+TT,Trane Technologies plc,NYQ,Ireland,Industrials
 TTC,Toro Co,NYSE Euronext,United States,Industrials
-TUP,Tupperware Brands Corp,NYSE Euronext,United States,Goods
+TTD,"The Trade Desk, Inc.",NGM,United States,Services
+TTI,"TETRA TECHNOLOGIES, INC.",NYQ,United States,Industrials
+TTWO,"Take-Two Interactive Software, Inc.",NMS,United States,Services
+TU,TELUS CORPORATION,NYQ,Canada,Technology
+TV,"GRUPO TELEVISA, S.A.B.",NYQ,Mexico,Technology
 TW,Towers Watson & Company,NASDAQ Global Select,United States,Industrials
-TWC,Time Warner Cable,NYSE Euronext,United States,Services
+TW.L,TAYLOR WIMPEY PLC,LSE,United Kingdom,ConsumerDiscr
+TWI,"TITAN INTERNATIONAL, INC.",NYQ,United States,Industrials
 TWO,Two Hbrs Invt Corp,,United States,Financials
-TWTC,TW Telecom Inc,NASDAQ Global Select,United States,Utilities
-TWX,Time Warner Inc,NYSE Euronext,United States,Services
+TX,TERNIUM S.A.,NYQ,Luxembourg,BasicMaterials
 TXN,Texas Instruments Inc,NASDAQ Global Select,United States,Technology
 TXT,Textron Inc,NYSE Euronext,United States,Industrials
-TYC,Tyco International Ltd,NYSE Euronext,United States,Industrials
+TYL,"Tyler Technologies, Inc.",NYQ,United States,Technology
 UA,Under Armour Inc,NYSE Euronext,United States,Goods
 UAL,United Continental Hldg,NYSE Euronext,United States,Services
+UBER,"Uber Technologies, Inc.",NYQ,United States,Technology
 UBS,UBS Ag,NYSE Euronext,Switzerland,Financials
 UCG.MI,UniCredit,Milan Stock Exchange,Italy,Financials
 UDR,UDR Inc,NYSE Euronext,United States,Financials
-UFS,Domtar Corporation,NYSE Euronext,United States,Materials
+UFI,"UNIFI, INC.",NYQ,United States,ConsumerDiscr
 UGI,UGI Corp,NYSE Euronext,United States,Utilities
-UHAL,Amerco,,United States,Services
 UHS,Universal Health Svcs,NYSE Euronext,United States,Health Care
+UHT,UNIVERSAL HEALTH REALTY INCOME TRUST,NYQ,United States,Financials
+UIS,UNISYS CORPORATION,NYQ,United States,Technology
+UL,UNILEVER PLC,NYQ,United Kingdom,ConsumerStpl
 UL.PA,Unibail-Rodamco,Euronext Paris,France,Financials
 ULTA,Ulta Salon Cosmetics,NASDAQ Global Select,United States,Services
 ULVR.L,Unilever,London Stock Exchange,United Kingdom,Goods
+UMC,UNITED MICROELECTRONICS CORPORATION,NYQ,Taiwan,Technology
+UN,CORGI UNH 2X DAILY ETF,BTS,US,Technology
+UNF,UNIFIRST CORPORATION,NYQ,United States,Industrials
 UNH,UnitedHealth Group,NYSE Euronext,United States,Health Care
 UNM,Unum Group,NYSE Euronext,United States,Financials
 UNP,Union Pacific Corp,NYSE Euronext,United States,Industrials
-UNT,Unit Corp,NYSE Euronext,United States,Oil & Gas
-UPL,Ultra Petroleum Corp,NYSE Euronext,United States,Oil & Gas
 UPS,United Parcel Service,NYSE Euronext,United States,Industrials
-URBN,Urban Outfitters Inc,NASDAQ Global Select,United States,Services
 URI,United Rentals Inc,NYSE Euronext,United States,Industrials
-URS,URS Corp,NYSE Euronext,United States,Industrials
 USB,US Bancorp,NYSE Euronext,United States,Financials
-USM,United States Cellular,NYSE Euronext,United States,Technology
-UTHR,United Therapeutics,NASDAQ Global Select,United States,Health Care
-UTX,United Technologies,NYSE Euronext,United States,Industrials
+USG,USCF GOLD STRATEGY PLUS INCOME FUND,PCX,US,Technology
+USNA,"USANA HEALTH SCIENCES, INC.",NYQ,United States,ConsumerStpl
+UTI,"UNIVERSAL TECHNICAL INSTITUTE, INC.",NYQ,United States,ConsumerStpl
+UTL,UNITIL CORPORATION,NYQ,United States,Utilities
 UU.L,United Utilities Group,London Stock Exchange,United Kingdom,Utilities
+UVV,UNIVERSAL CORPORATION,NYQ,United States,ConsumerStpl
 V,Visa Inc,NYSE Euronext,United States,Financials
+VAC,MARRIOTT VACATIONS WORLDWIDE CORPORATION,NYQ,United States,ConsumerDiscr
 VAL,Valspar Corp,NYSE Euronext,United States,Industrials
-VAR,Varian Medical Systems,NYSE Euronext,United States,Health Care
+VALE,VALE S.A.,NYQ,Brazil,BasicMaterials
 VC,Visteon Corp,NYSE Euronext,United States,Goods
-VED.L,Vedanta Resources,London Stock Exchange,United Kingdom,Materials
+VEEV,Veeva Systems Inc.,NYQ,United States,Health Care
 VFC,V F Corp,NYSE Euronext,United States,Goods
-VIAB,Viacom Inc,NASDAQ Global Select,United States,Services
-VIP,VimpelCom Ltd.  ,NASDAQ Global Select,Netherlands,Technology
+VG,"VENTURE GLOBAL, INC.",NYQ,United States,Energy
+VHI,"VALHI, INC.",NYQ,United States,BasicMaterials
+VICI,VICI Properties Inc.,NYQ,United States,Financials
+VIE.PA,VEOLIA ENVIRONNEMENT SA,PAR,France,Industrials
 VIV.PA,Vivendi,Euronext Paris,France,Technology
 VLO,Valero Energy Corp,NYSE Euronext,United States,Oil & Gas
+VLTO,Veralto Corporation,NYQ,United States,Industrials
 VLY,Valley National Bancorp,NYSE Euronext,United States,Financials
 VMC,Vulcan Materials Co,NYSE Euronext,United States,Industrials
 VMI,Valmont Industries Inc,NYSE Euronext,United States,Industrials
-VMW,VMware Inc,NYSE Euronext,United States,Technology
 VNO,Vornado Realty Trust,NYSE Euronext,United States,Financials
-VNTV,Vantiv Inc,NYSE Euronext,United States,Services
-VOD,Vodafone Group,London Stock Exchange,United Kingdom,Technology
+VOD.L,VODAFONE GROUP PUBLIC LIMITED COMPANY,LSE,United Kingdom,Technology
 VOW.DE,Volkswagen AG,Frankfurt Stock Exchange,Germany,Goods
-VOYA,ING US Inc,,United States,Financials
-VR,Validus Holdings Ltd,NYSE Euronext,United States,Financials
+VOW3.DE,VOLKSWAGEN AG,GER,Germany,ConsumerDiscr
+VPG,"VISHAY PRECISION GROUP, INC.",NYQ,United States,Technology
 VRSK,Verisk Analytics Inc,NASDAQ Global Select,United States,Technology
-VRSN,Verisign Inc,NASDAQ Global Select,United States,Technology
+VRT,Vertiv Holdings Co,NYQ,United States,Industrials
 VRTX,Vertex Pharmaceuticals,NASDAQ Global Select,United States,Health Care
 VSH,Vishay Intertechnology,NYSE Euronext,United States,Industrials
+VST,Vistra Corp.,NYQ,United States,Utilities
 VTR,Ventas Inc,NYSE Euronext,United States,Financials
+VTRS,Viatris Inc.,NMS,United States,Health Care
 VVC,Vectren Corp,NYSE Euronext,United States,Utilities
 VZ,Verizon Communications,NASDAQ Global Select,United States,Technology
 WAB,Wabtec Corp,NYSE Euronext,United States,Industrials
-WAFD,Washington Fed Inc,NASDAQ Global Select,United States,Financials
-WAG,Walgreen Co,NASDAQ Global Select,United States,Services
+WAL,WESTERN ALLIANCE BANCORPORATION,NYQ,United States,Financials
 WAT,Waters Corp,NYSE Euronext,United States,Health Care
-WBC,Wabco Holdings Inc,NYSE Euronext,United States,Goods
+WBD,"Warner Bros. Discovery, Inc.",NMS,United States,Services
+WBS,WEBSTER FINANCIAL CORPORATION,NYQ,United States,Financials
 WCC,Wesco International Inc,NYSE Euronext,United States,Industrials
 WCN,Waste Connections Inc,NYSE Euronext,United States,Industrials
-WCRX,Warner Chilcott,NASDAQ Global Select,United States,Health Care
+WD,"WALKER & DUNLOP, INC.",NYQ,United States,Financials
 WDAY,Workday Inc,,United States,Technology
 WDC,Western Digital Corp,NASDAQ Global Select,United States,Technology
-WDR,Waddell & Reed Financia,NYSE Euronext,United States,Financials
 WEC,Wisconsin Energy Corp,NYSE Euronext,United States,Utilities
 WEIR.L,Weir Group,London Stock Exchange,United Kingdom,Goods
-WEN,Wendy's,NASDAQ Global Select,United States,Services
+WELL,Welltower Inc.,NYQ,United States,Financials
+WF,WOORI FINANCIAL GROUP INC.,NYQ,South Korea,Financials
 WFC,Wells Fargo & Co,NYSE Euronext,United States,Financials
-WFM,Whole Foods Market Inc,NASDAQ Global Select,United States,Services
-WG.L,Wood Group,London Stock Exchange,United Kingdom,Oil & Gas
+WGO,"WINNEBAGO INDUSTRIES, INC.",NYQ,United States,ConsumerDiscr
+WH,"WYNDHAM HOTELS & RESORTS, INC.",NYQ,United States,ConsumerDiscr
+WHG,"WESTWOOD HOLDINGS GROUP, INC.",NYQ,United States,Financials
 WHR,Whirlpool Corp,NYSE Euronext,United States,Goods
-WIN,Windstream Corp,NASDAQ Global Select,United States,Technology
+WIT,WIPRO LIMITED,NYQ,India,Technology
 WLK,Westlake Chemical Corp,NYSE Euronext,United States,Materials
-WLL,Whiting Petroleum Corp,NYSE Euronext,United States,Oil & Gas
-WLP,Wellpoint Inc,NYSE Euronext,United States,Health Care
 WM,Waste Mgmt Inc,NYSE Euronext,United States,Industrials
 WMB,Williams Companies Inc,NYSE Euronext,United States,Oil & Gas
+WMK,"WEIS MARKETS, INC.",NYQ,United States,ConsumerStpl
+WMS,"ADVANCED DRAINAGE SYSTEMS, INC.",NYQ,United States,Industrials
 WMT,Wal Mart Stores Inc,NYSE Euronext,United States,Services
-WOOF,VCA Antech Inc,NASDAQ Global Select,United States,Services
-WOS.L,Wolseley,London Stock Exchange,United Kingdom,Materials
-WPC,WP Carey Inc,,United States,Financials
+WNC,WABASH NATIONAL CORPORATION,NYQ,United States,Industrials
+WOR,"WORTHINGTON ENTERPRISES, INC.",NYQ,United States,Industrials
+WPP,WPP PLC,NYQ,United Kingdom,Technology
 WPP.L,WPP,London Stock Exchange,United Kingdom,Services
-WPX,WPX Energy Inc,NYSE Euronext,United States,Oil & Gas
 WR,Westar Energy Inc,NYSE Euronext,United States,Utilities
 WRB,WR Berkley Corporation ,NYSE Euronext,United States,Financials
-WRI,Weingarten Rlty Invs,NYSE Euronext,United States,Financials
 WSM,Williams Sonoma Inc,NYSE Euronext,United States,Services
+WSO,"WATSCO, INC.",NYQ,United States,Industrials
+WST,"West Pharmaceutical Services, Inc.",NYQ,United States,Health Care
 WTB.L,Whitbread,London Stock Exchange,United Kingdom,Services
+WTI,"W&T OFFSHORE, INC.",NYQ,United States,Energy
 WTM,White Mountains Insurance,NYSE Euronext,United States,Financials
-WTR,Aqua America Inc,NYSE Euronext,United States,Utilities
+WTS,"WATTS WATER TECHNOLOGIES, INC.",NYQ,United States,Industrials
 WTW,Weight Watchers Intl,NYSE Euronext,United States,Services
 WU,Western Union Co,NYSE Euronext,United States,Financials
-WWAV,Whitewave Foods Company,,United States,Goods
+WWW,"WOLVERINE WORLD WIDE, INC.",NYQ,United States,ConsumerDiscr
+WX,CORGI ALL WORLD 2X DAILY ETF,BTS,US,Technology
 WY,Weyerhaeuser Co,NYSE Euronext,United States,Financials
-WYN,Wyndham Worldwide Corp,NYSE Euronext,United States,Services
-WYNN,Wynn Resorts Ltd,NASDAQ Global Select,United States,Services
-X,United States Steel Cor,NYSE Euronext,United States,Materials
-XEC,Cimarex Energy Co,NYSE Euronext,United States,Oil & Gas
 XEL,Xcel Energy Inc,NYSE Euronext,United States,Utilities
-XL,Xl Group Plc,NYSE Euronext,United States,Financials
-XLNX,Xilinx Inc,NASDAQ Global Select,United States,Technology
-XLS,Exelis Inc,NYSE Euronext,United States,Industrials
 XOM,Exxon Mobil Corp,NYSE Euronext,United States,Oil & Gas
-XRAY,Dentsply International,NASDAQ Global Select,United States,Health Care
 XRX,Xerox Corp,NYSE Euronext,United States,Industrials
 XYL,Xylem Inc,NYSE Euronext,United States,Utilities
-Y,Alleghany Corp,NYSE Euronext,United States,Financials
-YHOO,Yahoo Inc,NASDAQ Global Select,United States,Technology
+XYZ,"Block, Inc.",NYQ,United States,Technology
+YPF,YPF SOCIEDAD ANÓNIMA,NYQ,Argentina,Energy
 YUM,Yum! Brands Inc,NYSE Euronext,United States,Services
+ZBH,"Zimmer Biomet Holdings, Inc.",NYQ,United States,Health Care
 ZBRA,Zebra Technologies Corp,NASDAQ Global Select,United States,Technology
-ZION,Zions Bancorporation,NASDAQ Global Select,United States,Financials
-ZMH,Zimmer Holdings Inc,NYSE Euronext,United States,Health Care
-ZNGA,Zynga Inc,NASDAQ Global Select,United States,Technology
-ZTS,Zoetis,NYSE Euronext,United States,Health Care

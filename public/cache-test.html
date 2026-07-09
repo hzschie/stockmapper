@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head><title>Cache Test</title></head>
+<body>
+<h1>Direct API Test</h1>
+<pre id="output">Loading...</pre>
+<script>
+fetch('/data/nyse/groups.json?' + Date.now())
+  .then(r => r.json())
+  .then(data => {
+    let categorized = new Set();
+    data.forEach(g => g.ids.forEach(id => categorized.add(id)));
+    
+    let regions = data.filter(g => g.category === 'Region');
+    let output = 'Groups loaded: ' + data.length + '\n';
+    output += 'Total categorized: ' + categorized.size + '\n\n';
+    output += 'Regions:\n';
+    regions.forEach(g => {
+      output += '  ' + g.name + ': ' + g.ids.length + ' stocks\n';
+    });
+    document.getElementById('output').textContent = output;
+  });
+</script>
+</body>
+</html>

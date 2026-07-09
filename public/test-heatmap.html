@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Heatmap Data Test</title>
+    <script src="/javascripts/lib/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+    <h1>StockMapper Heatmap Data Test</h1>
+    <div id="status">Loading...</div>
+    <div id="results"></div>
+    
+    <script>
+        console.log('Test page loaded');
+        
+        // Test 1: Load stocks.json
+        $.getJSON('/data/nyse/stocks.json', function(data) {
+            console.log('✅ stocks.json loaded:', data.data.length, 'stocks');
+            $('#status').append('<br>✅ stocks.json: ' + data.data.length + ' stocks');
+        }).fail(function(err) {
+            console.error('❌ stocks.json failed:', err);
+            $('#status').append('<br>❌ stocks.json failed');
+        });
+        
+        // Test 2: Load groups.json
+        $.getJSON('/data/nyse/groups.json', function(data) {
+            console.log('✅ groups.json loaded:', data.length, 'groups');
+            $('#status').append('<br>✅ groups.json: ' + data.length + ' groups');
+        }).fail(function(err) {
+            console.error('❌ groups.json failed:', err);
+            $('#status').append('<br>❌ groups.json failed');
+        });
+        
+        // Test 3: Load heatmap data
+        $.getJSON('/datasets/heatmap?random=' + Math.floor(Math.random() * 1000), function(data) {
+            console.log('✅ heatmap loaded:', data.length, 'entries');
+            $('#status').append('<br>✅ heatmap: ' + data.length + ' entries');
+            
+            // Show sample data
+            if (data.length > 0) {
+                var sample = data[0];
+                $('#results').html(
+                    '<h2>Sample Entry:</h2>' +
+                    '<pre>' + JSON.stringify(sample, null, 2) + '</pre>' +
+                    '<h3>First 10 stocks:</h3>' +
+                    '<ul>' + data.slice(0, 10).map(function(e) {
+                        return '<li>' + e[1] + ': $' + e[2] + ' (' + e[11] + ')</li>';
+                    }).join('') + '</ul>'
+                );
+            }
+        }).fail(function(err) {
+            console.error('❌ heatmap failed:', err);
+            $('#status').append('<br>❌ heatmap failed: ' + err.statusText);
+            $('#results').html('<pre>' + JSON.stringify(err, null, 2) + '</pre>');
+        });
+    </script>
+</body>
+</html>
