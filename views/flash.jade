@@ -152,47 +152,50 @@ style.
       | DISMISS
       .x &nbsp;
     span(style='margin-right: 20px;')
-      | We're working on a &nbsp;
+      | This is a &nbsp;
       span.stockmapper-premium
-        //- span.stockmapper-logo Stockmapper
-        span.highlighted Stockmapper&nbsp;Premium&nbsp;
-      |  version! &nbsp;&nbsp;
+        span.highlighted demo version&nbsp;
+      | of Stockmapper which utilized free market data based on the Yahoo Finance API that was retired in May 2017. This current version is using &nbsp;
+      span.highlighted cached market data&nbsp;
+      | and is for &nbsp;
+      span.highlighted demo purposes only.
+      | &nbsp;&nbsp;
       .learn-more-btn.pill-btn.hidden-in-stage-2.hidden-in-stage-3.hidden-in-stage-4 LEARN MORE
 
   div.learn-more.hidden-in-stage-1.hidden-in-stage-5
     ul(style='font-size: 16px; line-height: 1.5; margin: 10px 0;')
-      li &nbsp;–&nbsp;&nbsp;Looking for more customization?
-      li &nbsp;–&nbsp;&nbsp;Want to track your own portfolios?
-      li &nbsp;–&nbsp;&nbsp;Need real-time data?
-    div(style='font-size: 16px; Xdisplay:none;/* temp */')
-      span
-        span.highlighted Pre-subscribe now &nbsp;
-        | and pay just &nbsp;
-        span.price.highlighted
-          | $
-          span.dollar-value ##
-          |  per month
-        |  for the first year &nbsp;&nbsp;
-        //- | — a 20% saving. &nbsp;&nbsp;
-      .presubscribe-btn.pill-btn.hidden-in-stage-3.hidden-in-stage-4 PRE-SUBSCRIBE
+      li &nbsp;–&nbsp;&nbsp;All market data is from cached snapshots (July 2026)
+      li &nbsp;–&nbsp;&nbsp;Data is not updated in real-time
+      li &nbsp;–&nbsp;&nbsp;This demo showcases the visualization capabilities of the original Stockmapper project
+  //-   div(style='font-size: 16px; Xdisplay:none;/* temp */')
+  //-     span
+  //-       span.highlighted Pre-subscribe now &nbsp;
+  //-       | and pay just &nbsp;
+  //-       span.price.highlighted
+  //-         | $
+  //-         span.dollar-value ##
+  //-         |  per month
+  //-       |  for the first year &nbsp;&nbsp;
+  //-       //- | — a 20% saving. &nbsp;&nbsp;
+  //-     .presubscribe-btn.pill-btn.hidden-in-stage-3.hidden-in-stage-4 PRE-SUBSCRIBE
 
-  div.presubscribe.hidden-in-stage-1.hidden-in-stage-2.hidden-in-stage-5(style='font-size: 16px;')
-    .form
-      div.email
-        input(type='text', placeholder='Enter Your Email')
-      .error-message
-      .dropdown_selector(style='font-size: 14px; float:left;')
-        .plus &nbsp;
-        | Additional feedback
-      div.feedback.hidden-in-stage-3
-        textarea(placeholder="Your message (optional)")
-        div.chars-remaining
-      .submit-btn.pill-btn SUBMIT
+  //- div.presubscribe.hidden-in-stage-1.hidden-in-stage-2.hidden-in-stage-5(style='font-size: 16px;')
+  //-   .form
+  //-     div.email
+  //-       input(type='text', placeholder='Enter Your Email')
+  //-     .error-message
+  //-     .dropdown_selector(style='font-size: 14px; float:left;')
+  //-       .plus &nbsp;
+  //-       | Additional feedback
+  //-     div.feedback.hidden-in-stage-3
+  //-       textarea(placeholder="Your message (optional)")
+  //-       div.chars-remaining
+  //-     .submit-btn.pill-btn SUBMIT
 
-  div.confirmation.hidden-in-stage-1.hidden-in-stage-2.hidden-in-stage-3.hidden-in-stage-4
-    .success-message
-    .dismiss-btn(style='margin-top: 0.7em;')
-      .x &nbsp;
+  //- div.confirmation.hidden-in-stage-1.hidden-in-stage-2.hidden-in-stage-3.hidden-in-stage-4
+  //-   .success-message
+  //-   .dismiss-btn(style='margin-top: 0.7em;')
+  //-     .x &nbsp;
 
 
 script.
